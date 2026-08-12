@@ -1,7 +1,7 @@
 name: isruc-tfm_pretrained
 group: B
 dataset: isruc
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/isruc
+data_root: $PACLOCK_PROC/processed/isruc
 model: tfm
 loader: tfm
 pretrained: true

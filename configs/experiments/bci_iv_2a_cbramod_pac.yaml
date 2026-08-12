@@ -1,7 +1,7 @@
 name: bci_iv_2a-cbramod_pac
 group: D
 dataset: bci_iv_2a
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/bci_iv_2a
+data_root: $PACLOCK_PROC/processed_pac/bci_iv_2a
 model: cbramod
 loader: null
 pretrained: true

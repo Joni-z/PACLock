@@ -1,7 +1,7 @@
 name: sleepedf-cbramod_pac
 group: D
 dataset: sleepedf
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/sleepedf
+data_root: $PACLOCK_PROC/processed_pac/sleepedf
 model: cbramod
 loader: null
 pretrained: true

@@ -2,7 +2,7 @@ name: sleepedf-contrawr
 group: A
 model: contrawr
 dataset: sleepedf
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf
+data_root: $PACLOCK_PROC/processed/sleepedf
 num_classes: 5
 sample_rate: 100
 loss: cross_entropy

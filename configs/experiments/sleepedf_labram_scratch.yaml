@@ -1,7 +1,7 @@
 name: sleepedf-labram_scratch
 group: C
 dataset: sleepedf
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf
+data_root: $PACLOCK_PROC/processed/sleepedf
 sample_rate: 200
 optimizer: adamw
 weight_decay: 0.05

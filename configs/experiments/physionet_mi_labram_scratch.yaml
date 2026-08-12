@@ -1,7 +1,7 @@
 name: physionet_mi-labram_scratch
 group: C
 dataset: physionet_mi
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi
+data_root: $PACLOCK_PROC/processed/physionet_mi
 sample_rate: 200
 optimizer: adamw
 weight_decay: 0.05

@@ -1,7 +1,7 @@
 name: tusz-cbramod_scratch
 group: C
 dataset: tusz
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tusz
+data_root: $PACLOCK_PROC/processed/tusz
 model: cbramod
 loader: null
 pretrained: false

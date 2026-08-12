@@ -1,7 +1,7 @@
 name: sleepedf-eegpt_scratch
 group: C
 dataset: sleepedf
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf
+data_root: $PACLOCK_PROC/processed/sleepedf
 model: eegpt
 loader: default
 pretrained: false

@@ -1,7 +1,7 @@
 name: tusz-eegpt_pretrained
 group: B
 dataset: tusz
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tusz
+data_root: $PACLOCK_PROC/processed/tusz
 model: eegpt
 loader: default
 pretrained: true

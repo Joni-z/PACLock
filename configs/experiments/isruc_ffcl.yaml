@@ -2,7 +2,7 @@ name: isruc-ffcl
 group: A
 model: ffcl
 dataset: isruc
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/isruc
+data_root: $PACLOCK_PROC/processed/isruc
 num_classes: 5
 sample_rate: 200
 loss: cross_entropy

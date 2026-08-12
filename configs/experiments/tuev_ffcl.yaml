@@ -2,7 +2,7 @@ name: tuev-ffcl
 group: A
 model: ffcl
 dataset: tuev
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuev
+data_root: $PACLOCK_PROC/processed/tuev
 num_classes: 6
 sample_rate: 200
 loss: cross_entropy

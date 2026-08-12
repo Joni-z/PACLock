@@ -2,7 +2,7 @@ name: tuev-cnn_transformer
 group: A
 model: cnn_transformer
 dataset: tuev
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuev
+data_root: $PACLOCK_PROC/processed/tuev
 num_classes: 6
 sample_rate: 200
 loss: cross_entropy

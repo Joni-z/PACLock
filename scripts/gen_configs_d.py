@@ -28,11 +28,12 @@ comparable to the supervised baselines it sits beside in the table.
 from __future__ import annotations
 
 import argparse
+from paclock_bench.paths import processed
 import os
 
 import yaml
 
-PROC = "/work1/chenyuyou/yifanwang/Zhizhe/processed"
+PROC = processed("processed")
 
 # measured 1.636M against the workbook's 1.64
 ARCH = {

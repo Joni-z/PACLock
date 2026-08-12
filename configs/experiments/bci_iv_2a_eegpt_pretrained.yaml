@@ -1,7 +1,7 @@
 name: bci_iv_2a-eegpt_pretrained
 group: B
 dataset: bci_iv_2a
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a
+data_root: $PACLOCK_PROC/processed/bci_iv_2a
 model: eegpt
 loader: default
 pretrained: true

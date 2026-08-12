@@ -1,8 +1,8 @@
 # TUEV v2.0.1 -- PROTOCOLS.md sec.2. FROZEN.
 dataset: tuev
 version: v2.0.1
-raw_root: /work1/chenyuyou/yifanwang/data/tuh/tuev/edf
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuev
+raw_root: $PACLOCK_DATA/tuh/tuev/edf
+out_dir: $PACLOCK_PROC/processed/tuev
 num_classes: 6
 
 sample_rate: 200

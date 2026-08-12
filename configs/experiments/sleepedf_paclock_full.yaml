@@ -1,7 +1,7 @@
 name: sleepedf-paclock_full
 group: C
 dataset: sleepedf
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf
+data_root: $PACLOCK_PROC/processed/sleepedf
 model: paclock
 optimizer: adamw
 lr: 0.0001

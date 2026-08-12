@@ -2,7 +2,7 @@ name: tuab-st_transformer
 group: A
 model: st_transformer
 dataset: tuab
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuab
+data_root: $PACLOCK_PROC/processed/tuab
 num_classes: 2
 sample_rate: 200
 loss: bce_with_logits

@@ -1,7 +1,7 @@
 name: faced-tfm_pretrained
 group: B
 dataset: faced
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/faced
+data_root: $PACLOCK_PROC/processed/faced
 model: tfm
 loader: tfm
 pretrained: true

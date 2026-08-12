@@ -1,7 +1,7 @@
 dataset: tusz
 version: v2.0.6
-raw_root: /work1/chenyuyou/yifanwang/data/tuh/tusz/edf
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/tusz
+raw_root: $PACLOCK_DATA/tuh/tusz/edf
+out_dir: $PACLOCK_PROC/processed_pac/tusz
 num_classes: 2
 sample_rate: 200
 notch: null

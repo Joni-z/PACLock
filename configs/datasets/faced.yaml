@@ -3,8 +3,8 @@
 dataset: faced
 version: "Synapse syn50614194"
 source: official pre-processed .pkl
-raw_root: /work1/chenyuyou/yifanwang/data/faced
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/faced
+raw_root: $PACLOCK_DATA/faced
+out_dir: $PACLOCK_PROC/processed/faced
 num_classes: 9
 
 # 官方 pre-processed 已统一到 250 Hz(0.05-47 Hz、坏导插值、ICA 去眼动、

@@ -1,8 +1,8 @@
 # ISRUC-Sleep Subgroup I -- PROTOCOLS.md sec.6. FROZEN.
 dataset: isruc
 subset: subgroup_I
-raw_root: /work1/chenyuyou/yifanwang/data/isruc
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/isruc
+raw_root: $PACLOCK_DATA/isruc
+out_dir: $PACLOCK_PROC/processed/isruc
 num_classes: 5
 
 sample_rate: 200

@@ -3,8 +3,8 @@
 # to TFM's published CHB-MIT numbers; the paper must state the difference.
 dataset: chbmit
 version: v1.0.0
-raw_root: /work1/chenyuyou/yifanwang/data/chbmit
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit
+raw_root: $PACLOCK_DATA/chbmit
+out_dir: $PACLOCK_PROC/processed/chbmit
 num_classes: 2
 
 sample_rate: 200

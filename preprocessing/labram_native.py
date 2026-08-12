@@ -32,12 +32,13 @@ from functools import partial
 from multiprocessing import Pool
 
 import mne
+from paclock_bench.paths import DATA as _DATA
 import numpy as np
 
 from .common import Manifest, assert_finite, save_split, sha256_file
 from .tuev import read_rec
 
-DATA = "/work1/chenyuyou/yifanwang/data"
+DATA = _DATA
 
 # verbatim from make_TUAB.py
 DROP_CHANNELS = [

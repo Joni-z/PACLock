@@ -1,7 +1,7 @@
 name: isruc-cbramod_pac
 group: D
 dataset: isruc
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/isruc
+data_root: $PACLOCK_PROC/processed_pac/isruc
 model: cbramod
 loader: null
 pretrained: true

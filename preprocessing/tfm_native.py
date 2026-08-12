@@ -31,6 +31,7 @@ from collections import Counter
 from functools import partial
 from multiprocessing import Pool
 
+from paclock_bench.paths import DATA as _DATA
 import numpy as np
 import yaml
 
@@ -39,7 +40,7 @@ from .common import (Manifest, assert_finite, bandpass, notch, resample_to,
 from .tuh_common import MissingChannels, load_bipolar_uv, subject_of
 from .tuev import read_rec
 
-DATA = "/work1/chenyuyou/yifanwang/data"
+DATA = _DATA
 
 
 # --------------------------------------------------------------------------- #

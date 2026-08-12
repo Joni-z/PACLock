@@ -1,7 +1,7 @@
 name: tuev-labram_scratch
 group: C
 dataset: tuev
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_labram/tuev
+data_root: $PACLOCK_PROC/processed_labram/tuev
 model: labram
 loader: labram
 pretrained: false

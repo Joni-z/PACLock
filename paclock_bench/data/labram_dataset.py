@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import os
 
+from ..paths import expand
 import numpy as np
 import torch
 from torch.utils.data import DataLoader, Dataset
@@ -53,7 +54,7 @@ class LaBraMWindowDataset(Dataset):
 
 
 def build_labram_dataloaders(cfg: dict):
-    root = cfg["data_root"]
+    root = expand(cfg["data_root"])
     flatten = bool(cfg.get("flatten_sequences", False))
     # LaBraM's loader divides raw microvolts by 100. That is correct for the
     # TUH rows, whose arrays labram_native.py stores in microvolts. The

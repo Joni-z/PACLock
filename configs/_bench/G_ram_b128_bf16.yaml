@@ -1,7 +1,7 @@
 name: bench-G_ram_b128_bf16
 group: bench
 dataset: tuev
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuev
+data_root: $PACLOCK_PROC/processed/tuev
 model: paclock
 optimizer: adamw
 lr: 0.0001

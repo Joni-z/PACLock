@@ -36,12 +36,12 @@ cd "$SLURM_SUBMIT_DIR"
 # shows 142T free but our own allowance is 1.9T with ~276G left. Report it going
 # in so a job that cannot possibly fit is visible at the top of the log rather
 # than as a truncated array eight hours later.
-echo "space before:"; df -h /work1/chenyuyou/yifanwang/Zhizhe | tail -1
+echo "space before:"; df -h ${PACLOCK_PROC:-/work1/chenyuyou/yifanwang/Zhizhe} | tail -1
 
 python3 -u -m "$MOD" \
     --dataset "$DATASET" \
-    --out /work1/chenyuyou/yifanwang/Zhizhe/"$OUT"/"$DATASET" \
+    --out ${PACLOCK_PROC:-/work1/chenyuyou/yifanwang/Zhizhe}/"$OUT"/"$DATASET" \
     --jobs "$SLURM_CPUS_PER_TASK"
 
-echo "space after:"; df -h /work1/chenyuyou/yifanwang/Zhizhe | tail -1
-du -sh /work1/chenyuyou/yifanwang/Zhizhe/"$OUT"/"$DATASET"
+echo "space after:"; df -h ${PACLOCK_PROC:-/work1/chenyuyou/yifanwang/Zhizhe} | tail -1
+du -sh ${PACLOCK_PROC:-/work1/chenyuyou/yifanwang/Zhizhe}/"$OUT"/"$DATASET"

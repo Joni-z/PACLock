@@ -1,8 +1,8 @@
 # BCI Competition IV-2a -- PROTOCOLS.md sec.9. FROZEN.
 dataset: bci_iv_2a
 moabb_name: BNCI2014_001
-raw_root: /work1/chenyuyou/yifanwang/data/bci-iv-2a
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a
+raw_root: $PACLOCK_DATA/bci-iv-2a
+out_dir: $PACLOCK_PROC/processed/bci_iv_2a
 num_classes: 4
 
 sample_rate: 200

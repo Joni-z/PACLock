@@ -1,8 +1,8 @@
 dataset: sleepedf
 version: v1.0.0
 subset: sleep-cassette
-raw_root: /work1/chenyuyou/yifanwang/data/sleep-edf
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/sleepedf
+raw_root: $PACLOCK_DATA/sleep-edf
+out_dir: $PACLOCK_PROC/processed_pac/sleepedf
 num_classes: 5
 sample_rate: 100
 resample: false

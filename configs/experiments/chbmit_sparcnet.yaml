@@ -2,7 +2,7 @@ name: chbmit-sparcnet
 group: A
 model: sparcnet
 dataset: chbmit
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit
+data_root: $PACLOCK_PROC/processed/chbmit
 num_classes: 2
 sample_rate: 200
 loss: focal

@@ -1,7 +1,7 @@
 name: tuev-cand_dense_lr3e5
 group: cand
 dataset: tuev
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuev
+data_root: $PACLOCK_PROC/processed/tuev
 model: paclock
 optimizer: adamw
 lr: 3.0e-05

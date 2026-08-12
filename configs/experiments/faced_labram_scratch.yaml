@@ -1,7 +1,7 @@
 name: faced-labram_scratch
 group: C
 dataset: faced
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/faced
+data_root: $PACLOCK_PROC/processed/faced
 sample_rate: 200
 optimizer: adamw
 weight_decay: 0.05

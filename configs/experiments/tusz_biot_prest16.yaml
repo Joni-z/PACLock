@@ -1,7 +1,7 @@
 name: tusz-biot_prest16
 group: B
 dataset: tusz
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tusz
+data_root: $PACLOCK_PROC/processed_biot/tusz
 checkpoint: prest16
 model: biot
 loader: biot

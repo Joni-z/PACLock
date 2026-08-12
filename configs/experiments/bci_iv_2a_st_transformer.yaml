@@ -2,7 +2,7 @@ name: bci_iv_2a-st_transformer
 group: A
 model: st_transformer
 dataset: bci_iv_2a
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a
+data_root: $PACLOCK_PROC/processed/bci_iv_2a
 num_classes: 4
 sample_rate: 200
 loss: cross_entropy

@@ -1,7 +1,7 @@
 name: tuab-biot_prest16
 group: B
 dataset: tuab
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tuab
+data_root: $PACLOCK_PROC/processed_biot/tuab
 checkpoint: prest16
 model: biot
 loader: biot

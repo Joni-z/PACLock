@@ -2,7 +2,7 @@ name: physionet_mi-cnn_transformer
 group: A
 model: cnn_transformer
 dataset: physionet_mi
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi
+data_root: $PACLOCK_PROC/processed/physionet_mi
 num_classes: 4
 sample_rate: 200
 loss: cross_entropy

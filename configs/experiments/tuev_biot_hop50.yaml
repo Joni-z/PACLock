@@ -1,7 +1,7 @@
 name: tuev-biot_hop50
 group: ablation
 dataset: tuev
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tuev
+data_root: $PACLOCK_PROC/processed_biot/tuev
 checkpoint: null
 model: biot
 loader: biot

@@ -2,7 +2,7 @@ name: faced-sparcnet
 group: A
 model: sparcnet
 dataset: faced
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/faced
+data_root: $PACLOCK_PROC/processed/faced
 num_classes: 9
 sample_rate: 200
 loss: cross_entropy

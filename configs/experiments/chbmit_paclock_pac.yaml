@@ -1,7 +1,7 @@
 name: chbmit-paclock_pac
 group: D
 dataset: chbmit
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/chbmit
+data_root: $PACLOCK_PROC/processed_pac/chbmit
 model: paclock
 optimizer: adamw
 lr: 0.0001

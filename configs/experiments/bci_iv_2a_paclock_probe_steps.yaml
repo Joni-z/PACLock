@@ -1,7 +1,7 @@
 name: bci_iv_2a-paclock_probe_steps
 group: probe
 dataset: bci_iv_2a
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a
+data_root: $PACLOCK_PROC/processed/bci_iv_2a
 model: paclock
 optimizer: adamw
 lr: 0.0001

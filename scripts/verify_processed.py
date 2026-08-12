@@ -9,6 +9,7 @@ train_signals.npy was still 11% uploaded.
 """
 from __future__ import annotations
 
+from paclock_bench.paths import processed
 import json
 import os
 import sys
@@ -16,7 +17,7 @@ import sys
 import numpy as np
 
 ds = sys.argv[1]
-root = f"/work1/chenyuyou/yifanwang/Zhizhe/processed/{ds}"
+root = fprocessed("processed", ds)
 man = json.load(open(os.path.join(root, "manifest.json")))
 
 problems = []

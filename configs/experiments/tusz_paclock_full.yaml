@@ -1,7 +1,7 @@
 name: tusz-paclock_full
 group: C
 dataset: tusz
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tusz
+data_root: $PACLOCK_PROC/processed/tusz
 model: paclock
 optimizer: adamw
 lr: 0.0001

@@ -31,10 +31,11 @@ from __future__ import annotations
 import os
 import sys
 
+from ...paths import vendored
 import torch
 import torch.nn as nn
 
-VENDOR = "/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench/vendor/cbramod"
+VENDOR = vendored("cbramod")
 CHECKPOINT = os.path.join(VENDOR, "pretrained_weights", "pretrained_weights.pth")
 
 # models/model_for_tuab.py, verbatim

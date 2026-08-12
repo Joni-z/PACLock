@@ -42,10 +42,11 @@ from __future__ import annotations
 import os
 import sys
 
+from ...paths import vendored
 import torch
 import torch.nn as nn
 
-VENDOR = "/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench/vendor/tfm"
+VENDOR = vendored("tfm")
 WEIGHTS = os.path.join(VENDOR, "pretrained_weigths")
 
 CODE_BOOK_SIZE = 8192

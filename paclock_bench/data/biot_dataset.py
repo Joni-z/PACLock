@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import os
 
+from ..paths import expand
 import numpy as np
 import torch
 from torch.utils.data import DataLoader, Dataset
@@ -60,7 +61,7 @@ class BIOTWindowDataset(Dataset):
 
 
 def build_biot_dataloaders(cfg: dict):
-    root = cfg["data_root"]
+    root = expand(cfg["data_root"])
     flatten = bool(cfg.get("flatten_sequences", False))
     sets = {s: BIOTWindowDataset(root, s, flatten_sequences=flatten)
             for s in ("train", "val", "test")}

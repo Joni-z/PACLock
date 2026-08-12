@@ -1,7 +1,7 @@
 name: faced-cbramod_pretrained
 group: B
 dataset: faced
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/faced
+data_root: $PACLOCK_PROC/processed/faced
 model: cbramod
 loader: null
 pretrained: true

@@ -1,7 +1,7 @@
 name: tusz-labram_scratch
 group: C
 dataset: tusz
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_labram/tusz
+data_root: $PACLOCK_PROC/processed_labram/tusz
 model: labram
 loader: labram
 pretrained: false

@@ -38,13 +38,14 @@ corpus would leave a hole in the table that looks like a failure.
 
 from __future__ import annotations
 
+from paclock_bench.paths import processed
 import argparse
 import os
 
 import yaml
 
-PROC_PAC = "/work1/chenyuyou/yifanwang/Zhizhe/processed_pac"
-PROC_FROZEN = "/work1/chenyuyou/yifanwang/Zhizhe/processed"
+PROC_PAC = processed("processed_pac")
+PROC_FROZEN = processed("processed")
 
 DATASETS = ["tuab", "tuev", "tusz", "chbmit", "sleepedf", "isruc",
             "physionet_mi", "bci_iv_2a", "faced"]

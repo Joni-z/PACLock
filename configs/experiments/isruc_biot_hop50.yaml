@@ -1,7 +1,7 @@
 name: isruc-biot_hop50
 group: ablation
 dataset: isruc
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/isruc
+data_root: $PACLOCK_PROC/processed/isruc
 sample_rate: 200
 optimizer: adamw
 weight_decay: 0.01

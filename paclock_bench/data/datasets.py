@@ -17,6 +17,7 @@ from __future__ import annotations
 import json
 import os
 
+from ..paths import expand
 import numpy as np
 import torch
 from torch.utils.data import DataLoader, Dataset
@@ -112,7 +113,7 @@ def load_manifest(root: str) -> dict:
 
 def build_dataloaders(cfg: dict) -> tuple[DataLoader, DataLoader, DataLoader, dict]:
     """train/val/test loaders plus the manifest the data came from."""
-    root = cfg["data_root"]
+    root = expand(cfg["data_root"])
     manifest = load_manifest(root)
     flatten = bool(cfg.get("flatten_sequences", False))
     # None lets each split decide from its own size; set explicitly to force

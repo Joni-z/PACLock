@@ -54,10 +54,11 @@ import os
 import sys
 from functools import partial
 
+from ...paths import vendored
 import torch
 import torch.nn as nn
 
-VENDOR = "/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench/vendor/eegpt"
+VENDOR = vendored("eegpt")
 DOWNSTREAM = os.path.join(VENDOR, "downstream")
 CHECKPOINT = os.path.join(VENDOR, "checkpoint", "eegpt_mcae_58chs_4s_large4E.ckpt")
 

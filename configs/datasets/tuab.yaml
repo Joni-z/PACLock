@@ -1,8 +1,8 @@
 # TUAB v3.0.1 -- PROTOCOLS.md sec.1. FROZEN.
 dataset: tuab
 version: v3.0.1
-raw_root: /work1/chenyuyou/yifanwang/data/tuh/tuab/edf
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuab
+raw_root: $PACLOCK_DATA/tuh/tuab/edf
+out_dir: $PACLOCK_PROC/processed/tuab
 num_classes: 2
 
 sample_rate: 200

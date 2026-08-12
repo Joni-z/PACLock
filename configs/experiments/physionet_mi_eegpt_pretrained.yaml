@@ -1,7 +1,7 @@
 name: physionet_mi-eegpt_pretrained
 group: B
 dataset: physionet_mi
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi
+data_root: $PACLOCK_PROC/processed/physionet_mi
 model: eegpt
 loader: default
 pretrained: true

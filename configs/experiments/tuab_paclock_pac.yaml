@@ -1,7 +1,7 @@
 name: tuab-paclock_pac
 group: D
 dataset: tuab
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/tuab
+data_root: $PACLOCK_PROC/processed_pac/tuab
 model: paclock
 optimizer: adamw
 lr: 0.0001

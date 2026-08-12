@@ -1,7 +1,7 @@
 name: tuab-biot_scratch
 group: C
 dataset: tuab
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tuab
+data_root: $PACLOCK_PROC/processed_biot/tuab
 checkpoint: null
 model: biot
 loader: biot

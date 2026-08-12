@@ -1,7 +1,7 @@
 name: isruc-eegpt_pretrained
 group: B
 dataset: isruc
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/isruc
+data_root: $PACLOCK_PROC/processed/isruc
 model: eegpt
 loader: default
 pretrained: true

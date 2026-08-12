@@ -1,7 +1,7 @@
 name: physionet_mi-paclock_v2
 group: C
 dataset: physionet_mi
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi
+data_root: $PACLOCK_PROC/processed/physionet_mi
 model: paclock
 optimizer: adamw
 lr: 0.0001

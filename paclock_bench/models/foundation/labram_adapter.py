@@ -36,10 +36,11 @@ import os
 import sys
 from collections import OrderedDict
 
+from ...paths import vendored
 import torch
 import torch.nn as nn
 
-VENDOR = "/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench/vendor/labram"
+VENDOR = vendored("labram")
 CHECKPOINT = os.path.join(VENDOR, "checkpoints", "labram-base.pth")
 
 # the 23 channels labram_native.py produces, in that order

@@ -1,7 +1,7 @@
 name: tusz-biot_scratch
 group: C
 dataset: tusz
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tusz
+data_root: $PACLOCK_PROC/processed_biot/tusz
 checkpoint: null
 model: biot
 loader: biot

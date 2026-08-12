@@ -1,7 +1,7 @@
 name: chbmit-biot_prest16
 group: B
 dataset: chbmit
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit
+data_root: $PACLOCK_PROC/processed/chbmit
 checkpoint: prest16
 model: biot
 loader: biot

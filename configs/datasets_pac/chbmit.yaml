@@ -1,7 +1,7 @@
 dataset: chbmit
 version: v1.0.0
-raw_root: /work1/chenyuyou/yifanwang/data/chbmit
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/chbmit
+raw_root: $PACLOCK_DATA/chbmit
+out_dir: $PACLOCK_PROC/processed_pac/chbmit
 num_classes: 2
 sample_rate: 200
 source_rate: 256

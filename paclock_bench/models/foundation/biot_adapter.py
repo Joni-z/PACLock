@@ -40,10 +40,11 @@ from __future__ import annotations
 import os
 import sys
 
+from ...paths import vendored
 import torch
 import torch.nn as nn
 
-VENDOR = "/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench/vendor/biot"
+VENDOR = vendored("biot")
 
 # checkpoint -> number of channels it was pretrained with
 CHECKPOINTS = {

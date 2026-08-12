@@ -1,7 +1,7 @@
 name: tuev-cbramod_scratch
 group: C
 dataset: tuev
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuev
+data_root: $PACLOCK_PROC/processed/tuev
 model: cbramod
 loader: null
 pretrained: false

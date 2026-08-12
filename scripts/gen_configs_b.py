@@ -31,12 +31,13 @@ not a config change, and is tracked separately.
 from __future__ import annotations
 
 import argparse
+from paclock_bench.paths import processed
 import os
 
 import yaml
 
-PROC_BIOT = "/work1/chenyuyou/yifanwang/Zhizhe/processed_biot"
-PROC_OURS = "/work1/chenyuyou/yifanwang/Zhizhe/processed"
+PROC_BIOT = processed("processed_biot")
+PROC_OURS = processed("processed")
 
 # BIOT argparse defaults, identical across both run scripts
 BIOT_COMMON = {
@@ -122,7 +123,7 @@ LABRAM_DATASETS = {
              "val_subsample": 20000, "loss": "bce_with_logits"},
 }
 
-PROC_LABRAM = "/work1/chenyuyou/yifanwang/Zhizhe/processed_labram"
+PROC_LABRAM = processed("processed_labram")
 
 
 # ---------------------------------------------------------------------------
@@ -418,7 +419,7 @@ TFM_COMMON = {
     "eval_every_steps": 0,
 }
 
-PROC_TFM = "/work1/chenyuyou/yifanwang/Zhizhe/processed_tfm"
+PROC_TFM = processed("processed_tfm")
 
 # TFM-Tokenizer runs on all nine corpora with the *multi-corpus* released
 # weights (multiple_dataset_settings). Two reasons, both measured:

@@ -1,7 +1,7 @@
 name: physionet_mi-cbramod_scratch
 group: C
 dataset: physionet_mi
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi
+data_root: $PACLOCK_PROC/processed/physionet_mi
 model: cbramod
 loader: null
 pretrained: false

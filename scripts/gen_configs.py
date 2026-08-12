@@ -16,6 +16,7 @@ one its own tuned schedule would make a failure to reproduce ambiguous between
 from __future__ import annotations
 
 import argparse
+from paclock_bench.paths import processed
 import os
 
 import yaml
@@ -24,7 +25,7 @@ DATASETS = ["tuab", "tuev", "tusz", "chbmit", "sleepedf", "isruc",
             "physionet_mi", "bci_iv_2a", "faced"]
 GROUP_A = ["sparcnet", "contrawr", "cnn_transformer", "ffcl", "st_transformer"]
 
-PROC_ROOT = "/work1/chenyuyou/yifanwang/Zhizhe/processed"
+PROC_ROOT = processed("processed")
 
 # BIOT's own training recipe, from run_binary_supervised.py /
 # run_multiclass_supervised.py. Group A is the calibration set, so it trains the

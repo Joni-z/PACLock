@@ -2,7 +2,7 @@ name: tusz-contrawr
 group: A
 model: contrawr
 dataset: tusz
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tusz
+data_root: $PACLOCK_PROC/processed/tusz
 num_classes: 2
 sample_rate: 200
 loss: bce_with_logits

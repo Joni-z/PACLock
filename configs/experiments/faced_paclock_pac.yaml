@@ -1,7 +1,7 @@
 name: faced-paclock_pac
 group: D
 dataset: faced
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/faced
+data_root: $PACLOCK_PROC/processed/faced
 model: paclock
 optimizer: adamw
 lr: 0.0001

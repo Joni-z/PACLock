@@ -1,8 +1,8 @@
 # TUSZ v2.0.6 -- PROTOCOLS.md sec.3. FROZEN.
 dataset: tusz
 version: v2.0.6
-raw_root: /work1/chenyuyou/yifanwang/data/tuh/tusz/edf
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/tusz
+raw_root: $PACLOCK_DATA/tuh/tusz/edf
+out_dir: $PACLOCK_PROC/processed/tusz
 num_classes: 2
 
 sample_rate: 200

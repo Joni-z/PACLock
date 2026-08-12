@@ -1,7 +1,7 @@
 name: tuab-tfm_scratch
 group: C
 dataset: tuab
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuab
+data_root: $PACLOCK_PROC/processed/tuab
 model: tfm
 loader: tfm
 pretrained: false

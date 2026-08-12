@@ -1,7 +1,7 @@
 name: isruc-repeat2
 group: diag
 dataset: isruc
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/isruc
+data_root: $PACLOCK_PROC/processed/isruc
 model: paclock
 optimizer: adamw
 lr: 0.0001

@@ -1,7 +1,7 @@
 name: tuev-paclock_pilot_unfiltered
 group: C
 dataset: tuev
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tuev
+data_root: $PACLOCK_PROC/processed_biot/tuev
 model: paclock
 optimizer: adamw
 lr: 0.0001

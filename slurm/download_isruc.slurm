@@ -19,8 +19,8 @@
 #   sbatch slurm/download_isruc.slurm
 set -uo pipefail
 
-DEST=/work1/chenyuyou/yifanwang/data/isruc
-LOG=/work1/chenyuyou/yifanwang/data/.download_logs/isruc.log
+DEST=${PACLOCK_DATA:-/work1/chenyuyou/yifanwang/data}/isruc
+LOG=${PACLOCK_DATA:-/work1/chenyuyou/yifanwang/data}/.download_logs/isruc.log
 URL="https://mega.nz/folder/QJgDQDDZ#ZMDj3w82msavACurqP48IA"
 
 export PATH=/home1/yifanwang/local/node-v20.17.0-linux-x64/bin:$PATH

@@ -1,7 +1,7 @@
 name: chbmit-cbramod_probe_a75
 group: probe
 dataset: chbmit
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit
+data_root: $PACLOCK_PROC/processed/chbmit
 model: cbramod
 loader: null
 pretrained: false

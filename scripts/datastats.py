@@ -7,12 +7,13 @@ through the sinc filterbank and Hilbert transform, not of a bad learning rate.
 This prints the scale each corpus actually arrives at so that guess can be
 checked rather than argued about.
 """
+from paclock_bench.paths import processed
 import glob
 import os
 
 import numpy as np
 
-ROOT = "/work1/chenyuyou/yifanwang/Zhizhe/processed"
+ROOT = processed("processed")
 
 print(f"{'corpus':14s} {'shape':>22s} {'std':>10s} {'p99.9|x|':>10s} "
       f"{'mean':>10s} {'zeros%':>7s}")

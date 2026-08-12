@@ -52,13 +52,14 @@ frozen-protocol result already matched the reference.
 from __future__ import annotations
 
 import argparse
+from paclock_bench.paths import processed
 import os
 import shutil
 
 import yaml
 
 SRC = "configs/datasets"
-PROC_PAC = "/work1/chenyuyou/yifanwang/Zhizhe/processed_pac"
+PROC_PAC = processed("processed_pac")
 
 DATASETS = ["tuab", "tuev", "tusz", "chbmit", "sleepedf", "isruc",
             "physionet_mi", "bci_iv_2a", "faced"]

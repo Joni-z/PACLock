@@ -1,8 +1,8 @@
 # EEG Motor Movement/Imagery v1.0.0 -- PROTOCOLS.md sec.7. FROZEN.
 dataset: physionet_mi
 version: v1.0.0
-raw_root: /work1/chenyuyou/yifanwang/data/physionet-mi
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi
+raw_root: $PACLOCK_DATA/physionet-mi
+out_dir: $PACLOCK_PROC/processed/physionet_mi
 num_classes: 4
 
 sample_rate: 200

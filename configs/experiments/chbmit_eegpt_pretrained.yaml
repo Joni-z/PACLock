@@ -1,7 +1,7 @@
 name: chbmit-eegpt_pretrained
 group: B
 dataset: chbmit
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit
+data_root: $PACLOCK_PROC/processed/chbmit
 model: eegpt
 loader: default
 pretrained: true

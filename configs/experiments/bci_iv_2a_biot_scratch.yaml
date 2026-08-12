@@ -1,7 +1,7 @@
 name: bci_iv_2a-biot_scratch
 group: C
 dataset: bci_iv_2a
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a
+data_root: $PACLOCK_PROC/processed/bci_iv_2a
 sample_rate: 200
 optimizer: adamw
 weight_decay: 0.01

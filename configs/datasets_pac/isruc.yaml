@@ -1,7 +1,7 @@
 dataset: isruc
 subset: subgroup_I
-raw_root: /work1/chenyuyou/yifanwang/data/isruc
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/isruc
+raw_root: $PACLOCK_DATA/isruc
+out_dir: $PACLOCK_PROC/processed_pac/isruc
 num_classes: 5
 sample_rate: 200
 resample: false

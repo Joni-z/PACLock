@@ -1,7 +1,7 @@
 name: tuev-tfm_pretrained
 group: B
 dataset: tuev
-data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_tfm/tuev
+data_root: $PACLOCK_PROC/processed_tfm/tuev
 model: tfm
 loader: tfm
 pretrained: true

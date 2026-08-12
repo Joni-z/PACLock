@@ -1,8 +1,8 @@
 dataset: faced
 version: Synapse syn50614194
 source: official pre-processed .pkl
-raw_root: /work1/chenyuyou/yifanwang/data/faced
-out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/faced
+raw_root: $PACLOCK_DATA/faced
+out_dir: $PACLOCK_PROC/processed_pac/faced
 num_classes: 9
 source_rate: 250
 sample_rate: 200
