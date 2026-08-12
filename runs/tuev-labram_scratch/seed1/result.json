@@ -1,0 +1,94 @@
+{
+  "name": "tuev-labram_scratch",
+  "dataset": "tuev",
+  "model": "labram",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 5.821142,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.27929399629012425,
+    "cohen_kappa": 0.3727014944572129,
+    "weighted_f1": 0.7048932850233316
+  },
+  "best_val": 0.5579565231713078,
+  "val_curve": [
+    0.5579565231713078,
+    0.5289680196053259,
+    0.47601882224437586,
+    0.4579668930098645,
+    0.4374037389506844,
+    0.48331355332646064,
+    0.4177230139777909,
+    0.40474882492541964,
+    0.5311512361308408,
+    0.4569374648698198,
+    0.45271140692029244
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 11,
+    "best_val": 0.5579565231713078,
+    "chance": 0.0,
+    "reason": "val peaked at the first evaluation, but reached 0.5580 vs chance 0.0000 -- converged early, not untrained"
+  },
+  "epochs_run": 11,
+  "stopped_by": "patience",
+  "wall_time_sec": 1956.4702270030975,
+  "config": {
+    "name": "tuev-labram_scratch",
+    "group": "C",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_labram/tuev",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "seed": 1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      581,
+      7732,
+      5199,
+      916,
+      8264,
+      41758
+    ],
+    "val": [
+      64,
+      3522,
+      985,
+      146,
+      2638,
+      11682
+    ],
+    "test": [
+      249,
+      3430,
+      1864,
+      310,
+      1980,
+      18234
+    ]
+  }
+}

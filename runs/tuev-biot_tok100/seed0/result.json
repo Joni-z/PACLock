@@ -1,0 +1,98 @@
+{
+  "name": "tuev-biot_tok100",
+  "dataset": "tuev",
+  "model": "biot",
+  "group": "ablation",
+  "seed": 0,
+  "n_params_M": 3.174934,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5886269223034132,
+    "cohen_kappa": 0.4880230397718909,
+    "weighted_f1": 0.7287939123064294
+  },
+  "best_val": 0.5573684827214279,
+  "val_curve": [
+    0.5106349672399948,
+    0.5390825195371383,
+    0.4295082528758343,
+    0.5345611267081218,
+    0.5500305325473813,
+    0.5205696193181957,
+    0.5360117946308287,
+    0.5573684827214279,
+    0.5461521528463913,
+    0.5147273840047217,
+    0.4776733983053686,
+    0.4951034624826135,
+    0.5363190959305507
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 13,
+    "best_val": 0.5573684827214279,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "stopped_by": "patience",
+  "wall_time_sec": 458.3923213481903,
+  "config": {
+    "name": "tuev-biot_tok100",
+    "group": "ablation",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tuev",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 100,
+      "hop_length": 50
+    },
+    "num_classes": 6,
+    "sample_rate": 200,
+    "batch_size": 128,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.0,
+    "eval_every_steps": 0,
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      610,
+      9683,
+      3877,
+      828,
+      9214,
+      43303
+    ],
+    "val": [
+      35,
+      1571,
+      2307,
+      242,
+      1839,
+      10423
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

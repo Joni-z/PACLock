@@ -1,0 +1,105 @@
+{
+ "name": "sleepedf-cbramod_scratch",
+ "dataset": "sleepedf",
+ "model": "cbramod",
+ "group": "C",
+ "seed": 1,
+ "n_params_M": 9.845805,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6717703490858258,
+  "cohen_kappa": 0.6566640196149941,
+  "weighted_f1": 0.7651838838474918
+ },
+ "best_val": 0.631188204147284,
+ "val_curve": [
+  0.5735232772499006,
+  0.5908011174882519,
+  0.6080685739043401,
+  0.6179514862460052,
+  0.6208458665655092,
+  0.631188204147284,
+  0.6227148823258973,
+  0.621086136986494,
+  0.618261567902602,
+  0.6070927451859549,
+  0.6159355771933962,
+  0.6089089908285243,
+  0.5982003505388594,
+  0.6045680251169977,
+  0.6095391274795654,
+  0.6013827153743156
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 16,
+  "best_val": 0.631188204147284,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 16,
+ "wall_time_sec": 1773.8525741100311,
+ "config": {
+  "name": "sleepedf-cbramod_scratch",
+  "group": "C",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 1
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 16,
+  "reason": "ok"
+ }
+}

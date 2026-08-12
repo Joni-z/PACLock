@@ -1,0 +1,99 @@
+{
+  "name": "tuev-tfm_pretrained",
+  "dataset": "tuev",
+  "model": "tfm",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 1.891114,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6154966775067962,
+    "cohen_kappa": 0.6759415515878959,
+    "weighted_f1": 0.8304585043062251
+  },
+  "best_val": 0.5977394658173137,
+  "val_curve": [
+    0.4964843382384794,
+    0.5542787460994789,
+    0.5576062909263295,
+    0.5447853248034308,
+    0.5310932303676341,
+    0.5179283404838998,
+    0.5479191847349141,
+    0.5699563823197857,
+    0.5697917585430183,
+    0.5741047480718693,
+    0.5532608078781647,
+    0.5977394658173137,
+    0.5846981128280733,
+    0.5724744327366952,
+    0.5950024146274229,
+    0.4406118169064843,
+    0.5879257805509479,
+    0.5337275055483599,
+    0.509698141815142,
+    0.5128275409257725,
+    0.5570387925523889,
+    0.5725049566262307
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 11,
+    "n_evals": 22,
+    "reason": "ok"
+  },
+  "epochs_run": 2,
+  "wall_time_sec": 4477.002148151398,
+  "config": {
+    "name": "tuev-tfm_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 64,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 6,
+    "loss": "cross_entropy",
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

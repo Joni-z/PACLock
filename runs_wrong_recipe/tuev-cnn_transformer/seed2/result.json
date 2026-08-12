@@ -1,0 +1,91 @@
+{
+  "name": "tuev-cnn_transformer",
+  "dataset": "tuev",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 3.155686,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.3073698679613148,
+    "cohen_kappa": 0.3536809644236175,
+    "weighted_f1": 0.6712636347590514
+  },
+  "best_val": 0.42168739850045356,
+  "val_curve": [
+    0.09049144388335073,
+    0.04420111076511124,
+    0.42168739850045356,
+    0.22682393812770674,
+    0.04368170234028512,
+    0.10126130982183579,
+    0.11111998344594043,
+    0.17512614256998793,
+    0.18892193149483327,
+    0.28011244060304474,
+    -0.0007068908757803527,
+    0.2127501642787728,
+    0.2619874582439662,
+    0.10986484834324539,
+    0.13639548574635685,
+    0.32169265883735343
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 16,
+    "reason": "ok"
+  },
+  "epochs_run": 4,
+  "wall_time_sec": 1061.5797288417816,
+  "config": {
+    "name": "tuev-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "batch_size": 64,
+    "num_workers": 8,
+    "epochs": 30,
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "patience": 10,
+    "eval_every_steps": 300,
+    "seed": 2,
+    "device": "cuda"
+  },
+  "data_manifest_created": "2026-08-04T12:04:52.683807+00:00",
+  "class_counts": {
+    "train": [
+      506,
+      10735,
+      5019,
+      963,
+      9750,
+      36742
+    ],
+    "val": [
+      119,
+      270,
+      627,
+      71,
+      456,
+      13038
+    ],
+    "test": [
+      567,
+      4564,
+      1904,
+      329,
+      2064,
+      18670
+    ]
+  }
+}

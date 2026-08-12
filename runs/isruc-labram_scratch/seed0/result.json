@@ -1,0 +1,102 @@
+{
+  "name": "isruc-labram_scratch",
+  "dataset": "isruc",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820941,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.674302064448882,
+    "cohen_kappa": 0.6301372328170212,
+    "weighted_f1": 0.7066609459310664
+  },
+  "best_val": 0.6478418971478819,
+  "val_curve": [
+    0.5648637565704229,
+    0.6458088694416254,
+    0.6185539327652074,
+    0.6478418971478819,
+    0.6016219869736739,
+    0.6173544281380958,
+    0.6290336644022924,
+    0.6306209850107066,
+    0.6402011300068622,
+    0.6163495688654406,
+    0.6234444803422422,
+    0.6332931387428433,
+    0.5869635477664891,
+    0.6244170342644767
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 14,
+    "best_val": 0.6478418971478819,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 14,
+  "stopped_by": "patience",
+  "wall_time_sec": 2137.1219923496246,
+  "config": {
+    "name": "isruc-labram_scratch",
+    "group": "C",
+    "dataset": "isruc",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 5,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "flatten_sequences": true,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 3000
+    },
+    "seed": 0,
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      16493,
+      9147,
+      21310,
+      13234,
+      9236
+    ],
+    "val": [
+      2072,
+      1015,
+      3226,
+      1980,
+      1067
+    ],
+    "test": [
+      1348,
+      1031,
+      3120,
+      1808,
+      1393
+    ]
+  }
+}

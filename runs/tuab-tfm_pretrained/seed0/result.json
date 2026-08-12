@@ -1,0 +1,102 @@
+{
+ "name": "tuab-tfm_pretrained",
+ "dataset": "tuab",
+ "model": "tfm",
+ "group": "B",
+ "seed": 0,
+ "n_params_M": 1.890854,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.7895795682344549,
+  "pr_auc": 0.8820419573031206,
+  "auroc": 0.8784664218608311
+ },
+ "best_val": 0.8887720795915266,
+ "val_curve": [
+  0.8108747173263965,
+  0.8504108228639844,
+  0.8638047138907954,
+  0.8727096599140018,
+  0.8792180719730486,
+  0.8765073289529246,
+  0.884862415394428,
+  0.8801851123910338,
+  0.8879254010081861,
+  0.8835355778103469,
+  0.8887720795915266,
+  0.882828210155152,
+  0.878078289011955,
+  0.8827719243292714,
+  0.8734466142225941,
+  0.8867049691009965,
+  0.8826063002286955,
+  0.885988698379649,
+  0.8799351197074892,
+  0.881120896830718,
+  0.8857712650512073,
+  0.8869012025044605,
+  0.8818479404626299,
+  0.8771695446279175
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 24,
+  "best_val": 0.8887720795915266,
+  "chance": 0.5,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 4,
+ "wall_time_sec": 31347.377885341644,
+ "config": {
+  "name": "tuab-tfm_pretrained",
+  "group": "B",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuab",
+  "model": "tfm",
+  "loader": "tfm",
+  "pretrained": true,
+  "tfm_setting": "multiple",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 10,
+  "batch_size": 512,
+  "warmup_epochs": 5,
+  "label_smoothing": 0.1,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 100,
+  "num_classes": 2,
+  "loss": "bce_with_logits",
+  "val_subsample": 20000,
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   147894,
+   149209
+  ],
+  "val": [
+   35815,
+   39592
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 24,
+  "reason": "ok"
+ }
+}

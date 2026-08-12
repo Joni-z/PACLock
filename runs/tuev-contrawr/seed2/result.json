@@ -1,0 +1,104 @@
+{
+ "name": "tuev-contrawr",
+ "dataset": "tuev",
+ "model": "contrawr",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 1.572582,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.27531069732515284,
+  "cohen_kappa": 0.2968508386686646,
+  "weighted_f1": 0.6445623351965143
+ },
+ "best_val": 0.4019987404002392,
+ "val_curve": [
+  0.3900906999340622,
+  0.2859471302598289,
+  0.4019987404002392,
+  0.31230740055666095,
+  0.389542170875543,
+  0.30680758654105444,
+  0.38962996865074306,
+  0.34942148028221387,
+  0.35511965279477364,
+  0.3371780658038974,
+  0.3269096649342743,
+  0.3979267988560211,
+  0.30078809623308156,
+  0.32900710702061287,
+  0.3765143587677515,
+  0.3870091375085035,
+  0.34532922697263524,
+  0.3402632505041192
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 2,
+  "n_evals": 18,
+  "best_val": 0.4019987404002392,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 18,
+ "wall_time_sec": 524.0861818790436,
+ "config": {
+  "name": "tuev-contrawr",
+  "group": "A",
+  "model": "contrawr",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 100,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 2,
+  "device": "cuda",
+  "label_smoothing": 0.1
+ },
+ "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 2,
+  "n_evals": 18,
+  "reason": "ok"
+ }
+}

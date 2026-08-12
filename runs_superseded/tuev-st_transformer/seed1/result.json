@@ -1,0 +1,97 @@
+{
+  "name": "tuev-st_transformer",
+  "dataset": "tuev",
+  "model": "st_transformer",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 3.425062,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.45692293181438554,
+    "cohen_kappa": 0.516757229124115,
+    "weighted_f1": 0.74276462407301
+  },
+  "best_val": 0.3830316637330562,
+  "val_curve": [
+    0.2622732119918679,
+    0.27353336366444914,
+    0.3774228492276893,
+    0.36962503844869044,
+    0.29400327608156707,
+    0.3830316637330562,
+    0.36361541329726144,
+    0.3547187869219648,
+    0.3682689940235201,
+    0.34828651005478184,
+    0.329312519310592,
+    0.3417602267559843,
+    0.33429547374980717,
+    0.33941037624522385,
+    0.2727929481957063,
+    0.29761974662972424,
+    0.2916024255739478,
+    0.30119057144522576,
+    0.30115041946593557,
+    0.320551904135448,
+    0.2846113269120919
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 21,
+    "reason": "ok"
+  },
+  "epochs_run": 21,
+  "wall_time_sec": 223.3807988166809,
+  "config": {
+    "name": "tuev-st_transformer",
+    "group": "A",
+    "model": "st_transformer",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 1,
+    "device": "cuda",
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-04T12:04:52.683807+00:00",
+  "class_counts": {
+    "train": [
+      506,
+      10735,
+      5019,
+      963,
+      9750,
+      36742
+    ],
+    "val": [
+      119,
+      270,
+      627,
+      71,
+      456,
+      13038
+    ],
+    "test": [
+      567,
+      4564,
+      1904,
+      329,
+      2064,
+      18670
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+ "name": "chbmit-st_transformer",
+ "dataset": "chbmit",
+ "model": "st_transformer",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 3.426034,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.5145916448555383,
+  "pr_auc": 0.302363489705115,
+  "auroc": 0.6992571510854741
+ },
+ "best_val": 0.28537098041397646,
+ "val_curve": [
+  0.026644343586848244,
+  0.06078842130801069,
+  0.18532900672689565,
+  0.1989809978262681,
+  0.18519245569176696,
+  0.1541308875969787,
+  0.28537098041397646,
+  0.17321902990869292,
+  0.0959432658042765,
+  0.20433168100295546,
+  0.2604798869283781,
+  0.28178987792487253,
+  0.175183236056294,
+  0.2771825082442317,
+  0.12873765173930476,
+  0.16163840475899582
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 16,
+  "best_val": 0.28537098041397646,
+  "chance": 0.0070808157099697885,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 4,
+ "wall_time_sec": 311.06367087364197,
+ "config": {
+  "name": "chbmit-st_transformer",
+  "group": "A",
+  "model": "st_transformer",
+  "dataset": "chbmit",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "focal",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 2,
+  "device": "cuda",
+  "focal_alpha": 0.25,
+  "focal_gamma": 2.0
+ },
+ "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+ "class_counts": {
+  "train": [
+   313322,
+   2883
+  ],
+  "val": [
+   21034,
+   150
+  ],
+  "test": [
+   17110,
+   276
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 16,
+  "reason": "ok"
+ }
+}

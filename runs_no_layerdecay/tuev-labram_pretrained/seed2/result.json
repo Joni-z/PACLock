@@ -1,0 +1,92 @@
+{
+  "name": "tuev-labram_pretrained",
+  "dataset": "tuev",
+  "model": "labram",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 5.821142,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.47929254422976336,
+    "cohen_kappa": 0.3895466105495088,
+    "weighted_f1": 0.6948237167044474
+  },
+  "best_val": 0.46081615533148224,
+  "val_curve": [
+    0.418817468731308,
+    0.46081615533148224,
+    0.4174728947928187,
+    0.40001704009164285,
+    0.3602663949458964,
+    0.3837304758669152,
+    0.4034560129973723,
+    0.3527752708185018,
+    0.35213750782754016,
+    0.42517400460954546,
+    0.4144469649390883,
+    0.4084887875691502
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 12,
+    "reason": "ok"
+  },
+  "epochs_run": 12,
+  "wall_time_sec": 2130.931355714798,
+  "config": {
+    "name": "tuev-labram_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_labram/tuev",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.0,
+    "seed": 2
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      581,
+      7732,
+      5199,
+      916,
+      8264,
+      41758
+    ],
+    "val": [
+      64,
+      3522,
+      985,
+      146,
+      2638,
+      11682
+    ],
+    "test": [
+      249,
+      3430,
+      1864,
+      310,
+      1980,
+      18234
+    ]
+  }
+}

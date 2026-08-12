@@ -1,0 +1,111 @@
+{
+ "name": "tuev-labram_scratch",
+ "dataset": "tuev",
+ "model": "labram",
+ "group": "C",
+ "seed": 2,
+ "n_params_M": 5.821142,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.40420611244557164,
+  "cohen_kappa": 0.31274056612576484,
+  "weighted_f1": 0.6574324349597661
+ },
+ "best_val": 0.49419940392761874,
+ "val_curve": [
+  0.4659787175390264,
+  0.4480037463455241,
+  0.4072561735377276,
+  0.3860667916166636,
+  0.44304687572408974,
+  0.4827819582345553,
+  0.41519605757835976,
+  0.44569129391473705,
+  0.48453483710791556,
+  0.42335430331476953,
+  0.49419940392761874,
+  0.4652194551439146,
+  0.46918462866550126,
+  0.43569806063733063,
+  0.4523445966728903,
+  0.4294270103068455,
+  0.43781159591993524,
+  0.4587051082982574,
+  0.4802948887737588,
+  0.46510334391497776,
+  0.4635443870776763
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 21,
+  "best_val": 0.49419940392761874,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 21,
+ "wall_time_sec": 3718.038583278656,
+ "config": {
+  "name": "tuev-labram_scratch",
+  "group": "C",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_labram/tuev",
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0005,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.0,
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   581,
+   7732,
+   5199,
+   916,
+   8264,
+   41758
+  ],
+  "val": [
+   64,
+   3522,
+   985,
+   146,
+   2638,
+   11682
+  ],
+  "test": [
+   249,
+   3430,
+   1864,
+   310,
+   1980,
+   18234
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 21,
+  "reason": "ok"
+ }
+}

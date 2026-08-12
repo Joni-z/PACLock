@@ -1,0 +1,101 @@
+{
+  "name": "physionet_mi-labram_scratch",
+  "dataset": "physionet_mi",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.82074,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.2939505545065038,
+    "cohen_kappa": 0.05867291697426047,
+    "weighted_f1": 0.27531489050103525
+  },
+  "best_val": 0.30155157008703226,
+  "val_curve": [
+    0.25057736720554274,
+    0.26435045461342804,
+    0.2574163884286901,
+    0.2692772539826346,
+    0.279002597914561,
+    0.2979727853600655,
+    0.2845789537819847,
+    0.30155157008703226,
+    0.28939491202587614,
+    0.29282814371415994,
+    0.2785396014382642,
+    0.271121662348892,
+    0.2740379807232459,
+    0.29248303525308444,
+    0.2767651934640065,
+    0.28273098833001326,
+    0.2770768149261895,
+    0.2826291759262012
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 18,
+    "best_val": 0.30155157008703226,
+    "chance": 0.25,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "wall_time_sec": 312.620671749115,
+  "config": {
+    "name": "physionet_mi-labram_scratch",
+    "group": "C",
+    "dataset": "physionet_mi",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 4,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 800
+    },
+    "seed": 0,
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1593,
+      1557,
+      1581,
+      1569
+    ],
+    "val": [
+      435,
+      432,
+      434,
+      433
+    ],
+    "test": [
+      451,
+      449,
+      450,
+      453
+    ]
+  }
+}

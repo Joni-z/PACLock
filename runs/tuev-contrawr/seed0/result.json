@@ -1,0 +1,113 @@
+{
+ "name": "tuev-contrawr",
+ "dataset": "tuev",
+ "model": "contrawr",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 1.572582,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.47661115111494085,
+  "cohen_kappa": 0.4409933222334351,
+  "weighted_f1": 0.7136686396655909
+ },
+ "best_val": 0.5936595969474897,
+ "val_curve": [
+  0.40008636067940384,
+  0.4066785581870468,
+  0.43841385068042393,
+  0.39905682434382916,
+  0.45299135236323596,
+  0.499569441905806,
+  0.3497219194103993,
+  0.4791371022712264,
+  0.4964360199424357,
+  0.44876615895826766,
+  0.3841268934379781,
+  0.5936595969474897,
+  0.5243879315783901,
+  0.5444744551424778,
+  0.5318740444939463,
+  0.38904813704053687,
+  0.51271927644461,
+  0.5809466857666286,
+  0.4931653767656058,
+  0.5832334515908231,
+  0.5728201622431044,
+  0.5753645995461839,
+  0.5600099974757478,
+  0.4592307217745346,
+  0.42678966740353785,
+  0.5843817380052845,
+  0.5261559643553753
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 11,
+  "n_evals": 27,
+  "best_val": 0.5936595969474897,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 27,
+ "wall_time_sec": 777.2977755069733,
+ "config": {
+  "name": "tuev-contrawr",
+  "group": "A",
+  "model": "contrawr",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 100,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 0,
+  "device": "cuda",
+  "label_smoothing": 0.1
+ },
+ "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 11,
+  "n_evals": 27,
+  "reason": "ok"
+ }
+}

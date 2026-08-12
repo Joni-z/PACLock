@@ -1,0 +1,299 @@
+# 协议实现记录
+
+记录实现过程中遇到的、与冻结协议相关的判断。**冻结参数一个都没有改动**;
+这里记的是协议文字未覆盖到的边界情况,以及依据文献通行做法所做的选择。
+
+---
+
+## 2026-08-04 — TUAB:按类切分导致的 train↔val 受试者重叠
+
+**现象.** `preprocessing/tuab.py` 的泄漏守卫报错:3 个受试者
+(`aaaaaoiz`、`aaaaaopm`、`aaaaaoru`)同时出现在 train 和 val。
+
+**成因.** 协议规定「normal 与 abnormal **分别**按 subject ID 排序后前 80%/后 20%」。
+实测 TUAB 官方 train 里有 **54 个受试者同时拥有 normal 和 abnormal 记录**
+(同一病人不同次就诊结论不同,临床常见)。两类各自独立切分时,这些人可能
+normal 记录落 train、abnormal 记录落 val。54 人中有 3 人跨越了 80/20 切分点。
+
+**文献做法.** 两个官方实现都是按类独立切分,因此都有同样的重叠:
+
+* BIOT `datasets/TUAB/process.py` — 对 abnormal / normal 各自
+  `np.random.shuffle` 后取前 80%
+* CBraMod `preprocessing/preprocessing_tuab.py` — 同样按类各自 80/20
+
+我们要对齐的所有已发表 TUAB 数字都是这样产生的。
+
+**决定.** **保持协议不变,采用通行做法。** A 组存在的意义就是校准 pipeline
+是否能对上已发表值,若在此处改用更严格的划分,反而会引入一个与文献不可比的
+差异,把「pipeline 是否正确」和「划分是否不同」两个因素混在一起。
+
+**处理方式.**
+
+* 重叠**不修复**,但**完整记录**在 `processed/tuab/manifest.json` 的
+  `qc.subject_overlap`(含受试者 ID)与 `qc.n_overlapping_subjects`
+* `Manifest.check_disjoint(strict=False)` 仅对 TUAB 使用;其余数据集保持
+  致命错误,泄漏就是 bug
+* 预处理时打印警告
+
+**影响范围.** 仅 train↔val。官方 eval(=test)与 train **零受试者重叠**
+(已实测确认),所以报告的 test 指标不受影响;重叠只可能让 val 略微乐观,
+从而轻微影响 best-checkpoint 的选择。
+
+**论文中需注明**:TUAB 的 train/val 划分沿用 BIOT/CBraMod 的按类划分惯例,
+其中 3 名受试者跨 train/val;test 为官方 eval,受试者与 train 不重叠。
+
+---
+
+## 2026-08-04 — A 组:改用 BIOT 官方实现,参数量对齐
+
+**现象.** 自己重写的 A 组五个模型能训练,但参数量与 xlsx 列出的值对不上
+(如 FFCL 0.70M vs 2.4M)。A 组的唯一作用是校准 pipeline 能否复现已发表值,
+架构不对则校准无意义,且 B/C 组结论会继承这个错误。
+
+**处理.** 删除自己的重写,改为 **vendor BIOT 官方实现**
+(`ycq091044/BIOT`,`model/`)到 `paclock_bench/models/baselines/biot_official/`,
+本地只保留一层薄适配。重写版产出的结果已移入 `runs_invalidated/` 作废。
+
+**重写版的两处结构性错误**(说明为何必须换掉,不只是超参不同):
+
+* ContraWR / CNN-Transformer / FFCL 官方是在 **STFT 频谱**上跑 **2D** ResBlock,
+  我写成了在原始波形上跑 1D 卷积
+* FFCL 的 LSTM 输入是 `shorten()` 的交错重排,我写成了简单的等间隔下采样
+
+**超参来源.** 取自作者的训练脚本 `run_binary_supervised.py` /
+`run_multiclass_supervised.py`,**不是**模型文件的构造函数默认值——两者不一致,
+而脚本才是产出已发表数字的那个:
+
+| 项 | 值 | 备注 |
+|---|---|---|
+| `token_size` | 200 | 200 Hz 语料;Sleep-EDF 是 100 Hz,配置里必须覆盖 |
+| `hop_length` | 100 | ⇒ `steps = hop_length // 5 = 20` |
+| ContraWR / FFCL | `fft = token_size` | |
+| CNN-Transformer | `fft = sampling_rate` | 与上面两个**不同**,脚本确实如此 |
+| **ST-Transformer** | **`depth = 4`** | 模型文件默认是 3;这一项就让它从 2.64M 变到 3.43M |
+| SPaRCNet | `block_layers=4, growth_rate=16, bn_size=16` | 与文件默认相同 |
+
+**参考配置.** xlsx 每个模型只给一个参数量,**是按 TUEV 的 5 秒窗口
+(16ch × 1000 @ 200Hz)测的**。FFCL 是长度相关的,正好钉死了这一点:
+T=1000 时实测 2.416M vs 表列 2.40M;T=2000 时是 2.465M。
+
+**结果.** 5 个中 4 个吻合到 ≤2.1%:ContraWR 1.7%、CNN-Transformer 1.4%、
+FFCL 0.7%、ST-Transformer 2.1%。
+
+**遗留:SPaRCNet 对不上,不予修正.** 用作者脚本的原始超参实测 0.992M(TUEV)/
+1.142M(TUAB),xlsx 列 0.79M,差 25.5%。已试遍窗口长度与
+`block_layers`/`growth_rate`/`bn_size` 的各种组合,**没有任何一组能复现 0.79M**。
+判定为已发表数字自身的不一致,**保留官方架构不动**。
+
+理由:为了让参数量对上而去编造超参,等于把校准基线换成一个与已发表模型
+不同的模型 —— 这正是这项检查要防的事。真正有约束力的校准门是**指标比对**
+(A 组能否对上 TFM-Tokenizer 的已发表值),不是参数量;参数量只是架构是否正确的
+廉价代理。已记入 `light_supervised.py` 的 `KNOWN_PARAM_DISCREPANCIES`,
+`tests/test_baseline_params.py` 会持续打印。
+
+---
+
+## 2026-08-04 — A 组:改用 BIOT 官方训练配方
+
+**现象.** 首轮 TUEV 结果里 SPaRCNet 只有 kappa 0.276,发表值 0.423,差 0.148;
+同时 CNN-Transformer 与 FFCL 虽然"通过"复现门,但靠的是 ±0.07–0.08 的大方差,
+说服力很弱。
+
+**根因.** 我自己定的训练配方与 BIOT 的**每一项都不同**:
+
+| 项 | BIOT 官方 | 首轮用的 |
+|---|---|---|
+| 优化器 | Adam | AdamW |
+| **学习率** | **1e-3** | 1e-4(低 10 倍) |
+| scheduler | 无 | cosine |
+| batch size | 512 | 64 |
+| epochs | 100 | 30 |
+| grad clip | 无 | 1.0 |
+
+学习率低 10 倍、epoch 少 3 倍,足以让 SPaRCNet 欠拟合。
+
+**处理.** 全部改为 BIOT 的配方(`run_binary_supervised.py` /
+`run_multiclass_supervised.py`)。训练循环新增 `optimizer` 配置项,因为 AdamW 的
+解耦权重衰减与 Adam 在 wd=1e-5 下并不等价。首轮结果移入 `runs_wrong_recipe/`。
+
+**唯一保留的偏离:epoch 上限.** BIOT 跑 100 epoch,在 TUAB/TUSZ/CHB-MIT
+(30 万+ 窗口)上远超模型峰值,也超出节点时限。实际停点由主指标的 early stopping
+决定,上限只用来约束作业时长。
+
+**顺带修正:STFT 帧数规则.** ContraWR / CNN-Transformer / FFCL 把频谱池化 4 次
+(共 256×)并假定塌缩到 1×1。BIOT 的默认 hop 在 5–10 秒窗口下没问题,但
+Sleep-EDF 和 ISRUC 是 **30 秒 epoch**,默认会产生约 601 帧,末端剩 3 帧导致
+分类器矩阵乘失败。现按数据自动放宽 hop 使帧数 ≤256,**5–10 秒的数据集保持
+BIOT 原始设置不变**。`tests/test_all_configs_forward.py` 覆盖全部 40 个组合。
+
+---
+
+## 2026-08-04 — 观察:官方配方下 val 曲线剧烈震荡(不修正)
+
+跑 A 组时发现 TUEV 上 CNN-Transformer 的验证曲线逐轮大幅跳动,例如 seed 1 的
+kappa 序列:`0.242 → 0.431 → 0.416 → 0.058 → 0.048 → 0.346 → ...`,seed 0 同样
+在 0.05–0.41 之间反复。两个 seed 都如此,不是个别 seed 崩溃。
+
+**成因**:BIOT 的配方是 lr=1e-3、Adam、**无 scheduler**。在这个学习率下不收敛到
+平稳点是预期行为。
+
+**不做修正.** 加 scheduler 或降 lr 都会偏离官方配方,而 A 组的全部意义是复现官方
+数字。BIOT 自己也是取验证集最优 checkpoint,我们做法一致。
+
+**两个后果,报告时必须说明**:
+
+1. **best-checkpoint 是在噪声曲线上选的**,存在向上的选择偏差。峰值
+   (seed1 0.431 / seed0 0.410)确实落在发表值 0.3815 附近,但这部分是
+   "在震荡序列里取最大值"的结果,不能解读为模型稳定达到该水平。
+2. **seed 间标准差偏大**(首轮观察到 ±0.07–0.08)。复现门用 mean±2std 判定,
+   区间被噪声撑宽后很容易"通过"。**因此判定为 reproduced 的说服力弱于
+   std 小的行**,附录里应同时给出各 seed 的峰值与曲线,而不是只报均值。
+
+早停 patience 也因此带有随机性(seed 1 在 epoch 18 停,峰值在 epoch 2)。
+
+---
+
+## 2026-08-05 — 矩阵变更:SEED-V 替换为 FACED
+
+**决定.** 用户改用 FACED 替换 SEED-V。SEED-V 的配置与预处理脚本保留但标记
+`DEPRECATED`,不再生成实验配置。
+
+**FACED 协议来源.** xlsx **初版**(2026-08-04 之前)本就包含完整的 FACED sheet,
+后来被改版移除。本次直接采用该版本的冻结协议,未做任何重新推导。
+
+**两者差异很大,是重写而非改名:**
+
+| 项 | FACED | SEED-V |
+|---|---|---|
+| 类别数 | **9** | 5 |
+| 通道数 | 32 | 62 |
+| 窗口 | 30 s trial 切 3×**10 s** | **1 s** |
+| 样本形状 | 32×2000 | 62×200 |
+| 划分 | **subject-disjoint**(S000–079/080–099/100–122) | trial-disjoint(同一人跨 split) |
+| 受试者 | 123 | 16 |
+
+FACED 是 subject-disjoint,因此 `Manifest.check_disjoint()` **要调用**;
+SEED-V 当初是刻意不调用的。
+
+**一个必须注意的执行要求.** 协议冻结项写明「使用**官方发布的 pre-processed**
+`.pkl`」,官方预处理已包含 0.05–47 Hz 滤波、坏导插值、**ICA 去眼动**、
+common-average 重参考、每视频取末 30 s。因此 `preprocessing/faced.py`
+**只做 250→200 Hz 重采样和切窗,不再做任何滤波** —— 二次滤波会悄悄改变所有模型
+看到的输入,而官方的 ICA 步骤我们也无法 bit-identical 复刻。
+
+用户手上的百度网盘 zip 有 52 GB,而官方 pre-processed 版本约 3–4 GB,
+**高度怀疑那是 raw 版本**,已提示确认。若确为 raw,不能直接使用。
+
+**传输方案.** 实测本机上行仅约 0.4 MB/s,52 GB 需约 37 小时,不可行。
+集群可直连 Synapse(HTTP 200),改为在集群侧用 `synapseclient` 下载官方
+pre-processed 版本,走 Slurm 作业,凭据用 Personal Access Token(可限权可撤销),
+不使用百度 BDUSS(等同整个账号登录态)。
+
+---
+
+## 2026-08-05 — ISRUC 预处理连挂两次:通道命名与二维标签
+
+### 第一次:`--jobs` 参数缺失
+
+`slurm/preprocess.slurm` 统一给所有数据集传 `--jobs`,但只有用多进程的
+TUAB/TUEV/TUSZ/CHB-MIT 定义了该参数。
+
+**为什么拖到现在才暴露**:Sleep-EDF 和 PhysioNet-MI 当初是在登录节点直接跑的
+(即那次违规),没走 Slurm 脚本,因此没经过这条路径。**绕过标准路径就等于绕过了
+它的检验** —— 这是那次违规的一个副作用。
+
+**处理**:9 个预处理脚本接口统一,全部接受 `--jobs`;单进程的注明「仅为接口一致」。
+顺带把 ISRUC 真正并行化(100 个 subject 各自读 EDF + 滤波),并按 subject 号
+重排序,保证 Pool 乱序返回不影响输出的确定性。
+
+### 第二次:通道命名两套 + 二维标签
+
+**通道命名(数据现实,非 bug)**:ISRUC 受试者分两批,一批用耳参考拼写
+`F3-A2`,另一批用乳突拼写 `F3-M2`。**A1/A2 与 M1/M2 是同一组参考电极**
+(左右耳/乳突),因此两种拼写指的是同一导联,协议的通道表对两者都成立。
+`pick_channels` 现在把 `A1≡M1`、`A2≡M2` 归一后再匹配。
+
+**为什么烟测没抓到**:`tests/test_readers.py` 只测了 subject 2,而它恰好是 A 拼写。
+测试已改为**遍历到覆盖两种拼写各一个**为止 —— 单样本烟测在"数据集内部存在
+变体"时是不够的。
+
+**二维标签(我的 bug)**:ISRUC 标签形状是 `(n_seq, 20)`,`common.save_split`
+里的 `np.bincount(y)` 只接受一维,抛 `object too deep for desired array`。
+已改为 `y.ravel()`。这条路径其他数据集都是一维标签,所以只有 ISRUC 触发。
+
+---
+
+## 2026-08-06 — B 组:五个模型的实现与两个不可用项
+
+### 已完整复现(严格照各自原仓库)
+
+| 模型 | 权重 | 预处理来源 | 状态 |
+|---|---|---|---|
+| BIOT | `EEG-PREST-16-channels.ckpt`,零 missing/unexpected | `datasets/TUAB/process.py` | ✅ |
+| CBraMod | HuggingFace `pretrained_weights.pth` | 其 `preprocessing_tuab.py` **即本工作簿的冻结协议** | ✅ |
+| LaBraM | `labram-base.pth`,224 张量(204 block) | `dataset_maker/make_TUAB.py` | ✅ |
+
+四套预处理互不相同,每一项都可追溯到上游具体文件:
+
+| | BIOT | LaBraM | TFM | CBraMod/我们 |
+|---|---|---|---|---|
+| 带通 | 无 | 0.1–75 | 0.1–75 | 0.3–75 |
+| notch | 无 | 50 Hz | 50 Hz | 60 Hz |
+| 通道 | 16 双极 | **23 单极 -REF** | 16 双极 | 16 双极 |
+| 优化器 | Adam 1e-3 | AdamW + layer decay 0.65 | AdamW 1e-3 | AdamW + multi_lr |
+| 归一化 | q95(loader) | ÷100(loader) | q95(loader) | ÷100(预处理) |
+
+### 关键验证:BIOT 精确命中发表值
+
+TUAB AUROC:预训练 **0.8730 ± 0.0026** vs BIOT 自报 **0.8730**(差 0.0000);
+from-scratch 0.8694 vs 0.8691(差 0.0003)。
+
+**这条结果同时解答了 A 组的遗留疑问。** A 组所有可比单元格都比发表值高
+0.02–0.045,当时推测源于预处理差异但未验证。现在用 BIOT 自己的预处理跑
+同一套训练/评测代码,能精确复现发表值 —— 说明训练循环、best-checkpoint 选择、
+指标实现**没有系统性问题**,A 组的偏高确实来自预处理(CBraMod 协议的带通+notch
+vs BIOT 的不滤波)。B 组本身充当了原计划的预处理对照实验。
+
+### 两个不可用项
+
+**TFM-Tokenizer:上游代码与发布权重版本不一致。**
+`get_tfm_tokenizer_2x2x8`(超参 8192/64,与 finetune 脚本默认值一致)构造出的
+`TFM_VQVAE2_deep` 期望 `decoder.0/decoder.2`,而发布权重含
+`freq_pos_embed`、`temporal_pos_embed`、`temporal_pos_embed_decoding`、
+单层 `decoder` —— 全仓库 grep 不到任何包含 `freq_pos_embed` 的代码。
+HuggingFace 上是同一批文件。判定为上游自身问题,非本仓库适配错误。
+预处理、适配层、配置均已就绪,上游修复后可直接跑。
+
+**EEGPT:权重不可自动获取且形状不匹配。**
+权重在 figshare 需浏览器交互;更根本的是它要求 **58 通道 / 256 Hz / 4 秒**,
+而 TUAB 的单极通道总共只有 23 个,凑不齐 58。判定为在本工作簿的数据上不可行。
+
+### 修正的错误
+
+* **TFM 采样率**:曾照抄 `dataset_configs.yaml` 的 `sampling_rate: 256`,但那是
+  语料原始采样率;模型输入是 **200**(`--resampling_rate` 默认值、
+  `get_stft_torch` 的 `n_fft=resampling_rate`、tokenizer 的 `n_freq=100`
+  三处佐证)。按 256 会产生 2560 点窗口,预训练 tokenizer 无法消费。
+* **变体冲突**:`collect_results` 以 `(dataset, model)` 为键,导致预训练与
+  from-scratch 两行同名 `biot`。改用 run name 的变体后缀。
+* **两处 pyhealth 依赖**:LaBraM 与 TFM 的 `utils.py` 均在模块顶层为 metrics
+  引入 pyhealth。分别用 AST 解析常量、内联函数解决,不拖入无关重依赖。
+
+### LaBraM 在 CHB-MIT 上不可行(montage 限制)
+
+LaBraM 的位置编码按电极身份索引,要求 23 个**单极** `-REF` 通道
+(`make_TUAB.py` 的 `chOrder_standard`)。CHB-MIT 的原始 EDF **只提供双极导联**
+(`FP1-F7`、`F7-T7`…),单极信号无法从中还原 —— 双极是两个单极之差,
+一组差值不足以反解出各自的绝对电位。
+
+因此 B 组的实际可行矩阵是:
+
+|  | TUAB | TUEV | CHB-MIT |
+|---|---|---|---|
+| BIOT | ✅ | ✅ | ✅(其 CHBMITLoader 用同一 16 双极 montage) |
+| CBraMod | ✅ | ✅ | ✅ |
+| LaBraM | ✅ | ✅ | ⛔ 需单极,CHB-MIT 无 |
+| TFM | ⛔ 上游权重与代码版本不一致 | ⛔ | ⛔ |
+| EEGPT | ⛔ 需 58 通道 | ⛔ | ⛔ |
+
+合计 8 个 B 组单元格(3+3+2),每个 3 seeds,另有同样数量的 from-scratch 对照。

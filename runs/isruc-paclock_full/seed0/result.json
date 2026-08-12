@@ -1,0 +1,113 @@
+{
+  "name": "isruc-paclock_full",
+  "dataset": "isruc",
+  "model": "paclock",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 1.618965,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7530444707807422,
+    "cohen_kappa": 0.6921226376699046,
+    "weighted_f1": 0.7591653835297061
+  },
+  "best_val": 0.7090103211101566,
+  "val_curve": [
+    0.5572752436985933,
+    0.5894592080344414,
+    0.6524938978835174,
+    0.6725940507706752,
+    0.6911940365465703,
+    0.6778253796522551,
+    0.6985649385193521,
+    0.7015457696767042,
+    0.7053487469823686,
+    0.6987610924334144,
+    0.7030198323961763,
+    0.6948664460304166,
+    0.6929627436217851,
+    0.7090103211101566,
+    0.7001495830132332,
+    0.6944256026833391,
+    0.6989877509253792,
+    0.6958353633990138,
+    0.6964849522653702,
+    0.6953769062609496
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 20,
+    "best_val": 0.7090103211101566,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "wall_time_sec": 27620.04679584503,
+  "config": {
+    "name": "isruc-paclock_full",
+    "group": "C",
+    "dataset": "isruc",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 5,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 200,
+    "flatten_sequences": true,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 128,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 200,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "pac_interaction",
+      "pac_token_mode": "measured",
+      "interaction_mode": "product",
+      "spatial_pe": "index"
+    },
+    "seed": 0
+  },
+  "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+  "class_counts": {
+    "train": [
+      16493,
+      9147,
+      21310,
+      13234,
+      9236
+    ],
+    "val": [
+      2072,
+      1015,
+      3226,
+      1980,
+      1067
+    ],
+    "test": [
+      1348,
+      1031,
+      3120,
+      1808,
+      1393
+    ]
+  }
+}

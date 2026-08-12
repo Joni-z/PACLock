@@ -1,0 +1,115 @@
+{
+ "name": "bci_iv_2a-biot_scratch",
+ "dataset": "bci_iv_2a",
+ "model": "biot",
+ "group": "C",
+ "seed": 0,
+ "n_params_M": 3.188762,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.32677469135802467,
+  "cohen_kappa": 0.10236625514403297,
+  "weighted_f1": 0.3259998525212623
+ },
+ "best_val": 0.31712962962962965,
+ "val_curve": [
+  0.22916666666666666,
+  0.27546296296296297,
+  0.24768518518518517,
+  0.25,
+  0.29166666666666663,
+  0.2962962962962963,
+  0.28240740740740744,
+  0.28703703703703703,
+  0.2800925925925926,
+  0.2685185185185185,
+  0.3055555555555556,
+  0.25462962962962965,
+  0.2939814814814815,
+  0.2708333333333333,
+  0.27314814814814814,
+  0.2523148148148148,
+  0.31712962962962965,
+  0.2638888888888889,
+  0.26851851851851855,
+  0.275462962962963,
+  0.28009259259259256,
+  0.2800925925925926,
+  0.26851851851851855,
+  0.2847222222222222,
+  0.30092592592592593,
+  0.29166666666666663,
+  0.3101851851851852
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 16,
+  "n_evals": 27,
+  "best_val": 0.31712962962962965,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 27,
+ "wall_time_sec": 38.489309549331665,
+ "config": {
+  "name": "bci_iv_2a-biot_scratch",
+  "group": "C",
+  "dataset": "bci_iv_2a",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "epochs": 100,
+  "loss": "cross_entropy",
+  "model": "biot",
+  "loader": "biot",
+  "checkpoint": null,
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100,
+   "target_len": 800
+  },
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   540,
+   540,
+   540,
+   540
+  ],
+  "val": [
+   108,
+   108,
+   108,
+   108
+  ],
+  "test": [
+   648,
+   648,
+   648,
+   648
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 16,
+  "n_evals": 27,
+  "reason": "ok"
+ }
+}

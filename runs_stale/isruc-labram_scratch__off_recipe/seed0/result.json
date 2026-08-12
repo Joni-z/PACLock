@@ -1,0 +1,98 @@
+{
+  "name": "isruc-labram_scratch",
+  "dataset": "isruc",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820941,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6475429519900182,
+    "cohen_kappa": 0.5972069915383653,
+    "weighted_f1": 0.6716981835229024
+  },
+  "best_val": 0.635503928149926,
+  "val_curve": [
+    0.47368467359231703,
+    0.5791226767622588,
+    0.5537038160240222,
+    0.635503928149926,
+    0.5779518470114233,
+    0.6221575426045205,
+    0.6123516119796747,
+    0.6160204583017596,
+    0.6204590118087444,
+    0.5999511679198832,
+    0.5908655847983258,
+    0.5898735405966473,
+    0.5835535208917826,
+    0.5958292644034037
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 14,
+    "reason": "ok"
+  },
+  "epochs_run": 14,
+  "wall_time_sec": 2140.5285501480103,
+  "config": {
+    "name": "isruc-labram_scratch",
+    "group": "C",
+    "dataset": "isruc",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 5,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "flatten_sequences": true,
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 3000
+    },
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      16493,
+      9147,
+      21310,
+      13234,
+      9236
+    ],
+    "val": [
+      2072,
+      1015,
+      3226,
+      1980,
+      1067
+    ],
+    "test": [
+      1348,
+      1031,
+      3120,
+      1808,
+      1393
+    ]
+  }
+}

@@ -1,0 +1,122 @@
+{
+ "name": "isruc-cbramod_pac",
+ "dataset": "isruc",
+ "model": "cbramod",
+ "group": "D",
+ "seed": 0,
+ "n_params_M": 26.471261,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.7635159364637244,
+  "cohen_kappa": 0.7260758194232295,
+  "weighted_f1": 0.7869857392252158
+ },
+ "best_val": 0.7401140548337407,
+ "val_curve": [
+  0.38790382911934596,
+  0.5851063892942022,
+  0.5073650547312939,
+  0.6083071851230966,
+  0.6949682847540033,
+  0.706075629090887,
+  0.7303598437830301,
+  0.7032857122877997,
+  0.6929472918810807,
+  0.7246118350227478,
+  0.7102223707450033,
+  0.7156773022693077,
+  0.7365997446266592,
+  0.7152796581876945,
+  0.7380106265731445,
+  0.7349518083938247,
+  0.735059639433832,
+  0.7088599160039896,
+  0.7324009096021713,
+  0.7265674324109984,
+  0.7146166201281903,
+  0.7401140548337407,
+  0.7273735027559057,
+  0.7245933607946322,
+  0.7292195206962553,
+  0.7320442126628772,
+  0.7235079590103444,
+  0.7286617435513718,
+  0.7249135608197825,
+  0.7268505232050271,
+  0.7305879746375117,
+  0.7249143745333723
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 21,
+  "n_evals": 32,
+  "best_val": 0.7401140548337407,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 32,
+ "wall_time_sec": 2452.440677165985,
+ "config": {
+  "name": "isruc-cbramod_pac",
+  "group": "D",
+  "dataset": "isruc",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_pac/isruc",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 5,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 0,
+  "_pac_note": "PAC-methodology protocol: 0.5 Hz high-pass, no notch. Identical to the frozen config in every other respect."
+ },
+ "data_manifest_created": "2026-08-09T16:33:32.221215+00:00",
+ "class_counts": {
+  "train": [
+   16493,
+   9147,
+   21310,
+   13234,
+   9236
+  ],
+  "val": [
+   2072,
+   1015,
+   3226,
+   1980,
+   1067
+  ],
+  "test": [
+   1348,
+   1031,
+   3120,
+   1808,
+   1393
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 21,
+  "n_evals": 32,
+  "reason": "ok"
+ }
+}

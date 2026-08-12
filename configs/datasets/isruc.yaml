@@ -1,0 +1,41 @@
+# ISRUC-Sleep Subgroup I -- PROTOCOLS.md sec.6. FROZEN.
+dataset: isruc
+subset: subgroup_I
+raw_root: /work1/chenyuyou/yifanwang/data/isruc
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/isruc
+num_classes: 5
+
+sample_rate: 200
+resample: false                 # already 200 Hz
+band: [0.3, 35.0]
+notch: 50.0
+window_sec: 30.0
+stride_sec: 30.0
+
+channels: ["F3-A2", "C3-A2", "O1-A2", "F4-A1", "C4-A1", "O2-A1"]
+
+# file codes 0,1,2,3,5 -> W,N1,N2,N3,REM
+label_map: {0: 0, 1: 1, 2: 2, 3: 3, 5: 4}
+
+# 20 consecutive epochs form one sequence; per-subject tail < 20 dropped
+sequence:
+  enabled: true
+  length: 20
+  drop_tail: true
+
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+primary_metric: cohen_kappa
+report_metrics: [cohen_kappa, balanced_acc, weighted_f1]
+
+split:
+  mode: subject_id_ranges
+  train: [1, 80]
+  val:   [81, 90]
+  test:  [91, 100]
+
+# sample count is an output, not an assertion (89,240 was insufficiently evidenced)
+expected:
+  n_samples: null

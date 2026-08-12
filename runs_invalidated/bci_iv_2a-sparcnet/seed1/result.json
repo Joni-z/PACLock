@@ -1,0 +1,99 @@
+{
+  "name": "bci_iv_2a-sparcnet",
+  "dataset": "bci_iv_2a",
+  "model": "sparcnet",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 0.488156,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.3792438271604938,
+    "cohen_kappa": 0.1723251028806584,
+    "weighted_f1": 0.2797382395695147
+  },
+  "best_val": 0.3958333333333333,
+  "val_curve": [
+    0.25,
+    0.2986111111111111,
+    0.3148148148148148,
+    0.3194444444444444,
+    0.30787037037037035,
+    0.2939814814814815,
+    0.3194444444444445,
+    0.34490740740740744,
+    0.3402777777777778,
+    0.34490740740740744,
+    0.35185185185185186,
+    0.375,
+    0.3587962962962963,
+    0.36342592592592593,
+    0.3958333333333333,
+    0.36111111111111116,
+    0.36574074074074076,
+    0.36111111111111116,
+    0.36342592592592593,
+    0.3564814814814815,
+    0.375,
+    0.3587962962962963,
+    0.3680555555555556,
+    0.3587962962962963,
+    0.37037037037037035,
+    0.3587962962962963,
+    0.37037037037037035,
+    0.3842592592592593,
+    0.3726851851851852,
+    0.37731481481481477
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 14,
+    "n_evals": 30,
+    "reason": "ok"
+  },
+  "epochs_run": 30,
+  "wall_time_sec": 98.6559898853302,
+  "config": {
+    "name": "bci_iv_2a-sparcnet",
+    "group": "A",
+    "model": "sparcnet",
+    "dataset": "bci_iv_2a",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+    "num_classes": 4,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "batch_size": 64,
+    "num_workers": 8,
+    "epochs": 50,
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 1,
+    "device": "cuda"
+  },
+  "data_manifest_created": "2026-08-04T10:52:01.822097+00:00",
+  "class_counts": {
+    "train": [
+      540,
+      540,
+      540,
+      540
+    ],
+    "val": [
+      108,
+      108,
+      108,
+      108
+    ],
+    "test": [
+      648,
+      648,
+      648,
+      648
+    ]
+  }
+}

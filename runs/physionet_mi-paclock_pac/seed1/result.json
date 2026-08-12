@@ -1,0 +1,118 @@
+{
+ "name": "physionet_mi-paclock_pac",
+ "dataset": "physionet_mi",
+ "model": "paclock",
+ "group": "D",
+ "seed": 1,
+ "n_params_M": 1.62626,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.23927891846782834,
+  "cohen_kappa": -0.014293340511325248,
+  "weighted_f1": 0.1952522690654185
+ },
+ "best_val": 0.2563548183672112,
+ "val_curve": [
+  0.2505787037037037,
+  0.25,
+  0.25,
+  0.24942396313364054,
+  0.25,
+  0.25,
+  0.25,
+  0.25,
+  0.2541753047390807,
+  0.25,
+  0.2535858245659054,
+  0.2553822290529278,
+  0.25115339795540015,
+  0.2486057835529246,
+  0.2563548183672112,
+  0.24809528343380913,
+  0.23694012140277815,
+  0.24944736181201127,
+  0.2532462326374426,
+  0.24638278648033682
+ ],
+ "verdict": {
+  "ok": false,
+  "status": "mis-configured",
+  "peak_index": 14,
+  "n_evals": 20,
+  "best_val": 0.2563548183672112,
+  "chance": 0.25,
+  "reason": "test Cohen's Kappa -0.0143 is at chance -- the model does not discriminate, whatever the val curve did",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 14243.19515156746,
+ "config": {
+  "name": "physionet_mi-paclock_pac",
+  "group": "D",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_pac/physionet_mi",
+  "model": "paclock",
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 1e-05,
+  "scheduler": "cosine",
+  "grad_clip": 1.0,
+  "num_workers": 8,
+  "device": "cuda",
+  "num_classes": 4,
+  "epochs": 20,
+  "batch_size": 32,
+  "eval_every_steps": 0,
+  "patience": 20,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "sample_rate": 200,
+  "model_kwargs": {
+   "arch": "triaxial",
+   "d_model": 128,
+   "depth": 6,
+   "n_bands": 8,
+   "n_heads": 4,
+   "dropout": 0.2,
+   "kernel_size": 201,
+   "patch_len": 200,
+   "augmentations": [],
+   "freq_mixer": "attention",
+   "band_pe": "index",
+   "tokenizer_mode": "pac_interaction",
+   "pac_token_mode": "measured",
+   "interaction_mode": "product",
+   "spatial_pe": "index"
+  },
+  "seed": 1,
+  "_pac_note": "PAC-methodology protocol: 0.5 Hz high-pass, no notch. Identical to the frozen config in every other respect."
+ },
+ "data_manifest_created": "2026-08-09T16:19:22.138570+00:00",
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 14,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,105 @@
+{
+  "name": "isruc-biot_scratch",
+  "dataset": "isruc",
+  "model": "biot",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 3.184907,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7622261189755507,
+    "cohen_kappa": 0.7361233355989965,
+    "weighted_f1": 0.7905630640973145
+  },
+  "best_val": 0.7365632780233581,
+  "val_curve": [
+    0.6368502797656617,
+    0.6810192221203129,
+    0.6964167414220643,
+    0.7084100400216915,
+    0.7318899556522481,
+    0.7296584735589837,
+    0.736226082781543,
+    0.732653642070302,
+    0.7296437969878041,
+    0.729443859984849,
+    0.7322965973628602,
+    0.7156822673031122,
+    0.7365632780233581,
+    0.6986210704981061,
+    0.6935939293121343,
+    0.7156877089600571,
+    0.7110822825610177,
+    0.7151472079709342,
+    0.7105437051306727,
+    0.704088766878757,
+    0.6920864487104939,
+    0.6961390867582637,
+    0.7010293906270779
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 12,
+    "n_evals": 23,
+    "reason": "ok"
+  },
+  "epochs_run": 23,
+  "wall_time_sec": 970.1062817573547,
+  "config": {
+    "name": "isruc-biot_scratch",
+    "group": "C",
+    "dataset": "isruc",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 5,
+    "epochs": 40,
+    "loss": "cross_entropy",
+    "flatten_sequences": true,
+    "model": "biot",
+    "loader": "biot",
+    "checkpoint": null,
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 3000
+    },
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      16493,
+      9147,
+      21310,
+      13234,
+      9236
+    ],
+    "val": [
+      2072,
+      1015,
+      3226,
+      1980,
+      1067
+    ],
+    "test": [
+      1348,
+      1031,
+      3120,
+      1808,
+      1393
+    ]
+  }
+}

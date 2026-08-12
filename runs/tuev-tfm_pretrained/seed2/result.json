@@ -1,0 +1,107 @@
+{
+ "name": "tuev-tfm_pretrained",
+ "dataset": "tuev",
+ "model": "tfm",
+ "group": "B",
+ "seed": 2,
+ "n_params_M": 1.891114,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6237117096163164,
+  "cohen_kappa": 0.6715055103210168,
+  "weighted_f1": 0.8265879836519214
+ },
+ "best_val": 0.5513307212614175,
+ "val_curve": [
+  0.44391105756411575,
+  0.5076203061019968,
+  0.5068944265712535,
+  0.5364975701328488,
+  0.46559243416153806,
+  0.5314880892749309,
+  0.5513307212614175,
+  0.5070662448154695,
+  0.50286980844724,
+  0.5265606634844618,
+  0.5305014791179108,
+  0.5044664832417319,
+  0.4896327633581118,
+  0.43690279485094574,
+  0.5056429568340848,
+  0.5225231787536662,
+  0.44685616432378017,
+  0.48945373895142985
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 18,
+  "best_val": 0.5513307212614175,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 9,
+ "wall_time_sec": 7955.917968511581,
+ "config": {
+  "name": "tuev-tfm_pretrained",
+  "group": "B",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "model": "tfm",
+  "loader": "tfm",
+  "pretrained": true,
+  "tfm_setting": "multiple",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 50,
+  "batch_size": 512,
+  "warmup_epochs": 5,
+  "label_smoothing": 0.1,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 100,
+  "num_classes": 6,
+  "loss": "cross_entropy",
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 18,
+  "reason": "ok"
+ }
+}

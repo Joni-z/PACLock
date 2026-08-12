@@ -1,0 +1,85 @@
+{
+ "name": "tuab-biot_scratch",
+ "dataset": "tuab",
+ "model": "biot",
+ "group": "C",
+ "seed": 2,
+ "n_params_M": 3.186706,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.7868909495358369,
+  "pr_auc": 0.8679467775793988,
+  "auroc": 0.8664980458816558
+ },
+ "best_val": 0.8641936091111738,
+ "val_curve": [
+  0.8641936091111738,
+  0.8631191806443141,
+  0.858565079237319,
+  0.8621746629660645,
+  0.8465831725032499,
+  0.8431668884114032
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "peaked-first-eval",
+  "peak_index": 0,
+  "n_evals": 6,
+  "best_val": 0.8641936091111738,
+  "chance": 0.5,
+  "reason": "val peaked at the first evaluation, but reached 0.8642 vs chance 0.5000 -- converged early, not untrained",
+  "rule_version": 2
+ },
+ "epochs_run": 6,
+ "wall_time_sec": 814.6087777614594,
+ "config": {
+  "name": "tuab-biot_scratch",
+  "group": "C",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tuab",
+  "checkpoint": null,
+  "model": "biot",
+  "loader": "biot",
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 100,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 5,
+  "num_workers": 16,
+  "device": "cuda",
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100
+  },
+  "num_classes": 2,
+  "sample_rate": 200,
+  "batch_size": 512,
+  "loss": "bce_with_logits",
+  "eval_every_steps": 0,
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   145617,
+   153341
+  ],
+  "val": [
+   38092,
+   35460
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": false,
+  "status": "mis-configured",
+  "peak_index": 0,
+  "n_evals": 6,
+  "reason": "val peak at epoch 0"
+ }
+}

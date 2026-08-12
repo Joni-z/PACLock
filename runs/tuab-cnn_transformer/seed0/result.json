@@ -1,0 +1,88 @@
+{
+ "name": "tuab-cnn_transformer",
+ "dataset": "tuab",
+ "model": "cnn_transformer",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 3.154658,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.7800529637954414,
+  "pr_auc": 0.8910694277755622,
+  "auroc": 0.8910211212033832
+ },
+ "best_val": 0.9071527881191166,
+ "val_curve": [
+  0.883203451838658,
+  0.8987783763788944,
+  0.888275179975496,
+  0.8947837614193886,
+  0.8889262964437459,
+  0.9002978562970104,
+  0.9071527881191166,
+  0.8797811941893873,
+  0.8729835534231939,
+  0.8927994011625546,
+  0.8898005940080654,
+  0.8715490069066053,
+  0.8922753789053202,
+  0.8900690163357436,
+  0.8701362870989524
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 15,
+  "best_val": 0.9071527881191166,
+  "chance": 0.5,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 5,
+ "wall_time_sec": 1927.5180761814117,
+ "config": {
+  "name": "tuab-cnn_transformer",
+  "group": "A",
+  "model": "cnn_transformer",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuab",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 0,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:32:29.190287+00:00",
+ "class_counts": {
+  "train": [
+   147894,
+   149209
+  ],
+  "val": [
+   35815,
+   39592
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 15,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "name": "sleepedf-cbramod_scratch",
+ "dataset": "sleepedf",
+ "model": "cbramod",
+ "group": "C",
+ "seed": 0,
+ "n_params_M": 9.845805,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6681408877295849,
+  "cohen_kappa": 0.6621443042520674,
+  "weighted_f1": 0.7613519585176705
+ },
+ "best_val": 0.6175518025054028,
+ "val_curve": [
+  0.5827942788399207,
+  0.5913035824059062,
+  0.6045673695136391,
+  0.6046746737472954,
+  0.6109913335649011,
+  0.6175518025054028,
+  0.6096496967941261,
+  0.594706267869739,
+  0.6132473009481226,
+  0.6042953097079533,
+  0.5988088899471787,
+  0.5948904823741549,
+  0.5821855573056977,
+  0.6022502983085176,
+  0.6024043923419431,
+  0.5975550630579238
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 16,
+  "best_val": 0.6175518025054028,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 16,
+ "wall_time_sec": 1602.915055513382,
+ "config": {
+  "name": "sleepedf-cbramod_scratch",
+  "group": "C",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 0
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 16,
+  "reason": "ok"
+ }
+}

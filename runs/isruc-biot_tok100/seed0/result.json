@@ -1,0 +1,101 @@
+{
+  "name": "isruc-biot_tok100",
+  "dataset": "isruc",
+  "model": "biot",
+  "group": "ablation",
+  "seed": 0,
+  "n_params_M": 3.172107,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7620568609993856,
+    "cohen_kappa": 0.7260043138487169,
+    "weighted_f1": 0.7822636878289663
+  },
+  "best_val": 0.7393298245529915,
+  "val_curve": [
+    0.6491731199496258,
+    0.6765716304415921,
+    0.6980455735934341,
+    0.7182886995939963,
+    0.6930255894452813,
+    0.7393298245529915,
+    0.6987807356883282,
+    0.7221513999802023,
+    0.7288770841440699,
+    0.7279387365440253,
+    0.736191421235836,
+    0.7259170725556942,
+    0.7300778742797112,
+    0.7330385557544202,
+    0.7293930697377687,
+    0.7347711307855023
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 16,
+    "best_val": 0.7393298245529915,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 16,
+  "stopped_by": "patience",
+  "wall_time_sec": 1172.7491538524628,
+  "config": {
+    "name": "isruc-biot_tok100",
+    "group": "ablation",
+    "dataset": "isruc",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 5,
+    "epochs": 40,
+    "loss": "cross_entropy",
+    "flatten_sequences": true,
+    "model": "biot",
+    "loader": "biot",
+    "checkpoint": null,
+    "model_kwargs": {
+      "token_size": 100,
+      "hop_length": 50,
+      "target_len": 3000
+    },
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      16493,
+      9147,
+      21310,
+      13234,
+      9236
+    ],
+    "val": [
+      2072,
+      1015,
+      3226,
+      1980,
+      1067
+    ],
+    "test": [
+      1348,
+      1031,
+      3120,
+      1808,
+      1393
+    ]
+  }
+}

@@ -1,0 +1,108 @@
+{
+ "name": "bci_iv_2a-labram_scratch",
+ "dataset": "bci_iv_2a",
+ "model": "labram",
+ "group": "C",
+ "seed": 1,
+ "n_params_M": 5.82074,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.3128858024691358,
+  "cohen_kappa": 0.08384773662551437,
+  "weighted_f1": 0.3089132776067636
+ },
+ "best_val": 0.35416666666666663,
+ "val_curve": [
+  0.2962962962962963,
+  0.27546296296296297,
+  0.2800925925925926,
+  0.28935185185185186,
+  0.32407407407407407,
+  0.30787037037037035,
+  0.3055555555555556,
+  0.35416666666666663,
+  0.3333333333333333,
+  0.33333333333333337,
+  0.3287037037037037,
+  0.3310185185185185,
+  0.3194444444444445,
+  0.34259259259259256,
+  0.3148148148148148,
+  0.35185185185185186,
+  0.34953703703703703,
+  0.33796296296296297
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "best_val": 0.35416666666666663,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 18,
+ "wall_time_sec": 79.95871114730835,
+ "config": {
+  "name": "bci_iv_2a-labram_scratch",
+  "group": "C",
+  "dataset": "bci_iv_2a",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.05,
+  "lr": 0.0005,
+  "max_lr": 0.0004,
+  "scheduler": "cosine",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "epochs": 50,
+  "loss": "cross_entropy",
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": false,
+  "loader_divisor": 1.0,
+  "model_kwargs": {
+   "montage_mode": "positional",
+   "target_len": 800
+  },
+  "seed": 1
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   540,
+   540,
+   540,
+   540
+  ],
+  "val": [
+   108,
+   108,
+   108,
+   108
+  ],
+  "test": [
+   648,
+   648,
+   648,
+   648
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "name": "physionet_mi-biot_scratch",
+ "dataset": "physionet_mi",
+ "model": "biot",
+ "group": "C",
+ "seed": 2,
+ "n_params_M": 3.199556,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.26873785435821207,
+  "cohen_kappa": 0.025019832444033607,
+  "weighted_f1": 0.2134139048182672
+ },
+ "best_val": 0.28199917766519067,
+ "val_curve": [
+  0.2586288844086191,
+  0.26902780264305737,
+  0.2600665323523606,
+  0.2711053009184417,
+  0.28199917766519067,
+  0.27490675001936554,
+  0.2553501048446597,
+  0.2697477628401246,
+  0.2672007805611396,
+  0.2636365345895052,
+  0.26988619864912844,
+  0.2672020986248432,
+  0.26133756308645106,
+  0.26620301330354135,
+  0.2742999939986921
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 15,
+  "best_val": 0.28199917766519067,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 15,
+ "wall_time_sec": 123.3934645652771,
+ "config": {
+  "name": "physionet_mi-biot_scratch",
+  "group": "C",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "epochs": 100,
+  "loss": "cross_entropy",
+  "model": "biot",
+  "loader": "biot",
+  "checkpoint": null,
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100,
+   "target_len": 800
+  },
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 15,
+  "reason": "ok"
+ }
+}

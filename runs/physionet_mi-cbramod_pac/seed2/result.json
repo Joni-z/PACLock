@@ -1,0 +1,115 @@
+{
+ "name": "physionet_mi-cbramod_pac",
+ "dataset": "physionet_mi",
+ "model": "cbramod",
+ "group": "D",
+ "seed": 2,
+ "n_params_M": 46.005604,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.5829535495376005,
+  "cohen_kappa": 0.4439113100191494,
+  "weighted_f1": 0.581318616754011
+ },
+ "best_val": 0.5201256927482195,
+ "val_curve": [
+  0.46245025992618904,
+  0.5039930502248542,
+  0.5120607470198737,
+  0.5022565339804375,
+  0.4959147825427911,
+  0.4987628419017575,
+  0.49708551186144007,
+  0.5028498468641979,
+  0.5022485517329592,
+  0.5068088498355674,
+  0.51089180843461,
+  0.509726363646255,
+  0.5149293756228552,
+  0.512617307542192,
+  0.49879494228115323,
+  0.5091517063059491,
+  0.5172215315162347,
+  0.5201256927482195,
+  0.5068794994687682,
+  0.5189629823760606,
+  0.516080180308838,
+  0.5172241430926825,
+  0.5201043581344169,
+  0.5195270522213212,
+  0.5160681028084217,
+  0.5108864440499844,
+  0.5137639798939434,
+  0.5154787624652781
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 17,
+  "n_evals": 28,
+  "best_val": 0.5201256927482195,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 28,
+ "wall_time_sec": 379.0752680301666,
+ "config": {
+  "name": "physionet_mi-cbramod_pac",
+  "group": "D",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_pac/physionet_mi",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 4,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 2,
+  "_pac_note": "PAC-methodology protocol: 0.5 Hz high-pass, no notch. Identical to the frozen config in every other respect."
+ },
+ "data_manifest_created": "2026-08-09T16:19:22.138570+00:00",
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 17,
+  "n_evals": 28,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "name": "bci_iv_2a-eegpt_pretrained",
+ "dataset": "bci_iv_2a",
+ "model": "eegpt",
+ "group": "B",
+ "seed": 0,
+ "n_params_M": 25.686073,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.3935185185185185,
+  "cohen_kappa": 0.191358024691358,
+  "weighted_f1": 0.3653221483133711
+ },
+ "best_val": 0.40740740740740744,
+ "val_curve": [
+  0.27083333333333337,
+  0.32175925925925924,
+  0.31712962962962965,
+  0.33564814814814814,
+  0.40046296296296297,
+  0.34953703703703703,
+  0.3958333333333333,
+  0.39583333333333337,
+  0.37037037037037035,
+  0.3912037037037038,
+  0.40740740740740744,
+  0.40509259259259256,
+  0.35648148148148145,
+  0.37731481481481477,
+  0.3657407407407407,
+  0.32407407407407407,
+  0.3333333333333333,
+  0.3611111111111111,
+  0.39120370370370366,
+  0.37037037037037035,
+  0.34953703703703703
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 21,
+  "best_val": 0.40740740740740744,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 21,
+ "wall_time_sec": 98.36985874176025,
+ "config": {
+  "name": "bci_iv_2a-eegpt_pretrained",
+  "group": "B",
+  "dataset": "bci_iv_2a",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+  "model": "eegpt",
+  "loader": "default",
+  "pretrained": true,
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 32,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "loss": "cross_entropy",
+  "epochs": 100,
+  "seed": 0
+ },
+ "data_manifest_created": "2026-08-04T10:52:01.822097+00:00",
+ "class_counts": {
+  "train": [
+   540,
+   540,
+   540,
+   540
+  ],
+  "val": [
+   108,
+   108,
+   108,
+   108
+  ],
+  "test": [
+   648,
+   648,
+   648,
+   648
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 21,
+  "reason": "ok"
+ }
+}

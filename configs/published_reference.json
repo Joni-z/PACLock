@@ -1,0 +1,278 @@
+{
+ "TUAB": {
+  "metrics": [
+   "Balanced Acc",
+   "AUC-PR",
+   "AUROC"
+  ],
+  "rows": {
+   "SPaRCNet": {
+    "Balanced Acc": 0.7896,
+    "AUC-PR": 0.8414,
+    "AUROC": 0.8676
+   },
+   "ContraWR": {
+    "Balanced Acc": 0.7746,
+    "AUC-PR": 0.8421,
+    "AUROC": 0.8456
+   },
+   "CNN-Transformer": {
+    "Balanced Acc": 0.7777,
+    "AUC-PR": 0.8433,
+    "AUROC": 0.8461
+   },
+   "FFCL": {
+    "Balanced Acc": 0.7848,
+    "AUC-PR": 0.8448,
+    "AUROC": 0.8569
+   },
+   "ST-Transformer": {
+    "Balanced Acc": 0.7966,
+    "AUC-PR": 0.8521,
+    "AUROC": 0.8707
+   },
+   "Vanilla BIOT (无预训练)": {
+    "Balanced Acc": 0.7925,
+    "AUC-PR": 0.8707,
+    "AUROC": 0.8691
+   },
+   "BIOT★": {
+    "Balanced Acc": 0.7955,
+    "AUC-PR": 0.8819,
+    "AUROC": 0.8834
+   },
+   "LaBraM-Base★": {
+    "Balanced Acc": 0.772,
+    "AUC-PR": 0.8498,
+    "AUROC": 0.8534
+   },
+   "TFM-Tokenizer": {
+    "Balanced Acc": 0.8152,
+    "AUC-PR": 0.8946,
+    "AUROC": 0.8897
+   },
+   "BIOT (4 语料)": {
+    "Balanced Acc": 0.7959,
+    "AUC-PR": 0.8792,
+    "AUROC": 0.8815
+   },
+   "EEGPT": {
+    "Balanced Acc": 0.7959,
+    "AUROC": 0.8716
+   },
+   "NeuroLM-B (254M)": {
+    "Balanced Acc": 0.7826,
+    "AUC-PR": 0.6975,
+    "AUROC": 0.7816
+   },
+   "LaBraM-Base† (4 语料)": {
+    "Balanced Acc": 0.7735,
+    "AUC-PR": 0.8531,
+    "AUROC": 0.8557
+   },
+   "CBraMod† (4 语料)": {
+    "Balanced Acc": 0.5,
+    "AUC-PR": 0.4938,
+    "AUROC": 0.5281
+   },
+   "TFM-Tokenizer† (4 语料)": {
+    "Balanced Acc": 0.8032,
+    "AUC-PR": 0.8886,
+    "AUROC": 0.887
+   }
+  }
+ },
+ "TUEV": {
+  "metrics": [
+   "Balanced Acc",
+   "Cohen's Kappa",
+   "Weighted F1"
+  ],
+  "rows": {
+   "SPaRCNet": {
+    "Balanced Acc": 0.4161,
+    "Cohen's Kappa": 0.4233,
+    "Weighted F1": 0.7024
+   },
+   "ContraWR": {
+    "Balanced Acc": 0.4384,
+    "Cohen's Kappa": 0.3912,
+    "Weighted F1": 0.6893
+   },
+   "CNN-Transformer": {
+    "Balanced Acc": 0.4087,
+    "Cohen's Kappa": 0.3815,
+    "Weighted F1": 0.6854
+   },
+   "FFCL": {
+    "Balanced Acc": 0.3979,
+    "Cohen's Kappa": 0.3732,
+    "Weighted F1": 0.6783
+   },
+   "ST-Transformer": {
+    "Balanced Acc": 0.3984,
+    "Cohen's Kappa": 0.3765,
+    "Weighted F1": 0.6823
+   },
+   "Vanilla BIOT (无预训练)": {
+    "Balanced Acc": 0.4682,
+    "Cohen's Kappa": 0.4482,
+    "Weighted F1": 0.7085
+   },
+   "BIOT★ (单语料预训练)": {
+    "Balanced Acc": 0.4679,
+    "Cohen's Kappa": 0.489,
+    "Weighted F1": 0.7352
+   },
+   "LaBraM-Base★ (单语料)": {
+    "Balanced Acc": 0.4682,
+    "Cohen's Kappa": 0.5067,
+    "Weighted F1": 0.7466
+   },
+   "TFM-Tokenizer": {
+    "Balanced Acc": 0.4943,
+    "Cohen's Kappa": 0.5337,
+    "Weighted F1": 0.757
+   },
+   "BIOT (4 语料)": {
+    "Balanced Acc": 0.5281,
+    "Cohen's Kappa": 0.5273,
+    "Weighted F1": 0.7492
+   },
+   "EEGPT": {
+    "Balanced Acc": 0.567,
+    "Cohen's Kappa": 0.5085,
+    "Weighted F1": 0.7535
+   },
+   "NeuroLM-B (254M)": {
+    "Balanced Acc": 0.456,
+    "Cohen's Kappa": 0.4285,
+    "Weighted F1": 0.7153
+   },
+   "LaBraM-Base† (4 语料)": {
+    "Balanced Acc": 0.555,
+    "Cohen's Kappa": 0.5175,
+    "Weighted F1": 0.745
+   },
+   "CBraMod† (4 语料)": {
+    "Balanced Acc": 0.5696,
+    "Cohen's Kappa": 0.5588,
+    "Weighted F1": 0.7702
+   },
+   "TFM-Tokenizer† (4 语料)": {
+    "Balanced Acc": 0.5974,
+    "Cohen's Kappa": 0.6189,
+    "Weighted F1": 0.801
+   },
+   "CBraMod (原论文)": {
+    "Cohen's Kappa": 0.6772
+   },
+   "LaBraM-Base (原论文)": {
+    "Cohen's Kappa": 0.6637
+   }
+  }
+ },
+ "TUSZ": {
+  "metrics": [],
+  "rows": {}
+ },
+ "CHB-MIT": {
+  "metrics": [
+   "Balanced Acc",
+   "AUC-PR",
+   "AUROC"
+  ],
+  "rows": {
+   "SPaRCNet": {
+    "Balanced Acc": 0.5876,
+    "AUC-PR": 0.1247,
+    "AUROC": 0.8143
+   },
+   "ContraWR": {
+    "Balanced Acc": 0.6344,
+    "AUC-PR": 0.2264,
+    "AUROC": 0.8097
+   },
+   "CNN-Transformer": {
+    "Balanced Acc": 0.6389,
+    "AUC-PR": 0.2479,
+    "AUROC": 0.8662
+   },
+   "FFCL": {
+    "Balanced Acc": 0.6262,
+    "AUC-PR": 0.2049,
+    "AUROC": 0.8271
+   },
+   "ST-Transformer": {
+    "Balanced Acc": 0.5915,
+    "AUC-PR": 0.1422,
+    "AUROC": 0.8237
+   },
+   "Vanilla BIOT (无预训练)": {
+    "Balanced Acc": 0.664,
+    "AUC-PR": 0.2573,
+    "AUROC": 0.8646
+   },
+   "BIOT★": {
+    "Balanced Acc": 0.6582,
+    "AUC-PR": 0.3127,
+    "AUROC": 0.8456
+   },
+   "LaBraM-Base★": {
+    "Balanced Acc": 0.5035,
+    "AUC-PR": 0.0959,
+    "AUROC": 0.6624
+   },
+   "TFM-Tokenizer": {
+    "Balanced Acc": 0.675,
+    "AUC-PR": 0.3379,
+    "AUROC": 0.8839
+   },
+   "BIOT (4 语料)": {
+    "Balanced Acc": 0.7068,
+    "AUC-PR": 0.3277,
+    "AUROC": 0.8761
+   },
+   "EEGPT": {
+    "Balanced Acc": 0.6644,
+    "AUC-PR": 0.3373,
+    "AUROC": 0.8185
+   },
+   "LaBraM-Base† (4 语料)": {
+    "Balanced Acc": 0.526,
+    "AUC-PR": 0.2138,
+    "AUROC": 0.775
+   },
+   "CBraMod† (4 语料)": {
+    "Balanced Acc": 0.6646,
+    "AUC-PR": 0.3469,
+    "AUROC": 0.9071
+   },
+   "TFM-Tokenizer† (4 语料)": {
+    "Balanced Acc": 0.6471,
+    "AUC-PR": 0.3554,
+    "AUROC": 0.8818
+   }
+  }
+ },
+ "Sleep-EDF": {
+  "metrics": [],
+  "rows": {}
+ },
+ "ISRUC": {
+  "metrics": [],
+  "rows": {}
+ },
+ "PhysioNet-MI": {
+  "metrics": [],
+  "rows": {}
+ },
+ "SEED-V": {
+  "metrics": [],
+  "rows": {}
+ },
+ "BCI-IV-2a": {
+  "metrics": [],
+  "rows": {}
+ }
+}

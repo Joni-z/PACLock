@@ -1,0 +1,28 @@
+name: tuev-cbramod_pac
+group: D
+dataset: tuev
+data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/tuev
+model: cbramod
+loader: null
+pretrained: true
+optimizer: adamw
+lr: 0.0001
+weight_decay: 0.05
+epochs: 50
+batch_size: 64
+multi_lr: true
+scheduler: cosine
+grad_clip: 1.0
+patience: 0
+num_workers: 16
+device: cuda
+eval_every_steps: 0
+model_kwargs:
+  dropout: 0.1
+num_classes: 6
+sample_rate: 200
+loss: cross_entropy
+label_smoothing: 0.1
+seed: 0
+_pac_note: 'PAC-methodology protocol: 0.5 Hz high-pass, no notch. Identical to the
+  frozen config in every other respect.'

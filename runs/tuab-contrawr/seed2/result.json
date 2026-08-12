@@ -1,0 +1,88 @@
+{
+ "name": "tuab-contrawr",
+ "dataset": "tuab",
+ "model": "contrawr",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 1.571554,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.7906750823186015,
+  "pr_auc": 0.8970930124570413,
+  "auroc": 0.8969300273622974
+ },
+ "best_val": 0.9113088054204823,
+ "val_curve": [
+  0.8922774353409664,
+  0.8983479212383454,
+  0.9097701095358048,
+  0.9046241607154387,
+  0.9113088054204823,
+  0.9081150219323516,
+  0.903794381174649,
+  0.9046319002054941,
+  0.9067184944397393,
+  0.9081219214996172,
+  0.9047960035585082,
+  0.9058196046272566,
+  0.9085791120666313,
+  0.9085098632182564,
+  0.9089969919903664
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 15,
+  "best_val": 0.9113088054204823,
+  "chance": 0.5,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 5,
+ "wall_time_sec": 878.790317773819,
+ "config": {
+  "name": "tuab-contrawr",
+  "group": "A",
+  "model": "contrawr",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuab",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 2,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:32:29.190287+00:00",
+ "class_counts": {
+  "train": [
+   147894,
+   149209
+  ],
+  "val": [
+   35815,
+   39592
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 15,
+  "reason": "ok"
+ }
+}

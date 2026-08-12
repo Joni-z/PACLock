@@ -1,0 +1,118 @@
+{
+ "name": "physionet_mi-cbramod_pretrained",
+ "dataset": "physionet_mi",
+ "model": "cbramod",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 46.005604,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.6240009104088418,
+  "cohen_kappa": 0.49862231610032204,
+  "weighted_f1": 0.624008536787172
+ },
+ "best_val": 0.5680180323449595,
+ "val_curve": [
+  0.5160098007361903,
+  0.5390988246522976,
+  0.5295337970834562,
+  0.5357268932690655,
+  0.5219641605893443,
+  0.5415455335922843,
+  0.5518810364862528,
+  0.5426018343297726,
+  0.5437686217327906,
+  0.553606504841422,
+  0.55014487640065,
+  0.5599322614139806,
+  0.5593469243213908,
+  0.5518477347239241,
+  0.5587841541903278,
+  0.5512716917835384,
+  0.5535891673191955,
+  0.5553279821790413,
+  0.5587642357166392,
+  0.5558986238234109,
+  0.5512863318009593,
+  0.5680180323449595,
+  0.5576374017718664,
+  0.5611029231962534,
+  0.5599202513649892,
+  0.5611002869414191,
+  0.5657192246282366,
+  0.5605043133368165,
+  0.557028087779089,
+  0.5593814642506157,
+  0.5616803333447372,
+  0.559930918756842
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 21,
+  "n_evals": 32,
+  "best_val": 0.5680180323449595,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 32,
+ "wall_time_sec": 430.26999378204346,
+ "config": {
+  "name": "physionet_mi-cbramod_pretrained",
+  "group": "B",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 4,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 1
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.796908+00:00",
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 21,
+  "n_evals": 32,
+  "reason": "ok"
+ }
+}

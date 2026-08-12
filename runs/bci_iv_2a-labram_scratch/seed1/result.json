@@ -1,0 +1,100 @@
+{
+  "name": "bci_iv_2a-labram_scratch",
+  "dataset": "bci_iv_2a",
+  "model": "labram",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 5.82074,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.3287037037037037,
+    "cohen_kappa": 0.1049382716049383,
+    "weighted_f1": 0.28892116341900914
+  },
+  "best_val": 0.3680555555555556,
+  "val_curve": [
+    0.28703703703703703,
+    0.2777777777777778,
+    0.30092592592592593,
+    0.2916666666666667,
+    0.3148148148148148,
+    0.3680555555555556,
+    0.3310185185185185,
+    0.3541666666666667,
+    0.36342592592592593,
+    0.3425925925925926,
+    0.35416666666666663,
+    0.3657407407407407,
+    0.35416666666666663,
+    0.3564814814814815,
+    0.3425925925925926,
+    0.36342592592592593
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 16,
+    "best_val": 0.3680555555555556,
+    "chance": 0.25,
+    "reason": "ok"
+  },
+  "epochs_run": 16,
+  "stopped_by": "patience",
+  "wall_time_sec": 70.94565510749817,
+  "config": {
+    "name": "bci_iv_2a-labram_scratch",
+    "group": "C",
+    "dataset": "bci_iv_2a",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 4,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 800
+    },
+    "seed": 1,
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      540,
+      540,
+      540,
+      540
+    ],
+    "val": [
+      108,
+      108,
+      108,
+      108
+    ],
+    "test": [
+      648,
+      648,
+      648,
+      648
+    ]
+  }
+}

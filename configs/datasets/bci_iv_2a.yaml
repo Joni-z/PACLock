@@ -1,0 +1,41 @@
+# BCI Competition IV-2a -- PROTOCOLS.md sec.9. FROZEN.
+dataset: bci_iv_2a
+moabb_name: BNCI2014_001
+raw_root: /work1/chenyuyou/yifanwang/data/bci-iv-2a
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a
+num_classes: 4
+
+sample_rate: 200
+source_rate: 250
+band: [0.5, 75.0]
+notch: 50.0
+
+n_channels: 22                 # 22 EEG, 3 EOG dropped
+drop_eog: true
+strict_channels: true          # missing channel in any file -> stop
+
+# cue onset + 0..4 s == raw trial t=2..6 s. No pre-cue baseline.
+trial_sec: 4.0
+trial_offset_sec: 0.0
+
+label_map: {left_hand: 0, right_hand: 1, feet: 2, tongue: 3}
+
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+primary_metric: balanced_acc
+report_metrics: [balanced_acc, cohen_kappa, weighted_f1]
+
+# session T = development (run 1-5 train, run 6 val), session E = test, evaluated once
+split:
+  mode: session_run
+  train_session: "0train"
+  test_session: "1test"
+  train_runs: [0, 1, 2, 3, 4]
+  val_runs: [5]
+
+expected:
+  trials_per_session: 288
+  train_trials_per_subject: 240
+  val_trials_per_subject: 48

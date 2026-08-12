@@ -1,0 +1,103 @@
+{
+ "name": "physionet_mi-labram_pretrained",
+ "dataset": "physionet_mi",
+ "model": "labram",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 5.82074,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.24944567627494457,
+  "cohen_kappa": -0.0007388239039274325,
+  "weighted_f1": 0.09992223347239731
+ },
+ "best_val": 0.25,
+ "val_curve": [
+  0.2431299938945077,
+  0.2494212962962963,
+  0.25,
+  0.25,
+  0.25,
+  0.25,
+  0.25,
+  0.25,
+  0.25,
+  0.25,
+  0.25,
+  0.25,
+  0.25
+ ],
+ "verdict": {
+  "ok": false,
+  "status": "mis-configured",
+  "peak_index": 2,
+  "n_evals": 13,
+  "best_val": 0.25,
+  "chance": 0.25,
+  "reason": "test Cohen's Kappa -0.0007 is at chance -- the model does not discriminate, whatever the val curve did",
+  "rule_version": 2
+ },
+ "epochs_run": 13,
+ "wall_time_sec": 225.55591869354248,
+ "config": {
+  "name": "physionet_mi-labram_pretrained",
+  "group": "B",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.05,
+  "lr": 0.0005,
+  "max_lr": 0.0004,
+  "scheduler": "cosine",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "epochs": 50,
+  "loss": "cross_entropy",
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": true,
+  "loader_divisor": 1.0,
+  "model_kwargs": {
+   "montage_mode": "positional",
+   "target_len": 800
+  },
+  "seed": 1
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 2,
+  "n_evals": 13,
+  "reason": "ok"
+ }
+}

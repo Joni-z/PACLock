@@ -1,0 +1,95 @@
+{
+  "name": "isruc-cbramod_pretrained",
+  "dataset": "isruc",
+  "model": "cbramod",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 33.845805,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7749339428773104,
+    "cohen_kappa": 0.7359002559076799,
+    "weighted_f1": 0.7960987416344479
+  },
+  "best_val": 0.7279122998390555,
+  "val_curve": [
+    0.6780047493631716,
+    0.7162147172573929,
+    0.7116330564650316,
+    0.7119225260743385,
+    0.7279122998390555,
+    0.7048702800077753,
+    0.7105801617918655,
+    0.7045071681046439,
+    0.6988797464584864,
+    0.704640357983165,
+    0.7086261477217513,
+    0.6911220387343082,
+    0.7070378448199188,
+    0.7099527409780041,
+    0.7084641129054432
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 15,
+    "reason": "ok"
+  },
+  "epochs_run": 15,
+  "wall_time_sec": 1421.1826560497284,
+  "config": {
+    "name": "isruc-cbramod_pretrained",
+    "group": "B",
+    "dataset": "isruc",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+    "model": "cbramod",
+    "loader": null,
+    "pretrained": true,
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "multi_lr": true,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "num_classes": 5,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "flatten_sequences": true,
+    "seed": 2
+  },
+  "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+  "class_counts": {
+    "train": [
+      16493,
+      9147,
+      21310,
+      13234,
+      9236
+    ],
+    "val": [
+      2072,
+      1015,
+      3226,
+      1980,
+      1067
+    ],
+    "test": [
+      1348,
+      1031,
+      3120,
+      1808,
+      1393
+    ]
+  }
+}

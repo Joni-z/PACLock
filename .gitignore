@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Logs churn constantly and are reproducible from the runs they describe.
+logs/
+slurm-*.out
+
+# Preprocessed signal arrays live outside the repo (see docs/MIGRATION.md).
+*.npy
+*.pkl
+
+# Vendored upstream repos + their pretrained weights: 1.6 GB of third-party
+# code and checkpoints. Copied, not cloned, on migration -- see
+# docs/MIGRATION.md. Tracking them would make the repo unusable to move.
+vendor/
+
+# runs/ and runs_*/ are deliberately NOT ignored. They are ~2 MB of result.json
+# holding every stored config, val curve and verdict -- the provenance the
+# paper rests on, and the only record that survives a cluster change.

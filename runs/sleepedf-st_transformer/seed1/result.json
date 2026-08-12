@@ -1,0 +1,107 @@
+{
+ "name": "sleepedf-st_transformer",
+ "dataset": "sleepedf",
+ "model": "st_transformer",
+ "group": "A",
+ "seed": 1,
+ "n_params_M": 3.414483,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6654326509741325,
+  "cohen_kappa": 0.6569892301711584,
+  "weighted_f1": 0.7641219819395155
+ },
+ "best_val": 0.6713809123196133,
+ "val_curve": [
+  0.30432757115798936,
+  0.3397522617655029,
+  0.3740792877573652,
+  0.514776224532669,
+  0.5521448497296669,
+  0.6055429620405959,
+  0.6392945458008358,
+  0.6628778794778125,
+  0.6713809123196133,
+  0.6692227322161737,
+  0.6616398065044001,
+  0.6582727288324708,
+  0.6510396805108503,
+  0.6587356085800201,
+  0.6503834404290729,
+  0.6678501879629174,
+  0.6586656237172193,
+  0.6432526426831191,
+  0.6481928186212667,
+  0.6624025817409327,
+  0.6289370547205899,
+  0.6396856572160783,
+  0.6451766543606696,
+  0.650538475482618
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 24,
+  "best_val": 0.6713809123196133,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 24,
+ "wall_time_sec": 955.6984934806824,
+ "config": {
+  "name": "sleepedf-st_transformer",
+  "group": "A",
+  "model": "st_transformer",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 60,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 1,
+  "device": "cuda",
+  "label_smoothing": 0.1
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 24,
+  "reason": "ok"
+ }
+}

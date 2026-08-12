@@ -1,0 +1,99 @@
+{
+ "name": "chbmit-cnn_transformer",
+ "dataset": "chbmit",
+ "model": "cnn_transformer",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 3.154658,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.7091805792019245,
+  "pr_auc": 0.5439431396998198,
+  "auroc": 0.9162929128656011
+ },
+ "best_val": 0.5405207385197105,
+ "val_curve": [
+  0.24842856337419295,
+  0.21490686426011843,
+  0.443805371061217,
+  0.3784986243683694,
+  0.46089180339386926,
+  0.4907918283542215,
+  0.3944632619439931,
+  0.45623269743899214,
+  0.5022318971511303,
+  0.48594546503913244,
+  0.469077069540263,
+  0.40742866067415,
+  0.31971387311492633,
+  0.347135110758254,
+  0.5405207385197105,
+  0.5096698173857362,
+  0.5350917704319854,
+  0.3512289514107705,
+  0.4378193951255632,
+  0.5063443910066074,
+  0.292579731300629,
+  0.37033566826612474,
+  0.5112808193645645,
+  0.47907549811058353
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 14,
+  "n_evals": 24,
+  "best_val": 0.5405207385197105,
+  "chance": 0.0070808157099697885,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 6,
+ "wall_time_sec": 2189.952568292618,
+ "config": {
+  "name": "chbmit-cnn_transformer",
+  "group": "A",
+  "model": "cnn_transformer",
+  "dataset": "chbmit",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "focal",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 0,
+  "device": "cuda",
+  "focal_alpha": 0.25,
+  "focal_gamma": 2.0
+ },
+ "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+ "class_counts": {
+  "train": [
+   313322,
+   2883
+  ],
+  "val": [
+   21034,
+   150
+  ],
+  "test": [
+   17110,
+   276
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 14,
+  "n_evals": 24,
+  "reason": "ok"
+ }
+}

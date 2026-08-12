@@ -1,0 +1,121 @@
+{
+  "name": "tuev-cand_ms",
+  "dataset": "tuev",
+  "model": "paclock",
+  "group": "cand",
+  "seed": 0,
+  "n_params_M": 1.665814,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6292277869697166,
+    "cohen_kappa": 0.6816002725605328,
+    "weighted_f1": 0.8288969220533562
+  },
+  "best_val": 0.5906550504377273,
+  "val_curve": [
+    0.5866783011457373,
+    0.46788077912534665,
+    0.5530732559551845,
+    0.5168786898045022,
+    0.5288004572323546,
+    0.5906550504377273,
+    0.5469957074720779,
+    0.45541392574184547,
+    0.4548335474634375,
+    0.5591646925975476,
+    0.48395686030196894,
+    0.5196964826077566,
+    0.5029486230179503,
+    0.4974949873387756,
+    0.4811810966531602,
+    0.48972165646152344,
+    0.5043812912877035,
+    0.5141079586275814,
+    0.4903597561798815,
+    0.4923243617019829
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 20,
+    "best_val": 0.5906550504377273,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 9379.89425945282,
+  "config": {
+    "name": "tuev-cand_ms",
+    "group": "cand",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 6,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 128,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "pac_interaction",
+      "pac_token_mode": "measured",
+      "interaction_mode": "product",
+      "spatial_pe": "xyz",
+      "pac_patch_len": [
+        50,
+        100,
+        200
+      ]
+    },
+    "seed": 0
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

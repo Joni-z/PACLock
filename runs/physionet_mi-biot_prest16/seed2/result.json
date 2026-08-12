@@ -1,0 +1,116 @@
+{
+ "name": "physionet_mi-biot_prest16",
+ "dataset": "physionet_mi",
+ "model": "biot",
+ "group": "B",
+ "seed": 2,
+ "n_params_M": 3.18826,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.5126477898176632,
+  "cohen_kappa": 0.3500160564596798,
+  "weighted_f1": 0.5112065032029065
+ },
+ "best_val": 0.45488431346675817,
+ "val_curve": [
+  0.27139674535729974,
+  0.2777112096778611,
+  0.2630078234698826,
+  0.26810787917184686,
+  0.25641192861354406,
+  0.2609784736610444,
+  0.2895346056680292,
+  0.29820917843512235,
+  0.34887914769684547,
+  0.3909628044232313,
+  0.4296606113262964,
+  0.4278102734361148,
+  0.4520944027577649,
+  0.4539794393513692,
+  0.4520343403222795,
+  0.446268803766686,
+  0.43079152714415914,
+  0.45488431346675817,
+  0.4422363439000798,
+  0.440536212262423,
+  0.4462129843571277,
+  0.4302522628152032,
+  0.44397154798491645,
+  0.4342945811662737,
+  0.42345438360557,
+  0.42445145069359297,
+  0.4377826519672444,
+  0.43489703537463975
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 17,
+  "n_evals": 28,
+  "best_val": 0.45488431346675817,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 28,
+ "wall_time_sec": 106.06505846977234,
+ "config": {
+  "name": "physionet_mi-biot_prest16",
+  "group": "B",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model": "biot",
+  "loader": "biot",
+  "checkpoint": "prest16",
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100,
+   "target_len": 800
+  },
+  "num_classes": 4,
+  "epochs": 100,
+  "loss": "cross_entropy",
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 17,
+  "n_evals": 28,
+  "reason": "ok"
+ }
+}

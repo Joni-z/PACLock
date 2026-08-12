@@ -1,0 +1,84 @@
+{
+  "name": "tusz-biot_scratch",
+  "dataset": "tusz",
+  "model": "biot",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 3.186706,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5683096589645436,
+    "pr_auc": 0.3555559137997194,
+    "auroc": 0.8108323915440464
+  },
+  "best_val": 0.2374074761066073,
+  "val_curve": [
+    0.16599298257001782,
+    0.15857087874587533,
+    0.14061977763173472,
+    0.13893877796038512,
+    0.15655763571241393,
+    0.20363237606781112,
+    0.2209868720745648,
+    0.2374074761066073,
+    0.15738148396167978,
+    0.15412754371146048,
+    0.21673007621992055,
+    0.20137577169772475,
+    0.21344649932707868
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 13,
+    "best_val": 0.2374074761066073,
+    "chance": 0.020051791937082387,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "wall_time_sec": 2035.3576166629791,
+  "config": {
+    "name": "tusz-biot_scratch",
+    "group": "C",
+    "dataset": "tusz",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tusz",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "batch_size": 512,
+    "loss": "bce_with_logits",
+    "eval_every_steps": 0,
+    "seed": 2
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      313196,
+      13472
+    ],
+    "val": [
+      153259,
+      3136
+    ],
+    "test": [
+      43364,
+      2727
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+# EEG Motor Movement/Imagery v1.0.0 -- PROTOCOLS.md sec.7. FROZEN.
+dataset: physionet_mi
+version: v1.0.0
+raw_root: /work1/chenyuyou/yifanwang/data/physionet-mi
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi
+num_classes: 4
+
+sample_rate: 200
+source_rate: 160
+hp: 0.3                        # high-pass only, no low-pass
+band: null
+notch: 60.0
+
+# motor-imagery runs only; movement and baseline runs excluded
+runs: [4, 6, 8, 10, 12, 14]
+reference: average
+n_channels: 64
+
+# 4 s from each annotation onset, no baseline correction
+trial_sec: 4.0
+trial_offset_sec: 0.0
+
+# runs 4/8/12: T1=left fist, T2=right fist; runs 6/10/14: T1=both fists, T2=both feet
+label_map:
+  "4":  {T1: 0, T2: 1}
+  "8":  {T1: 0, T2: 1}
+  "12": {T1: 0, T2: 1}
+  "6":  {T1: 2, T2: 3}
+  "10": {T1: 2, T2: 3}
+  "14": {T1: 2, T2: 3}
+drop_labels: [T0]
+
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+primary_metric: balanced_acc
+report_metrics: [balanced_acc, cohen_kappa, weighted_f1]
+
+split:
+  mode: subject_id_ranges
+  train: [1, 70]
+  val:   [71, 89]
+  test:  [90, 109]

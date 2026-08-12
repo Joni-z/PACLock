@@ -1,0 +1,34 @@
+# TUAB v3.0.1 -- PROTOCOLS.md sec.1. FROZEN.
+dataset: tuab
+version: v3.0.1
+raw_root: /work1/chenyuyou/yifanwang/data/tuh/tuab/edf
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/tuab
+num_classes: 2
+
+sample_rate: 200
+band: [0.3, 75.0]
+notch: 60.0
+window_sec: 10.0
+stride_sec: 10.0
+drop_tail: true
+
+# 16 bipolar montage, TUH naming (T3/T4/T5/T6, not T7/T8 -- see chbmit.yaml)
+channels:
+  [FP1-F7, F7-T3, T3-T5, T5-O1, FP2-F8, F8-T4, T4-T6, T6-O2,
+   FP1-F3, F3-C3, C3-P3, P3-O1, FP2-F4, F4-C4, C4-P4, P4-O2]
+channel_ref_suffix: "-REF"
+channel_std: "01_tcp_ar"
+
+normalization: div100
+loss: bce_with_logits
+class_weight: null
+resample_balance: false
+primary_metric: auroc
+report_metrics: [auroc, balanced_acc, pr_auc]
+
+# official train split, normal/abnormal each sorted by subject ID, first 80%/last 20%
+split:
+  mode: sort_subject_ratio
+  ratio: 0.8
+  per_class: true
+  test_from: eval

@@ -1,0 +1,92 @@
+{
+ "name": "tuab-cbramod_scratch",
+ "dataset": "tuab",
+ "model": "cbramod",
+ "group": "C",
+ "seed": 1,
+ "n_params_M": 30.645202,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.7994994263529662,
+  "pr_auc": 0.8827377905941562,
+  "auroc": 0.8754356130227886
+ },
+ "best_val": 0.8855917662968364,
+ "val_curve": [
+  0.882669061718373,
+  0.8715853891037176,
+  0.8855917662968364,
+  0.861059412527394,
+  0.8660309659433665,
+  0.8680423701625348,
+  0.8708628125545932,
+  0.871933915805801,
+  0.8629016142653108,
+  0.8682301944584164,
+  0.8726413250841961,
+  0.8640026451432421,
+  0.8603980727671869
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 2,
+  "n_evals": 13,
+  "best_val": 0.8855917662968364,
+  "chance": 0.5,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 13,
+ "wall_time_sec": 4797.190399885178,
+ "config": {
+  "name": "tuab-cbramod_scratch",
+  "group": "C",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuab",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "seed": 1
+ },
+ "data_manifest_created": "2026-08-04T12:32:29.190287+00:00",
+ "class_counts": {
+  "train": [
+   147894,
+   149209
+  ],
+  "val": [
+   35815,
+   39592
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 2,
+  "n_evals": 13,
+  "reason": "ok"
+ }
+}

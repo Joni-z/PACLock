@@ -1,0 +1,58 @@
+dataset: tuev
+version: v2.0.1
+raw_root: /work1/chenyuyou/yifanwang/data/tuh/tuev/edf
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/tuev
+num_classes: 6
+sample_rate: 200
+notch: null
+window_mode: event_centered
+window_sec: 5.0
+pre_sec: 2.0
+post_sec: 2.0
+channels:
+- FP1-F7
+- F7-T3
+- T3-T5
+- T5-O1
+- FP2-F8
+- F8-T4
+- T4-T6
+- T6-O2
+- FP1-F3
+- F3-C3
+- C3-P3
+- P3-O1
+- FP2-F4
+- F4-C4
+- C4-P4
+- P4-O2
+channel_ref_suffix: -REF
+channel_std: 01_tcp_ar
+labels:
+- SPSW
+- GPED
+- PLED
+- EYEM
+- ARTF
+- BCKG
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+primary_metric: cohen_kappa
+report_metrics:
+- cohen_kappa
+- balanced_acc
+- weighted_f1
+split:
+  mode: sort_subject_ratio
+  ratio: 0.8
+  per_class: false
+  test_from: eval
+expected:
+  n_samples: 112491
+hp: 0.5
+_pac_note: 'PAC-methodology variant: band [0.3, 75.0] -> high-pass 0.5 Hz, notch 60.0
+  -> none (Kramer et al. 2008: sharp spectral edges generate spurious phase-amplitude
+  coupling). Everything else identical to the frozen protocol, so the contrast isolates
+  the filtering.'

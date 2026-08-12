@@ -1,0 +1,90 @@
+{
+  "name": "bci_iv_2a-labram_pretrained",
+  "dataset": "bci_iv_2a",
+  "model": "labram",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 5.82074,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.3097993827160494,
+    "cohen_kappa": 0.07973251028806583,
+    "weighted_f1": 0.21841273772298578
+  },
+  "best_val": 0.2962962962962963,
+  "val_curve": [
+    0.2569444444444444,
+    0.2962962962962963,
+    0.2662037037037037,
+    0.25,
+    0.24768518518518517,
+    0.28240740740740744,
+    0.27314814814814814,
+    0.2523148148148148,
+    0.25,
+    0.25,
+    0.24537037037037038,
+    0.2777777777777778
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 12,
+    "reason": "ok"
+  },
+  "epochs_run": 12,
+  "wall_time_sec": 52.99783658981323,
+  "config": {
+    "name": "bci_iv_2a-labram_pretrained",
+    "group": "B",
+    "dataset": "bci_iv_2a",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 800
+    },
+    "num_classes": 4,
+    "epochs": 100,
+    "loss": "cross_entropy",
+    "seed": 1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      540,
+      540,
+      540,
+      540
+    ],
+    "val": [
+      108,
+      108,
+      108,
+      108
+    ],
+    "test": [
+      648,
+      648,
+      648,
+      648
+    ]
+  }
+}

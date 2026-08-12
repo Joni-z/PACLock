@@ -1,0 +1,65 @@
+dataset: physionet_mi
+version: v1.0.0
+raw_root: /work1/chenyuyou/yifanwang/data/physionet-mi
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/physionet_mi
+num_classes: 4
+sample_rate: 200
+source_rate: 160
+hp: 0.5
+notch: null
+runs:
+- 4
+- 6
+- 8
+- 10
+- 12
+- 14
+reference: average
+n_channels: 64
+trial_sec: 4.0
+trial_offset_sec: 0.0
+label_map:
+  '4':
+    T1: 0
+    T2: 1
+  '8':
+    T1: 0
+    T2: 1
+  '12':
+    T1: 0
+    T2: 1
+  '6':
+    T1: 2
+    T2: 3
+  '10':
+    T1: 2
+    T2: 3
+  '14':
+    T1: 2
+    T2: 3
+drop_labels:
+- T0
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+primary_metric: balanced_acc
+report_metrics:
+- balanced_acc
+- cohen_kappa
+- weighted_f1
+split:
+  mode: subject_id_ranges
+  train:
+  - 1
+  - 70
+  val:
+  - 71
+  - 89
+  test:
+  - 90
+  - 109
+_pac_note: 'PAC-methodology variant: band None -> high-pass 0.5 Hz, notch 60.0 ->
+  none (Kramer et al. 2008: sharp spectral edges generate spurious phase-amplitude
+  coupling). Everything else identical to the frozen protocol, so the contrast isolates
+  the filtering.'

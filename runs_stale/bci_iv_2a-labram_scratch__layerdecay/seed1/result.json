@@ -1,0 +1,107 @@
+{
+  "name": "bci_iv_2a-labram_scratch",
+  "dataset": "bci_iv_2a",
+  "model": "labram",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 5.82074,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.3252314814814815,
+    "cohen_kappa": 0.10030864197530864,
+    "weighted_f1": 0.32271864741412953
+  },
+  "best_val": 0.3587962962962963,
+  "val_curve": [
+    0.2962962962962963,
+    0.2777777777777778,
+    0.2800925925925926,
+    0.2939814814814815,
+    0.32175925925925924,
+    0.30787037037037035,
+    0.30787037037037035,
+    0.33333333333333337,
+    0.33101851851851855,
+    0.3472222222222222,
+    0.34259259259259256,
+    0.3472222222222222,
+    0.30092592592592593,
+    0.3587962962962963,
+    0.3055555555555556,
+    0.3333333333333333,
+    0.33796296296296297,
+    0.33101851851851855,
+    0.3194444444444444,
+    0.32407407407407407,
+    0.32407407407407407,
+    0.3449074074074074,
+    0.3287037037037037,
+    0.35185185185185186
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 24,
+    "best_val": 0.3587962962962963,
+    "chance": 0.25,
+    "reason": "ok"
+  },
+  "epochs_run": 24,
+  "wall_time_sec": 105.47629714012146,
+  "config": {
+    "name": "bci_iv_2a-labram_scratch",
+    "group": "C",
+    "dataset": "bci_iv_2a",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 4,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 800
+    },
+    "seed": 1,
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      540,
+      540,
+      540,
+      540
+    ],
+    "val": [
+      108,
+      108,
+      108,
+      108
+    ],
+    "test": [
+      648,
+      648,
+      648,
+      648
+    ]
+  }
+}

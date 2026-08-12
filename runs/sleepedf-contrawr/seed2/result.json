@@ -1,0 +1,115 @@
+{
+ "name": "sleepedf-contrawr",
+ "dataset": "sleepedf",
+ "model": "contrawr",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 1.564261,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.7113130461366198,
+  "cohen_kappa": 0.7031053804371654,
+  "weighted_f1": 0.7967787658949033
+ },
+ "best_val": 0.6787951288385266,
+ "val_curve": [
+  0.572874678386073,
+  0.6229577274553109,
+  0.6465252777244994,
+  0.6536509036924137,
+  0.6674816750690011,
+  0.6702058261684649,
+  0.6399649508915397,
+  0.6746111478126682,
+  0.670760452520708,
+  0.6715785711921853,
+  0.6612788286001396,
+  0.6467946823160902,
+  0.6787951288385266,
+  0.6718860254220409,
+  0.654772726436855,
+  0.6708024628315854,
+  0.6756703242655919,
+  0.660924582986655,
+  0.6709440467755448,
+  0.6528606983056295,
+  0.6563643182532811,
+  0.663609673095156,
+  0.6584344501852055,
+  0.6660788164823238,
+  0.6420960825643004,
+  0.6620081377702713,
+  0.6627254403260983,
+  0.6593877929338408
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 12,
+  "n_evals": 28,
+  "best_val": 0.6787951288385266,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 28,
+ "wall_time_sec": 1240.8404285907745,
+ "config": {
+  "name": "sleepedf-contrawr",
+  "group": "A",
+  "model": "contrawr",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 60,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 2,
+  "device": "cuda",
+  "label_smoothing": 0.1,
+  "model_kwargs": {
+   "token_size": 100,
+   "steps": 8
+  }
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 12,
+  "n_evals": 28,
+  "reason": "ok"
+ }
+}

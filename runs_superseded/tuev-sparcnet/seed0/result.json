@@ -1,0 +1,94 @@
+{
+  "name": "tuev-sparcnet",
+  "dataset": "tuev",
+  "model": "sparcnet",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 0.991531,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.3463486932175229,
+    "cohen_kappa": 0.3726602987651296,
+    "weighted_f1": 0.6875040958686025
+  },
+  "best_val": 0.3631296971726269,
+  "val_curve": [
+    0.043613732155930784,
+    0.2537551100110278,
+    0.3631296971726269,
+    0.27563736391311056,
+    0.35417340320936697,
+    0.32608924004043904,
+    0.1720607008691165,
+    0.23165465754684567,
+    0.17286614520323662,
+    0.20787859787279828,
+    0.2796352710162636,
+    0.26127429195940965,
+    0.19818396409089878,
+    0.21840178887022776,
+    0.2561837021593725,
+    0.2804875854466986,
+    0.29765612796405183,
+    0.21327395666781723
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 18,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "wall_time_sec": 1782.8867707252502,
+  "config": {
+    "name": "tuev-sparcnet",
+    "group": "A",
+    "model": "sparcnet",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 0,
+    "device": "cuda",
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-04T12:04:52.683807+00:00",
+  "class_counts": {
+    "train": [
+      506,
+      10735,
+      5019,
+      963,
+      9750,
+      36742
+    ],
+    "val": [
+      119,
+      270,
+      627,
+      71,
+      456,
+      13038
+    ],
+    "test": [
+      567,
+      4564,
+      1904,
+      329,
+      2064,
+      18670
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+ "name": "tusz-ffcl",
+ "dataset": "tusz",
+ "model": "ffcl",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 2.464994,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.6127983320731606,
+  "pr_auc": 0.5708668263960976,
+  "auroc": 0.8950713672818562
+ },
+ "best_val": 0.35335241946717666,
+ "val_curve": [
+  0.14205894043760264,
+  0.22557117750583433,
+  0.29876072390799696,
+  0.17363530853476866,
+  0.3324590061861932,
+  0.328894371446374,
+  0.30853122125835675,
+  0.3104703653002449,
+  0.31113388592885316,
+  0.2821571472430472,
+  0.3093841190597648,
+  0.30785789856942175,
+  0.3079430711909297,
+  0.3391404030720927,
+  0.35335241946717666,
+  0.27680632401338456,
+  0.3067825496395654,
+  0.32958989595491717,
+  0.2921924053307529,
+  0.3014339808349066,
+  0.2563431856818138,
+  0.2807465040081022,
+  0.34814370918899756,
+  0.30687104985437147
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 14,
+  "n_evals": 24,
+  "best_val": 0.35335241946717666,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 6,
+ "wall_time_sec": 2055.9095005989075,
+ "config": {
+  "name": "tusz-ffcl",
+  "group": "A",
+  "model": "ffcl",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 2,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 14,
+  "n_evals": 24,
+  "reason": "ok"
+ }
+}

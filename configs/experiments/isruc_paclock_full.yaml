@@ -1,0 +1,38 @@
+name: isruc-paclock_full
+group: C
+dataset: isruc
+data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/isruc
+model: paclock
+optimizer: adamw
+lr: 0.0001
+weight_decay: 1.0e-05
+scheduler: cosine
+grad_clip: 1.0
+num_workers: 8
+device: cuda
+num_classes: 5
+epochs: 20
+batch_size: 32
+eval_every_steps: 0
+patience: 20
+loss: cross_entropy
+label_smoothing: 0.1
+sample_rate: 200
+flatten_sequences: true
+model_kwargs:
+  arch: triaxial
+  d_model: 128
+  depth: 6
+  n_bands: 8
+  n_heads: 4
+  dropout: 0.2
+  kernel_size: 201
+  patch_len: 200
+  augmentations: []
+  freq_mixer: attention
+  band_pe: index
+  tokenizer_mode: pac_interaction
+  pac_token_mode: measured
+  interaction_mode: product
+  spatial_pe: index
+seed: 0

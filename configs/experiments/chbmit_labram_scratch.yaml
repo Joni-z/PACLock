@@ -1,0 +1,30 @@
+name: chbmit-labram_scratch
+group: C
+dataset: chbmit
+data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit
+sample_rate: 200
+optimizer: adamw
+weight_decay: 0.05
+lr: 0.0005
+max_lr: 0.0004
+scheduler: cosine
+pct_start: 0.2
+batch_size: 64
+grad_clip: null
+patience: 10
+num_workers: 16
+device: cuda
+eval_every_steps: 0
+num_classes: 2
+epochs: 50
+loss: cross_entropy
+warmup_epochs: 5
+layer_decay: null
+model: labram
+loader: labram
+pretrained: false
+loader_divisor: 1.0
+model_kwargs:
+  montage_mode: positional
+  target_len: 2000
+seed: 0

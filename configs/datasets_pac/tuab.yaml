@@ -1,0 +1,48 @@
+dataset: tuab
+version: v3.0.1
+raw_root: /work1/chenyuyou/yifanwang/data/tuh/tuab/edf
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/tuab
+num_classes: 2
+sample_rate: 200
+notch: null
+window_sec: 10.0
+stride_sec: 10.0
+drop_tail: true
+channels:
+- FP1-F7
+- F7-T3
+- T3-T5
+- T5-O1
+- FP2-F8
+- F8-T4
+- T4-T6
+- T6-O2
+- FP1-F3
+- F3-C3
+- C3-P3
+- P3-O1
+- FP2-F4
+- F4-C4
+- C4-P4
+- P4-O2
+channel_ref_suffix: -REF
+channel_std: 01_tcp_ar
+normalization: div100
+loss: bce_with_logits
+class_weight: null
+resample_balance: false
+primary_metric: auroc
+report_metrics:
+- auroc
+- balanced_acc
+- pr_auc
+split:
+  mode: sort_subject_ratio
+  ratio: 0.8
+  per_class: true
+  test_from: eval
+hp: 0.5
+_pac_note: 'PAC-methodology variant: band [0.3, 75.0] -> high-pass 0.5 Hz, notch 60.0
+  -> none (Kramer et al. 2008: sharp spectral edges generate spurious phase-amplitude
+  coupling). Everything else identical to the frozen protocol, so the contrast isolates
+  the filtering.'

@@ -1,0 +1,50 @@
+# FACED -- 情绪识别(9 类)。PROTOCOLS.md sec.8。FROZEN。
+# 2026-08-05 起替换 SEED-V(见 docs/CHANGELOG.md)。
+dataset: faced
+version: "Synapse syn50614194"
+source: official pre-processed .pkl
+raw_root: /work1/chenyuyou/yifanwang/data/faced
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/faced
+num_classes: 9
+
+# 官方 pre-processed 已统一到 250 Hz(0.05-47 Hz、坏导插值、ICA 去眼动、
+# common-average reference、统一通道顺序),我们只做 250 -> 200 Hz 重采样。
+# 不得对官方已处理数据再做一次滤波。
+source_rate: 250
+sample_rate: 200
+band: null
+notch: null
+
+n_subjects: 123          # S000-S122
+n_channels: 32           # 官方发布顺序
+n_videos: 28
+
+# 每个视频取末 30 s(官方已裁好)-> 3 个不重叠 10 s 窗口
+trial_sec: 30.0
+window_sec: 10.0
+stride_sec: 10.0
+drop_tail: true
+
+labels: [anger, disgust, fear, sadness, neutral,
+         amusement, inspiration, joy, tenderness]
+# 每类的视频数:3,3,3,3,4,3,3,3,3 = 28
+videos_per_label: [3, 3, 3, 3, 4, 3, 3, 3, 3]
+
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+resample_balance: false
+primary_metric: balanced_acc
+report_metrics: [balanced_acc, cohen_kappa, weighted_f1]
+
+# subject-disjoint。先按 subject 划分再切窗,同一 subject/video 的窗口不跨 split。
+split:
+  mode: subject_id_ranges
+  train: [0, 79]
+  val:   [80, 99]
+  test:  [100, 122]
+
+expected:
+  trials_per_subject: 28
+  windows_per_trial: 3

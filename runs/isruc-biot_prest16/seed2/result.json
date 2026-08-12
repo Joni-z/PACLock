@@ -1,0 +1,109 @@
+{
+ "name": "isruc-biot_prest16",
+ "dataset": "isruc",
+ "model": "biot",
+ "group": "B",
+ "seed": 2,
+ "n_params_M": 3.187589,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.776724747457034,
+  "cohen_kappa": 0.7409458749236107,
+  "weighted_f1": 0.7889297482779646
+ },
+ "best_val": 0.7386381280512878,
+ "val_curve": [
+  0.7001088910386493,
+  0.6879006335610647,
+  0.6830542588433773,
+  0.700607341297682,
+  0.7228565924546337,
+  0.7146525175056395,
+  0.7386381280512878,
+  0.6662839683336718,
+  0.7077813817091128,
+  0.7328200510492706,
+  0.719051147427334,
+  0.72130759742388,
+  0.706296085933207,
+  0.7110201195585784,
+  0.7139782459822659,
+  0.7110571408559796,
+  0.7035598532847512
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 17,
+  "best_val": 0.7386381280512878,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 17,
+ "wall_time_sec": 1688.7375376224518,
+ "config": {
+  "name": "isruc-biot_prest16",
+  "group": "B",
+  "dataset": "isruc",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model": "biot",
+  "loader": "biot",
+  "checkpoint": "prest16",
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100,
+   "target_len": 3000
+  },
+  "num_classes": 5,
+  "epochs": 40,
+  "loss": "cross_entropy",
+  "flatten_sequences": true,
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   16493,
+   9147,
+   21310,
+   13234,
+   9236
+  ],
+  "val": [
+   2072,
+   1015,
+   3226,
+   1980,
+   1067
+  ],
+  "test": [
+   1348,
+   1031,
+   3120,
+   1808,
+   1393
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 17,
+  "reason": "ok"
+ }
+}

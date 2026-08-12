@@ -1,0 +1,107 @@
+{
+ "name": "sleepedf-biot_prest16",
+ "dataset": "sleepedf",
+ "model": "biot",
+ "group": "B",
+ "seed": 0,
+ "n_params_M": 3.187525,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.5267353719078056,
+  "cohen_kappa": 0.580418627045667,
+  "weighted_f1": 0.7012889999995603
+ },
+ "best_val": 0.5976245946542994,
+ "val_curve": [
+  0.5821072663080274,
+  0.5705333146646716,
+  0.5843340890295567,
+  0.5651527832408976,
+  0.5705478025118574,
+  0.5976245946542994,
+  0.5923453557431182,
+  0.5863067199597134,
+  0.5676184234832142,
+  0.5797569067908525,
+  0.5965042758328407,
+  0.5891321172045485,
+  0.5636710475198876,
+  0.578535482703413,
+  0.5801493971897804,
+  0.5657741382415675
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 16,
+  "best_val": 0.5976245946542994,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 16,
+ "wall_time_sec": 2899.8065061569214,
+ "config": {
+  "name": "sleepedf-biot_prest16",
+  "group": "B",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model": "biot",
+  "loader": "biot",
+  "checkpoint": "prest16",
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100,
+   "target_len": 3000
+  },
+  "num_classes": 5,
+  "epochs": 40,
+  "loss": "cross_entropy",
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 16,
+  "reason": "ok"
+ }
+}

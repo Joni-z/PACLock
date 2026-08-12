@@ -1,0 +1,106 @@
+{
+  "name": "physionet_mi-labram_scratch",
+  "dataset": "physionet_mi",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.82074,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.38544863679610974,
+    "cohen_kappa": 0.18058732688131018,
+    "weighted_f1": 0.38652108115464306
+  },
+  "best_val": 0.376575711920395,
+  "val_curve": [
+    0.25,
+    0.24888368027967583,
+    0.26266599307159355,
+    0.2466048031422183,
+    0.290435408741634,
+    0.30240273961590247,
+    0.3198209687039253,
+    0.3292916438775997,
+    0.33318572927012474,
+    0.35729266977299334,
+    0.3599347700293115,
+    0.376575711920395,
+    0.36674341963439006,
+    0.3521477827449211,
+    0.3616174034166617,
+    0.3645323917066866,
+    0.35310459441488884,
+    0.36277634322019664,
+    0.3524034490876578,
+    0.3634000458591533,
+    0.35128858216398384,
+    0.3592056382649343
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 11,
+    "n_evals": 22,
+    "best_val": 0.376575711920395,
+    "chance": 0.25,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "stopped_by": "patience",
+  "wall_time_sec": 381.1663317680359,
+  "config": {
+    "name": "physionet_mi-labram_scratch",
+    "group": "C",
+    "dataset": "physionet_mi",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 4,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 800
+    },
+    "seed": 0,
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1593,
+      1557,
+      1581,
+      1569
+    ],
+    "val": [
+      435,
+      432,
+      434,
+      433
+    ],
+    "test": [
+      451,
+      449,
+      450,
+      453
+    ]
+  }
+}

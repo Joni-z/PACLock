@@ -1,0 +1,98 @@
+{
+  "name": "tuev-labram_pretrained",
+  "dataset": "tuev",
+  "model": "labram",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 5.821142,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.4657520960192015,
+    "cohen_kappa": 0.42549134258306665,
+    "weighted_f1": 0.7273336340375056
+  },
+  "best_val": 0.544993969755703,
+  "val_curve": [
+    0.48988303207165595,
+    0.46748945399977715,
+    0.5314774456990707,
+    0.47972979508070834,
+    0.4207495543741995,
+    0.5299571643672687,
+    0.4397710480047118,
+    0.544993969755703,
+    0.5060787987375249,
+    0.4909854996195989,
+    0.49251030072032853,
+    0.47709449786146496,
+    0.4790407929296848,
+    0.43730337045218215,
+    0.4632583715801647,
+    0.42544754789269634,
+    0.42965233300487915,
+    0.48489122970567033
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 18,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "wall_time_sec": 3178.270012617111,
+  "config": {
+    "name": "tuev-labram_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_labram/tuev",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.0,
+    "seed": 1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      581,
+      7732,
+      5199,
+      916,
+      8264,
+      41758
+    ],
+    "val": [
+      64,
+      3522,
+      985,
+      146,
+      2638,
+      11682
+    ],
+    "test": [
+      249,
+      3430,
+      1864,
+      310,
+      1980,
+      18234
+    ]
+  }
+}

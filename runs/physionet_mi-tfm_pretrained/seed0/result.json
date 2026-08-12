@@ -1,0 +1,99 @@
+{
+ "name": "physionet_mi-tfm_pretrained",
+ "dataset": "physionet_mi",
+ "model": "tfm",
+ "group": "B",
+ "seed": 0,
+ "n_params_M": 1.892024,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.4524433668566595,
+  "cohen_kappa": 0.26992698699616124,
+  "weighted_f1": 0.4530536360027424
+ },
+ "best_val": 0.4052340362764025,
+ "val_curve": [
+  0.2689634205554673,
+  0.27265053150601337,
+  0.30430724788121993,
+  0.3592631564054938,
+  0.3774208047894875,
+  0.4052340362764025,
+  0.4024452963253564,
+  0.3910939804965548,
+  0.3948727860947253,
+  0.3910266310559843,
+  0.399187647916557,
+  0.39265073962848884,
+  0.3848764123139022,
+  0.38472292974009503,
+  0.40369484267629696,
+  0.39049759572709597
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 16,
+  "best_val": 0.4052340362764025,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 16,
+ "wall_time_sec": 864.5267200469971,
+ "config": {
+  "name": "physionet_mi-tfm_pretrained",
+  "group": "B",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "model": "tfm",
+  "loader": "tfm",
+  "pretrained": true,
+  "tfm_setting": "multiple",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 50,
+  "batch_size": 32,
+  "warmup_epochs": 5,
+  "label_smoothing": 0.1,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "loss": "cross_entropy",
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 16,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,106 @@
+{
+  "name": "tuev-cbramod_scratch",
+  "dataset": "tuev",
+  "model": "cbramod",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 17.846006,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5953711175571778,
+    "cohen_kappa": 0.6303443118330563,
+    "weighted_f1": 0.8028305197079708
+  },
+  "best_val": 0.4243568524433693,
+  "val_curve": [
+    0.30104084534910347,
+    0.38917411899704757,
+    0.3675689404817447,
+    0.3571082817079595,
+    0.25432481342892477,
+    0.4243568524433693,
+    0.29813279969656536,
+    0.3189276773409707,
+    0.31484447322952414,
+    0.29683620086071827,
+    0.358656208161368,
+    0.3611900941681495,
+    0.3140990067855707,
+    0.3382438412750931,
+    0.3549005250320052,
+    0.3838884697023667,
+    0.3122922906844908,
+    0.33182236943345733,
+    0.32582546597219975,
+    0.3900647207834931,
+    0.3290385347344227,
+    0.3719360007936745
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 22,
+    "best_val": 0.4243568524433693,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 2,
+  "wall_time_sec": 255.74404072761536,
+  "config": {
+    "name": "tuev-cbramod_scratch",
+    "group": "C",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "model": "cbramod",
+    "loader": null,
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "multi_lr": true,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "seed": 2
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

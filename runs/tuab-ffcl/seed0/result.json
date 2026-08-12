@@ -1,0 +1,94 @@
+{
+ "name": "tuab-ffcl",
+ "dataset": "tuab",
+ "model": "ffcl",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 2.464994,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.7252906553093672,
+  "pr_auc": 0.8874802965857902,
+  "auroc": 0.8896476683841278
+ },
+ "best_val": 0.9106065308841796,
+ "val_curve": [
+  0.8917554462469583,
+  0.9024545230822489,
+  0.900661886662074,
+  0.899487721146875,
+  0.9073339783648866,
+  0.8949563842411359,
+  0.9019890584647474,
+  0.9063471445460153,
+  0.9065724116971752,
+  0.9079703291879558,
+  0.9106065308841796,
+  0.8803374399328264,
+  0.9032919345663052,
+  0.8981819878268601,
+  0.9033817188569253,
+  0.89779283770545,
+  0.9025065923008009,
+  0.8848150171960617,
+  0.8836994354139149,
+  0.8976522232763295,
+  0.8984867609691448
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 21,
+  "best_val": 0.9106065308841796,
+  "chance": 0.5,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 7,
+ "wall_time_sec": 1746.076334953308,
+ "config": {
+  "name": "tuab-ffcl",
+  "group": "A",
+  "model": "ffcl",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuab",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 0,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:32:29.190287+00:00",
+ "class_counts": {
+  "train": [
+   147894,
+   149209
+  ],
+  "val": [
+   35815,
+   39592
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 21,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,100 @@
+{
+  "name": "sleepedf-biot_scratch",
+  "dataset": "sleepedf",
+  "model": "biot",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 3.183879,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6221224913659761,
+    "cohen_kappa": 0.6722490634768536,
+    "weighted_f1": 0.7678350985830295
+  },
+  "best_val": 0.6395259774031805,
+  "val_curve": [
+    0.5689754522160974,
+    0.5985634583356589,
+    0.5967117192000285,
+    0.6165241928521286,
+    0.6192424081705503,
+    0.6346259953168965,
+    0.6212309471764563,
+    0.6243737340767553,
+    0.6395259774031805,
+    0.628447377476228,
+    0.5886004989693585,
+    0.6057535810753341,
+    0.6288128796840965,
+    0.5816877123014418,
+    0.619052365938531,
+    0.563236618423782,
+    0.5761545867518212,
+    0.5634462805709424,
+    0.5808059980814868
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 8,
+    "n_evals": 19,
+    "reason": "ok"
+  },
+  "epochs_run": 19,
+  "wall_time_sec": 641.5891923904419,
+  "config": {
+    "name": "sleepedf-biot_scratch",
+    "group": "C",
+    "dataset": "sleepedf",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 5,
+    "epochs": 40,
+    "loss": "cross_entropy",
+    "model": "biot",
+    "loader": "biot",
+    "checkpoint": null,
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 3000
+    },
+    "seed": 2
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34213,
+      11896,
+      47572,
+      10575,
+      18174
+    ],
+    "val": [
+      14158,
+      4849,
+      10838,
+      1647,
+      4150
+    ],
+    "test": [
+      17570,
+      4777,
+      10722,
+      817,
+      3511
+    ]
+  }
+}

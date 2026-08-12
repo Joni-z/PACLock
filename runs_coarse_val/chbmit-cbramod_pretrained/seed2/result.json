@@ -1,0 +1,95 @@
+{
+  "name": "chbmit-cbramod_pretrained",
+  "dataset": "chbmit",
+  "model": "cbramod",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 30.645202,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.6406906716133458,
+    "pr_auc": 0.43179534271400255,
+    "auroc": 0.8697668115094995
+  },
+  "best_val": 0.43220637174046705,
+  "val_curve": [
+    0.30902158862034246,
+    0.30902158862034246,
+    0.006419722912439021,
+    0.00925956500415224,
+    0.008534295593761674,
+    0.13558714818047884,
+    0.006746457619756369,
+    0.005988273054444807,
+    0.025689526752112325,
+    0.28619840407014585,
+    0.4249867279418221,
+    0.3467013921138807,
+    0.3138387624445932,
+    0.43220637174046705,
+    0.3068582087121033,
+    0.20687778095014822,
+    0.27421237934409537,
+    0.39016276327246774,
+    0.32322155442925793,
+    0.3091026115346477,
+    0.26094724916577433,
+    0.3435351596342241,
+    0.28612178970268454,
+    0.23632243797635238
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 24,
+    "reason": "ok"
+  },
+  "epochs_run": 24,
+  "wall_time_sec": 8978.002550125122,
+  "config": {
+    "name": "chbmit-cbramod_pretrained",
+    "group": "B",
+    "dataset": "chbmit",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit",
+    "model": "cbramod",
+    "loader": null,
+    "pretrained": true,
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "multi_lr": true,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "focal",
+    "focal_alpha": 0.25,
+    "focal_gamma": 2.0,
+    "seed": 2
+  },
+  "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}

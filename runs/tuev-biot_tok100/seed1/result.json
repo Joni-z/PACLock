@@ -1,0 +1,91 @@
+{
+  "name": "tuev-biot_tok100",
+  "dataset": "tuev",
+  "model": "biot",
+  "group": "ablation",
+  "seed": 1,
+  "n_params_M": 3.174934,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5080424941591821,
+    "cohen_kappa": 0.5328127178478999,
+    "weighted_f1": 0.7580041002109239
+  },
+  "best_val": 0.5489490137037764,
+  "val_curve": [
+    0.5489490137037764,
+    0.4259974725177633,
+    0.4575627464692841,
+    0.49711592551329753,
+    0.46090067695592885,
+    0.4906418653308491
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 6,
+    "best_val": 0.5489490137037764,
+    "chance": 0.0,
+    "reason": "val peaked at the first evaluation, but reached 0.5489 vs chance 0.0000 -- converged early, not untrained"
+  },
+  "epochs_run": 6,
+  "stopped_by": "patience",
+  "wall_time_sec": 216.71155166625977,
+  "config": {
+    "name": "tuev-biot_tok100",
+    "group": "ablation",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tuev",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 100,
+      "hop_length": 50
+    },
+    "num_classes": 6,
+    "sample_rate": 200,
+    "batch_size": 128,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.0,
+    "eval_every_steps": 0,
+    "seed": 1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      610,
+      9683,
+      3877,
+      828,
+      9214,
+      43303
+    ],
+    "val": [
+      35,
+      1571,
+      2307,
+      242,
+      1839,
+      10423
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

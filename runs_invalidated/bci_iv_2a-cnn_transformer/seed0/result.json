@@ -1,0 +1,97 @@
+{
+  "name": "bci_iv_2a-cnn_transformer",
+  "dataset": "bci_iv_2a",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 3.310532,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.43827160493827155,
+    "cohen_kappa": 0.2510288065843621,
+    "weighted_f1": 0.4289616749377375
+  },
+  "best_val": 0.4606481481481482,
+  "val_curve": [
+    0.26157407407407407,
+    0.27314814814814814,
+    0.3912037037037037,
+    0.3379629629629629,
+    0.3888888888888889,
+    0.4050925925925926,
+    0.3287037037037037,
+    0.42592592592592593,
+    0.46064814814814814,
+    0.38425925925925924,
+    0.4583333333333333,
+    0.4143518518518518,
+    0.4606481481481482,
+    0.3773148148148148,
+    0.44675925925925924,
+    0.3726851851851852,
+    0.42361111111111105,
+    0.39351851851851855,
+    0.3912037037037037,
+    0.3796296296296296,
+    0.42129629629629634,
+    0.41435185185185186,
+    0.3912037037037037,
+    0.41435185185185186,
+    0.42592592592592593,
+    0.41666666666666663,
+    0.4189814814814815,
+    0.4282407407407408
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 12,
+    "n_evals": 28,
+    "reason": "ok"
+  },
+  "epochs_run": 28,
+  "wall_time_sec": 25.773565769195557,
+  "config": {
+    "name": "bci_iv_2a-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "bci_iv_2a",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+    "num_classes": 4,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "batch_size": 64,
+    "num_workers": 8,
+    "epochs": 50,
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 0,
+    "device": "cuda"
+  },
+  "data_manifest_created": "2026-08-04T10:52:01.822097+00:00",
+  "class_counts": {
+    "train": [
+      540,
+      540,
+      540,
+      540
+    ],
+    "val": [
+      108,
+      108,
+      108,
+      108
+    ],
+    "test": [
+      648,
+      648,
+      648,
+      648
+    ]
+  }
+}

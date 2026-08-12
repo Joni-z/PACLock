@@ -1,0 +1,28 @@
+name: bci_iv_2a-biot_prest16
+group: B
+dataset: bci_iv_2a
+data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a
+sample_rate: 200
+optimizer: adamw
+weight_decay: 0.01
+lr: 0.0004
+max_lr: 0.0004
+scheduler: onecycle
+pct_start: 0.2
+batch_size: 64
+grad_clip: null
+patience: 10
+num_workers: 16
+device: cuda
+eval_every_steps: 0
+num_classes: 4
+epochs: 100
+loss: cross_entropy
+model: biot
+loader: biot
+checkpoint: prest16
+model_kwargs:
+  token_size: 200
+  hop_length: 100
+  target_len: 800
+seed: 0

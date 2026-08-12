@@ -1,0 +1,108 @@
+{
+ "name": "physionet_mi-labram_scratch",
+ "dataset": "physionet_mi",
+ "model": "labram",
+ "group": "C",
+ "seed": 0,
+ "n_params_M": 5.82074,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.29398977700417683,
+  "cohen_kappa": 0.0587095914287179,
+  "weighted_f1": 0.2687705793879119
+ },
+ "best_val": 0.2998021250015784,
+ "val_curve": [
+  0.2511560647502687,
+  0.26324500455427946,
+  0.25167874639280996,
+  0.2636097032367699,
+  0.27201558830799655,
+  0.29738884006900884,
+  0.2817106568293334,
+  0.2998021250015784,
+  0.28998283015487947,
+  0.29167730203183534,
+  0.29298479344667916,
+  0.281534423586561,
+  0.2890135962941229,
+  0.27752873556422275,
+  0.2860484789377506,
+  0.285557878772915,
+  0.2967086668254103,
+  0.2994422611165827
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "best_val": 0.2998021250015784,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 18,
+ "wall_time_sec": 313.1377422809601,
+ "config": {
+  "name": "physionet_mi-labram_scratch",
+  "group": "C",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.05,
+  "lr": 0.0005,
+  "max_lr": 0.0004,
+  "scheduler": "cosine",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "epochs": 50,
+  "loss": "cross_entropy",
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": false,
+  "loader_divisor": 1.0,
+  "model_kwargs": {
+   "montage_mode": "positional",
+   "target_len": 800
+  },
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "reason": "ok"
+ }
+}

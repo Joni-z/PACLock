@@ -1,0 +1,106 @@
+{
+ "name": "tuev-st_transformer",
+ "dataset": "tuev",
+ "model": "st_transformer",
+ "group": "A",
+ "seed": 1,
+ "n_params_M": 3.425062,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.4510403306633059,
+  "cohen_kappa": 0.49163994352884643,
+  "weighted_f1": 0.7340732766321313
+ },
+ "best_val": 0.36321431527459225,
+ "val_curve": [
+  0.038551304849206436,
+  0.25631439971070713,
+  0.33771901904373536,
+  0.2996471626111443,
+  0.36321431527459225,
+  0.2927621670419348,
+  0.3314202742193785,
+  0.2958111834265461,
+  0.318139659643357,
+  0.3197349791972016,
+  0.25490386293933964,
+  0.2854747076378148,
+  0.2817182114889297,
+  0.26395252946350034,
+  0.263094482270942,
+  0.2467981866145773,
+  0.26384490486982903,
+  0.3100374354697911,
+  0.2336680942379924,
+  0.2710340731875277
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "best_val": 0.36321431527459225,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 228.039568901062,
+ "config": {
+  "name": "tuev-st_transformer",
+  "group": "A",
+  "model": "st_transformer",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 100,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 1,
+  "device": "cuda",
+  "label_smoothing": 0.1
+ },
+ "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

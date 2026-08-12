@@ -1,0 +1,110 @@
+{
+ "name": "tusz-cbramod_pretrained",
+ "dataset": "tusz",
+ "model": "cbramod",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 30.645202,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.5740500790385898,
+  "pr_auc": 0.39332536156904807,
+  "auroc": 0.8148739631058085
+ },
+ "best_val": 0.26008865058379704,
+ "val_curve": [
+  0.21149300215240036,
+  0.16366299473438933,
+  0.15608695661282113,
+  0.23104802356635395,
+  0.17963658460279353,
+  0.20771631966666565,
+  0.2196034618793649,
+  0.22180931530431938,
+  0.2062771338040531,
+  0.23516336856028608,
+  0.25413532548823725,
+  0.20843581140572898,
+  0.2153086139958304,
+  0.22484638677082144,
+  0.1629437225904895,
+  0.22315645110945403,
+  0.19480855762317095,
+  0.22659576164999018,
+  0.22849668899895953,
+  0.20335742013667732,
+  0.26008865058379704,
+  0.20234017133406165,
+  0.2336142175931749,
+  0.23352935276846665,
+  0.23127001712264666,
+  0.22266610076261212,
+  0.23892482881113108,
+  0.24210762012867132,
+  0.23983135425135726,
+  0.23554419407719474,
+  0.23385010226388997
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 20,
+  "n_evals": 31,
+  "best_val": 0.26008865058379704,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 31,
+ "wall_time_sec": 13220.269349098206,
+ "config": {
+  "name": "tusz-cbramod_pretrained",
+  "group": "B",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "seed": 1
+ },
+ "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 20,
+  "n_evals": 31,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "name": "tuev-cbramod_scratch",
+ "dataset": "tuev",
+ "model": "cbramod",
+ "group": "C",
+ "seed": 2,
+ "n_params_M": 17.846006,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.5053612032083317,
+  "cohen_kappa": 0.5501453733500645,
+  "weighted_f1": 0.7660261624262591
+ },
+ "best_val": 0.39574276943648057,
+ "val_curve": [
+  0.25005206930366086,
+  0.33300677504219267,
+  0.2702344560119109,
+  0.3287702431088737,
+  0.23476250787316755,
+  0.344167903469904,
+  0.33558324894448555,
+  0.39574276943648057,
+  0.31356317207527185,
+  0.29438220808721616,
+  0.35757045151329747,
+  0.312258015838643,
+  0.3138652646506468,
+  0.2710469922262193,
+  0.3472533652793517,
+  0.3220936782136854,
+  0.34879501094246657,
+  0.30254148241263923
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "best_val": 0.39574276943648057,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 18,
+ "wall_time_sec": 1456.146564245224,
+ "config": {
+  "name": "tuev-cbramod_scratch",
+  "group": "C",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.0,
+  "seed": 2
+ },
+ "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,47 @@
+# Sleep-EDF Expanded v1.0.0, Sleep Cassette only -- PROTOCOLS.md sec.5. FROZEN.
+dataset: sleepedf
+version: v1.0.0
+subset: sleep-cassette
+raw_root: /work1/chenyuyou/yifanwang/data/sleep-edf
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf
+num_classes: 5
+
+# 100 Hz native, explicitly NOT resampled
+sample_rate: 100
+resample: false
+band: [0.3, 35.0]
+notch: null
+window_sec: 30.0
+stride_sec: 30.0
+
+channels: ["EEG Fpz-Cz", "EEG Pz-Oz"]
+
+# W->0, N1->1, N2->2, N3/N4->3, REM->4; Movement and unscored dropped
+label_map:
+  "Sleep stage W": 0
+  "Sleep stage 1": 1
+  "Sleep stage 2": 2
+  "Sleep stage 3": 3
+  "Sleep stage 4": 3
+  "Sleep stage R": 4
+drop_labels: ["Movement time", "Sleep stage ?"]
+
+# keep 30 min of wake either side of the sleep period
+crop_wake:
+  enabled: true
+  minutes: 30
+
+normalization: train_stats      # per-channel mean/std from train subjects only
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+primary_metric: cohen_kappa
+report_metrics: [cohen_kappa, balanced_acc, weighted_f1]
+
+split:
+  mode: explicit_subject_ids
+  train: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
+          25,26,27,28,29,30,31,32,33,34,35,36,37,38,
+          40,41,42,43,44,45,46,47,48,49,50,51,52,53,54]
+  val:   [55,56,57,58,59,60,61,62,63,64,65,66]
+  test:  [67,70,71,72,73,74,75,76,77,80,81,82]

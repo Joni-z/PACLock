@@ -1,0 +1,104 @@
+{
+ "name": "chbmit-labram_pretrained",
+ "dataset": "chbmit",
+ "model": "labram",
+ "group": "B",
+ "seed": 0,
+ "n_params_M": 5.820338,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.6390544134712305,
+  "pr_auc": 0.5425231293534374,
+  "auroc": 0.9384974885438637
+ },
+ "best_val": 0.511682387528913,
+ "val_curve": [
+  0.34221385694409423,
+  0.4471654754859482,
+  0.3475999029395724,
+  0.4804977265381311,
+  0.3045520009038314,
+  0.3536158817222095,
+  0.21457529604676465,
+  0.32379675486746134,
+  0.3320152864499525,
+  0.511682387528913,
+  0.4374912638112549,
+  0.33379935074189826,
+  0.44950872996967856,
+  0.1639394502290363,
+  0.3135637366689157,
+  0.4259393511456845,
+  0.2937184709254866,
+  0.3353372486932585,
+  0.2937084867629593,
+  0.4583231732698865
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 20,
+  "best_val": 0.511682387528913,
+  "chance": 0.0070808157099697885,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 9766.09848022461,
+ "config": {
+  "name": "chbmit-labram_pretrained",
+  "group": "B",
+  "dataset": "chbmit",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.05,
+  "lr": 0.0005,
+  "max_lr": 0.0004,
+  "scheduler": "cosine",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 2,
+  "epochs": 50,
+  "loss": "cross_entropy",
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": true,
+  "loader_divisor": 1.0,
+  "model_kwargs": {
+   "montage_mode": "positional",
+   "target_len": 2000
+  },
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   313322,
+   2883
+  ],
+  "val": [
+   21034,
+   150
+  ],
+  "test": [
+   17110,
+   276
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

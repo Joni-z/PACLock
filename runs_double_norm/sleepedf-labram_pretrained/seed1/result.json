@@ -1,0 +1,93 @@
+{
+  "name": "sleepedf-labram_pretrained",
+  "dataset": "sleepedf",
+  "model": "labram",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 5.820941,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6439392720104232,
+    "cohen_kappa": 0.6074135923559936,
+    "weighted_f1": 0.7240463004928371
+  },
+  "best_val": 0.6113290300584269,
+  "val_curve": [
+    0.5436306358129851,
+    0.5769455333392782,
+    0.6113290300584269,
+    0.5861490205258135,
+    0.5909837929599258,
+    0.5879776758473434,
+    0.6019435341280692,
+    0.6050595310154934,
+    0.5997979718643673,
+    0.5933990609100707,
+    0.5764198838451984,
+    0.5841792788788633,
+    0.5637872530638908
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 13,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "wall_time_sec": 1523.673356294632,
+  "config": {
+    "name": "sleepedf-labram_pretrained",
+    "group": "B",
+    "dataset": "sleepedf",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 3000
+    },
+    "num_classes": 5,
+    "epochs": 40,
+    "loss": "cross_entropy",
+    "seed": 1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34213,
+      11896,
+      47572,
+      10575,
+      18174
+    ],
+    "val": [
+      14158,
+      4849,
+      10838,
+      1647,
+      4150
+    ],
+    "test": [
+      17570,
+      4777,
+      10722,
+      817,
+      3511
+    ]
+  }
+}

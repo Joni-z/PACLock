@@ -1,0 +1,103 @@
+{
+  "name": "bci_iv_2a-tfm_pretrained",
+  "dataset": "bci_iv_2a",
+  "model": "tfm",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 1.891352,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.33487654320987653,
+    "cohen_kappa": 0.11316872427983538,
+    "weighted_f1": 0.3356199705462804
+  },
+  "best_val": 0.3865740740740741,
+  "val_curve": [
+    0.2708333333333333,
+    0.2708333333333333,
+    0.2800925925925926,
+    0.2592592592592593,
+    0.31018518518518523,
+    0.30092592592592593,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3263888888888889,
+    0.30092592592592593,
+    0.3472222222222222,
+    0.31712962962962965,
+    0.3564814814814815,
+    0.33564814814814814,
+    0.3310185185185185,
+    0.375,
+    0.3564814814814815,
+    0.34259259259259256,
+    0.3310185185185185,
+    0.3425925925925926,
+    0.34259259259259256,
+    0.3865740740740741,
+    0.3449074074074074,
+    0.3171296296296296,
+    0.35185185185185186,
+    0.35648148148148145,
+    0.3611111111111111,
+    0.33564814814814814,
+    0.34490740740740744,
+    0.3518518518518518,
+    0.3541666666666667,
+    0.34953703703703703
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 21,
+    "n_evals": 32,
+    "reason": "ok"
+  },
+  "epochs_run": 32,
+  "wall_time_sec": 597.3954145908356,
+  "config": {
+    "name": "bci_iv_2a-tfm_pretrained",
+    "group": "B",
+    "dataset": "bci_iv_2a",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 64,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 4,
+    "loss": "cross_entropy",
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      540,
+      540,
+      540,
+      540
+    ],
+    "val": [
+      108,
+      108,
+      108,
+      108
+    ],
+    "test": [
+      648,
+      648,
+      648,
+      648
+    ]
+  }
+}

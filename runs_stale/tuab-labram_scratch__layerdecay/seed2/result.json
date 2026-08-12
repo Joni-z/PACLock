@@ -1,0 +1,89 @@
+{
+ "name": "tuab-labram_scratch",
+ "dataset": "tuab",
+ "model": "labram",
+ "group": "C",
+ "seed": 2,
+ "n_params_M": 5.820338,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.7926726914263309,
+  "pr_auc": 0.8629902308913836,
+  "auroc": 0.8756353680369087
+ },
+ "best_val": 0.8709897677172449,
+ "val_curve": [
+  0.85649016439475,
+  0.8709897677172449,
+  0.8592211609924371,
+  0.8594318603936659,
+  0.8514533211954783,
+  0.85003402140828,
+  0.8476915658872933,
+  0.842095342213453,
+  0.8404021496400125,
+  0.8374660835850739,
+  0.8357404410162506,
+  0.8552401532201923
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 1,
+  "n_evals": 12,
+  "best_val": 0.8709897677172449,
+  "chance": 0.5,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 12,
+ "wall_time_sec": 8573.748491764069,
+ "config": {
+  "name": "tuab-labram_scratch",
+  "group": "C",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_labram/tuab",
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0005,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   146162,
+   152177
+  ],
+  "val": [
+   37176,
+   36252
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 1,
+  "n_evals": 12,
+  "reason": "ok"
+ }
+}

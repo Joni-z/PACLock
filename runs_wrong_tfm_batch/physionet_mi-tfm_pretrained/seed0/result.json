@@ -1,0 +1,93 @@
+{
+  "name": "physionet_mi-tfm_pretrained",
+  "dataset": "physionet_mi",
+  "model": "tfm",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 1.892024,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.4565020112872877,
+    "cohen_kappa": 0.2752730943280298,
+    "weighted_f1": 0.45553928609304023
+  },
+  "best_val": 0.40995699331988267,
+  "val_curve": [
+    0.2643824377173933,
+    0.32635896993444324,
+    0.38648480343016967,
+    0.37393483853243475,
+    0.39924235289095716,
+    0.38980164288529917,
+    0.3959678072631232,
+    0.3931357976478597,
+    0.4053742211925975,
+    0.4054508779528415,
+    0.38979669055751953,
+    0.40995699331988267,
+    0.4019761855133287,
+    0.3886885307180856,
+    0.3932504105735943,
+    0.38992840110268023,
+    0.38573279216800405,
+    0.40834314590155696,
+    0.3892390885308343,
+    0.39721756747925485,
+    0.3933581749709803,
+    0.3985322132050711
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 11,
+    "n_evals": 22,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "wall_time_sec": 1180.0277812480927,
+  "config": {
+    "name": "physionet_mi-tfm_pretrained",
+    "group": "B",
+    "dataset": "physionet_mi",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 64,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 4,
+    "loss": "cross_entropy",
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1593,
+      1557,
+      1581,
+      1569
+    ],
+    "val": [
+      435,
+      432,
+      434,
+      433
+    ],
+    "test": [
+      451,
+      449,
+      450,
+      453
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+ "name": "tusz-st_transformer",
+ "dataset": "tusz",
+ "model": "st_transformer",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 3.426034,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.5996087409681841,
+  "pr_auc": 0.3932985447717813,
+  "auroc": 0.8372539318624542
+ },
+ "best_val": 0.12756960654393104,
+ "val_curve": [
+  0.024565432062696138,
+  0.0661296259789191,
+  0.06744387604094745,
+  0.09610882630624741,
+  0.0913148498545362,
+  0.10859145339509056,
+  0.10182707602232953,
+  0.10983881443478158,
+  0.12112256106770099,
+  0.12756960654393104,
+  0.12030748142358899,
+  0.12083224811088944,
+  0.11012375443380204,
+  0.12274385436888029,
+  0.12697507973258584,
+  0.11875614180762852,
+  0.12029614388312178,
+  0.12198750502796259,
+  0.1185010770026155,
+  0.11804731323060814
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 20,
+  "best_val": 0.12756960654393104,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 5,
+ "wall_time_sec": 635.1604824066162,
+ "config": {
+  "name": "tusz-st_transformer",
+  "group": "A",
+  "model": "st_transformer",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 2,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

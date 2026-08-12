@@ -1,0 +1,110 @@
+{
+ "name": "bci_iv_2a-labram_pretrained",
+ "dataset": "bci_iv_2a",
+ "model": "labram",
+ "group": "B",
+ "seed": 2,
+ "n_params_M": 5.82074,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.3618827160493827,
+  "cohen_kappa": 0.14917695473251025,
+  "weighted_f1": 0.33142566868160467
+ },
+ "best_val": 0.3912037037037037,
+ "val_curve": [
+  0.25462962962962965,
+  0.27546296296296297,
+  0.29398148148148145,
+  0.3148148148148148,
+  0.32407407407407407,
+  0.32638888888888884,
+  0.35185185185185186,
+  0.3263888888888889,
+  0.2962962962962963,
+  0.3912037037037037,
+  0.32175925925925924,
+  0.34490740740740744,
+  0.32407407407407407,
+  0.36342592592592593,
+  0.35416666666666663,
+  0.34259259259259256,
+  0.38657407407407407,
+  0.3680555555555556,
+  0.3680555555555555,
+  0.3819444444444444
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 20,
+  "best_val": 0.3912037037037037,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 85.75196814537048,
+ "config": {
+  "name": "bci_iv_2a-labram_pretrained",
+  "group": "B",
+  "dataset": "bci_iv_2a",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.05,
+  "lr": 0.0005,
+  "max_lr": 0.0004,
+  "scheduler": "cosine",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "epochs": 50,
+  "loss": "cross_entropy",
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": true,
+  "loader_divisor": 1.0,
+  "model_kwargs": {
+   "montage_mode": "positional",
+   "target_len": 800
+  },
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   540,
+   540,
+   540,
+   540
+  ],
+  "val": [
+   108,
+   108,
+   108,
+   108
+  ],
+  "test": [
+   648,
+   648,
+   648,
+   648
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

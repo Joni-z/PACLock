@@ -1,0 +1,52 @@
+dataset: isruc
+subset: subgroup_I
+raw_root: /work1/chenyuyou/yifanwang/data/isruc
+out_dir: /tmp/isruc_smoke
+num_classes: 5
+sample_rate: 200
+resample: false
+band:
+- 0.3
+- 35.0
+notch: 50.0
+window_sec: 30.0
+stride_sec: 30.0
+channels:
+- F3-A2
+- C3-A2
+- O1-A2
+- F4-A1
+- C4-A1
+- O2-A1
+label_map:
+  0: 0
+  1: 1
+  2: 2
+  3: 3
+  5: 4
+sequence:
+  enabled: true
+  length: 20
+  drop_tail: true
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+primary_metric: cohen_kappa
+report_metrics:
+- cohen_kappa
+- balanced_acc
+- weighted_f1
+split:
+  mode: subject_id_ranges
+  train:
+  - 2
+  - 20
+  val:
+  - 21
+  - 27
+  test:
+  - 28
+  - 31
+expected:
+  n_samples: null

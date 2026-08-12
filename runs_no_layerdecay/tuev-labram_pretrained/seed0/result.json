@@ -1,0 +1,100 @@
+{
+  "name": "tuev-labram_pretrained",
+  "dataset": "tuev",
+  "model": "labram",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 5.821142,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5065642847235317,
+    "cohen_kappa": 0.4240238902905009,
+    "weighted_f1": 0.7113221459690983
+  },
+  "best_val": 0.5524005965067318,
+  "val_curve": [
+    0.4564460169649388,
+    0.47200863224313794,
+    0.4206088363959667,
+    0.4030722388739034,
+    0.3866615827576986,
+    0.4111609052434366,
+    0.4701138594787242,
+    0.49217196650557304,
+    0.4840151083179939,
+    0.5524005965067318,
+    0.45210716852358823,
+    0.49996298779351145,
+    0.4975801812104327,
+    0.5367968576864877,
+    0.4774987835267981,
+    0.44577670341114595,
+    0.49417749205861283,
+    0.4598250820033659,
+    0.518105790830919,
+    0.47247926070286317
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 9,
+    "n_evals": 20,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "wall_time_sec": 3535.859439611435,
+  "config": {
+    "name": "tuev-labram_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_labram/tuev",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.0,
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      581,
+      7732,
+      5199,
+      916,
+      8264,
+      41758
+    ],
+    "val": [
+      64,
+      3522,
+      985,
+      146,
+      2638,
+      11682
+    ],
+    "test": [
+      249,
+      3430,
+      1864,
+      310,
+      1980,
+      18234
+    ]
+  }
+}

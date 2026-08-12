@@ -1,0 +1,113 @@
+{
+ "name": "tusz-tfm_pretrained",
+ "dataset": "tusz",
+ "model": "tfm",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 1.890854,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.5937968727690959,
+  "pr_auc": 0.3686359693931829,
+  "auroc": 0.8295123807956235
+ },
+ "best_val": 0.22181010711396817,
+ "val_curve": [
+  0.04574111259271316,
+  0.0935077395096927,
+  0.12226688407075034,
+  0.1321982193339982,
+  0.15182079451274555,
+  0.1625011649094776,
+  0.1749857471539052,
+  0.1800183801454978,
+  0.18496400501716975,
+  0.19657748996190766,
+  0.1959299584419147,
+  0.21174169295546308,
+  0.17792678830335215,
+  0.1819677223182423,
+  0.18690784425357998,
+  0.20534919645879984,
+  0.16802958974028295,
+  0.18164670754348652,
+  0.20524156323137197,
+  0.15521646856516472,
+  0.20922831941437267,
+  0.17561281846506308,
+  0.22181010711396817,
+  0.21132655410754242,
+  0.1671408267787792,
+  0.17252087571771554,
+  0.17214776997340805,
+  0.15700036373358472,
+  0.2043818606654651,
+  0.177691528469959,
+  0.17193933788344015,
+  0.2046924249342569,
+  0.20230072013083245,
+  0.19328004143606015,
+  0.19425216853219066
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 22,
+  "n_evals": 35,
+  "best_val": 0.22181010711396817,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 5,
+ "wall_time_sec": 43255.32839298248,
+ "config": {
+  "name": "tusz-tfm_pretrained",
+  "group": "B",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "model": "tfm",
+  "loader": "tfm",
+  "pretrained": true,
+  "tfm_setting": "multiple",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 5,
+  "batch_size": 512,
+  "warmup_epochs": 5,
+  "label_smoothing": 0.1,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 100,
+  "num_classes": 2,
+  "loss": "bce_with_logits",
+  "val_subsample": 20000,
+  "seed": 1
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 22,
+  "n_evals": 35,
+  "reason": "ok"
+ }
+}

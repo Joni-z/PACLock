@@ -1,0 +1,104 @@
+{
+ "name": "sleepedf-tfm_pretrained",
+ "dataset": "sleepedf",
+ "model": "tfm",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 1.891049,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.5621369078148547,
+  "cohen_kappa": 0.612572822271629,
+  "weighted_f1": 0.724510092303972
+ },
+ "best_val": 0.5785840613639063,
+ "val_curve": [
+  0.5098175567334504,
+  0.5431586775891988,
+  0.5416016942395785,
+  0.5334717642470976,
+  0.5404588809847553,
+  0.5629906620038677,
+  0.5568769706182477,
+  0.5785840613639063,
+  0.5668010299119943,
+  0.5561104895275497,
+  0.5729451330360369,
+  0.5624166043013323,
+  0.5576421868628966,
+  0.5510236314336829,
+  0.5452568529666502,
+  0.5591671034689052,
+  0.5527137437880976,
+  0.5682350402206278
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "best_val": 0.5785840613639063,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 18,
+ "wall_time_sec": 8850.79260802269,
+ "config": {
+  "name": "sleepedf-tfm_pretrained",
+  "group": "B",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "model": "tfm",
+  "loader": "tfm",
+  "pretrained": true,
+  "tfm_setting": "multiple",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 50,
+  "batch_size": 512,
+  "warmup_epochs": 5,
+  "label_smoothing": 0.1,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 5,
+  "loss": "cross_entropy",
+  "seed": 1
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "reason": "ok"
+ }
+}

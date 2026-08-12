@@ -1,0 +1,99 @@
+{
+  "name": "physionet_mi-labram_scratch",
+  "dataset": "physionet_mi",
+  "model": "labram",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 5.82074,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.2964661627468097,
+    "cohen_kappa": 0.062048220204534044,
+    "weighted_f1": 0.27865941142239625
+  },
+  "best_val": 0.2966923283743182,
+  "val_curve": [
+    0.2534535605197901,
+    0.24885723864156406,
+    0.25393739222298733,
+    0.27499199800131746,
+    0.2671648313303896,
+    0.27162125054350217,
+    0.2794566992129815,
+    0.28302739987819736,
+    0.2966923283743182,
+    0.2888525497311369,
+    0.29347526435793453,
+    0.27910776194908615,
+    0.28562287573885814,
+    0.26409108332703674,
+    0.274429528470842,
+    0.2774051115444041,
+    0.28958861038790273,
+    0.28954982127377293,
+    0.2768836990335506
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 8,
+    "n_evals": 19,
+    "reason": "ok"
+  },
+  "epochs_run": 19,
+  "wall_time_sec": 328.66603994369507,
+  "config": {
+    "name": "physionet_mi-labram_scratch",
+    "group": "C",
+    "dataset": "physionet_mi",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 4,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 800
+    },
+    "seed": 2
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1593,
+      1557,
+      1581,
+      1569
+    ],
+    "val": [
+      435,
+      432,
+      434,
+      433
+    ],
+    "test": [
+      451,
+      449,
+      450,
+      453
+    ]
+  }
+}

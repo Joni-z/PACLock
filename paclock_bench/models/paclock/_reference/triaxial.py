@@ -1,0 +1,567 @@
+"""v2 tri-axial backbone: positional encodings, axis mixers, block, encoder.
+
+The token grid is (B, C, n_bands, P, D) -- electrode x band x time-patch. Each
+block mixes ONE axis at a time (AGENT.md sec. 13.5):
+
+  time  : RoPE self-attention over P patches         (per electrode+band fiber)
+  space : self-attention over C electrodes           (per band+patch)
+  freq  : directional coupling operator over n_bands  (per electrode+patch)  <-- ours
+
+Factorising the mixing is what keeps compute cheap: instead of one attention
+over all C*n_bands*P tokens, each axis is O(axis_len^2) with the other two axes
+folded into the batch. The frequency axis stays O(n_bands^2), constant in
+sequence length.
+
+Only the FREQUENCY-axis mixer is swapped in the ablation (coupling / attention /
+cotar); time and space are always attention. base.py's "swap only the mixer"
+contract now means "swap only the frequency-axis mixer" (sec. 13.8).
+"""
+
+from __future__ import annotations
+
+import math
+from functools import partial
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+# --------------------------------------------------------------------------- #
+# Positional encodings (AGENT.md sec. 13.4)
+# --------------------------------------------------------------------------- #
+class BandPE(nn.Module):
+    """Encode each band by its (center_freq, bandwidth) in Hz, NOT its index --
+    so a different filter bank at finetune time still lands in the same space.
+
+    `mode` exists so this claim can be ablated (sec. 13.28 Link 5); "hz" is the
+    default, so every config that does not mention band_pe is unchanged.
+      hz    : MLP over (centre freq, bandwidth) -- ours, the physics-aware version
+      index : learned per-band embedding -- the non-physical control. Same
+              parameter budget order, but it cannot transfer across filter banks,
+              which is exactly the property "hz" claims to buy.
+      none  : no band PE at all -- tests whether ANY band identity is needed.
+    """
+
+    def __init__(self, d_model: int, n_bands: int | None = None, mode: str = "hz"):
+        super().__init__()
+        if mode not in ("hz", "index", "none"):
+            raise ValueError(f"band_pe mode must be hz/index/none, got {mode!r}")
+        self.mode = mode
+        self.d_model = d_model
+        if mode == "hz":
+            self.mlp = nn.Sequential(
+                nn.Linear(2, d_model), nn.GELU(), nn.Linear(d_model, d_model)
+            )
+        elif mode == "index":
+            if n_bands is None:
+                raise ValueError("band_pe: index needs n_bands")
+            self.emb = nn.Embedding(n_bands, d_model)
+
+    def forward(self, band_hz: torch.Tensor) -> torch.Tensor:
+        if self.mode == "none":
+            return band_hz.new_zeros(band_hz.shape[0], self.d_model)
+        if self.mode == "index":
+            return self.emb(torch.arange(self.emb.num_embeddings,
+                                         device=band_hz.device))   # (n_bands, D)
+        # normalise Hz to ~O(1) so the MLP sees a stable scale across sample rates
+        return self.mlp(band_hz / 100.0)                        # (n_bands, D)
+
+
+class SpatialPE(nn.Module):
+    """Per-electrode positional encoding (sec. 13.4 / 13.23 A).
+
+    Two modes, chosen at build time:
+      * xyz coords given -> MLP over electrode coordinates (montage-agnostic:
+        "channel 3" means nothing across datasets, geometry is universal). For a
+        bipolar montage a channel is an electrode *pair*, so coords is (C, 6) =
+        concatenated endpoint xyz (models/montage.py).
+      * coords None -> learned index embedding (original behaviour; kept so every
+        existing config that ships no coordinates is bit-for-bit unchanged).
+    """
+
+    def __init__(self, n_channels: int, d_model: int, coords=None):
+        super().__init__()
+        if coords is None:
+            self.emb = nn.Embedding(n_channels, d_model)
+            self.mlp = None
+        else:
+            coords = torch.as_tensor(coords, dtype=torch.float32)
+            self.register_buffer("coords", coords)              # (C, coord_dim)
+            self.mlp = nn.Sequential(
+                nn.Linear(coords.shape[1], d_model), nn.GELU(),
+                nn.Linear(d_model, d_model)
+            )
+            self.emb = None
+
+    def forward(self, C: int, device, coords=None) -> torch.Tensor:
+        if self.mlp is None:
+            return self.emb(torch.arange(C, device=device))     # (C, D)
+        if coords is None:
+            coords = self.coords
+        coords = torch.as_tensor(coords, dtype=torch.float32, device=device)
+        if coords.shape[0] != C:
+            raise ValueError(
+                f"spatial coordinates have {coords.shape[0]} channels, input has {C}"
+            )
+        return self.mlp(coords)                                 # (C, D)
+
+
+def rope(x: torch.Tensor) -> torch.Tensor:
+    """Rotary position embedding over the sequence axis of (..., L, head_dim)."""
+    *_, L, hd = x.shape
+    half = hd // 2
+    freqs = torch.exp(
+        -math.log(10000.0) * torch.arange(0, half, device=x.device).float() / half
+    )
+    pos = torch.arange(L, device=x.device).float()
+    ang = torch.outer(pos, freqs)                               # (L, half)
+    cos, sin = ang.cos(), ang.sin()
+    x1, x2 = x[..., :half], x[..., half:]
+    return torch.cat([x1 * cos - x2 * sin, x1 * sin + x2 * cos], dim=-1)
+
+
+# --------------------------------------------------------------------------- #
+# Axis mixers -- each takes (M, L, D) [L = the axis being mixed] -> (M, L, D)
+# --------------------------------------------------------------------------- #
+class _MHA(nn.Module):
+    """Plain multi-head self-attention over the L axis, optional RoPE."""
+
+    def __init__(self, d_model: int, n_heads: int = 4, use_rope: bool = False):
+        super().__init__()
+        self.h = n_heads
+        self.use_rope = use_rope
+        self.scale = (d_model // n_heads) ** -0.5
+        self.qkv = nn.Linear(d_model, d_model * 3)
+        self.out = nn.Linear(d_model, d_model)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        M, L, D = x.shape
+        hd = D // self.h
+        qkv = self.qkv(x).reshape(M, L, 3, self.h, hd).permute(2, 0, 3, 1, 4)
+        q, k, v = qkv[0], qkv[1], qkv[2]
+        if self.use_rope:
+            q, k = rope(q), rope(k)
+        a = F.softmax((q @ k.transpose(-2, -1)) * self.scale, dim=-1)
+        o = (a @ v).transpose(1, 2).reshape(M, L, D)
+        return self.out(o)
+
+
+class FreqCoupling(nn.Module):
+    """OURS: directional PAC-coupling mixer over the n_bands axis.
+
+    For each (electrode, patch) the band tokens attend to each other with logits
+    = learned cross-band QK  +  pac_scale * coupling[i->j]. `coupling` is the
+    time-resolved MVL matrix for THIS (electrode, patch) (sec. 13.6). Always on:
+    this is the only channel through which bands exchange information -- no
+    attention fallback path (contrast v5, sec. 9.15/9.17).
+    """
+
+    def __init__(self, d_model: int, d_k: int | None = None, **_):
+        super().__init__()
+        self.d_k = d_k or max(d_model // 4, 16)
+        self.q_proj = nn.Linear(d_model, self.d_k, bias=False)
+        self.k_proj = nn.Linear(d_model, self.d_k, bias=False)
+        self.v_proj = nn.Linear(d_model, d_model, bias=False)
+        self.pac_scale = nn.Parameter(torch.ones(1))
+        self.lin_out1 = nn.Linear(2 * d_model, d_model)
+        self.lin_out2 = nn.Linear(d_model, d_model)
+
+    def forward(self, x: torch.Tensor, coupling: torch.Tensor,
+                pac_vector: torch.Tensor | None = None) -> torch.Tensor:
+        # x: (M, nb, D) with M = B*C*P ; coupling: (M, nb, nb) [i, j]
+        q, k, v = self.q_proj(x), self.k_proj(x), self.v_proj(x)
+        logits = torch.bmm(q, k.transpose(1, 2)) / math.sqrt(self.d_k)
+        logits = logits + self.pac_scale * coupling.transpose(1, 2)   # [j, i]
+        w = F.softmax(logits, dim=-1)
+        core = torch.bmm(w, v)
+        out = self.lin_out2(F.gelu(self.lin_out1(torch.cat([x, core], dim=-1))))
+        return out
+
+
+class FreqAttention(nn.Module):
+    """Ablation baseline: plain attention over bands, ignores coupling."""
+
+    def __init__(self, d_model: int, n_heads: int = 4, **_):
+        super().__init__()
+        self.mha = _MHA(d_model, n_heads)
+
+    def forward(self, x, coupling=None, pac_vector=None):
+        return self.mha(x)
+
+
+class FreqCoTAR(nn.Module):
+    """Ablation baseline: CoTAR aggregate-redistribute over bands."""
+
+    def __init__(self, d_model: int, d_core: int | None = None, **_):
+        super().__init__()
+        d_core = d_core or d_model // 4
+        self.lin1 = nn.Linear(d_model, d_model)
+        self.lin2 = nn.Linear(d_model, d_core)
+        self.lin3 = nn.Linear(d_model + d_core, d_model)
+        self.lin4 = nn.Linear(d_model, d_model)
+
+    def forward(self, x, coupling=None, pac_vector=None):
+        B, N, D = x.shape
+        core = self.lin2(F.gelu(self.lin1(x)))
+        core = torch.sum(core * F.softmax(core, dim=1), dim=1, keepdim=True).repeat(1, N, 1)
+        return self.lin4(F.gelu(self.lin3(torch.cat([x, core], dim=-1))))
+
+
+class FreqCoherenceGate(nn.Module):
+    """OURS (new primitive): multiplicative coherence gate on plain band attention.
+
+    Motivation — the communication-through-coherence hypothesis (Fries): bands
+    should exchange information preferentially when they are phase-coupled. Unlike
+    FreqCoupling, which ADDS `pac_scale * coupling` into the attention logits (a
+    bias the model learned to zero out -> pac_scale->0, AGENT.md 9.17), this
+    MULTIPLIES the softmax attention probabilities by a coupling-derived gate and
+    renormalises. A multiplicative gate can *veto* a high-QK-similarity band pair
+    that is not coupled -- something an additive logit bias cannot do once the QK
+    term dominates.
+
+    Graceful degradation: gate_w initialised to 0 makes the gate uniform, which
+    cancels under renormalisation -> at init this is EXACTLY plain attention, so
+    the model never starts worse than the FreqAttention baseline and can only
+    switch coherence-gating on if it helps. `last_gate` is logged by train.py.
+    """
+
+    def __init__(self, d_model: int, n_heads: int = 4, **_):
+        super().__init__()
+        self.h = n_heads
+        self.scale = (d_model // n_heads) ** -0.5
+        self.qkv = nn.Linear(d_model, d_model * 3)
+        self.out = nn.Linear(d_model, d_model)
+        self.gate_w = nn.Parameter(torch.zeros(1))   # 0 -> uniform gate -> plain attn
+        self.gate_b = nn.Parameter(torch.zeros(1))
+        self.last_gate = 0.0
+
+    def forward(self, x: torch.Tensor, coupling: torch.Tensor | None = None,
+                pac_vector: torch.Tensor | None = None) -> torch.Tensor:
+        M, L, D = x.shape
+        hd = D // self.h
+        qkv = self.qkv(x).reshape(M, L, 3, self.h, hd).permute(2, 0, 3, 1, 4)
+        q, k, v = qkv[0], qkv[1], qkv[2]
+        w = F.softmax((q @ k.transpose(-2, -1)) * self.scale, dim=-1)   # (M, h, L, L)
+        if coupling is not None:
+            # coupling[.., i, j] = band i (phase) drives band j (amplitude); align
+            # to attention's [query j, key i] by transposing, broadcast over heads.
+            c = coupling.transpose(1, 2).unsqueeze(1)                   # (M, 1, L, L)
+            g = torch.sigmoid(self.gate_w * c + self.gate_b)            # (M, 1, L, L)
+            w = w * g
+            w = w / (w.sum(dim=-1, keepdim=True) + 1e-8)
+            self.last_gate = float(g.mean().item())
+        o = (w @ v).transpose(1, 2).reshape(M, L, D)
+        return self.out(o)
+
+
+class FreqPhaseSteered(nn.Module):
+    """Parameter-free, directional cross-band communication through complex PAC.
+
+    ``pac_vector[i, j] = mean_t A_j(t) exp(i phi_i(t))`` retains both the
+    coupling magnitude and its preferred physical phase.  For every target
+    band j, messages may arrive only from slower bands i < j.  Each source
+    token is rotated in paired feature planes by angle(pac_vector[i, j]) before
+    magnitude-normalised aggregation.
+
+    There is deliberately no QK path, learned PAC scale, gate, or value/output
+    projection in this mixer.  Consequently the only way information crosses
+    the frequency axis is the measured phase-amplitude geometry itself.  The
+    surrounding block still supplies the ordinary within-token residual and
+    FFN; those cannot create cross-band communication.
+    """
+
+    def __init__(self, d_model: int, **_):
+        super().__init__()
+        if d_model % 2:
+            raise ValueError("FreqPhaseSteered requires an even d_model")
+
+    def forward(self, x: torch.Tensor, coupling: torch.Tensor | None = None,
+                pac_vector: torch.Tensor | None = None) -> torch.Tensor:
+        if pac_vector is None:
+            raise ValueError("FreqPhaseSteered requires the complex pac_vector")
+
+        M, nb, D = x.shape
+        if pac_vector.shape != (M, nb, nb):
+            raise ValueError(
+                f"pac_vector shape {tuple(pac_vector.shape)} != {(M, nb, nb)}"
+            )
+
+        # Convert [source phase i, target amplitude j] to [target j, source i].
+        z = pac_vector.transpose(1, 2)
+        valid = torch.tril(
+            torch.ones(nb, nb, dtype=torch.bool, device=x.device), diagonal=-1
+        )  # row=target j, col=source i; only i < j
+        z = z * valid
+
+        mag = z.abs()
+        denom = mag.sum(dim=-1, keepdim=True).clamp_min(1e-8)
+        weight = mag / denom
+        unit = z / mag.clamp_min(1e-8)
+        c, s = unit.real, unit.imag
+
+        # Adjacent feature pairs form 2-D planes.  Complex batched matrix
+        # multiplication performs the per-edge rotation and source aggregation
+        # without materialising an (M, target, source, D/2) tensor.  That tensor
+        # was the dominant cost on 16-electrode TUSZ/CHB-MIT batches.
+        value = torch.view_as_complex(x.reshape(M, nb, D // 2, 2).contiguous())
+        coeff = weight * torch.complex(c, s)               # (M, target, source)
+        out = torch.bmm(coeff, value)                       # (M, target, D/2), complex
+        return torch.view_as_real(out).reshape(M, nb, D)
+
+
+def _mi_prepare(coupling: torch.Tensor, shuffle: bool) -> torch.Tensor:
+    """(M, nb, nb) [i drives j] -> (M, nb, nb) [target j, source i], non-negative.
+
+    `coupling` is |MVL| (frontend/triaxial.py::patch_coupling takes `.abs()`), so it
+    is >= 0 by construction -- which is what makes a multiplicative / top-k use of it
+    well defined. Do NOT use it as an additive logit bias here; that is FreqCoupling,
+    and its `pac_scale` collapsed to 0 (AGENT.md sec. 13.20).
+
+    `shuffle` is the CONTROL arm. It randomly permutes the entries WITHIN each
+    matrix, preserving the exact multiset of values (so sparsity and spread are
+    matched cell-for-cell) while destroying which band pair carries which value. If
+    a mixer's win survives this, the win is about the *shape* of the modulation, not
+    about phase-amplitude coupling -- which is exactly what the phase-steered
+    `scramble` control found (sec. 13.12), so it is measured from day one, not after.
+
+    A FRESH permutation every forward is deliberate: a permutation fixed for the run
+    is invertible, so the model could learn to undo it and recover the true pairing,
+    which would silently turn the control into a second copy of the treatment.
+    """
+    c = coupling.transpose(1, 2)                                   # [target j, source i]
+    if shuffle:
+        M, L, _ = c.shape
+        perm = torch.rand(M, L * L, device=c.device).argsort(dim=-1)
+        c = c.reshape(M, L * L).gather(-1, perm).reshape(M, L, L)
+    return c
+
+
+class FreqMIProduct(nn.Module):
+    """OURS: MI coupling modulates attention MULTIPLICATIVELY, with NO learnable knob.
+
+    ``w = softmax(QK) * mi ; w /= w.sum()`` -- a product of experts over the band
+    axis: an edge is strong only if the task-learned similarity AND the measured
+    coupling both support it. Either one can veto.
+
+    Why multiplicative and why on the PROBABILITIES, not the logits: QK logits are
+    signed, and multiplying a *negative* logit by a large coupling makes that pair
+    *less* attended -- i.e. strong coupling would suppress the very edge it should
+    promote. Post-softmax weights are non-negative, so the product is monotone in
+    coupling, which is the intended semantics.
+
+    Why no learnable scale -- this is the whole point of the design. Every previous
+    attempt put the prior next to a free QK path behind a learnable knob, and the
+    optimiser turned the knob off: FreqCoupling's `pac_scale` decayed monotonically
+    to 0 (sec. 13.20), and FreqCoherenceGate's `gate_w` never left its 0 init at all
+    (mean gate = 0.5000 on every layer of every dataset -> a uniform gate, which
+    cancels under renormalisation, so those five runs were plain attention wearing a
+    coupling costume). Here the prior's strength is fixed by construction: the row is
+    normalised to mean 1, so the modulation is invariant to coupling's absolute scale
+    and there is no parameter that can flatten it.
+
+    Degenerate rows (a flat/dead electrode gives an all-zero coupling row) fall back
+    to a uniform row = plain attention, rather than propagating 0/0. Dead channels in
+    16-channel clinical montages are the exact failure that produced NaN across a
+    whole batch in sec. 9.10; this is that lesson applied to the new normalisation.
+    """
+
+    def __init__(self, d_model: int, n_heads: int = 4, mi_shuffle: bool = False, **_):
+        super().__init__()
+        self.h = n_heads
+        self.scale = (d_model // n_heads) ** -0.5
+        self.qkv = nn.Linear(d_model, d_model * 3)
+        self.out = nn.Linear(d_model, d_model)
+        self.mi_shuffle = mi_shuffle
+        # Diagnostic, logged by train.py. This is the number whose being pinned at a
+        # constant is what exposed the FreqCoherenceGate no-op: if the modulation is
+        # doing nothing, mi_spread sits at 0.
+        self.last_mi_spread = 0.0
+
+    def forward(self, x: torch.Tensor, coupling: torch.Tensor | None = None,
+                pac_vector: torch.Tensor | None = None) -> torch.Tensor:
+        if coupling is None:
+            raise ValueError("FreqMIProduct requires the coupling matrix")
+        M, L, D = x.shape
+        hd = D // self.h
+        qkv = self.qkv(x).reshape(M, L, 3, self.h, hd).permute(2, 0, 3, 1, 4)
+        q, k, v = qkv[0], qkv[1], qkv[2]
+        w = F.softmax((q @ k.transpose(-2, -1)) * self.scale, dim=-1)   # (M, h, L, L)
+
+        c = _mi_prepare(coupling, self.mi_shuffle)                      # (M, L, L) >= 0
+        m = c.mean(dim=-1, keepdim=True)
+        # mean-1 rows: scale-invariant in coupling, so no temperature hyper-parameter.
+        c = torch.where(m > 1e-8, c / m.clamp_min(1e-8), torch.ones_like(c))
+        self.last_mi_spread = float((c.std(dim=-1).mean()).item())
+
+        w = w * c.unsqueeze(1)
+        w = w / w.sum(dim=-1, keepdim=True).clamp_min(1e-8)
+        o = (w @ v).transpose(1, 2).reshape(M, L, D)
+        return self.out(o)
+
+
+class FreqMITopology(nn.Module):
+    """OURS: MI coupling decides the attention TOPOLOGY, not a weight on it.
+
+    For each target band j, only the `mi_k` source bands with the strongest measured
+    coupling into j may be attended at all; every other logit is -inf, so softmax
+    gives them exactly zero. QK still learns freely -- but only inside the set the
+    physics allows.
+
+    This is the strictly harder version of FreqMIProduct, and the difference is a
+    real one: a *multiplicative* prior can be overridden by a sufficiently confident
+    QK (a near-one-hot softmax times anything, renormalised, is still that one-hot),
+    whereas -inf cannot be out-voted by confidence. Running both answers whether the
+    escape hatch matters.
+
+    It also lands in the one category sec. 13.23 identified as safe from being
+    optimised away -- "which tokens may attend to which" is structure, not an
+    optional term beside a free path, so there is no knob to turn off. The closest
+    thing already tried, FreqPhaseSteered, also uses a hard non-learnable mask
+    (strict lower triangular) and is the only mixer in the project that beat every
+    other on TUAB and TUEV under plain supervised training (sec. 13.12). The
+    difference here: that mask is fixed for every sample, this one is recomputed per
+    (electrode, patch) from that segment's own coupling.
+
+    No self-edge is forced. topk always returns `mi_k` distinct sources, so no row can
+    be fully masked (which would make softmax NaN), and the token's own content
+    already survives through the block's `x = x + freq(...)` residual.
+
+    Deliberate limitation: topk is discrete, so no gradient reaches `coupling` or the
+    sinc cutoffs through this path. The frontend still gets gradient via the token
+    path. Recorded here because it is a property of the design, not an oversight.
+    """
+
+    def __init__(self, d_model: int, n_heads: int = 4, mi_k: int = 3,
+                 mi_shuffle: bool = False, **_):
+        super().__init__()
+        if mi_k < 1:
+            raise ValueError(f"mi_k must be >= 1, got {mi_k}")
+        self.h = n_heads
+        self.scale = (d_model // n_heads) ** -0.5
+        self.qkv = nn.Linear(d_model, d_model * 3)
+        self.out = nn.Linear(d_model, d_model)
+        self.mi_k = mi_k
+        self.mi_shuffle = mi_shuffle
+        self.last_kept_frac = 0.0
+
+    def forward(self, x: torch.Tensor, coupling: torch.Tensor | None = None,
+                pac_vector: torch.Tensor | None = None) -> torch.Tensor:
+        if coupling is None:
+            raise ValueError("FreqMITopology requires the coupling matrix")
+        M, L, D = x.shape
+        hd = D // self.h
+        qkv = self.qkv(x).reshape(M, L, 3, self.h, hd).permute(2, 0, 3, 1, 4)
+        q, k, v = qkv[0], qkv[1], qkv[2]
+        logits = (q @ k.transpose(-2, -1)) * self.scale                 # (M, h, L, L)
+
+        c = _mi_prepare(coupling, self.mi_shuffle)                      # (M, L, L)
+        kk = min(self.mi_k, L)
+        idx = c.topk(kk, dim=-1).indices                                # (M, L, kk)
+        keep = torch.zeros_like(c, dtype=torch.bool).scatter_(-1, idx, True)
+        self.last_kept_frac = float(keep.float().mean().item())
+
+        logits = logits.masked_fill(~keep.unsqueeze(1), float("-inf"))
+        w = F.softmax(logits, dim=-1)
+        o = (w @ v).transpose(1, 2).reshape(M, L, D)
+        return self.out(o)
+
+
+class FreqNone(nn.Module):
+    """Ablation baseline: NO frequency axis -- band tokens never communicate.
+
+    This is the honest 2-axis control (space + time only), i.e. the CBraMod-style
+    criss-cross backbone our tri-axial design claims to improve on (AGENT.md
+    sec. 13.23). It returns exactly zero so the block's `x = x + freq(...)`
+    residual is a no-op; the band dimension survives as a batch dimension only.
+
+    It doubles as a MECHANISM probe for the cf_mixed objective: with no cross-band
+    path, a masked HIGH band can never see the visible LOW bands, so crossfreq
+    reconstruction is unsolvable by construction. If cf_mixed's advantage over
+    random MAE disappears here, that advantage is *caused* by cross-frequency
+    communication rather than by the mask happening to be harder.
+
+    Carries no parameters, so the comparison is not parameter-matched -- that is
+    deliberate: the question is whether the axis buys anything, and it must beat
+    the free option of not existing.
+    """
+
+    def __init__(self, d_model: int, **_):
+        super().__init__()
+
+    def forward(self, x, coupling=None, pac_vector=None):
+        return torch.zeros_like(x)
+
+
+FREQ_MIXERS = {
+    "none": FreqNone,
+    "coupling": FreqCoupling,
+    "attention": FreqAttention,
+    "cotar": FreqCoTAR,
+    "coherence": FreqCoherenceGate,
+    "phase": FreqPhaseSteered,
+    # MI-guided mixers + their matched shuffle controls. The control is the SAME
+    # class with one flag flipped, so the two arms cannot drift apart in any other
+    # respect -- the failure mode that makes a control useless.
+    "mi_product": FreqMIProduct,
+    "mi_product_shuffle": partial(FreqMIProduct, mi_shuffle=True),
+    "mi_topk": FreqMITopology,
+    "mi_topk_shuffle": partial(FreqMITopology, mi_shuffle=True),
+}
+
+
+# --------------------------------------------------------------------------- #
+# Tri-axial block + encoder
+# --------------------------------------------------------------------------- #
+class TriAxialBlock(nn.Module):
+    """Pre-norm, one sub-layer per axis, then an FFN. Grid in, grid out."""
+
+    def __init__(self, d_model, freq_mixer="coupling", n_heads=4, dropout=0.1, **mk):
+        super().__init__()
+        self.n_time = nn.LayerNorm(d_model)
+        self.time = _MHA(d_model, n_heads, use_rope=True)
+        self.n_space = nn.LayerNorm(d_model)
+        self.space = _MHA(d_model, n_heads)
+        self.n_freq = nn.LayerNorm(d_model)
+        self.freq = FREQ_MIXERS[freq_mixer](d_model, n_heads=n_heads, **mk)
+        self.n_ffn = nn.LayerNorm(d_model)
+        self.ffn = nn.Sequential(
+            nn.Linear(d_model, 2 * d_model), nn.GELU(), nn.Dropout(dropout),
+            nn.Linear(2 * d_model, d_model), nn.Dropout(dropout),
+        )
+
+    def forward(self, x, coupling, pac_vector=None):
+        # x: (B, C, nb, P, D) ; coupling: (B, C, P, nb, nb)
+        B, C, nb, P, D = x.shape
+
+        # time: mix over P, per (B, C, nb)
+        h = self.n_time(x).reshape(B * C * nb, P, D)
+        x = x + self.time(h).reshape(B, C, nb, P, D)
+
+        # space: mix over C, per (B, nb, P)
+        h = self.n_space(x).permute(0, 2, 3, 1, 4).reshape(B * nb * P, C, D)
+        h = self.space(h).reshape(B, nb, P, C, D).permute(0, 3, 1, 2, 4)
+        x = x + h
+
+        # freq: mix over nb, per (B, C, P), using this (C,P)'s coupling matrix
+        h = self.n_freq(x).permute(0, 1, 3, 2, 4).reshape(B * C * P, nb, D)
+        cpl = coupling.reshape(B * C * P, nb, nb)
+        pac = None if pac_vector is None else pac_vector.reshape(B * C * P, nb, nb)
+        h = self.freq(h, cpl, pac).reshape(B, C, P, nb, D).permute(0, 1, 3, 2, 4)
+        x = x + h
+
+        x = x + self.ffn(self.n_ffn(x))
+        return x
+
+
+class TriAxialEncoder(nn.Module):
+    def __init__(self, depth, d_model, freq_mixer="coupling", n_heads=4, dropout=0.1, **mk):
+        super().__init__()
+        self.blocks = nn.ModuleList([
+            TriAxialBlock(d_model, freq_mixer, n_heads, dropout, **mk) for _ in range(depth)
+        ])
+
+    def forward(self, x, coupling, pac_vector=None):
+        for blk in self.blocks:
+            x = blk(x, coupling, pac_vector)
+        return x

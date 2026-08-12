@@ -1,0 +1,123 @@
+{
+ "name": "sleepedf-contrawr",
+ "dataset": "sleepedf",
+ "model": "contrawr",
+ "group": "A",
+ "seed": 1,
+ "n_params_M": 1.564261,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6945923748765703,
+  "cohen_kappa": 0.6964014775585821,
+  "weighted_f1": 0.7896070244693734
+ },
+ "best_val": 0.6690499230970175,
+ "val_curve": [
+  0.612737650108863,
+  0.6403851583604923,
+  0.6535036665041463,
+  0.6368360079439679,
+  0.6644128717382316,
+  0.6563367559912571,
+  0.654462351266771,
+  0.6308701432649739,
+  0.6578453944900182,
+  0.6551766805772312,
+  0.6656013239490091,
+  0.6572477008853985,
+  0.6533402671918667,
+  0.6669273310925339,
+  0.6652669425440594,
+  0.6587653912459033,
+  0.6542463025790409,
+  0.6607391828878018,
+  0.6506545117174101,
+  0.6567721597308359,
+  0.6690499230970175,
+  0.6486207302216676,
+  0.6545719156941214,
+  0.6522664098963932,
+  0.6471824894045114,
+  0.6562201394306244,
+  0.6515153948111203,
+  0.6508494903019151,
+  0.6525336031611358,
+  0.6606669814235531,
+  0.6575907507129068,
+  0.6623847057354577,
+  0.6579677365696524,
+  0.6546213251501767,
+  0.6551571436137538,
+  0.6548660406945881
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 20,
+  "n_evals": 36,
+  "best_val": 0.6690499230970175,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 36,
+ "wall_time_sec": 1595.340209722519,
+ "config": {
+  "name": "sleepedf-contrawr",
+  "group": "A",
+  "model": "contrawr",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 60,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 1,
+  "device": "cuda",
+  "label_smoothing": 0.1,
+  "model_kwargs": {
+   "token_size": 100,
+   "steps": 8
+  }
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 20,
+  "n_evals": 36,
+  "reason": "ok"
+ }
+}

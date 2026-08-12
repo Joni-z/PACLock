@@ -1,0 +1,107 @@
+{
+ "name": "physionet_mi-cbramod_scratch",
+ "dataset": "physionet_mi",
+ "model": "cbramod",
+ "group": "C",
+ "seed": 0,
+ "n_params_M": 46.005604,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.5047315109880119,
+  "cohen_kappa": 0.33958536199200806,
+  "weighted_f1": 0.5063287655558106
+ },
+ "best_val": 0.48899414326924556,
+ "val_curve": [
+  0.37944861481142494,
+  0.4355281752552617,
+  0.44814602427778283,
+  0.4515472956715568,
+  0.45214875633063056,
+  0.44915036753958526,
+  0.45902692308157583,
+  0.4624656901616867,
+  0.4584562381969352,
+  0.47342401899599307,
+  0.48899414326924556,
+  0.47057163735142793,
+  0.48089645441908635,
+  0.4745493447133164,
+  0.4780308486423602,
+  0.47514545351809845,
+  0.47865884914338314,
+  0.4677033892883169,
+  0.46194574879698935,
+  0.47463587282816433,
+  0.48095767516713644
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 21,
+  "best_val": 0.48899414326924556,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 21,
+ "wall_time_sec": 285.83452796936035,
+ "config": {
+  "name": "physionet_mi-cbramod_scratch",
+  "group": "C",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 4,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 0
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.796908+00:00",
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 21,
+  "reason": "ok"
+ }
+}

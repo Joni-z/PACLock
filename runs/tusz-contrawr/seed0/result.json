@@ -1,0 +1,101 @@
+{
+ "name": "tusz-contrawr",
+ "dataset": "tusz",
+ "model": "contrawr",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 1.571554,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.5649261517794617,
+  "pr_auc": 0.5188196798572317,
+  "auroc": 0.8908331336777253
+ },
+ "best_val": 0.35009031513378996,
+ "val_curve": [
+  0.207620399880501,
+  0.22300497758343726,
+  0.2728084143076093,
+  0.19339344549447385,
+  0.31222176390750206,
+  0.2985119935407514,
+  0.3048246839214527,
+  0.21273913581003892,
+  0.3176996439593797,
+  0.3107850422197052,
+  0.33396841458164284,
+  0.24822176643777905,
+  0.2991088175627764,
+  0.34089744006559564,
+  0.28606792627486566,
+  0.29422727397240805,
+  0.29383978459449667,
+  0.35009031513378996,
+  0.2598410623135224,
+  0.3228526644369645,
+  0.2988336614955259,
+  0.29685896874670875,
+  0.30698119611947344,
+  0.3375147349143414,
+  0.34139827419363594,
+  0.3024288252245778,
+  0.3280760074691311,
+  0.27431265542505967
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 17,
+  "n_evals": 28,
+  "best_val": 0.35009031513378996,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 7,
+ "wall_time_sec": 1700.5949938297272,
+ "config": {
+  "name": "tusz-contrawr",
+  "group": "A",
+  "model": "contrawr",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 0,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 17,
+  "n_evals": 28,
+  "reason": "ok"
+ }
+}

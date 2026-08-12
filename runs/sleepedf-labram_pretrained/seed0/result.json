@@ -1,0 +1,106 @@
+{
+  "name": "sleepedf-labram_pretrained",
+  "dataset": "sleepedf",
+  "model": "labram",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 5.820941,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6216522203754994,
+    "cohen_kappa": 0.608150166860018,
+    "weighted_f1": 0.7257905291825629
+  },
+  "best_val": 0.6201884267815567,
+  "val_curve": [
+    0.5831993556640098,
+    0.6061928372207843,
+    0.6059234528240233,
+    0.6033122938938504,
+    0.6097664431494589,
+    0.6172051592225786,
+    0.6043845494086171,
+    0.6112052524371089,
+    0.6201884267815567,
+    0.6072740375978839,
+    0.6039024976379048,
+    0.6128145695157108,
+    0.5778909088330952,
+    0.5996012936399308,
+    0.6041395720353031,
+    0.5965427943758161,
+    0.5933287073477631,
+    0.5805659359627275,
+    0.5736364547988009
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 8,
+    "n_evals": 19,
+    "best_val": 0.6201884267815567,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 19,
+  "stopped_by": "patience",
+  "wall_time_sec": 2439.6769399642944,
+  "config": {
+    "name": "sleepedf-labram_pretrained",
+    "group": "B",
+    "dataset": "sleepedf",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 5,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 3000
+    },
+    "seed": 0,
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34213,
+      11896,
+      47572,
+      10575,
+      18174
+    ],
+    "val": [
+      14158,
+      4849,
+      10838,
+      1647,
+      4150
+    ],
+    "test": [
+      17570,
+      4777,
+      10722,
+      817,
+      3511
+    ]
+  }
+}

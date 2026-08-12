@@ -1,0 +1,80 @@
+{
+  "name": "tusz-eegpt_pretrained",
+  "dataset": "tusz",
+  "model": "eegpt",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 25.685829,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5265052798210977,
+    "pr_auc": 0.5133441814166844,
+    "auroc": 0.876178500840583
+  },
+  "best_val": 0.2718889527924769,
+  "val_curve": [
+    0.24075814818941677,
+    0.23291841841218153,
+    0.2718889527924769,
+    0.22612611456466916,
+    0.13052235445036542,
+    0.24547530094533213,
+    0.19796548872429237,
+    0.20293734186477727,
+    0.2067527947501539,
+    0.18182895044014263,
+    0.2065265400501039,
+    0.2510226633088072,
+    0.1869254129629961
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 13,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "wall_time_sec": 33968.906614780426,
+  "config": {
+    "name": "tusz-eegpt_pretrained",
+    "group": "B",
+    "dataset": "tusz",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": true,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "epochs": 40,
+    "seed": 2
+  },
+  "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+  "class_counts": {
+    "train": [
+      313196,
+      13472
+    ],
+    "val": [
+      153259,
+      3136
+    ],
+    "test": [
+      43364,
+      2727
+    ]
+  }
+}

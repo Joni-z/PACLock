@@ -1,0 +1,96 @@
+{
+ "name": "chbmit-biot_prest16",
+ "dataset": "chbmit",
+ "model": "biot",
+ "group": "B",
+ "seed": 2,
+ "n_params_M": 3.186706,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.6047802370001439,
+  "pr_auc": 0.6099917569028449,
+  "auroc": 0.871751200670851
+ },
+ "best_val": 0.6403554617286299,
+ "val_curve": [
+  0.3645982405954846,
+  0.17218942951466457,
+  0.48669158360422543,
+  0.3563317791378978,
+  0.6123369169511941,
+  0.3594344632892409,
+  0.5479372750238707,
+  0.4834372045880408,
+  0.5741299797481009,
+  0.6403554617286299,
+  0.5901022798738939,
+  0.5325769970555553,
+  0.5176265476291317,
+  0.4764069674146994,
+  0.519977323593201
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 15,
+  "best_val": 0.6403554617286299,
+  "chance": 0.0070808157099697885,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 15,
+ "wall_time_sec": 1989.1220269203186,
+ "config": {
+  "name": "chbmit-biot_prest16",
+  "group": "B",
+  "dataset": "chbmit",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit",
+  "checkpoint": "prest16",
+  "model": "biot",
+  "loader": "biot",
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 100,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 5,
+  "num_workers": 16,
+  "device": "cuda",
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100
+  },
+  "num_classes": 2,
+  "sample_rate": 200,
+  "batch_size": 512,
+  "loss": "focal",
+  "focal_alpha": 0.25,
+  "focal_gamma": 2.0,
+  "eval_every_steps": 0,
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   313322,
+   2883
+  ],
+  "val": [
+   21034,
+   150
+  ],
+  "test": [
+   17110,
+   276
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 15,
+  "reason": "ok"
+ }
+}

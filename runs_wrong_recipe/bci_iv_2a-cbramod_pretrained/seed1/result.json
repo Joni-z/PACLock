@@ -1,0 +1,105 @@
+{
+ "name": "bci_iv_2a-cbramod_pretrained",
+ "dataset": "bci_iv_2a",
+ "model": "cbramod",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 19.125604,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.5358796296296297,
+  "cohen_kappa": 0.38117283950617287,
+  "weighted_f1": 0.5360429341670597
+ },
+ "best_val": 0.5208333333333333,
+ "val_curve": [
+  0.3310185185185185,
+  0.34953703703703703,
+  0.4375,
+  0.4537037037037037,
+  0.5023148148148149,
+  0.48842592592592593,
+  0.49768518518518523,
+  0.5046296296296297,
+  0.5208333333333333,
+  0.5069444444444444,
+  0.4837962962962963,
+  0.5185185185185185,
+  0.4930555555555555,
+  0.49537037037037035,
+  0.4907407407407408,
+  0.49768518518518523,
+  0.5162037037037037,
+  0.48148148148148145,
+  0.5092592592592592
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 19,
+  "best_val": 0.5208333333333333,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 19,
+ "wall_time_sec": 61.96536159515381,
+ "config": {
+  "name": "bci_iv_2a-cbramod_pretrained",
+  "group": "B",
+  "dataset": "bci_iv_2a",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 4,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 1
+ },
+ "data_manifest_created": "2026-08-04T10:52:01.822097+00:00",
+ "class_counts": {
+  "train": [
+   540,
+   540,
+   540,
+   540
+  ],
+  "val": [
+   108,
+   108,
+   108,
+   108
+  ],
+  "test": [
+   648,
+   648,
+   648,
+   648
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 19,
+  "reason": "ok"
+ }
+}

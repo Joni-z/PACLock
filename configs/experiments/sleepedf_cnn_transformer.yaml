@@ -1,0 +1,24 @@
+name: sleepedf-cnn_transformer
+group: A
+model: cnn_transformer
+dataset: sleepedf
+data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf
+num_classes: 5
+sample_rate: 100
+loss: cross_entropy
+batch_size: 512
+num_workers: 16
+epochs: 60
+optimizer: adam
+lr: 0.001
+weight_decay: 1.0e-05
+scheduler: null
+grad_clip: null
+patience: 15
+eval_every_steps: 0
+seed: 0
+device: cuda
+label_smoothing: 0.1
+model_kwargs:
+  token_size: 100
+  steps: 8

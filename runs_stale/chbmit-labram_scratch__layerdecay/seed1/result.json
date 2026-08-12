@@ -1,0 +1,87 @@
+{
+  "name": "chbmit-labram_scratch",
+  "dataset": "chbmit",
+  "model": "labram",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 5.820338,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5650712779203618,
+    "pr_auc": 0.4458707389706659,
+    "auroc": 0.8779375142937006
+  },
+  "best_val": 0.15346134031445305,
+  "val_curve": [
+    0.031000803038652176,
+    0.10617105136757356,
+    0.15346134031445305,
+    0.08963569198148141,
+    0.11765884583242799,
+    0.06094186514724581,
+    0.07053136062276025,
+    0.05590834381316649,
+    0.03842281785209367,
+    0.03182693968647645,
+    0.05454303017632277,
+    0.03461081227968111,
+    0.04449228269965838
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 13,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "wall_time_sec": 6401.638579130173,
+  "config": {
+    "name": "chbmit-labram_scratch",
+    "group": "C",
+    "dataset": "chbmit",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "seed": 1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}

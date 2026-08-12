@@ -1,0 +1,102 @@
+{
+ "name": "sleepedf-cbramod_pac",
+ "dataset": "sleepedf",
+ "model": "cbramod",
+ "group": "D",
+ "seed": 0,
+ "n_params_M": 9.845805,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6991689890556178,
+  "cohen_kappa": 0.6677750737853159,
+  "weighted_f1": 0.76741685577017
+ },
+ "best_val": 0.6528818547487649,
+ "val_curve": [
+  0.618693939130244,
+  0.6528818547487649,
+  0.642669436888416,
+  0.6490259297997885,
+  0.6409470813131057,
+  0.6501489923905455,
+  0.6491240246083383,
+  0.6502393470027834,
+  0.6386284003551288,
+  0.6353799528323155,
+  0.6279046019871892,
+  0.6329659191898007
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 1,
+  "n_evals": 12,
+  "best_val": 0.6528818547487649,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 12,
+ "wall_time_sec": 1442.5129852294922,
+ "config": {
+  "name": "sleepedf-cbramod_pac",
+  "group": "D",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_pac/sleepedf",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 0,
+  "_pac_note": "PAC-methodology protocol: 0.5 Hz high-pass, no notch. Identical to the frozen config in every other respect."
+ },
+ "data_manifest_created": "2026-08-09T16:33:32.212579+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 1,
+  "n_evals": 12,
+  "reason": "ok"
+ }
+}

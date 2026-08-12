@@ -1,0 +1,109 @@
+{
+ "name": "sleepedf-contrawr",
+ "dataset": "sleepedf",
+ "model": "contrawr",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 1.564261,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.711862165830709,
+  "cohen_kappa": 0.6751813254017051,
+  "weighted_f1": 0.7734419191406611
+ },
+ "best_val": 0.6713181120309952,
+ "val_curve": [
+  0.5876433096734133,
+  0.6230381940178722,
+  0.6630417419208368,
+  0.6626038029440805,
+  0.663623727916024,
+  0.6606939945148897,
+  0.6713181120309952,
+  0.6511732099850465,
+  0.6530055278425871,
+  0.6579938379344432,
+  0.6692693834031289,
+  0.6674383314363883,
+  0.6638389369368659,
+  0.6554721753668868,
+  0.65029914409277,
+  0.6653354405788601,
+  0.663259159135817,
+  0.641531981499197,
+  0.6476710880939963,
+  0.64370263816073,
+  0.6525316534762355,
+  0.6513268564059069
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 22,
+  "best_val": 0.6713181120309952,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 22,
+ "wall_time_sec": 982.9073820114136,
+ "config": {
+  "name": "sleepedf-contrawr",
+  "group": "A",
+  "model": "contrawr",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 60,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 0,
+  "device": "cuda",
+  "label_smoothing": 0.1,
+  "model_kwargs": {
+   "token_size": 100,
+   "steps": 8
+  }
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 22,
+  "reason": "ok"
+ }
+}

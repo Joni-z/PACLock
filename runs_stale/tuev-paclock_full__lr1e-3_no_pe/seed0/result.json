@@ -1,0 +1,117 @@
+{
+ "name": "tuev-paclock_full",
+ "dataset": "tuev",
+ "model": "paclock",
+ "group": "C",
+ "seed": 0,
+ "n_params_M": 1.636246,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.46360159941309814,
+  "cohen_kappa": 0.6205569801516058,
+  "weighted_f1": 0.794869486496457
+ },
+ "best_val": 0.5507047538505732,
+ "val_curve": [
+  0.5507047538505732,
+  0.3945323238553944,
+  0.418880200840275,
+  0.445153605553805,
+  0.4306500044284679,
+  0.40615384287106737,
+  0.34493277365322716,
+  0.3953752235466024,
+  0.5199425738810588,
+  0.3675585831579693,
+  0.40300244083569403,
+  0.38717937560789584,
+  0.3743167374610027,
+  0.42088998182555937,
+  0.4516162956332417,
+  0.3448952227313711
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "peaked-first-eval",
+  "peak_index": 0,
+  "n_evals": 16,
+  "best_val": 0.5507047538505732,
+  "chance": 0.0,
+  "reason": "val peaked at the first evaluation, but reached 0.5507 vs chance 0.0000 -- converged early, not untrained",
+  "rule_version": 2
+ },
+ "epochs_run": 16,
+ "wall_time_sec": 32368.507607460022,
+ "config": {
+  "name": "tuev-paclock_full",
+  "group": "C",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "model": "paclock",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": "cosine",
+  "grad_clip": 1.0,
+  "num_workers": 16,
+  "device": "cuda",
+  "num_classes": 6,
+  "epochs": 100,
+  "batch_size": 128,
+  "eval_every_steps": 0,
+  "patience": 15,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "sample_rate": 200,
+  "model_kwargs": {
+   "arch": "triaxial",
+   "d_model": 128,
+   "depth": 6,
+   "n_bands": 8,
+   "n_heads": 4,
+   "dropout": 0.1,
+   "kernel_size": 201,
+   "patch_len": 200,
+   "augmentations": [],
+   "freq_mixer": "attention",
+   "tokenizer_mode": "pac_interaction",
+   "pac_token_mode": "measured",
+   "interaction_mode": "product"
+  },
+  "seed": 0
+ },
+ "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": false,
+  "status": "mis-configured",
+  "peak_index": 0,
+  "n_evals": 16,
+  "reason": "val peak at epoch 0"
+ }
+}

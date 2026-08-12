@@ -1,0 +1,111 @@
+{
+ "name": "physionet_mi-biot_prest16",
+ "dataset": "physionet_mi",
+ "model": "biot",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 3.18826,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.5033682701786142,
+  "cohen_kappa": 0.33754904859362933,
+  "weighted_f1": 0.5029355893731455
+ },
+ "best_val": 0.4660030753024444,
+ "val_curve": [
+  0.2636776194731917,
+  0.2578068733491136,
+  0.2644423994004985,
+  0.2791580266828458,
+  0.258279834414194,
+  0.2905029923507842,
+  0.3707904107806039,
+  0.4047183070153165,
+  0.4383343744639141,
+  0.4250273081425606,
+  0.45257859066225176,
+  0.4382718960950933,
+  0.4660030753024444,
+  0.4386057176985865,
+  0.46592230447252353,
+  0.45396505117242264,
+  0.4456835160733449,
+  0.4423205485087336,
+  0.426140569441986,
+  0.4533367922491904,
+  0.4445272849882026,
+  0.431985847173856,
+  0.43213235803976063
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 12,
+  "n_evals": 23,
+  "best_val": 0.4660030753024444,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 23,
+ "wall_time_sec": 87.67318367958069,
+ "config": {
+  "name": "physionet_mi-biot_prest16",
+  "group": "B",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model": "biot",
+  "loader": "biot",
+  "checkpoint": "prest16",
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100,
+   "target_len": 800
+  },
+  "num_classes": 4,
+  "epochs": 100,
+  "loss": "cross_entropy",
+  "seed": 1
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 12,
+  "n_evals": 23,
+  "reason": "ok"
+ }
+}

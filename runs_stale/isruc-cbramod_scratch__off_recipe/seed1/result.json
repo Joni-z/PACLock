@@ -1,0 +1,117 @@
+{
+ "name": "isruc-cbramod_scratch",
+ "dataset": "isruc",
+ "model": "cbramod",
+ "group": "C",
+ "seed": 1,
+ "n_params_M": 26.471261,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.7293355045267,
+  "cohen_kappa": 0.6858525475401731,
+  "weighted_f1": 0.7565397657520708
+ },
+ "best_val": 0.650170541395198,
+ "val_curve": [
+  0.33378296102358995,
+  0.4524960219037587,
+  0.5479196913257967,
+  0.5528317885104043,
+  0.5278077061914617,
+  0.46248868474319227,
+  0.5212594600930236,
+  0.6074046940407543,
+  0.5954909836444967,
+  0.5910744947686626,
+  0.5846936941942104,
+  0.6379611586343868,
+  0.6232571489572255,
+  0.6465474669155041,
+  0.6353433989358583,
+  0.6362641297259619,
+  0.641159952783602,
+  0.650170541395198,
+  0.6353002552500362,
+  0.6448448836072403,
+  0.6273457872140578,
+  0.6376835052636769,
+  0.6402931968731955,
+  0.6401496116529092,
+  0.6495777683270088,
+  0.6482528287643048,
+  0.6487995155376716,
+  0.614140275078253
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 17,
+  "n_evals": 28,
+  "best_val": 0.650170541395198,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 28,
+ "wall_time_sec": 2150.762467622757,
+ "config": {
+  "name": "isruc-cbramod_scratch",
+  "group": "C",
+  "dataset": "isruc",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 5,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 1
+ },
+ "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+ "class_counts": {
+  "train": [
+   16493,
+   9147,
+   21310,
+   13234,
+   9236
+  ],
+  "val": [
+   2072,
+   1015,
+   3226,
+   1980,
+   1067
+  ],
+  "test": [
+   1348,
+   1031,
+   3120,
+   1808,
+   1393
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 17,
+  "n_evals": 28,
+  "reason": "ok"
+ }
+}

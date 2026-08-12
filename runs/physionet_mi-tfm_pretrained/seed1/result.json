@@ -1,0 +1,108 @@
+{
+ "name": "physionet_mi-tfm_pretrained",
+ "dataset": "physionet_mi",
+ "model": "tfm",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 1.892024,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.42169578039250194,
+  "cohen_kappa": 0.2287831488948454,
+  "weighted_f1": 0.4205297282266954
+ },
+ "best_val": 0.4029432424090847,
+ "val_curve": [
+  0.25468132906538776,
+  0.25983723505675016,
+  0.30389102578230637,
+  0.35175570230946746,
+  0.3336590727440068,
+  0.3683539622302332,
+  0.3755775176545014,
+  0.3831757980247722,
+  0.3902745750668979,
+  0.40290211793803804,
+  0.38171324963151815,
+  0.39565167925571904,
+  0.3816306202345059,
+  0.3908974696479802,
+  0.4029432424090847,
+  0.39692862830014675,
+  0.3876027768997199,
+  0.3838394236244153,
+  0.37615438912605287,
+  0.38977538011239493,
+  0.38069186779152403,
+  0.37372634018946993,
+  0.37756947397355684,
+  0.38336859466998774,
+  0.36376609569392415
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 14,
+  "n_evals": 25,
+  "best_val": 0.4029432424090847,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 25,
+ "wall_time_sec": 1335.2926998138428,
+ "config": {
+  "name": "physionet_mi-tfm_pretrained",
+  "group": "B",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "model": "tfm",
+  "loader": "tfm",
+  "pretrained": true,
+  "tfm_setting": "multiple",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 50,
+  "batch_size": 32,
+  "warmup_epochs": 5,
+  "label_smoothing": 0.1,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "loss": "cross_entropy",
+  "seed": 1
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 14,
+  "n_evals": 25,
+  "reason": "ok"
+ }
+}

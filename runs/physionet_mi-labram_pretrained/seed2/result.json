@@ -1,0 +1,104 @@
+{
+  "name": "physionet_mi-labram_pretrained",
+  "dataset": "physionet_mi",
+  "model": "labram",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 5.82074,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5719954313603547,
+    "cohen_kappa": 0.42917228677457553,
+    "weighted_f1": 0.5727867202212865
+  },
+  "best_val": 0.5113920647721114,
+  "val_curve": [
+    0.25,
+    0.25,
+    0.26652594961479836,
+    0.2614778462064836,
+    0.360675193153696,
+    0.4272319878208077,
+    0.44929572497763165,
+    0.4790999872379186,
+    0.49124762031543395,
+    0.5113920647721114,
+    0.5051897664791578,
+    0.5045936699923311,
+    0.49547052363054134,
+    0.49405735851514876,
+    0.5022840355998494,
+    0.5080181284504972,
+    0.5015886232189647,
+    0.5062806691179296,
+    0.5000704073517609,
+    0.49760429431891273
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 9,
+    "n_evals": 20,
+    "best_val": 0.5113920647721114,
+    "chance": 0.25,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "patience",
+  "wall_time_sec": 348.34173941612244,
+  "config": {
+    "name": "physionet_mi-labram_pretrained",
+    "group": "B",
+    "dataset": "physionet_mi",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 4,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 800
+    },
+    "seed": 2,
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1593,
+      1557,
+      1581,
+      1569
+    ],
+    "val": [
+      435,
+      432,
+      434,
+      433
+    ],
+    "test": [
+      451,
+      449,
+      450,
+      453
+    ]
+  }
+}

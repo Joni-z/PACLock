@@ -1,0 +1,96 @@
+{
+  "name": "sleepedf-biot_scratch",
+  "dataset": "sleepedf",
+  "model": "biot",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 3.183879,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6384540131870675,
+    "cohen_kappa": 0.6340979239630244,
+    "weighted_f1": 0.7562990009143775
+  },
+  "best_val": 0.633964569331465,
+  "val_curve": [
+    0.5627623615913244,
+    0.5922280718149306,
+    0.5624721738285614,
+    0.6160914588576458,
+    0.633964569331465,
+    0.6054213437915165,
+    0.6091635294654156,
+    0.6200696811254266,
+    0.6262804372720384,
+    0.5876748801926863,
+    0.6095910762203958,
+    0.6057343869284904,
+    0.6283249571893466,
+    0.5820340456172419,
+    0.595298713875638
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 15,
+    "reason": "ok"
+  },
+  "epochs_run": 15,
+  "wall_time_sec": 502.27258014678955,
+  "config": {
+    "name": "sleepedf-biot_scratch",
+    "group": "C",
+    "dataset": "sleepedf",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 5,
+    "epochs": 40,
+    "loss": "cross_entropy",
+    "model": "biot",
+    "loader": "biot",
+    "checkpoint": null,
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 3000
+    },
+    "seed": 1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34213,
+      11896,
+      47572,
+      10575,
+      18174
+    ],
+    "val": [
+      14158,
+      4849,
+      10838,
+      1647,
+      4150
+    ],
+    "test": [
+      17570,
+      4777,
+      10722,
+      817,
+      3511
+    ]
+  }
+}

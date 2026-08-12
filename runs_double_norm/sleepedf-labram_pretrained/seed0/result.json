@@ -1,0 +1,96 @@
+{
+  "name": "sleepedf-labram_pretrained",
+  "dataset": "sleepedf",
+  "model": "labram",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 5.820941,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6214680463003447,
+    "cohen_kappa": 0.5973333201726545,
+    "weighted_f1": 0.7221622191505367
+  },
+  "best_val": 0.6085971253366387,
+  "val_curve": [
+    0.5665288455144001,
+    0.5750469024112481,
+    0.6018434175105505,
+    0.5657394863426899,
+    0.5710510570209675,
+    0.6085971253366387,
+    0.5945062293801742,
+    0.5760238876731563,
+    0.5966778626357458,
+    0.5996240031894335,
+    0.5813074293916116,
+    0.5932433799181234,
+    0.5683017214440538,
+    0.5864061263257119,
+    0.5754488686146999,
+    0.5389213613092143
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 16,
+    "reason": "ok"
+  },
+  "epochs_run": 16,
+  "wall_time_sec": 1855.3575365543365,
+  "config": {
+    "name": "sleepedf-labram_pretrained",
+    "group": "B",
+    "dataset": "sleepedf",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 3000
+    },
+    "num_classes": 5,
+    "epochs": 40,
+    "loss": "cross_entropy",
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34213,
+      11896,
+      47572,
+      10575,
+      18174
+    ],
+    "val": [
+      14158,
+      4849,
+      10838,
+      1647,
+      4150
+    ],
+    "test": [
+      17570,
+      4777,
+      10722,
+      817,
+      3511
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "name": "bci_iv_2a-tfm_pretrained",
+  "dataset": "bci_iv_2a",
+  "model": "tfm",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 1.891352,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.3252314814814815,
+    "cohen_kappa": 0.10030864197530864,
+    "weighted_f1": 0.32310113186698053
+  },
+  "best_val": 0.3472222222222222,
+  "val_curve": [
+    0.26851851851851855,
+    0.28009259259259256,
+    0.2685185185185185,
+    0.2986111111111111,
+    0.31481481481481477,
+    0.2986111111111111,
+    0.3333333333333333,
+    0.3055555555555556,
+    0.33796296296296297,
+    0.32407407407407407,
+    0.32407407407407407,
+    0.33333333333333337,
+    0.3055555555555556,
+    0.3472222222222222,
+    0.31712962962962965,
+    0.3287037037037037,
+    0.32407407407407407,
+    0.337962962962963,
+    0.3287037037037037,
+    0.3194444444444445,
+    0.31481481481481477,
+    0.34490740740740744,
+    0.3310185185185185,
+    0.32638888888888884
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 24,
+    "reason": "ok"
+  },
+  "epochs_run": 24,
+  "wall_time_sec": 454.96059560775757,
+  "config": {
+    "name": "bci_iv_2a-tfm_pretrained",
+    "group": "B",
+    "dataset": "bci_iv_2a",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 64,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 4,
+    "loss": "cross_entropy",
+    "seed": 1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      540,
+      540,
+      540,
+      540
+    ],
+    "val": [
+      108,
+      108,
+      108,
+      108
+    ],
+    "test": [
+      648,
+      648,
+      648,
+      648
+    ]
+  }
+}

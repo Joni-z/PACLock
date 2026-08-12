@@ -1,0 +1,105 @@
+{
+  "name": "sleepedf-labram_scratch",
+  "dataset": "sleepedf",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820941,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5738792896251835,
+    "cohen_kappa": 0.582978468773663,
+    "weighted_f1": 0.7041004349566383
+  },
+  "best_val": 0.5525457622776564,
+  "val_curve": [
+    0.47538061391019504,
+    0.5165500381097405,
+    0.5141724298735031,
+    0.5389371794132556,
+    0.531788882963995,
+    0.5432717233828805,
+    0.5276106721694015,
+    0.5456984769823152,
+    0.5525457622776564,
+    0.5491619166559333,
+    0.5449443479573617,
+    0.5351774001180452,
+    0.5262485645934447,
+    0.5216296950805357,
+    0.5313485744120585,
+    0.5157777309612728,
+    0.5255876254048771,
+    0.520491959652263,
+    0.49821256825490434
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 8,
+    "n_evals": 19,
+    "best_val": 0.5525457622776564,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 19,
+  "wall_time_sec": 2372.339136838913,
+  "config": {
+    "name": "sleepedf-labram_scratch",
+    "group": "C",
+    "dataset": "sleepedf",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 5,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 3000
+    },
+    "seed": 0,
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34213,
+      11896,
+      47572,
+      10575,
+      18174
+    ],
+    "val": [
+      14158,
+      4849,
+      10838,
+      1647,
+      4150
+    ],
+    "test": [
+      17570,
+      4777,
+      10722,
+      817,
+      3511
+    ]
+  }
+}

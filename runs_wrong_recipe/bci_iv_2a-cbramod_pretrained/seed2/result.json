@@ -1,0 +1,105 @@
+{
+ "name": "bci_iv_2a-cbramod_pretrained",
+ "dataset": "bci_iv_2a",
+ "model": "cbramod",
+ "group": "B",
+ "seed": 2,
+ "n_params_M": 19.125604,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.5374228395061729,
+  "cohen_kappa": 0.3832304526748971,
+  "weighted_f1": 0.5376565301102152
+ },
+ "best_val": 0.5532407407407407,
+ "val_curve": [
+  0.3148148148148148,
+  0.3310185185185185,
+  0.44907407407407407,
+  0.42824074074074076,
+  0.4560185185185185,
+  0.49537037037037035,
+  0.4930555555555555,
+  0.5092592592592593,
+  0.5532407407407407,
+  0.5231481481481481,
+  0.5462962962962963,
+  0.5347222222222222,
+  0.525462962962963,
+  0.5231481481481481,
+  0.5162037037037037,
+  0.4953703703703704,
+  0.5138888888888888,
+  0.5208333333333334,
+  0.5092592592592593
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 19,
+  "best_val": 0.5532407407407407,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 19,
+ "wall_time_sec": 60.3841438293457,
+ "config": {
+  "name": "bci_iv_2a-cbramod_pretrained",
+  "group": "B",
+  "dataset": "bci_iv_2a",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 4,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 2
+ },
+ "data_manifest_created": "2026-08-04T10:52:01.822097+00:00",
+ "class_counts": {
+  "train": [
+   540,
+   540,
+   540,
+   540
+  ],
+  "val": [
+   108,
+   108,
+   108,
+   108
+  ],
+  "test": [
+   648,
+   648,
+   648,
+   648
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 19,
+  "reason": "ok"
+ }
+}

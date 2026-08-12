@@ -1,0 +1,115 @@
+{
+ "name": "tuev-cbramod_pac",
+ "dataset": "tuev",
+ "model": "cbramod",
+ "group": "D",
+ "seed": 2,
+ "n_params_M": 17.846006,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.5552494523205335,
+  "cohen_kappa": 0.565070659850337,
+  "weighted_f1": 0.776168027486717
+ },
+ "best_val": 0.5404960722928992,
+ "val_curve": [
+  0.3908061188622679,
+  0.5220472222725937,
+  0.45759405962148325,
+  0.4056332662128189,
+  0.4343889633427017,
+  0.39547387607431705,
+  0.3423693450561862,
+  0.5404960722928992,
+  0.45804838917067947,
+  0.407455146901599,
+  0.4410217081673784,
+  0.4349363361346603,
+  0.4471326440972686,
+  0.44745040945369374,
+  0.42572296996550596,
+  0.44199040617385055,
+  0.41881091785332136,
+  0.4371275782988445,
+  0.3799657582805963,
+  0.45961574700928975,
+  0.4543868319389095,
+  0.47083191372088895
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 22,
+  "best_val": 0.5404960722928992,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 2,
+ "wall_time_sec": 241.93528842926025,
+ "config": {
+  "name": "tuev-cbramod_pac",
+  "group": "D",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_pac/tuev",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 100,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.0,
+  "seed": 2,
+  "_pac_note": "PAC-methodology protocol: 0.5 Hz high-pass, no notch. Identical to the frozen config in every other respect."
+ },
+ "data_manifest_created": "2026-08-09T16:33:29.241802+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 22,
+  "reason": "ok"
+ }
+}

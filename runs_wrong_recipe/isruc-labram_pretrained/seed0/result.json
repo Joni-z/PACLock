@@ -1,0 +1,107 @@
+{
+ "name": "isruc-labram_pretrained",
+ "dataset": "isruc",
+ "model": "labram",
+ "group": "B",
+ "seed": 0,
+ "n_params_M": 5.820941,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.7658393531957144,
+  "cohen_kappa": 0.7351915428762068,
+  "weighted_f1": 0.7922375676944386
+ },
+ "best_val": 0.7329387676673484,
+ "val_curve": [
+  0.6855278784341552,
+  0.7201417166881767,
+  0.7329387676673484,
+  0.7052708046323966,
+  0.7271752307075063,
+  0.7192764283406521,
+  0.7257151832992871,
+  0.7173254525459255,
+  0.7105424706613298,
+  0.7230177974121382,
+  0.7193942801761772,
+  0.7087434654548264,
+  0.7016145235080637
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 2,
+  "n_evals": 13,
+  "best_val": 0.7329387676673484,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 13,
+ "wall_time_sec": 1968.2270784378052,
+ "config": {
+  "name": "isruc-labram_pretrained",
+  "group": "B",
+  "dataset": "isruc",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.05,
+  "lr": 0.0005,
+  "max_lr": 0.0004,
+  "scheduler": "cosine",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 5,
+  "epochs": 50,
+  "loss": "cross_entropy",
+  "flatten_sequences": true,
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": true,
+  "loader_divisor": 1.0,
+  "model_kwargs": {
+   "montage_mode": "positional",
+   "target_len": 3000
+  },
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   16493,
+   9147,
+   21310,
+   13234,
+   9236
+  ],
+  "val": [
+   2072,
+   1015,
+   3226,
+   1980,
+   1067
+  ],
+  "test": [
+   1348,
+   1031,
+   3120,
+   1808,
+   1393
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 2,
+  "n_evals": 13,
+  "reason": "ok"
+ }
+}

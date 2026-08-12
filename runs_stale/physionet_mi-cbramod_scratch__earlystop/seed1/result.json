@@ -1,0 +1,106 @@
+{
+  "name": "physionet_mi-cbramod_scratch",
+  "dataset": "physionet_mi",
+  "model": "cbramod",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 46.005604,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5562277148537487,
+    "cohen_kappa": 0.408327956298965,
+    "weighted_f1": 0.5602203530444402
+  },
+  "best_val": 0.5316861624475919,
+  "val_curve": [
+    0.40525232499964015,
+    0.47109436894540213,
+    0.4810731022672473,
+    0.48387520078607105,
+    0.46605756428786793,
+    0.47274147424865,
+    0.4855389391094479,
+    0.48490615784003094,
+    0.5051299746988857,
+    0.47918963519353963,
+    0.5045633482832196,
+    0.5022696904063196,
+    0.5097501689445811,
+    0.5028151721595505,
+    0.5097355902196072,
+    0.5143505861606965,
+    0.5143813679242045,
+    0.5316861624475919,
+    0.5276566143757397,
+    0.5271218426599726,
+    0.5190494121171683,
+    0.5195509983266202,
+    0.5184280879904481,
+    0.5189908706093693,
+    0.5224364180867926,
+    0.5229990105419678,
+    0.5172587625789091,
+    0.5149493676644707
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 17,
+    "n_evals": 28,
+    "best_val": 0.5316861624475919,
+    "chance": 0.25,
+    "reason": "ok"
+  },
+  "epochs_run": 28,
+  "wall_time_sec": 379.5895256996155,
+  "config": {
+    "name": "physionet_mi-cbramod_scratch",
+    "group": "C",
+    "dataset": "physionet_mi",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+    "model": "cbramod",
+    "loader": null,
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "multi_lr": true,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "num_classes": 4,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "seed": 1
+  },
+  "data_manifest_created": "2026-08-04T10:52:50.796908+00:00",
+  "class_counts": {
+    "train": [
+      1593,
+      1557,
+      1581,
+      1569
+    ],
+    "val": [
+      435,
+      432,
+      434,
+      433
+    ],
+    "test": [
+      451,
+      449,
+      450,
+      453
+    ]
+  }
+}

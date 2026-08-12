@@ -1,0 +1,112 @@
+{
+  "name": "tuev-cbramod_pretrained",
+  "dataset": "tuev",
+  "model": "cbramod",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 17.846006,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5490626807856939,
+    "cohen_kappa": 0.5150610739932202,
+    "weighted_f1": 0.7463657297213762
+  },
+  "best_val": 0.3855713985334206,
+  "val_curve": [
+    0.2569906806823903,
+    0.30431067383211274,
+    0.3207255546918589,
+    0.29656069453656764,
+    0.22257700862969954,
+    0.34024832685293505,
+    0.3213308941304659,
+    0.3393151431860203,
+    0.34551947347192,
+    0.3531055542427367,
+    0.29803391673681123,
+    0.3570505751685963,
+    0.26321063419594315,
+    0.3255334979472674,
+    0.3438448517754603,
+    0.3221853030591362,
+    0.31752337164712796,
+    0.3618590369868795,
+    0.34370753347969907,
+    0.3855713985334206,
+    0.3684852067118721,
+    0.34650095595941055,
+    0.34917252700089874,
+    0.3459266871300666,
+    0.35706890463879626,
+    0.3350480944928931,
+    0.3246291330730665,
+    0.31215177120859194,
+    0.36072435102990363,
+    0.3304321962629404
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 19,
+    "n_evals": 30,
+    "reason": "ok"
+  },
+  "epochs_run": 30,
+  "wall_time_sec": 2357.927539587021,
+  "config": {
+    "name": "tuev-cbramod_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "model": "cbramod",
+    "loader": null,
+    "pretrained": true,
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "multi_lr": true,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.0,
+    "seed": 1
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

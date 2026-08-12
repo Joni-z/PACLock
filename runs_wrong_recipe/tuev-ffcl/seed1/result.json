@@ -1,0 +1,91 @@
+{
+  "name": "tuev-ffcl",
+  "dataset": "tuev",
+  "model": "ffcl",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 2.415846,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.32154791946939154,
+    "cohen_kappa": 0.4007537189908972,
+    "weighted_f1": 0.6861590917842955
+  },
+  "best_val": 0.4080434930535699,
+  "val_curve": [
+    0.028926727236087024,
+    0.27910245324987937,
+    0.4080434930535699,
+    0.22161372583534522,
+    0.12083178460388655,
+    0.015780971698296287,
+    -0.0025786394300466586,
+    0.0,
+    0.0,
+    -0.0005569999003303128,
+    0.0,
+    0.07060395611727355,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 16,
+    "reason": "ok"
+  },
+  "epochs_run": 4,
+  "wall_time_sec": 351.8289911746979,
+  "config": {
+    "name": "tuev-ffcl",
+    "group": "A",
+    "model": "ffcl",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "batch_size": 64,
+    "num_workers": 8,
+    "epochs": 30,
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "patience": 10,
+    "eval_every_steps": 300,
+    "seed": 1,
+    "device": "cuda"
+  },
+  "data_manifest_created": "2026-08-04T12:04:52.683807+00:00",
+  "class_counts": {
+    "train": [
+      506,
+      10735,
+      5019,
+      963,
+      9750,
+      36742
+    ],
+    "val": [
+      119,
+      270,
+      627,
+      71,
+      456,
+      13038
+    ],
+    "test": [
+      567,
+      4564,
+      1904,
+      329,
+      2064,
+      18670
+    ]
+  }
+}

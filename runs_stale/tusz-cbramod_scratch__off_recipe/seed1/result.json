@@ -1,0 +1,93 @@
+{
+ "name": "tusz-cbramod_scratch",
+ "dataset": "tusz",
+ "model": "cbramod",
+ "group": "C",
+ "seed": 1,
+ "n_params_M": 30.645202,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.615032009842438,
+  "pr_auc": 0.5156238927027972,
+  "auroc": 0.8742814723620995
+ },
+ "best_val": 0.28909260585886476,
+ "val_curve": [
+  0.26434020490580173,
+  0.2174845915534288,
+  0.2522170033207424,
+  0.28909260585886476,
+  0.2637840966140201,
+  0.19859845922176728,
+  0.25391241062248787,
+  0.24112415391391762,
+  0.20783158032729268,
+  0.24013303632861882,
+  0.2292179058490741,
+  0.22752539474030525,
+  0.23101189313623316,
+  0.2215948956848915
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 3,
+  "n_evals": 14,
+  "best_val": 0.28909260585886476,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 14,
+ "wall_time_sec": 6024.472684144974,
+ "config": {
+  "name": "tusz-cbramod_scratch",
+  "group": "C",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "seed": 1
+ },
+ "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 3,
+  "n_evals": 14,
+  "reason": "ok"
+ }
+}

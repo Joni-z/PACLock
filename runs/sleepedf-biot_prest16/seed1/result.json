@@ -1,0 +1,113 @@
+{
+ "name": "sleepedf-biot_prest16",
+ "dataset": "sleepedf",
+ "model": "biot",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 3.187525,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6006103449599098,
+  "cohen_kappa": 0.586075231005265,
+  "weighted_f1": 0.7177474825194959
+ },
+ "best_val": 0.5958283111455451,
+ "val_curve": [
+  0.5347860682960963,
+  0.5816290161525346,
+  0.5754009965876384,
+  0.5709215635161302,
+  0.584237126832388,
+  0.5797328451050006,
+  0.5838607487018739,
+  0.5748326949466016,
+  0.5791921129567286,
+  0.5697318426483291,
+  0.5862532591878378,
+  0.5958283111455451,
+  0.5785636320961117,
+  0.5829526012432626,
+  0.5695373688628109,
+  0.5791908789382345,
+  0.5785843831243282,
+  0.5608730303837751,
+  0.5541412710415459,
+  0.5502888115029023,
+  0.5504634444676928,
+  0.5407326072146419
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 11,
+  "n_evals": 22,
+  "best_val": 0.5958283111455451,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 22,
+ "wall_time_sec": 3929.1517465114594,
+ "config": {
+  "name": "sleepedf-biot_prest16",
+  "group": "B",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model": "biot",
+  "loader": "biot",
+  "checkpoint": "prest16",
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100,
+   "target_len": 3000
+  },
+  "num_classes": 5,
+  "epochs": 40,
+  "loss": "cross_entropy",
+  "seed": 1
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 11,
+  "n_evals": 22,
+  "reason": "ok"
+ }
+}

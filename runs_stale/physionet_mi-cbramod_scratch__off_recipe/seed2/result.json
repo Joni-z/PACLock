@@ -1,0 +1,112 @@
+{
+ "name": "physionet_mi-cbramod_scratch",
+ "dataset": "physionet_mi",
+ "model": "cbramod",
+ "group": "C",
+ "seed": 2,
+ "n_params_M": 46.005604,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.5163758079005911,
+  "cohen_kappa": 0.35512323575374993,
+  "weighted_f1": 0.5176877338465158
+ },
+ "best_val": 0.46704220379068717,
+ "val_curve": [
+  0.3835155951533817,
+  0.42207762229595736,
+  0.4515299092173143,
+  0.45672542423140344,
+  0.45037437876898,
+  0.43310929266147663,
+  0.4290330098845527,
+  0.4353961696313555,
+  0.4533053310442529,
+  0.46072055487397334,
+  0.43535769955227066,
+  0.4602137209606665,
+  0.4480490806945079,
+  0.456170770995814,
+  0.44627044736421784,
+  0.46704220379068717,
+  0.46073114861294795,
+  0.4538214344313773,
+  0.4619073406474872,
+  0.46074844943616255,
+  0.466496820368721,
+  0.4486276675475381,
+  0.45729097138179786,
+  0.4630486794944529,
+  0.46420063658887684,
+  0.4607564805307052
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 15,
+  "n_evals": 26,
+  "best_val": 0.46704220379068717,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 26,
+ "wall_time_sec": 348.3963704109192,
+ "config": {
+  "name": "physionet_mi-cbramod_scratch",
+  "group": "C",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 4,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 2
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.796908+00:00",
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 15,
+  "n_evals": 26,
+  "reason": "ok"
+ }
+}

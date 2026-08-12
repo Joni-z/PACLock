@@ -1,0 +1,120 @@
+{
+ "name": "isruc-paclock_full",
+ "dataset": "isruc",
+ "model": "paclock",
+ "group": "C",
+ "seed": 0,
+ "n_params_M": 1.634837,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.626196977546139,
+  "cohen_kappa": 0.5432905676756579,
+  "weighted_f1": 0.6308265833342176
+ },
+ "best_val": 0.6084781010459954,
+ "val_curve": [
+  0.4328212710191377,
+  0.5594624981596549,
+  0.5870566286559169,
+  0.5484411220001195,
+  0.5408292434594173,
+  0.6084781010459954,
+  0.5637575342423684,
+  0.4270628464283125,
+  0.38434529409642415,
+  0.46287477180078085,
+  0.5039671715017721,
+  0.5318149366895988,
+  0.5323100250443553,
+  0.49222693736751055,
+  0.5608970024684026,
+  0.5671842141590322,
+  0.5598930674644614,
+  0.5073914370415689,
+  0.5574336296410234,
+  0.5488109162782476,
+  0.5262173288233714
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 21,
+  "best_val": 0.6084781010459954,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 21,
+ "wall_time_sec": 28387.318751335144,
+ "config": {
+  "name": "isruc-paclock_full",
+  "group": "C",
+  "dataset": "isruc",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+  "model": "paclock",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": "cosine",
+  "grad_clip": 1.0,
+  "num_workers": 16,
+  "device": "cuda",
+  "num_classes": 5,
+  "epochs": 60,
+  "batch_size": 64,
+  "eval_every_steps": 0,
+  "patience": 15,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "sample_rate": 200,
+  "flatten_sequences": true,
+  "model_kwargs": {
+   "arch": "triaxial",
+   "d_model": 128,
+   "depth": 6,
+   "n_bands": 8,
+   "n_heads": 4,
+   "dropout": 0.1,
+   "kernel_size": 201,
+   "patch_len": 200,
+   "augmentations": [],
+   "freq_mixer": "attention",
+   "tokenizer_mode": "pac_interaction",
+   "pac_token_mode": "measured",
+   "interaction_mode": "product"
+  },
+  "seed": 0
+ },
+ "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+ "class_counts": {
+  "train": [
+   16493,
+   9147,
+   21310,
+   13234,
+   9236
+  ],
+  "val": [
+   2072,
+   1015,
+   3226,
+   1980,
+   1067
+  ],
+  "test": [
+   1348,
+   1031,
+   3120,
+   1808,
+   1393
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 21,
+  "reason": "ok"
+ }
+}

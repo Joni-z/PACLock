@@ -1,0 +1,123 @@
+{
+ "name": "sleepedf-paclock_full",
+ "dataset": "sleepedf",
+ "model": "paclock",
+ "group": "C",
+ "seed": 0,
+ "n_params_M": 1.634325,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6133351636764973,
+  "cohen_kappa": 0.6228437549992722,
+  "weighted_f1": 0.7366429178676345
+ },
+ "best_val": 0.5804951000296787,
+ "val_curve": [
+  0.49555478997540336,
+  0.5176104082921422,
+  0.5342780858611402,
+  0.5063321184595997,
+  0.5562850764695941,
+  0.5543972658768697,
+  0.5392026945372423,
+  0.5651454901899573,
+  0.5709705347407747,
+  0.5804951000296787,
+  0.555057081670606,
+  0.5449534464848562,
+  0.5680529450100809,
+  0.5605541874064706,
+  0.5683309046756388,
+  0.5430273243729591,
+  0.5294864138755757,
+  0.5559207983059948,
+  0.5374560322907928,
+  0.5468185496474796,
+  0.5697288018663307,
+  0.5476934603708119,
+  0.5518275923794952,
+  0.5452478269606337,
+  0.5471901610657779
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 25,
+  "best_val": 0.5804951000296787,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 25,
+ "wall_time_sec": 10745.14091682434,
+ "config": {
+  "name": "sleepedf-paclock_full",
+  "group": "C",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "model": "paclock",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": "cosine",
+  "grad_clip": 1.0,
+  "num_workers": 16,
+  "device": "cuda",
+  "num_classes": 5,
+  "epochs": 60,
+  "batch_size": 256,
+  "eval_every_steps": 0,
+  "patience": 15,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "sample_rate": 100,
+  "model_kwargs": {
+   "arch": "triaxial",
+   "d_model": 128,
+   "depth": 6,
+   "n_bands": 8,
+   "n_heads": 4,
+   "dropout": 0.1,
+   "kernel_size": 201,
+   "patch_len": 200,
+   "augmentations": [],
+   "freq_mixer": "attention",
+   "tokenizer_mode": "pac_interaction",
+   "pac_token_mode": "measured",
+   "interaction_mode": "product"
+  },
+  "seed": 0
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 25,
+  "reason": "ok"
+ }
+}

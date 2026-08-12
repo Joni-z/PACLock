@@ -1,0 +1,230 @@
+# PACLock 实验矩阵设计
+
+论文:*PACLock: Gauge-Invariant Phase–Amplitude Tokenization for EEG*(ICLR 2026 投稿)
+
+本文档把论文里 pending 的实验章节翻译成可执行的 run 矩阵。写作依据是草稿本身,
+而不是 `PACLock_baseline_matrix.xlsx`——xlsx 定义的是**协议**(怎么预处理、怎么
+算指标、什么时候拒绝写数),不是论文需要哪些实验。两者的关系在 §0 说明。
+
+---
+
+## 0. 先厘清一件事:baseline 表在这篇论文里的角色
+
+论文的中心主张(Abstract, §3, §6)是:
+
+> PAC 先验只有在**构成性**(constitutive,无法绕过)时才起作用,而增益具体来自
+> **测得的 preferred phase**,不是来自乘法形式、不是来自耦合强度、不是来自
+> 暴露解析相位。
+
+这个主张**不是**由"PACLock 在 benchmark 上打败 BIOT/LaBraM/CBraMod"证明的。
+它由 §6.2 的 parameter-matched control arms 证明——每个 arm 拆掉一个成分,
+单独证伪一种替代解释。论文自己在 §6.1 就写明了:
+
+> "Every comparison holds data, splits, preprocessing, optimiser, schedule and
+> seed fixed and varies only the tokenizer. All arms are constructed to have
+> identical parameter counts, so no outcome can be attributed to capacity."
+
+因此外部 baseline(BIOT / LaBraM / CBraMod / 5 个监督模型)承担的是**另一个、
+更有限但仍然必要的**任务:
+
+> 证明消融是在一个**有竞争力的 regime** 里做的,而不是在一个谁都能赢的弱基线上。
+
+审稿人会问的是"你的绝对数字站得住吗",不是"你在每个数据集上都赢了吗"。
+这两个问题需要的表完全不同。**这直接决定了下面所有取舍。**
+
+### 推论:B 组的覆盖缺口不构成问题
+
+上一轮我按"模型 × 数据集"的完整度汇报,给人一种矩阵有大洞的印象。按论文的
+实际需求重新算,每个数据集的 baseline 数是:
+
+| 数据集 | 已完成 baseline 数 | 含基础模型 |
+|---|---|---|
+| TUAB | 11 | BIOT, LaBraM, CBraMod |
+| TUEV | 11 | BIOT, LaBraM, CBraMod |
+| CHB-MIT | 9 | BIOT, CBraMod |
+| TUSZ | 6(+BIOT/LaBraM 排队中) | CBraMod |
+| Sleep-EDF | 7 | CBraMod |
+| ISRUC | 7 | CBraMod |
+| PhysioNet-MI | 7 | CBraMod |
+| BCI-IV-2a | 7 | CBraMod |
+| FACED | 7 | CBraMod |
+
+**没有一个数据集低于 7 个 baseline,且每个都含一个 2025 ICLR 的基础模型
+(CBraMod,pretrained + from-scratch 两行)。** 这对任何 EEG 论文都是充分的
+baseline 集。BIOT 只能上 4 个数据集、LaBraM 只能上 3 个,是因为它们的
+预训练权重绑定了特定 montage(BIOT 16 双极 / LaBraM 23 单极 `-REF`),
+在 Sleep-EDF(2 通道)这类数据上**本来就不该报**——强行适配反而是方法学错误,
+审稿人会质疑。这一点在论文里用一句脚注说明即可,不是缺陷。
+
+TFM-Tokenizer 和 EEGPT 从 baseline 集中移除,理由见 §5。
+
+---
+
+## 1. 设计原则:让任务选择本身成为证据
+
+论文 §6.2 的方法学是**分别证伪每个竞争解释**。这个标准应该同样施加到
+**数据集选择**上,而目前草稿没有这么做。
+
+PAC 不是一个在所有 EEG 任务上均匀存在的现象。它在某些 regime 里有明确、
+窄带、可引用的生理学基础,在另一些里没有。这给了论文一个可以**事先声明并
+承担风险**的预测:
+
+> 如果 PACLock 的增益真的来自 phase–amplitude 依赖,增益应当**随任务的 PAC
+> 生理学证据强度排序**。如果增益来自容量、正则化或任何通用机制,增益应当
+> **在任务间大致均匀**。
+
+这是一个能被数据打脸的预测,比"平均分更高"强得多,而且和论文自己的
+falsification 逻辑完全同构。我建议把它写进 §6 作为 pre-registered prediction。
+
+### 任务分层
+
+| 层 | 数据集 | PAC 生理学依据 | 预期 |
+|---|---|---|---|
+| **T1 强** | Sleep-EDF, ISRUC | 慢波(0.5–1 Hz)–纺锤波(12–16 Hz)耦合,是全 EEG 领域最稳健的 PAC 现象 | 增益最大 |
+| **T1 强** | TUSZ, CHB-MIT | 癫痫发作起始时 delta/theta–gamma PAC 显著改变,文献充分 | 增益大 |
+| **T2 中** | BCI-IV-2a, PhysioNet-MI | 感觉运动皮层 beta–gamma PAC,有报道但不如上者稳健 | 增益中等 |
+| **T2 中** | FACED, TUEV | 情绪/事件相关 theta–gamma,证据较弱且异质 | 增益小 |
+| **T3 阴性对照** | **TUAB** | normal/abnormal 粗筛,病理高度异质,**无特定窄带 PAC 机制** | **增益应最小** |
+
+TUAB 作为阴性对照是这个设计里最有价值的一格:它是本套件里样本量最大、
+最"标准"的数据集,如果 PACLock 在这里的增益也很大,那就说明增益是通用的,
+和 PAC 无关——这会**削弱**论文,而我们主动去测它。这正是 §3 批评那四个
+失败设计时用的标准("Without an explicit check that the parameter changed,
+the design is untestable by construction")。
+
+---
+
+## 2. 需要产出的表
+
+### T1 — 注入式 PAC 先验的失败(论文 §3)
+
+论文已有这四个负结果("We ran four architectural injections on identical
+backbones and data"),但草稿里只有文字描述,没有表。需要在本 codebase 的
+统一协议下重跑,以便和 T2 用同一套预处理/指标/seed。
+
+| arm | 说明 | 需记录的诊断量 |
+|---|---|---|
+| plain attention | 参照点 | — |
+| additive bias | α·C 加到 attention logits | **α 的训练轨迹**(论文称其单调衰减到 0) |
+| multiplicative gate | σ(w·C) 乘 attention 概率,w 初始化为 0 | **w 的均值**(论文称五位小数不动) |
+| hyperparameter-free modulation | 行均值归一化耦合乘 post-softmax 权重 | — |
+| hard top-k topology | top-k 源频带,其余 mask 为 −∞ | 与 shuffle 对照的差 |
+
+**关键:必须记录参数轨迹,不只是最终指标。** §3 明确说"A module initialised at
+a no-op value has two indistinguishable outcomes: it correctly declined to act,
+or it never moved." 这个表的说服力全在 α 和 w 的轨迹上。训练循环需要加一个
+per-epoch 的标量 hook。
+
+数据集:4 个(TUAB, TUEV, Sleep-EDF, BCI-IV-2a),覆盖不同任务类型。
+Runs:5 arms × 4 datasets × 3 seeds = **60**
+
+---
+
+### T2 — Control arms(论文 §6.2 + Table 1)**← 核心表**
+
+六个 arm,全部 parameter-matched,已能用现有 config 开关表达:
+
+| arm | 移除的成分 | 证伪的解释 | config |
+|---|---|---|---|
+| `raw` | 整个交互 | (参照点) | `tokenizer_mode=raw`, `freq_mixer=attention` |
+| `uniform` | 测得的 α_ij 与 ∠Z_ij | "乘法形式本身有用" | `tokenizer_mode=pac`, `pac_token_mode=uniform` |
+| `magnitude` | ∠Z_ij(确定性地) | "耦合强度就够了" | `phase_mode=magnitude` |
+| `concat` | 仅强制乘积 | "暴露解析相位就够了" | `interaction_mode=concat` |
+| `scramble` | 相位–边配对 | "任意复旋转就够了" | `phase_mode=scramble` |
+| `measured` | 无 | — | 全默认 |
+
+论文 §6.2 已注明 `concat` 参数量略多于 product arm,这是**对我们不利**的方向,
+要在表注里保留这句话。
+
+数据集:**全部 9 个**——分层预测(§1)需要完整梯度才能画出来。
+Runs:6 arms × 9 datasets × 3 seeds = **162**
+
+Δ 的定义:`measured − raw`,主指标用 xlsx 里每个数据集的 PRIMARY_METRIC。
+分层预测检验:Δ 在 T1/T2/T3 三层间的排序。
+
+---
+
+### T3 — 容量对照(论文 §6.3)
+
+只需 `raw` 和 `measured` 两个 arm,在 2 个额外容量上重跑。论文问的是
+**gap 是否随容量收窄**,不是绝对分数。
+
+容量:base(=T2 的)、2× width、2× depth。
+数据集:每层各取一个 —— Sleep-EDF(T1)、BCI-IV-2a(T2)、TUAB(T3)。
+Runs:2 arms × 2 额外容量 × 3 datasets × 3 seeds = **36**
+
+---
+
+### T4 — 与外部 baseline 的对比(论文 Table 2 的资格证明)
+
+**已基本完成**,见 §0 的表。需要做的是重新填表,不是重新跑。
+
+呈现方式建议:每个数据集一行 block,列出该数据集上**最强的 3 个 baseline**
++ PACLock(`measured`),而不是把 11 个 baseline 全列出来——全列会让 Table 2
+变成一张吞掉两页的表,并且把读者的注意力从消融上引开。完整的 9×11 矩阵
+放 Appendix。
+
+---
+
+### T5 — Gauge 不变性的数值验证(论文 §5)
+
+论文已给出 8.3×10⁻⁷(float32 舍入量级)。需要在 repo 里有一个可复现的
+测试固化它,并扩展到:对所有 9 个数据集的真实 batch 施加随机相位平移,
+报告 max |Δh_j| for j>0。这是一张**一行表**,但它是论文唯一一个
+"exact"级别的主张,值得有代码背书。
+
+Runs:0(纯 forward,可在已有 checkpoint 上做)
+
+---
+
+## 3. 总成本
+
+| 表 | Runs | 状态 |
+|---|---|---|
+| T1 失败注入 | 60 | 待跑,需先加参数轨迹 hook |
+| T2 control arms | 162 | 待跑,**优先级最高** |
+| T3 容量对照 | 36 | 待跑,依赖 T2 的超参 |
+| T4 外部 baseline | ~0 | 已完成,待重新填表 |
+| T5 gauge 不变性 | 0 | 待写测试 |
+| **合计新增** | **~258** | |
+
+作为参照,groups A/B 已完成约 200 runs,所以这个量级是可行的。
+
+---
+
+## 4. 执行顺序
+
+1. **T2 在 T1 层的 4 个数据集上先跑**(Sleep-EDF, ISRUC, TUSZ, CHB-MIT),
+   6 arms × 4 × 3 = 72 runs。如果 `measured` 打不赢 `raw`,后面的都不用跑了,
+   这是最省钱的失败点。
+2. T2 铺满剩余 5 个数据集(90 runs),画分层梯度。
+3. T1 参数轨迹 hook + 60 runs。
+4. T3 容量对照 36 runs。
+5. T5 测试 + 全表重填。
+
+---
+
+## 5. 从 baseline 集中移除 TFM-Tokenizer 和 EEGPT
+
+**TFM-Tokenizer**:上游发布的 tokenizer 权重含 `freq_pos_embed` /
+`temporal_pos_embed` / 单层 `decoder`,而上游仓库代码构造的模型期望
+`decoder.0` / `decoder.2`,且全仓库 grep 不到 `freq_pos_embed`。
+HuggingFace 上是同一批文件。权重来自一个未发布的更早模型版本。
+适配代码(`models/foundation/tfm_adapter.py`)和预处理已入库,上游修复后可直接跑。
+
+**EEGPT**:要求 58 通道,TUAB 原始 EDF 的单极通道总共只有 23 个,本套件
+无任何数据集满足。权重在 figshare 需浏览器交互获取。
+
+两者都不影响 §0 的结论:每个数据集仍有 ≥7 个 baseline。论文里用一句
+脚注说明即可,或直接不提。
+
+---
+
+## 6. 需要在论文里补的方法学句子
+
+1. §6 加 pre-registered prediction(§1 的分层假设)。
+2. §6.1 说明 baseline 集按数据集变化的理由(montage 绑定),并注明
+   BIOT/LaBraM 未在 Sleep-EDF 等报数是因为其预训练权重的通道假设不成立,
+   不是未尝试。
+3. Table 2 的 caption 保留 §6.2 那句 concat 参数量更多的自陈。
+4. §7 Limitations 加一条:分层预测若不成立对论文的影响。

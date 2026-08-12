@@ -1,0 +1,63 @@
+dataset: faced
+version: Synapse syn50614194
+source: official pre-processed .pkl
+raw_root: /work1/chenyuyou/yifanwang/data/faced
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/faced
+num_classes: 9
+source_rate: 250
+sample_rate: 200
+band: null
+notch: null
+n_subjects: 123
+n_channels: 32
+n_videos: 28
+trial_sec: 30.0
+window_sec: 10.0
+stride_sec: 10.0
+drop_tail: true
+labels:
+- anger
+- disgust
+- fear
+- sadness
+- neutral
+- amusement
+- inspiration
+- joy
+- tenderness
+videos_per_label:
+- 3
+- 3
+- 3
+- 3
+- 4
+- 3
+- 3
+- 3
+- 3
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+resample_balance: false
+primary_metric: balanced_acc
+report_metrics:
+- balanced_acc
+- cohen_kappa
+- weighted_f1
+split:
+  mode: subject_id_ranges
+  train:
+  - 0
+  - 79
+  val:
+  - 80
+  - 99
+  test:
+  - 100
+  - 122
+expected:
+  trials_per_subject: 28
+  windows_per_trial: 3
+_pac_note: officially pre-processed upstream (0.05-47 Hz, ICA, average reference);
+  PROTOCOLS.md forbids re-filtering, so the frozen settings stand

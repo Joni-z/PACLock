@@ -1,0 +1,89 @@
+{
+ "name": "tusz-ffcl",
+ "dataset": "tusz",
+ "model": "ffcl",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 2.464994,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.556802160014913,
+  "pr_auc": 0.5511463606604278,
+  "auroc": 0.9019602806604801
+ },
+ "best_val": 0.35356959315188885,
+ "val_curve": [
+  0.1652565364915749,
+  0.2844724149135343,
+  0.31061111899996685,
+  0.2987198618501187,
+  0.31184911731282733,
+  0.330575301325405,
+  0.35356959315188885,
+  0.28195906451453173,
+  0.30754036013965325,
+  0.3325470562011966,
+  0.33473526445913426,
+  0.34065086402303524,
+  0.3132358380041206,
+  0.29824623954741775,
+  0.3239553195813266,
+  0.31753421509050866
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 16,
+  "best_val": 0.35356959315188885,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 4,
+ "wall_time_sec": 1398.2367215156555,
+ "config": {
+  "name": "tusz-ffcl",
+  "group": "A",
+  "model": "ffcl",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 0,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 16,
+  "reason": "ok"
+ }
+}

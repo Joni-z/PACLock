@@ -1,0 +1,100 @@
+{
+  "name": "physionet_mi-sparcnet",
+  "dataset": "physionet_mi",
+  "model": "sparcnet",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.269603,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.6000112274103437,
+    "cohen_kappa": 0.4667367585942944,
+    "weighted_f1": 0.6036823720988016
+  },
+  "best_val": 0.5512701345391215,
+  "val_curve": [
+    0.43070324163935686,
+    0.4618956376129152,
+    0.4942148430227628,
+    0.5068929320292299,
+    0.5167147094111748,
+    0.4705040966427432,
+    0.48663968787225287,
+    0.5253231929919622,
+    0.5149147723044464,
+    0.5253815380496103,
+    0.500551137266361,
+    0.5248072979906625,
+    0.5340276946103409,
+    0.5426762793798867,
+    0.520146708072123,
+    0.5396975934558349,
+    0.5316185351309379,
+    0.5403254588841057,
+    0.5512701345391215,
+    0.5397883273029381,
+    0.5247234491160655,
+    0.533406548669217,
+    0.5328172514389173,
+    0.5246899507761589,
+    0.5489969350871139,
+    0.5357677476370832,
+    0.5444377713407711,
+    0.5408671583878929,
+    0.5334157323845796,
+    0.5403202418477121
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 18,
+    "n_evals": 30,
+    "reason": "ok"
+  },
+  "epochs_run": 30,
+  "wall_time_sec": 313.8095257282257,
+  "config": {
+    "name": "physionet_mi-sparcnet",
+    "group": "A",
+    "model": "sparcnet",
+    "dataset": "physionet_mi",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+    "num_classes": 4,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 64,
+    "num_workers": 16,
+    "epochs": 30,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 30,
+    "eval_every_steps": 0,
+    "seed": 0,
+    "device": "cuda",
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-04T10:52:50.796908+00:00",
+  "class_counts": {
+    "train": [
+      1593,
+      1557,
+      1581,
+      1569
+    ],
+    "val": [
+      435,
+      432,
+      434,
+      433
+    ],
+    "test": [
+      451,
+      449,
+      450,
+      453
+    ]
+  }
+}

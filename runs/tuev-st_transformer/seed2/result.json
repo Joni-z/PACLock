@@ -1,0 +1,107 @@
+{
+ "name": "tuev-st_transformer",
+ "dataset": "tuev",
+ "model": "st_transformer",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 3.425062,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.47859587041024537,
+  "cohen_kappa": 0.49616208138550055,
+  "weighted_f1": 0.7383251950839641
+ },
+ "best_val": 0.3993347687505612,
+ "val_curve": [
+  0.25663916610456383,
+  0.32504986083914167,
+  0.31765669062943824,
+  0.3531865611131787,
+  0.35273327610108285,
+  0.3993347687505612,
+  0.29360190214279114,
+  0.30341400260380824,
+  0.3184677043130947,
+  0.29604818885748296,
+  0.35019896796420547,
+  0.19518991369979954,
+  0.27269559175401703,
+  0.3087971829211268,
+  0.3513348092131008,
+  0.3038312205113697,
+  0.2667287292916195,
+  0.30230706985409816,
+  0.36605270983041927,
+  0.2735697836168046,
+  0.30117172743617027
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 21,
+  "best_val": 0.3993347687505612,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 21,
+ "wall_time_sec": 238.01142859458923,
+ "config": {
+  "name": "tuev-st_transformer",
+  "group": "A",
+  "model": "st_transformer",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 100,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 2,
+  "device": "cuda",
+  "label_smoothing": 0.1
+ },
+ "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 21,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "name": "tuev-tfm_pretrained",
+ "dataset": "tuev",
+ "model": "tfm",
+ "group": "B",
+ "seed": 0,
+ "n_params_M": 1.891114,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6087536703779156,
+  "cohen_kappa": 0.6542689710040224,
+  "weighted_f1": 0.8186898230286914
+ },
+ "best_val": 0.6093516467431664,
+ "val_curve": [
+  0.46259082693702647,
+  0.5422646697087283,
+  0.5827274988771431,
+  0.57426646644815,
+  0.5800983450205992,
+  0.5509613780340585,
+  0.5500756379124201,
+  0.5774448387101774,
+  0.5889077265035092,
+  0.47885164841832717,
+  0.6093516467431664,
+  0.5157185391912782,
+  0.566514173431576,
+  0.5232678462166837,
+  0.5340574610620771,
+  0.5451011394724568,
+  0.5800959105554955,
+  0.5381542401747279,
+  0.5573088598437899,
+  0.553340050262114,
+  0.5164244696186497,
+  0.555991418681611
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 22,
+  "best_val": 0.6093516467431664,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 11,
+ "wall_time_sec": 9707.024098396301,
+ "config": {
+  "name": "tuev-tfm_pretrained",
+  "group": "B",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "model": "tfm",
+  "loader": "tfm",
+  "pretrained": true,
+  "tfm_setting": "multiple",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 50,
+  "batch_size": 512,
+  "warmup_epochs": 5,
+  "label_smoothing": 0.1,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 100,
+  "num_classes": 6,
+  "loss": "cross_entropy",
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 10,
+  "n_evals": 22,
+  "reason": "ok"
+ }
+}

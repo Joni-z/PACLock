@@ -1,0 +1,121 @@
+{
+ "name": "physionet_mi-biot_scratch",
+ "dataset": "physionet_mi",
+ "model": "biot",
+ "group": "C",
+ "seed": 0,
+ "n_params_M": 3.199556,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.3337385435938944,
+  "cohen_kappa": 0.11178149215088129,
+  "weighted_f1": 0.33272977845192103
+ },
+ "best_val": 0.34250045866119316,
+ "val_curve": [
+  0.25456074443735066,
+  0.2599104203198324,
+  0.25847575434071496,
+  0.25115487517558266,
+  0.2694310137104382,
+  0.25172942862030623,
+  0.26421277028465506,
+  0.27912040909122604,
+  0.27513590884416694,
+  0.26860494125113427,
+  0.2585211652478625,
+  0.2538703481827594,
+  0.27695533558983326,
+  0.2597488818881446,
+  0.2880130241956042,
+  0.2781845511553848,
+  0.2675371306585952,
+  0.2808464022762467,
+  0.3207621414552406,
+  0.34198955404590775,
+  0.3339251849677775,
+  0.32673872052129777,
+  0.34250045866119316,
+  0.32725866235322787,
+  0.332689036049888,
+  0.31339501817946724,
+  0.3233213197418679,
+  0.3184623223919035,
+  0.3243189306463839,
+  0.3214000002708251,
+  0.3126938553097687,
+  0.32620505895064233,
+  0.31040564107716606
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 22,
+  "n_evals": 33,
+  "best_val": 0.34250045866119316,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 33,
+ "wall_time_sec": 254.81833958625793,
+ "config": {
+  "name": "physionet_mi-biot_scratch",
+  "group": "C",
+  "dataset": "physionet_mi",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/physionet_mi",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "epochs": 100,
+  "loss": "cross_entropy",
+  "model": "biot",
+  "loader": "biot",
+  "checkpoint": null,
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100,
+   "target_len": 800
+  },
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   1593,
+   1557,
+   1581,
+   1569
+  ],
+  "val": [
+   435,
+   432,
+   434,
+   433
+  ],
+  "test": [
+   451,
+   449,
+   450,
+   453
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 22,
+  "n_evals": 33,
+  "reason": "ok"
+ }
+}

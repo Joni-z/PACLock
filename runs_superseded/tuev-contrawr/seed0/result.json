@@ -1,0 +1,98 @@
+{
+  "name": "tuev-contrawr",
+  "dataset": "tuev",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.572582,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.45823275152342746,
+    "cohen_kappa": 0.43692731343743174,
+    "weighted_f1": 0.7116998239791434
+  },
+  "best_val": 0.49896335187613083,
+  "val_curve": [
+    0.4265266523065653,
+    0.3706943725404158,
+    0.1278223232229866,
+    0.40698599162569893,
+    0.41127655432562493,
+    0.24959832540947857,
+    0.49896335187613083,
+    0.36716571798092845,
+    0.3575277086041546,
+    0.44042970149207017,
+    0.4098691505840959,
+    0.44212199832980326,
+    0.4693482550314355,
+    0.4214289751526682,
+    0.4345751915440529,
+    0.47958101017487575,
+    0.37906715849050254,
+    0.360714259401133,
+    0.34475309202522453,
+    0.475607581377387,
+    0.3466057020221822,
+    0.3737353058183912
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 22,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "wall_time_sec": 599.9603595733643,
+  "config": {
+    "name": "tuev-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 0,
+    "device": "cuda",
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-04T12:04:52.683807+00:00",
+  "class_counts": {
+    "train": [
+      506,
+      10735,
+      5019,
+      963,
+      9750,
+      36742
+    ],
+    "val": [
+      119,
+      270,
+      627,
+      71,
+      456,
+      13038
+    ],
+    "test": [
+      567,
+      4564,
+      1904,
+      329,
+      2064,
+      18670
+    ]
+  }
+}

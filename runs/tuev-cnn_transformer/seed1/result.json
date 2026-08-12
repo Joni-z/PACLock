@@ -1,0 +1,102 @@
+{
+ "name": "tuev-cnn_transformer",
+ "dataset": "tuev",
+ "model": "cnn_transformer",
+ "group": "A",
+ "seed": 1,
+ "n_params_M": 3.155686,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.2707316134550927,
+  "cohen_kappa": 0.2778991028472996,
+  "weighted_f1": 0.606947487029453
+ },
+ "best_val": 0.418088948244453,
+ "val_curve": [
+  0.418088948244453,
+  0.4081064796816015,
+  0.32097213222797283,
+  0.37874931630950814,
+  0.3425685284470392,
+  0.3968771577814355,
+  0.38514903714636706,
+  0.32395105332932006,
+  0.40348844707922005,
+  0.3512969265899053,
+  0.31210647943811065,
+  0.37369703314739744,
+  0.3295328054558829,
+  0.36100240198812483,
+  0.2934942304514566,
+  0.39279286318902173
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "peaked-first-eval",
+  "peak_index": 0,
+  "n_evals": 16,
+  "best_val": 0.418088948244453,
+  "chance": 0.0,
+  "reason": "val peaked at the first evaluation, but reached 0.4181 vs chance 0.0000 -- converged early, not untrained",
+  "rule_version": 2
+ },
+ "epochs_run": 16,
+ "wall_time_sec": 3176.632140636444,
+ "config": {
+  "name": "tuev-cnn_transformer",
+  "group": "A",
+  "model": "cnn_transformer",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 100,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 1,
+  "device": "cuda",
+  "label_smoothing": 0.1
+ },
+ "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": false,
+  "status": "mis-configured",
+  "peak_index": 0,
+  "n_evals": 16,
+  "reason": "val peak at epoch 0"
+ }
+}

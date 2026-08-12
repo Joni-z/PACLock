@@ -1,0 +1,104 @@
+{
+ "name": "sleepedf-ffcl",
+ "dataset": "sleepedf",
+ "model": "ffcl",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 2.509669,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6885117796609107,
+  "cohen_kappa": 0.6823878319204153,
+  "weighted_f1": 0.7722666291625851
+ },
+ "best_val": 0.6565393373115741,
+ "val_curve": [
+  0.6084738091222471,
+  0.6565393373115741,
+  0.6451394856622696,
+  0.6512772310844382,
+  0.648129556627334,
+  0.638418780724231,
+  0.6540676337855674,
+  0.6345021476958392,
+  0.6380545840962594,
+  0.6278399826290116,
+  0.6373249683435291,
+  0.6255818062098515,
+  0.622287956241508,
+  0.6208253388219493,
+  0.6180849167624689,
+  0.6102656429588853,
+  0.6103209027883011
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 1,
+  "n_evals": 17,
+  "best_val": 0.6565393373115741,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 17,
+ "wall_time_sec": 810.3190274238586,
+ "config": {
+  "name": "sleepedf-ffcl",
+  "group": "A",
+  "model": "ffcl",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 60,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 2,
+  "device": "cuda",
+  "label_smoothing": 0.1,
+  "model_kwargs": {
+   "token_size": 100,
+   "steps": 8
+  }
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 1,
+  "n_evals": 17,
+  "reason": "ok"
+ }
+}

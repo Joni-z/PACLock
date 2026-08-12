@@ -1,0 +1,108 @@
+{
+ "name": "tuev-ffcl",
+ "dataset": "tuev",
+ "model": "ffcl",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 2.415846,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.5145751028385782,
+  "cohen_kappa": 0.4827292256043134,
+  "weighted_f1": 0.7428773477869234
+ },
+ "best_val": 0.457746941341305,
+ "val_curve": [
+  0.25879577847036117,
+  0.3637896653497137,
+  0.3827744696938059,
+  0.30898189294358,
+  0.383189979296914,
+  0.31530465792752915,
+  0.457746941341305,
+  0.32305062978670496,
+  0.39014118222989247,
+  0.38839261485155496,
+  0.3351374148544528,
+  0.3549829723616703,
+  0.4174833428555852,
+  0.41989111257477285,
+  0.31427438457149837,
+  0.416682857535118,
+  0.32910859974917317,
+  0.37836177405546223,
+  0.37326194057241324,
+  0.3324016105451931,
+  0.4295032503148475,
+  0.36166662951167383
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 22,
+  "best_val": 0.457746941341305,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 22,
+ "wall_time_sec": 978.8252158164978,
+ "config": {
+  "name": "tuev-ffcl",
+  "group": "A",
+  "model": "ffcl",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 100,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 2,
+  "device": "cuda",
+  "label_smoothing": 0.1
+ },
+ "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 22,
+  "reason": "ok"
+ }
+}

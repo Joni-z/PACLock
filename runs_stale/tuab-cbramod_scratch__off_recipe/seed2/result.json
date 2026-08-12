@@ -1,0 +1,90 @@
+{
+ "name": "tuab-cbramod_scratch",
+ "dataset": "tuab",
+ "model": "cbramod",
+ "group": "C",
+ "seed": 2,
+ "n_params_M": 30.645202,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.7800271968963699,
+  "pr_auc": 0.873939395726948,
+  "auroc": 0.8716538654361279
+ },
+ "best_val": 0.8841940212335304,
+ "val_curve": [
+  0.8841940212335304,
+  0.8652348316220676,
+  0.8600865492126912,
+  0.8623164109319216,
+  0.8817269606639968,
+  0.867228693725843,
+  0.8759039773045105,
+  0.8657107758807574,
+  0.8654014572117379,
+  0.8593879608866504,
+  0.8719274436047912
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "peaked-first-eval",
+  "peak_index": 0,
+  "n_evals": 11,
+  "best_val": 0.8841940212335304,
+  "chance": 0.5,
+  "reason": "val peaked at the first evaluation, but reached 0.8842 vs chance 0.5000 -- converged early, not untrained",
+  "rule_version": 2
+ },
+ "epochs_run": 11,
+ "wall_time_sec": 4093.1168599128723,
+ "config": {
+  "name": "tuab-cbramod_scratch",
+  "group": "C",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuab",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": false,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "seed": 2
+ },
+ "data_manifest_created": "2026-08-04T12:32:29.190287+00:00",
+ "class_counts": {
+  "train": [
+   147894,
+   149209
+  ],
+  "val": [
+   35815,
+   39592
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": false,
+  "status": "mis-configured",
+  "peak_index": 0,
+  "n_evals": 11,
+  "reason": "val peak at epoch 0"
+ }
+}

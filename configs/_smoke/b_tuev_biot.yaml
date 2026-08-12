@@ -1,0 +1,26 @@
+name: tuev-biot_prest16
+group: B
+dataset: tuev
+data_root: /work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tuev
+checkpoint: prest16
+model: biot
+loader: biot
+optimizer: adam
+lr: 0.001
+weight_decay: 1.0e-05
+epochs: 2
+scheduler: null
+grad_clip: null
+patience: 2
+num_workers: 16
+device: cuda
+model_kwargs:
+  token_size: 200
+  hop_length: 100
+num_classes: 6
+sample_rate: 200
+batch_size: 128
+loss: cross_entropy
+label_smoothing: 0.0
+eval_every_steps: 0
+seed: 0

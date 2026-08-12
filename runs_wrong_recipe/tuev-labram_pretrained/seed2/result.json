@@ -1,0 +1,108 @@
+{
+ "name": "tuev-labram_pretrained",
+ "dataset": "tuev",
+ "model": "labram",
+ "group": "B",
+ "seed": 2,
+ "n_params_M": 5.821142,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6763721722481403,
+  "cohen_kappa": 0.6607596652316656,
+  "weighted_f1": 0.8342184062062754
+ },
+ "best_val": 0.7006484428532511,
+ "val_curve": [
+  0.5793316359770946,
+  0.5918446987449253,
+  0.6200582948788382,
+  0.6599366353576377,
+  0.595454913825291,
+  0.651085542524044,
+  0.6771576482216723,
+  0.7006484428532511,
+  0.6292624320157378,
+  0.6785362910057923,
+  0.6611669607485497,
+  0.6180965023724561,
+  0.6671768037497114,
+  0.6427493010939617,
+  0.5587239955590718,
+  0.582808516037995,
+  0.5385214863449446,
+  0.6303370692887478
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "best_val": 0.7006484428532511,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 18,
+ "wall_time_sec": 3207.1252501010895,
+ "config": {
+  "name": "tuev-labram_pretrained",
+  "group": "B",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_labram/tuev",
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0005,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.0,
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   581,
+   7732,
+   5199,
+   916,
+   8264,
+   41758
+  ],
+  "val": [
+   64,
+   3522,
+   985,
+   146,
+   2638,
+   11682
+  ],
+  "test": [
+   249,
+   3430,
+   1864,
+   310,
+   1980,
+   18234
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 7,
+  "n_evals": 18,
+  "reason": "ok"
+ }
+}

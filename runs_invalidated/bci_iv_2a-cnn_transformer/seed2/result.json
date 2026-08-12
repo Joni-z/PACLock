@@ -1,0 +1,91 @@
+{
+  "name": "bci_iv_2a-cnn_transformer",
+  "dataset": "bci_iv_2a",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 3.310532,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.4610339506172839,
+    "cohen_kappa": 0.2813786008230452,
+    "weighted_f1": 0.4493445680857317
+  },
+  "best_val": 0.4467592592592593,
+  "val_curve": [
+    0.2476851851851852,
+    0.2685185185185185,
+    0.337962962962963,
+    0.3310185185185185,
+    0.4004629629629629,
+    0.3171296296296296,
+    0.4467592592592593,
+    0.4120370370370371,
+    0.4074074074074074,
+    0.4027777777777778,
+    0.42361111111111116,
+    0.41898148148148145,
+    0.36111111111111105,
+    0.3935185185185185,
+    0.40509259259259256,
+    0.4189814814814815,
+    0.4027777777777778,
+    0.3935185185185185,
+    0.39814814814814814,
+    0.3912037037037037,
+    0.3842592592592593,
+    0.40046296296296297
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 22,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "wall_time_sec": 19.621873140335083,
+  "config": {
+    "name": "bci_iv_2a-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "bci_iv_2a",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+    "num_classes": 4,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "batch_size": 64,
+    "num_workers": 8,
+    "epochs": 50,
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 2,
+    "device": "cuda"
+  },
+  "data_manifest_created": "2026-08-04T10:52:01.822097+00:00",
+  "class_counts": {
+    "train": [
+      540,
+      540,
+      540,
+      540
+    ],
+    "val": [
+      108,
+      108,
+      108,
+      108
+    ],
+    "test": [
+      648,
+      648,
+      648,
+      648
+    ]
+  }
+}

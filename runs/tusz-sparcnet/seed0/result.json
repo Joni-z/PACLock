@@ -1,0 +1,97 @@
+{
+ "name": "tusz-sparcnet",
+ "dataset": "tusz",
+ "model": "sparcnet",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 1.141665,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.5927842738152609,
+  "pr_auc": 0.4795096413826948,
+  "auroc": 0.8874471107135927
+ },
+ "best_val": 0.23611123936622158,
+ "val_curve": [
+  0.15359107789546073,
+  0.14114716861085097,
+  0.15510544939251486,
+  0.16941598672519553,
+  0.1996932084798862,
+  0.13385077842656934,
+  0.11419773743717437,
+  0.18323846014892944,
+  0.15636381718607076,
+  0.1654166887643166,
+  0.20305932684953049,
+  0.14856938359130972,
+  0.1870943611452962,
+  0.23611123936622158,
+  0.18009421531153197,
+  0.21211147396949226,
+  0.08238835202776086,
+  0.15226592040804413,
+  0.17379865991759225,
+  0.20998443891017315,
+  0.19343393604867953,
+  0.1943392575134395,
+  0.12925308245961226,
+  0.1336358684007999
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 13,
+  "n_evals": 24,
+  "best_val": 0.23611123936622158,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 6,
+ "wall_time_sec": 4546.0358209609985,
+ "config": {
+  "name": "tusz-sparcnet",
+  "group": "A",
+  "model": "sparcnet",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 0,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 13,
+  "n_evals": 24,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "name": "bci_iv_2a-tfm_pretrained",
+ "dataset": "bci_iv_2a",
+ "model": "tfm",
+ "group": "B",
+ "seed": 2,
+ "n_params_M": 1.891352,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.3680555555555556,
+  "cohen_kappa": 0.15740740740740744,
+  "weighted_f1": 0.36083420033600305
+ },
+ "best_val": 0.3680555555555556,
+ "val_curve": [
+  0.26851851851851855,
+  0.2638888888888889,
+  0.27546296296296297,
+  0.27314814814814814,
+  0.2638888888888889,
+  0.3287037037037037,
+  0.30324074074074076,
+  0.3125,
+  0.3333333333333333,
+  0.3680555555555556,
+  0.32175925925925924,
+  0.3425925925925926,
+  0.33796296296296297,
+  0.3564814814814815,
+  0.31712962962962965,
+  0.35185185185185186,
+  0.33796296296296297,
+  0.32407407407407407,
+  0.3425925925925926,
+  0.33564814814814814
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 20,
+  "best_val": 0.3680555555555556,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 460.56818771362305,
+ "config": {
+  "name": "bci_iv_2a-tfm_pretrained",
+  "group": "B",
+  "dataset": "bci_iv_2a",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/bci_iv_2a",
+  "model": "tfm",
+  "loader": "tfm",
+  "pretrained": true,
+  "tfm_setting": "multiple",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 50,
+  "batch_size": 16,
+  "warmup_epochs": 5,
+  "label_smoothing": 0.1,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 4,
+  "loss": "cross_entropy",
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   540,
+   540,
+   540,
+   540
+  ],
+  "val": [
+   108,
+   108,
+   108,
+   108
+  ],
+  "test": [
+   648,
+   648,
+   648,
+   648
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

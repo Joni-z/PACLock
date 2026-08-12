@@ -1,0 +1,107 @@
+{
+ "name": "sleepedf-ffcl",
+ "dataset": "sleepedf",
+ "model": "ffcl",
+ "group": "A",
+ "seed": 1,
+ "n_params_M": 2.509669,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6928190314852645,
+  "cohen_kappa": 0.6729631414139671,
+  "weighted_f1": 0.7632109273182874
+ },
+ "best_val": 0.6617492367062517,
+ "val_curve": [
+  0.6100543725070504,
+  0.6368095573803805,
+  0.6476044481379506,
+  0.6445386857903904,
+  0.6617492367062517,
+  0.6585658854009216,
+  0.655483277717642,
+  0.6408531885417816,
+  0.6316046412512903,
+  0.6275113543053114,
+  0.6324222809429699,
+  0.6268905306630536,
+  0.6144251635729802,
+  0.6208924791260708,
+  0.6119472125336342,
+  0.61906159750995,
+  0.6080141602896022,
+  0.6213049579774492,
+  0.59740722737017,
+  0.6063179166280985
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "best_val": 0.6617492367062517,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 957.6185476779938,
+ "config": {
+  "name": "sleepedf-ffcl",
+  "group": "A",
+  "model": "ffcl",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 60,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 1,
+  "device": "cuda",
+  "label_smoothing": 0.1,
+  "model_kwargs": {
+   "token_size": 100,
+   "steps": 8
+  }
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

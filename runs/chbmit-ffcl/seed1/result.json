@@ -1,0 +1,91 @@
+{
+ "name": "chbmit-ffcl",
+ "dataset": "chbmit",
+ "model": "ffcl",
+ "group": "A",
+ "seed": 1,
+ "n_params_M": 2.464994,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.6319833727204195,
+  "pr_auc": 0.47355005610126377,
+  "auroc": 0.9032174590670767
+ },
+ "best_val": 0.6302420966233314,
+ "val_curve": [
+  0.29121585153245705,
+  0.4111355617071068,
+  0.3274354794244098,
+  0.33561241567125083,
+  0.46836368362278746,
+  0.5090374632152094,
+  0.6302420966233314,
+  0.5679217624300206,
+  0.5852553150963238,
+  0.46937538688792696,
+  0.5212361077490653,
+  0.5316330598502197,
+  0.5019894271035898,
+  0.5393915572291704,
+  0.4961967311929409,
+  0.4577325071588831
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 16,
+  "best_val": 0.6302420966233314,
+  "chance": 0.0070808157099697885,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 4,
+ "wall_time_sec": 952.9280581474304,
+ "config": {
+  "name": "chbmit-ffcl",
+  "group": "A",
+  "model": "ffcl",
+  "dataset": "chbmit",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "focal",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 1,
+  "device": "cuda",
+  "focal_alpha": 0.25,
+  "focal_gamma": 2.0
+ },
+ "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+ "class_counts": {
+  "train": [
+   313322,
+   2883
+  ],
+  "val": [
+   21034,
+   150
+  ],
+  "test": [
+   17110,
+   276
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 6,
+  "n_evals": 16,
+  "reason": "ok"
+ }
+}

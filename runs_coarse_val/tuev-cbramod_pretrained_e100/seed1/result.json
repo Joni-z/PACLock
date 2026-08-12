@@ -1,0 +1,93 @@
+{
+  "name": "tuev-cbramod_pretrained",
+  "dataset": "tuev",
+  "model": "cbramod",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 17.846006,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5017181759970313,
+    "cohen_kappa": 0.6104264098817243,
+    "weighted_f1": 0.7945169898194702
+  },
+  "best_val": 0.5639365623254928,
+  "val_curve": [
+    0.5639365623254928,
+    0.5001244197789037,
+    0.5005215559690782,
+    0.3918847027722151,
+    0.39023878141444257,
+    0.519811973654278,
+    0.47678896232191814,
+    0.4239071726910668,
+    0.3660245627054338,
+    0.33908491771083205,
+    0.2569906806823903
+  ],
+  "verdict": {
+    "ok": false,
+    "status": "mis-configured",
+    "peak_index": 0,
+    "n_evals": 11,
+    "reason": "val peak at epoch 0"
+  },
+  "epochs_run": 1,
+  "wall_time_sec": 126.72853016853333,
+  "config": {
+    "name": "tuev-cbramod_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "model": "cbramod",
+    "loader": null,
+    "pretrained": true,
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "multi_lr": true,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.0,
+    "seed": 1
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

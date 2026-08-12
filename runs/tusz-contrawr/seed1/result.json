@@ -1,0 +1,93 @@
+{
+ "name": "tusz-contrawr",
+ "dataset": "tusz",
+ "model": "contrawr",
+ "group": "A",
+ "seed": 1,
+ "n_params_M": 1.571554,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.5405634404722027,
+  "pr_auc": 0.48494144832251684,
+  "auroc": 0.8839345546337064
+ },
+ "best_val": 0.3738996460095623,
+ "val_curve": [
+  0.21871272914326284,
+  0.2290974375692833,
+  0.26256825679663104,
+  0.25914515666859117,
+  0.3036715784596708,
+  0.3431138933234959,
+  0.33941867144228544,
+  0.27427240708711537,
+  0.3738996460095623,
+  0.3560745768038025,
+  0.359692655503835,
+  0.34494111859442467,
+  0.3270194774904962,
+  0.3341064448725515,
+  0.3154636426717614,
+  0.337394965261526,
+  0.32305125971321247,
+  0.3361607479556448,
+  0.34942020437130256,
+  0.29008835177299336
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 20,
+  "best_val": 0.3738996460095623,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 5,
+ "wall_time_sec": 1226.5991497039795,
+ "config": {
+  "name": "tusz-contrawr",
+  "group": "A",
+  "model": "contrawr",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 1,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

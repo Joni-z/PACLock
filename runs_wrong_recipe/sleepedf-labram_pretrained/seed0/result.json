@@ -1,0 +1,112 @@
+{
+ "name": "sleepedf-labram_pretrained",
+ "dataset": "sleepedf",
+ "model": "labram",
+ "group": "B",
+ "seed": 0,
+ "n_params_M": 5.820941,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6324912306608007,
+  "cohen_kappa": 0.6019138152473854,
+  "weighted_f1": 0.723875186793563
+ },
+ "best_val": 0.6228000367766382,
+ "val_curve": [
+  0.5816625436618512,
+  0.6012989137088243,
+  0.6084549733155298,
+  0.6062027782567585,
+  0.6180984975300388,
+  0.6081182009312442,
+  0.6037070488120257,
+  0.6090461031163057,
+  0.6228000367766382,
+  0.6145080770664337,
+  0.6102782131007528,
+  0.610783882081893,
+  0.5906149272695356,
+  0.5965552413502293,
+  0.5976899097750411,
+  0.59704893673297,
+  0.5930318734685087,
+  0.5771823471569774,
+  0.5872894654642487
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 19,
+  "best_val": 0.6228000367766382,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 19,
+ "wall_time_sec": 2280.430172920227,
+ "config": {
+  "name": "sleepedf-labram_pretrained",
+  "group": "B",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.05,
+  "lr": 0.0005,
+  "max_lr": 0.0004,
+  "scheduler": "cosine",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "num_classes": 5,
+  "epochs": 50,
+  "loss": "cross_entropy",
+  "warmup_epochs": 5,
+  "layer_decay": 0.65,
+  "model": "labram",
+  "loader": "labram",
+  "pretrained": true,
+  "loader_divisor": 1.0,
+  "model_kwargs": {
+   "montage_mode": "positional",
+   "target_len": 3000
+  },
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 8,
+  "n_evals": 19,
+  "reason": "ok"
+ }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "tuev-st_transformer",
+  "dataset": "tuev",
+  "model": "st_transformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 3.425062,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.4577323440597607,
+    "cohen_kappa": 0.4792475508231947,
+    "weighted_f1": 0.7317688970797575
+  },
+  "best_val": 0.3693156552605247,
+  "val_curve": [
+    0.1518302379000196,
+    0.3529203367108563,
+    0.3102542877300867,
+    0.2951567423641178,
+    0.3319104954352703,
+    0.2508556053459359,
+    0.3693156552605247,
+    0.2860365691679183,
+    0.26947443878222466,
+    0.295516678548964,
+    0.2701647187990335,
+    0.2629726841006652,
+    0.29921139517667716,
+    0.2744183480205298,
+    0.3010892641514056,
+    0.2466267279461738,
+    0.2934131016968379,
+    0.3004623193892305,
+    0.2467719142814213,
+    0.3451538961727969,
+    0.22993167787500002,
+    0.2800353072630657
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 22,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "wall_time_sec": 236.20016384124756,
+  "config": {
+    "name": "tuev-st_transformer",
+    "group": "A",
+    "model": "st_transformer",
+    "dataset": "tuev",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 2,
+    "device": "cuda",
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-04T12:04:52.683807+00:00",
+  "class_counts": {
+    "train": [
+      506,
+      10735,
+      5019,
+      963,
+      9750,
+      36742
+    ],
+    "val": [
+      119,
+      270,
+      627,
+      71,
+      456,
+      13038
+    ],
+    "test": [
+      567,
+      4564,
+      1904,
+      329,
+      2064,
+      18670
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+ "name": "sleepedf-ffcl",
+ "dataset": "sleepedf",
+ "model": "ffcl",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 2.509669,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.7076701477231506,
+  "cohen_kappa": 0.6785091268616948,
+  "weighted_f1": 0.7794634172795298
+ },
+ "best_val": 0.6573887503826096,
+ "val_curve": [
+  0.5811912646542524,
+  0.6323192315568185,
+  0.6550636421105165,
+  0.6427674557899989,
+  0.6573887503826096,
+  0.6474654089201424,
+  0.6447993993327977,
+  0.6384100777495019,
+  0.6296277612354606,
+  0.6333233884540835,
+  0.6236580870953121,
+  0.6269811977184929,
+  0.6191162444261116,
+  0.6341565870859742,
+  0.6055844914302768,
+  0.610489191362229,
+  0.6035116703761843,
+  0.6006792273119597,
+  0.6059815590658284,
+  0.6017172331077061
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "best_val": 0.6573887503826096,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 950.7659847736359,
+ "config": {
+  "name": "sleepedf-ffcl",
+  "group": "A",
+  "model": "ffcl",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/sleepedf",
+  "num_classes": 5,
+  "sample_rate": 100,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 60,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 0,
+  "device": "cuda",
+  "label_smoothing": 0.1,
+  "model_kwargs": {
+   "token_size": 100,
+   "steps": 8
+  }
+ },
+ "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

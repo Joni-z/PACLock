@@ -1,0 +1,107 @@
+{
+  "name": "isruc-labram_pretrained",
+  "dataset": "isruc",
+  "model": "labram",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 5.820941,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7835867516748898,
+    "cohen_kappa": 0.7537584766490424,
+    "weighted_f1": 0.8055761421858395
+  },
+  "best_val": 0.7360615751483892,
+  "val_curve": [
+    0.6987726885580472,
+    0.6982138053694239,
+    0.6950480320319052,
+    0.7080162309746127,
+    0.6755914493508177,
+    0.6937088028170334,
+    0.7209125800826912,
+    0.7210995796296743,
+    0.7360615751483892,
+    0.7280081060511596,
+    0.6806749583542913,
+    0.7051470109904525,
+    0.7035987729325383,
+    0.6983574265178251,
+    0.6850104943722133,
+    0.7043345350980881,
+    0.7046436895364954,
+    0.6926201948467235,
+    0.6824525404057737
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 8,
+    "n_evals": 19,
+    "best_val": 0.7360615751483892,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 19,
+  "stopped_by": "patience",
+  "wall_time_sec": 2886.7554109096527,
+  "config": {
+    "name": "isruc-labram_pretrained",
+    "group": "B",
+    "dataset": "isruc",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 5,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "flatten_sequences": true,
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 3000
+    },
+    "seed": 1,
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      16493,
+      9147,
+      21310,
+      13234,
+      9236
+    ],
+    "val": [
+      2072,
+      1015,
+      3226,
+      1980,
+      1067
+    ],
+    "test": [
+      1348,
+      1031,
+      3120,
+      1808,
+      1393
+    ]
+  }
+}

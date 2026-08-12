@@ -1,0 +1,86 @@
+{
+ "name": "tuab-biot_prest16",
+ "dataset": "tuab",
+ "model": "biot",
+ "group": "B",
+ "seed": 0,
+ "n_params_M": 3.186706,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.7970880328944547,
+  "pr_auc": 0.8656032727481568,
+  "auroc": 0.8749612037092328
+ },
+ "best_val": 0.8709194085960081,
+ "val_curve": [
+  0.8687661696273794,
+  0.8709194085960081,
+  0.856538566512079,
+  0.858604475722653,
+  0.8518783812148567,
+  0.8440956647452935,
+  0.8523432148775794
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 1,
+  "n_evals": 7,
+  "best_val": 0.8709194085960081,
+  "chance": 0.5,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 7,
+ "wall_time_sec": 938.1929416656494,
+ "config": {
+  "name": "tuab-biot_prest16",
+  "group": "B",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_biot/tuab",
+  "checkpoint": "prest16",
+  "model": "biot",
+  "loader": "biot",
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 100,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 5,
+  "num_workers": 16,
+  "device": "cuda",
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100
+  },
+  "num_classes": 2,
+  "sample_rate": 200,
+  "batch_size": 512,
+  "loss": "bce_with_logits",
+  "eval_every_steps": 0,
+  "seed": 0
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   145617,
+   153341
+  ],
+  "val": [
+   38092,
+   35460
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 1,
+  "n_evals": 7,
+  "reason": "ok"
+ }
+}

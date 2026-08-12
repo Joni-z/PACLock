@@ -1,0 +1,91 @@
+{
+ "name": "tuab-sparcnet",
+ "dataset": "tuab",
+ "model": "sparcnet",
+ "group": "A",
+ "seed": 2,
+ "n_params_M": 1.141665,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.8043317658477103,
+  "pr_auc": 0.8895794843035723,
+  "auroc": 0.8898089138322287
+ },
+ "best_val": 0.8871873985093297,
+ "val_curve": [
+  0.8459079085098833,
+  0.819582433830798,
+  0.8469710808024906,
+  0.864537739077922,
+  0.816730623037659,
+  0.8026667721353928,
+  0.8644665208891689,
+  0.8729201667563384,
+  0.8827066209357505,
+  0.8871873985093297,
+  0.8085356039250784,
+  0.8657607689173672,
+  0.856654119047652,
+  0.8495484850825341,
+  0.7951162925641628,
+  0.8287436275530445,
+  0.8716289801091897,
+  0.8507346676290823
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 18,
+  "best_val": 0.8871873985093297,
+  "chance": 0.5,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 6,
+ "wall_time_sec": 3836.3112258911133,
+ "config": {
+  "name": "tuab-sparcnet",
+  "group": "A",
+  "model": "sparcnet",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuab",
+  "num_classes": 2,
+  "sample_rate": 200,
+  "loss": "bce_with_logits",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 20,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 8,
+  "eval_every_steps": 200,
+  "seed": 2,
+  "device": "cuda"
+ },
+ "data_manifest_created": "2026-08-04T12:32:29.190287+00:00",
+ "class_counts": {
+  "train": [
+   147894,
+   149209
+  ],
+  "val": [
+   35815,
+   39592
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 18,
+  "reason": "ok"
+ }
+}

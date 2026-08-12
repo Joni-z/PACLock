@@ -1,0 +1,114 @@
+{
+ "name": "bci_iv_2a-cbramod_pac",
+ "dataset": "bci_iv_2a",
+ "model": "cbramod",
+ "group": "D",
+ "seed": 0,
+ "n_params_M": 19.125604,
+ "primary_metric": "balanced_acc",
+ "test": {
+  "balanced_acc": 0.5285493827160493,
+  "cohen_kappa": 0.37139917695473246,
+  "weighted_f1": 0.5291324179125155
+ },
+ "best_val": 0.5416666666666666,
+ "val_curve": [
+  0.28935185185185186,
+  0.34953703703703703,
+  0.400462962962963,
+  0.4444444444444444,
+  0.4699074074074074,
+  0.49768518518518523,
+  0.49537037037037035,
+  0.5300925925925927,
+  0.5046296296296295,
+  0.5138888888888888,
+  0.5300925925925926,
+  0.5069444444444444,
+  0.525462962962963,
+  0.5023148148148148,
+  0.5092592592592593,
+  0.5162037037037037,
+  0.5416666666666666,
+  0.5277777777777778,
+  0.5393518518518519,
+  0.5300925925925926,
+  0.5092592592592593,
+  0.5092592592592593,
+  0.5115740740740741,
+  0.5208333333333334,
+  0.5092592592592593,
+  0.5347222222222222,
+  0.5115740740740741
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 16,
+  "n_evals": 27,
+  "best_val": 0.5416666666666666,
+  "chance": 0.25,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 27,
+ "wall_time_sec": 89.7503457069397,
+ "config": {
+  "name": "bci_iv_2a-cbramod_pac",
+  "group": "D",
+  "dataset": "bci_iv_2a",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_pac/bci_iv_2a",
+  "model": "cbramod",
+  "loader": null,
+  "pretrained": true,
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 0.05,
+  "epochs": 50,
+  "batch_size": 64,
+  "multi_lr": true,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model_kwargs": {
+   "dropout": 0.1
+  },
+  "num_classes": 4,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "seed": 0,
+  "_pac_note": "PAC-methodology protocol: 0.5 Hz high-pass, no notch. Identical to the frozen config in every other respect."
+ },
+ "data_manifest_created": "2026-08-09T16:33:33.581456+00:00",
+ "class_counts": {
+  "train": [
+   540,
+   540,
+   540,
+   540
+  ],
+  "val": [
+   108,
+   108,
+   108,
+   108
+  ],
+  "test": [
+   648,
+   648,
+   648,
+   648
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 16,
+  "n_evals": 27,
+  "reason": "ok"
+ }
+}

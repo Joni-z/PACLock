@@ -1,0 +1,106 @@
+{
+ "name": "tuev-sparcnet",
+ "dataset": "tuev",
+ "model": "sparcnet",
+ "group": "A",
+ "seed": 1,
+ "n_params_M": 0.991531,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.4978570594759561,
+  "cohen_kappa": 0.5198877690017588,
+  "weighted_f1": 0.7514002574237991
+ },
+ "best_val": 0.3371955361358784,
+ "val_curve": [
+  0.3346334343447731,
+  0.2731421497952349,
+  0.16720509896841396,
+  0.203805971619743,
+  0.3371955361358784,
+  0.32485451420947953,
+  0.20223766530831044,
+  0.14671126225458453,
+  0.22579694592051802,
+  0.2626808846987311,
+  0.14084293891195743,
+  0.07498704757467489,
+  0.16192278474617128,
+  0.2784186917701956,
+  0.14456498837036924,
+  0.2234947380958513,
+  0.2662509752120851,
+  0.25573864855226847,
+  0.26170744744504415,
+  0.15863836825984723
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "best_val": 0.3371955361358784,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 2118.0190539360046,
+ "config": {
+  "name": "tuev-sparcnet",
+  "group": "A",
+  "model": "sparcnet",
+  "dataset": "tuev",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev",
+  "num_classes": 6,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 100,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 1,
+  "device": "cuda",
+  "label_smoothing": 0.1
+ },
+ "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+ "class_counts": {
+  "train": [
+   526,
+   10963,
+   5515,
+   984,
+   10553,
+   39904
+  ],
+  "val": [
+   119,
+   291,
+   669,
+   86,
+   500,
+   13822
+  ],
+  "test": [
+   567,
+   4677,
+   1998,
+   329,
+   2204,
+   19646
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

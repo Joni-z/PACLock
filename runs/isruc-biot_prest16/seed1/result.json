@@ -1,0 +1,114 @@
+{
+ "name": "isruc-biot_prest16",
+ "dataset": "isruc",
+ "model": "biot",
+ "group": "B",
+ "seed": 1,
+ "n_params_M": 3.187589,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.7690312844827331,
+  "cohen_kappa": 0.7300137281682909,
+  "weighted_f1": 0.7842701198320715
+ },
+ "best_val": 0.7314800024938826,
+ "val_curve": [
+  0.6547900273789848,
+  0.6909663569200496,
+  0.7104011877851351,
+  0.6865710735496708,
+  0.6796146485047925,
+  0.7000376169503816,
+  0.6939126875349655,
+  0.704042800510009,
+  0.7260774609601032,
+  0.7303125959018355,
+  0.7086852169957565,
+  0.7314800024938826,
+  0.7194940776464896,
+  0.7135134018312352,
+  0.7129191501744387,
+  0.71271980704817,
+  0.6956284824126491,
+  0.667784018273494,
+  0.7012807715908126,
+  0.6750142476145576,
+  0.6862294955672115,
+  0.6976007289102951
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 11,
+  "n_evals": 22,
+  "best_val": 0.7314800024938826,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 22,
+ "wall_time_sec": 2213.7736992836,
+ "config": {
+  "name": "isruc-biot_prest16",
+  "group": "B",
+  "dataset": "isruc",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+  "sample_rate": 200,
+  "optimizer": "adamw",
+  "weight_decay": 0.01,
+  "lr": 0.0004,
+  "max_lr": 0.0004,
+  "scheduler": "onecycle",
+  "pct_start": 0.2,
+  "batch_size": 64,
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 0,
+  "model": "biot",
+  "loader": "biot",
+  "checkpoint": "prest16",
+  "model_kwargs": {
+   "token_size": 200,
+   "hop_length": 100,
+   "target_len": 3000
+  },
+  "num_classes": 5,
+  "epochs": 40,
+  "loss": "cross_entropy",
+  "flatten_sequences": true,
+  "seed": 1
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   16493,
+   9147,
+   21310,
+   13234,
+   9236
+  ],
+  "val": [
+   2072,
+   1015,
+   3226,
+   1980,
+   1067
+  ],
+  "test": [
+   1348,
+   1031,
+   3120,
+   1808,
+   1393
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 11,
+  "n_evals": 22,
+  "reason": "ok"
+ }
+}

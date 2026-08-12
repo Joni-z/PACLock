@@ -1,0 +1,103 @@
+{
+  "name": "faced-labram_pretrained",
+  "dataset": "faced",
+  "model": "labram",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 5.821745,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.1111111111111111,
+    "cohen_kappa": 0.0,
+    "weighted_f1": 0.03571428571428571
+  },
+  "best_val": 0.1111111111111111,
+  "val_curve": [
+    0.1111111111111111,
+    0.1111111111111111,
+    0.1111111111111111,
+    0.1111111111111111,
+    0.1111111111111111,
+    0.1111111111111111,
+    0.1111111111111111,
+    0.1111111111111111,
+    0.1111111111111111,
+    0.1111111111111111,
+    0.1111111111111111
+  ],
+  "verdict": {
+    "ok": false,
+    "status": "mis-configured",
+    "peak_index": 0,
+    "n_evals": 11,
+    "reason": "val peak at epoch 0"
+  },
+  "epochs_run": 11,
+  "wall_time_sec": 249.44166088104248,
+  "config": {
+    "name": "faced-labram_pretrained",
+    "group": "B",
+    "dataset": "faced",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/faced",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "num_classes": 9,
+    "epochs": 100,
+    "loss": "cross_entropy",
+    "seed": 2
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      720,
+      720,
+      720,
+      720,
+      960,
+      720,
+      720,
+      720,
+      720
+    ],
+    "val": [
+      180,
+      180,
+      180,
+      180,
+      240,
+      180,
+      180,
+      180,
+      180
+    ],
+    "test": [
+      207,
+      207,
+      207,
+      207,
+      276,
+      207,
+      207,
+      207,
+      207
+    ]
+  }
+}

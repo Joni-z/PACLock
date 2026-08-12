@@ -1,0 +1,121 @@
+{
+ "name": "sleepedf-paclock_pac",
+ "dataset": "sleepedf",
+ "model": "paclock",
+ "group": "D",
+ "seed": 0,
+ "n_params_M": 1.635605,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.6000952156070574,
+  "cohen_kappa": 0.6254279312237427,
+  "weighted_f1": 0.7425048764625797
+ },
+ "best_val": 0.6009277802105437,
+ "val_curve": [
+  0.5330781745380533,
+  0.5802764901777893,
+  0.5931305458979179,
+  0.5958664021741976,
+  0.5827112792992114,
+  0.6009277802105437,
+  0.5921812462680096,
+  0.5755302805970058,
+  0.5754616727238591,
+  0.579787199362855,
+  0.5873067949149837,
+  0.5648267687202295,
+  0.5725606836381971,
+  0.5730019284581058,
+  0.5597605207356203,
+  0.5643680603433612,
+  0.5615125214122434,
+  0.5646938511796505,
+  0.5599933366101608,
+  0.5603515485560383
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 20,
+  "best_val": 0.6009277802105437,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 13817.599700689316,
+ "config": {
+  "name": "sleepedf-paclock_pac",
+  "group": "D",
+  "dataset": "sleepedf",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed_pac/sleepedf",
+  "model": "paclock",
+  "optimizer": "adamw",
+  "lr": 0.0001,
+  "weight_decay": 1e-05,
+  "scheduler": "cosine",
+  "grad_clip": 1.0,
+  "num_workers": 8,
+  "device": "cuda",
+  "num_classes": 5,
+  "epochs": 20,
+  "batch_size": 32,
+  "eval_every_steps": 0,
+  "patience": 20,
+  "loss": "cross_entropy",
+  "label_smoothing": 0.1,
+  "sample_rate": 100,
+  "model_kwargs": {
+   "arch": "triaxial",
+   "d_model": 128,
+   "depth": 6,
+   "n_bands": 8,
+   "n_heads": 4,
+   "dropout": 0.2,
+   "kernel_size": 201,
+   "patch_len": 200,
+   "augmentations": [],
+   "freq_mixer": "attention",
+   "band_pe": "index",
+   "tokenizer_mode": "pac_interaction",
+   "pac_token_mode": "measured",
+   "interaction_mode": "product",
+   "spatial_pe": "xyz"
+  },
+  "seed": 0,
+  "_pac_note": "PAC-methodology protocol: 0.5 Hz high-pass, no notch. Identical to the frozen config in every other respect."
+ },
+ "data_manifest_created": "2026-08-09T16:33:32.212579+00:00",
+ "class_counts": {
+  "train": [
+   34213,
+   11896,
+   47572,
+   10575,
+   18174
+  ],
+  "val": [
+   14158,
+   4849,
+   10838,
+   1647,
+   4150
+  ],
+  "test": [
+   17570,
+   4777,
+   10722,
+   817,
+   3511
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 5,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

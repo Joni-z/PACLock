@@ -1,0 +1,107 @@
+{
+ "name": "isruc-ffcl",
+ "dataset": "isruc",
+ "model": "ffcl",
+ "group": "A",
+ "seed": 0,
+ "n_params_M": 2.665573,
+ "primary_metric": "cohen_kappa",
+ "test": {
+  "balanced_acc": 0.7657110657831774,
+  "cohen_kappa": 0.7252226832896693,
+  "weighted_f1": 0.7789525154914326
+ },
+ "best_val": 0.7582737563036217,
+ "val_curve": [
+  0.5894630994391092,
+  0.6905698327416212,
+  0.7328129863152086,
+  0.7418383624252397,
+  0.7582737563036217,
+  0.7463496307209626,
+  0.7579624580917053,
+  0.7509237383067725,
+  0.7511801408144865,
+  0.7425504160247514,
+  0.7346672502843455,
+  0.7502453102237997,
+  0.7350594309191083,
+  0.7402030675521816,
+  0.7235579996581487,
+  0.730915592455427,
+  0.7320275513055405,
+  0.7063066091203931,
+  0.7192687999697641,
+  0.7213512671379949
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "best_val": 0.7582737563036217,
+  "chance": 0.0,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 20,
+ "wall_time_sec": 838.3510394096375,
+ "config": {
+  "name": "isruc-ffcl",
+  "group": "A",
+  "model": "ffcl",
+  "dataset": "isruc",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/isruc",
+  "num_classes": 5,
+  "sample_rate": 200,
+  "loss": "cross_entropy",
+  "batch_size": 512,
+  "num_workers": 16,
+  "epochs": 60,
+  "optimizer": "adam",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": null,
+  "grad_clip": null,
+  "patience": 15,
+  "eval_every_steps": 0,
+  "seed": 0,
+  "device": "cuda",
+  "label_smoothing": 0.1,
+  "flatten_sequences": true,
+  "model_kwargs": {
+   "steps": 8
+  }
+ },
+ "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+ "class_counts": {
+  "train": [
+   16493,
+   9147,
+   21310,
+   13234,
+   9236
+  ],
+  "val": [
+   2072,
+   1015,
+   3226,
+   1980,
+   1067
+  ],
+  "test": [
+   1348,
+   1031,
+   3120,
+   1808,
+   1393
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 4,
+  "n_evals": 20,
+  "reason": "ok"
+ }
+}

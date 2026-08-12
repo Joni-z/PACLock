@@ -1,0 +1,99 @@
+{
+ "name": "tusz-tfm_pretrained",
+ "dataset": "tusz",
+ "model": "tfm",
+ "group": "B",
+ "seed": 2,
+ "n_params_M": 1.890854,
+ "primary_metric": "pr_auc",
+ "test": {
+  "balanced_acc": 0.5393780857192813,
+  "pr_auc": 0.3388720303134881,
+  "auroc": 0.8223709466233036
+ },
+ "best_val": 0.20682686268828862,
+ "val_curve": [
+  0.023211905919638218,
+  0.1346282636956389,
+  0.16053666184288182,
+  0.16561868722021836,
+  0.1831898272335345,
+  0.19411190087375427,
+  0.17952187867398428,
+  0.1833279905240788,
+  0.20610111443533377,
+  0.20682686268828862,
+  0.17936263007656206,
+  0.1643608758020693,
+  0.17166847236083502,
+  0.18039884151280988,
+  0.18596103730030392,
+  0.18439430547676566,
+  0.19492270110868218,
+  0.14928624063014262,
+  0.16864131738484683,
+  0.20047684376336342,
+  0.18741055242376395
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 21,
+  "best_val": 0.20682686268828862,
+  "chance": 0.020051791937082387,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 3,
+ "wall_time_sec": 25650.492726564407,
+ "config": {
+  "name": "tusz-tfm_pretrained",
+  "group": "B",
+  "dataset": "tusz",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tusz",
+  "model": "tfm",
+  "loader": "tfm",
+  "pretrained": true,
+  "tfm_setting": "multiple",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 5,
+  "batch_size": 512,
+  "warmup_epochs": 5,
+  "label_smoothing": 0.1,
+  "scheduler": "cosine",
+  "grad_clip": null,
+  "patience": 10,
+  "num_workers": 16,
+  "device": "cuda",
+  "eval_every_steps": 100,
+  "num_classes": 2,
+  "loss": "bce_with_logits",
+  "val_subsample": 20000,
+  "seed": 2
+ },
+ "data_manifest_created": null,
+ "class_counts": {
+  "train": [
+   313196,
+   13472
+  ],
+  "val": [
+   153259,
+   3136
+  ],
+  "test": [
+   43364,
+   2727
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 9,
+  "n_evals": 21,
+  "reason": "ok"
+ }
+}

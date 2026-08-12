@@ -1,0 +1,112 @@
+{
+ "name": "tuab-paclock_full",
+ "dataset": "tuab",
+ "model": "paclock",
+ "group": "C",
+ "seed": 2,
+ "n_params_M": 1.63573,
+ "primary_metric": "auroc",
+ "test": {
+  "balanced_acc": 0.776404642722596,
+  "pr_auc": 0.8585886838559769,
+  "auroc": 0.8516018962291334
+ },
+ "best_val": 0.8672917672728677,
+ "val_curve": [
+  0.7251517894220054,
+  0.8035941174177363,
+  0.8252742883879342,
+  0.8256589300069137,
+  0.8390055436173526,
+  0.8436577810969107,
+  0.8430134175091589,
+  0.8490741409790162,
+  0.8420988491379346,
+  0.8517362480520632,
+  0.8549982419449853,
+  0.8512911245873623,
+  0.8531869893519793,
+  0.8610813400834822,
+  0.8518326833181912,
+  0.8672917672728677,
+  0.85874742173323,
+  0.8560927043587155,
+  0.8625734340052142,
+  0.8487802166631259,
+  0.8588944857961651,
+  0.8488209127206117,
+  0.8590002370824883,
+  0.8628027128279017
+ ],
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 15,
+  "n_evals": 24,
+  "best_val": 0.8672917672728677,
+  "chance": 0.5,
+  "reason": "ok",
+  "rule_version": 2
+ },
+ "epochs_run": 1,
+ "wall_time_sec": 32202.22038578987,
+ "config": {
+  "name": "tuab-paclock_full",
+  "group": "C",
+  "dataset": "tuab",
+  "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuab",
+  "model": "paclock",
+  "optimizer": "adamw",
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "scheduler": "cosine",
+  "grad_clip": 1.0,
+  "num_workers": 16,
+  "device": "cuda",
+  "num_classes": 2,
+  "epochs": 20,
+  "batch_size": 64,
+  "eval_every_steps": 200,
+  "patience": 8,
+  "loss": "bce_with_logits",
+  "sample_rate": 200,
+  "model_kwargs": {
+   "arch": "triaxial",
+   "d_model": 128,
+   "depth": 6,
+   "n_bands": 8,
+   "n_heads": 4,
+   "dropout": 0.1,
+   "kernel_size": 201,
+   "patch_len": 200,
+   "augmentations": [],
+   "freq_mixer": "attention",
+   "tokenizer_mode": "pac_interaction",
+   "pac_token_mode": "measured",
+   "interaction_mode": "product"
+  },
+  "seed": 2
+ },
+ "data_manifest_created": "2026-08-04T12:32:29.190287+00:00",
+ "class_counts": {
+  "train": [
+   147894,
+   149209
+  ],
+  "val": [
+   35815,
+   39592
+  ],
+  "test": [
+   19907,
+   17038
+  ]
+ },
+ "verdict_v1": {
+  "ok": true,
+  "status": "ok",
+  "peak_index": 15,
+  "n_evals": 24,
+  "reason": "ok"
+ }
+}

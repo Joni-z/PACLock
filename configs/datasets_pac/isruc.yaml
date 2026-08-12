@@ -1,0 +1,54 @@
+dataset: isruc
+subset: subgroup_I
+raw_root: /work1/chenyuyou/yifanwang/data/isruc
+out_dir: /work1/chenyuyou/yifanwang/Zhizhe/processed_pac/isruc
+num_classes: 5
+sample_rate: 200
+resample: false
+notch: null
+window_sec: 30.0
+stride_sec: 30.0
+channels:
+- F3-A2
+- C3-A2
+- O1-A2
+- F4-A1
+- C4-A1
+- O2-A1
+label_map:
+  0: 0
+  1: 1
+  2: 2
+  3: 3
+  5: 4
+sequence:
+  enabled: true
+  length: 20
+  drop_tail: true
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+class_weight: null
+primary_metric: cohen_kappa
+report_metrics:
+- cohen_kappa
+- balanced_acc
+- weighted_f1
+split:
+  mode: subject_id_ranges
+  train:
+  - 1
+  - 80
+  val:
+  - 81
+  - 90
+  test:
+  - 91
+  - 100
+expected:
+  n_samples: null
+hp: 0.5
+_pac_note: 'PAC-methodology variant: band [0.3, 35.0] -> high-pass 0.5 Hz, notch 50.0
+  -> none (Kramer et al. 2008: sharp spectral edges generate spurious phase-amplitude
+  coupling). Everything else identical to the frozen protocol, so the contrast isolates
+  the filtering.'
