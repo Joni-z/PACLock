@@ -1,0 +1,91 @@
+{
+  "name": "chbmit-labram_scratch",
+  "dataset": "chbmit",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820338,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.6497194199510414,
+    "pr_auc": 0.4020347502569709,
+    "auroc": 0.8413510405814042
+  },
+  "best_val": 0.2681048571900277,
+  "val_curve": [
+    0.11910485588333797,
+    0.24805302061188914,
+    0.244369241329026,
+    0.2681048571900277,
+    0.26422411367523035,
+    0.25416079770870237,
+    0.1854133699368959,
+    0.23462546971982667,
+    0.18233294804204755,
+    0.2445047172617678,
+    0.2536144615666606,
+    0.2001623095364947,
+    0.2071692434873093,
+    0.24330503798630532
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 14,
+    "best_val": 0.2681048571900277,
+    "chance": 0.0070808157099697885,
+    "reason": "ok"
+  },
+  "epochs_run": 14,
+  "stopped_by": "patience",
+  "wall_time_sec": 6820.382973909378,
+  "config": {
+    "name": "chbmit-labram_scratch",
+    "group": "C",
+    "dataset": "chbmit",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}

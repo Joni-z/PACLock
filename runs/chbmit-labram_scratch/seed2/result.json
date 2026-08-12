@@ -1,0 +1,107 @@
+{
+  "name": "chbmit-labram_scratch",
+  "dataset": "chbmit",
+  "model": "labram",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 5.820338,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5865474042639698,
+    "pr_auc": 0.30474260121777436,
+    "auroc": 0.7882262258701158
+  },
+  "best_val": 0.28596304439443204,
+  "val_curve": [
+    0.08175654040120839,
+    0.11501840889755259,
+    0.11217078684273489,
+    0.11844654274352846,
+    0.1396440726164465,
+    0.12424367641573539,
+    0.10238452336298674,
+    0.155514063220364,
+    0.20983399212825526,
+    0.12301782093263233,
+    0.12588701386500897,
+    0.15858135307743046,
+    0.24273009091048617,
+    0.14482955804457606,
+    0.1637239416909671,
+    0.21383245934588974,
+    0.11723746845570454,
+    0.1909872584302615,
+    0.1952042785349308,
+    0.28596304439443204,
+    0.2379566647586847,
+    0.23210143544341252,
+    0.19896398806989732,
+    0.0703497103112894,
+    0.21624607548916383,
+    0.2609067825013363,
+    0.15011944637451713,
+    0.23772465018189926,
+    0.22573007949815097,
+    0.18784901382180005
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 19,
+    "n_evals": 30,
+    "best_val": 0.28596304439443204,
+    "chance": 0.0070808157099697885,
+    "reason": "ok"
+  },
+  "epochs_run": 30,
+  "stopped_by": "patience",
+  "wall_time_sec": 14470.268718481064,
+  "config": {
+    "name": "chbmit-labram_scratch",
+    "group": "C",
+    "dataset": "chbmit",
+    "data_root": "/work1/chenyuyou/yifanwang/Zhizhe/processed/chbmit",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "seed": 2
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}
