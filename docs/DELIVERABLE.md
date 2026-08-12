@@ -123,6 +123,25 @@ For a model headed into pretraining that is the encouraging reading: the
 supervised task saturates in one epoch, which is exactly the regime where a
 pretrained initialisation should pay.
 
+### Exception — patch_len=50 is unsafe above ~20 channels
+
+FACED (32 channels) and PhysioNet-MI (64) collapse on 2 of 3 seeds at
+`patch_len=50`: train loss sits at the chance-level cross-entropy for the
+whole run on some seeds, never moving. Every other corpus in the matrix has
+16 channels or fewer and is unaffected. A single-seed 2x2 (patch_len x
+learning rate) found the cause: it is the token count, not the optimizer step
+size. `patch_len=200` escapes the collapse on both corpora; a lower learning
+rate alone does not, and combined with `patch_len=200` it is actively worse
+(that arm ran to completion and early-stopped dead at exact chance). Full
+account, including the mechanical gradient check that ruled out a dead
+frontend at init, in docs/ARCH_SEARCH.md.
+
+**FACED and PhysioNet-MI ship at `patch_len=200`, `pac_patch_len=200`** —
+every other corpus keeps 50. This is single-seed evidence, matching the scope
+of the diagnosis so far; a 3-seed confirmation at 200 for these two corpora is
+still open, as is finding exactly where between 16 and 32 channels the
+boundary sits.
+
 ## Where it lands
 
 TUEV, our protocol, 3 seeds, same pipeline:

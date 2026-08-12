@@ -26,7 +26,7 @@ model_kwargs:
   n_heads: 4
   dropout: 0.2
   kernel_size: 201
-  patch_len: 50
+  patch_len: 200
   augmentations: []
   freq_mixer: attention
   band_pe: index
@@ -34,5 +34,5 @@ model_kwargs:
   pac_token_mode: measured
   interaction_mode: product
   spatial_pe: index
-  pac_patch_len: 50
+  pac_patch_len: 200
 seed: 0
