@@ -1,110 +1,86 @@
-# PACLock-Bench
+# paclock-bench
 
-AMD/ROCm 集群上的 PACLock baseline 评测矩阵实现。
+PACLock — a phase-amplitude-coupling tokeniser for EEG — and the nine-corpus
+benchmark it is measured on, against five foundation models and five light
+supervised baselines under each model's own published recipe.
 
-目标:完成 `PACLock_baseline_matrix.xlsx` 中 9 个数据集 × 4 组模型的评测矩阵。
-
-## 事实来源
-
-| 文件 | 内容 |
-|---|---|
-| `../PACLock_baseline_matrix.xlsx` | **最高权威**。评测矩阵与冻结协议 |
-| `docs/PROTOCOLS.md` | xlsx 的仓库内转录版。代码以此为准 |
-| `docs/CHANGELOG.md` | 协议变更记录(任何冻结项的修改必须留痕) |
-
-> 参考仓库 `Joni-z/PACLock`(NVIDIA 集群)的预处理协议与本仓库**不同**——
-> 那边沿用 BIOT 协议,这边是 CBraMod 协议。不要跨仓库拷贝预处理脚本。
-> 模型架构可以借鉴。
-
-## 集群使用规则(必读)
-
-**不要在登录节点跑任何计算。** 登录节点只用于外部 I/O、基础编译,以及与
-资源管理器交互(`squeue` / `sbatch` / `sacct` / `scancel`)。它由约 20 位用户共用,
-管理员会直接终止违规进程。
-
-一切其他工作走 Slurm——包括看起来"很快"的东西:
-
-| 动作 | 正确做法 |
-|---|---|
-| 预处理、训练、评测 | `sbatch slurm/*.slurm` |
-| 单元测试 / 前向检查 / 参数量统计 | `sbatch`(在负载高的节点上并不快) |
-| 长时间下载、重试守护 | `sbatch slurm/download_*.slurm`,**不要 `nohup`** |
-| `squeue` / `sacct` / `scancel` / 读小日志 / `rsync` 代码 | 登录节点可以 |
-
-用户指南:https://amdresearch.github.io/hpcfund/jobs.html
-
-注:`devel` 分区虽有 30 分钟短队列,但其节点缺少 `pytorch/2.7.1` 依赖的
-`rocm/6.3.1` 模块,短测试也用 `mi2104x`。
-
-## 环境
-
-集群自带 ROCm PyTorch 模块,不需要自建 conda 环境:
+## Start here on a new cluster
 
 ```bash
-module load pytorch/2.7.1     # torch 2.7.1+rocm6.3, cpython-39, 依赖 rocm/6.3.1
+export PACLOCK_DATA=/path/to/raw          # raw corpora, read-only
+export PACLOCK_PROC=/path/to/processed    # parent of processed*/
+
+sbatch slurm/bootstrap.slurm              # clone upstream repos, audit checkpoints
+sbatch slurm/run.slurm scripts.verify_frontend   # frontend invariants
+sbatch slurm/run.slurm scripts.smoke_paths       # real config -> loader -> model
 ```
 
-ROCm 兼容性已验证(`tests/test_rocm_compat.py`,MI210 上 8/8 通过):
-matmul、rfft/irfft、Hilbert 解析信号、复数 autograd、BF16 autocast、
-autocast 内 FFT、SDPA、`conv1d(k=201)`。BIG_CLUSTER_HANDOFF 里标记为
-「未评估」的三个 AMD 风险点均无需改写。
+Both variables default to the paths this was built on, so nothing needs setting
+to keep working there. `docs/MIGRATION.md` is the full checklist; `docs/DATASETS.md`
+covers where each corpus comes from.
 
-额外依赖(已装到 `~/.local`):`mne moabb tensorpac braindecode einops timm`。
+Nothing heavier than an editor belongs on the login node — that includes
+anything importing torch or touching the preprocessed arrays. `slurm/run.slurm`
+takes any module: `sbatch slurm/run.slurm scripts.collect_waves`.
 
-## 数据
-
-原始数据在 `/work1/chenyuyou/yifanwang/data/`(与 youran 共用,只读):
-
-| 数据集 | 路径 | 状态 |
-|---|---|---|
-| TUAB v3.0.1 | `tuh/tuab` | ✅ |
-| TUEV v2.0.1 | `tuh/tuev` | ✅ |
-| TUSZ v2.0.6 | `tuh/tusz` | ✅ |
-| CHB-MIT v1.0.0 | `chbmit` | ✅ |
-| Sleep-EDF (SC) | `sleep-edf` | ✅ |
-| PhysioNet-MI | `physionet-mi` | ✅ |
-| BCI-IV-2a | `bci-iv-2a` | ✅ |
-| ISRUC Subgroup I | `isruc` | ⏳ 部分(Mega 带宽限额) |
-| SEED-V | — | ⛔ 待 SJTU BCMI 授权 |
-
-预处理产物写到 `/work1/chenyuyou/yifanwang/Zhizhe/processed/<dataset>/`,
-**不写回共用的 data 目录**。
-
-## 用法
+## Running an experiment
 
 ```bash
-# 预处理(每个数据集一次,产出 npy + manifest.json)
-python -m preprocessing.tuab --config configs/datasets/tuab.yaml
-
-# 训练
-python -m paclock_bench.training.train --config configs/experiments/<exp>.yaml
-
-# Slurm
-sbatch slurm/train.slurm configs/experiments/<exp>.yaml
+sbatch slurm/preprocess.slurm frozen tuev              # once per corpus+protocol
+sbatch slurm/seeds_packed.slurm configs/experiments/tuev_paclock_full.yaml
+sbatch slurm/run.slurm scripts.fill_xlsx --xlsx results/_in.xlsx
 ```
 
-## 目录
+`seeds_packed` runs three seeds of one config on one node, one GPU each;
+`configs_packed` runs up to four different configs. Both exist because this
+cluster exposes no GPU GRES, so `--exclusive` is the only way to get a GPU and
+it hands over all four. With proper GRES, ask for one GPU per job and use
+`train.slurm`.
+
+## Layout
 
 ```
-configs/datasets/      每个数据集的冻结协议参数(与 docs/PROTOCOLS.md 一一对应)
-configs/models/        模型超参
-configs/experiments/   实验矩阵:数据集 × 模型 × seed
-preprocessing/         预处理脚本,每个数据集一个,共享 common.py
-paclock_bench/data/    torch Dataset,读预处理产物
-paclock_bench/models/  baselines/ foundation/ paclock/
-paclock_bench/training/ 训练循环与指标
-scripts/               工具(结果收集、manifest 校验)
-slurm/                 作业脚本
-tests/                 烟测(提交 GPU 作业前的正确性检查)
+paclock_bench/     the package
+  paths.py           every filesystem location, resolved once
+  training/          loop, metrics (hard rule 3), losses, LaBraM layer decay
+  data/              three loaders: frozen/PAC, BIOT+TFM, LaBraM
+  models/
+    paclock/         frontend/triaxial.py is the core: sinc -> Hilbert -> PAC
+    foundation/      five upstream adapters
+    baselines/       the light supervised group
+configs/           datasets, experiments (the matrix), deliverable, _cand, _diag
+preprocessing/     four protocols, one module per corpus
+scripts/           collection, verification, config generation
+slurm/             seven scripts; run.slurm is the generic one
+docs/              read PERF, ARCH_SEARCH, DELIVERABLE, PROTOCOLS
+runs/              every result.json — config, val curve, verdict
+archive/           superseded results, with why each was retired
 ```
 
-## 硬规则(摘自 xlsx README sheet)
+## Four rules the results depend on
 
-1. B 组模型进表前必须先用**自己的 recipe** 复现自己论文的数字(≥3 seeds,
-   发表值落在 mean±2std 内),否则标 `not reproduced`。
-2. 每个模型用自己的 recipe(B、D 组);架构对照用对称超参(C 组)。
-3. val 曲线峰值在 epoch 0 ⇒ 标 `mis-configured`,拒绝写入。
-4. 全部 3 seeds,报 mean ± std。
-5. 所有数据集从零预处理,不复用来源不明的缓存。
+1. **Reproduction gate.** Group A must reproduce published numbers before any
+   group B/C number is believed. A mismatch is the pipeline, not the model.
+2. **Each model runs its own repo's recipe** — preprocessing, normalisation and
+   finetuning. Feeding a foundation model our pipeline instead of its own turned
+   0.6772 into 0.4436 once. Hence four preprocessing protocols, not one.
+3. **A mis-configured cell is not written.** `training/metrics.py` refuses cells
+   whose validation curve is flat, or that never clear chance.
+4. **Fewer than three seeds is withheld.**
 
-完整协议见 `docs/PROTOCOLS.md`。
+And one learned the hard way: **seed spread is measured per corpus, never
+assumed.** ISRUC sd 0.0021, TUEV sd 0.0235 — eleven times apart. A delta has to
+clear roughly twice its own corpus's sd to mean anything.
+
+## Two results worth knowing before changing code
+
+**Training was 9.4x slower than it needed to be** — `set_seed()` forces
+`cudnn.deterministic=True`, which on ROCm made the `in_channels=1` patch
+convolutions select an atomics-free backward-weights kernel. Replaced with a
+GEMM. Neither factor costs anything alone; together they cost 3.76x. On CUDA
+this may not reproduce — check with the 2x2 in `docs/PERF.md`
+(`scripts/bench_ab.py`), do not assume.
+
+**A mathematically identical frontend change moved an ISRUC result by 0.0276 —
+13.4 seed standard deviations.** After any numerical change to the frontend,
+re-run rather than reuse. That is why `archive/runs_conv_tokenizer/` exists.
