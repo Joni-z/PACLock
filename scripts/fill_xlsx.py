@@ -52,7 +52,7 @@ MODEL_ROW_LABEL = {
     # variant key is paclock_full. Its absence here was silent: the cell simply
     # reported "no row label" in the notes sheet and the row stayed blank, which
     # is indistinguishable from "the runs are not finished yet".
-    "paclock_full": "PACLock (from scratch, full)",
+    "paclock_v2": "PACLock (from scratch, full)",
 }
 
 # Rows the workbook does not carry, so a run for them has nowhere to go.

@@ -22,3 +22,5 @@ the record of *why* they were withdrawn is part of the provenance.
 
 Nothing here should be read into a table. `scripts/fill_xlsx.py` only ever
 looks at `runs/`.
+
+| `runs_paclock_p200` | `patch_len=200` full-scratch PACLock runs, the config before the wave 1-7 architecture search. Superseded by `paclock_v2` (`patch_len=50`, `docs/DELIVERABLE.md`), which wins on both TUEV (0.7076 vs the old config, 3 seeds, significant) and every other measured axis. Kept so a from-scratch run under the old default is still on record, not shown in the main table so the PACLock row never mixes two different configurations under one label |
