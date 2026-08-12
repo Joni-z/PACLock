@@ -91,6 +91,22 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
             sequence=len(input_shape) == 3,
         )
 
+    if name == "cbramod_paclockfe":
+        # Ablation, not a matrix row: CBraMod's architecture (encoder,
+        # positional encoding, classifier head, all vendor code, all
+        # unmodified) with its own tokenizer replaced by PACLock's frontend.
+        # See foundation/cbramod_paclockfe_adapter.py for exactly what is and
+        # is not swapped.
+        from .foundation.cbramod_paclockfe_adapter import build_cbramod_paclockfe
+
+        return build_cbramod_paclockfe(
+            n_classes=cfg["num_classes"],
+            n_channels=C,
+            seq_len=T,
+            dropout=cfg.get("model_kwargs", {}).get("dropout", 0.1),
+            sequence=len(input_shape) == 3,
+        )
+
     if name == "tfm":
         # Group B/C: official TFM-Tokenizer code + its shipped weights.
         from .foundation.tfm_adapter import build_tfm

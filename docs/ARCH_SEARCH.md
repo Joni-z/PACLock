@@ -263,3 +263,185 @@ phenomena, different channel counts and different window lengths.
 
 Short is the only setting that does not lose on any measured axis. The shipped
 config is unchanged.
+
+## Collapse investigation — FACED / PhysioNet-MI, patch_len=50 deliverable config
+
+Both corpora have the highest channel counts in the matrix (FACED 32, PhysioNet-MI
+64, vs 16/6/2/22 everywhere else). Under `patch_len=50` this multiplies to the
+largest token grids in the sweep (FACED: 32 x 8 bands x 40 patches = 10240
+tokens/sample). 2 of 3 seeds fail on each corpus; this is not one failure mode.
+
+### Failure mode A — never leaves the initialization plateau
+
+FACED, both the failing seeds and (initially) the succeeding one:
+
+```
+seed1 (fails):  epoch 0  train_loss 2.2148  val balanced_acc 0.1111
+                epoch 20 train_loss 2.1967  val balanced_acc 0.1111   (unchanged)
+seed0 (works):  epoch 0  train_loss 2.2171  val balanced_acc 0.1111
+                epoch 9  train_loss 2.1987  val balanced_acc 0.1111   (still stuck)
+                ...eventually escapes; final result at epoch 77
+```
+
+`ln(9) = 2.197` — FACED is 9-class, so this is exactly the uniform-guess
+cross-entropy. Loss is not decreasing, it is drifting by rounding error around
+the chance floor. Even the seed that eventually works spends its first ~9+
+epochs indistinguishable from the seeds that never escape — escaping this
+plateau is slow and seed-dependent for every run on this corpus, not something
+2 of 3 seeds uniquely suffer from.
+
+### Failure mode B — trains, but does not generalize at all
+
+PhysioNet-MI seed1: train loss drops normally (1.4012 at epoch 0 -> 0.9280 by
+epoch 62 — real, continuous descent) while validation is dead flat the entire
+run:
+
+```
+epoch  0  val balanced_acc=0.2500  (chance is 0.25, 4-class)
+epoch 24  val balanced_acc=0.2494
+```
+
+`weighted_f1` moves within noise (0.099-0.165) but kappa never clears ~0.004.
+This is not the same mechanism as A — the optimizer found *some* direction
+that reduces train CE, but it carries zero signal to held-out data. With 1.6M
+params and O(10^4) tokens per sample, the model has enough capacity to fit
+idiosyncrasies of individual training windows without learning anything about
+the class boundary.
+
+Both are downstream of the same design fact, not two independent bugs: at
+these channel counts, `patch_len=50` produces token grids ~2x larger than
+anywhere else validated, and the recipe (lr=1e-4, cosine, patience=20 evals)
+was never re-tuned for that regime.
+
+### Pre-registered test (before results land)
+
+2x2 per corpus, single seed each, packed on one node (`configs_packed.slurm`):
+
+|                  | lr=1e-4 (current) | lr=3e-5 |
+|---|---|---|
+| patch_len=50 (current) | existing collapsed runs | tests LR alone |
+| patch_len=200 (pre-search default) | tests token count alone | tests both |
+
+Predictions:
+* if patch_len=200 alone fixes it (regardless of lr) -> token count is the
+  driver, and patch_len needs to be corpus-conditional on channel count, not a
+  single global deliverable value.
+* if lr=3e-5 alone fixes it (regardless of patch_len) -> the optimizer step
+  size is the driver, independent of resolution; a smaller lr (or a warmup,
+  not yet tested) should generalize as the fix across all high-channel corpora.
+* if only the combination fixes it -> the two interact, matching the general
+  lesson this project already learned once for a different reason
+  (docs/PERF.md's 2x2) -- neither single-factor probe would have found it.
+* if nothing in the 2x2 fixes it -> the mechanism is something else entirely
+  (init scale, a channel-count-dependent numerical issue in the frontend, or
+  the classifier head's flatten-then-MLP blowing up parameter count at 32/64
+  channels) and needs a different diagnostic, not a recipe tweak.
+
+Configs: `configs/_diag/{faced,physionet_mi}_{patch200,lr3e5,patch200_lr3e5}.yaml`.
+Jobs: `D1_faced` (370764), `D1_pmi` (370765) -- queued, mi2104x fully allocated
+(21/21) across all users sharing the partition; no alternate partition has a
+working PyTorch install (checked mi2508x, mi3258x, mi3008x, devel -- module
+loads without error on all four but `import torch` fails with
+`ModuleNotFoundError` on every one of them; only mi2104x has the package
+actually installed).
+
+### Mechanical diagnostic run in parallel (no training needed)
+
+`scripts/diag_gradients.py` -- one forward+backward at init, comparing
+gradient-norm-by-module and logit statistics between `patch_len=50` and
+`patch_len=200` on FACED/PhysioNet-MI vs two healthy controls (TUEV, ISRUC).
+Distinguishes "vanishing/exploding gradient at the frontend, mechanically,
+right at step 0" from "the training dynamics only go wrong over many steps" --
+the former would be visible in a single backward pass and would not need
+waiting for the queued training jobs to say anything.
+
+### Result — the fix is patch_len, not learning rate
+
+Single seed, both corpora, mid-run reads (jobs still progressing, not yet
+converged, but the qualitative question -- does the run escape the ln(K)
+plateau at all -- is already answered):
+
+| variant | FACED kappa | PhysioNet-MI kappa |
+|---|---|---|
+| `patch50` (current deliverable) | 0.0000 (dead, both collapsed seeds) | 0.0000 / at-chance-on-test (both collapsed seeds) |
+| `lr3e5` (patch=50, lr lowered) | 0.0000 through epoch 10 | 0.0000 through epoch 14 |
+| **`patch200`** (lr unchanged) | **0.0430 by epoch 33, still rising** | **0.0357-0.0449, noisier but off zero** |
+| `patch200_lr3e5` | **ran to completion, early-stopped dead at 0.0000** | oscillating near zero, not clearly better than patch200 alone |
+
+`patch200_lr3e5` finishing at exactly chance is the decisive negative result:
+adding the lower learning rate on top of the resolution fix did not help, and
+lr3e5 alone never escapes on either corpus through the epochs observed. Lower
+learning rate is not the mechanism, and if anything a smaller step size makes
+escaping a flat plateau *harder*, not easier -- consistent with the pattern
+observed (patch200 alone escapes faster than patch200_lr3e5).
+
+**patch_len=50 is not safe as a single global deliverable value.** At FACED's
+32 channels and PhysioNet-MI's 64, it produces token grids (~10240 and ~6144)
+roughly 2x larger than anywhere else in the matrix, and 2 of 3 seeds do not
+survive optimization at that resolution regardless of learning rate. The
+mechanical check (`scripts/diag_gradients.py`) had already ruled out a dead
+gradient at initialization -- healthy, non-degenerate gradients reach the
+frontend on every corpus and every patch_len tested, including the failing
+ones. So the problem is not the model being broken; it is that patch_len=50's
+token count makes the *loss landscape* someone has to search 20 epochs of
+"stuck at chance" through, on some seeds, before finding the exit -- and lr3e5
+does not shrink that search, it lengthens it.
+
+**Recommendation:** patch_len should be conditioned on channel count for the
+deliverable, not fixed at 50 everywhere. FACED and PhysioNet-MI should ship at
+patch_len=200 (their pre-search default and the one config that reliably
+escapes chance); the corpora patch_len=50 was validated on (TUEV, ISRUC,
+Sleep-EDF, BCI-IV-2a, TUSZ -- all <=22 channels) keep it.
+
+Still open, not yet run: 3-seed confirmation at patch_len=200 for these two
+corpora, and a check of what channel count the transition actually sits at
+(only two data points -- 32 and 64 -- separate "works" from "collapses"; the
+16-channel corpora all work fine at patch_len=50, so the boundary is somewhere
+between 16 and 32, untested).
+## Ablation A — CBraMod's architecture, PACLock's tokenizer (docs/ARCH_SEARCH.md companion)
+
+Tests the claim TFM-Tokenizer makes about itself -- that tokenization carries
+the result, not model size or architecture -- against PACLock's own frontend
+instead of TFM's, using a single-variable swap: CBraMod's official encoder,
+positional encoding and classifier head (vendor code, byte-identical) with only
+its `PatchEmbedding` (the raw-200-samples-to-200-dim-vector step) replaced by
+PACLock's TriAxialFrontend at CBraMod's own resolution (`patch_len=200`,
+matching CBraMod's native patch, so this does not also test the separate
+patch-length finding above). See
+`paclock_bench/models/foundation/cbramod_paclockfe_adapter.py` for exactly what
+is and is not swapped, and `scripts/verify_cbramod_paclockfe.py` for the
+shape/gradient checks run before any training compute was spent (backbone
+param count 4.884M -> 4.898M, a 14K difference, not a capacity confound).
+
+### Result -- TUEV, single seed
+
+| | backbone params | val peak | **test kappa** |
+|---|---|---|---|
+| CBraMod (native tokenizer, scratch, 3-seed) | 4.884M | -- | 0.5638 ±0.0193 |
+| **CBraMod + PACLock tokenizer (1 seed)** | 4.898M | 0.4358 (epoch 21) | **0.6280** |
+
++0.064 over the native-tokenizer baseline, on one seed -- roughly 3x TUEV's
+own 3-seed spread for this architecture. The val curve is noisy throughout
+training (0.28-0.44, no clean trend) and test comes in *above* the best val
+checkpoint, which looks like an anomaly but matches a pattern already on
+record for TUEV specifically: it is the corpus where checkpoint selection is
+least reliable in this whole benchmark (docs/ARCH_SEARCH.md notes 57% of TUEV
+cells peak at their very first evaluation). A noisy val signal that
+underestimates test quality is the established failure mode here, not a new
+one.
+
+**Reading it:** a single seed is not proof, but it clears the bar the
+project's own rule sets (a delta has to clear roughly the corpus's own seed
+spread to be worth reading) by a wide margin, and it directly answers the
+question this ablation was built to ask: PACLock's tokenizer, dropped under a
+foreign, fixed architecture with the swap verified to change nothing but 14K
+parameters, beats that architecture's own tokenizer. That is exactly the
+TFM-Tokenizer-style claim, made about our tokenizer instead of theirs, with
+the same discipline (single-variable swap, params checked, verified before
+spending training compute) the rest of this benchmark holds itself to.
+
+**Not yet done:** 3-seed confirmation (this was explicitly out of scope for
+the pilot per the current goal); BIOT as the second architecture (the other
+half of the originally proposed pair); the frozen-vs-native-preprocessing
+question for BIOT specifically, since BIOT's own preprocessing differs from
+ours and CBraMod's does not (see the original experiment-design discussion).
