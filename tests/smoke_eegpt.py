@@ -1,5 +1,8 @@
-import sys, torch
-sys.path.insert(0, "/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench")
+"""Smoke-test EEGPT across every corpus shape in the matrix.
+
+    python -m tests.smoke_eegpt
+"""
+
 from paclock_bench.models.foundation.eegpt_adapter import build_eegpt, DATASETS
 
 CASES = [("sleepedf",2,30*200,5), ("isruc",6,30*200,5), ("physionet_mi",64,4*200,4),

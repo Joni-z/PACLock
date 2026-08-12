@@ -1,5 +1,8 @@
-import sys, torch
-sys.path.insert(0, "/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench")
+"""Smoke-test TFM-Tokenizer across every corpus shape in the matrix.
+
+    python -m tests.smoke_tfm
+"""
+
 from paclock_bench.models.foundation.tfm_adapter import build_tfm
 CASES = [("tuab",16,10*200,2),("tuev",16,5*200,6),("tusz",16,10*200,2),("chbmit",16,10*200,2),
          ("sleepedf",2,30*200,5),("isruc",6,30*200,5),

@@ -1,4 +1,4 @@
-# paclock-bench
+# PACLock
 
 PACLock — a phase-amplitude-coupling tokeniser for EEG — and the nine-corpus
 benchmark it is measured on, against five foundation models and five light

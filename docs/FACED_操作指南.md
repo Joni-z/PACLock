@@ -36,8 +36,8 @@ python3 -c "import numpy, scipy, yaml; print('依赖 OK')"
 ## 第 1 步:拿代码
 
 ```bash
-rsync -az amd:/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench/ ~/paclock-bench/
-cd ~/paclock-bench
+rsync -az amd:/work1/chenyuyou/yifanwang/Zhizhe/PACLock/ ~/PACLock/
+cd ~/PACLock
 ```
 
 只有代码,几 MB。
@@ -176,10 +176,10 @@ bash scripts/faced_local_prep.sh run <上面那个真实目录> ~/faced_out
 1. **把代码从这台电脑拷过去**(U 盘 / AirDrop):
    这台电脑上先执行
    ```bash
-   rsync -az amd:/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench/ ~/paclock-bench/
-   tar czf ~/Desktop/paclock-bench.tgz -C ~ paclock-bench
+   rsync -az amd:/work1/chenyuyou/yifanwang/Zhizhe/PACLock/ ~/PACLock/
+   tar czf ~/Desktop/PACLock.tgz -C ~ PACLock
    ```
-   把 `~/Desktop/paclock-bench.tgz` 拷到那台电脑,解压。
+   把 `~/Desktop/PACLock.tgz` 拷到那台电脑,解压。
 
 2. 在那台电脑上执行**第 2、3 步**(inspect 和 run,都不需要联网)。
 

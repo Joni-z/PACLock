@@ -1,5 +1,8 @@
-import sys, torch
-sys.path.insert(0, "/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench")
+"""Smoke-test BIOT and LaBraM across every corpus shape in the matrix.
+
+    python -m tests.smoke_adapt
+"""
+
 from paclock_bench.models.foundation.biot_adapter import build_biot
 from paclock_bench.models.foundation.labram_adapter import build_labram
 

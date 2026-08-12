@@ -20,7 +20,9 @@ import sys
 
 import torch
 
-VENDOR = "/work1/chenyuyou/yifanwang/Zhizhe/paclock-bench/vendor/biot"
+from paclock_bench.paths import vendored
+
+VENDOR = vendored("biot")
 sys.path.insert(0, VENDOR)
 
 from model.biot import BIOTClassifier  # noqa: E402
