@@ -20,7 +20,7 @@ import os
 from ..paths import expand
 import numpy as np
 import torch
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, Subset
 
 
 # Read the whole split into RAM when it is at most this large; above it, fall
@@ -111,6 +111,54 @@ def load_manifest(root: str) -> dict:
         return json.load(f)
 
 
+def _counts(d):
+    """Class counts for a WindowDataset or a Subset view of one."""
+    if isinstance(d, Subset):
+        return np.bincount(np.asarray(d.dataset.labels).ravel()[d.indices]).tolist()
+    return d.class_counts().tolist()
+
+
+def stratified_subset(dataset, cap: int, seed: int):
+    """A class-stratified random subset of `cap` windows, as a Subset view.
+
+    Stratified rather than plain random because the corpora this exists for are
+    imbalanced -- TUEV's rarest class is under 2% of its training split -- and a
+    uniform draw at cap=2160 could drop a class entirely, which would change the
+    task rather than its sample size and confound the very comparison the
+    subsample is built to make.
+
+    `seed` is deliberately independent of the run's model seed, so every model
+    and every seed at a given cap trains on the IDENTICAL subset: the curve then
+    varies in sample size only.
+    """
+    labels = np.asarray(dataset.labels).ravel()
+    rng = np.random.default_rng(seed)
+    classes, counts = np.unique(labels, return_counts=True)
+    # proportional allocation, at least one window per class, largest-remainder
+    # rounding so the parts sum to exactly `cap`
+    exact = counts / counts.sum() * cap
+    take = np.maximum(np.floor(exact).astype(int), 1)
+    short = cap - take.sum()
+    if short > 0:
+        order = np.argsort(-(exact - np.floor(exact)))
+        for k in range(short):
+            take[order[k % len(order)]] += 1
+    elif short < 0:
+        order = np.argsort(exact - np.floor(exact))
+        i = 0
+        while take.sum() > cap:
+            j = order[i % len(order)]
+            if take[j] > 1:
+                take[j] -= 1
+            i += 1
+    take = np.minimum(take, counts)
+    idx = np.concatenate([
+        rng.choice(np.where(labels == c)[0], n, replace=False)
+        for c, n in zip(classes, take)
+    ])
+    return Subset(dataset, np.sort(idx).tolist())
+
+
 def build_dataloaders(cfg: dict) -> tuple[DataLoader, DataLoader, DataLoader, dict]:
     """train/val/test loaders plus the manifest the data came from."""
     root = expand(cfg["data_root"])
@@ -124,6 +172,20 @@ def build_dataloaders(cfg: dict) -> tuple[DataLoader, DataLoader, DataLoader, di
         for s in ("train", "val", "test")
     }
 
+    # Sample-size ablation (docs/FINDINGS.md): the tier boundary in this
+    # benchmark coincides with training-set size -- every corpus we lead has
+    # >=68k training windows and every corpus we lose has <=6.7k, with nothing in
+    # between -- so the explanation has to be tested by moving that variable on a
+    # corpus we win, holding everything else fixed.
+    cap = int(cfg.get("train_subsample", 0))
+    if cap and cap < len(sets["train"]):
+        full = len(sets["train"])
+        sets["train"] = stratified_subset(
+            sets["train"], cap, int(cfg.get("train_subsample_seed", 0))
+        )
+        print(f"  [train] subsampled {cap} / {full} windows (stratified, "
+              f"seed {int(cfg.get('train_subsample_seed', 0))})", flush=True)
+
     bs = cfg.get("batch_size", 32)
     nw = cfg.get("num_workers", 8)
     common = dict(num_workers=nw, pin_memory=True,
@@ -136,8 +198,10 @@ def build_dataloaders(cfg: dict) -> tuple[DataLoader, DataLoader, DataLoader, di
     )
     info = {
         "manifest": manifest,
-        "input_shape": sets["train"].shape,
-        "class_counts": {s: d.class_counts().tolist() for s, d in sets.items()},
+        "input_shape": (sets["train"].dataset.shape
+                        if isinstance(sets["train"], Subset)
+                        else sets["train"].shape),
+        "class_counts": {s: _counts(d) for s, d in sets.items()},
         "n_samples": {s: len(d) for s, d in sets.items()},
     }
     return (*loaders, info)
