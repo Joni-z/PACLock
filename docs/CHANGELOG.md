@@ -297,3 +297,125 @@ LaBraM 的位置编码按电极身份索引,要求 23 个**单极** `-REF` 通�
 | EEGPT | ⛔ 需 58 通道 | ⛔ | ⛔ |
 
 合计 8 个 B 组单元格(3+3+2),每个 3 seeds,另有同样数量的 from-scratch 对照。
+
+---
+
+# 2026-08-06 → 2026-08-18
+
+上一条记录停在 A 组完成。这一段覆盖 B/C/D 组、预训练、以及两处进入模型的架构
+改动。逐条按「做了什么 / 为什么 / 证据」记录,被否掉的同样记录,因为重走一遍
+的成本比读一段文字高得多。
+
+## 架构改动(两处,均零新增参数)
+
+### `interaction_mode: rotation`(新增,未设为默认)
+
+`token = a_j · aligned_phase_j / |aligned_phase_j|`。
+
+**为什么**:`product` 模式下 `|aligned_phase|` 在各 patch 间的变异系数约 0.62,
+而它是耦合估计量的副产物、不是特征;在 BCI-IV-2a 上四个类的耦合统计量完全一致
+(mean |Z| 0.0026–0.0031,preferred phase 一致性处于 surrogate 零水平),
+于是频带功率被乘上一个不含标签信息的每-patch 随机增益。PAC 的信息在
+`aligned_phase` 的**方向**里,不在模长里。
+
+**证据**:TUSZ +0.100(n=1)、TUEV +0.025(n=3)、PhysioNet-MI +0.024(n=1)、
+BCI +0.012(n=3);TUAR −0.021(n=1)、Sleep-EDF −0.001(n=1)。
+
+**验证**(`scripts/verify_rotation.py`):`product`/`concat` 与改动前逐位一致;
+`|h| = |a|` 误差 2.4e-7;相位扭转仍改变 token;**规范不变性首次实测通过**
+(`p_i → e^{iδ_i}p_i, Z_ij → e^{iδ_i}Z_ij` 下 1.. 频带不动),`product` 与
+`rotation` 都成立 —— 这条主张 docstring 里写了很久但从未被测过。
+
+### `head: spatial`(新增,未设为默认)+ 一个会让实验作废的 bug 修复
+
+保留电极身份,只池化频带与时间轴。
+
+**为什么**:`mean`/`band`/`attn` 都把电极轴平均掉,而运动想象的判别量是对侧
+感觉运动区的 mu/beta 去同步 —— 一个空间对比。旁证:BCI 上最好的 PACLock 变体
+一直是 `raw_headattn`(用学出来的权重池化而非均匀平均)。
+
+**证据**:PhysioNet-MI +0.084、BCI +0.056(均 n=1);FACED +0.004(无效)。
+与 rotation 叠加:BCI 0.4344,高于任一单项。
+
+**Bug**:投影层原本在 `forward()` 里懒构建,而 optimizer 在此之前已经捕获
+`model.parameters()` —— 该层会带着随机初始化训练全程,并被记录为「试过没用」。
+改为按 `cfg['n_channels']` 在 `__init__` 中构建;`scripts/verify_head.py` 断言
+它在首次 forward 前已在 `parameters()` 中、能收到梯度、能被优化器更新。
+
+## 等级三诊断:排除掉的解释
+
+`PhysioNet-MI / FACED / BCI-IV-2a` 落后 baseline 0.2–0.4。以下每条都曾被当作
+原因,每条都被实测否掉:
+
+* **「PAC 在 band-power 任务上退化到随机」—— 混淆,已在 `FINDINGS.md` 撤回。**
+  0.259 那个数字来自 `processed_pac` 预处理(0.5 Hz 高通、无 notch);同一模型
+  配置在 `processed/` 上是 0.3588。约 0.10 属于预处理,只有约 0.06 属于 tokenizer。
+* **样本量** —— TUEV 分层降采样到 2160 窗口(BCI 规模)仍得 kappa 0.6523,
+  仍领先 SPaRCNet +0.161;32 倍数据缩减只掉 0.055。为此给
+  `build_dataloaders` 加了 `train_subsample` / `train_subsample_seed`
+  (分层抽样,子集种子与模型种子解耦,`scripts/check_subsample.py` 验证)。
+* **分类头参数爆炸** —— 九个语料 `n_params` 恒为 1.60–1.63 M。
+* **recipe** —— 已跑过的 `patch200`/`lr3e5` 2×2 最多 +0.011。
+* **幅度信息不可及** —— `scripts/probe_readability.py` 用岭回归从单个未训练
+  token 回归其自身 log 频带功率:rotation 二次可读 R²=0.907、concat 线性可读
+  0.853,都**高于**在 BCI 上真正获胜的 raw(0.469 / 0.031)。信息一直都在。
+* **耦合显著性门控** —— 见下。
+
+## 被否决的设计:`coupling_gate: significance`(已完全回退)
+
+`w_ij = relu(1 − 1/λ_ij)`,`λ_ij = |Z_ij|² / E_null|Z_ij|²`,耦合不显著时让频带
+退回自己的相位。`scripts/pac_null_calib.py` 用循环移位 surrogate(同时保留两侧
+边缘分布与两侧自相关)测零水平,两条结论杀死了它:
+
+1. **解析零水平错了 23–350 倍,而且方向是反的。** 我按包络自相关推出
+   `L_eff = (bw_i + bw_j)·T`,预言有效自由度**远小于**名义 200;实测是 174–10121,
+   多数**大于** 200。漏掉的主导项是:`A~_j(t)·exp(i φ_i(t))` 是**振荡积分**,
+   相位以 f_i 高速旋转,抵消比随机游走快得多,所以有效自由度随源频率**上升**
+   (45 Hz 源频带达 ~10⁴)。包络自相关真实存在但是二阶效应。
+2. **显著性区分不开语料。** 用校准后的零水平,`frac(w>0)` 在 TUEV 是
+   0.358–0.370、在 BCI 是 0.356–0.370,且 TUEV 内部类间平坦。运动想象里的跨频
+   耦合统计上真实存在,只是**不具判别性** —— 门控恰好保留了没用的那部分耦合。
+   **显著性 ≠ 判别性**,任何不看标签的耦合统计门控都区分不开这两种情况。
+
+它还有一个真实缺陷,被自带的 `λ→∞` 等价性检查抓到:用 `w` 取代 `|Z|` 作混合
+权重后,`λ→∞` 给出**均匀**权重而非幅度权重,所以它从来不是无条件 tokenizer
+的严格推广。
+
+## 预训练
+
+* 预训练全部在 b2,checkpoint 传回 AMD 微调。正式 60k checkpoint 在
+  `pretrain_runs_60k/`;`pretrain_runs/` 下同名的是 6000 步早期试跑,仅被
+  `*_ft_*` 配方实验引用,**矩阵行未受影响**(一度误报为混淆,系
+  `scripts/ckpt_steps.py` 用 `basename(dirname())` 剥掉父目录所致,已修)。
+* **排除消融**:预训练池剔除 TUSZ/CHB-MIT 后,收益仍保留 66% / 69%。
+* **raw vs pac 预训练**(同 60k、同 d256、每语料 `patch_len` 一致):raw 在三个
+  等级三语料上分别 +0.049 / +0.036 / +0.005。TUSZ/CHB-MIT 的格子此前从未跑过。
+* **已知配方问题**:预训练 `patch_len=200` 与 TUSZ/CHB-MIT/BCI 微调的
+  `patch_len=50` 形状不符,tokenizer 权重加载时被跳过 —— 这些语料上的预训练
+  只迁移了 encoder。
+
+## 新增语料
+
+* **TUAR**(伪迹事件形态,3 类):用来检验 PAC 的 TUEV 优势是否可泛化。
+  **答案是否定的**:pac 0.5780 vs raw 0.6289。`bckg` 类 0 事件不是解析 bug ——
+  41 个带 bckg 区间的标注文件全部没有配套 EDF(352 csv vs 310 edf);
+  `chew` 只出现在 212 个受试者中的 25 个,验证集 0 窗口,故降为 3 类。
+* **TUSL**:全语料仅 300 个事件(每类 100),在花训练算力前放弃。
+
+## 工具
+
+新增 `scripts/`:`verify_rotation.py`、`verify_head.py`、`pac_null_calib.py`、
+`pac_noise_diag.py`、`pac_noise_diag2.py`、`probe_readability.py`、
+`check_subsample.py`、`ckpt_steps.py`、`status_snapshot.py`。
+
+`scripts/normalize_xlsx.py` 的 `range(1, 8)` 硬编码改为 `ws.max_column` ——
+这个脚本唯一的职责就是统一格式,却漏掉了新增的两列 delta。
+
+## 文档
+
+* `docs/STATUS.md` 重写(上一版停在 08-06,内容已与事实不符)。
+* `docs/FINDINGS.md` 追加 tokenizer 一节,并**撤回**其中一个已发布的错误
+  结论(见上「混淆」条)。
+* 删除 `docs/FACED_操作指南.md`:一次性操作手册,任务 8/12 完成;其中的协议
+  事实(官方 `.pkl` 版本、split 边界 S000–079/080–099/100–122、每人 84 窗口、
+  类别分布 3,3,3,3,4,3,3,3,3)已由 `docs/PROTOCOLS.md` §8 更完整地记录。

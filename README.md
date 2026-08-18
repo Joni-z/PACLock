@@ -16,7 +16,7 @@ sbatch slurm/run.slurm scripts.smoke_paths       # real config -> loader -> mode
 ```
 
 Both variables default to the paths this was built on, so nothing needs setting
-to keep working there. `docs/MIGRATION.md` is the full checklist; `docs/DATASETS.md`
+to keep working there. `docs/STATUS.md` is the full checklist; `docs/PROTOCOLS.md`
 covers where each corpus comes from.
 
 Nothing heavier than an editor belongs on the login node — that includes
@@ -78,7 +78,7 @@ clear roughly twice its own corpus's sd to mean anything.
 `cudnn.deterministic=True`, which on ROCm made the `in_channels=1` patch
 convolutions select an atomics-free backward-weights kernel. Replaced with a
 GEMM. Neither factor costs anything alone; together they cost 3.76x. On CUDA
-this may not reproduce — check with the 2x2 in `docs/PERF.md`
+this may not reproduce — check with the 2x2 in `docs/FINDINGS.md`
 (`scripts/bench_ab.py`), do not assume.
 
 **A mathematically identical frontend change moved an ISRUC result by 0.0276 —
