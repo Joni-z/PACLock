@@ -100,12 +100,15 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
         # is not swapped.
         from .foundation.cbramod_paclockfe_adapter import build_cbramod_paclockfe
 
+        mk = cfg.get("model_kwargs", {})
         return build_cbramod_paclockfe(
             n_classes=cfg["num_classes"],
             n_channels=C,
             seq_len=T,
-            dropout=cfg.get("model_kwargs", {}).get("dropout", 0.1),
+            dropout=mk.get("dropout", 0.1),
             sequence=len(input_shape) == 3,
+            tokenizer_mode=mk.get("tokenizer_mode", "pac_interaction"),
+            interaction_mode=mk.get("interaction_mode", "product"),
         )
 
     if name == "tfm":
@@ -139,11 +142,14 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
         # docstring for why spatial_pe and the head are excluded).
         ckpt = cfg.get("checkpoint")
         if ckpt:
-            report = load_pretrained_backbone(model, expand(ckpt))
+            report = load_pretrained_backbone(
+                model, expand(ckpt), exclude=tuple(cfg.get("checkpoint_exclude", ())))
             print(f"[paclock] loaded {len(report['loaded'])} pretrained backbone "
                   f"tensors from {ckpt}"
                   + (f"; skipped {len(report['skipped_shape'])} shape mismatches: "
-                     f"{report['skipped_shape']}" if report["skipped_shape"] else ""))
+                     f"{report['skipped_shape']}" if report["skipped_shape"] else "")
+                  + (f"; deliberately NOT loaded (checkpoint_exclude): "
+                     f"{report['skipped_excluded']}" if report["skipped_excluded"] else ""))
         return model
 
     raise KeyError(

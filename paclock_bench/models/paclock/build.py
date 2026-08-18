@@ -199,18 +199,35 @@ def build_model(cfg: dict) -> nn.Module:
 _BACKBONE_PREFIXES = ("frontend.", "band_pe.", "encoder.")
 
 
-def load_pretrained_backbone(model: nn.Module, checkpoint_path: str) -> dict:
+def load_pretrained_backbone(model: nn.Module, checkpoint_path: str,
+                             exclude: tuple = ()) -> dict:
     """Load frontend/band_pe/encoder weights from a training/pretrain.py
-    checkpoint into `model` in place. Returns {"loaded": [...], "skipped_shape": [...]}
+    checkpoint into `model` in place. Returns
+    {"loaded": [...], "skipped_shape": [...], "skipped_excluded": [...]}
     for the caller to log -- a shape mismatch (e.g. n_bands or d_model differs
     from the pretraining config) is silently dropped per-key rather than
-    failing the whole load, since the rest of the backbone may still transfer."""
+    failing the whole load, since the rest of the backbone may still transfer.
+
+    `exclude` is a tuple of key prefixes to leave at their fresh initialisation.
+    It exists for one measurement: pretraining runs at patch_len=200 while most
+    finetuning configs run at 50, so the tokenizer's Conv1d kernel does not match
+    and its weights are dropped by the shape check -- meaning "pretrained" has so
+    far meant "pretrained encoder, tokenizer relearned from scratch" on those
+    corpora. Matching patch_len fixes that, but it also changes the token grid and
+    the PAC estimation window, which docs/FINDINGS.md records as the single
+    largest architectural factor. Excluding the tokenizer explicitly gives a third
+    arm at the SAME patch_len, so the pretrained tokenizer's contribution can be
+    read off without the resolution moving underneath it."""
     ckpt = torch.load(checkpoint_path, map_location="cpu")
     src = ckpt["model"] if "model" in ckpt else ckpt
     dst = model.state_dict()
-    loaded, skipped = [], []
+    loaded, skipped, excluded_keys = [], [], []
+    exclude = tuple(exclude or ())
     for k, v in src.items():
         if not k.startswith(_BACKBONE_PREFIXES):
+            continue
+        if exclude and k.startswith(exclude):
+            excluded_keys.append(k)
             continue
         if k not in dst:
             skipped.append(k)
@@ -221,4 +238,5 @@ def load_pretrained_backbone(model: nn.Module, checkpoint_path: str) -> dict:
         dst[k] = v
         loaded.append(k)
     model.load_state_dict(dst, strict=True)
-    return {"loaded": loaded, "skipped_shape": skipped}
+    return {"loaded": loaded, "skipped_shape": skipped,
+            "skipped_excluded": excluded_keys}

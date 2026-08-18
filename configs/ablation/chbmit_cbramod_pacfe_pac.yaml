@@ -1,0 +1,27 @@
+name: chbmit-cbramod_pacfe_pac
+group: ablation
+dataset: chbmit
+data_root: $PACLOCK_PROC/processed/chbmit
+model: cbramod_paclockfe
+loader: null
+optimizer: adamw
+lr: 0.0001
+weight_decay: 0.05
+epochs: 50
+batch_size: 64
+multi_lr: true
+scheduler: cosine
+grad_clip: 1.0
+patience: 0
+num_workers: 16
+device: cuda
+eval_every_steps: 0
+model_kwargs:
+  dropout: 0.1
+  tokenizer_mode: pac_interaction
+num_classes: 2
+sample_rate: 200
+loss: focal
+seed: 0
+focal_alpha: 0.25
+focal_gamma: 2.0

@@ -63,7 +63,7 @@ class PACLockCBraModBackbone(nn.Module):
     CBraMod, with no changes to either.
     """
 
-    def __init__(self):
+    def __init__(self, tokenizer_mode: str = "pac_interaction", interaction_mode: str = "product"):
         super().__init__()
         CBraMod = _import_cbramod()
         real = CBraMod(**BACKBONE_ARGS)
@@ -76,8 +76,8 @@ class PACLockCBraModBackbone(nn.Module):
         self.frontend = TriAxialFrontend(
             n_bands=N_BANDS, hidden_dim=D_MODEL, sample_rate=200,
             kernel_size=201, patch_len=PATCH, pac_patch_len=PATCH,
-            tokenizer_mode="pac_interaction", pac_token_mode="measured",
-            interaction_mode="product",
+            tokenizer_mode=tokenizer_mode, pac_token_mode="measured",
+            interaction_mode=interaction_mode,
         )
 
     def forward(self, x: torch.Tensor, mask=None) -> torch.Tensor:
@@ -93,9 +93,22 @@ class PACLockCBraModBackbone(nn.Module):
 
 
 def build_cbramod_paclockfe(n_classes: int, n_channels: int, seq_len: int,
-                            *, dropout: float = 0.1, sequence: bool = False):
-    """Same call convention as build_cbramod (build.py passes seq_len=T)."""
-    backbone = PACLockCBraModBackbone()
+                            *, dropout: float = 0.1, sequence: bool = False,
+                            tokenizer_mode: str = "pac_interaction",
+                            interaction_mode: str = "product"):
+    """Same call convention as build_cbramod (build.py passes seq_len=T).
+
+    tokenizer_mode="raw" is the control this ablation needs to mean anything.
+    Swapping CBraMod's tokenizer for PACLock's PAC frontend and winning shows
+    that OUR FRONTEND is better than theirs -- it does not show that the PAC
+    interaction is what did it, because the frontend also brings a learned sinc
+    filterbank and a per-band token axis. Running the same swap with the
+    frontend's raw tokenizer separates the two, and the two are exactly
+    parameter-matched (both 40,200 in the tokenizer: raw is one Conv1d(1,200,200)
+    with bias; pac is Conv1d(1,100,200) without bias plus Conv1d(1,100,200) with
+    bias plus a 100-entry scale), so neither arm can win on capacity."""
+    backbone = PACLockCBraModBackbone(tokenizer_mode=tokenizer_mode,
+                                      interaction_mode=interaction_mode)
     n_patches = seq_len // PATCH
     if sequence:
         return CBraModSequence(backbone, n_channels, n_patches, n_classes)
