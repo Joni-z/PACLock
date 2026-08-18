@@ -45,6 +45,7 @@ from .common import (
     window_signal,
 )
 from .tuh_common import MissingChannels, load_bipolar_uv, sort_subject_split, subject_of
+from paclock_bench.paths import expand
 
 
 def process_one(path_label: tuple[str, int], cfg: dict):
@@ -114,7 +115,12 @@ def main():
                     default=int(os.environ.get("SLURM_CPUS_PER_TASK", 16)))
     args = ap.parse_args()
     cfg = yaml.safe_load(open(args.config))
-    root, out_dir = cfg["raw_root"], cfg["out_dir"]
+    # $PACLOCK_*-templated config fields are not expanded by the yaml loader.
+    # None of the preprocessing scripts called paths.expand() on their own until
+    # tueg.py's first run after the portability migration exposed the gap; this
+    # fix was made on b2 and is being carried back. An absolute path passes
+    # through expand() untouched, so it is safe on either cluster.
+    root, out_dir = expand(cfg["raw_root"]), expand(cfg["out_dir"])
     man = Manifest(dataset=cfg["dataset"], protocol=cfg)
 
     # ---- split by subject inside the official train dir, per class ---------- #
