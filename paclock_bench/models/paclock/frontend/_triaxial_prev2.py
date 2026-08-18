@@ -133,10 +133,9 @@ class TriAxialFrontend(nn.Module):
         self.pac_patch_len = self.pac_patch_lens[0]
         self.normalize = normalize
         self.return_pac_vector = return_pac_vector
-        if tokenizer_mode not in ("raw", "pac_interaction", "hybrid"):
+        if tokenizer_mode not in ("raw", "pac_interaction"):
             raise ValueError(
-                "tokenizer_mode must be raw/pac_interaction/hybrid, got "
-                f"{tokenizer_mode!r}"
+                f"tokenizer_mode must be raw/pac_interaction, got {tokenizer_mode!r}"
             )
         if pac_token_mode not in ("measured", "uniform", "scramble", "magnitude"):
             raise ValueError(
@@ -152,27 +151,13 @@ class TriAxialFrontend(nn.Module):
         self.pac_token_mode = pac_token_mode
         self.interaction_mode = interaction_mode
         self.sinc = SincBandpass(n_bands, sample_rate, kernel_size=kernel_size)
-        # "hybrid" (2026-08-18): raw band tokens AND PAC interaction tokens,
-        # side by side on the frequency axis -- grid (C, 2*nb, P) with rows
-        # 0..nb-1 the raw tokens and nb..2nb-1 the interactions. The measured
-        # reason: the interaction token REPLACES band j's own phase with a
-        # coupling-weighted mixture of lower bands' phases, which wins where
-        # cross-band structure is the class signal (TUEV, +0.20 with rotation)
-        # and costs up to 0.12 where the discarded within-band phase carried it
-        # (CHB-MIT, TUSZ, MI) -- every alternative explanation was measured
-        # away first (amplitude readability probe, rotation, concat, uniform;
-        # docs/FINDINGS.md). Side-by-side keeps both sources: nothing is
-        # replaced, and the encoder's frequency attention decides per task what
-        # to read. This retires the constitutive-only ("no free path") design
-        # on the strength of that evidence -- the forced version is a bet that
-        # loses on 8 of 9 corpora, and the bet was the doctrine, not the PAC.
-        if tokenizer_mode in ("raw", "hybrid"):
+        if tokenizer_mode == "raw":
             # Per-(channel, band) raw-waveform patch tokenizer. Shared across
             # all channel/band pairs; retained as the exact legacy baseline.
             self.tokenizer = nn.Conv1d(
                 1, hidden_dim, kernel_size=patch_len, stride=patch_len
             )
-        if tokenizer_mode in ("pac_interaction", "hybrid"):
+        else:
             if hidden_dim % 2:
                 raise ValueError("pac_interaction tokenizer needs an even hidden_dim")
             complex_dim = hidden_dim // 2
@@ -211,27 +196,6 @@ class TriAxialFrontend(nn.Module):
                 # (product wins with LESS capacity); a concat win would need
                 # this margin controlled before being taken at face value.
                 self.concat_proj = nn.Linear(3 * complex_dim, hidden_dim)
-
-    @property
-    def n_token_bands(self) -> int:
-        """Rows on the token grid's frequency axis. 2*n_bands under "hybrid"
-        (raw rows + interaction rows), n_bands otherwise. BandPE(index) and the
-        band/spatial heads must be sized from THIS, not from n_bands -- the
-        builder reads it so no config has to know the factor."""
-        return 2 * self.n_bands if self.tokenizer_mode == "hybrid" else self.n_bands
-
-    def token_band_hz(self) -> torch.Tensor:
-        """band_hz aligned to the token grid rows: duplicated under "hybrid"
-        (an interaction row describes the same target band as its raw row).
-        NOTE for band_pe: "hz" -- the duplicate rows get identical PEs, so hz
-        mode cannot tell a raw row from its interaction row; "index" gives each
-        of the 2*nb rows its own embedding and is what hybrid configs should
-        use. band_hz() itself stays n_bands-shaped: the sinc bank has n_bands
-        filters and the coupling matrices are (nb, nb) regardless of mode."""
-        bh = self.band_hz()
-        if self.tokenizer_mode == "hybrid":
-            return torch.cat([bh, bh], dim=0)
-        return bh
 
     def band_hz(self) -> torch.Tensor:
         """(n_bands, 2): [center_freq, bandwidth] in Hz, from the sinc params."""
@@ -450,7 +414,7 @@ class TriAxialFrontend(nn.Module):
         # phase / amplitude -> time-resolved per-channel coupling
         z = hilbert(filtered)                                    # (B, C, nb, T)
         phase_unit, amplitude = phase_amplitude(z)
-        if self.tokenizer_mode in ("raw", "hybrid"):
+        if self.tokenizer_mode == "raw":
             f = filtered.reshape(B * C * self.n_bands, T)
             feat = _patch_project(self.tokenizer, f)             # (B*C*nb, P, D)
             P = feat.shape[1]
@@ -484,17 +448,6 @@ class TriAxialFrontend(nn.Module):
             tokens = self._interaction_tokens(
                 phase_unit, amplitude, pac_vectors
             )
-        elif self.tokenizer_mode == "hybrid":
-            # Raw rows first (0..nb-1), interaction rows after (nb..2nb-1).
-            # The raw rows here are BIT-IDENTICAL to tokenizer_mode="raw" and
-            # the interaction rows to tokenizer_mode="pac_interaction" under
-            # the same weights -- asserted by scripts/verify_hybrid.py, not
-            # assumed. Row order is a contract: checkpoint surgery and the
-            # ablation that deletes interaction rows both index by it.
-            interaction = self._interaction_tokens(
-                phase_unit, amplitude, pac_vectors
-            )
-            tokens = torch.cat([tokens, interaction], dim=2)  # (B,C,2nb,P,D)
         # `coupling` and the returned `pac_vector` stay single-scale: they feed
         # the coupling/phase freq-mixers and the phase-ablation modes, whose
         # semantics are defined for one estimation window. The first entry is
@@ -502,20 +455,6 @@ class TriAxialFrontend(nn.Module):
         coupling = pac_vector.abs()
 
         if return_amp_target:
-            if self.tokenizer_mode == "hybrid":
-                # The interaction token for band j carries a_j directly, so a
-                # crossfreq mask that hides raw row j but leaves interaction
-                # row j visible hands the reconstruction its own target. The
-                # masking scheme has to hide both rows of a band together, and
-                # neither training/pretrain.py nor the supervised aux path does
-                # that yet. Fail here, at the source, rather than let a
-                # pretraining run silently leak.
-                raise NotImplementedError(
-                    "hybrid + return_amp_target: masked-amplitude pretraining "
-                    "needs paired-row masking (raw row j AND interaction row "
-                    "j) before it is meaningful; see the hybrid note in "
-                    "docs/FINDINGS.md"
-                )
             # Per-token (electrode, band, patch) log mean amplitude -- a fixed,
             # deterministic regression target for masked-reconstruction pretraining
             # (models/pretrain.py). Deterministic => no representation collapse, no
@@ -527,9 +466,9 @@ class TriAxialFrontend(nn.Module):
             am = amplitude[..., : P * L].reshape(B, C, self.n_bands, P, L)
             amp_target = torch.log(am.mean(dim=-1) + 1e-6)      # (B, C, nb, P)
             if self.return_pac_vector:
-                return tokens, coupling, self.token_band_hz(), amp_target, pac_vector
-            return tokens, coupling, self.token_band_hz(), amp_target
+                return tokens, coupling, self.band_hz(), amp_target, pac_vector
+            return tokens, coupling, self.band_hz(), amp_target
 
         if self.return_pac_vector:
-            return tokens, coupling, self.token_band_hz(), pac_vector
-        return tokens, coupling, self.token_band_hz()
+            return tokens, coupling, self.band_hz(), pac_vector
+        return tokens, coupling, self.band_hz()

@@ -551,10 +551,18 @@ class TriAxialBlock(nn.Module):
         h = self.space(h).reshape(B, nb, P, C, D).permute(0, 3, 1, 2, 4)
         x = x + h
 
-        # freq: mix over nb, per (B, C, P), using this (C,P)'s coupling matrix
+        # freq: mix over nb, per (B, C, P), using this (C,P)'s coupling matrix.
+        # The coupling matrix keeps its OWN band count: under tokenizer_mode
+        # "hybrid" the grid has 2*nb rows while coupling stays (nb, nb) -- the
+        # sinc bank has nb filters whatever the grid shape. Only FreqAttention
+        # accepts that mismatch (it ignores coupling entirely; the builder
+        # enforces freq_mixer=attention for hybrid), so reshaping by
+        # coupling.shape[-1] instead of the grid's nb is exact for every
+        # non-hybrid mode and inert for hybrid.
         h = self.n_freq(x).permute(0, 1, 3, 2, 4).reshape(B * C * P, nb, D)
-        cpl = coupling.reshape(B * C * P, nb, nb)
-        pac = None if pac_vector is None else pac_vector.reshape(B * C * P, nb, nb)
+        nbc = coupling.shape[-1]
+        cpl = coupling.reshape(B * C * P, nbc, nbc)
+        pac = None if pac_vector is None else pac_vector.reshape(B * C * P, nbc, nbc)
         h = self.freq(h, cpl, pac).reshape(B, C, P, nb, D).permute(0, 1, 3, 2, 4)
         x = x + h
 

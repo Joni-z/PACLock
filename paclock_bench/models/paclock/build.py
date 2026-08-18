@@ -86,7 +86,28 @@ class TriAxialPACLock(nn.Module):
             pac_token_mode=cfg.get("pac_token_mode", "measured"),
             interaction_mode=cfg.get("interaction_mode", "product"),
         )
-        self.band_pe = BandPE(d, n_bands=cfg["n_bands"], mode=cfg.get("band_pe", "hz"))
+        if self.frontend.tokenizer_mode == "hybrid":
+            # The coupling/phase mixers consume an (nb, nb) coupling matrix and
+            # would need it lifted to the 2*nb hybrid grid; nothing defines that
+            # lift yet, and the deliverable uses attention anyway. Refuse rather
+            # than mis-index.
+            if self.freq_mixer != "attention":
+                raise ValueError(
+                    "tokenizer_mode=hybrid requires freq_mixer=attention, got "
+                    f"{self.freq_mixer!r}"
+                )
+            if cfg.get("aux_recon_weight", 0.0) > 0:
+                raise ValueError(
+                    "tokenizer_mode=hybrid does not support aux_recon yet: the "
+                    "crossfreq mask must hide a band's raw AND interaction rows "
+                    "together or the target leaks (see the frontend's "
+                    "return_amp_target guard)"
+                )
+        # BandPE(index) and the band/spatial heads are sized from the GRID's
+        # frequency axis, which is 2*n_bands under hybrid -- the frontend owns
+        # that fact, so read it rather than re-deriving it here.
+        grid_bands = self.frontend.n_token_bands
+        self.band_pe = BandPE(d, n_bands=grid_bands, mode=cfg.get("band_pe", "hz"))
         self.spatial_pe = SpatialPE(cfg["n_channels"], d, coords=_spatial_coords(cfg))
         self.encoder = TriAxialEncoder(
             depth=cfg["depth"], d_model=d,
@@ -98,7 +119,7 @@ class TriAxialPACLock(nn.Module):
         )
         self.head = ClassificationHead(d, cfg["num_classes"],
                                       mode=cfg.get("head", "mean"),
-                                      n_bands=cfg["n_bands"],
+                                      n_bands=grid_bands,
                                       n_channels=cfg["n_channels"])
 
         # Optional crossfreq-reconstruction auxiliary head (AGENT.md sec. 13.15).
