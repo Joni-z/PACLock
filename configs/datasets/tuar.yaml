@@ -1,0 +1,34 @@
+dataset: tuar
+version: v3.0.1
+raw_root: $PACLOCK_DATA/tuh/tuar/edf
+out_dir: $PACLOCK_PROC/processed/tuar
+num_classes: 3
+sample_rate: 200
+band:
+- 0.3
+- 75.0
+notch: 60.0
+window_sec: 5.0
+min_event_sec: 0.5
+channel_ref_suffix: -REF
+label_map:
+  eyem: 0
+  musc: 1
+  elec: 2
+normalization: div100
+loss: cross_entropy
+primary_metric: cohen_kappa
+report_metrics:
+- cohen_kappa
+- balanced_acc
+- weighted_f1
+split:
+  mode: sort_subject_ratio
+  train_ratio: 0.7
+  val_ratio_of_rest: 0.5
+_class_note: 'Three artifact morphologies. Dropped, with reasons: shiv (42 events
+  corpus-wide); bckg (all 41 annotation files carrying background intervals ship without
+  their EDF -- 352 csv vs 310 edf in this release, so no background signal exists);
+  chew (present in only 25 of 212 subjects, so a subject-disjoint split cannot reliably
+  place it in every split -- the first build put 663 train / 0 val / 82 test windows
+  in it, leaving validation blind to a quarter of the label space).'

@@ -5,6 +5,7 @@ from __future__ import annotations
 import torch.nn as nn
 
 from .baselines.light_supervised import REGISTRY as LIGHT_REGISTRY
+from ..paths import expand
 
 
 def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
@@ -120,7 +121,7 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
         )
 
     if name == "paclock":
-        from .paclock.build import build_model as build_paclock
+        from .paclock.build import build_model as build_paclock, load_pretrained_backbone
 
         # the vendored builder is config-driven; hand it the resolved shape
         pac_cfg = {
@@ -132,7 +133,18 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
             "sampling_rate": cfg.get("sample_rate", 200),
             "dataset": cfg["dataset"],
         }
-        return build_paclock(pac_cfg)
+        model = build_paclock(pac_cfg)
+        # cfg['checkpoint'] points at a training/pretrain.py checkpoint.pt --
+        # transfers frontend/band_pe/encoder only (see load_pretrained_backbone's
+        # docstring for why spatial_pe and the head are excluded).
+        ckpt = cfg.get("checkpoint")
+        if ckpt:
+            report = load_pretrained_backbone(model, expand(ckpt))
+            print(f"[paclock] loaded {len(report['loaded'])} pretrained backbone "
+                  f"tensors from {ckpt}"
+                  + (f"; skipped {len(report['skipped_shape'])} shape mismatches: "
+                     f"{report['skipped_shape']}" if report["skipped_shape"] else ""))
+        return model
 
     raise KeyError(
         f"unknown model {name!r}. Registered: "

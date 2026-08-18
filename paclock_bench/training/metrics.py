@@ -76,6 +76,7 @@ PRIMARY_METRIC = {
     "physionet_mi": "balanced_acc",
     "faced": "balanced_acc",
     "bci_iv_2a": "balanced_acc",
+    "tuar": "cohen_kappa",
 }
 
 
