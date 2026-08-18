@@ -131,5 +131,32 @@ check("frontend: hybrid = raw + pac tokenizer params",
       n(hy) == n(raw) + tok_pac and n(hy) == n(pac) + tok_raw,
       f"hybrid {n(hy):,} = raw {n(raw):,} + {tok_pac:,} = pac {n(pac):,} + {tok_raw:,}")
 
+print("\n=== 7. per-band interaction gate", flush=True)
+torch.manual_seed(0)
+gated = TriAxialFrontend(**KW, tokenizer_mode="hybrid", hybrid_gate="band").eval()
+gated.load_state_dict({**hy.state_dict(),
+                       "interaction_gate": torch.ones(NB)}, strict=True)
+with torch.no_grad():
+    t_g = gated(x)[0]
+d = (t_g - t_h).abs().max().item()
+check("gate=1 bit-identical to plain hybrid", d == 0.0, f"max|diff| = {d:.3e}")
+with torch.no_grad():
+    gated.interaction_gate[3] = 0.0
+    t_g0 = gated(x)[0]
+check("zeroing gate band 3 kills only interaction row 3",
+      t_g0[:, :, NB + 3].abs().max().item() == 0.0
+      and torch.equal(t_g0[:, :, :NB], t_h[:, :, :NB])
+      and torch.equal(t_g0[:, :, NB:NB + 3], t_h[:, :, NB:NB + 3]))
+gated.interaction_gate.data.fill_(1.0)
+gated.train()
+gated(x)[0].sum().backward()
+g = gated.interaction_gate.grad
+check("gate receives gradient", g is not None and g.abs().sum().item() > 0)
+try:
+    TriAxialFrontend(**KW, tokenizer_mode="raw", hybrid_gate="band")
+    check("gate without hybrid raises", False)
+except ValueError as e:
+    check("gate without hybrid raises", True, str(e)[:50])
+
 print(f"\n{'ALL CHECKS PASSED' if ok else 'FAILURES ABOVE'}")
 raise SystemExit(0 if ok else 1)

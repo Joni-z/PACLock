@@ -85,6 +85,7 @@ class TriAxialPACLock(nn.Module):
             tokenizer_mode=cfg.get("tokenizer_mode", "raw"),
             pac_token_mode=cfg.get("pac_token_mode", "measured"),
             interaction_mode=cfg.get("interaction_mode", "product"),
+            hybrid_gate=cfg.get("hybrid_gate", "none"),
         )
         if self.frontend.tokenizer_mode == "hybrid":
             # The coupling/phase mixers consume an (nb, nb) coupling matrix and

@@ -106,6 +106,7 @@ class TriAxialFrontend(nn.Module):
         tokenizer_mode: str = "raw",
         pac_token_mode: str = "measured",
         interaction_mode: str = "product",
+        hybrid_gate: str = "none",
         **_,
     ):
         super().__init__()
@@ -148,9 +149,26 @@ class TriAxialFrontend(nn.Module):
                 "interaction_mode must be product/rotation/concat, got "
                 f"{interaction_mode!r}"
             )
+        if hybrid_gate not in ("none", "band"):
+            raise ValueError(f"hybrid_gate must be none/band, got {hybrid_gate!r}")
+        if hybrid_gate != "none" and tokenizer_mode != "hybrid":
+            raise ValueError("hybrid_gate requires tokenizer_mode=hybrid")
         self.tokenizer_mode = tokenizer_mode
         self.pac_token_mode = pac_token_mode
         self.interaction_mode = interaction_mode
+        self.hybrid_gate = hybrid_gate
+        if hybrid_gate == "band":
+            # Per-band learned gate on the INTERACTION rows only. Initialised to
+            # one, so at init the gated model is bit-identical to plain hybrid
+            # (asserted by verify_hybrid.py). The frequency attention already
+            # learns input-dependent mixing between raw and interaction rows;
+            # what it cannot fix is head=mean averaging all 2*nb rows uniformly
+            # at the readout, where useless interaction rows dilute the pooled
+            # representation no matter what attention did upstream. The gate
+            # lets the gradient shrink those rows globally -- and its trained
+            # value is itself a measurement: alpha_j per corpus reads out how
+            # much of band j's interaction the task actually used.
+            self.interaction_gate = nn.Parameter(torch.ones(n_bands))
         self.sinc = SincBandpass(n_bands, sample_rate, kernel_size=kernel_size)
         # "hybrid" (2026-08-18): raw band tokens AND PAC interaction tokens,
         # side by side on the frequency axis -- grid (C, 2*nb, P) with rows
@@ -494,6 +512,8 @@ class TriAxialFrontend(nn.Module):
             interaction = self._interaction_tokens(
                 phase_unit, amplitude, pac_vectors
             )
+            if self.hybrid_gate == "band":
+                interaction = interaction * self.interaction_gate.view(1, 1, -1, 1, 1)
             tokens = torch.cat([tokens, interaction], dim=2)  # (B,C,2nb,P,D)
         # `coupling` and the returned `pac_vector` stay single-scale: they feed
         # the coupling/phase freq-mixers and the phase-ablation modes, whose
