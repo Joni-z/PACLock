@@ -495,3 +495,79 @@ its own repo's recipe): the repo recipe does not converge on these two
 corpora, which its authors never ran, so there is no recipe to honour. It is
 recorded here and in the workbook's `_填写记录` sheet rather than applied
 silently.
+
+---
+
+# 附录 D(2026-08-18):扩模计划 —— 依据、成本、阶梯
+
+原则:不盲目做大。每一级都要有(a)容量确实还在付钱的证据,(b)数据量跟上,
+(c)算得起的成本。以下全部是实测数字,唯二的未知项单独标出。
+
+## D.1 我们现在在哪
+
+| 量 | 实测值 | 来源 |
+|---|---|---|
+| base | 1.63 M | result.json |
+| large | 8.5 M(d256, depth8) | RAWPT 日志 |
+| 60k 步成本(l40s-48 @24 SU/h) | base 1h39m ≈ **40 SU**;large 4h25m ≈ **106 SU** | b2 sacct 43534889/90 |
+| 预训练池 | 9 语料 + 2,000h TUEG 切片(处理后 85 GB) | b2 du |
+| 数据覆盖 | 60k 步 × batch32 × ~10s ≈ 5,300h 信号 ≈ **池的 ~1.1 个 epoch** | 配置推算 |
+| b2 余额 | **147 / 700 SU** | projects |
+| b2 存储 | 222 / 3,000 GB(余 2.78 TB) | projects |
+
+关键读数:**当前 large 在 60k 步下把池子恰好过了一遍** —— 参数、步数、数据
+此刻是平衡的。只加参数不加步数和数据,没有依据。
+
+## D.2 对标(参数为我们矩阵里的实测值,不是论文自报)
+
+| 模型 | 实测参数(as-run) | 预训练数据 |
+|---|---|---|
+| EEGPT | 25.7 M | (未核) |
+| **CBraMod** | **19.1 M** | TUEG 级(具体小时数待从其论文核实) |
+| **LaBraM-Base** | **5.8 M** | ~2,500h / ~20 数据集(vendor README 原文) |
+| BIOT | 3.2 M | 5 数据集 |
+| TFM-Tokenizer | 1.9 M | — |
+| PACLock base / large | 1.63 / 8.5 M | 4,800h 池 |
+
+**我们的 large(8.5M @ ~4,800h)已经与 LaBraM(5.8M @ 2,500h)同级或更大。**
+下一个有意义的档位是 CBraMod 级(≈19 M)。
+
+## D.3 容量还在付钱的证据(已有,不用再跑)
+
+* 容量阶梯(raw, BCI):d32→64→128→256 = 0.2617→0.2780→0.4192→0.4437,单调不饱和;
+* 60 epoch 下 large:ISRUC +0.0181(8.6σ)、TUEV +0.041 —— 20 epoch 时的负结果是没训够;
+* 成本结构:encoder 只占步时 ~2%,size_large 的 5.33× FLOPs 只贵 7% 墙钟 ——
+  **encoder 扩容在本栈上近乎免费,贵的是前端 GEMM(不随 d_model 显著增长)**。
+
+## D.4 阶梯
+
+**第 0 级(在跑,免费,AMD)**:hybrid 监督验证,TUEV/CHB-MIT/TUSZ/BCI 单 seed。
+机制预测:处处 ≥ raw,TUEV 保住 PAC 优势。任一条不成立则 hybrid 出局。
+
+**第 1 级(现在就付得起:~110 SU,余 147)**:hybrid-large(8.5 M + 51 K)
+在**当前池**上 60k 步。前置条件有两个:
+1. 第 0 级通过;
+2. **hybrid 的配对行掩码**(见下 D.6)—— 未实现前 hybrid 不能预训练。
+另:先在 AMD 用 200 步测 hybrid 的每步耗时(前端算两套 tokenizer,估计
++30–50%,**未实测,不许拍脑袋进成本表**)。
+
+**第 2 级(付不起,需要 SU 补充)**:19 M 档 + 池扩到 ~10,000h
+(TUEG 切片 2,000→7,000h,处理后约 85→300 GB,b2 存储足够)。
+成本估算:每步 ~2×large、步数 ~120k(维持 ~1 epoch 覆盖)→ **~400–500 SU**,
+另加扩片预处理的 GPU-shared 时长(**未知项二**:首次 2,000h 切片的预处理
+job 耗时未留记录,扩片前先查 sacct 或用 500h 试片实测)。
+**结论:第 2 级必须先申请 SU supplement(PSC 可申请)—— 这是 Zhizhe 层面的
+动作,不是脚本能解决的。**
+
+## D.5 为什么预训练留在 b2
+
+AMD 免费但 `/work1` 配额 1.9 TB 已是紧约束(2026-08-18 清理后余 293 GB),
+而 TUEG 原始数据 1.6 TB **只在 b2**,拷不动也放不下。数据在哪,预训练在哪。
+
+## D.6 代码前置:hybrid 的配对行掩码(未实现,已设防)
+
+交互行 j 直接携带 a_j。crossfreq 掩码若只遮 raw 行 j 而留交互行 j 可见,
+幅度重建目标等于把答案递给模型。掩码必须**成对遮蔽**(raw 行 j 与交互行 j
+同遮),损失只在 raw 行上计。实现前,frontend 的 `return_amp_target` 与
+builder 的 `aux_recon` 都会对 hybrid 直接 raise(verify_hybrid.py 断言了
+这两个 guard)—— 宁可当场失败,不许静默泄漏。
