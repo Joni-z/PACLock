@@ -1,0 +1,84 @@
+{
+  "name": "tuab-labram_scratch",
+  "dataset": "tuab",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.7781260481853366,
+    "pr_auc": 0.8514684096130769,
+    "auroc": 0.8617442409587491
+  },
+  "best_val": 0.8542013690370138,
+  "val_curve": [
+    0.8379527364240303,
+    0.8500512030497422,
+    0.8500829064437972,
+    0.8542013690370138,
+    0.8489270722334668,
+    0.841911545554332,
+    0.8315103638130593,
+    0.8389031746216805,
+    0.8320886405030342,
+    0.8373867714940388,
+    0.8387319070079302,
+    0.8225801415728078,
+    0.8246804797351333,
+    0.8029284271899579
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 14,
+    "best_val": 0.8542013690370138,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 14,
+  "stopped_by": "patience",
+  "wall_time_sec": 9915.102886199951,
+  "config": {
+    "name": "tuab-labram_scratch",
+    "group": "C",
+    "dataset": "tuab",
+    "data_root": "$PACLOCK_PROC/processed_labram/tuab",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "seed": 0
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      146902,
+      150877
+    ],
+    "val": [
+      36436,
+      37552
+    ],
+    "test": [
+      19907,
+      17038
+    ]
+  }
+}

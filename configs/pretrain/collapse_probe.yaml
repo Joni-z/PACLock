@@ -1,0 +1,65 @@
+name: pretrain-collapse_probe
+group: pretrain
+corpora:
+- name: tuab
+  data_root: $PACLOCK_PROC/processed/tuab
+  flatten_sequences: false
+  batch_size: 32
+- name: tuev
+  data_root: $PACLOCK_PROC/processed/tuev
+  flatten_sequences: false
+  batch_size: 32
+- name: tusz
+  data_root: $PACLOCK_PROC/processed/tusz
+  flatten_sequences: false
+  batch_size: 32
+- name: chbmit
+  data_root: $PACLOCK_PROC/processed/chbmit
+  flatten_sequences: false
+  batch_size: 32
+- name: sleepedf
+  data_root: $PACLOCK_PROC/processed/sleepedf
+  flatten_sequences: false
+  batch_size: 32
+- name: isruc
+  data_root: $PACLOCK_PROC/processed/isruc
+  flatten_sequences: true
+  batch_size: 32
+- name: physionet_mi
+  data_root: $PACLOCK_PROC/processed/physionet_mi
+  flatten_sequences: false
+  batch_size: 32
+- name: faced
+  data_root: $PACLOCK_PROC/processed/faced
+  flatten_sequences: false
+  batch_size: 32
+- name: bci_iv_2a
+  data_root: $PACLOCK_PROC/processed/bci_iv_2a
+  flatten_sequences: false
+  batch_size: 32
+model_kwargs:
+  arch: triaxial
+  d_model: 128
+  depth: 6
+  n_bands: 8
+  n_heads: 4
+  dropout: 0.1
+  kernel_size: 201
+  tokenizer_mode: pac_interaction
+  pac_token_mode: measured
+  interaction_mode: product
+  freq_mixer: attention
+  band_pe: index
+  patch_len: 50
+sample_rate: 200
+optimizer: adamw
+lr: 0.0001
+weight_decay: 0.01
+grad_clip: 1.0
+steps: 3000
+warmup_steps: 150
+batch_size: 32
+num_workers: 4
+log_every_steps: 25
+save_every_steps: 3000
+seed: 0

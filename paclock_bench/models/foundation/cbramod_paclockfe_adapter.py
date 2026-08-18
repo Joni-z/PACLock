@@ -5,7 +5,7 @@
 Tests the same claim TFM-Tokenizer makes about itself -- that the tokenizer
 carries the result, not the model size -- against OUR tokenizer instead of
 theirs, using the same single-variable-swap logic the rest of this benchmark
-is built on (docs/ARCH_SEARCH.md).
+is built on (docs/FINDINGS.md).
 
 What is swapped and what is not
 --------------------------------
@@ -27,7 +27,7 @@ native 200-sample patch, so the token COUNT and GRID SHAPE match exactly what
 CBraMod's own tokenizer produces -- the ablation asks "is this representation
 better at the model's own resolution", not "is a different resolution better",
 which is a question this benchmark already answered separately
-(docs/ARCH_SEARCH.md's PAC-window result) and would confound this one.
+(docs/FINDINGS.md's PAC-window result) and would confound this one.
 
 Band pooling
 ------------

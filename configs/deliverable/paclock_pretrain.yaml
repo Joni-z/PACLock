@@ -38,4 +38,4 @@ model_kwargs:
 seed: 0
 _note: 'Deliverable config. dataset/data_root/num_classes are the TUEV instantiation
   the 0.7076 result came from; swap them per corpus. spatial_pe: xyz needs montage
-  coords (models/montage.py) -- use index for corpora without them. See docs/DELIVERABLE.md.'
+  coords (models/montage.py) -- use index for corpora without them. See docs/FINDINGS.md.'

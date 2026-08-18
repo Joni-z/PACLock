@@ -1,0 +1,108 @@
+{
+  "name": "tuar-paclock_raw",
+  "dataset": "tuar",
+  "model": "paclock",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 1.600787,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7612509062288945,
+    "cohen_kappa": 0.6289087614238902,
+    "weighted_f1": 0.749096622875047
+  },
+  "best_val": 0.571757172790804,
+  "val_curve": [
+    0.34186544278513065,
+    0.3703843976252654,
+    0.27251990349354904,
+    0.4354234748447138,
+    0.4882150191747118,
+    0.49400106175898073,
+    0.5407256199364137,
+    0.4325999309795412,
+    0.5494728310575161,
+    0.5111540982294877,
+    0.517725348881678,
+    0.5019405769143075,
+    0.571757172790804,
+    0.47646876947692973,
+    0.5427449351522138,
+    0.5540105307436793,
+    0.5347424877916209,
+    0.5245908962083965,
+    0.5319299463101315,
+    0.5307687283702608
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 12,
+    "n_evals": 20,
+    "best_val": 0.571757172790804,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 2605.2551980018616,
+  "config": {
+    "name": "tuar-paclock_raw",
+    "group": "C",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 3,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 128,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "raw",
+      "pac_token_mode": "measured",
+      "interaction_mode": "product",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50
+    },
+    "seed": 0
+  },
+  "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

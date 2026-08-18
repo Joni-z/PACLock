@@ -1,0 +1,38 @@
+name: bci_iv_2a-paclock_lr1e3
+group: C
+dataset: bci_iv_2a
+data_root: $PACLOCK_PROC/processed/bci_iv_2a
+model: paclock
+optimizer: adamw
+lr: 0.001
+weight_decay: 1.0e-05
+scheduler: cosine
+grad_clip: 1.0
+num_workers: 8
+device: cuda
+num_classes: 4
+epochs: 638
+batch_size: 32
+eval_every_steps: 0
+patience: 20
+loss: cross_entropy
+label_smoothing: 0.1
+sample_rate: 200
+model_kwargs:
+  arch: triaxial
+  d_model: 128
+  depth: 6
+  n_bands: 8
+  n_heads: 4
+  dropout: 0.2
+  kernel_size: 201
+  patch_len: 50
+  augmentations: []
+  freq_mixer: attention
+  band_pe: index
+  tokenizer_mode: pac_interaction
+  pac_token_mode: measured
+  interaction_mode: product
+  spatial_pe: index
+  pac_patch_len: 50
+seed: 0
