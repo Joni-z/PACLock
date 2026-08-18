@@ -142,10 +142,9 @@ class TriAxialFrontend(nn.Module):
                 "pac_token_mode must be measured/uniform/scramble/magnitude, got "
                 f"{pac_token_mode!r}"
             )
-        if interaction_mode not in ("product", "rotation", "concat"):
+        if interaction_mode not in ("product", "concat"):
             raise ValueError(
-                "interaction_mode must be product/rotation/concat, got "
-                f"{interaction_mode!r}"
+                f"interaction_mode must be product/concat, got {interaction_mode!r}"
             )
         self.tokenizer_mode = tokenizer_mode
         self.pac_token_mode = pac_token_mode
@@ -228,41 +227,10 @@ class TriAxialFrontend(nn.Module):
         inherit it. This is the physical gauge invariance the old
         phase-steered mixer lacked.
 
-        ``interaction_mode="product"`` (the original): h_j = a_j *
+        ``interaction_mode="product"`` (OURS, mandatory): h_j = a_j *
         aligned_phase_j. There is no raw high-band token beside this
         interaction, so the amplitude and the aligned phase cannot be pulled
         apart again downstream -- the interaction is forced.
-
-        ``interaction_mode="rotation"`` (OURS): h_j = a_j * aligned_phase_j /
-        |aligned_phase_j|. The coupling ROTATES the amplitude token instead of
-        also rescaling it. Forced exactly as strongly as ``product`` -- the
-        token's phase is still determined entirely by the coupling-aligned
-        mixture and there is still no raw high-band token beside it -- but
-        |h_j| = |a_j| now holds exactly, so band power reaches the encoder
-        intact.
-
-        Why ``product`` needed fixing, measured rather than argued
-        (scripts/pac_noise_diag.py, scripts/pac_noise_diag2.py): |aligned_phase|
-        has a coefficient of variation of ~0.75 across patches on every corpus
-        tested, and on BCI-IV-2a its statistics are identical across all four
-        classes (mean |Z| 0.0027-0.0031, preferred-phase consistency at the
-        surrogate null). So on a band-power task ``product`` multiplies the one
-        discriminative quantity, a_j, by a per-patch random gain carrying no
-        label information -- and it scores 0.259 on a 4-class problem whose
-        chance level is 0.25. The PAC content was never in that modulus: it is
-        in the DIRECTION of aligned_phase, which ``rotation`` keeps in full.
-        On TUEV, where this tokenizer wins +0.172 kappa, the class signal lives
-        in |Z| (the artifact class runs 17x the others), and |Z| enters through
-        the mixing weights alpha, i.e. through the direction -- so rotation
-        keeps that too.
-
-        A significance gate on the coupling was tried first and rejected by
-        measurement, not by taste: with the null level calibrated by
-        circular-shift surrogates (scripts/pac_null_calib.py), 36% of edges beat
-        their null on BOTH corpora and the fraction is flat across classes
-        within TUEV. Coupling in motor imagery is statistically real; it is just
-        not class-discriminative, so gating on significance keeps precisely the
-        useless coupling. Significance is not discriminativeness.
 
         ``interaction_mode="concat"`` (SleepPACNet-style control): h_j =
         Linear([a_j, Re(aligned_phase_j), Im(aligned_phase_j)]). The same
@@ -334,16 +302,6 @@ class TriAxialFrontend(nn.Module):
 
         if self.interaction_mode == "product":
             return amplitude_feat.to(aligned_phase.dtype) * aligned_phase
-        if self.interaction_mode == "rotation":
-            # Per-component unit modulus: |h_jk| = |a_jk| for every one of the K
-            # complex features, so the amplitude token passes through exactly and
-            # only the coupling's phase geometry is applied to it. The modulus is
-            # gauge-invariant, so normalising by it keeps aligned_phase's gauge
-            # invariance. clamp_min guards near-cancellation of the alpha-weighted
-            # sum -- phase_feat is an unnormalised learned projection, so its
-            # modulus has no lower bound.
-            unit_phase = aligned_phase / aligned_phase.abs().clamp_min(1e-6)
-            return amplitude_feat.to(unit_phase.dtype) * unit_phase
         # concat: expose the same ingredients, let a learned projection combine
         # them. Real, already at the token width (hidden_dim), no view_as_real
         # needed downstream.
@@ -384,7 +342,7 @@ class TriAxialFrontend(nn.Module):
             interaction = self._pac_interaction(
                 phase_feat, amplitude_feat, pac_vector
             )
-            if self.interaction_mode in ("product", "rotation"):
+            if self.interaction_mode == "product":
                 per_scale.append(torch.view_as_real(interaction).flatten(-2))
             else:
                 per_scale.append(interaction)   # concat_proj already real (B,C,P,nb,D)
