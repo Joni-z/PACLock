@@ -98,7 +98,8 @@ class TriAxialPACLock(nn.Module):
         )
         self.head = ClassificationHead(d, cfg["num_classes"],
                                       mode=cfg.get("head", "mean"),
-                                      n_bands=cfg["n_bands"])
+                                      n_bands=cfg["n_bands"],
+                                      n_channels=cfg["n_channels"])
 
         # Optional crossfreq-reconstruction auxiliary head (AGENT.md sec. 13.15).
         # When aux_recon_weight > 0, supervised training adds a masked-amplitude
@@ -185,3 +186,39 @@ def build_model(cfg: dict) -> nn.Module:
     if cfg.get("arch", "flat") == "triaxial":
         return TriAxialPACLock(cfg)
     return PACLock(cfg)
+
+
+# Prefixes carried over from a training/pretrain.py checkpoint into a
+# downstream TriAxialPACLock. spatial_pe is deliberately excluded: it was
+# sized to the pretraining pool's max channel count and indexes electrodes by
+# raw position, which is not a shared identity across corpora (channel 0 in
+# TUAB is not channel 0 in FACED), so transferring it would silently paste
+# one corpus's electrode geometry onto another's. head/mask_token/recon are
+# task-specific (classification head) or pretraining-only (aux reconstruction
+# head) and are always reinitialized fresh.
+_BACKBONE_PREFIXES = ("frontend.", "band_pe.", "encoder.")
+
+
+def load_pretrained_backbone(model: nn.Module, checkpoint_path: str) -> dict:
+    """Load frontend/band_pe/encoder weights from a training/pretrain.py
+    checkpoint into `model` in place. Returns {"loaded": [...], "skipped_shape": [...]}
+    for the caller to log -- a shape mismatch (e.g. n_bands or d_model differs
+    from the pretraining config) is silently dropped per-key rather than
+    failing the whole load, since the rest of the backbone may still transfer."""
+    ckpt = torch.load(checkpoint_path, map_location="cpu")
+    src = ckpt["model"] if "model" in ckpt else ckpt
+    dst = model.state_dict()
+    loaded, skipped = [], []
+    for k, v in src.items():
+        if not k.startswith(_BACKBONE_PREFIXES):
+            continue
+        if k not in dst:
+            skipped.append(k)
+            continue
+        if dst[k].shape != v.shape:
+            skipped.append(f"{k} (ckpt {tuple(v.shape)} vs model {tuple(dst[k].shape)})")
+            continue
+        dst[k] = v
+        loaded.append(k)
+    model.load_state_dict(dst, strict=True)
+    return {"loaded": loaded, "skipped_shape": skipped}

@@ -26,12 +26,6 @@ Modes:
   attn   : one learned query attends over all tokens. Lets the model choose
            which electrode/band/patch to read, at ~2 D^2 parameters, and does
            not assume in advance which axis matters.
-  spatial: mean over bands and patches, then one linear layer that sees every
-           electrode separately. The only mode that does NOT collapse the
-           electrode axis, so it is the only one that can represent a spatial
-           contrast -- which is what motor imagery (mu/beta desynchronisation
-           over the contralateral sensorimotor strip) and emotion (frontal
-           asymmetry) actually are. Costs (C*D) x n_classes.
 """
 
 from __future__ import annotations
@@ -44,7 +38,7 @@ class ClassificationHead(nn.Module):
     """``mode='mean'`` reproduces the original head exactly."""
 
     def __init__(self, d_model: int, num_classes: int, mode: str = "mean",
-                 n_bands: int | None = None, n_channels: int | None = None):
+                 n_bands: int | None = None):
         super().__init__()
         if mode not in ("mean", "band", "attn", "spatial"):
             raise ValueError(
@@ -72,15 +66,9 @@ class ClassificationHead(nn.Module):
             # classifier (vendor/cbramod/models/model_for_faced.py,
             # ); this is the same idea with the band and time
             # axes pooled first so the layer stays small.
-            # Built here, NOT lazily in forward(): the optimizer is handed
-            # model.parameters() before the first forward runs, so a layer
-            # created inside forward() never enters the parameter groups and
-            # keeps its initial random weights for the whole run -- the head
-            # would look like it was tested when it was never trained.
-            if not n_channels:
-                raise ValueError("head mode 'spatial' needs n_channels")
-            self.n_channels = n_channels
-            self.proj = nn.Linear(n_channels * d_model, num_classes)
+            self.pool_proj = None          # built lazily: needs C from the grid
+            self.num_classes = num_classes
+            self.d_model = d_model
         elif mode == "attn":
             self.query = nn.Parameter(torch.zeros(1, 1, d_model))
             nn.init.normal_(self.query, std=0.02)
@@ -110,11 +98,10 @@ class ClassificationHead(nn.Module):
             B, N, D = x.shape
             # (B, C, nb, P, D) -> mean over bands and patches, per electrode
             pooled = x.reshape(B, C, nb, P, D).mean(dim=(2, 3))     # (B, C, D)
-            if C != self.n_channels:
-                raise ValueError(
-                    f"head mode 'spatial' was built for {self.n_channels} "
-                    f"electrodes but the grid has {C}")
-            return self.proj(self.norm(pooled).reshape(B, C * D))
+            pooled = self.norm(pooled).reshape(B, C * D)
+            if self.pool_proj is None:
+                self.pool_proj = nn.Linear(C * D, self.num_classes).to(pooled.device)
+            return self.pool_proj(pooled)
 
         # attn: a single learned query reads the grid
         h = self.norm(x)
