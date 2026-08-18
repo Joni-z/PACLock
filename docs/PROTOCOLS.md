@@ -556,3 +556,67 @@ distorted the PAC product term. It changes the input (PhysioNet-MI's epoch-0
 loss moves from 1.4074 to 1.4073) but not the loss trajectory, because the
 encoder's LayerNorms already absorb the scale. The code was removed rather than
 left behind as an unused option.
+
+---
+
+# 附录 C:被删除的预处理,以及如何重建
+
+`/work1` 上的项目配额是 **1.9 T**,不是整个文件系统(底层是 382 T)。2026-08-18
+配额到 96%(仅剩 80 G)时做过一次清理,降到 85%(293 G 可用)。
+
+删掉预处理**不会**影响已有结果:`runs/*/seed*/result.json` 里存着完整的配置、
+val 曲线和裁定,`manifest.json` 里存着每个源文件的 SHA256。删掉的只是可以从
+`$PACLOCK_DATA`(511 G,仍在)重新生成的中间产物。
+
+**这一条存在的理由**:此前 `processed_biot/tuab` 和 `processed_labram/tuab`
+被以同样方式删过,但没有留记录,后来花了不少时间才弄清它们为什么不见了。
+
+## 2026-08-18 删除清单
+
+| 目录 | 大小 | 删除依据 |
+|---|---|---|
+| `processed_labram/` | 134 G | 6 个 run(LaBraM pretrained/scratch × TUAB/TUEV/TUSZ)全部 3 seed、verdict 全 OK。LaBraM 的位置编码要求 23 个单极 `-REF` 通道,CHB-MIT 只有双极导联无法还原,所以**不可能再有新格子** |
+| `processed_biot/` | 70 G | 9 个 run(BIOT pretrained/scratch × TUAB/TUEV/TUSZ,加 `biot_hop50`/`biot_tok100`,加 `tuev-paclock_pilot_unfiltered`)全部 3 seed、verdict 全 OK。BIOT 在 CHB-MIT 上用 `processed/`,不依赖此目录 |
+| `processed/faced_winnorm` | 2.5 G | 建了之后**从未被任何 run 引用** |
+| `processed/faced_subjnorm` | 2.5 G | 每受试者归一化,实测无效(见 FINDINGS.md) |
+| `processed/faced_clean` | 2.5 G | FACED 伪迹清洗,实测无效 |
+| `processed/physionet_mi_winnorm` | 1.9 G | 每窗口归一化,实测无效 |
+| `processed/bci_iv_2a_winnorm` | 349 M | 同上 |
+
+删除前核对过三件事,顺序不能省:
+
+1. 每个依赖该目录的 run 是否已达 3 seed 且 verdict 为 ok(`scripts/xlsx_gap.py`
+   和逐 run 的 `result.json`);
+2. 该 baseline 是否还可能有新语料(montage 限制);
+3. **当时队列里每个 job 的 `data_root`** —— 删掉一个正在被读的目录会让跑了几小时
+   的任务在中途崩掉。
+
+## 重建
+
+原始语料在 `$PACLOCK_DATA`(511 G),四套协议都可重跑:
+
+```bash
+sbatch slurm/preprocess.slurm biot   tusz      # BIOT 与 TFM-Tokenizer
+sbatch slurm/preprocess.slurm labram tuab      # LaBraM:23 单极通道
+sbatch slurm/preprocess.slurm frozen  <ds>     # 冻结协议 -> processed/
+sbatch slurm/preprocess.slurm pac     <ds>     # PAC 协议  -> processed_pac/
+```
+
+派生副本由脚本重建,各自一条命令:`scripts/winnorm.py`、`scripts/subjnorm.py`、
+`scripts/clean_faced.py`。
+
+重建后**必须**核对 manifest 的 SHA256 与原结果一致,否则新数组和 `runs/` 里已有
+的数字不可比:
+
+```bash
+sbatch slurm/run.slurm scripts.verify_processed --dataset tusz
+```
+
+## 仍然保留
+
+`processed_pac/`(180 G)没有删。它背后有三个未达 3 seed 的格子,其中
+`chbmit-paclock_pac`(n=1)是 PAC 协议敏感性分析的真实空缺。若再次需要空间,
+可以只删 `chbmit` 以外的七个语料(约 137 G),把补齐那一格的能力留着。
+
+`pretrain_runs/` 与 `pretrain_runs_60k/`(共 125 M)必须保留 —— 正在被
+`p200` 三臂实验和 raw 预训练微调读取,且已在 `.gitignore` 中(见 STATUS.md)。
