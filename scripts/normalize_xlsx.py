@@ -66,7 +66,7 @@ ROW_H = 20.0
 HEADER_H = 28.0
 TITLE_H = 26.0
 
-COL_WIDTHS = [24, 30, 12, 17, 17, 17, 17]
+COL_WIDTHS = [24, 30, 12, 17, 17, 17, 17, 17, 17]
 
 
 def find_row(ws, needle, col=1, start=1):
@@ -154,7 +154,7 @@ def main():
         while r <= last:
             row_empty = all(
                 not str(ws.cell(row=r, column=c).value or "").strip()
-                for c in range(1, 8))
+                for c in range(1, ws.max_column + 1))
             if row_empty:
                 ws.delete_rows(r)
                 last -= 1
@@ -163,7 +163,7 @@ def main():
                 r += 1
 
         # ---- 4. all-empty metric columns -------------------------------- #
-        for col in range(7, 3, -1):
+        for col in range(ws.max_column, 3, -1):
             head = ws.cell(row=hdr, column=col).value
             if not head:
                 continue
@@ -173,8 +173,8 @@ def main():
                 n_cols += 1
 
         # ---- 5. redraw the results table -------------------------------- #
-        ncol = max(c for c in range(1, 8)
-                   if ws.cell(row=hdr, column=c).value) if hdr else 6
+        ncol = max((c for c in range(1, ws.max_column + 1)
+                    if ws.cell(row=hdr, column=c).value), default=6) if hdr else 6
         for r in range(hdr, last + 1):
             ws.row_dimensions[r].height = HEADER_H if r == hdr else ROW_H
             for c in range(1, ncol + 1):
@@ -240,9 +240,9 @@ def main():
             if r < 1 or r > ws.max_row:
                 continue
             if any(str(ws.cell(row=r, column=c).value or "").strip()
-                   for c in range(1, 8)):
+                   for c in range(1, ncol + 1)):
                 continue
-            for c in range(1, 8):
+            for c in range(1, ncol + 1):
                 cell = ws.cell(row=r, column=c)
                 cell.border = NO_BORDER
                 cell.fill = PatternFill()

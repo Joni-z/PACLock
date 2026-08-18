@@ -53,6 +53,8 @@ def main():
         ws = wb[name]
         hdr_row, model_col, cols, _ = find_results_block(ws)
         if hdr_row is None:
+            n_sheets_skipped += 1
+            print(f"  {name}: no results block found on this sheet -- delta column left blank")
             continue
 
         delta_col = next(
@@ -60,6 +62,8 @@ def main():
              if isinstance(c.value, str) and c.value.strip().startswith("Δ")),
             None)
         if delta_col is None:
+            n_sheets_skipped += 1
+            print(f"  {name}: no 'Δ... vs PACLock' header column on this sheet -- delta column left blank")
             continue
 
         delta_header = ws.cell(row=hdr_row, column=delta_col).value.strip()

@@ -11,7 +11,7 @@ snapshot, so it keeps working.
 What it guards, and why each one cost something to learn:
 
 1. `_patch_project` is `Conv1d(1, K, k=P, stride=P)`. Replacing that convolution
-   with a GEMM is what made training 9.4x faster (docs/PERF.md) -- forced
+   with a GEMM is what made training 9.4x faster (docs/FINDINGS.md) -- forced
    determinism made MIOpen pick an atomics-free backward-weights kernel for the
    in_channels=1 shape. If someone "simplifies" it back, this fails.
 2. A one-element `pac_patch_len` list is bit-identical to the scalar. Multi-scale

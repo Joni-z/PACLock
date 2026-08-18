@@ -53,6 +53,13 @@ MODEL_ROW_LABEL = {
     # reported "no row label" in the notes sheet and the row stayed blank, which
     # is indistinguishable from "the runs are not finished yet".
     "paclock_v2": "PACLock (from scratch, full)",
+    # Group D -- ours, pretrained on the 10-corpus pool (9 downstream corpora
+    # + a 2,000h TUEG slice) for 60k steps, then finetuned with each corpus's
+    # own deliverable config unchanged apart from the checkpoint, so each of
+    # these sits directly under its own from-scratch baseline and the pair is
+    # a single-variable comparison. See docs/PRETRAIN.md sec 12.
+    "paclock_pt_base": "PACLock (pretrained, base)",
+    "paclock_pt_large": "PACLock (pretrained, large)",
 }
 
 # Rows the workbook does not carry, so a run for them has nowhere to go.
@@ -116,7 +123,7 @@ def load_runs(runs_dir: str) -> dict:
 # can be checked from the workbook alone. Hard rule 2 has every model running its
 # own repo's recipe, which is the right call but means the cells in one column
 # are NOT under a shared schedule -- and a reader who does not know that will
-# read the table wrong. docs/RECIPE_AUDIT.md gives the justification for each;
+# read the table wrong. docs/PROTOCOLS.md gives the justification for each;
 # this is the per-cell record of what was actually used.
 RECIPE_KEYS = ("lr", "batch_size", "epochs", "patience", "eval_every_steps",
                "loss", "label_smoothing", "grad_clip", "select_metric",
