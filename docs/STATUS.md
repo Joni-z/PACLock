@@ -1,10 +1,10 @@
-# 进度(2026-08-18)
+# 进度(2026-08-18 晚)
 
-上一版停在 2026-08-06「A 组完成,下一步 B/C/D」。此后 B/C/D 组、60k 预训练、
-预训练行入表、等级三诊断、两处架构改动全部完成,本文件据此重写。
+上一版写于同日上午,此后做了一次方向重估并开了两条新线,故重写。
 
-数字全部来自 `runs/`,由 `scripts/status_snapshot.py` 生成;括号内是 seed 数,
-**n=1 的一律视为线索而非结论**(项目硬规则 4:少于 3 seed 不进表)。
+数字全部来自 `runs/`,由 `scripts/status_snapshot.py` / `scripts/xlsx_gap.py` 生成;
+括号内是 seed 数。当前阶段**单 seed 可用**(诊断为主),但 seed 数一律标出——
+把 1 seed 的数字当 3 seed 讲是这份文档唯一可能误导人的地方。
 
 ---
 
@@ -13,163 +13,221 @@
 | 文件 | 内容 | 什么时候读 |
 |---|---|---|
 | `STATUS.md` | 本文件 —— 现状、在跑的实验、遗留问题、两个集群怎么用 | 先读这个 |
-| `PROTOCOLS.md` | 冻结的预处理与评测协议、九个语料的来源、baseline 配方审计 | 改任何预处理或复现协议之前 |
-| `FINDINGS.md` | 架构搜索的每一波结论、性能修复、交付配置及其依据 | 想改模型之前 —— 大部分想法已经试过了 |
-| `PRETRAIN.md` | 预训练方案与实际执行情况 | 要再跑一次预训练时 |
-| `PAPER.md` | 论文需要的实验矩阵,以及还缺什么 | 写论文 / 排投稿前的实验时 |
+| `PROTOCOLS.md` | 冻结的预处理与评测协议、语料来源、baseline 配方审计、**存储清理记录** | 改预处理或复现协议之前 |
+| `FINDINGS.md` | 架构搜索每一波的结论、性能修复、交付配置及依据 | 想改模型之前 —— 大部分想法已经试过了 |
+| `PRETRAIN.md` | 预训练方案与实际执行 | 要再跑预训练时 |
+| `PAPER.md` | 论文需要的实验矩阵,以及**被证伪的预注册预测** | 写论文 / 排投稿实验时 |
 | `CHANGELOG.md` | 按时间的变更日志,含被否决的方案和原因 | 想知道"这个为什么是现在这样" |
 
 ---
 
-## 1. 一句话现状
+## 1. 必须先说的:novelty 和战绩对不上
 
-九个语料的完整对比矩阵已建成并填满(770 个 run,101 个单元格,0 个缺 seed、
-0 个误配置)。我们在 **TUSZ / CHB-MIT / TUEV** 上领先全部 baseline,在
-**TUAB / Sleep-EDF / ISRUC** 上互有胜负,在 **PhysioNet-MI / FACED / BCI-IV-2a**
-上明显落后。落后的原因已定位,且**不是 tokenizer**(见 §4)。
+我们在 TUEV / TUSZ / CHB-MIT 上领先全部外部 baseline。但拆开看领先来自哪里:
 
-## 2. 主表现状
+| 语料 | 我们的最好成绩 | 来自什么 |
+|---|---|---|
+| TUEV | 0.7328 | **PAC tokenizer**(对 raw +0.172) |
+| TUSZ | 0.6884 | rotation;但 raw tokenizer 本身就有 0.6710,PAC 从零只有 0.5882 |
+| CHB-MIT | 0.6830 | **预训练**;PAC 从零 0.5464,raw 0.6672 |
 
-| 语料 | 指标 | 最强外部 baseline | 我们(冻结 v2) | 我们(最好变体) |
-|---|---|---|---|---|
-| TUEV | kappa | tfm_pretrained 0.6519 | 0.7076 (3) | **rotation 0.7328 (3)** |
-| TUSZ | PR-AUC | ffcl 0.5449 | 0.5882 (3) | **rotation 0.6884 (1)** |
-| CHB-MIT | PR-AUC | tfm_pretrained 0.6269 | 0.5464 (3) | **pt_base 0.6830 (3)** |
-| TUAB | AUROC | eegpt_pretrained 0.9028 | 0.8829 (3) | pt_large 0.8869 (3) |
-| Sleep-EDF | kappa | contrawr 0.6916 | 0.6459 (3) | pt_base 0.6651 (3) |
-| ISRUC | kappa | cbramod_pretrained 0.7540 | 0.6952 (3) | rawtok 0.7013 (3) |
-| PhysioNet-MI | BAcc | cbramod_pretrained 0.6129 | 0.2722 (5) | raw_large 0.4159 (3) |
-| BCI-IV-2a | BAcc | sparcnet 0.6440 | 0.3588 (3) | rawpt_large 0.4483 (3) |
-| FACED | BAcc | cbramod_pretrained 0.5509 | 0.1477 (3) | rawpt_large 0.1690 (2) |
+**PAC tokenizer 只在 TUEV 一个语料上是获胜的原因。**另外两个的领先来自 raw
+tokenizer 或预训练 —— 把我们的 novelty 整个拿掉,这两格不降反升。
 
-产物:`results/PACLock_baseline_matrix_filled.xlsx`,含三列 delta
-(vs from-scratch / vs pt-base / vs pt-large)、灰显未被 baseline 原论文覆盖的格子。
+这不只是"效果不够",是**论文完整性问题**:主张 A,战绩来自 B。审稿人读消融表
+会发现,我们自己已经发现了。
 
-## 3. 两处已验证的架构改动(均零新增参数)
+两次扩展尝试都失败:
 
-### 3.1 `interaction_mode: rotation`
+* **TUAR**(唯一一次检验 TUEV 优势能否推广到同类事件形态任务):pac 0.5780
+  vs raw 0.6289,**raw 反赢 0.05**。
+* **预注册的分层预测**(增益应随各语料 PAC 生理学证据强度排序):**被自己的数据
+  证伪**,增益不分层,是单点的(见 `PAPER.md`)。
+
+## 2. 当前正在推的两条线
+
+两条线针对的是同一个事实:PAC tokenizer 从未在它应该起作用的条件下被测试过。
+
+### 线 A —— 预训练过的 PAC tokenizer,从来没测过
+
+预训练在 `patch_len=200` 下做,而 TUSZ/CHB-MIT/BCI 的微调配置是 `50`,tokenizer
+的 Conv1d 核形状对不上,**加载时被形状检查直接丢弃**。也就是说这些语料上的
+"预训练"一直是「预训练 encoder + 从零重学的 tokenizer」。
+**CHB-MIT 的最好成绩 0.6830 就是用一个随机初始化的 PAC tokenizer 跑出来的。**
+
+对齐 `patch_len` 能修好这件事,但同时会改变 token 网格和 PAC 估计窗口 ——
+`FINDINGS.md` 记载那是全项目最大的单一架构因素。所以设计成三臂,**全部固定在
+`patch_len=200`**:
+
+| 臂 | 配置 | 含义 |
+|---|---|---|
+| A | 从零 | 参照点 |
+| B | 预训练,tokenizer 迁移 | 完整预训练 |
+| C | 预训练,`checkpoint_exclude` 掉 tokenizer | 只迁移 encoder |
+
+**B − C 就是预训练 tokenizer 的净贡献**,分辨率不动。
+
+`scripts/verify_ckpt_exclude.py`(job 377036,全通过)证实:B 在 200 下**真的**
+加载了 tokenizer(153 个张量 vs C 的 150),C 的 tokenizer 与随机初始化**逐位
+相同**,B 和 C 加载**同样的 144 个 encoder 张量**、差异只在那 3 个 tokenizer
+张量上。
+
+任务 `PK_p200_{chbmit,tusz,bci_iv_2a}`,CHB-MIT 优先 —— 它是 PAC 输给 raw 最惨的
+一格(−0.121),最能说明"预训练能否救活 PAC tokenizer"。
+
+### 线 B —— tokenizer 移植进 CBraMod
+
+一个**不需要我们的架构在任何地方获胜**的、更窄的主张:把 PACLock 的前端装进
+CBraMod 原样 vendored 的 encoder,对上 CBraMod 自己的 tokenizer。
+Pilot:TUEV 0.6280(1 seed)vs CBraMod scratch 0.5638。
+
+原设计缺一个决定性对照,现已补上:**第三臂 = CBraMod + PACLock 的 raw 前端**。
+没有它,赢了也只能说"我们的前端比他们的好" —— 前端还捎带了学习式 sinc 滤波器组
+和分频带 token 轴。同宿主内 PAC vs raw 才能把交互项和滤波器组分开。
+
+`scripts/verify_transplant.py`(job 377014,全通过):两臂参数量精确相等
+(**30,660,422**,原生 30,646,006),差异只在 tokenizer 张量,192 个 encoder
+张量完全相同。
+
+语料刻意选成:TUEV(我们模型里 PAC 赢)+ BCI、CHB-MIT(PAC 输得最惨)。
+**若移植后在后两个也赢,说明 tokenizer 是好的、问题出在我们的架构** —— 那是个
+完全不同也更好讲的故事。
+
+**已知弱点**:移植目前**全是 from scratch**,适配器不加载任何 CBraMod 预训练
+权重。所以只能对上 CBraMod 的 scratch(TUEV 0.5638),对不上它真正的
+**0.6449**。审稿人会说"CBraMod 的价值就在预训练,你把它弄失效了再跟它没预训练
+的版本比"。**待办:第四臂 = CBraMod 预训练 encoder + 我们的 tokenizer**,
+需要先确认 `load_pretrained` 能跳过 `patch_embedding` 做部分加载。
+
+## 3. 两处已落地的架构改动(均零新增参数)
+
+### `interaction_mode: rotation`
 
 `token = a_j · aligned_phase_j / |aligned_phase_j|` —— 耦合**旋转**幅度 token
-而不是同时缩放它。强制性与 `product` 完全相同(token 相位仍完全由耦合决定,
-旁边没有裸的高频 token,没有可学习旁路),但 `|h_j| = |a_j|` 精确成立。
+而不是同时缩放它。强制性与 `product` 相同,但 `|h_j| = |a_j|` 精确成立。
 
-| 语料 | product | rotation | delta |
-|---|---|---|---|
-| TUSZ | 0.5882 (3) | **0.6884 (1)** | **+0.100** |
-| TUEV | 0.7076 (3) | **0.7328 (3)** | **+0.025** |
-| PhysioNet-MI | 0.2722 (5) | 0.2961 (1) | +0.024 |
-| BCI-IV-2a | 0.3588 (3) | 0.3708 (3) | +0.012 |
-| FACED | 0.1477 (3) | 0.1514 (1) | +0.004 |
-| Sleep-EDF | 0.6459 (3) | 0.6449 (1) | −0.001 |
-| TUAR | 0.5780 (1) | 0.5568 (1) | −0.021 |
+九个语料 **六正三负**,但只有两格是 3 seed:
 
-TUEV 三个 seed 逐个看:rotation 最差的 seed(0.7156)高于 product 的均值
-(0.7076),product 有一个 seed 掉到 0.6718 而 rotation 最低 0.7156 —— 均值和
-稳定性同时改善。TUSZ/CHB-MIT/TUAB/ISRUC 的确认 run 在跑。
+| 语料 | product | rotation | delta | seed |
+|---|---|---|---|---|
+| TUSZ | 0.5882 | 0.6884 | +0.100 | 1 |
+| **TUEV** | 0.7076 | **0.7328** | **+0.025** | **3** |
+| PhysioNet-MI | 0.2722 | 0.2961 | +0.024 | 1 |
+| ISRUC | 0.6952 | 0.7104 | +0.015 | 1 |
+| **BCI-IV-2a** | 0.3588 | **0.3708** | **+0.012** | **3** |
+| FACED | 0.1477 | 0.1514 | +0.004 | 1 |
+| Sleep-EDF | 0.6459 | 0.6449 | −0.001 | 1 |
+| TUAB | 0.8829 | 0.8806 | −0.002 | 1 |
+| CHB-MIT | 0.5464 | 0.5100 | **−0.036** | 1 |
 
-验证(`scripts/verify_rotation.py`,全部通过):`product`/`concat` 与改动前
-**逐位一致**(所有冻结格子不动);`|h|=|a|` 误差 2.4e-7;相位内容仍在(不是退化
-成纯幅度 tokenizer);**规范不变性首次被真正验证**(`product` 和 `rotation` 都
-通过),这是 `_pac_interaction` docstring 一直声称却从未测过的核心主张。
+TUEV 逐 seed 看:rotation 最差的(0.7156)高于 product 的均值(0.7076),
+product 有一个 seed 掉到 0.6718。均值与稳定性同时改善。
 
-### 3.2 `head: spatial`
+CHB-MIT 的 −0.036 要放进上下文:product 自己三 seed 是
+**[0.5809, 0.5382, 0.5200]**,跨度 0.061,单个 −0.036 落在约一个标准差内,
+**什么也没证明**,但也不能说它是好的。
 
-不在电极轴上池化,保留电极身份。`mean`/`band`/`attn` 三种头都会把电极轴平均掉,
-而等级三的标签本身就是空间模式。
+方法学副产品:`scripts/verify_rotation.py` **第一次真正验证了规范不变性**
+(`p_i → e^{iδ_i}p_i, Z_ij → e^{iδ_i}Z_ij` 下 1.. 频带不动),`product` 与
+`rotation` 都通过 —— 这是 `_pac_interaction` docstring 一直声称、却从未被测过的
+核心主张。
 
-| 语料 | mean 头 | spatial 头 | delta |
-|---|---|---|---|
-| PhysioNet-MI | 0.2722 (5) | **0.3560 (1)** | **+0.084** |
-| BCI-IV-2a | 0.3588 (3) | **0.4144 (1)** | **+0.056** |
-| FACED | 0.1477 (3) | 0.1514 (1) | +0.004 |
+### `head: spatial` —— 帮助真实,但**不属于 PAC**
 
-两个运动想象语料大幅改善(对侧感觉运动区 mu/beta 去同步就是空间对比),
-情绪语料无反应。**叠加有效**:BCI rotation+spatial = 0.4344,高于任一单项。
+不在电极轴上池化。`mean`/`band`/`attn` 都会把电极轴平均掉,而运动想象的判别量
+就是空间对比(对侧感觉运动区 mu/beta 去同步)。
 
-修掉一个会让该实验作废的 bug:`spatial` 头原本在 `forward()` 里懒构建投影层,
-而 optimizer 早已捕获参数列表 —— 它会带着随机权重训练全程,然后被记录成
-「试过没用」。现改为按 `cfg['n_channels']` 提前构建
-(`scripts/verify_head.py` 验证:`mean`/`band`/`attn` 逐位一致,投影层在首次
-forward 前已在 `parameters()` 中,能收到梯度并被优化器更新)。
+**关键对照(2026-08-18 晚落地,推翻了此前的说法):**
 
-## 4. 等级三落后的原因:已排除的与仍存活的
+| BCI-IV-2a | mean 头 | spatial 头 |
+|---|---|---|
+| PAC tokenizer | 0.3588 (3) | 0.4317 (3) |
+| raw tokenizer | 0.4192 (3) | **0.5274 (1)** |
 
-按排除顺序记录,每条都是实测否掉的,免得重走:
+把头固定住,**raw 比 PAC 高 0.096** —— 比用 mean 头时的 0.060 差距**更大**。
+先前"BCI 上 PAC+spatial 赢过 raw+mean"的说法**作废**:那是拿好头的 PAC 比
+差头的 raw。空间头对两者都有效,对 raw 更有效。
+
+0.5274 是 PACLock 家族在 BCI 上的历史最好成绩(此前 raw_headattn 0.4545),
+但它**加强的是"我们的读出头选错了"这个结论,不是 PAC 的地位**。
+
+TUEV 上空间头是 **−0.056**(0.6520 vs 0.7076):等级一安全检查未通过,但**符合
+机制预测** —— 等级一标签空间弥散,保留电极身份只是白花参数。符号翻转本身是机制
+成立的证据。结论:**必须按语料条件化,不能设全局默认**,和 `patch_len` 一样。
+
+## 4. 等级三:排除掉的与仍存活的
 
 | 假设 | 判定 | 证据 |
 |---|---|---|
-| PAC tokenizer 在 band-power 任务上退化到随机 | **混淆** | 0.259 来自 `processed_pac` 预处理;同预处理下是 0.3588,PAC 对 raw 只差 ~0.06 |
-| 训练样本太少 | **否** | TUEV 砍到 2160 窗口(=BCI 规模)仍得 0.6523,仍领先 SPaRCNet +0.161;32 倍数据缩减只掉 0.055 |
-| 分类头在高电极数下参数爆炸 | **否** | 九个语料的 `n_params` 恒为 1.60–1.63 M |
-| recipe(patch_len / lr)没调好 | **否** | 已跑过的 `patch200`/`lr3e5` 2×2 最多 +0.011,`lr3e5` 为负 |
-| 幅度信息在 PAC token 里不可及 | **否** | 线性可读性探针:频带功率从 rotation token 二次可读 R²=0.907、从 concat 线性可读 0.853,均**高于**赢的 raw(0.469/0.031) |
-| 耦合显著性可以当门控 | **否** | surrogate 校准后,TUEV 与 BCI 的显著边比例都是 36% 且类间平坦。**显著性 ≠ 判别性** |
-| **电极轴被平均掉** | **成立(部分)** | spatial 头在两个 MI 语料上 +0.056 / +0.084;FACED 无效 |
+| PAC 在 band-power 任务上退化到随机 | **混淆** | 0.259 来自 `processed_pac` 预处理;同预处理下 0.3588 |
+| 训练样本太少 | **否** | TUEV 砍到 2160 窗口仍得 0.6523,仍领先 SPaRCNet +0.161 |
+| 分类头参数爆炸 | **否** | 九语料 `n_params` 恒为 1.60–1.63 M |
+| recipe 没调好 | **否** | `patch200`/`lr3e5` 2×2 最多 +0.011 |
+| 幅度信息不可及 | **否** | 探针:频带功率从 rotation token 二次可读 R²=0.907、concat 线性可读 0.853,均高于获胜的 raw(0.469/0.031) |
+| 耦合显著性可当门控 | **否** | surrogate 校准后 TUEV 与 BCI 的显著边比例都是 36% 且类间平坦。**显著性 ≠ 判别性** |
+| **电极轴被平均掉** | **成立,但不救 PAC** | 空间头两个 MI 语料 +0.07~0.10,**对 raw 帮助更大**;FACED 无效 |
 
-FACED 仍是完全没解决的:15 个 PACLock 变体全部落在 0.110–0.169 之间(随机 0.111),
-而 CBraMod 从零训练就有 0.2469、预训练 0.5509。空间头没救回来,原因未知。
+**FACED 仍完全未解**:15 个 PACLock 变体全在 0.110–0.169(随机 0.111),
+CBraMod 从零 0.2469、预训练 0.5509。空间头没救回来,原因未知。
 
 ## 5. 预训练现状
 
-* 预训练**全部在 b2 做**,checkpoint 传回 AMD 做微调。
-* 60k 步的正式 checkpoint 在 `pretrain_runs_60k/`(base / large,均 pac tokenizer)。
-  `pretrain_runs/` 下的同名文件是 6000 步的早期试跑,**只被 `*_ft_*` 那批配方
-  实验引用**,矩阵行未受影响。
-* `pretrain_runs/pretrain-raw_large`(60k,raw tokenizer)与
-  `pretrain-excl_szdet`(60k,pac,预训练池剔除 TUSZ/CHB-MIT)也在 AMD。
-
-**排除消融**(答「你拿下游数据做预训练」的质疑):把 TUSZ/CHB-MIT 从预训练池
-剔除后,预训练收益仍保留 **66%**(TUSZ:+0.0339 of +0.0516)和 **69%**
-(CHB-MIT:+0.0946 of +0.1366)。只有约三分之一来自域内数据。(剔除组 n=1。)
-
-**raw vs pac 预训练**(两边同为 60k、d_model=256、每语料 `patch_len` 一致):
-
-| 语料 | raw 预训练 | PAC 预训练 | raw − pac |
-|---|---|---|---|
-| PhysioNet-MI | 0.3633 | 0.3140 | +0.049 |
-| BCI-IV-2a | 0.4483 | 0.4122 | +0.036 |
-| FACED | 0.1690 | 0.1640 | +0.005 |
-
-TUSZ / CHB-MIT 的对应格子从未跑过,现已提交。
-
-**一个待修的配方问题**:预训练用 `patch_len=200`,而 TUSZ/CHB-MIT/BCI 的微调
-配置是 `patch_len=50`,卷积核形状对不上,加载时 tokenizer 权重被直接跳过 ——
-这几个语料上的「预训练」**只迁移了 encoder,tokenizer 从头重学**。FACED 和
-PhysioNet-MI(`patch_len=200`)才真的迁移了 tokenizer。每语料内 raw/pac 两边
-一致,所以对比公平,但意味着**我们从未在 TUSZ/CHB-MIT 上测过「预训练过的 PAC
-tokenizer」**,而那正是最该体现其价值的地方。
+* 预训练**全部在 b2 做**,checkpoint 传回 AMD 微调。正式 60k checkpoint 在
+  `pretrain_runs_60k/`;`pretrain_runs/` 下同名文件是 6000 步早期试跑,只被
+  `*_ft_*` 配方实验引用,**矩阵行未受影响**(曾误报为混淆,系
+  `scripts/ckpt_steps.py` 早期版本用 `basename(dirname())` 剥掉父目录所致,已修)。
+* **排除消融**:预训练池剔除 TUSZ/CHB-MIT 后,收益仍保留 **66%**(TUSZ)和
+  **69%**(CHB-MIT)。只有约三分之一来自域内数据。(剔除臂 n=1。)
+* **raw vs pac 预训练**(同 60k、同 d256、每语料 `patch_len` 一致):raw 在三个
+  等级三语料上分别 **+0.049 / +0.036 / +0.005**。TUSZ 与 CHB-MIT 的对应格子
+  此前从未跑过,现正在跑。
 
 ## 6. 负面结果(必须进论文)
 
-* **TUAR**:pac 0.5780 vs raw 0.6289,raw 赢 0.05。所以「PAC 在事件形态类任务上
-  普遍占优」**不成立**,TUEV 目前是唯一的强证据。
-* **TUSL**:全语料仅 300 个事件(每类 100),在花训练算力之前就放弃了。
-* `interaction_mode: concat`、`pac_token_mode: uniform`、`spatial_pe: xyz`、
-  per-window / per-subject 归一化、FACED 伪迹清洗、提高学习率、降低容量 ——
-  全部实测无效,记录在 `docs/FINDINGS.md`。
+* **TUAR**:pac 0.5780 vs raw 0.6289。"PAC 在事件形态类任务上普遍占优"**不成立**。
+* **TUSL**:全语料仅 300 个事件(每类 100),花训练算力前放弃。
+* **预注册分层预测被证伪**(`PAPER.md`)。
+* `interaction_mode: concat`、`pac_token_mode: uniform`、`coupling_gate:
+  significance`、`spatial_pe: xyz`、per-window / per-subject 归一化、FACED 伪迹
+  清洗、提高学习率、降低容量 —— 全部实测无效,记录在 `FINDINGS.md`。
 
 ## 7. 遗留问题
 
-1. **FACED 完全学不动**(§4),未知原因。
-2. **`patch_len` 不匹配导致 tokenizer 不迁移**(§5),需要一组
-   `patch_len=200` 的 TUSZ/CHB-MIT 微调才能测出预训练过的 PAC tokenizer。
-3. **rotation 需补 seed**:TUSZ/PhysioNet-MI/FACED/Sleep-EDF 目前 n=1。
-4. **spatial 头需补 seed**,且需在等级一上做安全性检查(TUEV 的在跑)。
-5. **`scripts/audit_runs.py` 只列 A 组 45 个格子**,C/D 组和预训练行只进总数
-   不进明细,建议扩表。
-6. 6 个 baseline 单元格 seed 离散 20–43%(BIOT 配方 `lr=1e-3` 无 scheduler 固有
-   不稳),论文附录应给各 seed 值而非只报均值。
+1. **FACED 完全学不动**,未知原因。
+2. **线 B 缺第四臂**(CBraMod 预训练 encoder + 我们的 tokenizer),否则对不上
+   CBraMod 真正的 0.6449。
+3. rotation 多数格子仍 n=1(补 seed 已主动停掉 —— 那是在一条平均输给 raw 的
+   路径上做 +0.025 的改良,补齐误差棒不改变判决)。
+4. 空间头需在更多语料上确认,且需要 `raw + spatial` 的完整对照(BCI 已有,
+   PhysioNet-MI 在跑)。
+5. `scripts/audit_runs.py` 只列 A 组 45 格,C/D 组与预训练行只进总数不进明细。
+6. 6 个 baseline 单元格 seed 离散 20–43%(BIOT 配方固有),论文附录应给各 seed 值。
 
 ## 8. 集群规范
 
 所有计算走 Slurm;登录节点只用 `squeue`/`sbatch`/`sacct` 和代码同步。
 
-* **AMD**(`ssh amd`,ROCm/MI210,免费):微调与全部消融在此。
-* **b2**(`ssh b2`,PSC Bridges-2,CUDA):只做预训练。**配额只剩 147 / 700 SU**,
-  该账号无 CPU 分区(连 `run_cpu_b2.slurm` 都要申请一块最便宜的 GPU),所以
-  新实验一律放 AMD。
-* 两个集群的 `runs/` **不要互相 tar 覆盖**,同名 seed 目录会被静默替换、把不同
-  硬件混进同一个格子的统计里(见 `docs/CHANGELOG.md`)。
+* **AMD**(`ssh amd`,ROCm/MI210,免费):微调与全部消融。
+* **b2**(`ssh b2`,PSC Bridges-2,CUDA):**只做预训练**。配额仅剩 147/700 SU,
+  该账号无 CPU 分区,新实验一律放 AMD。密码认证(PSC 未注册公钥),
+  `ControlMaster` 每会话输一次密码。
+* **默认单 seed。** 除非 Zhizhe 明确要求,所有实验只跑一个 seed。硬规则 4
+  (进论文正表需要 3 seed)不变,但那是这一格要进表了才付的代价 —— 探索阶段
+  跑一个、拿到答案,不要保险起见顺手排 seed 1 和 2。2026-08-18 排队的 27 个
+  任务里有 20 个是冗余 seed,占掉共享分区 21 个节点里的 14 个,把真正决定方向的
+  那个实验堵在自己后面 —— 而它们确认的只是一条已知平均输给自身对照的路径上的
+  +0.025。报数时 seed 数必须写出来。
+* **`mi2104x` 一个节点有 4 块 GPU,而 `run.slurm`/`train.slurm` 用 `--exclusive`
+  会整节点独占** —— 单任务提交等于浪费 3/4 算力。诊断实验用
+  `slurm/configs_packed.slurm`(一节点 4 个不同配置,单 seed);矩阵格子用
+  `slurm/seeds_packed.slurm`(一节点一个配置的 3 个 seed)。
+  打包后节点占用从 27 降到 10,吞吐反升。
+* 打包时**按运行时长分组**:同语料的多个臂时长一致、同时结束;把 7 小时的
+  CHB-MIT 和 16 分钟的 BCI packed 在一起会让三块 GPU 空转 6 小时。
+* 两个集群的 `runs/` **不要互相 tar 覆盖**,同名 seed 目录会被静默替换。
+* **存储**:`/work1` 的 1.9 T 是**项目配额**,不是集群容量(底层 382 T)。
+  看告警要用 `df -h /work1/chenyuyou/yifanwang`。清理记录与重建方法见
+  `PROTOCOLS.md` 附录 C。
 
 ---
 

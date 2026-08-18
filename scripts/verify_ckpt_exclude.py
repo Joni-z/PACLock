@@ -26,7 +26,7 @@ CKPT = "pretrain_runs_60k/pretrain-size_base/checkpoint.pt"
 TOK = ("frontend.phase_tokenizer", "frontend.amplitude_tokenizer")
 
 BASE = dict(
-    model="paclock", num_classes=2, sample_rate=200,
+    model="paclock", num_classes=2, sample_rate=200, dataset="chbmit",
     model_kwargs=dict(arch="triaxial", d_model=128, depth=6, n_bands=8, n_heads=4,
                       dropout=0.2, kernel_size=201, patch_len=200, pac_patch_len=200,
                       augmentations=[], freq_mixer="attention", band_pe="index",
