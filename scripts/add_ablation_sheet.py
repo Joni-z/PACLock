@@ -49,6 +49,8 @@ ROWS = [
     ("架构改动", "paclock_hybrid_attn", "hybrid + attn 头"),
     ("架构改动", "paclock_hybrid_sp", "hybrid + spatial 头"),
     ("架构改动", "paclock_hybrid_sp_gate", "hybrid + spatial 头 + 门"),
+    ("架构改动", "paclock_fuse", "fused:行内融合 blend(β 零初始化)"),
+    ("架构改动", "paclock_fusegate", "fused:行内融合 gated(内容门)"),
     ("架构改动", "paclock_rot2", "rotation(耦合只旋转不缩放)"),
     ("架构改动", "paclock_rot", "rotation(跑在 PAC 协议数据上,与上行不可比)"),
     ("架构改动", "paclock_sphead", "spatial 头(保留电极身份)"),
