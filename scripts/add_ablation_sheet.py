@@ -44,6 +44,9 @@ ROWS = [
     ("tokenizer 消融", "paclock_pac_uniform", "uniform 耦合(去掉测得的 α 与 ∠Z)"),
     ("tokenizer 消融", "paclock_pac", "PAC 协议预处理(0.5Hz 高通、无 notch)"),
 
+    ("架构改动", "paclock_hybrid", "hybrid(raw 行 + 交互行并列)"),
+    ("架构改动", "paclock_hybrid_gate", "hybrid + 逐频带可学门"),
+    ("架构改动", "paclock_hybrid_attn", "hybrid + attn 头"),
     ("架构改动", "paclock_rot2", "rotation(耦合只旋转不缩放)"),
     ("架构改动", "paclock_rot", "rotation(跑在 PAC 协议数据上,与上行不可比)"),
     ("架构改动", "paclock_sphead", "spatial 头(保留电极身份)"),
