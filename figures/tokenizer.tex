@@ -41,7 +41,7 @@
 \draw[flow] (sinc.east) -- (split);
 
 % ============================================================ RAW lane
-\node[rawbox, text width=34mm] (rawtok) at (78mm,\yraw)
+\node[rawbox, text width=34mm, anchor=west] (rawtok) at ($(split)+(10mm,20mm)$)
   {\textbf{raw patch tokenizer}\\[0.5mm]
    $r_j=\mathrm{Conv1d}(x_j)$\\[0.5mm]
    {\scriptsize one token per (band, patch)}};
@@ -52,7 +52,7 @@
    $\rightarrow$ within-band morphology (seizure, motor imagery)};
 
 % ============================================================ PAC lane
-\node[pacbox, text width=22mm] (hilb) at (58mm,\ypac)
+\node[pacbox, text width=22mm, anchor=west] (hilb) at ($(split)+(10mm,-20mm)$)
   {Hilbert\\[0.5mm] $e^{i\varphi_j},\;A_j$};
 \draw[pacflow] (split) |- (hilb.west);
 
@@ -90,7 +90,7 @@
 % paths converge on its top and bottom edges (raw fills the upper rows,
 % interaction the lower), which keeps left and right edges free for the
 % row braces and the encoder arrow.
-\coordinate (g0) at (214mm,13mm);
+\coordinate (g0) at (228mm,13mm);
 \foreach \r in {0,1,2,3} {
   \foreach \c in {0,1,2,3,4,5} {
     \fill[rawc!25, draw=rawc!60, line width=0.3pt]
