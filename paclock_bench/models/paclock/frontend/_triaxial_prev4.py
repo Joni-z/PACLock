@@ -135,9 +135,9 @@ class TriAxialFrontend(nn.Module):
         self.pac_patch_len = self.pac_patch_lens[0]
         self.normalize = normalize
         self.return_pac_vector = return_pac_vector
-        if tokenizer_mode not in ("raw", "pac_interaction", "hybrid", "fused", "duplex"):
+        if tokenizer_mode not in ("raw", "pac_interaction", "hybrid", "fused"):
             raise ValueError(
-                "tokenizer_mode must be raw/pac_interaction/hybrid/fused/duplex, got "
+                "tokenizer_mode must be raw/pac_interaction/hybrid/fused, got "
                 f"{tokenizer_mode!r}"
             )
         if fusion_mode not in ("blend", "gated"):
@@ -188,20 +188,6 @@ class TriAxialFrontend(nn.Module):
         # on the strength of that evidence -- the forced version is a bet that
         # loses on 8 of 9 corpora, and the bet was the doctrine, not the PAC.
         self.fusion_mode = fusion_mode
-        if tokenizer_mode == "duplex":
-            # duplex = fused rows PLUS separate interaction rows: grid
-            # (C, 2*nb, P). Rows 0..nb-1 are fused-blend tokens (r + beta*h,
-            # beta init 0 -- the raw worst case), rows nb..2nb-1 are the gated
-            # interaction rows hybrid_gate uses (alpha init 1). At init this is
-            # bit-identical to hybrid-with-gate (asserted), and if training
-            # drives beta and alpha to 0 it degrades to raw plus zero rows,
-            # which LayerNorm in the head renormalises away. The measured
-            # motivation: TUEV needs the interaction as SEPARATE attendable
-            # rows (fused loses 0.15 there), the seizure corpora profit from
-            # in-row fusion (fusegate is their family best), and MI needs the
-            # raw worst case -- duplex is the only grid holding all three.
-            self.fusion_beta = nn.Parameter(torch.zeros(n_bands, hidden_dim))
-            self.interaction_gate = nn.Parameter(torch.ones(n_bands))
         if tokenizer_mode == "fused":
             # In-row fusion of the two sources; the grid keeps raw's shape, so
             # the encoder, every head, and the pretraining mask are untouched.
@@ -215,13 +201,13 @@ class TriAxialFrontend(nn.Module):
                 self.fusion_gate = nn.Linear(2 * hidden_dim, hidden_dim)
                 # bias +2: sigmoid ~ 0.88, training starts mostly-raw
                 nn.init.constant_(self.fusion_gate.bias, 2.0)
-        if tokenizer_mode in ("raw", "hybrid", "fused", "duplex"):
+        if tokenizer_mode in ("raw", "hybrid", "fused"):
             # Per-(channel, band) raw-waveform patch tokenizer. Shared across
             # all channel/band pairs; retained as the exact legacy baseline.
             self.tokenizer = nn.Conv1d(
                 1, hidden_dim, kernel_size=patch_len, stride=patch_len
             )
-        if tokenizer_mode in ("pac_interaction", "hybrid", "fused", "duplex"):
+        if tokenizer_mode in ("pac_interaction", "hybrid", "fused"):
             if hidden_dim % 2:
                 raise ValueError("pac_interaction tokenizer needs an even hidden_dim")
             complex_dim = hidden_dim // 2
@@ -267,9 +253,7 @@ class TriAxialFrontend(nn.Module):
         (raw rows + interaction rows), n_bands otherwise. BandPE(index) and the
         band/spatial heads must be sized from THIS, not from n_bands -- the
         builder reads it so no config has to know the factor."""
-        if self.tokenizer_mode in ("hybrid", "duplex"):
-            return 2 * self.n_bands
-        return self.n_bands
+        return 2 * self.n_bands if self.tokenizer_mode == "hybrid" else self.n_bands
 
     def token_band_hz(self) -> torch.Tensor:
         """band_hz aligned to the token grid rows: duplicated under "hybrid"
@@ -280,7 +264,7 @@ class TriAxialFrontend(nn.Module):
         use. band_hz() itself stays n_bands-shaped: the sinc bank has n_bands
         filters and the coupling matrices are (nb, nb) regardless of mode."""
         bh = self.band_hz()
-        if self.tokenizer_mode in ("hybrid", "duplex"):
+        if self.tokenizer_mode == "hybrid":
             return torch.cat([bh, bh], dim=0)
         return bh
 
@@ -501,7 +485,7 @@ class TriAxialFrontend(nn.Module):
         # phase / amplitude -> time-resolved per-channel coupling
         z = hilbert(filtered)                                    # (B, C, nb, T)
         phase_unit, amplitude = phase_amplitude(z)
-        if self.tokenizer_mode in ("raw", "hybrid", "fused", "duplex"):
+        if self.tokenizer_mode in ("raw", "hybrid", "fused"):
             f = filtered.reshape(B * C * self.n_bands, T)
             feat = _patch_project(self.tokenizer, f)             # (B*C*nb, P, D)
             P = feat.shape[1]
@@ -535,14 +519,6 @@ class TriAxialFrontend(nn.Module):
             tokens = self._interaction_tokens(
                 phase_unit, amplitude, pac_vectors
             )
-        elif self.tokenizer_mode == "duplex":
-            interaction = self._interaction_tokens(
-                phase_unit, amplitude, pac_vectors
-            )                                                  # (B,C,nb,P,D)
-            beta = self.fusion_beta.view(1, 1, self.n_bands, 1, -1)
-            fused_rows = tokens + beta * interaction
-            gated_rows = interaction * self.interaction_gate.view(1, 1, -1, 1, 1)
-            tokens = torch.cat([fused_rows, gated_rows], dim=2)  # (B,C,2nb,P,D)
         elif self.tokenizer_mode == "fused":
             interaction = self._interaction_tokens(
                 phase_unit, amplitude, pac_vectors
@@ -574,7 +550,7 @@ class TriAxialFrontend(nn.Module):
         coupling = pac_vector.abs()
 
         if return_amp_target:
-            if self.tokenizer_mode in ("hybrid", "duplex"):
+            if self.tokenizer_mode == "hybrid":
                 # The interaction token for band j carries a_j directly, so a
                 # crossfreq mask that hides raw row j but leaves interaction
                 # row j visible hands the reconstruction its own target. The

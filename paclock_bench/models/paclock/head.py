@@ -46,9 +46,9 @@ class ClassificationHead(nn.Module):
     def __init__(self, d_model: int, num_classes: int, mode: str = "mean",
                  n_bands: int | None = None, n_channels: int | None = None):
         super().__init__()
-        if mode not in ("mean", "band", "attn", "spatial"):
+        if mode not in ("mean", "band", "attn", "spatial", "meanspatial"):
             raise ValueError(
-                f"head mode must be mean/band/attn/spatial, got {mode!r}")
+                f"head mode must be mean/band/attn/spatial/meanspatial, got {mode!r}")
         self.mode = mode
         self.norm = nn.LayerNorm(d_model)
         if mode == "band":
@@ -81,6 +81,19 @@ class ClassificationHead(nn.Module):
                 raise ValueError("head mode 'spatial' needs n_channels")
             self.n_channels = n_channels
             self.proj = nn.Linear(n_channels * d_model, num_classes)
+        elif mode == "meanspatial":
+            # BOTH readouts, concatenated: the global mean vector (what every
+            # tier-1 result was built on) and the per-electrode vectors (what
+            # motor imagery needs). Nothing is removed -- the classifier sees
+            # [mean ; electrode_1 ; ... ; electrode_C] and the gradient decides
+            # how much spatial identity to use. The measured motivation: the
+            # spatial head gains +0.08~0.11 on the MI corpora but COSTS 0.056
+            # on TUEV, and that failure came from REPLACING the mean path, the
+            # same mistake the constitutive tokenizer made at the token level.
+            if not n_channels:
+                raise ValueError("head mode 'meanspatial' needs n_channels")
+            self.n_channels = n_channels
+            self.proj = nn.Linear((n_channels + 1) * d_model, num_classes)
         elif mode == "attn":
             self.query = nn.Parameter(torch.zeros(1, 1, d_model))
             nn.init.normal_(self.query, std=0.02)
@@ -115,6 +128,23 @@ class ClassificationHead(nn.Module):
                     f"head mode 'spatial' was built for {self.n_channels} "
                     f"electrodes but the grid has {C}")
             return self.proj(self.norm(pooled).reshape(B, C * D))
+
+        if self.mode == "meanspatial":
+            if grid is None:
+                raise ValueError("head mode meanspatial needs the token grid shape")
+            C, nb, P = grid
+            B, N, D = x.shape
+            if C != self.n_channels:
+                raise ValueError(
+                    f"head mode 'meanspatial' was built for {self.n_channels} "
+                    f"electrodes but the grid has {C}")
+            # pool THEN norm, matching the mean and spatial heads own order --
+            # LayerNorm and mean do not commute, and the containment property
+            # (zeroing the spatial columns must recover the mean head exactly)
+            # only holds if the mean branch is literally the mean head.
+            g_mean = self.norm(x.mean(dim=1))                       # (B, D)
+            per_el = self.norm(x.reshape(B, C, nb, P, D).mean(dim=(2, 3)))
+            return self.proj(torch.cat([g_mean, per_el.reshape(B, C * D)], dim=1))
 
         # attn: a single learned query reads the grid
         h = self.norm(x)
