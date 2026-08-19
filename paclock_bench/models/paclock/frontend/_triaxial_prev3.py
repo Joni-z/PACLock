@@ -107,7 +107,6 @@ class TriAxialFrontend(nn.Module):
         pac_token_mode: str = "measured",
         interaction_mode: str = "product",
         hybrid_gate: str = "none",
-        fusion_mode: str = "blend",
         **_,
     ):
         super().__init__()
@@ -135,13 +134,11 @@ class TriAxialFrontend(nn.Module):
         self.pac_patch_len = self.pac_patch_lens[0]
         self.normalize = normalize
         self.return_pac_vector = return_pac_vector
-        if tokenizer_mode not in ("raw", "pac_interaction", "hybrid", "fused"):
+        if tokenizer_mode not in ("raw", "pac_interaction", "hybrid"):
             raise ValueError(
-                "tokenizer_mode must be raw/pac_interaction/hybrid/fused, got "
+                "tokenizer_mode must be raw/pac_interaction/hybrid, got "
                 f"{tokenizer_mode!r}"
             )
-        if fusion_mode not in ("blend", "gated"):
-            raise ValueError(f"fusion_mode must be blend/gated, got {fusion_mode!r}")
         if pac_token_mode not in ("measured", "uniform", "scramble", "magnitude"):
             raise ValueError(
                 "pac_token_mode must be measured/uniform/scramble/magnitude, got "
@@ -187,27 +184,13 @@ class TriAxialFrontend(nn.Module):
         # to read. This retires the constitutive-only ("no free path") design
         # on the strength of that evidence -- the forced version is a bet that
         # loses on 8 of 9 corpora, and the bet was the doctrine, not the PAC.
-        self.fusion_mode = fusion_mode
-        if tokenizer_mode == "fused":
-            # In-row fusion of the two sources; the grid keeps raw's shape, so
-            # the encoder, every head, and the pretraining mask are untouched.
-            if fusion_mode == "blend":
-                # zero-init: the model IS the raw model at step 0, and PAC
-                # content enters only where the gradient earns it. The worst
-                # case is raw by construction -- the guarantee hybrid's
-                # side-by-side rows could not give on the MI corpora.
-                self.fusion_beta = nn.Parameter(torch.zeros(n_bands, hidden_dim))
-            else:
-                self.fusion_gate = nn.Linear(2 * hidden_dim, hidden_dim)
-                # bias +2: sigmoid ~ 0.88, training starts mostly-raw
-                nn.init.constant_(self.fusion_gate.bias, 2.0)
-        if tokenizer_mode in ("raw", "hybrid", "fused"):
+        if tokenizer_mode in ("raw", "hybrid"):
             # Per-(channel, band) raw-waveform patch tokenizer. Shared across
             # all channel/band pairs; retained as the exact legacy baseline.
             self.tokenizer = nn.Conv1d(
                 1, hidden_dim, kernel_size=patch_len, stride=patch_len
             )
-        if tokenizer_mode in ("pac_interaction", "hybrid", "fused"):
+        if tokenizer_mode in ("pac_interaction", "hybrid"):
             if hidden_dim % 2:
                 raise ValueError("pac_interaction tokenizer needs an even hidden_dim")
             complex_dim = hidden_dim // 2
@@ -485,7 +468,7 @@ class TriAxialFrontend(nn.Module):
         # phase / amplitude -> time-resolved per-channel coupling
         z = hilbert(filtered)                                    # (B, C, nb, T)
         phase_unit, amplitude = phase_amplitude(z)
-        if self.tokenizer_mode in ("raw", "hybrid", "fused"):
+        if self.tokenizer_mode in ("raw", "hybrid"):
             f = filtered.reshape(B * C * self.n_bands, T)
             feat = _patch_project(self.tokenizer, f)             # (B*C*nb, P, D)
             P = feat.shape[1]
@@ -519,17 +502,6 @@ class TriAxialFrontend(nn.Module):
             tokens = self._interaction_tokens(
                 phase_unit, amplitude, pac_vectors
             )
-        elif self.tokenizer_mode == "fused":
-            interaction = self._interaction_tokens(
-                phase_unit, amplitude, pac_vectors
-            )                                                  # (B,C,nb,P,D)
-            if self.fusion_mode == "blend":
-                beta = self.fusion_beta.view(1, 1, self.n_bands, 1, -1)
-                tokens = tokens + beta * interaction
-            else:
-                g = torch.sigmoid(self.fusion_gate(
-                    torch.cat([tokens, interaction], dim=-1)))
-                tokens = g * tokens + (1.0 - g) * interaction
         elif self.tokenizer_mode == "hybrid":
             # Raw rows first (0..nb-1), interaction rows after (nb..2nb-1).
             # The raw rows here are BIT-IDENTICAL to tokenizer_mode="raw" and
