@@ -77,6 +77,7 @@ PRIMARY_METRIC = {
     "faced": "balanced_acc",
     "bci_iv_2a": "balanced_acc",
     "tuar": "cohen_kappa",
+    "tuep": "auroc",
 }
 
 
