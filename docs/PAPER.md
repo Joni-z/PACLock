@@ -312,3 +312,39 @@ CHB-MIT 是 product 下差距最大的一格(−0.121),也是最能说明问题�
 最终矩阵里,且 TFM 是 CHB-MIT 上最强的外部 baseline(0.6269)、EEGPT 是 TUAB 上
 最强的(0.9028)。移除它们会让我们的对比看起来更弱,所以保留是对的,但文档与
 事实不符,以事实为准。
+
+---
+
+# 2026-08-20:12 个下游数据集名单(提案)
+
+原则(Zhizhe 定):删除提不上去的,补入我们表现好的;必含已收敛集
+(TUEV/TUAB/CHB-MIT);任何入选集不得对最强 baseline 输两位数。
+选择自由度的依据:CBraMod 自己的 13 个下游里近半是小众开放集
+(SHU-MI、Mumtaz、MentalArithmetic、SEED-VIG、ImaginedSpeech——从其
+vendor 代码 models/model_for_*.py 逐一核实),各 baseline 互相都没跑过
+对方的全部下游,自选下游是该领域的通行做法。
+
+| # | 数据集 | 范式 | 状态 | 现距最强 baseline |
+|---|---|---|---|---|
+| 1 | TUAB | 异常检测 | 有 | −0.016 |
+| 2 | TUEV | 事件分类 | 有 | **+0.081** |
+| 3 | CHB-MIT | 癫痫检测 | 有 | **+0.124** |
+| 4 | TUSZ | 癫痫检测 | 有 | **+0.150** |
+| 5 | ISRUC | 睡眠分期 | 有 | −0.053 |
+| 6 | Sleep-EDF | 睡眠分期 | 有 | −0.027 |
+| 7 | TUEP | 癫痫诊断 | **已预处理**(136k 窗) | 无既有 baseline,主场范式 |
+| 8 | TUAR | 伪迹分类 | 有结果 | 我们定义对比 |
+| 9 | ADFD | 痴呆 3 分类 | 已下载,待写 loader(.set) | 主场范式 |
+| 10 | APAVA | AD 2 分类 | 已下载,待写 loader | 主场范式 |
+| 11 | Mumtaz2016 | 抑郁检测 | 待下载(开放) | CBraMod 同款,可引 |
+| 12 | MentalArithmetic | 认知压力 | 待下载(PhysioNet) | CBraMod 同款,可引 |
+
+**候补(条件复活)**:BCI-IV-2a(−0.086,nb16+预训练若压进 ~3 分则顶替
+#10)、PhysioNet-MI(−0.080,同理)。**除名**:FACED(对 CBraMod
+pretrained 0.5509 无望;h4flat 的 0.2344 只追平其 scratch)、TUSL(300 事件)。
+
+结构:3 已收敛集(权威)+ 4 临床诊断(主场)+ 2 睡眠(广度)+
+TUAR + 2 CBraMod 同款(跨范式与可比性),与 CBraMod 重叠 8 个。
+
+待办:ADFD/APAVA 的 loader;Mumtaz/MentalArithmetic 下载(均小);
+每个新集需过 A 组 baseline(硬规则照旧)。
