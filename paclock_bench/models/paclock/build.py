@@ -77,6 +77,21 @@ class TriAxialPACLock(nn.Module):
         d = cfg["d_model"]
         self.freq_mixer = cfg.get("freq_mixer", "coupling")
         self.augment = RandomAugment(cfg.get("augmentations", []))
+        # H2 (2026-08-20): learned montage -- a per-corpus channel-mixing
+        # matrix W = I + Delta applied to the raw input, Delta ZERO-INIT so
+        # the init is exactly the identity (the current model). This is the
+        # learnable form of re-referencing / CSP-style spatial filtering,
+        # which every strong MI baseline performs early and this model never
+        # did: electrodes stayed separate until the encoder spatial attention.
+        # Corpus-specific by construction, like spatial_pe and the head -- it
+        # is NOT part of the transferable backbone, so the pretraining
+        # contract is unchanged (load_pretrained_backbone already excludes
+        # everything outside frontend./band_pe./encoder., and this lives
+        # outside the frontend).
+        self.learned_montage = bool(cfg.get("learned_montage", False))
+        if self.learned_montage:
+            self.montage_delta = nn.Parameter(
+                torch.zeros(cfg["n_channels"], cfg["n_channels"]))
         self.frontend = TriAxialFrontend(
             n_bands=cfg["n_bands"], hidden_dim=d, sample_rate=cfg["sample_rate"],
             kernel_size=cfg.get("kernel_size", 201), patch_len=cfg.get("patch_len", 200),
@@ -87,6 +102,7 @@ class TriAxialPACLock(nn.Module):
             interaction_mode=cfg.get("interaction_mode", "product"),
             hybrid_gate=cfg.get("hybrid_gate", "none"),
             fusion_mode=cfg.get("fusion_mode", "blend"),
+            raw_stem=cfg.get("raw_stem", "linear"),
         )
         if self.frontend.tokenizer_mode in ("hybrid", "duplex"):
             # The coupling/phase mixers consume an (nb, nb) coupling matrix and
@@ -180,6 +196,9 @@ class TriAxialPACLock(nn.Module):
 
     def forward(self, x: torch.Tensor, phase_mode: str = "normal") -> torch.Tensor:
         x = self.augment(x)
+        if self.learned_montage:
+            eye = torch.eye(x.shape[1], device=x.device, dtype=x.dtype)
+            x = torch.einsum("vc,bct->bvt", eye + self.montage_delta, x)
         frontend_out = self.frontend(x)
         if self.freq_mixer == "phase":
             tokens, coupling, band_hz, pac_vector = frontend_out

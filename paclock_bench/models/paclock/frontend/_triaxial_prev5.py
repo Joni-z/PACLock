@@ -108,7 +108,6 @@ class TriAxialFrontend(nn.Module):
         interaction_mode: str = "product",
         hybrid_gate: str = "none",
         fusion_mode: str = "blend",
-        raw_stem: str = "linear",
         **_,
     ):
         super().__init__()
@@ -216,46 +215,12 @@ class TriAxialFrontend(nn.Module):
                 self.fusion_gate = nn.Linear(2 * hidden_dim, hidden_dim)
                 # bias +2: sigmoid ~ 0.88, training starts mostly-raw
                 nn.init.constant_(self.fusion_gate.bias, 2.0)
-        if raw_stem not in ("linear", "deep"):
-            raise ValueError(f"raw_stem must be linear/deep, got {raw_stem!r}")
-        self.raw_stem = raw_stem
         if tokenizer_mode in ("raw", "hybrid", "fused", "duplex"):
             # Per-(channel, band) raw-waveform patch tokenizer. Shared across
             # all channel/band pairs; retained as the exact legacy baseline.
             self.tokenizer = nn.Conv1d(
                 1, hidden_dim, kernel_size=patch_len, stride=patch_len
             )
-            if raw_stem == "deep":
-                # H1 (2026-08-20): every baseline that beats this model on the
-                # motor-imagery corpora enters the signal through a DEEP
-                # NONLINEAR conv stem (SPaRCNet: DenseNet-1D; CBraMod: stacked
-                # Conv2d+GN+GELU; ContraWR: ResNet over spectrograms), while
-                # this frontend was the only one in the suite entering through
-                # a single linear map. Where the discriminative feature is a
-                # constructed physical quantity (bands, coupling) the linear
-                # map suffices and we win; where it must be dug out of the
-                # waveform (ERD trajectories, MI/emotion) it starves.
-                #
-                # The stem refines each patch AFTER the linear projection as a
-                # residual: token = linear_patch + refine(patch_waveform),
-                # with the refiner's LAST layer ZERO-INIT -- at init the
-                # tokenizer is bit-identical to the legacy linear one, and
-                # depth must be earned by the gradient (the same worst-case
-                # principle as fused beta / duplex alpha / head gamma).
-                # The PAC lane is untouched: the phase tokenizer must stay
-                # linear and bias-free for gauge invariance, and does.
-                d4 = max(hidden_dim // 4, 8)
-                self.stem_conv = nn.Sequential(
-                    nn.Conv1d(1, d4, kernel_size=11, stride=5, padding=5),
-                    nn.GELU(),
-                    nn.Conv1d(d4, hidden_dim // 2, kernel_size=7, stride=5,
-                              padding=3),
-                    nn.GELU(),
-                )
-                self.stem_out = nn.Conv1d(hidden_dim // 2, hidden_dim,
-                                          kernel_size=1)
-                nn.init.zeros_(self.stem_out.weight)
-                nn.init.zeros_(self.stem_out.bias)
         if tokenizer_mode in ("pac_interaction", "hybrid", "fused", "duplex"):
             if hidden_dim % 2:
                 raise ValueError("pac_interaction tokenizer needs an even hidden_dim")
@@ -540,13 +505,6 @@ class TriAxialFrontend(nn.Module):
             f = filtered.reshape(B * C * self.n_bands, T)
             feat = _patch_project(self.tokenizer, f)             # (B*C*nb, P, D)
             P = feat.shape[1]
-            if self.raw_stem == "deep":
-                # residual refinement per patch; stride 5*5 then adaptive pool
-                # to one vector per patch keeps the token grid shape identical
-                h = self.stem_conv(f[:, : P * self.patch_len].unsqueeze(1))
-                # (N, D/2, T'): pool T' into P patch bins, then 1x1 to D
-                h = torch.nn.functional.adaptive_avg_pool1d(h, P)
-                feat = feat + self.stem_out(h).transpose(1, 2)   # (N, P, D)
             tokens = feat.reshape(B, C, self.n_bands, P, -1)
         else:
             P = T // self.patch_len

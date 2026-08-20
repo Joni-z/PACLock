@@ -46,9 +46,11 @@ class ClassificationHead(nn.Module):
     def __init__(self, d_model: int, num_classes: int, mode: str = "mean",
                  n_bands: int | None = None, n_channels: int | None = None):
         super().__init__()
-        if mode not in ("mean", "band", "attn", "spatial", "meanspatial"):
+        if mode not in ("mean", "band", "attn", "spatial", "meanspatial",
+                        "gated_meanspatial"):
             raise ValueError(
-                f"head mode must be mean/band/attn/spatial/meanspatial, got {mode!r}")
+                "head mode must be mean/band/attn/spatial/meanspatial/"
+                f"gated_meanspatial, got {mode!r}")
         self.mode = mode
         self.norm = nn.LayerNorm(d_model)
         if mode == "band":
@@ -81,7 +83,7 @@ class ClassificationHead(nn.Module):
                 raise ValueError("head mode 'spatial' needs n_channels")
             self.n_channels = n_channels
             self.proj = nn.Linear(n_channels * d_model, num_classes)
-        elif mode == "meanspatial":
+        elif mode in ("meanspatial", "gated_meanspatial"):
             # BOTH readouts, concatenated: the global mean vector (what every
             # tier-1 result was built on) and the per-electrode vectors (what
             # motor imagery needs). Nothing is removed -- the classifier sees
@@ -94,6 +96,17 @@ class ClassificationHead(nn.Module):
                 raise ValueError("head mode 'meanspatial' needs n_channels")
             self.n_channels = n_channels
             self.proj = nn.Linear((n_channels + 1) * d_model, num_classes)
+            if mode == "gated_meanspatial":
+                # Zero-init gate on the per-electrode block. The plain
+                # meanspatial head CONTAINS the mean head mathematically, yet
+                # measured single seeds show its randomly initialised spatial
+                # block derails the seizure corpora (TUSZ -0.096, CHB-MIT
+                # collapse) -- the same no-worst-case failure the product
+                # tokenizer had. gamma = 0 makes the init exactly a mean head;
+                # spatial identity must be earned by the gradient, the one
+                # principle that has worked every time it was applied here
+                # (fused beta, interaction alpha).
+                self.spatial_scale = nn.Parameter(torch.zeros(1))
         elif mode == "attn":
             self.query = nn.Parameter(torch.zeros(1, 1, d_model))
             nn.init.normal_(self.query, std=0.02)
@@ -129,7 +142,7 @@ class ClassificationHead(nn.Module):
                     f"electrodes but the grid has {C}")
             return self.proj(self.norm(pooled).reshape(B, C * D))
 
-        if self.mode == "meanspatial":
+        if self.mode in ("meanspatial", "gated_meanspatial"):
             if grid is None:
                 raise ValueError("head mode meanspatial needs the token grid shape")
             C, nb, P = grid
@@ -144,7 +157,10 @@ class ClassificationHead(nn.Module):
             # only holds if the mean branch is literally the mean head.
             g_mean = self.norm(x.mean(dim=1))                       # (B, D)
             per_el = self.norm(x.reshape(B, C, nb, P, D).mean(dim=(2, 3)))
-            return self.proj(torch.cat([g_mean, per_el.reshape(B, C * D)], dim=1))
+            per_el = per_el.reshape(B, C * D)
+            if self.mode == "gated_meanspatial":
+                per_el = per_el * self.spatial_scale
+            return self.proj(torch.cat([g_mean, per_el], dim=1))
 
         # attn: a single learned query reads the grid
         h = self.norm(x)
