@@ -78,6 +78,8 @@ PRIMARY_METRIC = {
     "bci_iv_2a": "balanced_acc",
     "tuar": "cohen_kappa",
     "tuep": "auroc",
+    "adfd": "balanced_acc",
+    "apava": "auroc",
 }
 
 

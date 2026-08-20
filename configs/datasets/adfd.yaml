@@ -1,0 +1,24 @@
+# ADFD (ADFTD, OpenNeuro ds004504 via the Medformer preprocessed release):
+# Alzheimer's / frontotemporal dementia / healthy, 3-class, subject-level.
+# 88 subjects (36 AD / 23 FTD / 29 CN), 19 channels 10-20, source 256 Hz,
+# arrays in VOLTS (unit_scale converts to microvolts). Added 2026-08-20 for
+# the 12-corpus slate (clinical-diagnostic home paradigm).
+dataset: adfd
+raw_root: $PACLOCK_DATA/medformer/ADFD
+out_dir: $PACLOCK_PROC/processed/adfd
+num_classes: 3
+source_rate: 256
+sample_rate: 200
+unit_scale: 1.0e6
+band: [0.3, 75.0]
+notch: 50.0
+window_sec: 10.0
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+primary_metric: balanced_acc
+report_metrics: [balanced_acc, cohen_kappa, weighted_f1]
+split:
+  mode: sort_subject_ratio_stratified
+  train_ratio: 0.7
+  val_ratio_of_rest: 0.5

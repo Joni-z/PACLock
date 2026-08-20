@@ -1,0 +1,21 @@
+# APAVA (Medformer preprocessed release): Alzheimer's vs healthy, 2-class,
+# subject-level. 23 subjects (12 AD / 11 HC), 16 channels, source 256 Hz,
+# arrays already in microvolts. Added 2026-08-20 for the 12-corpus slate.
+dataset: apava
+raw_root: $PACLOCK_DATA/medformer/APAVA
+out_dir: $PACLOCK_PROC/processed/apava
+num_classes: 2
+source_rate: 256
+sample_rate: 200
+unit_scale: 1.0
+band: [0.3, 75.0]
+notch: 50.0
+window_sec: 10.0
+normalization: div100
+loss: bce_with_logits
+primary_metric: auroc
+report_metrics: [auroc, balanced_acc, pr_auc]
+split:
+  mode: sort_subject_ratio_stratified
+  train_ratio: 0.7
+  val_ratio_of_rest: 0.5
