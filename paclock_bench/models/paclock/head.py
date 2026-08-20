@@ -44,13 +44,14 @@ class ClassificationHead(nn.Module):
     """``mode='mean'`` reproduces the original head exactly."""
 
     def __init__(self, d_model: int, num_classes: int, mode: str = "mean",
-                 n_bands: int | None = None, n_channels: int | None = None):
+                 n_bands: int | None = None, n_channels: int | None = None,
+                 n_patches: int | None = None):
         super().__init__()
         if mode not in ("mean", "band", "attn", "spatial", "meanspatial",
-                        "gated_meanspatial"):
+                        "gated_meanspatial", "flatten"):
             raise ValueError(
                 "head mode must be mean/band/attn/spatial/meanspatial/"
-                f"gated_meanspatial, got {mode!r}")
+                f"gated_meanspatial/flatten, got {mode!r}")
         self.mode = mode
         self.norm = nn.LayerNorm(d_model)
         if mode == "band":
@@ -107,6 +108,19 @@ class ClassificationHead(nn.Module):
                 # principle that has worked every time it was applied here
                 # (fused beta, interaction alpha).
                 self.spatial_scale = nn.Parameter(torch.zeros(1))
+        elif mode == "flatten":
+            # H4 (2026-08-20): every head so far pools the TIME axis uniformly,
+            # but an MI trial is cue-locked -- the discriminative content is
+            # the power TRAJECTORY over the trial, and averaging collapses the
+            # trajectory to a point. CBraMod, which wins these paradigm tasks,
+            # flattens its whole (channel, patch, feature) grid into the
+            # classifier instead. This is that readout on our grid: pool the
+            # band axis only, keep (C, P, D), flatten into one linear layer.
+            if not (n_channels and n_patches):
+                raise ValueError("head mode 'flatten' needs n_channels and n_patches")
+            self.n_channels = n_channels
+            self.n_patches = n_patches
+            self.proj = nn.Linear(n_channels * n_patches * d_model, num_classes)
         elif mode == "attn":
             self.query = nn.Parameter(torch.zeros(1, 1, d_model))
             nn.init.normal_(self.query, std=0.02)
@@ -161,6 +175,18 @@ class ClassificationHead(nn.Module):
             if self.mode == "gated_meanspatial":
                 per_el = per_el * self.spatial_scale
             return self.proj(torch.cat([g_mean, per_el], dim=1))
+
+        if self.mode == "flatten":
+            if grid is None:
+                raise ValueError("head mode flatten needs the token grid shape")
+            C, nb, P = grid
+            B, N, D = x.shape
+            if C != self.n_channels or P != self.n_patches:
+                raise ValueError(
+                    f"head mode 'flatten' was built for (C={self.n_channels}, "
+                    f"P={self.n_patches}) but the grid is (C={C}, P={P})")
+            pooled = self.norm(x.reshape(B, C, nb, P, D).mean(dim=2))  # (B,C,P,D)
+            return self.proj(pooled.reshape(B, C * P * D))
 
         # attn: a single learned query reads the grid
         h = self.norm(x)

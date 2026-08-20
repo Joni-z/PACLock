@@ -189,5 +189,32 @@ check("montage delta receives gradient",
       m_on.montage_delta.grad is not None
       and m_on.montage_delta.grad.abs().sum().item() > 0)
 
+print("\n=== 9. flatten head", flush=True)
+torch.manual_seed(0)
+fl = ClassificationHead(D, NCLS, mode="flatten", n_bands=NB, n_channels=C,
+                        n_patches=P).eval()
+xt3 = torch.randn(3, C * NB * P, D)
+with torch.no_grad():
+    y3 = fl(xt3, (C, NB, P))
+check("flatten forward finite", y3.shape == (3, NCLS)
+      and torch.isfinite(y3).all().item())
+check("flatten proj sized C*P*D", fl.proj.in_features == C * P * D)
+fl.train()
+fl(xt3, (C, NB, P)).sum().backward()
+check("flatten receives gradient", fl.proj.weight.grad.abs().sum().item() > 0)
+try:
+    fl(torch.randn(2, C * NB * (P + 1) * 1, D), (C, NB, P + 1))
+    check("wrong P raises", False)
+except ValueError:
+    check("wrong P raises", True)
+cfgf = {**BASE, "model_kwargs": {**BASE["model_kwargs"],
+                                 "tokenizer_mode": "raw", "head": "flatten"}}
+torch.manual_seed(0)
+mf = build_model(cfgf, input_shape=(C, 1000)).eval()
+with torch.no_grad():
+    yf = mf(torch.randn(2, C, 1000))
+check("full model with flatten head builds and forwards",
+      yf.shape == (2, NCLS) and torch.isfinite(yf).all().item())
+
 print(f"\n{'ALL CHECKS PASSED' if ok else 'FAILURES ABOVE'}")
 raise SystemExit(0 if ok else 1)

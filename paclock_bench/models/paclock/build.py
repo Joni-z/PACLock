@@ -138,7 +138,8 @@ class TriAxialPACLock(nn.Module):
         self.head = ClassificationHead(d, cfg["num_classes"],
                                       mode=cfg.get("head", "mean"),
                                       n_bands=grid_bands,
-                                      n_channels=cfg["n_channels"])
+                                      n_channels=cfg["n_channels"],
+                                      n_patches=cfg["seq_len"] // cfg.get("patch_len", 200))
 
         # Optional crossfreq-reconstruction auxiliary head (AGENT.md sec. 13.15).
         # When aux_recon_weight > 0, supervised training adds a masked-amplitude
