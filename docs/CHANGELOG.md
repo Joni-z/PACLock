@@ -419,3 +419,45 @@ BCI +0.012(n=3);TUAR −0.021(n=1)、Sleep-EDF −0.001(n=1)。
 * 删除 `docs/FACED_操作指南.md`:一次性操作手册,任务 8/12 完成;其中的协议
   事实(官方 `.pkl` 版本、split 边界 S000–079/080–099/100–122、每人 84 窗口、
   类别分布 3,3,3,3,4,3,3,3,3)已由 `docs/PROTOCOLS.md` §8 更完整地记录。
+
+
+---
+
+# 2026-08-19 → 08-21:结构收敛波与 12 数据集数据齐备
+
+## 架构(全部有 verify 脚本,全部零初始化等价旧形态)
+
+* `tokenizer_mode: fused`(行内融合,blend/gated 两式)与
+  `tokenizer_mode: duplex`(nb 融合行 + nb 门控交互行,init ≡ hybrid+gate)。
+* `raw_stem: deep`(3 层 conv 残差精炼,末层零初始化)、
+  `learned_montage`(W=I+Δ,语料私有)、`n_bands: 16`、
+  头 `meanspatial` / `gated_meanspatial` / `flatten`。
+* `scripts/verify_duplex.py` 26/26;快照链 `_triaxial_prev*.py` 至 prev5。
+
+## 判决(详见 FINDINGS.md 第四部分)
+
+* 骨干定稿方向:**duplex + rotation + nb8**,唯一三个等级一语料全超
+  baseline 的网格(TUEV 0.7094 / TUSZ 0.6328 / CHB 0.7130,均单 seed)。
+* **旗舰全组件堆叠被证伪**:BCI 旗舰 0.3661(预期 0.53–0.56);
+  gated_meanspatial 弃用(零初始化保底在训练中不成立);深 stem 伤癫痫
+  (CHB −0.023 / TUSZ −0.044),降为语料条件项。
+* 头按任务族微调期选择(CBraMod 每数据集一头的先例),不属于骨干。
+
+## 数据 / 语料
+
+* 新增 TUEP(136,525 训练窗)、ADFD、APAVA(Medformer npy 版,ADFD 伏特
+  单位换算)loader 与配置;metrics 注册 tuar/tuep/adfd/apava。
+* 新增 Mumtaz2016 与 EEGMat loader(commit 4ca79f3):CBraMod 协议、
+  被试不相交划分;montage.py 增 `_MONO_19` 共享 19 电极表。
+* EEGMat 首次下载截断(63M/158.8M),devel 分区续传修复。
+* 12 数据集名单进 PAPER.md;FACED/TUSL 除名,BCI/PMI 转候补。
+
+## 集群 / 运维
+
+* devel 分区:0.5 h 墙钟上限;**无 pytorch/2.7.1 模块**(rocm/6.3.1 缺失),
+  只能跑纯 CPU/网络任务(下载、解压)。
+* 集群内节点间 ssh 需要 home 的 `authorized_keys` 含自己的公钥(08-21 已配;
+  且只允许进有本人作业的节点;等价方式 `srun --jobid=<id> --overlap --pty bash`)。
+* 登录节点 `/tmp` 有他人 `inspect.py` 遮蔽标准库(与 b2 同款坑)——脚本放
+  repo 或私有目录,不放共享 `/tmp`。
+* 冗余的 squeue 监视 shell 清理:每波提交只留一个监视循环。
