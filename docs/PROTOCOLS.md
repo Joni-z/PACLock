@@ -620,3 +620,43 @@ sbatch slurm/run.slurm scripts.verify_processed --dataset tusz
 
 `pretrain_runs/` 与 `pretrain_runs_60k/`(共 125 M)必须保留 —— 正在被
 `p200` 三臂实验和 raw 预训练微调读取,且已在 `.gitignore` 中(见 STATUS.md)。
+
+
+---
+
+# 附录 D:同类 EEG FM 如何处理预训练/下游重叠(2026-08-21 调研)
+
+发现自家 TUEG 切片有被试级泄漏后(`STATUS.md` §5.5),先查了领域标准,
+因为"要不要修"取决于对手怎么做。**结论:没有人做被试级排除,也没有人量化过。**
+
+| 模型 | 预训练数据 | 排除做法 | 证据 |
+|---|---|---|---|
+| **CBraMod** | 全量 TUEG(27,062 h / 14,987 被试) | **零排除** | 它自己发布的 `preprocessing_tueg_for_pretraining.py`(见 `vendor/cbramod/`):`iter_files()` 遍历 TUEG 根目录 → sorted → shuffle → 全量处理,无任何 session/subject 过滤;随后在 TUAB/TUEV 上评测 |
+| **LaBraM** | 2,500 h+,含 TUEG | 排除的是**下游数据集**(以数据集为单位),但 TUEG 留在池中,而 TUAB/TUEV 的病人就在 TUEG 里 | 论文表述"the four downstream datasets excluded from the pre-training datasets" |
+| **BIOT** | 含 TUH | 未记录 | — |
+| **REVE** | 含 TUH(14,987 被试,占语料 44%) | 移除下游评测数据,但自陈分布相似性仍在 | — |
+
+2026 年的批评论文 *What EEG Foundation Models Encode: Dataset Identity and a
+Negative-Control Suite for Clinical Benchmarks*(arXiv 2607.24519)明说
+"**all models are in-domain on this task**"(指 TUAB),并警告 TUAB 的结果
+不应与 CHB-MIT 等 OOD 结果直接比较 —— 但它**也没有量化被试重叠比例**。
+
+## 为什么"他们不做所以我们也不做"在本项目不成立
+
+**他们不排是因为排了要掉数据量,我们排了一点不掉。**CBraMod 用的是全量
+TUEG;我们只抽 2,000 h ≈ TUEG 的 7%。排掉 3,182 个下游被试后仍有 11,885 个
+合格被试,而我们只需要 5,245 个文件 —— 干跑实测:**同样 2,000 h,文件数
+一个不少,泄漏检查 0**。
+
+而且 TUAB 自己的 train split 本来就直接在池中(占采样 15.5%),**合法的
+域内信号一点没丢**;排掉的恰好只是测试病人的录音。
+
+风险是不对称的:我们已经量出 34.8% 了。"没查过"是一种辩护,"查过、
+知道了、仍然发"不是;而这个检查是五行脚本,审稿人自己能跑。
+
+**因此建议发清洁版,并把这次测量写进论文方法节** —— 在上述批评论文已经
+点名该问题的背景下,"我们的预训练切片与全部下游测试集被试不相交,而标准
+TUEG 切片在 TUAB 上的重叠实测为 34.8%"是别人给不出的一句话。
+
+脏切片(`processed/tueg_slice`)**保留未删**:若要量化"泄漏能把 TUAB 抬高
+多少",多跑一个 60k 即可,那是论文的一节而不是成本。
