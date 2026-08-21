@@ -114,10 +114,13 @@ class TriAxialPACLock(nn.Module):
                     "tokenizer_mode=hybrid/duplex requires freq_mixer=attention, "
                     f"got {self.freq_mixer!r}"
                 )
-            # aux_recon / masked-amplitude pretraining IS supported on these
-            # grids: crossfreq_aux_loss masks a band's fused/raw and interaction
-            # rows together (paired-row masking), so the visible interaction row
-            # cannot hand the reconstruction its own target.
+            if cfg.get("aux_recon_weight", 0.0) > 0:
+                raise ValueError(
+                    "tokenizer_mode=hybrid/duplex does not support aux_recon yet: the "
+                    "crossfreq mask must hide a band's raw AND interaction rows "
+                    "together or the target leaks (see the frontend's "
+                    "return_amp_target guard)"
+                )
         # BandPE(index) and the band/spatial heads are sized from the GRID's
         # frequency axis, which is 2*n_bands under hybrid -- the frontend owns
         # that fact, so read it rather than re-deriving it here.
@@ -169,24 +172,12 @@ class TriAxialPACLock(nn.Module):
             tokens, coupling, band_hz, amp_target = frontend_out
             pac_vector = None
         B, C, nb, P, D = tokens.shape
-        # hybrid/duplex grids carry 2*nb_phys rows (fused/raw rows first,
-        # interaction rows after -- frontend row-order contract), both derived
-        # from the same physical band, and amp_target is per PHYSICAL band. The
-        # mask is therefore drawn over physical bands and applied to BOTH of a
-        # band's rows -- a visible interaction row would otherwise hand the
-        # reconstruction its own target. Residual second-order path: a visible
-        # band's interaction row mixes MASKED bands' unit phases via the PAC
-        # vectors; phases are amplitude-normalised, so the amplitude target
-        # does not travel that path (only per-window coupling statistics do).
-        nb_phys = amp_target.shape[2]
-        paired = nb == 2 * nb_phys
 
         if self.aux_mask_mode == "crossfreq":
-            pmask = torch.zeros(B, C, nb_phys, P, dtype=torch.bool, device=x.device)
-            pmask[:, :, nb_phys // 2:, :] = True            # hide high-frequency half
+            mask = torch.zeros(B, C, nb, P, dtype=torch.bool, device=x.device)
+            mask[:, :, nb // 2:, :] = True                  # hide high-frequency half
         else:                                               # "random"
-            pmask = torch.rand(B, C, nb_phys, P, device=x.device) < self.aux_mask_ratio
-        mask = torch.cat([pmask, pmask], dim=2) if paired else pmask
+            mask = torch.rand(B, C, nb, P, device=x.device) < self.aux_mask_ratio
 
         tok = torch.where(mask.unsqueeze(-1), self.mask_token.view(1, 1, 1, 1, D), tokens)
         tok = tok + self.band_pe(band_hz).view(1, 1, nb, 1, D)
@@ -194,18 +185,15 @@ class TriAxialPACLock(nn.Module):
 
         # leakage control: keep coupling only between bands BOTH visible at each
         # (channel, patch); zero every entry touching a masked band (else the
-        # reconstruction target leaks through the coupling matrix). coupling is
-        # (.., nb_phys, nb_phys) in every mode -- single-scale by contract.
-        vis = (~pmask).permute(0, 1, 3, 2)                  # (B,C,P,nb_phys)
+        # reconstruction target leaks through the coupling matrix).
+        vis = (~mask).permute(0, 1, 3, 2)                   # (B,C,P,nb) True=visible
         keep = (vis.unsqueeze(-1) & vis.unsqueeze(-2)).to(coupling.dtype)
         cpl = coupling * keep
         pac = None if pac_vector is None else pac_vector * keep
         h = self.encoder(tok, cpl, pac)
 
-        # each masked band's amplitude is predicted from its fused/raw row --
-        # the first nb_phys grid rows in every mode.
-        pred = self.recon(h[:, :, :nb_phys]).squeeze(-1)    # (B,C,nb_phys,P)
-        return F.mse_loss(pred[pmask], amp_target.detach()[pmask])
+        pred = self.recon(h).squeeze(-1)                    # (B,C,nb,P)
+        return F.mse_loss(pred[mask], amp_target.detach()[mask])
 
     def forward(self, x: torch.Tensor, phase_mode: str = "normal") -> torch.Tensor:
         x = self.augment(x)

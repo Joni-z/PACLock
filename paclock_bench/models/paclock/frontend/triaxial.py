@@ -616,20 +616,12 @@ class TriAxialFrontend(nn.Module):
         coupling = pac_vector.abs()
 
         if return_amp_target:
-            if self.tokenizer_mode in ("hybrid", "duplex"):
-                # The interaction token for band j carries a_j directly, so a
-                # crossfreq mask that hides raw row j but leaves interaction
-                # row j visible hands the reconstruction its own target. The
-                # masking scheme has to hide both rows of a band together, and
-                # neither training/pretrain.py nor the supervised aux path does
-                # that yet. Fail here, at the source, rather than let a
-                # pretraining run silently leak.
-                raise NotImplementedError(
-                    "hybrid + return_amp_target: masked-amplitude pretraining "
-                    "needs paired-row masking (raw row j AND interaction row "
-                    "j) before it is meaningful; see the hybrid note in "
-                    "docs/FINDINGS.md"
-                )
+            # hybrid/duplex: the interaction token for band j carries a_j
+            # directly, so any masking scheme MUST hide both of a band's rows
+            # together -- build.py's crossfreq_aux_loss draws its mask over the
+            # nb PHYSICAL bands and applies it to row j and row nb+j jointly
+            # (scripts/verify_duplex_pretrain.py). The target below is per
+            # physical band -- (B, C, nb, P) -- whatever the grid height.
             # Per-token (electrode, band, patch) log mean amplitude -- a fixed,
             # deterministic regression target for masked-reconstruction pretraining
             # (models/pretrain.py). Deterministic => no representation collapse, no
