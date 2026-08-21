@@ -95,16 +95,56 @@ TUSL、SHU-MI、SEED-VIG。FACED 已除名(15 个变体全在随机附近,原因
 
 全部落地后:12 数据集 × 预期表现判决表 → 骨干定稿写入本文件与 `FINDINGS.md`。
 
+## 5.5 预训练池的被试级泄漏(2026-08-21 发现并修复)
+
+TUEG 切片此前只用 TUEG 自带的 `sessions_tueg_common_with_tusz.list` 排除,
+那是**会话**清单;而 TUAB/TUEV/TUSZ/TUEP/TUAR 全都是 TUEG 的子集,同一病人的
+其他会话仍会进池。切片占预训练采样 **36.8%**,实测重叠:
+
+| 语料 | test 泄漏 | val 泄漏 |
+|---|---|---|
+| **TUAB** | **88/253 = 34.8%** | 158/424 = 37.3% |
+| TUEV | 0/80 = 0%(官方 eval 集) | 28/58 = 48.3% |
+| TUSZ | 17/43 = 39.5% | 0% |
+| TUEP | 11/28 = 39.3% | 9/26 = 34.6% |
+| TUAR | 9/32 = 28.1% | 11/32 = 34.4% |
+
+**修复**(commit 35be6dc):`preprocessing/tueg.py` 增 `exclude_subject_manifests`,
+按**被试**剔除五个 TUH 下游语料所有 split 的全部被试;缺 manifest 直接报错
+(少排就是这个 bug 本身)。**不损失数据**:排除 3,182 个被试后仍有 11,885 个
+合格被试,照样选满 5,245 文件 ≈ 2000 h,泄漏检查 0。重建进
+`processed/tueg_slice_clean`(旧切片保留不覆盖,job 44047303)。
+
+**后果(必须处理)**:
+1. 已有的**预训练行**(TUAB/TUSZ/TUEP/TUAR)是用脏切片跑的,须用干净
+   checkpoint 重跑后才能进论文;**TUEV 的 test 恰好干净,该行成立**。
+2. 排除消融(§5「剔除 TUSZ/CHB-MIT 仍保留 66%/69% 收益」)的"非域内"臂
+   其实仍通过 TUEG 见到了 TUSZ 被试,该结论需在干净切片上重做。
+
+## 5.6 池子构成:六进六出,是特性不是缺陷
+
+全池采样占比(n 加权):TUEG 36.8%、TUSZ 17.0%、CHB-MIT 16.4%、TUAB 15.5%、
+Sleep-EDF 6.4%、ISRUC 3.6%、TUEV 3.6%,**PhysioNet-MI 0.33%、FACED 0.35%、
+BCI 0.11%**。后三个合计 0.79%,日志里经常整整 250 步拿到 **0 个 batch**
+(`physionet_mi=nan(0)`)——它们在预训练里等于不存在,留着只为通道数多样性
+(64/32/22 通道),删不删都不影响结果。
+
+12 语料名单里 **6 个在池中**(TUAB/TUEV/TUSZ/CHB-MIT/ISRUC/Sleep-EDF),
+**6 个完全不在**(TUEP/TUAR/ADFD/APAVA/Mumtaz/EEGMat)。不补进池,理由:
+ADFD/APAVA/Mumtaz/EEGMat 各自 <1%,加进去和 FACED 一样是统计噪声;TUEP
+(约 7%)是唯一有分量的,但把它留在池外反而更值钱——**论文里这就是一个
+自带的迁移实验:六个语料有域内训练数据,六个一点没有,两边都要赢。**
+
 ## 6. 预训练点火条件
 
 b2 余额 ~147 SU,rung-1(duplex 骨干,base 档)约 110 SU —— **基本一发定音**,
 所以点火前置条件全部客观化:
 
+0. **干净 TUEG 切片落地**(§5.5,job 44047303)—— 脏切片上的 60k 是废的;
 1. FL 波落地,旗舰证伪证据链闭合(骨干定稿不再变);
 2. 7 个新语料 duplex scratch 数字回来,没有输十几个点的格子(有则先换名单);
 3. Mumtaz/EEGMat 处理完成并测过 scratch;
-4. duplex 预训练的配对行掩码实现并过 verify(`triaxial.py` 目前对
-   hybrid/duplex + `return_amp_target` 是显式 raise 的守卫);
+4. ~~配对行掩码~~ **已完成**(commit 7f12853,verify 16/16);
 5. Zhizhe 批准动用 SU。
 
 ## 7. 遗留问题
