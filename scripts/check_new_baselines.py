@@ -8,7 +8,7 @@ gate must be too.
 import glob, json, subprocess, sys
 
 SHAPES = {}
-for ds in ("tuep", "tuar", "adfd"):
+for ds in ("tuep", "tuar", "adfd", "mumtaz", "eegmat"):
     m = json.load(open("/work1/chenyuyou/yifanwang/Zhizhe/processed/%s/manifest.json" % ds))
     SHAPES[ds] = tuple(m["splits"]["train"]["shape"])
 
