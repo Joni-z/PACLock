@@ -121,6 +121,20 @@ TUEG 切片此前只用 TUEG 自带的 `sessions_tueg_common_with_tusz.list` 排
 2. 排除消融(§5「剔除 TUSZ/CHB-MIT 仍保留 66%/69% 收益」)的"非域内"臂
    其实仍通过 TUEG 见到了 TUSZ 被试,该结论需在干净切片上重做。
 
+### 决定(2026-08-21,Zhizhe):rung-1 用**未排除**的原切片
+
+分析摆在上面,选择是发**脏版**,即与 CBraMod/LaBraM 同一口径的原切片
+(`processed/tueg_slice`)。理由是可比性:对手的公开数字全部建立在未排除的
+全量 TUEG 上,单方面清洁会让我们的 TUAB/TUSZ 与注水后的数字对比。
+
+作业:`pt_duplex_base` 44058728(b2 h100,60k,duplex+rotation,d128/depth6,
+输出 `pretrain_runs_60k/pretrain-duplex_base/`)。
+
+**清洁切片仍然构建并保留**(`processed/tueg_slice_clean`,job 44058306),
+所以"泄漏能把分数抬高多少"随时可以补一个 60k 测出来(约 40 SU / 1h40m),
+附录 D 的调研与 §5.5 的测量数据也都保留 —— 论文里要不要用、怎么用,
+是后面的事,不是现在被关掉的门。
+
 ## 5.6 池子构成:六进六出,是特性不是缺陷
 
 全池采样占比(n 加权):TUEG 36.8%、TUSZ 17.0%、CHB-MIT 16.4%、TUAB 15.5%、
@@ -140,7 +154,7 @@ ADFD/APAVA/Mumtaz/EEGMat 各自 <1%,加进去和 FACED 一样是统计噪声;TUE
 b2 余额 ~147 SU,rung-1(duplex 骨干,base 档)约 110 SU —— **基本一发定音**,
 所以点火前置条件全部客观化:
 
-0. **干净 TUEG 切片落地**(§5.5,job 44047303)—— 脏切片上的 60k 是废的;
+0. ~~干净 TUEG 切片落地~~ —— **已决定用原切片**(见 §5.5 决定);
 1. FL 波落地,旗舰证伪证据链闭合(骨干定稿不再变);
 2. 7 个新语料 duplex scratch 数字回来,没有输十几个点的格子(有则先换名单);
 3. Mumtaz/EEGMat 处理完成并测过 scratch;
