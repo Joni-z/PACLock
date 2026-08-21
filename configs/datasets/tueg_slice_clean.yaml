@@ -1,0 +1,36 @@
+# TUEG pretraining slice, SUBJECT-CLEAN rebuild (2026-08-21).
+#
+# Supersedes configs/datasets/tueg_slice.yaml, whose only exclusion was TUEG's
+# own DOCS/sessions_tueg_common_with_tusz.list -- a SESSION list. Every TUH
+# downstream corpus is a subset of TUEG, and a session list leaves the same
+# patient's other sessions in the pool. Measured on the old slice (55% of the
+# pretraining sample budget): 34.8% of TUAB's test subjects, 39.5% of TUSZ's,
+# 39.3% of TUEP's, 28.1% of TUAR's, and 48.3% of TUEV's val subjects were
+# inside it. TUEV's official eval set was the only clean one (0%).
+#
+# The rebuild excludes, by subject, every subject of every split of the five
+# TUH downstream corpora. TUEG has ~14.7k eligible subjects against this
+# slice's ~5.2k, so the same 2000 h comes back from clean subjects: the fix
+# costs no data. Everything else -- filter recipe, window length, seed,
+# target hours -- is unchanged, so the clean slice differs from the old one
+# in exactly one respect.
+dataset: tueg_slice
+index_path: $PACLOCK_PROC/tueg_edf_index.txt
+exclude_list_path: $PACLOCK_DATA/tuh/tueg/DOCS/sessions_tueg_common_with_tusz.list
+exclude_subject_manifests:
+  - $PACLOCK_PROC/processed/tuab/manifest.json
+  - $PACLOCK_PROC/processed/tuev/manifest.json
+  - $PACLOCK_PROC/processed/tusz/manifest.json
+  - $PACLOCK_PROC/downstream_manifests/tuep/manifest.json
+  - $PACLOCK_PROC/downstream_manifests/tuar/manifest.json
+out_dir: $PACLOCK_PROC/processed/tueg_slice_clean
+
+target_hours: 2000
+avg_file_hours: 0.3813          # TUEG v2.0.2 AAREADME's own corpus-wide average
+seed: 0
+
+sample_rate: 200
+band: [0.3, 75.0]
+notch: 60.0
+window_sec: 10.0
+stride_sec: 10.0
