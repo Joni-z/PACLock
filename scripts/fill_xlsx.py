@@ -53,6 +53,9 @@ MODEL_ROW_LABEL = {
     # reported "no row label" in the notes sheet and the row stayed blank, which
     # is indistinguishable from "the runs are not finished yet".
     "paclock_v2": "PACLock (from scratch, full)",
+    # the structure-convergence backbone and its pretrained counterpart
+    "paclock_duplex": "PACLock (duplex)",
+    "paclock_duplex_pt": "PACLock (duplex, pretrained)",
     # Group D -- ours, pretrained on the 10-corpus pool (9 downstream corpora
     # + a 2,000h TUEG slice) for 60k steps, then finetuned with each corpus's
     # own deliverable config unchanged apart from the checkpoint, so each of
@@ -89,6 +92,9 @@ DATASET_TO_SHEET = {
     "tuab": "TUAB", "tuev": "TUEV", "tusz": "TUSZ", "chbmit": "CHB-MIT",
     "sleepedf": "Sleep-EDF", "isruc": "ISRUC", "physionet_mi": "PhysioNet-MI",
     "faced": "FACED", "bci_iv_2a": "BCI-IV-2a",
+    # 12-corpus slate additions (scripts/add_slate_sheets.py builds the frames)
+    "tuep": "TUEP", "tuar": "TUAR", "adfd": "ADFD",
+    "mumtaz": "Mumtaz2016", "eegmat": "EEGMat",
 }
 # our metric key -> the column header used in each sheet's upper (results) block
 METRIC_HEADER = {

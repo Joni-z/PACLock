@@ -1,0 +1,29 @@
+name: adfd-labram_scratch
+group: C
+dataset: adfd
+data_root: $PACLOCK_PROC/processed/adfd
+model: labram
+loader: labram
+pretrained: false
+optimizer: adamw
+lr: 0.0005
+weight_decay: 0.05
+epochs: 50
+batch_size: 64
+warmup_epochs: 5
+layer_decay: null
+scheduler: cosine
+grad_clip: null
+patience: 10
+num_workers: 16
+device: cuda
+eval_every_steps: 0
+num_classes: 3
+sample_rate: 200
+loss: cross_entropy
+seed: 0
+label_smoothing: 0.1
+max_hours: 22.5
+model_kwargs:
+  montage_mode: positional
+  target_len: 2000

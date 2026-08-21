@@ -101,6 +101,15 @@ DATASETS = {
     "tuev":         (TEN20, 5),
     "tusz":         (TEN20, 10),
     "chbmit":       (TEN20, 10),
+    # 12-corpus slate additions. The TUH corpora reuse TEN20 exactly as
+    # tuab/tuev/tusz do (upstream tolerates a bipolar montage on this
+    # positional list); adfd/mumtaz/eegmat ARE the 19-electrode 10-20
+    # set, so TEN20 is their montage rather than an approximation.
+    "tuep":         (TEN20, 10),
+    "tuar":         (TEN20, 5),
+    "adfd":         (TEN20, 10),
+    "mumtaz":       (TEN20, 5),
+    "eegmat":       (TEN20, 5),
 }
 
 
