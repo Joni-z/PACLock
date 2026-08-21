@@ -80,6 +80,8 @@ PRIMARY_METRIC = {
     "tuep": "auroc",
     "adfd": "balanced_acc",
     "apava": "auroc",
+    "mumtaz": "auroc",
+    "eegmat": "auroc",
 }
 
 

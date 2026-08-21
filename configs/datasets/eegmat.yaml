@@ -1,0 +1,34 @@
+# EEGMat (PhysioNet eegmat 1.0.0) -- rest vs mental arithmetic, recording-level.
+# Added 2026-08-21 for the 12-corpus slate; CBraMod's "MentalArithmetic" set.
+# Provider distributes 0.5-45 Hz filtered signals: band tops out at 45 and no
+# notch (50 Hz mains sits above the provider's low-pass).
+dataset: eegmat
+raw_root: $PACLOCK_DATA/eegmat
+out_dir: $PACLOCK_PROC/processed/eegmat
+num_classes: 2
+
+sample_rate: 200
+source_rate: 500
+band: [0.3, 45.0]
+notch: null
+window_sec: 5.0
+stride_sec: 5.0
+
+# canonical order; EDF labels below are matched case-insensitively
+channels: [FP1, FP2, F3, F4, C3, C4, P3, P4, O1, O2,
+           F7, F8, T3, T4, T5, T6, FZ, CZ, PZ]
+channels_edf: ["EEG Fp1", "EEG Fp2", "EEG F3", "EEG F4",
+               "EEG C3", "EEG C4", "EEG P3", "EEG P4",
+               "EEG O1", "EEG O2", "EEG F7", "EEG F8",
+               "EEG T3", "EEG T4", "EEG T5", "EEG T6",
+               "EEG Fz", "EEG Cz", "EEG Pz"]
+
+normalization: div100
+loss: bce_with_logits
+primary_metric: auroc
+report_metrics: [auroc, balanced_acc, pr_auc]
+
+split:
+  mode: sort_subject_ratio      # both classes per subject; no stratification
+  train_ratio: 0.7
+  val_ratio_of_rest: 0.5

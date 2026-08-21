@@ -1,0 +1,34 @@
+# Mumtaz2016 (figshare 4244171) -- MDD vs healthy, resting EC+EO only.
+# Added 2026-08-21 for the 12-corpus slate; CBraMod reference protocol with a
+# subject-disjoint split (theirs sorts files and leaks subjects across splits).
+dataset: mumtaz
+raw_root: $PACLOCK_DATA/mumtaz
+out_dir: $PACLOCK_PROC/processed/mumtaz
+num_classes: 2
+
+sample_rate: 200
+source_rate: 256
+band: [0.3, 75.0]
+notch: 50.0
+window_sec: 5.0
+stride_sec: 5.0
+conditions: [EC, EO]            # TASK recordings dropped (CBraMod precedent)
+
+# canonical order; EDF labels below are matched case-insensitively
+channels: [FP1, FP2, F3, F4, C3, C4, P3, P4, O1, O2,
+           F7, F8, T3, T4, T5, T6, FZ, CZ, PZ]
+channels_edf: ["EEG Fp1-LE", "EEG Fp2-LE", "EEG F3-LE", "EEG F4-LE",
+               "EEG C3-LE", "EEG C4-LE", "EEG P3-LE", "EEG P4-LE",
+               "EEG O1-LE", "EEG O2-LE", "EEG F7-LE", "EEG F8-LE",
+               "EEG T3-LE", "EEG T4-LE", "EEG T5-LE", "EEG T6-LE",
+               "EEG Fz-LE", "EEG Cz-LE", "EEG Pz-LE"]
+
+normalization: div100
+loss: bce_with_logits
+primary_metric: auroc
+report_metrics: [auroc, balanced_acc, pr_auc]
+
+split:
+  mode: sort_subject_ratio_stratified
+  train_ratio: 0.7
+  val_ratio_of_rest: 0.5
