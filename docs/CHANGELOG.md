@@ -461,3 +461,41 @@ BCI +0.012(n=3);TUAR −0.021(n=1)、Sleep-EDF −0.001(n=1)。
 * 登录节点 `/tmp` 有他人 `inspect.py` 遮蔽标准库(与 b2 同款坑)——脚本放
   repo 或私有目录,不放共享 `/tmp`。
 * 冗余的 squeue 监视 shell 清理:每波提交只留一个监视循环。
+
+
+---
+
+# 2026-08-21 → 22:rung-1 预训练、75 个 baseline 单元格、十二语料判决
+
+## 预训练
+
+* 配对行掩码实现(commit 7f12853):掩码打在 nb 个物理频带上,同时遮住融合行
+  与交互行;`scripts/verify_duplex_pretrain.py` 16/16,含 encoder 入口 hook
+  的泄漏测试。旧模式的 aux loss 与快照逐位相同。
+* `pt_duplex_base` 44058728 完成:60k 步,2:05:06,约 25 SU(h100)。
+  **发现 h100 计费 12/小时,l40s 24/小时** —— 此前预训练都跑在贵一倍的卡上。
+* `scripts/verify_duplex_transfer.py`:152 张量载入 / 5 排除 / 0 形状丢弃。
+  发现 duplex 比 pac_interaction 多一个 patch_len 相关张量
+  (`frontend.tokenizer`),线 A 的排除清单照抄会漏。
+* **结果为负**:下游 4/5 变差。见 FINDINGS 第五部分。
+
+## Baseline
+
+* 五个新语料 × 15 个 baseline = 75 个单元格,全部落地,**共 18 node-hours**。
+* 三个跨语料适配问题修复(EEGPT 通道表 / LaBraM positional / BIOT target_len),
+  见 PROTOCOLS 附录 E。
+* `scripts/add_slate_sheets.py` 建五张 sheet;`fill_xlsx.py` 注册五个数据集
+  与两个 duplex 行标签。
+
+## 数据
+
+* Mumtaz2016 与 EEGMat 预处理完成 —— 十二语料的数据侧全部齐备。
+* 干净 TUEG 切片(被试级排除)建好并保留,但**按决定不使用**:rung-1 用与
+  CBraMod/LaBraM 同口径的原切片。
+
+## 运维
+
+* 停掉 `FL_long`(22h50m 只产一个已无意义的旗舰格)。教训:一个 24 小时的
+  单目的任务 ≈ 五个语料全部 baseline 的成本。
+* 预算口径厘清:AMD 是 node-hours(整节点),b2 是 SU(单卡);
+  b2 单位价值约为 AMD 的 35 倍,baseline 不该搬去 b2。

@@ -66,19 +66,30 @@
 | gated_meanspatial 头 | **弃用** | γ 零初始化保底在真实训练中不成立:TUSZ 0.6595 vs mean 头 0.6950;BCI 0.4174 vs spatial 头 0.5583 |
 | 旗舰全家桶 | **弃用** | BCI 旗舰 0.3661,比单用 nb16+spatial 低 0.19 |
 
-## 4. 12 个下游数据集名单现状
+## 4. 12 个下游数据集名单现状(已全部实测,判决见 §4.9)
 
-名单已提名、**数据全部在手**,锁定要等实测数字齐:
+数据、baseline、我们的臂三者齐备。**每个语料都有 15 个 baseline 单元格**
+(A 组 5 轻量监督 + B 组 5 官方预训练 FM + C 组 5 同款 from-scratch),
+判决按"该语料 15 个 baseline 里的最好者"计。
 
-| 状态 | 数据集 | 说明 |
-|---|---|---|
-| 有实测、稳(3) | TUEV、TUSZ、CHB-MIT | duplex 赢 baseline +0.06~0.09 |
-| 有旧实测、duplex 确认臂在跑(3) | TUAB、ISRUC、Sleep-EDF | v2 三 seed 数字在矩阵;duplex 臂在 DUP_slate_long |
-| 数据就绪、首测排队(4) | TUEP、TUAR、ADFD、APAVA | duplex scratch 单 seed,380980/380981 |
-| loader 刚落地、预处理排队(2) | Mumtaz2016、EEGMat | `preprocessing/{mumtaz,eegmat}.py`(commit 4ca79f3),预处理任务 381007 |
+| 状态 | 数据集 |
+|---|---|
+| 赢(5) | TUSZ +0.088、CHB-MIT +0.086、TUEV +0.057、ADFD +0.034、TUEP +0.017 |
+| 平(1) | TUAB −0.004 |
+| 噪声边缘(2) | Sleep-EDF −0.017、Mumtaz −0.022(基准已饱和) |
+| 真输(3) | ISRUC −0.042、TUAR −0.086、**EEGMat −0.129** |
+| 建议除名(2) | **APAVA**(语料容量不足,见 §4.9)、**Mumtaz**(基准饱和,留着不输但证明不了东西) |
 
-候补池(哪个实测崩了就换):BCI-IV-2a、PhysioNet-MI(预训练翻盘才进)、
-TUSL、SHU-MI、SEED-VIG。FACED 已除名(15 个变体全在随机附近,原因未知)。
+候补池:TUSL、SHU-MI、SEED-VIG、BCI-IV-2a / PhysioNet-MI(需要预训练翻盘,
+而预训练目前是负贡献,见 §4.9)。FACED 已除名。
+
+新语料的 baseline 配方政策:整套从**任务形状相同的现有语料**原样复制
+(二分类照 CHB-MIT,三分类照 TUEV),只换语料事实(dataset / data_root /
+num_classes / loss),**一个超参都不 per-corpus 调**。baseline 的数字之所以
+有意义就在于"它跑的是自己发表的配方";没有参考时保守做法是沿用参考语料的
+epochs/patience,宁可让 baseline 训过头也不让它训不足。data_root 一律
+`processed/<ds>`:BIOT 和 LaBraM 只在 TUAB/TUEV(它们论文覆盖的语料)读
+各自的 `processed_biot` / `processed_labram`。
 
 协议注意:Mumtaz/EEGMat 对齐 CBraMod 的预处理(5 s 窗、19 通道 10-20),但
 划分改为我们的被试不相交标准 —— CBraMod 的 Mumtaz 划分按文件排序切,同一
@@ -138,12 +149,15 @@ encoder 是在 2nb 网格上按幅度目标训练的,而微调时三个 tokenize
 
 | 任务 | 内容 | 状态 |
 |---|---|---|
-| FL_long / FL_short(379887/379886) | 旗舰臂收尾(TUEV/TUSZ/CHB/PMI 旗舰;作用已变为补齐"全家桶失败"的证据链) | 跑了 ~10 h,CHB 臂有 24 h 撞墙风险 |
-| DUP_slate_long(380980) | tuab/tuep/isruc/sleepedf duplex scratch | 排队 |
-| DUP_slate_short(380981) | tuar/adfd/apava duplex scratch | 排队 |
-| prep_mumtaz_eegmat(381007) | 两语料预处理 | 排队 |
+| DPT_long(381359) | TUAB 的 duplex 预训练微调(TUSZ/CHB 已落) | 在跑 |
 
-全部落地后:12 数据集 × 预期表现判决表 → 骨干定稿写入本文件与 `FINDINGS.md`。
+其余全部落地。本轮(75 个 baseline 单元格 + 8 个我们的臂)实际消耗
+**18 node-hours** —— 远低于按 24 小时墙估算的 600,因为 baseline 本身很便宜
+(一个语料跑满 15 个中位 11.1 GPU-小时 ≈ 4.4 node-hours)。
+
+**已停**:`FL_long`(379887)跑满 22h50m 只为产出 CHB 旗舰格,而旗舰已在四个
+语料全部输给家族最好、结论闭合 —— 这一格不改变任何判断却占着整节点。
+**一个这样的任务 ≈ 五个语料全部 baseline 的总成本**,这是本轮最贵的教训。
 
 ## 5.5 预训练池的被试级泄漏(2026-08-21 发现并修复)
 
@@ -165,11 +179,12 @@ TUEG 切片此前只用 TUEG 自带的 `sessions_tueg_common_with_tusz.list` 排
 合格被试,照样选满 5,245 文件 ≈ 2000 h,泄漏检查 0。重建进
 `processed/tueg_slice_clean`(旧切片保留不覆盖,job 44047303)。
 
-**后果(必须处理)**:
-1. 已有的**预训练行**(TUAB/TUSZ/TUEP/TUAR)是用脏切片跑的,须用干净
-   checkpoint 重跑后才能进论文;**TUEV 的 test 恰好干净,该行成立**。
-2. 排除消融(§5「剔除 TUSZ/CHB-MIT 仍保留 66%/69% 收益」)的"非域内"臂
-   其实仍通过 TUEG 见到了 TUSZ 被试,该结论需在干净切片上重做。
+**后果 —— 已由决定关闭(2026-08-21,Zhizhe:"泄露一点都不用管")**:
+1. ~~预训练行须用干净 checkpoint 重跑~~ —— 采用与 CBraMod/LaBraM 同口径的
+   原切片,不重跑。测量数据(上表)与附录 D 的领域调研保留,只作记录。
+2. ~~排除消融需重做~~ —— 同上,不重做。
+   干净切片 `processed/tueg_slice_clean`(700,110 窗口 / 5,226 被试)已建好并
+   保留,若日后要量化泄漏值多少分,一次 60k(约 25 SU)即可,不必重新预处理。
 
 ### 决定(2026-08-21,Zhizhe):rung-1 用**未排除**的原切片
 
@@ -199,30 +214,35 @@ ADFD/APAVA/Mumtaz/EEGMat 各自 <1%,加进去和 FACED 一样是统计噪声;TUE
 (约 7%)是唯一有分量的,但把它留在池外反而更值钱——**论文里这就是一个
 自带的迁移实验:六个语料有域内训练数据,六个一点没有,两边都要赢。**
 
-## 6. 预训练点火条件
+## 6. rung-1 预训练:已执行,结果为负
 
-b2 余额 ~147 SU,rung-1(duplex 骨干,base 档)约 110 SU —— **基本一发定音**,
-所以点火前置条件全部客观化:
+`pt_duplex_base` 44058728(b2 h100,60k 步,duplex+rotation+nb8,d128/depth6,
+patch_len 200,10 语料全池 + 原 TUEG 切片,配对行掩码目标)。
+**2 小时 05 分,约 25 SU**;h100 计费 12/小时,是 l40s 的一半且更快。
+最终重建 loss:TUAB 0.0320 / TUEV 0.0357 / TUSZ 0.0351 / CHB 0.0382 ——
+在 base 参数量(1.671M)上补掉了 base→large 差距的约 70–75%。
 
-0. ~~干净 TUEG 切片落地~~ —— **已决定用原切片**(见 §5.5 决定);
-1. FL 波落地,旗舰证伪证据链闭合(骨干定稿不再变);
-2. 7 个新语料 duplex scratch 数字回来,没有输十几个点的格子(有则先换名单);
-3. Mumtaz/EEGMat 处理完成并测过 scratch;
-4. ~~配对行掩码~~ **已完成**(commit 7f12853,verify 16/16);
-5. Zhizhe 批准动用 SU。
+**但下游是负的**(§4.9):TUEV −0.020、TUSZ −0.029、CHB −0.050、ISRUC −0.017,
+只有 Sleep-EDF +0.021。checkpoint 迁移本身无误(`scripts/verify_duplex_transfer.py`
+16/16;每个 run 的日志记录 "loaded 152 pretrained backbone tensors")。
+
+配套代码已落地并验证:配对行掩码(commit 7f12853,`scripts/verify_duplex_pretrain.py`
+16/16)—— 掩码打在 8 个物理频带上,同时遮住该频带的融合行与交互行,否则可见的
+交互行会把重建目标直接递给模型。
 
 ## 7. 遗留问题
 
-1. FACED 完全学不动(已除名,但原因未知 —— CBraMod scratch 0.2469 我们只有
-   0.24 上下,其预训练 0.5509 说明差距主要在预训练)。
-2. duplex/hybrid 的**配对行掩码**未实现(预训练侧;守卫已在,见 §6.4)。
-3. BCI/PMI 的最终判定悬在预训练之后。
-4. 小语料过拟合调参波(aug/wd/patience)只有 PMI +0.021、FACED +0.018,
-   BCI 无改善 —— 调参不是出路,结构才是(已并入判决表)。
-5. `scripts/audit_runs.py` 只列 A 组 45 格;新语料的 A 组 baseline
-   (TUEP/TUAR/ADFD/APAVA/Mumtaz/EEGMat)是未来阶段,费用未排。
-
----
+1. **预训练是负贡献**(§4.9 结论 1)。这是当前最大的问题:一个"基础模型"论文
+   的前提是预训练要有用。机制假说:目标只问幅度,而前端的全部卖点是相位耦合;
+   且 patch_len 200→50 使三个 tokenizer 全部重初始化,encoder 收到没见过的
+   token 统计量。**未验证**。
+2. **三个真输的格子**:ISRUC −0.042、TUAR −0.086、EEGMat −0.129。EEGMat 属于
+   明令禁止的两位数亏损,失效模式同 BCI/FACED(训练集 1,199 窗口)。
+3. 睡眠分期(ISRUC / Sleep-EDF)系统性偏弱 —— 与"瞬态事件强、持续状态弱"的
+   机制解释一致,但没有针对性尝试过。
+4. FACED 完全学不动(已除名,原因未知)。
+5. 所有判决均为**单 seed**;进论文正表需 3 seed(硬规则 4),按语料分批补。
+6. 新语料的 A 组 baseline 已跑,但 `scripts/audit_runs.py` 仍只列旧的 45 格。
 
 ## 8. 集群规范
 
@@ -240,6 +260,16 @@ b2 余额 ~147 SU,rung-1(duplex 骨干,base 档)约 110 SU —— **基本一发
   任务里有 20 个是冗余 seed,占掉共享分区 21 个节点里的 14 个,把真正决定方向的
   那个实验堵在自己后面 —— 而它们确认的只是一条已知平均输给自身对照的路径上的
   +0.025。报数时 seed 数必须写出来。
+* **预算(共享账号,必须计划着用)**:AMD 计费单位是 **node-hours**,
+  1,107 / 2,250 已用。b2 是 **SU,按单卡**,h100 = 12 SU/小时,余额 696 SU
+  = 58 卡·小时。**换算:AMD 打包后最多 4,640 卡·小时,b2 只有 58** ——
+  b2 的单位价值约是 AMD 的 35 倍,只该用在 AMD 做不了的事(预训练)上。
+  把 baseline 搬去 b2 是反方向:五个语料的 baseline 在 AMD 约 25–30
+  node-hours(剩余额度 2.5%),在 b2 要 666 SU(几乎全部预算)。
+* **纪律**:任何单任务超过 8 小时,先问"这一格改变结论吗"。
+  实测参考:一个语料跑满 15 个 baseline 中位 11.1 GPU-小时 ≈ 4.4 node-hours;
+  TFM 是唯一大头(中位 3.0h,最长 16.8h)。
+* **存储比算力更紧**:1.6T / 1.9T,只剩 260G。加数据集会先撞存储墙。
 * **`mi2104x` 一个节点有 4 块 GPU,而 `run.slurm`/`train.slurm` 用 `--exclusive`
   会整节点独占** —— 单任务提交等于浪费 3/4 算力。诊断实验用
   `slurm/configs_packed.slurm`(一节点 4 个不同配置,单 seed);矩阵格子用

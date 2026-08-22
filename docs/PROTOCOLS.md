@@ -665,3 +665,40 @@ TUEG 切片在 TUAB 上的重叠实测为 34.8%"是别人给不出的一句话�
 
 脏切片(`processed/tueg_slice`)**保留未删**:若要量化"泄漏能把 TUAB 抬高
 多少",多跑一个 60k 即可,那是论文的一节而不是成本。
+
+
+---
+
+# 附录 E:12 语料名单新增的五个语料(2026-08-19 → 22)
+
+| 语料 | 来源 | 通道 / 窗口 | 划分 | 主指标 | 规模(train/val/test 窗口) |
+|---|---|---|---|---|---|
+| TUEP v2.0.1 | TUH,`01_tcp_ar` | 16 bipolar / 10 s | 被试不相交排序,按标签分层 | AUROC | 136,525 / 23,808 / 24,406 |
+| TUAR | TUH,3 类伪迹 | 16 bipolar / 5 s | 同上 | κ | 20,650 / 5,046 / 1,936 |
+| ADFD | OpenNeuro ds004504,Medformer 预处理版 | 19 ref / 10 s | 被试不相交,按类分层 | balanced_acc | 4,895 / 942 / 1,101 |
+| APAVA | Medformer 预处理版 | 16 / 10 s | 同上 | AUROC | 484 / 58 / **46** |
+| Mumtaz2016 | figshare 4244171 | 19 ref / 5 s | 被试不相交,按诊断分层 | AUROC | 4,526 / — / 1,303 |
+| EEGMat | PhysioNet eegmat 1.0.0 | 19 ref / 5 s | 被试不相交(每人两类) | AUROC | 1,199 / 240 / 268 |
+
+要点:
+
+* **ADFD 的数组是伏特**,配置里用 `unit_scale: 1e6` 显式换算,不埋在代码里。
+* **Mumtaz 只用 EC/EO 静息**,丢弃 TASK —— CBraMod 的先例;但 **划分不抄**:
+  CBraMod 按文件排序切,同一被试的 EC/EO 会跨 train/test。
+* **EEGMat 的标签就是文件后缀**(`_1` 静息 / `_2` 心算),每个被试两类都有,
+  故无需分层。供方已做 0.5–45 Hz 滤波,所以带通取 [0.3, 45] 且不加陷波。
+  训练集类别 899:300,是因为静息录 180 秒而心算 60 秒 —— 协议本身,不是错误。
+* **APAVA 不适合作为评测语料**:全语料 22 个被试、588 个窗口,测试集 3 人 /
+  46 窗口 / 类别 2:44。建议除名(见 `FINDINGS.md` 5.4)。
+
+## baseline 适配:三个跨语料路径必须显式打开
+
+新语料跑 15 个 baseline 时发现(`scripts/check_new_baselines.py`,每配置一个
+子进程 —— 单进程不行,EEGPT 的 adapter 把 `vendor/eegpt` 放进 sys.path 后其
+顶层 `models` 包会遮蔽 vendor/tfm 的,产生 6 个假的 ModuleNotFoundError):
+
+1. **EEGPT** 需要 per-corpus 通道表。`TEN20` 恰好就是 19 电极 10-20 集,
+   所以是 adfd/mumtaz/eegmat 的**原生**蒙太奇;TUH 语料照 tuab/tuev 的先例复用。
+2. **LaBraM** 的电极索引路径要 `labram_native` 的 23 通道蒙太奇,只有 TUAB/TUEV
+   有;其余语料必须 `montage_mode: positional` + `target_len`。
+3. **BIOT prest16** 按 16 通道构建,19 通道语料需要 `target_len` 才走跨语料路径。
