@@ -22,4 +22,4 @@ seed: 0
 max_hours: 22.5
 model_kwargs:
   dropout: 0.1
-label_smoothing: 0.0
+label_smoothing: 0.1
