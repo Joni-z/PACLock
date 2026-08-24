@@ -152,29 +152,6 @@ class TriAxialPACLock(nn.Module):
             self.aux_mask_ratio = cfg.get("aux_mask_ratio", 0.5)
             self.mask_token = nn.Parameter(torch.zeros(d))
             self.recon = nn.Sequential(nn.Linear(d, d), nn.GELU(), nn.Linear(d, 1))
-            # What the masked cells are asked to predict:
-            #   amp           -- log mean amplitude, raw scale (the original)
-            #   band_norm     -- same target, standardized PER BAND: an l2 loss
-            #                    on raw log-amplitudes is dominated by the
-            #                    high-variance slow bands (the 1/f aperiodic
-            #                    component), which starves the fast oscillatory
-            #                    structure downstream tasks need and biases the
-            #                    representation toward subject identity
-            #                    (arXiv:2605.26434; FAME arXiv:2608.01898)
-            #   band_norm_pac -- band_norm PLUS the masked band's coupling
-            #                    column: for masked amplitude-band j, predict
-            #                    the complex PAC entries Z[i, j] against every
-            #                    VISIBLE phase-band i -- the pretraining task
-            #                    becomes the tokenizer's native quantity
-            self.aux_target = cfg.get("aux_target", "amp")
-            if self.aux_target not in ("amp", "band_norm", "band_norm_pac"):
-                raise ValueError(f"aux_target must be amp/band_norm/"
-                                 f"band_norm_pac, got {self.aux_target!r}")
-            self.aux_pac_weight = cfg.get("aux_pac_weight", 1.0)
-            if self.aux_target == "band_norm_pac":
-                self.recon_pac = nn.Sequential(
-                    nn.Linear(d, d), nn.GELU(),
-                    nn.Linear(d, 2 * cfg["n_bands"]))
 
     def crossfreq_aux_loss(self, x: torch.Tensor) -> torch.Tensor:
         """Masked band-amplitude reconstruction as a supervised auxiliary.
@@ -185,21 +162,9 @@ class TriAxialPACLock(nn.Module):
         the classifier uses. No augmentation here -- the reconstruction target
         must stay clean. Only called during training when aux_recon_weight > 0.
         """
-        want_pac = getattr(self, "aux_target", "amp") == "band_norm_pac"
-        restore = False
-        if want_pac and not self.frontend.return_pac_vector:
-            self.frontend.return_pac_vector = True
-            restore = True
         frontend_out = self.frontend(x, return_amp_target=True)
-        if restore:
-            self.frontend.return_pac_vector = False
-        pac_target_src = None
-        if len(frontend_out) == 5:
-            tokens, coupling, band_hz, amp_target, pv = frontend_out
-            pac_target_src = pv if want_pac else None
-            # the encoder's phase mixer is the only consumer of the complex
-            # vector; every other mixer historically received None
-            pac_vector = pv if self.freq_mixer == "phase" else None
+        if self.freq_mixer == "phase":
+            tokens, coupling, band_hz, amp_target, pac_vector = frontend_out
         else:
             tokens, coupling, band_hz, amp_target = frontend_out
             pac_vector = None
@@ -240,33 +205,7 @@ class TriAxialPACLock(nn.Module):
         # each masked band's amplitude is predicted from its fused/raw row --
         # the first nb_phys grid rows in every mode.
         pred = self.recon(h[:, :, :nb_phys]).squeeze(-1)    # (B,C,nb_phys,P)
-        target = amp_target.detach()
-        if getattr(self, "aux_target", "amp") != "amp":
-            # per-band standardization with batch statistics -- equal reward
-            # for every band's structure instead of an l2 race the slow bands
-            # always win (see aux_target comment in __init__)
-            mu = target.mean(dim=(0, 1, 3), keepdim=True)
-            sd = target.std(dim=(0, 1, 3), keepdim=True).clamp_min(1e-6)
-            target = (target - mu) / sd
-        loss = F.mse_loss(pred[pmask], target[pmask])
-        if pac_target_src is not None:
-            # Z is (B, C, P, i, j) complex, i = phase band, j = amplitude band
-            # (patch_pac_vector's contract). Supervise entry (i, j) only where
-            # band j is MASKED and band i is VISIBLE: a masked phase band
-            # makes the entry unpredictable from the input -- noise, not
-            # leakage -- so it is excluded rather than averaged in.
-            Z = pac_target_src.detach()
-            tgt = torch.stack([Z.real, Z.imag], dim=-1)      # (B,C,P,i,j,2)
-            tgt = tgt.permute(0, 1, 4, 2, 3, 5)              # (B,C,j,P,i,2)
-            pp = self.recon_pac(h[:, :, :nb_phys])           # (B,C,j,P,2nb)
-            pp = pp.reshape(*pp.shape[:-1], nb_phys, 2)      # (B,C,j,P,i,2)
-            w = (pmask.unsqueeze(-1)
-                 & (~pmask).permute(0, 1, 3, 2).unsqueeze(2))  # (B,C,j,P,i)
-            w = w.unsqueeze(-1).to(pp.dtype)
-            denom = w.sum().clamp_min(1.0)
-            loss = loss + self.aux_pac_weight * (
-                ((pp - tgt) ** 2) * w).sum() / denom
-        return loss
+        return F.mse_loss(pred[pmask], amp_target.detach()[pmask])
 
     def forward(self, x: torch.Tensor, phase_mode: str = "normal") -> torch.Tensor:
         x = self.augment(x)
