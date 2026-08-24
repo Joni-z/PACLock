@@ -63,8 +63,7 @@ RETIRED = [
 # (group label, [(variant_key, row label, static note or "")])
 GROUPS = [
     ("A0 经典特征", [
-        ("feat_lr",  "手工特征+LogReg", "bandpower+Hjorth+谱熵；批评文献标配"),
-        ("feat_lda", "手工特征+LDA", ""),
+        ("feat_best", "手工特征 (LR/LDA 取优)", "bandpower+Hjorth+谱熵；四道门第 1 门"),
     ]),
     ("A 轻量监督", [
         ("sparcnet", "SPaRCNet", ""),
@@ -83,14 +82,13 @@ GROUPS = [
         ("tfm_pretrained", "TFM-Tokenizer", "tokenizer 直接对手"),
         ("reve_pretrained", "REVE-Base (pretrained)", "新增；HF 权重"),
         ("csbrain_pretrained", "CSBrain (pretrained)", "新增；GDrive 权重"),
-        ("brainomni_pretrained", "BrainOmni (pretrained)", "新增；HF 权重"),
     ]),
     ("C FM · 同 pipeline scratch", [
         ("biot_scratch", "BIOT (scratch)", ""),
         ("labram_scratch", "LaBraM-Base (scratch)", ""),
         ("cbramod_scratch", "CBraMod (scratch)", ""),
-        ("eegpt_scratch", "EEGPT (scratch)", ""),
-        ("tfm_scratch", "TFM-Tokenizer (scratch)", ""),
+        ("eegpt_scratch", "EEGPT (scratch)", "不新排；仅新语料已有数字"),
+        ("tfm_scratch", "TFM-Tokenizer (scratch)", "不新排；仅新语料已有数字"),
     ]),
     ("D PACLock", [
         ("paclock_duplex", "PACLock (duplex, scratch)", ""),
@@ -115,7 +113,7 @@ REFS = {
     "TUAB": [("CodeBrain (ICLR'26, 自报)", {"Balanced Acc": 0.8294}),
              ("Uni-NTFM-large (ICLR'26, 自报)", {"Balanced Acc": 0.8197}),
              ("REVE-Base (原论文自报)", {"Balanced Acc": 0.8315})],
-    "CAUEEG": [("CEEDNet (数据集作者, NeuroImage'23)", {})],
+    "CAUEEG": [("CEEDNet (作者自报, 同官方划分可直接比)", {})],
 }
 
 
@@ -178,7 +176,8 @@ def build_readme(ws):
         ("A  轻量监督（BIOT 配方五件套 + 调参 EEGNet/Conformer；调参需公开搜索预算）", False),
         ("B  FM · 官方预训练权重（复现门：先在重叠语料复现其发表数字）", False),
         ("C  同 pipeline from-scratch（与 B 同架构，剥离预训练贡献）", False),
-        ("缓议：MOMENT 等通用时序 FM 对照 —— 不承重于 tokenizer 主张，留作 rebuttal 期选项", False),
+        ("缓议：MOMENT（通用时序 FM）、BrainOmni、CEEDNet 复现、EEGPT/TFM 老语料 scratch —— 不承重或可用发表数替代", False),
+        ("新 baseline（A0/调参/REVE/CSBrain）只排核心 9 语料；边界 2 语料用既有行", False),
         ("D  PACLock（scratch / 预训练 v2 / 冻结探针 vs 随机初始化探针 —— 四道门第 4 门）", False),
         ("E  参考值（灰）：无公开权重或异管线论文自报数，只作上下文", False),
         ("", False),

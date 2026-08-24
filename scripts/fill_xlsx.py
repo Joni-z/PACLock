@@ -60,14 +60,12 @@ MODEL_ROW_LABEL = {
     "paclock_probe_v2": "PACLock (冻结探针, v2)",
     "paclock_probe_rand": "PACLock (冻结探针, 随机初始化)",
     # classical-feature and tuned-supervised baselines (2026-08-24 plan)
-    "feat_lr": "手工特征+LogReg",
-    "feat_lda": "手工特征+LDA",
+    "feat_best": "手工特征 (LR/LDA 取优)",
     "eegnet": "EEGNet (调参)",
     "eegconformer": "EEGConformer (调参)",
     # new foundation-model rows
     "reve_pretrained": "REVE-Base (pretrained)",
     "csbrain_pretrained": "CSBrain (pretrained)",
-    "brainomni_pretrained": "BrainOmni (pretrained)",
     "eegpt_scratch": "EEGPT (scratch)",
     "tfm_scratch": "TFM-Tokenizer (scratch)",
     # Group D -- ours, pretrained on the 10-corpus pool (9 downstream corpora
