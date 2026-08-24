@@ -169,6 +169,20 @@ def main():
               f"windows for checkpoint selection (test split untouched)", flush=True)
 
     model = build_model(cfg, info["input_shape"]).to(device)
+    if cfg.get("freeze_backbone"):
+        # Linear-probe protocol: the (pretrained or control) backbone stays
+        # fixed and only the fresh corpus-specific parts train -- head,
+        # spatial_pe, montage where configured. The freeze set is exactly the
+        # checkpoint-transferable set (_BACKBONE_PREFIXES), so a probe on a
+        # random-init model freezes the same tensors and the three-way
+        # comparison (v2 / v1 / random) moves a single variable.
+        n_frozen = 0
+        for pname, prm in model.named_parameters():
+            if pname.startswith(("frontend.", "band_pe.", "encoder.")):
+                prm.requires_grad_(False)
+                n_frozen += 1
+        print(f"  freeze_backbone: {n_frozen} tensors frozen; "
+              f"training head/spatial_pe only", flush=True)
     if cfg.get("compile"):
         # The tri-axial block is a chain of permute/reshape/LayerNorm around three
         # short attentions, so most of its kernels move memory rather than do
