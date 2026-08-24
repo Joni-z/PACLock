@@ -1,0 +1,25 @@
+name: tuev-csbrain_pretrained
+group: B
+dataset: tuev
+data_root: $PACLOCK_PROC/processed/tuev
+model: csbrain
+pretrained: true
+num_classes: 6
+sample_rate: 200
+loss: cross_entropy
+optimizer: adamw
+lr: 0.0001
+weight_decay: 0.01
+scheduler: cosine
+grad_clip: 1.0
+epochs: 50
+batch_size: 64
+patience: 10
+eval_every_steps: 0
+num_workers: 8
+device: cuda
+seed: 0
+max_hours: 22.5
+model_kwargs:
+  dropout: 0.1
+label_smoothing: 0.0

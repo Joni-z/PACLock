@@ -30,6 +30,15 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
     if name in LIGHT_REGISTRY:
         return LIGHT_REGISTRY[name](**kwargs)
 
+    if name == "csbrain":
+        # Group B: CSBrain (NeurIPS 2025 spotlight), official code + released
+        # weights; pretrained=False would be a group-C row (not scheduled).
+        from .foundation.csbrain_adapter import build_csbrain
+        return build_csbrain(cfg["num_classes"], C, T, cfg.get("dataset"),
+                             pretrained=cfg.get("pretrained", True),
+                             dropout=mk.get("dropout", 0.1),
+                             n_layer=mk.get("n_layer", 12))
+
     if name == "biot":
         # Group B/C: official BIOT code and, for group B, official weights.
         # checkpoint=None is the from-scratch (group C / "Vanilla BIOT") row.
