@@ -1,0 +1,25 @@
+# CAUEEG dementia benchmark (Kim et al., NeuroImage 2023) -- 外部韩国队列.
+# 作者官方 no-overlap 划分（官方且被试不相交）。
+dataset: caueeg
+raw_root: $PACLOCK_DATA/caueeg/caueeg-dataset
+out_dir: $PACLOCK_PROC/processed/caueeg
+task_json: dementia-no-overlap.json
+num_classes: 3
+
+sample_rate: 200
+band: [0.3, 75.0]
+notch: 60.0               # Korean mains
+window_sec: 10.0
+stride_sec: 10.0
+
+channels: [FP1, FP2, F3, F4, C3, C4, P3, P4, O1, O2,
+           F7, F8, T3, T4, T5, T6, FZ, CZ, PZ]
+channels_edf: [Fp1-AVG, Fp2-AVG, F3-AVG, F4-AVG, C3-AVG, C4-AVG, P3-AVG,
+               P4-AVG, O1-AVG, O2-AVG, F7-AVG, F8-AVG, T3-AVG, T4-AVG,
+               T5-AVG, T6-AVG, FZ-AVG, CZ-AVG, PZ-AVG]
+
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+primary_metric: balanced_acc
+report_metrics: [balanced_acc, cohen_kappa, weighted_f1]

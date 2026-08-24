@@ -5,6 +5,8 @@ from __future__ import annotations
 import torch.nn as nn
 
 from .baselines.light_supervised import REGISTRY as LIGHT_REGISTRY
+from .baselines.braindecode_models import REGISTRY as BD_REGISTRY
+LIGHT_REGISTRY = {**LIGHT_REGISTRY, **BD_REGISTRY}
 from ..paths import expand
 
 

@@ -1,0 +1,24 @@
+# Siena Scalp EEG v1.0.0 (PhysioNet) -- 外部发作队列, CHB-MIT 的任务形状.
+dataset: siena
+raw_root: $PACLOCK_DATA/siena/siena-scalp-eeg-database-1.0.0
+out_dir: $PACLOCK_PROC/processed/siena
+num_classes: 2
+
+sample_rate: 200
+band: [0.3, 75.0]
+notch: 50.0               # Italian mains
+window_sec: 10.0
+stride_sec: 10.0
+
+channels: [FP1, FP2, F3, F4, C3, C4, P3, P4, O1, O2,
+           F7, F8, T3, T4, T5, T6, FZ, CZ, PZ]
+
+normalization: div100
+loss: bce_with_logits
+primary_metric: pr_auc
+report_metrics: [pr_auc, auroc, balanced_acc]
+
+split:
+  mode: sort_subject_ratio
+  train_ratio: 0.7
+  val_ratio_of_rest: 0.5

@@ -82,6 +82,9 @@ PRIMARY_METRIC = {
     "apava": "auroc",
     "mumtaz": "auroc",
     "eegmat": "auroc",
+    "iiic": "cohen_kappa",
+    "caueeg": "balanced_acc",
+    "siena": "pr_auc",
 }
 
 

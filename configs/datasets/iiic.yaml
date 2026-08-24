@@ -1,0 +1,21 @@
+# IIIC (BDSP SPaRCNet prepared release) -- ICU harmful brain activity, 6 类.
+# 通道顺序已对照作者 runSPaRCNet.py 验证 = 本 benchmark 的 _BIPOLAR_16 双香蕉序。
+dataset: iiic
+raw_root: $PACLOCK_DATA/iiic/sparcnet_data
+out_dir: $PACLOCK_PROC/processed/iiic
+num_classes: 6
+
+sample_rate: 200
+window_sec: 10.0          # release windows are pre-cut (n, 16, 2000)
+source_filter: "release: 0.5-40 Hz band + 60 Hz notch already applied"
+
+normalization: div100
+loss: cross_entropy
+label_smoothing: 0.1
+primary_metric: cohen_kappa
+report_metrics: [cohen_kappa, balanced_acc, weighted_f1]
+
+split:
+  mode: sort_subject_ratio       # patient = key prefix; release test has no labels
+  train_ratio: 0.7
+  val_ratio_of_rest: 0.5

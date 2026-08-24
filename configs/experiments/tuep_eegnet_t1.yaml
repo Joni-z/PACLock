@@ -1,0 +1,23 @@
+dataset: tuep
+data_root: $PACLOCK_PROC/processed/tuep
+num_classes: 2
+sample_rate: 200
+loss: bce_with_logits
+epochs: 20
+batch_size: 512
+patience: 8
+eval_every_steps: 200
+num_workers: 16
+device: cuda
+name: tuep-eegnet_t1
+group: A
+model: eegnet
+optimizer: adamw
+lr: 0.001
+weight_decay: 1.0e-05
+scheduler: cosine
+grad_clip: 1.0
+seed: 0
+max_hours: 22.5
+model_kwargs:
+  dropout: 0.25

@@ -204,6 +204,10 @@ _BY_DATASET = {
     "isruc": _ISRUC_6,
     "mumtaz": _MONO_19,
     "eegmat": _MONO_19,
+    # IIIC: order verified against runSPaRCNet.py = the double-banana order
+    "iiic": _BIPOLAR_16,
+    "caueeg": _MONO_19,
+    "siena": _MONO_19,
 }
 
 COORD_DIM = 6      # bipolar montages; referential ones are 3 (see above)
