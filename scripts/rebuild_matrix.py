@@ -92,14 +92,11 @@ GROUPS = [
         ("eegpt_scratch", "EEGPT (scratch)", ""),
         ("tfm_scratch", "TFM-Tokenizer (scratch)", ""),
     ]),
-    ("D 对照", [
-        ("moment", "MOMENT (通用时序 FM)", "EEG 特异性对照"),
-        ("paclock_randinit", "PACLock (随机初始化)", "四道门第 4 门"),
-    ]),
-    ("E PACLock", [
+    ("D PACLock", [
         ("paclock_duplex", "PACLock (duplex, scratch)", ""),
         ("paclock_duplex_pt2", "PACLock (duplex, 预训练 v2)", "band_norm_pac 目标"),
         ("paclock_probe_v2", "PACLock (冻结探针, v2)", "patch_len 200；表征质量协议"),
+        ("paclock_probe_rand", "PACLock (冻结探针, 随机初始化)", "四道门第 4 门对照"),
     ]),
 ]
 
@@ -152,7 +149,7 @@ def build_sheet(ws, title, metrics, note):
     refs = REFS.get(ws.title)
     if refs:
         r += 1
-        ws.cell(row=r, column=1, value="F 参考值（论文自报，不同管线，不可直接比）").font = GREY
+        ws.cell(row=r, column=1, value="E 参考值（论文自报，不同管线，不可直接比）").font = GREY
         for name, vals in refs:
             ws.cell(row=r, column=2, value=name).font = GREY
             for m, v in vals.items():
@@ -181,9 +178,9 @@ def build_readme(ws):
         ("A  轻量监督（BIOT 配方五件套 + 调参 EEGNet/Conformer；调参需公开搜索预算）", False),
         ("B  FM · 官方预训练权重（复现门：先在重叠语料复现其发表数字）", False),
         ("C  同 pipeline from-scratch（与 B 同架构，剥离预训练贡献）", False),
-        ("D  对照（通用时序 FM；随机初始化同架构 —— 四道归因门第 4 门）", False),
-        ("E  PACLock（scratch / 预训练 v2 / 冻结探针）", False),
-        ("F  参考值（灰）：无公开权重或异管线论文自报数，只作上下文", False),
+        ("缓议：MOMENT 等通用时序 FM 对照 —— 不承重于 tokenizer 主张，留作 rebuttal 期选项", False),
+        ("D  PACLock（scratch / 预训练 v2 / 冻结探针 vs 随机初始化探针 —— 四道门第 4 门）", False),
+        ("E  参考值（灰）：无公开权重或异管线论文自报数，只作上下文", False),
         ("", False),
         ("硬规则", True),
         ("1. B 组任一模型进表前须先复现其发表数字（噪声内）", False),

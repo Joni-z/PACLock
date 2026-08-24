@@ -58,7 +58,7 @@ MODEL_ROW_LABEL = {
     "paclock_duplex_pt": "PACLock (duplex, pretrained)",   # v1 rows retired
     "paclock_duplex_pt2": "PACLock (duplex, 预训练 v2)",
     "paclock_probe_v2": "PACLock (冻结探针, v2)",
-    "paclock_randinit": "PACLock (随机初始化)",
+    "paclock_probe_rand": "PACLock (冻结探针, 随机初始化)",
     # classical-feature and tuned-supervised baselines (2026-08-24 plan)
     "feat_lr": "手工特征+LogReg",
     "feat_lda": "手工特征+LDA",
@@ -70,7 +70,6 @@ MODEL_ROW_LABEL = {
     "brainomni_pretrained": "BrainOmni (pretrained)",
     "eegpt_scratch": "EEGPT (scratch)",
     "tfm_scratch": "TFM-Tokenizer (scratch)",
-    "moment": "MOMENT (通用时序 FM)",
     # Group D -- ours, pretrained on the 10-corpus pool (9 downstream corpora
     # + a 2,000h TUEG slice) for 60k steps, then finetuned with each corpus's
     # own deliverable config unchanged apart from the checkpoint, so each of
