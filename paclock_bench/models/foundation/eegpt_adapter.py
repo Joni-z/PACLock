@@ -110,6 +110,8 @@ DATASETS = {
     "adfd":         (TEN20, 10),
     "mumtaz":       (TEN20, 5),
     "eegmat":       (TEN20, 5),
+    "iiic":         (TEN20, 10),
+    "caueeg":       (TEN20, 10),
 }
 
 
