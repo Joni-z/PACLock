@@ -54,8 +54,23 @@ MODEL_ROW_LABEL = {
     # is indistinguishable from "the runs are not finished yet".
     "paclock_v2": "PACLock (from scratch, full)",
     # the structure-convergence backbone and its pretrained counterpart
-    "paclock_duplex": "PACLock (duplex)",
-    "paclock_duplex_pt": "PACLock (duplex, pretrained)",
+    "paclock_duplex": "PACLock (duplex, scratch)",
+    "paclock_duplex_pt": "PACLock (duplex, pretrained)",   # v1 rows retired
+    "paclock_duplex_pt2": "PACLock (duplex, 预训练 v2)",
+    "paclock_probe_v2": "PACLock (冻结探针, v2)",
+    "paclock_randinit": "PACLock (随机初始化)",
+    # classical-feature and tuned-supervised baselines (2026-08-24 plan)
+    "feat_lr": "手工特征+LogReg",
+    "feat_lda": "手工特征+LDA",
+    "eegnet": "EEGNet (调参)",
+    "eegconformer": "EEGConformer (调参)",
+    # new foundation-model rows
+    "reve_pretrained": "REVE-Base (pretrained)",
+    "csbrain_pretrained": "CSBrain (pretrained)",
+    "brainomni_pretrained": "BrainOmni (pretrained)",
+    "eegpt_scratch": "EEGPT (scratch)",
+    "tfm_scratch": "TFM-Tokenizer (scratch)",
+    "moment": "MOMENT (通用时序 FM)",
     # Group D -- ours, pretrained on the 10-corpus pool (9 downstream corpora
     # + a 2,000h TUEG slice) for 60k steps, then finetuned with each corpus's
     # own deliverable config unchanged apart from the checkpoint, so each of
@@ -69,7 +84,8 @@ MODEL_ROW_LABEL = {
 # Listed explicitly rather than silently skipped, since "no row" and "we forgot
 # to map the label" look identical in the output otherwise.
 NO_ROW_IN_WORKBOOK = {
-    "eegpt_scratch", "tfm_scratch",
+    # eegpt_scratch / tfm_scratch moved OUT of this set 2026-08-24: the
+    # rebuilt workbook (scripts/rebuild_matrix.py) carries rows for them.
     # group D: protocol-variant and pilot arms. They belong in the sensitivity
     # analysis, not the main matrix, so having no row is correct -- but they must
     # be listed, because "deliberately has no row" and "we forgot to map the
@@ -95,6 +111,8 @@ DATASET_TO_SHEET = {
     # 12-corpus slate additions (scripts/add_slate_sheets.py builds the frames)
     "tuep": "TUEP", "tuar": "TUAR", "adfd": "ADFD",
     "mumtaz": "Mumtaz2016", "eegmat": "EEGMat",
+    # 2026-08-24 slate additions (scripts/rebuild_matrix.py)
+    "iiic": "IIIC", "siena": "Siena", "caueeg": "CAUEEG",
 }
 # our metric key -> the column header used in each sheet's upper (results) block
 METRIC_HEADER = {
@@ -182,6 +200,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--xlsx", required=True)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--allow-single-seed", action="store_true",
+                    help="enter <3-seed cells as italic grey 'x.xxxx (n seed)' "
+                         "instead of withholding them (rule 4 still governs "
+                         "the paper table)")
     ap.add_argument("--runs", default="runs")
     args = ap.parse_args()
 
@@ -241,10 +263,33 @@ def main():
         vals_primary = [r["test"][key] for r in rs]
 
         if len(rs) < 3:
-            n_withheld += 1
-            notes.append([ds, model, str(seeds), "withheld (rule 4)",
-                          f"only {len(rs)} seeds; primary {key} "
-                          f"{np.mean(vals_primary):.4f}"])
+            if not args.allow_single_seed:
+                n_withheld += 1
+                notes.append([ds, model, str(seeds), "withheld (rule 4)",
+                              f"only {len(rs)} seeds; primary {key} "
+                              f"{np.mean(vals_primary):.4f}"])
+                continue
+            # exploration mode: enter the number but make its status visible
+            # in the cell itself -- italic grey with an explicit seed count.
+            # Hard rule 4 still governs the paper table; this only keeps the
+            # workbook current between confirmation waves.
+            from openpyxl.styles import Font as _Font
+            grey = _Font(italic=True, color="808080")
+            wrote = []
+            for mkey, header in METRIC_HEADER.items():
+                if mkey not in rs[0]["test"] or header not in cols:
+                    continue
+                v = [r["test"][mkey] for r in rs]
+                cell = ws.cell(row=target, column=cols[header],
+                               value=f"{np.mean(v):.4f} ({len(rs)} seed)")
+                cell.font = grey
+                wrote.append(header)
+            meas = rs[0].get("n_params_M")
+            if param_col and isinstance(meas, (int, float)):
+                ws.cell(row=target, column=param_col, value=round(meas, 2))
+            n_filled += 1
+            notes.append([ds, model, str(seeds), "filled (single-seed, grey)",
+                          f"{key} " + ", ".join(f"{r['test'][key]:.4f}" for r in rs)])
             continue
         if bad:
             n_withheld += 1
