@@ -30,6 +30,14 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
     if name in LIGHT_REGISTRY:
         return LIGHT_REGISTRY[name](**kwargs)
 
+    if name == "reve":
+        # Group B: REVE (NeurIPS 2025), official weights via HF snapshot;
+        # positions from their released bank, bipolar = midpoint (their rule).
+        from .foundation.reve_adapter import build_reve
+        return build_reve(cfg["num_classes"], C, T, cfg.get("dataset"),
+                          pretrained=cfg.get("pretrained", True),
+                          dropout=mk.get("dropout", 0.15))
+
     if name == "csbrain":
         # Group B: CSBrain (NeurIPS 2025 spotlight), official code + released
         # weights; pretrained=False would be a group-C row (not scheduled).
