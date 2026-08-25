@@ -112,6 +112,7 @@ DATASETS = {
     "eegmat":       (TEN20, 5),
     "iiic":         (TEN20, 10),
     "caueeg":       (TEN20, 10),
+    "siena":        (TEN20, 10),
 }
 
 
