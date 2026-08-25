@@ -1,0 +1,28 @@
+dataset: tuev
+data_root: $PACLOCK_PROC/processed/tuev
+num_classes: 6
+sample_rate: 200
+loss: cross_entropy
+label_smoothing: 0.1
+epochs: 100
+batch_size: 512
+patience: 15
+eval_every_steps: 0
+num_workers: 16
+device: cuda
+name: tuev-eegnet
+group: A
+model: eegnet
+optimizer: adamw
+lr: 0.001
+weight_decay: 1.0e-05
+scheduler: cosine
+grad_clip: 1.0
+seed: 0
+max_hours: 22.5
+model_kwargs:
+  dropout: 0.25
+tuned_from:
+  grid: lr{1e-3,3e-4} x dropout{0.25,0.5}
+  winner: t1
+  selected_by: best_val seed0
