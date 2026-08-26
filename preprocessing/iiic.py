@@ -16,9 +16,17 @@ What this script adds on top of the release:
     a duplicated key crossing a split boundary would be leakage;
   * label = majority expert vote (argmax of the per-class vote counts);
     tied rows are excluded and counted in the manifest;
-  * subject-disjoint sorted split by patient (key prefix ``abn10108_...``),
-    the rule every unofficial-split corpus here uses. The release's own
-    10_test split has no public labels, so it cannot serve as eval.
+  * patient-disjoint 70/15/15 split with the class mix BALANCED across
+    splits. A plain sorted-by-ID cut -- this benchmark's default rule --
+    is wrong here: patient IDs correlate with pattern type, so the first
+    version of this loader produced train 44% class-1 / 0.9% class-2
+    against test 8% / 18%, and every model scored 0.15-0.23 kappa against
+    ~0.45 published. BIOT (NeurIPS 2023) splits IIIC "by patient groups
+    60:20:20" at random, whose expected class mix is identical across
+    splits; the greedy assignment below reaches the same property without
+    an RNG, keeping the no-random-seed rule the rest of the pipeline uses.
+    The release's own 10_test split has no public labels, so it cannot
+    serve as eval.
 """
 
 from __future__ import annotations
@@ -31,8 +39,51 @@ import numpy as np
 import yaml
 
 from .common import Manifest, assert_finite, norm_div100, save_split
-from .tuh_common import sort_subject_split
 from paclock_bench.paths import expand
+
+
+def balanced_patient_split(patients, labels, train_ratio, val_ratio_of_rest,
+                           n_classes):
+    """Patient-disjoint split whose class mix matches across the three splits.
+
+    Deterministic by construction: patients are visited largest-first (ties
+    by ID) and each is placed in whichever split is currently furthest below
+    its target on that patient's own dominant class, subject to the split's
+    window quota. Largest-first matters -- placing the big patients while
+    every split is still empty is what lets the small ones correct the mix.
+    """
+    order = sorted(set(patients.tolist()),
+                   key=lambda p: (-(patients == p).sum(), p))
+    targets = {"train": train_ratio,
+               "val": (1 - train_ratio) * val_ratio_of_rest,
+               "test": (1 - train_ratio) * (1 - val_ratio_of_rest)}
+    total = len(patients)
+    counts = {k: np.zeros(n_classes, dtype=np.int64) for k in targets}
+    sizes = {k: 0 for k in targets}
+    groups = {k: set() for k in targets}
+    for p in order:
+        sel = patients == p
+        hist = np.bincount(labels[sel], minlength=n_classes)
+        dom = int(hist.argmax())
+        best, best_key = None, None
+        for k, ratio in targets.items():
+            room = ratio * total - sizes[k]
+            if room <= 0:                       # quota full: heavy penalty
+                room = -abs(room) - total
+            # want the split that is furthest behind on this patient's
+            # dominant class, tie-broken by remaining room
+            deficit = ratio * total * (
+                np.bincount(labels, minlength=n_classes)[dom] / total) \
+                - counts[k][dom]
+            score = deficit + 1e-6 * room
+            if room < -total / 2:
+                score -= total
+            if best is None or score > best:
+                best, best_key = score, k
+        groups[best_key].add(p)
+        counts[best_key] += hist
+        sizes[best_key] += int(sel.sum())
+    return groups
 
 
 def main():
@@ -64,11 +115,15 @@ def main():
     man.exclude("(duplicate keys)", f"{n_dupes} rows repeating an already-seen key")
 
     patients = np.array([k.split("_")[0] for k in keys[keep_idx]])
-    tr, rest = sort_subject_split(sorted(set(patients)), cfg["split"]["train_ratio"])
-    va, te = sort_subject_split(rest, cfg["split"]["val_ratio_of_rest"])
-    groups = {"train": set(tr), "val": set(va), "test": set(te)}
-    print("patients: %d train / %d val / %d test" % (len(tr), len(va), len(te)),
-          flush=True)
+    groups = balanced_patient_split(
+        patients, labels, cfg["split"]["train_ratio"],
+        cfg["split"]["val_ratio_of_rest"], n_classes=votes.shape[1])
+    for name, g in groups.items():
+        sel = np.isin(patients, sorted(g))
+        frac = np.bincount(labels[sel], minlength=votes.shape[1]) / max(sel.sum(), 1)
+        print("patients[%s]=%d windows=%d class mix %s"
+              % (name, len(g), int(sel.sum()),
+                 " ".join("%.3f" % f for f in frac)), flush=True)
 
     X_all = np.load(os.path.join(root, "all_train_X.npy"), mmap_mode="r")
     for split, keep in groups.items():
@@ -89,7 +144,9 @@ def main():
     man.qc = {"n_excluded": len(man.excluded),
               "note": "official SPaRCNet prepared arrays; dedupe by key; "
                       "majority-vote labels, ties excluded; patient-disjoint "
-                      "sorted split (release test labels are not public)"}
+                      "CLASS-BALANCED split (a sorted cut put 44% of class 1 "
+                      "in train against 8% in test); release test labels are "
+                      "not public"}
     man.check_disjoint(strict=True)
     man.save(os.path.join(out_dir, "manifest.json"))
 
