@@ -191,3 +191,29 @@ IIIC / TUEP / ADFD / CAUEEG / Siena 五个语料——后者是真正的留出�
 "替代方案伤 TUEV / 伤癫痫"这类反向证据。定位从通用 EEG 收窄到阵发性临床
 之后,这些决定或者不变、或者变得更强(不放大规模:当初九格里为负的四格
 全是临床语料;mean 头:三个替代头的收益全部来自已除名的 MI/情绪语料)。
+
+
+---
+
+## 定名(2026-08-26,Zhizhe 拍板)
+
+**论文标题**:*Cross-Frequency Modulation as Token Content and Pretraining
+Objective for EEG Foundation Models*
+
+**模型名(表格 / 图 / 代码)**:**CroFreMo**
+
+分工的理由:标题承载**可被引用的概念**——"cross-frequency modulation" 是真实
+术语,读者会引述它;名字承载**辨识度**——CroFreMo 短、无重名、在表格里一眼可认。
+两者不重复劳动。
+
+命名过程中排除掉的与理由:
+* **PAC** —— 太呆(Zhizhe 原话),且是三字母缩写
+* **首字母缩写(含 CFM)** —— Zhizhe 定的规矩:不要首字母拼盘;且 **CFM 在
+  ML 圈已被 Conditional Flow Matching 占用**,正是我们要投的场子
+* **Phasor / Heterodyne / Intermod 等单词** —— 都成立,但把重心压在 tokenizer
+  或机制上,而我们要读者看到的是**整个 FM**
+* **CroFreMod** —— 尾音 "-Mod" 与 CBraMod 形状太近,且辅音丛多不好念;
+  去掉 d 之后收在开元音,与 LUNA / REVE / Mamba 同一命名语域
+
+代码层 `paclock_*` 的重命名留到跑批结束后一次性做完(现在动会打断队列);
+表格与文档已切换到 CroFreMo。

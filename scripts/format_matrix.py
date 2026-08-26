@@ -58,7 +58,7 @@ PUBLISHED_ON = {
     "REVE-Base (pretrained)": {"tuab", "tuev"},
     "CSBrain (pretrained)": {"tuab", "tuev", "chbmit", "siena"},
 }
-OURS_PREFIX = "PACLock"
+OURS_PREFIX = "CroFreMo"
 
 GREY = Font(color="8C8C8C")
 BLACK = Font(color="000000")

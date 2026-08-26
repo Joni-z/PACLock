@@ -90,11 +90,12 @@ GROUPS = [
         ("eegpt_scratch", "EEGPT (scratch)", "不新排；仅新语料已有数字"),
         ("tfm_scratch", "TFM-Tokenizer (scratch)", "不新排；仅新语料已有数字"),
     ]),
-    ("D PACLock", [
-        ("paclock_duplex", "PACLock (duplex, scratch)", ""),
-        ("paclock_duplex_pt2", "PACLock (duplex, 预训练 v2)", "band_norm_pac 目标"),
-        ("paclock_probe_v2", "PACLock (冻结探针, v2)", "patch_len 200；表征质量协议"),
-        ("paclock_probe_rand", "PACLock (冻结探针, 随机初始化)", "四道门第 4 门对照"),
+    ("D CroFreMo", [
+        ("paclock_duplex", "CroFreMo (scratch)", ""),
+        ("paclock_duplex_pt2", "CroFreMo (预训练 v2)", "band_norm + 耦合列目标"),
+        ("paclock_duplex_pt3", "CroFreMo (预训练 v3)", "band_norm 目标"),
+        ("paclock_probe_v2", "CroFreMo (冻结探针)", "patch_len 200；表征质量协议"),
+        ("paclock_probe_rand", "CroFreMo (冻结探针, 随机初始化)", "四道门第 4 门对照"),
     ]),
 ]
 
@@ -164,7 +165,7 @@ def build_sheet(ws, title, metrics, note):
 
 def build_readme(ws):
     lines = [
-        ("PACLock 基线矩阵（2026-08-24 重建 —— 定位:耦合感知 tokenizer，阵发性临床评测域）", True),
+        ("CroFreMo 基线矩阵（2026-08-24 重建 —— 定位:耦合感知 tokenizer，阵发性临床评测域）", True),
         ("", False),
         ("sheet 顺序 = 论文重要性：核心 9（发作/痫样/临床判别/痴呆）→ 边界 2（机制分析）→ 已除名 6（存档）", False),
         ("核心：TUEV TUSZ CHB-MIT IIIC TUEP TUAB ADFD CAUEEG Siena", False),

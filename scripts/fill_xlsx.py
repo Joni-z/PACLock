@@ -54,11 +54,12 @@ MODEL_ROW_LABEL = {
     # is indistinguishable from "the runs are not finished yet".
     "paclock_v2": "PACLock (from scratch, full)",
     # the structure-convergence backbone and its pretrained counterpart
-    "paclock_duplex": "PACLock (duplex, scratch)",
+    "paclock_duplex": "CroFreMo (scratch)",
     "paclock_duplex_pt": "PACLock (duplex, pretrained)",   # v1 rows retired
-    "paclock_duplex_pt2": "PACLock (duplex, 预训练 v2)",
-    "paclock_probe_v2": "PACLock (冻结探针, v2)",
-    "paclock_probe_rand": "PACLock (冻结探针, 随机初始化)",
+    "paclock_duplex_pt2": "CroFreMo (预训练 v2)",
+    "paclock_duplex_pt3": "CroFreMo (预训练 v3)",
+    "paclock_probe_v2": "CroFreMo (冻结探针)",
+    "paclock_probe_rand": "CroFreMo (冻结探针, 随机初始化)",
     # classical-feature and tuned-supervised baselines (2026-08-24 plan)
     "feat_best": "手工特征 (LR/LDA 取优)",
     "eegnet": "EEGNet (调参)",
