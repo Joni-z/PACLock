@@ -1,5 +1,5 @@
-name: siena-paclock_duplex
-group: C
+name: siena-paclock_duplex_pt2
+group: pretrain_ft
 dataset: siena
 data_root: $PACLOCK_PROC/processed/siena
 model: paclock
@@ -36,3 +36,8 @@ model_kwargs:
   pac_patch_len: 50
 seed: 0
 max_hours: 22.5
+checkpoint: pretrain_runs_60k/pretrain-duplex_v2/checkpoint.pt
+checkpoint_exclude:
+- frontend.tokenizer
+- frontend.phase_tokenizer
+- frontend.amplitude_tokenizer

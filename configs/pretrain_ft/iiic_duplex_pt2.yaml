@@ -1,7 +1,7 @@
-name: siena-paclock_duplex
-group: C
-dataset: siena
-data_root: $PACLOCK_PROC/processed/siena
+name: iiic-paclock_duplex_pt2
+group: pretrain_ft
+dataset: iiic
+data_root: $PACLOCK_PROC/processed/iiic
 model: paclock
 optimizer: adamw
 lr: 0.0001
@@ -10,12 +10,13 @@ scheduler: cosine
 grad_clip: 1.0
 num_workers: 8
 device: cuda
-num_classes: 2
+num_classes: 6
 epochs: 20
 batch_size: 32
-eval_every_steps: 200
+eval_every_steps: 0
 patience: 20
-loss: bce_with_logits
+loss: cross_entropy
+label_smoothing: 0.1
 sample_rate: 200
 model_kwargs:
   arch: triaxial
@@ -35,4 +36,8 @@ model_kwargs:
   spatial_pe: xyz
   pac_patch_len: 50
 seed: 0
-max_hours: 22.5
+checkpoint: pretrain_runs_60k/pretrain-duplex_v2/checkpoint.pt
+checkpoint_exclude:
+- frontend.tokenizer
+- frontend.phase_tokenizer
+- frontend.amplitude_tokenizer
