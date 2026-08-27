@@ -1,0 +1,61 @@
+# Siena, batch corrected (2026-08-27).
+#
+# The batch-32 run scored the HIGHEST AUROC of all 17 models on this corpus
+# (0.8702 vs REVE's 0.8565) and simultaneously the 3rd-worst AUC-PR (0.1098
+# vs REVE's 0.5181), with balanced accuracy pinned at exactly 0.5000. A
+# representation that ranks better than everyone's cannot be the problem; the
+# head of the ranking is, and AUC-PR at 0.556% test positives is almost
+# entirely a measurement of that head.
+#
+# Cause: Siena carries 326 positive training windows in 34,472 -- the same
+# 0.95% rate as CHB-MIT but 9x fewer positives in absolute terms. At batch 32
+# a batch holds 0.3 positives in expectation, so ~74% of steps carry no
+# positive gradient at all. CHB-MIT survives that because its 10x larger
+# train split still yields ~2,570 positive-bearing updates per epoch against
+# Siena's ~280. Every baseline that does well here uses a large batch:
+# EEGConformer 128 -> 0.5376, REVE 128 -> 0.5912, ContraWR 512 -> 0.4873.
+#
+# batch 128 OOMs the MI210 (64 GiB; job 386667 died in the first forward --
+# activations scale 4x from the batch-32 run's ~16 GiB). batch 64 is the
+# next anchor down and it is a VALIDATED one: CBraMod's Siena recipe is batch
+# 64 / lr 1e-4 and it scores 0.44-0.48 AUC-PR here, second-best in the table.
+# Expected positives per batch rise 0.3 -> 0.6; zero-positive steps 74% -> 54%. Epochs are raised because the corpus is small enough that 20
+# epochs is only ~5,400 steps. Nothing about the model changes.
+batch_size: 64
+data_root: $PACLOCK_PROC/processed/siena
+dataset: siena
+device: cuda
+epochs: 60
+eval_every_steps: 200
+grad_clip: 1.0
+group: C
+loss: bce_with_logits
+lr: 0.0001
+max_hours: 22.5
+model: paclock
+model_kwargs:
+  arch: triaxial
+  augmentations: []
+  band_pe: index
+  d_model: 128
+  depth: 6
+  dropout: 0.2
+  freq_mixer: attention
+  interaction_mode: rotation
+  kernel_size: 201
+  n_bands: 8
+  n_heads: 4
+  pac_patch_len: 50
+  pac_token_mode: measured
+  patch_len: 50
+  spatial_pe: xyz
+  tokenizer_mode: duplex
+name: siena-paclock_duplex_b64
+num_classes: 2
+num_workers: 8
+optimizer: adamw
+patience: 20
+sample_rate: 200
+scheduler: cosine
+seed: 0
+weight_decay: 1.0e-05
