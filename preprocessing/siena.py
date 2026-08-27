@@ -127,6 +127,7 @@ def main():
     stride = int(cfg["stride_sec"] * cfg["sample_rate"])
     for split, subs in groups.items():
         X_all, y_all, used = [], [], set()
+        sid_all, rec_all = [], []
         for sub in subs:
             sdir = os.path.join(root, sub)
             szlist = os.path.join(sdir, f"Seizures-list-{sub}.txt")
@@ -152,12 +153,21 @@ def main():
                         intervals.get(f.lower(), []), cfg["sample_rate"])
                     X_all.append(X)
                     y_all.append(y)
+                    sid_all.extend([sub] * len(X))
+                    rec_all.extend([f] * len(X))
                     used.add(sub)
                 except Exception as ex:                      # noqa: BLE001
                     man.exclude(f, f"{type(ex).__name__}: {ex}", split=split)
         X = np.concatenate(X_all).astype(np.float32)
         y = np.concatenate(y_all)
         save_split(out_dir, split, X, y)
+        # per-window subject/recording sidecar: the b32x4 incident (val PR
+        # 0.43, test PR 0.065) was unattributable without knowing which test
+        # subject owns which window
+        np.save(os.path.join(out_dir, f"{split}_subject_ids.npy"),
+                np.array(sid_all))
+        np.save(os.path.join(out_dir, f"{split}_recording_ids.npy"),
+                np.array(rec_all))
         man.add_split(split, subjects=sorted(used), n_windows=len(X),
                       class_counts=Counter(y.tolist()),
                       n_recordings=len(used), shape=list(X.shape[1:]))

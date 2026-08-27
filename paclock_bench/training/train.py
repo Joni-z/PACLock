@@ -82,7 +82,7 @@ def amp_context(cfg: dict, device):
 
 @torch.no_grad()
 def evaluate(model, loader: DataLoader, device, criterion, num_classes: int,
-             cfg: dict | None = None):
+             cfg: dict | None = None, return_raw: bool = False):
     model.eval()
     cfg = cfg or {}
     losses, logits_all, y_all = [], [], []
@@ -97,7 +97,10 @@ def evaluate(model, loader: DataLoader, device, criterion, num_classes: int,
         y_all.append(y.cpu().numpy())
     logits_all = np.concatenate(logits_all)
     y_all = np.concatenate(y_all)
-    return float(np.mean(losses)), compute_metrics(y_all, logits_all, num_classes)
+    m = compute_metrics(y_all, logits_all, num_classes)
+    if return_raw:
+        return float(np.mean(losses)), m, logits_all, y_all
+    return float(np.mean(losses)), m
 
 
 def main():
@@ -391,7 +394,15 @@ def main():
 
     if best_state is not None:
         model.load_state_dict(best_state)
-    _, test_m = evaluate(model, test_loader, device, criterion, cfg["num_classes"], cfg)
+    _, test_m, test_logits, test_y = evaluate(
+        model, test_loader, device, criterion, cfg["num_classes"], cfg,
+        return_raw=True)
+    # Per-window test scores beside result.json. Cost is trivial and it is
+    # what a diagnosis needs: the Siena incident (AUROC 0.87, AUC-PR 0.07)
+    # could not be attributed without per-subject scores, and no checkpoint
+    # or scores existed, forcing a 2h retrain just to look.
+    np.savez_compressed(os.path.join(run_dir, "test_scores.npz"),
+                        logits=test_logits.astype(np.float16), y=test_y)
     print("test | " + " ".join(f"{k}={v:.4f}" for k, v in test_m.items()), flush=True)
 
     # Hard rule 3 is evaluated here so it travels with the result.
