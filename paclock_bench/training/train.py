@@ -328,16 +328,31 @@ def main():
             if prof_n:
                 torch.cuda.synchronize(); prof["fwd"] += time.time() - _mark
                 _mark = time.time()
-            optimizer.zero_grad(set_to_none=True)
-            loss.backward()
+            # Gradient accumulation (accum_steps, default 1 = exact old
+            # behaviour). Exists because attention memory scales with
+            # batch x tokens^2, so on some corpora the physical batch that
+            # fits is smaller than the effective batch the class balance
+            # needs -- Siena at 0.95% positives wants an effective 128, but
+            # (19,2000) windows OOM the 64GB MI210 above physical 32 (jobs
+            # 386667, 387122). Equal-sized micro-batches with loss/accum
+            # reproduce the large-batch mean-loss gradient exactly; the
+            # scheduler steps once per OPTIMIZER step, not per micro-batch.
+            accum = int(cfg.get("accum_steps", 1))
+            if accum == 1:
+                optimizer.zero_grad(set_to_none=True)
+            elif step % accum == 0:
+                optimizer.zero_grad(set_to_none=True)
+            (loss / accum).backward() if accum > 1 else loss.backward()
             if prof_n:
                 torch.cuda.synchronize(); prof["bwd"] += time.time() - _mark
                 _mark = time.time()
-            if cfg.get("grad_clip"):
-                torch.nn.utils.clip_grad_norm_(model.parameters(), cfg["grad_clip"])
-            optimizer.step()
-            if scheduler is not None:
-                scheduler.step()
+            if accum == 1 or (step + 1) % accum == 0:
+                if cfg.get("grad_clip"):
+                    torch.nn.utils.clip_grad_norm_(model.parameters(),
+                                                   cfg["grad_clip"])
+                optimizer.step()
+                if scheduler is not None:
+                    scheduler.step()
             running.append(loss.item())
             if prof_n:
                 torch.cuda.synchronize(); prof["opt"] += time.time() - _mark
