@@ -93,7 +93,7 @@ GROUPS = [
     ("D CroFreMo", [
         ("paclock_duplex", "CroFreMo (scratch)", ""),
         ("paclock_duplex_pt2", "CroFreMo (预训练 v2)", "band_norm + 耦合列目标"),
-        ("paclock_duplex_pt3", "CroFreMo (预训练 v3)", "band_norm 目标"),
+        ("paclock_duplex_pt3", "CroFreMo (预训练 v3)", "CroFreMo (预训练 v2-full)", "band_norm 目标"),
         ("paclock_probe_v2", "CroFreMo (冻结探针)", "patch_len 200；表征质量协议"),
         ("paclock_probe_rand", "CroFreMo (冻结探针, 随机初始化)", "四道门第 4 门对照"),
     ]),
