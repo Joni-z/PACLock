@@ -1,24 +1,28 @@
-name: tuep-reve_pretrained
-group: B
-dataset: tuep
-data_root: $PACLOCK_PROC/processed/tuep
-model: reve
-pretrained: true
-num_classes: 2
-sample_rate: 200
-loss: bce_with_logits
-optimizer: adamw
-lr: 0.0001
-weight_decay: 0.01
-scheduler: cosine
-grad_clip: 1.0
-epochs: 30
+# lr halved to 5e-5 (2026-08-28): at the transplanted 1e-4, seed 0
+# failed identically across two independent runs (val peak at eval 0,
+# never cleared chance); the half-lr probe passes rule 3 with test
+# auroc 0.68. Cell reruns uniformly at this lr.
 batch_size: 128
-patience: 10
-eval_every_steps: 0
-num_workers: 8
+data_root: $PACLOCK_PROC/processed/tuep
+dataset: tuep
 device: cuda
-seed: 0
+epochs: 30
+eval_every_steps: 0
+grad_clip: 1.0
+group: B
+loss: bce_with_logits
+lr: 5.0e-05
 max_hours: 22.5
+model: reve
 model_kwargs:
   dropout: 0.15
+name: tuep-reve_pretrained
+num_classes: 2
+num_workers: 8
+optimizer: adamw
+patience: 10
+pretrained: true
+sample_rate: 200
+scheduler: cosine
+seed: 0
+weight_decay: 0.01
