@@ -397,12 +397,6 @@ def main():
     _, test_m, test_logits, test_y = evaluate(
         model, test_loader, device, criterion, cfg["num_classes"], cfg,
         return_raw=True)
-    # Per-window test scores beside result.json. Cost is trivial and it is
-    # what a diagnosis needs: the Siena incident (AUROC 0.87, AUC-PR 0.07)
-    # could not be attributed without per-subject scores, and no checkpoint
-    # or scores existed, forcing a 2h retrain just to look.
-    np.savez_compressed(os.path.join(run_dir, "test_scores.npz"),
-                        logits=test_logits.astype(np.float16), y=test_y)
     print("test | " + " ".join(f"{k}={v:.4f}" for k, v in test_m.items()), flush=True)
 
     # Hard rule 3 is evaluated here so it travels with the result.
@@ -420,6 +414,13 @@ def main():
 
     out_dir = os.path.join(args.out, cfg["name"], f"seed{seed}")
     os.makedirs(out_dir, exist_ok=True)
+    # Per-window test scores beside result.json (diagnosis needs them: the
+    # Siena incident, AUROC 0.87 vs AUC-PR 0.07, was unattributable without
+    # per-subject scores). Placed AFTER out_dir exists -- the first version
+    # of this dump referenced an undefined run_dir and killed SIENA_d2 at
+    # the finish line after a completed 2h training.
+    np.savez_compressed(os.path.join(out_dir, "test_scores.npz"),
+                        logits=test_logits.astype(np.float16), y=test_y)
     result = {
         "name": cfg["name"],
         "dataset": dataset,
