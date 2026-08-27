@@ -1,10 +1,9 @@
-# lr 5e-4 (transplanted from TUAB/TUEV, where it beats published)
-# kills this corpus at all 3 seeds: val peaks at the first eval and
-# never recovers. Probe verdict (2026-08-28): lr 1e-4 learns
-# (kappa 0.20), 2e-4 is already dead -- narrow window, small corpus.
+# Final lr probe: 5e-4, 2e-4, 1e-4 all flat on CAUEEG while scratch
+# learns -- if 5e-5 is also flat the failure is not the lr and the
+# cell stays empty pending a channel-mapping investigation.
 batch_size: 64
-data_root: $PACLOCK_PROC/processed/adfd
-dataset: adfd
+data_root: $PACLOCK_PROC/processed/caueeg
+dataset: caueeg
 device: cuda
 epochs: 50
 eval_every_steps: 100
@@ -14,13 +13,13 @@ label_smoothing: 0.1
 layer_decay: 0.65
 loader: labram
 loss: cross_entropy
-lr: 0.0001
+lr: 5.0e-05
 max_hours: 22.5
 model: labram
 model_kwargs:
   montage_mode: positional
   target_len: 2000
-name: adfd-labram_pretrained
+name: caueeg-labram_pt_lr5e5
 num_classes: 3
 num_workers: 16
 optimizer: adamw
