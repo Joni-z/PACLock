@@ -499,3 +499,32 @@ BCI +0.012(n=3);TUAR −0.021(n=1)、Sleep-EDF −0.001(n=1)。
   单目的任务 ≈ 五个语料全部 baseline 的成本。
 * 预算口径厘清:AMD 是 node-hours(整节点),b2 是 SU(单卡);
   b2 单位价值约为 AMD 的 35 倍,baseline 不该搬去 b2。
+
+
+## 2026-08-26/27
+
+* **定名**:标题 *Cross-Frequency Modulation as Token Content and
+  Pretraining Objective for EEG Foundation Models*;模型 CroFreMo。
+  否决 PAC(呆/缩写)、CFM(撞 Conditional Flow Matching)、
+  CroFreMod(形近 CBraMod)。表格脚本已切换。
+* **预训练根因**:旧 60k×32 = 1.58 epoch;修正日程 PT_v2full
+  (150k × 形状感知 batch,+TUEG,15.4 epoch,b2 h100,~250 SU)。
+  探针 1(统一 batch 256)在 faced 形状上 OOM 身亡 → 按 C×T 反比配
+  batch + expandable_segments + workers 8;吞吐 1.12→0.50 s/step。
+  pretrain.py 加峰值显存打印与 --resume(原子 checkpoint)。
+* **取消 b2 三个 P3**(旧 checkpoint v3 微调):10h walltime 内注定
+  跑不完(5h 走 1–3/20 epoch),烧 36 SU/h 且压 PT_v2full 优先级。
+  amd 的 DPT3 跑完存档:v3 赢 tuev 输 sleepedf,均不敌 scratch。
+* **IIIC 平衡切分重跑落地**(23 配置多数 3 seed):CroFreMo 0.4868 vs
+  REVE 0.4363,该列翻盘。发表值差距确认为协议差(全表下移 0.03–0.15)。
+* **Siena 诊断**:AUROC 全表第一 + PR 地板 = batch 32 正例饥饿;
+  SIENA_b128 重跑中。
+* **表格**:重灌 297 格;格式四规则(去备注/灰移植/黄单 seed/粗列最优)
+  补跑 format_matrix 恢复。7 格 rule-3 留空确认为 baseline 自身训练失败。
+* **论文**:Overleaf 骨架 + build.sh;Related Work 写完(LaBraM 监督
+  边缘相位 —— 从其代码核实;FAME 抢发 C3a → 改引用为对照);boundary
+  节删除;作者 Zhizhe + Yifan Wang;ICLR 2027 规则核实
+  (9-18/9-25,9 页,AI 声明必填,9-18 后冻结作者)。
+* **文献**:Kommineni 2605.26434(重建偏置机制)、Bindra 2606.08583
+  (睡眠掉 >0.42 vs 临床 0.07–0.13)、FAME 2608.01898 —— 三篇全部
+  独立支撑"阵发性临床"定位与频带标准化动机。

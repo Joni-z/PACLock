@@ -702,3 +702,20 @@ TUEG 切片在 TUAB 上的重叠实测为 34.8%"是别人给不出的一句话�
 2. **LaBraM** 的电极索引路径要 `labram_native` 的 23 通道蒙太奇,只有 TUAB/TUEV
    有;其余语料必须 `montage_mode: positional` + `target_len`。
 3. **BIOT prest16** 按 16 通道构建,19 通道语料需要 `target_len` 才走跨语料路径。
+
+
+---
+
+## 发表值锚点政策(2026-08-27 冻结)
+
+* 锚点仅用于校准(reproduction gate:发表值须落于我们 mean±2σ),
+  **永不与我们的数并排进论文表格**。
+* 逐点可比:仅 TUAB、TUEV(官方切分)。CHB-MIT/IIIC/TUSZ 等自定义协议
+  语料的锚点一律标 not point-comparable(collect_results.py 的
+  NONCOMPARABLE 表)。
+* IIIC 最终协议:SPaRCNet 官方数组 → 按 key 去重(−23,355)→ 剔专家
+  平票(−5,900)→ 105,195 窗;balanced_patient_split 70/15/15,
+  三 split 类分布小数点后三位一致(preprocessing/iiic.py)。
+* Siena 微调配方:batch 128 / lr 1e-4 / epochs 60
+  (configs/_diag/siena_paclock_duplex_b128.yaml,含完整归因注释);
+  batch 32 在 326 正例下 74% 的步无正例梯度,禁用。

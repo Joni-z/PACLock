@@ -400,3 +400,58 @@ TUAR、ADFD、APAVA、Mumtaz2016、EEGMat(MentalArithmetic)。
 之所以可信,在于它跑的是自己发表的配方;替对手编超参是唯一能让对比不公平
 的做法。没有参考时取参考语料的 epochs/patience(偏保守,宁可让 baseline
 训过头)。
+
+
+---
+
+# 论文落地(2026-08-27)
+
+## 稿件仓库
+
+`/Users/zzz/Desktop/figure/ICLR2027-Paper`(Zhizhe 的 MacBook,Overleaf
+git 远端 6a8c15e637a15954a68962dd)。`./build.sh` 一键编译(latexmk)。
+骨架:intro / related_work / method / setup / results / conclusion +
+statements(AI 声明必填)+ appendix。**boundary 独立节已删(Zhizhe 拍板
+results 直接接 conclusion)**,赢/输机制并入 Results;related_work 中
+指向 sec:results。作者块:Zhizhe Zhang(NYU Shanghai)+ Yifan Wang
+(Stony Brook);\iclrfinalcopy 注释保持 —— 投稿 PDF 匿名,录用前不得
+取消注释。.tex 源码含真名,勿作为补充材料上传。
+
+## ICLR 2027 硬规则(已核对 CFP/AuthorGuidelines)
+
+* 摘要 9-18、正文 9-25(AoE);正文 9 页,rebuttal/camera 10 页;
+  参考文献与三条声明不计页。
+* **AI use statement 必填**;Ethics / Reproducibility 建议填,均 ≤1 页。
+* **9-18 后不能加作者**;每篇须有一名作者注册评审 ≥3 篇且在主会有发表;
+  挂 3+ 篇的作者须评审 6 篇,违者 desk reject。
+* 行号是 style 自动加的,正文勿引用。
+
+## Related Work 已写(sections/related_work.tex,689 词,15 引用全解析)
+
+三束:token 装什么(BIOT/TFM 取模长销毁相位;CBraMod/EEGPT 朴素 MSE;
+**LaBraM 确实监督相位 —— modeling_vqnsp.py 的 rec_angle_loss,但逐频率
+bin 的边缘量;耦合是频率对上的联合量,边缘监督不蕴含它**);临床 PAC
+证据(Canolty/Tort/Amiri;睡眠雷用 Amiri 自己的 N3 发现预埋);谱偏置
+(MAE per-patch 标准化先例;Kommineni 2605.26434 机制;Bindra
+2606.08583 任务依赖量化;**FAME 2608.01898 = 我们的频带标准化被抢发
+三周 —— 处理为"adopt, not reinvent",作为 Results 的对照,把内部消融
+升级为与已发表方法的对比**)。
+
+## 贡献点拆分(FAME 之后)
+
+C2 duplex tokenizer(token content,scratch 战绩已验证);C3b 耦合列
+预测(objective,仍是我们的);C3a 频带标准化 → 引 FAME,不再主张;
+C3c 配对掩码 + 泄漏控制(使 C3b 良定义)。
+
+## 协议权威性的三层防御(写进 Setup)
+
+1. 校准声明:官方切分的 TUAB/TUEV 上 18 个复现达标或超标(附录逐条)。
+2. 协议差异披露:IIIC 去重 23,355 + 剔平票 5,900 + 配平切分;8 个锚点
+   模型一致下移 0.03–0.15 —— 均匀下移非偏向,我们同受其难仍赢该列。
+3. (可选,未拍板)BIOT 原协议下我们模型的附录保险行。
+
+## 安全写作窗口(不依赖 PT_v2full 结果)
+
+Setup 全节、Method 3.1/3.2(记号 + tokenizer)、附录(split 审计、
+移植超参披露)≈ 2.5 页正文 + 附录零返工风险;3.3/3.4 公式不变,
+框架措辞等判决。Intro/Abstract/Results/Conclusion 等结果。

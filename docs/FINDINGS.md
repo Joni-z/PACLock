@@ -1141,3 +1141,51 @@ TUSZ/CHB,raw 预训练反而伤;tokenizer 迁移的净贡献为正。线 B(CBraM
 
 **待完成的另一半验收**：v2 checkpoint 的微调波（duplex_pt2，六语料）已提交；
 v1 微调是 5/6 负贡献，v2 若能转正即为主行。未调超参：aux_pac_weight=1.0。
+
+
+---
+
+# Part 5 —— 诊断三连(2026-08-26/27)
+
+## 5.1 预训练不迁移的根因是日程,不是架构/容量/域
+
+证据链见 PRETRAIN.md 修正日程一节(1.58 epoch;帮最弱伤最强的单调签名;
+size 消融排除容量;同域仍不迁移排除域)。行动:PT_v2full(15.4 epoch)。
+
+## 5.2 Siena:AUROC 全表第一 + AUC-PR 地板 = batch 太小,不是模型
+
+CroFreMo scratch 在 Siena:AUROC **0.8702(17 模型最高**,REVE 0.8565),
+AUC-PR 0.1098,BAcc 恰 0.5000。表示排序好、排序头部坏 —— 0.556% 测试正例
+下 AUC-PR 几乎只量头部。原因:326 个训练正例 / 34,472 窗,batch 32 期望
+每批 0.3 个正例,~74% 的步没有正例梯度;CHB-MIT 同正例率但窗数 10 倍,
+每 epoch 含正例更新 ~2,570 vs Siena ~280。Siena 上打得好的 baseline 全是
+大 batch(EEGConformer 128→0.5376,REVE 128→0.5912,ContraWR 512→0.4873)。
+修复:batch 128 / lr 1e-4 / epochs 60(SIENA_b128,job 386667)。
+
+## 5.3 IIIC 发表值差距是协议造成,且全表系统性下移
+
+同一 SPaRCNet 发布(原始 134,450 ≈ TFM 报的 135,096)。我们:去重
+−23,355、剔平票 −5,900 → 105,195 窗;70/15/15 患者不相交且类别配平。
+他们(BIOT/TFM):保留重复与平票,60/20/20 随机 patient-group。
+8 个有发表值的模型在我们协议下**全部**下移 0.03–0.15 kappa
+(TFM 0.4985→0.4060;BIOT-scr 0.4932→0.3557;ST-T 0.4492→0.2961)——
+均匀下移是协议签名,不是复现失败。BIOT 与 ST-T 掉得最狠,提示其发表值
+受重复/平票样本抬升最多。政策:发表值只做校准,不与我们的数并排。
+
+## 5.4 发表锚点校准:官方切分语料上复现达标或超标
+
+TUAB(15 锚点):多数超标(CNN-T +0.045、ContraWR +0.043、FFCL +0.030、
+ST-T +0.027、SPaRCNet +0.020;LaBraM-pre 高出 +0.024);低于者仅
+BIOT −0.010、TFM −0.010。TUEV(17 锚点):多数达标或超标(LaBraM-pre
++0.092);离群仅 FFCL +0.104(超标向,无害)与 **labram_scratch −0.135**
+(CHECK PIPELINE 旗;scratch LaBraM 需从零训 VQ codebook,本身脆 ——
+倾向附录解释而非重跑)。**结论:pipeline 权威性由 TUAB/TUEV 锚定,
+自定义协议语料继承之;审稿防御三层见 PAPER.md。**
+
+## 5.5 baseline 自身的 rule-3 失败(7 格留空,非漏跑)
+
+3-seed 全灭:ADFD/EEGNet(Kappa −0.03,随机)、CAUEEG/LaBraM-pre
+(val 曲线平,没在学)—— 疑配置,待重跑。个别 seed 失败:CHB-MIT/
+EEGConformer(2 seed AUROC 0.5008)、Siena/ST-T、TUEP/REVE、
+CAUEEG/CBraMod-scr(各 1 seed val 首评即峰)。留空是保守正确:全是
+baseline 的格子,填入只会缩小我们的优势。

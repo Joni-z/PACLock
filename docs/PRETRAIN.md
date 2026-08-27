@@ -616,3 +616,57 @@ CHB −0.050、TUSZ −0.029、TUEV −0.020、ISRUC −0.017,仅 Sleep-EDF +0.0
    而它只占采样 0.33%)。
 3. **配对行掩码已实现并验证**,不再是阻塞项(`scripts/verify_duplex_pretrain.py`
    16/16;附录 D.6 的"未实现"作废)。
+
+
+---
+
+# 修正日程(2026-08-26/27)—— 此前所有预训练作废的原因
+
+## 根因:60k × batch 32 = 每个窗口只被看 1.58 次
+
+预训练池(9 语料 train split)1,215,451 窗;60k 步 × 32 = 1.92M 次呈现
+= **1.58 epoch**。这不是预训练,是 warm start。三条互证:
+
+1. **下游签名**:旧 checkpoint 恰好在 scratch 最弱处帮忙(TUSZ +0.082)、
+   在 scratch 最强处帮倒忙(TUEV −0.056),单调无例外 —— 半收敛先验的
+   标准形状,不是容量不足(容量不足会均匀压低且先压垮 scratch)。
+2. **size 消融排除容量**:d128(1.6M)vs d256(8.6M),8 指标 3 seed
+   全在方差内 —— 日程受限时加参数无回报。**因此不升 30M。**
+3. **同行对照**:TFM-Tokenizer 1.89M 参数(≈我们),tokenizer 100 epoch
+   @batch 256 + encoder 50 epoch @512,lr 1e-3 —— 约百倍于我们的训练量。
+
+附带发现:配置里的 tueg_slice 在 amd 不存在,旧预训练实际只用了下游语料
+—— **迁移条件已是最有利(完全同域),仍不迁移**,矛头锁死日程。
+
+## 新配置 configs/pretrain/duplex_v2_full.yaml(job 44508503)
+
+* 架构一字不动(duplex+rotation+nb8, d128/depth6/patch200)—— 冻结协议。
+* 目标 band_norm_pac(v2):标题主张的那个;v3(≈FAME)是对照。
+* lr 1e-4→1e-3;池 +tueg_slice(706,817 窗,b2 独有)→ 1,922,268 窗。
+* **batch 按形状配**:C×T×batch ≈ 32000×192 恒定,cap 256
+  (tuab/tusz/chbmit/tueg 192,tuev/sleepedf/bci 256,isruc 168,
+  physionet_mi 120,faced 96)。统一 batch 256 在 tuab 形状上已占
+  77/79 GiB,抽到 faced(2 倍 C×T)必炸 —— 探针 44506910 在 step
+  ~200 正是这么死的。修正后峰值 44.8/79.2 GiB,faced 实测通过。
+* PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True(形状 10 倍跨度防碎片,
+  写进 run_b2.slurm);num_workers 4→8(每 25 步耗时从 19.6–57.0s 稳到
+  12.1–13.0s,GPU 不再等 Lustre)。
+* 150,000 步 × 均值 197 窗/步 = 29.6M 呈现 = **15.4 epoch**;
+  0.50 s/step 实测 → ~21h,~250 SU。
+* pretrain.py 新增:每 log 间隔打印峰值显存;**--resume**(optimizer +
+  scheduler 状态,原子写 checkpoint)—— cosine 必须跑满才算退火,
+  中断即重续,walltime 30h 留裕量。
+
+## v2 vs v3 判决(旧 1.58-epoch checkpoint,存档,不当定论)
+
+| 语料 | scratch | v1 | v2(+pac) | v3(norm) |
+|---|---|---|---|---|
+| tuev | 0.7094 | 0.6891 | 0.6533 | 0.6753 |
+| isruc | 0.7117 | 0.6948 | 0.7000 | 0.6966 |
+| sleepedf | 0.6533 | 0.6746 | **0.6775** | 0.6664 |
+
+v3 赢 tuev、平 isruc、输 sleepedf;两者都打不过 scratch(tuev/isruc)——
+欠训问题目标函数换不掉。b2 三个 P3(tuab/tusz/chbmit)5h 才走 1–3/20
+epoch、10h walltime 内注定跑不完,08-26 取消止损(它们还压着 PT_v2full
+的 fair-share 优先级)。**FAME(arXiv:2608.01898)发表后 v3 即 FAME 目标
+—— 正式对比必须在修正日程上重做才对双方公平。**

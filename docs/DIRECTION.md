@@ -217,3 +217,20 @@ Objective for EEG Foundation Models*
 
 代码层 `paclock_*` 的重命名留到跑批结束后一次性做完(现在动会打断队列);
 表格与文档已切换到 CroFreMo。
+
+
+---
+
+## FAME 抢发与贡献点重排(2026-08-27)
+
+FAME(arXiv:2608.01898,08-03)逐字做了我们的频带标准化(per-band
+standardize + 等权)。处理:C3a 降为"采用 FAME 的做法"并引用;C3b
+(掩码频带的耦合列预测)仍无人做,升为 objective 侧唯一主张;v3 即
+FAME 目标,v2 vs v3 从内部消融升级为与已发表方法的头对头。开篇他们
+"加数据加容量不涨"的结论与我们 size 消融互证。
+
+## PT_v2full 判决后的预注册决策规则
+
+普遍胜 → 按计划;只在阵发类胜 → 论点证实(最优);仍只 TUSZ → γ 插值
+最后一发;仍不行 → tokenizer 贡献 + 诚实负结果,标题砍
+"and Pretraining Objective"。**任何分支都不回头动架构。**
