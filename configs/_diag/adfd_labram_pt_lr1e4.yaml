@@ -1,0 +1,31 @@
+# LaBraM lr probe: transplanted 5e-4 fails here (ADFD first-eval peak / CAUEEG flat val) while the same
+# recipe beats its published value on TUEV -- classic too-high finetune lr on a small corpus.
+batch_size: 64
+data_root: $PACLOCK_PROC/processed/adfd
+dataset: adfd
+device: cuda
+epochs: 50
+eval_every_steps: 100
+grad_clip: null
+group: B
+label_smoothing: 0.1
+layer_decay: 0.65
+loader: labram
+loss: cross_entropy
+lr: 0.0001
+max_hours: 22.5
+model: labram
+model_kwargs:
+  montage_mode: positional
+  target_len: 2000
+name: adfd-labram_pt_lr1e4
+num_classes: 3
+num_workers: 16
+optimizer: adamw
+patience: 10
+pretrained: true
+sample_rate: 200
+scheduler: cosine
+seed: 0
+warmup_epochs: 5
+weight_decay: 0.05
