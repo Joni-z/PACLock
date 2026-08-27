@@ -1,0 +1,27 @@
+# seed 0 fails identically across two independent runs (val peaks at
+# eval 0 and never clears chance) while seeds 1-2 train; transplanted
+# recipe, so probe half lr per the ADFD/LaBraM playbook.
+batch_size: 128
+data_root: $PACLOCK_PROC/processed/tuep
+dataset: tuep
+device: cuda
+epochs: 30
+eval_every_steps: 0
+grad_clip: 1.0
+group: B
+loss: bce_with_logits
+lr: 5.0e-05
+max_hours: 22.5
+model: reve
+model_kwargs:
+  dropout: 0.15
+name: tuep-reve_pt_lrhalf
+num_classes: 2
+num_workers: 8
+optimizer: adamw
+patience: 10
+pretrained: true
+sample_rate: 200
+scheduler: cosine
+seed: 0
+weight_decay: 0.01
