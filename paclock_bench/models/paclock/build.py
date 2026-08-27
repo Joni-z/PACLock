@@ -334,7 +334,10 @@ def load_pretrained_backbone(model: nn.Module, checkpoint_path: str,
     largest architectural factor. Excluding the tokenizer explicitly gives a third
     arm at the SAME patch_len, so the pretrained tokenizer's contribution can be
     read off without the resolution moving underneath it."""
-    ckpt = torch.load(checkpoint_path, map_location="cpu")
+    # weights_only=False: corrected-schedule checkpoints carry optimizer and
+    # scheduler state for --resume, whose numpy scalars PyTorch>=2.6 refuses
+    # under the weights_only default. These are our own files.
+    ckpt = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     src = ckpt["model"] if "model" in ckpt else ckpt
     dst = model.state_dict()
     loaded, skipped, excluded_keys = [], [], []
