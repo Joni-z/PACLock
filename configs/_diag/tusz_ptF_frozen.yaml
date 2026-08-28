@@ -1,0 +1,50 @@
+# Frozen probe on the corrected-schedule checkpoint. Old probes:
+# tuev v1 0.6351 / v2 0.5184; tusz v1 0.4842 / v2 0.5417. If ptF
+# probes rise, the representation is fine and the finetune recipe
+# is the culprit; if they collapse, the pretraining itself
+# over-specialized to reconstruction.
+batch_size: 32
+checkpoint: pretrain_runs_full/pretrain-duplex_v2_full/checkpoint.pt
+checkpoint_exclude:
+- frontend.tokenizer
+- frontend.phase_tokenizer
+- frontend.amplitude_tokenizer
+data_root: $PACLOCK_PROC/processed/tusz
+dataset: tusz
+device: cuda
+epochs: 20
+eval_every_steps: 200
+freeze_backbone: true
+grad_clip: 1.0
+group: pretrain_ft
+loss: bce_with_logits
+lr: 0.0001
+max_hours: 22.5
+model: paclock
+model_kwargs:
+  arch: triaxial
+  augmentations: []
+  band_pe: index
+  d_model: 128
+  depth: 6
+  dropout: 0.2
+  freq_mixer: attention
+  interaction_mode: rotation
+  kernel_size: 201
+  n_bands: 8
+  n_heads: 4
+  pac_patch_len: 50
+  pac_token_mode: measured
+  patch_len: 50
+  spatial_pe: xyz
+  tokenizer_mode: duplex
+name: tusz-paclock_ptF_frozen
+num_classes: 2
+num_workers: 8
+optimizer: adamw
+patience: 20
+sample_rate: 200
+scheduler: cosine
+seed: 0
+val_subsample: 20000
+weight_decay: 1.0e-05
