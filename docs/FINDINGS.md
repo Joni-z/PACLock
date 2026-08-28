@@ -1189,3 +1189,22 @@ BIOT −0.010、TFM −0.010。TUEV(17 锚点):多数达标或超标(LaBraM-pre
 EEGConformer(2 seed AUROC 0.5008)、Siena/ST-T、TUEP/REVE、
 CAUEEG/CBraMod-scr(各 1 seed val 首评即峰)。留空是保守正确:全是
 baseline 的格子,填入只会缩小我们的优势。
+
+## 5.6 修正日程预训练的判决(2026-08-28,探针背书)
+
+九语料 scratch vs ptF(15.4 epoch,band_norm_pac):1 大胜(Siena +0.358,
+逐被试分析证实捞回 PN14/16)、3 平(TUEP/TUAB/Sleep-EDF)、其余为负,
+TUSZ 从欠训 checkpoint 的 +0.08 反转为 -0.14。分离实验排除微调配方混淆:
+
+* TUEV 微调 lr/3=0.6097、lr/10=0.5699,天花板距 scratch 0.7094 差 0.10,
+  且仅比冻结探针 0.5813 高 0.03 —— 预训练初始化锁死优化盆地;
+* 冻结探针对比旧 checkpoint:TUSZ 0.5417(v2)-> 0.4860(ptF),
+  表示随重建目标收敛而丢失任务信息;TUEV 0.5184 -> 0.5813,略升但微调受锁。
+
+机制与 Kommineni(2605.26434)一致:重建式目标越收敛,嵌入越偏向
+非周期成分。旧 v2 的 TUSZ 增益是"欠训=温和正则"的红利。Siena 例外
+成立于低标注(326 正例):监督不足处,通用特征决定性有效。
+
+**待 Zhizhe 拍板**:A 保标题做"提出+严格评测";B 砍标题后半;
+C 轨迹实验(存每 10k checkpoint,画迁移质量 vs 预训练时长曲线,
+~100-250 SU)。倾向 C+A。
