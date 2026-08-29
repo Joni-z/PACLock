@@ -455,3 +455,18 @@ C3c 配对掩码 + 泄漏控制(使 C3b 良定义)。
 Setup 全节、Method 3.1/3.2(记号 + tokenizer)、附录(split 审计、
 移植超参披露)≈ 2.5 页正文 + 附录零返工风险;3.3/3.4 公式不变,
 框架措辞等判决。Intro/Abstract/Results/Conclusion 等结果。
+
+## 语料名单定稿(2026-08-29,Zhizhe 拍板"先把数据集定下来")
+
+**12 个**:TUSZ, CHB-MIT, Siena, TUEV, IIIC, TUEP, ADFD, CAUEEG, TUAB
++ ISRUC, Sleep-EDF(睡眠边界任务,13 个 baseline 全 3-seed,我们 -0.042/-0.014
+小负,作为边界条件诚实报告)+ **Mumtaz2016(抑郁症,第 12 个)**:精神科
+临床契合定位,我们单 seed 0.9775;baseline 15 个 arm 已有 seed0,
+补 seed 1-2 的波已提交(MZ_*,2026-08-29)。
+
+**砍掉**:FACED(-0.40)、BCI-IV-2a(-0.22)、PhysioNet-MI(-0.27)——
+运动想象/情绪,不在阵发性临床定位内,且差距不可修。TUAR/EEGMat 备选
+不入正表(TUAR 伪迹任务理论上不利;EEGMat 认知小语料)。
+
+ISRUC/Sleep-EDF 缺的 7 个 arm(eegnet/eegconformer 未调参、eegpt/tfm
+scratch 沿用既定不跑政策、reve/csbrain/feat)记为已知空缺,不阻塞定稿。
