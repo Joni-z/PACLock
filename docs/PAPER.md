@@ -470,3 +470,11 @@ Setup 全节、Method 3.1/3.2(记号 + tokenizer)、附录(split 审计、
 
 ISRUC/Sleep-EDF 缺的 7 个 arm(eegnet/eegconformer 未调参、eegpt/tfm
 scratch 沿用既定不跑政策、reve/csbrain/feat)记为已知空缺,不阻塞定稿。
+
+## 名单修订(2026-08-30,Zhizhe:换 TUAR)
+
+Mumtaz 出表:补齐 3 seed 后暴露饱和(前五名挤 0.96-0.99,测试集差距折算
+十几个窗口),该列无分辨力,凑数不如不凑。数据保留在工作簿备 rebuttal。
+**TUAR(伪迹三分类)入表为第 12 个**:不饱和、临床工作流真实任务、TUH
+家族一致;小语料(20,650 窗)且 CBraMod 自家预训练在此 +0.064,调参与
+ptF 两条线都有戏。baseline 补 seed 波(TR_*)与我们的 4 探针已提交。
