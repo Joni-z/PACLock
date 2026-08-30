@@ -1,0 +1,46 @@
+# Winner-shaped val-tuning probe: our model never received the
+# per-corpus tuning every baseline got here (column winners run
+# 50-100 epochs at lr up to 1e-3; ours ran a transplanted 20-epoch
+# lr 1e-4 recipe). Single seed; winner is promoted to the cell
+# recipe per the ADFD/LaBraM playbook.
+accum_steps: 4
+batch_size: 32
+data_root: $PACLOCK_PROC/processed/mumtaz
+dataset: mumtaz
+device: cuda
+epochs: 60
+eval_every_steps: 200
+focal_alpha: 0.25
+focal_gamma: 2.0
+grad_clip: 1.0
+group: C
+loss: bce_with_logits
+lr: 0.0003
+max_hours: 22.5
+model: paclock
+model_kwargs:
+  arch: triaxial
+  augmentations: []
+  band_pe: index
+  d_model: 128
+  depth: 6
+  dropout: 0.2
+  freq_mixer: attention
+  interaction_mode: rotation
+  kernel_size: 201
+  n_bands: 8
+  n_heads: 4
+  pac_patch_len: 50
+  pac_token_mode: measured
+  patch_len: 50
+  spatial_pe: xyz
+  tokenizer_mode: duplex
+name: mumtaz-paclock_tune_t1
+num_classes: 2
+num_workers: 8
+optimizer: adamw
+patience: 20
+sample_rate: 200
+scheduler: cosine
+seed: 0
+weight_decay: 1.0e-05
