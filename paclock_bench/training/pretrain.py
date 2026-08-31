@@ -69,6 +69,8 @@ def main():
     ap.add_argument("--config", required=True)
     ap.add_argument("--seed", type=int, default=None)
     ap.add_argument("--out", default="pretrain_runs")
+    ap.add_argument("--resume", action="store_true",
+                    help="continue from <out>/<name>/checkpoint.pt if present")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(open(args.config))
@@ -117,9 +119,29 @@ def main():
     os.makedirs(os.path.join(args.out, cfg["name"]), exist_ok=True)
     ckpt_path = os.path.join(args.out, cfg["name"], "checkpoint.pt")
 
+    # Resume. A corrected-schedule run is ~20h on one GPU with no second
+    # chance in the SU budget, so the checkpoint carries optimizer and
+    # scheduler state, not just weights: restarting from weights alone would
+    # restart Adam's moments and re-enter the cosine at lr=0, which is worse
+    # than useless mid-run. Dataloader position is deliberately NOT restored
+    # -- corpora are sampled i.i.d. per step, so a fresh iterator is
+    # distributionally identical to the one that was interrupted.
+    start_step = 1
+    if args.resume and os.path.exists(ckpt_path):
+        ck = torch.load(ckpt_path, map_location=device, weights_only=False)
+        model.load_state_dict(ck["model"])
+        if "opt" in ck:
+            opt.load_state_dict(ck["opt"])
+            sched.load_state_dict(ck["sched"])
+            start_step = int(ck["step"]) + 1
+            print("resumed from step %d" % ck["step"], flush=True)
+        else:
+            print("checkpoint has weights only; optimizer state restarts",
+                  flush=True)
+
     t0 = time.time()
     model.train()
-    for step in range(1, steps + 1):
+    for step in range(start_step, steps + 1):
         ci = np.random.choice(len(corpora), p=weights)
         name, loader, _, _ = corpora[ci]
         try:
@@ -146,14 +168,35 @@ def main():
                 v = running[nm]
                 parts.append("%s=%.4f(%d)" % (nm, np.mean(v) if v else float("nan"), len(v)))
                 running[nm] = []
-            print("step %6d/%d  %5.1fs  lr=%.2e  %s" % (
-                step, steps, elapsed, sched.get_last_lr()[0], "  ".join(parts)), flush=True)
+            # peak GPU memory since the last log: the pool mixes shapes from
+            # (2,3000) to (32,2000), a 10x span, so a batch that fits one
+            # corpus can be 2x over the card on another (this is exactly how
+            # the 2026-08-26 batch-256 probe died at step ~200). Printing the
+            # peak per interval makes the headroom visible instead of fatal.
+            peak = (torch.cuda.max_memory_allocated() / 2**30
+                    if torch.cuda.is_available() else 0.0)
+            torch.cuda.reset_peak_memory_stats() if torch.cuda.is_available() else None
+            print("step %6d/%d  %5.1fs  %4.1fGiB  lr=%.2e  %s" % (
+                step, steps, elapsed, peak, sched.get_last_lr()[0],
+                "  ".join(parts)), flush=True)
             t0 = time.time()
 
         save_every = cfg.get("save_every_steps", steps)
         if step % save_every == 0 or step == steps:
-            torch.save({"model": model.state_dict(), "cfg": cfg, "step": step},
-                      ckpt_path)
+            torch.save({"model": model.state_dict(), "opt": opt.state_dict(),
+                        "sched": sched.state_dict(), "cfg": cfg, "step": step},
+                       ckpt_path + ".tmp")
+            os.replace(ckpt_path + ".tmp", ckpt_path)   # atomic: a kill during
+            if cfg.get("save_numbered"):
+                # numbered snapshots for trajectory probing: the v2-full run
+                # overwrote a single file, so the transfer-vs-duration curve
+                # could never be reconstructed and the degradation question
+                # cost a rerun. 20MB each; keep them all.
+                import shutil
+                shutil.copyfile(ckpt_path, ckpt_path.replace(
+                    "checkpoint.pt", f"checkpoint_{step}.pt"))
+            #   torch.save would otherwise leave a truncated checkpoint and
+            #   destroy the very thing resume depends on
             print("  -> saved %s (step %d)" % (ckpt_path, step), flush=True)
 
     print("pretraining done -> %s" % ckpt_path)

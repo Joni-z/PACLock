@@ -1,0 +1,123 @@
+# v3 (band_norm only, = FAME) at the corrected schedule, with numbered
+# checkpoints every 20k for trajectory probing. Fills the missing 2x2
+# cell: does the converged-reconstruction degradation need the coupling
+# term, or is it a family property? Readout is frozen probes only --
+# no finetune wave. Pre-registered: probes decline = family property;
+# probes rise above scratch-frozen = the coupling regression term was
+# the culprit and FAME-at-convergence is live on this architecture.
+# Duplex pretraining, CORRECTED SCHEDULE (2026-08-26).
+#
+# Why this exists: the 60k/batch-32 runs saw each window 1.58 times
+# (60000*32 = 1.92M presentations over a 1.22M-window pool). That is a warm
+# start, not pretraining, and the downstream pattern says so -- the resulting
+# checkpoint helped only where scratch was weakest (TUSZ +0.082) and hurt
+# where scratch was strongest (TUEV -0.056), which is the signature of a
+# half-converged prior, not of a capacity limit. Our own size ablation
+# agrees: d_model 256 (8.6M) tied d_model 128 (1.6M) across 8 metrics at 3
+# seeds, because parameters cannot rescue a schedule-bound run. TFM-Tokenizer
+# (ICLR 2026) reaches strong numbers at 1.89M params -- our size -- with 100
+# tokenizer epochs at batch 256 plus 50 encoder epochs at batch 512, lr 1e-3.
+#
+# Changes from duplex_base, all schedule, none architectural:
+#   lr    1e-4 -> 1e-3        (TFM's value, and ~linear in the batch scaling)
+#   pool  +tueg_slice         (706,817 windows, b2-only -- absent on amd,
+#                              which is why every previous run pretrained on
+#                              downstream corpora alone: the most favourable
+#                              possible transfer setting, and it still did
+#                              not transfer)
+#   batch 32 -> SHAPE-AWARE, equalizing C*T*batch across corpora.
+#
+# That last one is not a tuning knob, it is a bug fix. This pool spans
+# (2,3000) to (32,2000) -- a 10x range in C*T -- and activation memory is
+# linear in it. A uniform batch 256 held 77GiB of an 80GiB H100 on tuab
+# (16,2000) and therefore could not survive faced (32,2000) being drawn: the
+# probe died at step ~200 in exactly that way. Batches below hold
+# C*T*batch = 32000*192 constant, capped at 256.
+#
+# Sizing (measured, probe 44508232 -- 250 steps, all corpora incl. the
+# worst-shape one): 0.50 s/step at 44.8 of 79.2 GiB peak, 12.1-13.0 s per 25
+# steps. The 2.25x speedup over the batch-256 probe is num_workers 4 -> 8;
+# the flat per-interval timing says the GPU is no longer waiting on Lustre.
+#
+#   150,000 steps  x  197 windows/step (pool-weighted mean of the per-corpus
+#                                       batches above)
+#   = 29.6M presentations over a 1,922,268-window pool
+#   = 15.4 epochs,  against 1.58 for every previous run.
+#
+# ~21h on one H100 (12 SU/h -> ~250 of the 587 SU left). The cosine schedule
+# is defined over these 150k steps, so the run has to REACH them for the
+# checkpoint to be annealed -- hence --resume, and a 30h wall clock for slack.
+
+name: pretrain-duplex_v3_traj
+group: pretrain
+corpora:
+- name: tuab
+  data_root: $PACLOCK_PROC/processed/tuab
+  flatten_sequences: false
+  batch_size: 192
+- name: tuev
+  data_root: $PACLOCK_PROC/processed/tuev
+  flatten_sequences: false
+  batch_size: 256
+- name: tusz
+  data_root: $PACLOCK_PROC/processed/tusz
+  flatten_sequences: false
+  batch_size: 192
+- name: chbmit
+  data_root: $PACLOCK_PROC/processed/chbmit
+  flatten_sequences: false
+  batch_size: 192
+- name: sleepedf
+  data_root: $PACLOCK_PROC/processed/sleepedf
+  flatten_sequences: false
+  batch_size: 256
+- name: isruc
+  data_root: $PACLOCK_PROC/processed/isruc
+  flatten_sequences: true
+  batch_size: 168
+- name: physionet_mi
+  data_root: $PACLOCK_PROC/processed/physionet_mi
+  flatten_sequences: false
+  batch_size: 120
+- name: faced
+  data_root: $PACLOCK_PROC/processed/faced
+  flatten_sequences: false
+  batch_size: 96
+- name: bci_iv_2a
+  data_root: $PACLOCK_PROC/processed/bci_iv_2a
+  flatten_sequences: false
+  batch_size: 256
+- name: tueg_slice
+  data_root: $PACLOCK_PROC/processed/tueg_slice
+  flatten_sequences: false
+  batch_size: 192
+model_kwargs:
+  arch: triaxial
+  d_model: 128
+  depth: 6
+  n_bands: 8
+  n_heads: 4
+  dropout: 0.1
+  kernel_size: 201
+  tokenizer_mode: duplex
+  pac_token_mode: measured
+  interaction_mode: rotation
+  freq_mixer: attention
+  band_pe: index
+  patch_len: 200
+  aux_target: band_norm
+  aux_pac_weight: 1.0
+  aux_mask_ratio: 0.5
+sample_rate: 200
+optimizer: adamw
+lr: 0.001
+weight_decay: 0.01
+grad_clip: 1.0
+steps: 100000
+warmup_steps: 6000
+batch_size: 192
+num_workers: 8
+log_every_steps: 250
+save_every_steps: 20000
+save_numbered: true
+seed: 0
