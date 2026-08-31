@@ -1,0 +1,50 @@
+# Label-fraction ablation: stratified subsample of the training
+# split to 10% (6844 windows). Scratch vs the corrected-schedule
+# checkpoint. TUSZ is where pretraining helped, TUEV where it
+# hurt; the two curves test whether pretraining value is a
+# function of label quantity or of the task.
+batch_size: 32
+checkpoint: pretrain_runs_full/pretrain-duplex_v2_full/checkpoint.pt
+checkpoint_exclude:
+- frontend.tokenizer
+- frontend.phase_tokenizer
+- frontend.amplitude_tokenizer
+data_root: $PACLOCK_PROC/processed/tuev
+dataset: tuev
+device: cuda
+epochs: 20
+eval_every_steps: 0
+grad_clip: 1.0
+group: pretrain_ft
+label_smoothing: 0.1
+loss: cross_entropy
+lr: 0.0001
+model: paclock
+model_kwargs:
+  arch: triaxial
+  augmentations: []
+  band_pe: index
+  d_model: 128
+  depth: 6
+  dropout: 0.2
+  freq_mixer: attention
+  interaction_mode: rotation
+  kernel_size: 201
+  n_bands: 8
+  n_heads: 4
+  pac_patch_len: 50
+  pac_token_mode: measured
+  patch_len: 50
+  spatial_pe: xyz
+  tokenizer_mode: duplex
+name: tuev-paclock_lf10_ptF
+num_classes: 6
+num_workers: 8
+optimizer: adamw
+patience: 20
+sample_rate: 200
+scheduler: cosine
+seed: 0
+train_subsample: 6844
+train_subsample_seed: 0
+weight_decay: 1.0e-05

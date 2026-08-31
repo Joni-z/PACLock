@@ -442,6 +442,21 @@ def main():
         "data_manifest_created": info["manifest"].get("created_utc"),
         "class_counts": info["class_counts"],
     }
+    # Learned coupling gates, reported per corpus in the paper: |beta_b|
+    # (fused-row blend, zero-init) and gamma_b (interaction-row gate,
+    # unit-init). Finetune runs keep no checkpoint, so this is the only
+    # record of what each task retained.
+    try:
+        fe = getattr(model, "frontend", None)
+        gates = {}
+        if fe is not None and hasattr(fe, "fusion_beta"):
+            gates["beta_norm"] = fe.fusion_beta.detach().norm(dim=-1).cpu().tolist()
+        if fe is not None and hasattr(fe, "interaction_gate"):
+            gates["gamma"] = fe.interaction_gate.detach().cpu().tolist()
+        if gates:
+            result["gates"] = gates
+    except Exception as e:                                    # noqa: BLE001
+        print(f"[gates] not recorded: {type(e).__name__}: {e}", flush=True)
     with open(os.path.join(out_dir, "result.json"), "w") as f:
         json.dump(result, f, indent=2)
     print(f"-> {out_dir}/result.json", flush=True)
