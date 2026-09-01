@@ -1,0 +1,48 @@
+# Probe at lr 1e-3, MATCHING the reference probes (probe_v1/v2/rand). The
+# first trajectory/ptF probes inherited lr 1e-4 from the finetune recipe;
+# a linear head at a tenth of the reference lr is undertrained, so those
+# numbers were not comparable to the reference lines. 2026-09-01.
+batch_size: 32
+checkpoint: pretrain_runs_traj/pretrain-duplex_v3_traj/checkpoint_40000.pt
+checkpoint_exclude:
+- frontend.tokenizer
+- frontend.phase_tokenizer
+- frontend.amplitude_tokenizer
+data_root: $PACLOCK_PROC/processed/tuev
+dataset: tuev
+device: cuda
+epochs: 20
+eval_every_steps: 0
+freeze_backbone: true
+grad_clip: 1.0
+group: pretrain_ft
+label_smoothing: 0.1
+loss: cross_entropy
+lr: 0.001
+model: paclock
+model_kwargs:
+  arch: triaxial
+  augmentations: []
+  band_pe: index
+  d_model: 128
+  depth: 6
+  dropout: 0.2
+  freq_mixer: attention
+  interaction_mode: rotation
+  kernel_size: 201
+  n_bands: 8
+  n_heads: 4
+  pac_patch_len: 50
+  pac_token_mode: measured
+  patch_len: 50
+  spatial_pe: xyz
+  tokenizer_mode: duplex
+name: tuev-paclock_v3traj_40000frozenL3
+num_classes: 6
+num_workers: 8
+optimizer: adamw
+patience: 20
+sample_rate: 200
+scheduler: cosine
+seed: 0
+weight_decay: 1.0e-05
