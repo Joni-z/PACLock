@@ -57,7 +57,13 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 | PT_v2full 44508503 | b2 h100 | 修正日程预训练:150k 步 × 均值 batch 197 = 15.4 epoch,band_norm_pac,+TUEG | ~50%,ETA 08-27 晚 |
 | SIENA_b128 386667 | amd | Siena 修 batch(32→128, epochs 60) | 排队 |
 
-## 4. PT_v2full 出来后的决策规则(预注册,不看结果改口)
+## 4. 预训练判决(已定稿,见 FINDINGS 5.6)
+
+结局:标题走 token-content 版(已改),预训练为分析章节。机制分语料(TUEV
+优化锁死 / TUSZ 表示退化),耦合项作用 corpus-dependent,低标注例外成立。
+**不再开预训练实验。** 下文为当初的预注册规则,存档:
+
+## 4a. (存档)PT_v2full 出来后的决策规则
 
 | 结果 | 动作 |
 |---|---|
