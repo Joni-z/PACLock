@@ -34,6 +34,8 @@ from functools import partial
 from multiprocessing import Pool
 
 import numpy as np
+
+from paclock_bench.paths import expand
 import yaml
 
 from .common import (
@@ -131,7 +133,7 @@ def main():
                     default=int(os.environ.get("SLURM_CPUS_PER_TASK", 16)))
     args = ap.parse_args()
     cfg = yaml.safe_load(open(args.config))
-    root, out_dir = cfg["raw_root"], cfg["out_dir"]
+    root, out_dir = expand(cfg["raw_root"]), expand(cfg["out_dir"])
     sp = cfg["split"]
     man = Manifest(dataset=cfg["dataset"], protocol=cfg)
 

@@ -17,6 +17,8 @@ import os
 from collections import Counter
 
 import numpy as np
+
+from paclock_bench.paths import expand
 import yaml
 
 from .common import (
@@ -94,10 +96,10 @@ def main():
                     default=int(os.environ.get("SLURM_CPUS_PER_TASK", 8)))
     args = ap.parse_args()
     cfg = yaml.safe_load(open(args.config))
-    out_dir = cfg["out_dir"]
+    out_dir = expand(cfg["out_dir"])
     sp = cfg["split"]
 
-    os.environ.setdefault("MNE_DATA", cfg["raw_root"])
+    os.environ.setdefault("MNE_DATA", expand(cfg["raw_root"]))
     from moabb.datasets import BNCI2014_001
 
     ds = BNCI2014_001()
