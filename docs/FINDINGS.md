@@ -1259,7 +1259,10 @@ TUEV 对(configs/pretrain_ft/tuev_duplex_p200{,ptF}.yaml,单 seed,20 epoch,同�
    时间轴注意力基本失效。下游网格留在 50 是对的;预训练与下游网格不一致是既定事实,
    要消除只能在 50 网格上重新预训练(成本 ≈ 4× token 数),本轮不做。
 
-TUSZ / CHB-MIT 的同名对正在 amd 跑(P200_0/P200_1),落地后补到本表;b2 镜像由 harvester 撤。
+TUSZ 对(同配方,AUC-PR,单 seed):scratch@200 0.6140 vs ptF@200 **0.6296**(+0.016);
+对照表内 50 网格:scratch 0.68 量级、v2 预训练(tokenizer 重初始化)0.7143。方向与 5.6 一致——
+TUSZ 上预训练不伤、略帮(表示漂移型语料),但 patch 200 本身仍贵 8–9 点。
+CHB-MIT 对在跑(P200_1),落地后补;b2 镜像由 harvester 撤(tuev、tusz 已撤)。
 
 ## 5.7 结案
 

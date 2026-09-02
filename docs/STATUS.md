@@ -62,7 +62,7 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 结局:标题走 token-content 版(已改),预训练为分析章节。机制分语料(TUEV
 优化锁死 / TUSZ 表示退化),耦合项作用 corpus-dependent,低标注例外成立。
 **不再开预训练实验。** 下文为当初的预注册规则,存档:
-- 09-03 patch-200 全量加载对照(TUEV):scratch@200 0.6094 vs ptF@200 0.5306(−0.079);害处不是 tokenizer 重初始化工件,5.6 判决成立。详见 FINDINGS 5.8。TUSZ/CHB-MIT 对在跑。
+- 09-03 patch-200 全量加载对照(TUEV):scratch@200 0.6094 vs ptF@200 0.5306(−0.079);害处不是 tokenizer 重初始化工件,5.6 判决成立。详见 FINDINGS 5.8。TUSZ 对:scratch@200 0.6140 vs ptF@200 0.6296(+0.016,方向与 5.6 一致)。CHB-MIT 对在跑。
 
 ## 4a. (存档)PT_v2full 出来后的决策规则
 
