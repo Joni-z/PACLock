@@ -1262,7 +1262,11 @@ TUEV 对(configs/pretrain_ft/tuev_duplex_p200{,ptF}.yaml,单 seed,20 epoch,同�
 TUSZ 对(同配方,AUC-PR,单 seed):scratch@200 0.6140 vs ptF@200 **0.6296**(+0.016);
 对照表内 50 网格:scratch 0.68 量级、v2 预训练(tokenizer 重初始化)0.7143。方向与 5.6 一致——
 TUSZ 上预训练不伤、略帮(表示漂移型语料),但 patch 200 本身仍贵 8–9 点。
-CHB-MIT 对在跑(P200_1),落地后补;b2 镜像由 harvester 撤(tuev、tusz 已撤)。
+CHB-MIT 对(同配方,AUC-PR,单 seed):scratch@200 0.5486 vs ptF@200 0.5448(−0.004,平)。
+
+三对合起来(全量加载、网格对齐、单 seed):TUEV −0.079,TUSZ +0.016,CHB-MIT −0.004。
+5.6 的判决原样成立:预训练收益语料相关、平均为零,害处不是 tokenizer 重初始化的工件;
+标题维持 token-content 版,预训练作分析章节;下游网格留在 50。b2 三对镜像均已撤,未耗 SU。
 
 ## 5.7 结案
 
