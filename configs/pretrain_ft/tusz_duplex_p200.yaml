@@ -1,18 +1,17 @@
-# FULL checkpoint load: the three tokenizer projections are no longer
-# excluded. The exclusion dates from a patch_len-50 pilot (PRETRAIN.md 8)
-# and was carried into every pt2/ptF config after patch_len froze at 200,
-# so every pretrained finetune so far paired a pretrained encoder with a
-# RANDOM tokenizer. Hypothesis: the interface mismatch, not the
-# representation, explains pretraining losing to scratch. 2026-09-02.
+# patch_len 200 = the PRETRAINING patch. Every previous finetune ran at 50:
+# a 1-second-token encoder applied to a 0.25-second grid with the three
+# patch-shaped tokenizer convs forced to re-initialise (shape mismatch),
+# i.e. pretrained encoder + random tokenizer + foreign grid. This pair
+# (scratch@200 vs full-load pretrained@200) is the first clean test of
+# whether the pretraining transfers at all. 2026-09-02.
 batch_size: 32
-checkpoint: pretrain_runs_full/pretrain-duplex_v2_full/checkpoint.pt
 data_root: $PACLOCK_PROC/processed/tusz
 dataset: tusz
 device: cuda
 epochs: 20
 eval_every_steps: 200
 grad_clip: 1.0
-group: pretrain_ft
+group: C
 loss: bce_with_logits
 lr: 0.0001
 max_hours: 22.5
@@ -29,12 +28,12 @@ model_kwargs:
   kernel_size: 201
   n_bands: 8
   n_heads: 4
-  pac_patch_len: 50
+  pac_patch_len: 200
   pac_token_mode: measured
-  patch_len: 50
+  patch_len: 200
   spatial_pe: xyz
   tokenizer_mode: duplex
-name: tusz-paclock_duplex_ptFfull
+name: tusz-paclock_duplex_p200
 num_classes: 2
 num_workers: 8
 optimizer: adamw
