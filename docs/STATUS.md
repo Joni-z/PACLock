@@ -91,3 +91,11 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 * IIIC 按 BIOT 原协议的"保险行"(我们模型一次训练)—— Zhizhe 未拍板。
 * 代码层 paclock_* → CroFreMo 重命名,等队列排空。
 * 用户侧:AWS key 与 HF token 建议轮换(注入消息事件后),未确认完成。
+
+## 6. 第三个集群:NYU Torch(2026-09-03 起)
+
+- 仓库 `/scratch/zz5070/PACLock`(与 GitHub main 同步);环境 conda `py312`(torch 2.8+cu128,numpy 2.0.2 / scipy 1.13.1 与 amd 一致;scipy≥1.17 会让 mne 1.8 导入失败)。
+- 数据:`PACLOCK_DATA=/scratch/zz5070/data/raw`,`PACLOCK_PROC=/scratch/zz5070/data`;已就绪 `processed/tuev`、`processed/tusz`(由 torch 上的原始 edf 重新预处理,split 大小与各类计数与 amd 完全一致;样本顺序不同,`imap_unordered` 所致)。其余语料需从 amd 拉或重新下载。
+- 投递:`sbatch -A torch_pr_63_tandon_advanced -p h100_tandon|a100_tandon|h200_tandon slurm/torch_run.slurm <cfg> [seed]`,或 `-A torch_pr_63_general -p h200_public|l40s_public`;`--array=0-2` 跑三 seed。CPU:`-A torch_pr_63_general -p cpu_short`(≤4h,内存上限 120G)。
+- 队列很深(排 1–2 小时起),适合不赶时间的批量任务;H200 上 TUEV 一个 epoch 约 8 分钟(amd MI210 约 12 分钟)。
+- 进行中:`tuev_paclock_duplex` seed 0 跨集群复现(对照 amd κ 0.7094)。
