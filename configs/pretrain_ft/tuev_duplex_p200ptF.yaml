@@ -16,6 +16,7 @@ group: C
 label_smoothing: 0.1
 loss: cross_entropy
 lr: 0.0001
+max_hours: 14.0
 model: paclock
 model_kwargs:
   arch: triaxial

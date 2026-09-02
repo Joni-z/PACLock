@@ -14,7 +14,7 @@ grad_clip: 1.0
 group: C
 loss: bce_with_logits
 lr: 0.0001
-max_hours: 22.5
+max_hours: 14.0
 model: paclock
 model_kwargs:
   arch: triaxial
