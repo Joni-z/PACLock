@@ -4,7 +4,11 @@
 # corpus's cbramod_scratch config so the only variable is the tokenizer.
 # The claim under test is TFM-Tokenizer's own: the tokenizer carries the
 # result across backbones. 2026-09-02.
-batch_size: 64
+# ISRUC is a 20-epoch sequence task: batch 64 x 20 windows through the sinc/
+# Hilbert frontend OOMs the 64GB MI210 (job 401206). Physical 16 x accum 4
+# keeps the effective batch at CBraMod's 64.
+accum_steps: 4
+batch_size: 16
 data_root: $PACLOCK_PROC/processed/isruc
 dataset: isruc
 device: cuda
