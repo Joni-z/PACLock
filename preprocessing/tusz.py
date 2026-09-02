@@ -122,8 +122,8 @@ def run_group(paths, cfg, jobs, man, tag):
             man.raw_sha256[os.path.basename(path)] = sha
     if not X_all:
         raise RuntimeError(f"{tag}: every recording was excluded")
-    return (np.concatenate(X_all).astype(np.float32),
-            np.concatenate(y_all).astype(np.int64), subs, tail_total)
+    return (np.concatenate(X_all).astype(np.float32, copy=False),
+            np.concatenate(y_all).astype(np.int64, copy=False), subs, tail_total)
 
 
 def main():

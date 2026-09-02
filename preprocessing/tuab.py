@@ -103,8 +103,8 @@ def run_group(items, cfg, jobs, manifest, tag):
             manifest.raw_sha256[os.path.basename(path)] = sha
     if not X_all:
         raise RuntimeError(f"{tag}: every recording was excluded")
-    X = np.concatenate(X_all).astype(np.float32)
-    y = np.concatenate(y_all).astype(np.int64)
+    X = np.concatenate(X_all).astype(np.float32, copy=False)
+    y = np.concatenate(y_all).astype(np.int64, copy=False)
     return X, y, subs, tail_total
 
 
