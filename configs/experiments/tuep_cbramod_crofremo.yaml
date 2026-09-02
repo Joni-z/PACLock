@@ -1,0 +1,34 @@
+# Portability arm: CBraMod's encoder/head verbatim, its PatchEmbedding
+# replaced by CroFreMo's duplex+rotation tokenizer (bands mean-pooled to
+# CBraMod's one-token-per-(channel,patch)). Recipe copied from the
+# corpus's cbramod_scratch config so the only variable is the tokenizer.
+# The claim under test is TFM-Tokenizer's own: the tokenizer carries the
+# result across backbones. 2026-09-02.
+batch_size: 64
+data_root: $PACLOCK_PROC/processed/tuep
+dataset: tuep
+device: cuda
+epochs: 50
+eval_every_steps: 0
+grad_clip: 1.0
+group: portability
+loader: null
+loss: bce_with_logits
+lr: 0.0001
+max_hours: 22.5
+model: cbramod_paclockfe
+model_kwargs:
+  dropout: 0.1
+  interaction_mode: rotation
+  tokenizer_mode: duplex
+multi_lr: true
+name: tuep-cbramod_crofremo
+num_classes: 2
+num_workers: 16
+optimizer: adamw
+patience: 0
+sample_rate: 200
+scheduler: cosine
+seed: 0
+select_metric: auroc
+weight_decay: 0.05
