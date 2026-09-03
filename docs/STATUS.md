@@ -98,9 +98,9 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 - 数据:`PACLOCK_DATA=/scratch/zz5070/data/raw`,`PACLOCK_PROC=/scratch/zz5070/data`;已就绪 `processed/tuev`、`processed/tusz`(由 torch 上的原始 edf 重新预处理,split 大小与各类计数与 amd 完全一致;样本顺序不同,`imap_unordered` 所致)。其余语料需从 amd 拉或重新下载。
 - 投递:`sbatch -A torch_pr_63_tandon_advanced -p h100_tandon|a100_tandon|h200_tandon slurm/torch_run.slurm <cfg> [seed]`,或 `-A torch_pr_63_general -p h200_public|l40s_public`;`--array=0-2` 跑三 seed。CPU:`-A torch_pr_63_general -p cpu_short`(≤4h,内存上限 120G)。
 - 队列很深(排 1–2 小时起),适合不赶时间的批量任务;H200 上 TUEV 一个 epoch 约 8 分钟(amd MI210 约 12 分钟)。
-- 进行中:`tuev_paclock_duplex` seed 0 跨集群复现(对照 amd κ 0.7094)。
+- 跨集群复现(09-03):`tuev_paclock_duplex` seed 0 在 H200 上 test κ 0.6969(amd MI210 同配置 0.7094;best val 0.572 vs 0.609),1.95 h。差 0.0125,在单 seed 噪声内(TUEV 三 seed 的 CBraMod 基线 std ≈ 0.02);torch 结果可入表,但同一格的三个 seed 应在同一集群跑。
 
-## 7. 移植波(TP_*,CBraMod 编码器 + 我们的 duplex 前端,从零训练,3 seed;09-03 中期,5/11 落地)
+## 7. 移植波(TP_*,CBraMod 编码器 + 我们的 duplex 前端,从零训练,3 seed;09-03 中期,6/11 落地)
 
 | 语料 | 移植(3 seed) | CBraMod 从零(3 seed) | Δ | CBraMod 预训练(3 seed) |
 |---|---|---|---|---|
@@ -109,8 +109,9 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 | CAUEEG (BAcc) | 0.4270±0.068 | 0.4266±0.067 | 0(双方各有 seed 塌到 0.333) | 0.5145±0.025 |
 | Sleep-EDF (κ) | 0.6084±0.001 | 0.6545±0.003 | **−0.046** | 0.6715±0.004 |
 | Siena (AUC-PR) | 0.089±0.065 | 0.199±0.050 | −0.11(两者都在正样本饥饿地板上) | 0.4243±0.052 |
+| IIIC (κ) | 0.3100±0.009 | 0.3935±0.005 | **−0.083** | 0.3133±0.016 |
 
-未落地:TUSZ、CHB-MIT、IIIC、TUEP、TUAB、ISRUC(仍在跑)。旧 Line-B 单 seed 曾见 CHB-MIT 0.508 vs 0.317。
+未落地:TUSZ、CHB-MIT、TUEP、TUAB、ISRUC(仍在跑)。旧 Line-B 单 seed 曾见 CHB-MIT 0.508 vs 0.317。
 中期读法:前端搬到 CBraMod 上,事件/发作类语料受益(TUEV),睡眠分期受损(Sleep-EDF −0.046)——
 移植把 CBraMod 自带的 FFT 谱分支换掉、且把 8 个频带均值池化掉,谱功率信息变粗,睡眠最吃这一块。
 对会议第三点的含义:"即插即用"目前只对 paroxysmal 语料成立;要么在移植里保留频带轴(不池化),
