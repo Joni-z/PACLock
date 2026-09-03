@@ -27,3 +27,4 @@ vendor/
 # used which checkpoint at how many steps, so provenance survives without them.
 pretrain_runs/
 pretrain_runs_60k/
+ckpt/

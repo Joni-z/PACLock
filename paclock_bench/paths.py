@@ -31,6 +31,10 @@ DATA = os.environ.get("PACLOCK_DATA", "/work1/chenyuyou/yifanwang/data")
 # Parent of processed/, processed_pac/, processed_biot/, processed_labram/.
 PROC_ROOT = os.environ.get("PACLOCK_PROC", "/work1/chenyuyou/yifanwang/Zhizhe")
 
+# Pretraining checkpoints shipped between clusters: <REPO>/ckpt/ (gitignored on
+# main; the `ckpt` branch carries the files, `git checkout origin/ckpt -- ckpt/`).
+CKPT = os.environ.get("PACLOCK_CKPT", os.path.join(REPO, "ckpt"))
+
 VENDOR = os.path.join(REPO, "vendor")
 RUNS = os.path.join(REPO, "runs")
 RESULTS = os.path.join(REPO, "results")
@@ -63,4 +67,5 @@ def expand(path: str) -> str:
         return path
     os.environ.setdefault("PACLOCK_DATA", DATA)
     os.environ.setdefault("PACLOCK_PROC", PROC_ROOT)
+    os.environ.setdefault("PACLOCK_CKPT", CKPT)
     return os.path.expanduser(os.path.expandvars(path))

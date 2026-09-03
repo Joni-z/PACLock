@@ -211,9 +211,12 @@ def main():
         # LaBraM scales the LR by depth (--layer_decay 0.65). Without it the
         # pretrained blocks train at the head's rate and the recipe is not
         # LaBraM's any more.
-        from .param_groups import layer_decay_param_groups
+        from .param_groups import layer_decay_param_groups, paclock_layer_decay_param_groups
 
-        groups = layer_decay_param_groups(model, lr, wd, cfg["layer_decay"])
+        if hasattr(model, "encoder") and hasattr(model.encoder, "blocks"):
+            groups = paclock_layer_decay_param_groups(model, lr, wd, cfg["layer_decay"])
+        else:
+            groups = layer_decay_param_groups(model, lr, wd, cfg["layer_decay"])
         optimizer = opt_cls(groups)
         lrs = sorted({round(g["lr"], 8) for g in groups})
         print(f"  layer_decay={cfg['layer_decay']}: {len(groups)} groups, "
@@ -301,9 +304,29 @@ def main():
             since_best += 1
         model.train()
 
+    # Staged finetune (LP-FT style): for the first N epochs only the tensors
+    # that did NOT come from the checkpoint train (fresh tokenizer convs, head,
+    # spatial_pe), so a random tokenizer cannot drag the pretrained encoder
+    # off its solution before it has learned to speak the encoder's language.
+    freeze_loaded_epochs = int(cfg.get("freeze_loaded_epochs", 0))
+    loaded_keys = getattr(model, "_loaded_keys", set())
+    if freeze_loaded_epochs and loaded_keys:
+        n_frz = 0
+        for pname, prm in model.named_parameters():
+            if pname in loaded_keys:
+                prm.requires_grad_(False)
+                n_frz += 1
+        print(f"  stage 1: {n_frz} checkpoint-loaded tensors frozen for "
+              f"{freeze_loaded_epochs} epoch(s); fresh tensors train", flush=True)
+
     epoch = 0
     for epoch in range(epochs):
         model.train()
+        if freeze_loaded_epochs and loaded_keys and epoch == freeze_loaded_epochs:
+            for pname, prm in model.named_parameters():
+                if pname in loaded_keys:
+                    prm.requires_grad_(True)
+            print(f"  stage 2: all tensors trainable from epoch {epoch}", flush=True)
         running = []
         # Opt-in step breakdown. Three rounds of inferring the bottleneck from
         # aggregate throughput were wrong (kernel launches, then Lustre reads,

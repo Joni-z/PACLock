@@ -357,5 +357,8 @@ def load_pretrained_backbone(model: nn.Module, checkpoint_path: str,
         dst[k] = v
         loaded.append(k)
     model.load_state_dict(dst, strict=True)
+    # Remembered on the model so the finetune recipe can treat loaded and
+    # fresh tensors differently (staged unfreeze, per-depth LR).
+    model._loaded_keys = set(loaded)
     return {"loaded": loaded, "skipped_shape": skipped,
             "skipped_excluded": excluded_keys}

@@ -71,3 +71,48 @@ def layer_decay_param_groups(model: nn.Module, base_lr: float,
         groups[key]["params"].append(param)
 
     return [g for g in groups.values() if g["params"]]
+
+
+def paclock_layer_decay_param_groups(model: nn.Module, base_lr: float,
+                                     weight_decay: float, layer_decay: float):
+    """LaBraM's per-depth LR schedule mapped onto CroFreMo's naming.
+
+    Depth index: frontend / band_pe / mask_token = 0, encoder.blocks.i = i+1,
+    head / spatial_pe / montage = top. Same scale rule as upstream
+    (``layer_decay ** (num_max_layer - 1 - depth)``), so with base_lr 5e-4,
+    decay 0.65 and 6 blocks the head trains at 5e-4, block 5 at 3.3e-4, block 0
+    at 3.8e-5, the loaded frontend at 2.5e-5.
+
+    Tensors NOT loaded from the checkpoint (``model._loaded_keys``, set by
+    load_pretrained_backbone) are fresh random init and train at the top rate
+    whatever their depth: at patch 50 the tokenizer convs never match the
+    patch-200 checkpoint, and the whole point of the staged recipe is that a
+    fresh tokenizer must not be starved by the depth schedule.
+
+    All parameters are included, frozen or not, so a stage-1 freeze can be
+    lifted later without rebuilding the optimizer (AdamW skips grad=None).
+    """
+    n_blocks = len(model.encoder.blocks)
+    num_max_layer = n_blocks + 2
+    scales = [layer_decay ** (num_max_layer - 1 - i) for i in range(num_max_layer)]
+    loaded = getattr(model, "_loaded_keys", set())
+
+    def depth_of(name: str) -> int:
+        if name.startswith("encoder.blocks."):
+            return int(name.split(".")[2]) + 1
+        if name.startswith(("frontend.", "band_pe.", "mask_token")):
+            return 0
+        return num_max_layer - 1
+
+    groups: dict[tuple, dict] = {}
+    for name, param in model.named_parameters():
+        depth = depth_of(name)
+        if loaded and name not in loaded:
+            depth = num_max_layer - 1            # fresh tensor: full rate
+        wd = 0.0 if (param.ndim == 1 or name.endswith(".bias")) else weight_decay
+        key = (depth, wd)
+        if key not in groups:
+            groups[key] = {"params": [], "weight_decay": wd,
+                           "lr": base_lr * scales[depth], "layer_id": depth}
+        groups[key]["params"].append(param)
+    return [g for g in groups.values() if g["params"]]

@@ -1,0 +1,49 @@
+# ptS (2026-09-03): the pretrained row, final recipe. Checkpoint = duplex_v2 60k
+# (the short v2 run; v2_full 150k finetunes worse on every corpus tried).
+# Finetune = LaBraM/CBraMod standard for pretrained models: base lr 5e-4 with
+# layer_decay 0.65 by depth, 2 warmup epochs, and 2 epochs of stage-1 where only
+# the fresh tensors (tokenizer convs at patch 50, head, spatial_pe) train before
+# everything unfreezes. No per-corpus tuning; batch/epochs as the scratch recipe.
+batch_size: 32
+checkpoint: $PACLOCK_CKPT/pretrain-duplex_v2_60k.pt
+data_root: $PACLOCK_PROC/processed/sleepedf
+dataset: sleepedf
+device: cuda
+epochs: 20
+eval_every_steps: 0
+grad_clip: 1.0
+group: pretrain_ft
+label_smoothing: 0.1
+loss: cross_entropy
+lr: 0.0005
+layer_decay: 0.65
+warmup_epochs: 2
+freeze_loaded_epochs: 2
+max_hours: 22.5
+model: paclock
+model_kwargs:
+  arch: triaxial
+  augmentations: []
+  band_pe: index
+  d_model: 128
+  depth: 6
+  dropout: 0.2
+  freq_mixer: attention
+  interaction_mode: rotation
+  kernel_size: 201
+  n_bands: 8
+  n_heads: 4
+  pac_patch_len: 50
+  pac_token_mode: measured
+  patch_len: 50
+  spatial_pe: xyz
+  tokenizer_mode: duplex
+name: sleepedf-paclock_duplex_ptS
+num_classes: 5
+num_workers: 8
+optimizer: adamw
+patience: 20
+sample_rate: 100
+scheduler: cosine
+seed: 0
+weight_decay: 1.0e-05
