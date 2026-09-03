@@ -133,6 +133,12 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 取均值,分类头形状与参数量不变(17.90M vs 17.90M)。同时跑耦合关闭对照
 (`tokenizer_mode: raw`,同前端,8 行)。配置 `configs/experiments/{tuev,tusz}_cbramod_{crofremo,rawfe}_bands.yaml`。
 
+**TUEV 半边结果(09-03 晚,seed 0)**:修好版移植 test κ **0.6322**;同前端耦合关闭 0.5953;
+CBraMod 自带 tokenizer 从零 0.5638±0.019;直接移植(均值池化)0.612;CBraMod 预训练 0.645。
+TUEV 过门:高于 CBraMod 从零 6.8 点,且耦合开/关同前端差 3.7 点——增益可归因于耦合内容,
+不只是 sinc 前端。TUSZ 半边:amd 上 4 卡打包 9.3 h 才到第 5/50 epoch,24 h wall 内跑不完
+(这两个配置没带 max_hours),撤销后转投 torch H100(单卡各一,配置补 max_hours 44)。
+
 预注册判据:TUEV 移植 ≥ 0.61(且明显高于 CBraMod 从零 0.564)**且** TUSZ 移植 ≥ CBraMod
 从零 0.48 → 线活,再补耦合开/关 3 seed;否则关线,第三点改为"新颖性收回到自己的模型,
 移植作为边界讨论",不再投任何 tokenizer 对照。

@@ -35,3 +35,4 @@ seed: 0
 select_metric: auroc
 val_subsample: 20000
 weight_decay: 0.05
+max_hours: 44.0
