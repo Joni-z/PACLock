@@ -168,6 +168,8 @@ stage-1 冻结期的 val 平台被当成收敛,已修(fd6bcf5:冻结+warmup 期�
 TUEP 重跑与 Siena seed 1/2 打包在 PTS_rerun 403226。
 torch 落地:TUEV ptS κ 0.6417(从零 0.709;v1 全参数微调 0.689)、TUSZ ptS AUC-PR 0.6525
 (duplex 从零 0.633;同一 60k checkpoint 用从零配方 pt2 = 0.714)。Siena seed 2 = 0.467。
+IIIC ptS κ 0.4339(从零 0.4868,输 0.05);CAUEEG 0.5033(从零 0.5254,输 0.02);Siena 三 seed
+0.456±0.033。目前 ptS 比分 2 赢(Siena、TUSZ)5 输(ADFD、TUAR、TUEV、CAUEEG、IIIC),余 5 格在跑。
 读法:定稿配方不是处处优于从零配方——TUSZ 上同一 checkpoint 换回从零配方反而高 6 点。
 按预注册规则不再改配方,逐格如实入表;若最终 ptS 行整体弱于"各语料最好的既有预训练格",
 论文的预训练行用 ptS(统一配方,可辩护),既有格作附录参考。
