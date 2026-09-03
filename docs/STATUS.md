@@ -119,6 +119,12 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 对会议第三点的含义:"即插即用"目前只对 paroxysmal 语料成立;要么在移植里保留频带轴(不池化),
 要么把结论收窄为发作/事件检测。等 6 个语料落地后定。
 
+- 09-03 TP_tusz(401197)在 14.7 h 时主动撤销:35/50 epoch,0.42 h/epoch,剩余 15 epoch 需 6.3 h 而
+  wall 只剩 5.3 h;train.py 不存中间 checkpoint、结果只在收尾时写,被 SLURM 杀掉等于全丢。
+  TP_chbmit(7% 超限,赌一把)与 TP_tuab(勉强够)保留。val 轨迹(TUSZ pr_auc 0.23 vs CBraMod 从零
+  test 0.48)已足够说明直接移植在 TUSZ 上输;需要正式数字时在 torch 单 seed 补(H200 约 10 h)。
+  教训:50 epoch 无 patience 的长跑必须带 max_hours(ptS 配置已带 22.5 h)。
+
 ### 死活门(2026-09-03 投,amd 402075,4 卡打包,seed 0)
 
 直接移植 8/11 落地后只赢 TUEV,判定这条线需要先过门再谈对照。修法:适配器加
