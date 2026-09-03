@@ -33,15 +33,18 @@ cd "$SLURM_SUBMIT_DIR"
 
 pids=()
 gpu=0
-for cfg in "$@"; do
-    tag=$(basename "$cfg" .yaml)
+for spec in "$@"; do
+    # <cfg.yaml> or <cfg.yaml>:<seed> -- a per-config seed lets one node pack
+    # e.g. a rerun of one corpus with extra seeds of another.
+    cfg=${spec%%:*}; s=${spec#*:}; [ "$s" = "$spec" ] && s=$SEED
+    tag=$(basename "$cfg" .yaml)-s$s
     # Per-process MIOpen cache: concurrent processes sharing one SQLite DB on
     # the shared filesystem corrupt it ("database disk image is malformed").
     HIP_VISIBLE_DEVICES=$gpu \
     MIOPEN_USER_DB_PATH="/tmp/miopen_${SLURM_JOB_ID}_${gpu}" \
     MIOPEN_CUSTOM_CACHE_DIR="/tmp/miopen_${SLURM_JOB_ID}_${gpu}" \
     python3 -u -m paclock_bench.training.train \
-        --config "$cfg" --seed "$SEED" \
+        --config "$cfg" --seed "$s" \
         > "logs/${SLURM_JOB_NAME}-${SLURM_JOB_ID}-${tag}.out" 2>&1 &
     pids+=($!)
     echo "launched $tag on GPU $gpu (pid ${pids[-1]})"

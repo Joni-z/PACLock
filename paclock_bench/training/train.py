@@ -326,6 +326,7 @@ def main():
             for pname, prm in model.named_parameters():
                 if pname in loaded_keys:
                     prm.requires_grad_(True)
+            since_best = 0          # stage-1 plateaus must not count toward patience
             print(f"  stage 2: all tensors trainable from epoch {epoch}", flush=True)
         running = []
         # Opt-in step breakdown. Three rounds of inferring the bottleneck from
@@ -395,7 +396,11 @@ def main():
 
         print(f"epoch {epoch:3d} | train_loss {np.mean(running):.4f}", flush=True)
         validate(f"epoch {epoch:3d} |")
-        if patience and since_best >= patience:
+        # No early stop while the encoder is still frozen or the LR still warming
+        # up: a stage-1 plateau is by construction, not a converged model (TUEP
+        # ptS was cut at epoch 1 by exactly this, 2026-09-03).
+        no_stop_before = freeze_loaded_epochs + int(cfg.get("warmup_epochs", 0))
+        if patience and since_best >= patience and epoch >= no_stop_before:
             print(f"early stop: no val {key} gain for {patience} evals", flush=True)
             stopped_by = "patience"
             break
