@@ -130,3 +130,22 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 预注册判据:TUEV 移植 ≥ 0.61(且明显高于 CBraMod 从零 0.564)**且** TUSZ 移植 ≥ CBraMod
 从零 0.48 → 线活,再补耦合开/关 3 seed;否则关线,第三点改为"新颖性收回到自己的模型,
 移植作为边界讨论",不再投任何 tokenizer 对照。
+
+## 8. 预训练行定稿配方 ptS(2026-09-03 投,12 语料单 seed,三集群分跑)
+
+不再搜索。checkpoint = duplex_v2 60k(短版;150k 的 v2_full 在所有试过的语料上都更差)。
+微调 = LaBraM/CBraMod 的预训练标准配方:base lr 5e-4 + layer_decay 0.65(按深度,
+frontend/band_pe=0,encoder.blocks.i=i+1,head/spatial_pe=顶),warmup 2 epoch,前 2 epoch
+只训未从 checkpoint 加载的张量(patch-50 tokenizer 卷积、head、spatial_pe),之后全解冻。
+不逐语料调参;batch/epochs 与从零配方相同。代码:`freeze_loaded_epochs`、
+`paclock_layer_decay_param_groups`、`model._loaded_keys`、`$PACLOCK_CKPT`(commit fe43a46)。
+checkpoint 走仓库 `ckpt` 分支跨集群(6.8 MB)。
+
+| 集群 | 语料 | 任务 |
+|---|---|---|
+| amd | adfd caueeg tuep tuar | PTS_small 403027(4 卡打包) |
+| amd | iiic siena tuab chbmit | PTS_big 403028(4 卡打包) |
+| b2 | isruc sleepedf | ptS_isruc 45126830 / ptS_sleepedf 45126831(h100-80) |
+| torch | tuev tusz | 16833442 / 16833443(h100_tandon) |
+
+判读:与"最好从零"逐格比;赢/平/输如实入表,单 seed 定行后补 3 seed。
