@@ -95,7 +95,7 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 ## 6. 第三个集群:NYU Torch(2026-09-03 起)
 
 - 仓库 `/scratch/zz5070/PACLock`(与 GitHub main 同步);环境 conda `py312`(torch 2.8+cu128,numpy 2.0.2 / scipy 1.13.1 与 amd 一致;scipy≥1.17 会让 mne 1.8 导入失败)。
-- 数据:`PACLOCK_DATA=/scratch/zz5070/data/raw`,`PACLOCK_PROC=/scratch/zz5070/data`;已就绪 `processed/tuev`、`processed/tusz`(由 torch 上的原始 edf 重新预处理,split 大小与各类计数与 amd 完全一致;样本顺序不同,`imap_unordered` 所致)。其余语料需从 amd 拉或重新下载。
+- 数据:`PACLOCK_DATA=/scratch/zz5070/data/raw`,`PACLOCK_PROC=/scratch/zz5070/data`;12 个论文语料的 `processed/` 全部就绪(09-03):tuev/tusz 由 torch 上的原始 edf 重新预处理(split 与计数与 amd 一致,样本顺序不同),其余 10 个经 `/scratch/zz5070/sync/pull.sh` 从 amd rsync(size+mtime 校验无差异)。torch 的公钥已加入 amd 的 authorized_keys(Zhizhe 09-03 手动)。
 - 投递:`sbatch -A torch_pr_63_tandon_advanced -p h100_tandon|a100_tandon|h200_tandon slurm/torch_run.slurm <cfg> [seed]`,或 `-A torch_pr_63_general -p h200_public|l40s_public`;`--array=0-2` 跑三 seed。CPU:`-A torch_pr_63_general -p cpu_short`(≤4h,内存上限 120G)。
 - 队列很深(排 1–2 小时起),适合不赶时间的批量任务;H200 上 TUEV 一个 epoch 约 8 分钟(amd MI210 约 12 分钟)。
 - 跨集群复现(09-03):`tuev_paclock_duplex` seed 0 在 H200 上 test κ 0.6969(amd MI210 同配置 0.7094;best val 0.572 vs 0.609),1.95 h。差 0.0125,在单 seed 噪声内(TUEV 三 seed 的 CBraMod 基线 std ≈ 0.02);torch 结果可入表,但同一格的三个 seed 应在同一集群跑。
@@ -166,3 +166,8 @@ checkpoint 走仓库 `ckpt` 分支跨集群(6.8 MB)。
 Siena **0.4912**(从零 0.110;此前最好预训练 0.468)。TUEP 首跑在第 1 epoch 被 patience 砍掉——
 stage-1 冻结期的 val 平台被当成收敛,已修(fd6bcf5:冻结+warmup 期内不早停,解冻时清零计数),
 TUEP 重跑与 Siena seed 1/2 打包在 PTS_rerun 403226。
+torch 落地:TUEV ptS κ 0.6417(从零 0.709;v1 全参数微调 0.689)、TUSZ ptS AUC-PR 0.6525
+(duplex 从零 0.633;同一 60k checkpoint 用从零配方 pt2 = 0.714)。Siena seed 2 = 0.467。
+读法:定稿配方不是处处优于从零配方——TUSZ 上同一 checkpoint 换回从零配方反而高 6 点。
+按预注册规则不再改配方,逐格如实入表;若最终 ptS 行整体弱于"各语料最好的既有预训练格",
+论文的预训练行用 ptS(统一配方,可辩护),既有格作附录参考。
