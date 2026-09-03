@@ -155,3 +155,8 @@ checkpoint 走仓库 `ckpt` 分支跨集群(6.8 MB)。
 | torch | tuev tusz | 16833442 / 16833443(h100_tandon) |
 
 判读:与"最好从零"逐格比;赢/平/输如实入表,单 seed 定行后补 3 seed。
+
+首批落地(09-03 晚):ADFD 0.4527(从零 0.562,输)、TUAR 0.5923(从零 0.658,输)、
+Siena **0.4912**(从零 0.110;此前最好预训练 0.468)。TUEP 首跑在第 1 epoch 被 patience 砍掉——
+stage-1 冻结期的 val 平台被当成收敛,已修(fd6bcf5:冻结+warmup 期内不早停,解冻时清零计数),
+TUEP 重跑与 Siena seed 1/2 打包在 PTS_rerun 403226。
