@@ -1,0 +1,37 @@
+# Band-as-channels transplant (2026-09-03): frontend rows are NOT mean-pooled;
+# each (electrode, row) is a CBraMod channel, rows pooled after the encoder.
+# Portability arm: CBraMod's encoder/head verbatim, its PatchEmbedding
+# replaced by CroFreMo's duplex+rotation tokenizer (bands mean-pooled to
+# CBraMod's one-token-per-(channel,patch)). Recipe copied from the
+# corpus's cbramod_scratch config so the only variable is the tokenizer.
+# The claim under test is TFM-Tokenizer's own: the tokenizer carries the
+# result across backbones. 2026-09-02.
+batch_size: 64
+data_root: $PACLOCK_PROC/processed/tusz
+dataset: tusz
+device: cuda
+epochs: 50
+eval_every_steps: 0
+grad_clip: 1.0
+group: portability
+loader: null
+loss: bce_with_logits
+lr: 0.0001
+model: cbramod_paclockfe
+model_kwargs:
+  dropout: 0.1
+  interaction_mode: rotation
+  tokenizer_mode: duplex
+  band_mode: channels
+multi_lr: true
+name: tusz-cbramod_crofremo_bands
+num_classes: 2
+num_workers: 16
+optimizer: adamw
+patience: 0
+sample_rate: 200
+scheduler: cosine
+seed: 0
+select_metric: auroc
+val_subsample: 20000
+weight_decay: 0.05

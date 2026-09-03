@@ -63,8 +63,12 @@ class PACLockCBraModBackbone(nn.Module):
     CBraMod, with no changes to either.
     """
 
-    def __init__(self, tokenizer_mode: str = "pac_interaction", interaction_mode: str = "product"):
+    def __init__(self, tokenizer_mode: str = "pac_interaction", interaction_mode: str = "product",
+                 band_mode: str = "mean"):
         super().__init__()
+        if band_mode not in ("mean", "channels"):
+            raise ValueError(f"band_mode must be mean|channels, got {band_mode!r}")
+        self.band_mode = band_mode
         CBraMod = _import_cbramod()
         real = CBraMod(**BACKBONE_ARGS)
         # keep CBraMod's own positional encoding, encoder and output head;
@@ -83,7 +87,19 @@ class PACLockCBraModBackbone(nn.Module):
     def forward(self, x: torch.Tensor, mask=None) -> torch.Tensor:
         B, C, n_patches, patch_size = x.shape
         raw = x.reshape(B, C, n_patches * patch_size)          # frontend wants (B,C,T)
-        tokens = self.frontend(raw)[0]                          # (B,C,nb,P,D)
+        tokens = self.frontend(raw)[0]                          # (B,C,R,P,D); R = token rows per band grid
+        if self.band_mode == "channels":
+            # Keep the frequency axis: every (channel, row) becomes its own
+            # CBraMod "channel", so the criss-cross encoder attends across
+            # bands as well as electrodes. Rows are pooled only AFTER the
+            # encoder, so the classifier head sees the same (B,C,P,D) it always
+            # did -- head capacity is unchanged between the two band modes.
+            R = tokens.shape[2]
+            t = tokens.reshape(B, C * R, n_patches, tokens.shape[-1])
+            pe = self.positional_encoding(t.permute(0, 3, 1, 2))
+            t = t + pe.permute(0, 2, 3, 1)
+            out = self.proj_out(self.encoder(t))                # (B,C*R,P,D)
+            return out.reshape(B, C, R, n_patches, out.shape[-1]).mean(dim=2)
         tokens = tokens.mean(dim=2)                             # pool bands -> (B,C,P,D)
 
         pe = self.positional_encoding(tokens.permute(0, 3, 1, 2))
@@ -95,7 +111,8 @@ class PACLockCBraModBackbone(nn.Module):
 def build_cbramod_paclockfe(n_classes: int, n_channels: int, seq_len: int,
                             *, dropout: float = 0.1, sequence: bool = False,
                             tokenizer_mode: str = "pac_interaction",
-                            interaction_mode: str = "product"):
+                            interaction_mode: str = "product",
+                            band_mode: str = "mean"):
     """Same call convention as build_cbramod (build.py passes seq_len=T).
 
     tokenizer_mode="raw" is the control this ablation needs to mean anything.
@@ -108,7 +125,8 @@ def build_cbramod_paclockfe(n_classes: int, n_channels: int, seq_len: int,
     with bias; pac is Conv1d(1,100,200) without bias plus Conv1d(1,100,200) with
     bias plus a 100-entry scale), so neither arm can win on capacity."""
     backbone = PACLockCBraModBackbone(tokenizer_mode=tokenizer_mode,
-                                      interaction_mode=interaction_mode)
+                                      interaction_mode=interaction_mode,
+                                      band_mode=band_mode)
     n_patches = seq_len // PATCH
     if sequence:
         return CBraModSequence(backbone, n_channels, n_patches, n_classes)
