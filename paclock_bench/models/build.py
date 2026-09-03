@@ -128,6 +128,7 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
             sequence=len(input_shape) == 3,
             tokenizer_mode=mk.get("tokenizer_mode", "pac_interaction"),
             interaction_mode=mk.get("interaction_mode", "product"),
+            band_mode=mk.get("band_mode", "mean"),
         )
 
     if name == "tfm":
