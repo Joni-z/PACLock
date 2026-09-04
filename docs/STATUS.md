@@ -188,3 +188,19 @@ ISRUC 与 TUSZ seed 1/2(torch 排队)。
 读法:定稿配方不是处处优于从零配方——TUSZ 上同一 checkpoint 换回从零配方反而高 6 点。
 按预注册规则不再改配方,逐格如实入表;若最终 ptS 行整体弱于"各语料最好的既有预训练格",
 论文的预训练行用 ptS(统一配方,可辩护),既有格作附录参考。
+
+## 9. 定稿实验波(2026-09-05 投;目的:把"耦合只在部分任务有效"变成可预测的机制主张,并解释贡献一)
+
+| 组 | 内容 | 集群 / 任务 |
+|---|---|---|
+| A raw 对照 | siena/iiic/tuep/adfd/caueeg/tuar × raw 3 seed(此前无) | amd R1–R5(405062–405066) |
+| A′ TUEV raw 重跑 | 3 seed,存 test 分数供逐类别分析 | torch raw_tuev_s0–2 |
+| B duplex 补 seed | adfd/iiic/siena/tuar/tuep seed 1–2(amd D1、D2、G3);tusz/chbmit/isruc/sleepedf seed 1–2(torch dup_*) | amd 405067/405068/405071;torch 8 job |
+| C 设计假设:内容门控 | fusegate、hybrid_gate 在 tuev/tusz/chbmit 补 seed 1–2(单 seed 时在发作语料上高于 raw 与 duplex) | amd G1–G3(405069–405071,与 B 混排) |
+| D 架构对照 | tusz/chbmit × {raw_nb1(不分频), raw_flat(不分轴)} × 3 seed | 配置已建,CPU 冒烟后投 amd |
+| E 形态 vs 状态 | **tusz_type**:同 TUSZ 发作窗口、标签换成发作类型(fnsz/gnsz/cpsz/absz/tcsz/spsz);raw vs duplex 3 seed | 预处理 torch cpu_short 16964310;训练待数据 |
+
+预注册读法:
+- E 是核心检验:同一语料、同一窗口、只换标签类型。耦合在 tusz_type 上显著而在 tusz 检测上中性 → "耦合 token 对形态标签决定性、对状态标签中性"成为经过设计检验的主张;IIIC(形态)应同向。
+- C 若三 seed 下门控变体在发作语料 ≥ raw 且 TUEV 不掉 → 定稿架构改为内容门控 duplex(耦合按测得强度进入),站位更清:处处不差于 raw、形态任务大胜。选择规则:三语料平均名次,test 三 seed,附录披露。
+- D 解释贡献一:哪一个(分频 / 分轴)撑起发作检测的领先。
