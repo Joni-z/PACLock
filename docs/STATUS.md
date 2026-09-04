@@ -179,7 +179,9 @@ IIIC ptS κ 0.4339(从零 0.4868,输 0.05);CAUEEG 0.5033(从零 0.5254,输 0.02)
 最佳 checkpoint 仍是 stage-1 的——5e-4 顶层 lr 在 TUEP 上让全参数微调发散;按规则不逐语料调,如实入表。
 CHB-MIT ptS AUC-PR 0.6991(duplex 从零见 runs;v2 短版从零配方 0.7134;最好从零 hybrid_gate 0.7513)。
 CHB-MIT:duplex 从零 0.713 → ptS 0.699,输 0.014。Sleep-EDF ptS(torch)κ 0.6747(从零 0.6533,赢 0.02)。
-目前 ptS 比分 3 赢(Siena、TUSZ、Sleep-EDF)7 输,余 TUAB(amd,max_hours 会在第 2–3 epoch 截住)、
+TUAB ptS BAcc 0.8054(从零 0.8157;仅约 1.5 epoch——TUAB 一个 epoch 3–14 h,max_hours 只在 epoch 末检查,
+作业以 3 分钟之差险过 24 h wall;已改为 eval 步也检查)。
+目前 ptS 比分 3 赢(Siena、TUSZ、Sleep-EDF)8 输,余 
 ISRUC 与 TUSZ seed 1/2(torch 排队)。
 读法:定稿配方不是处处优于从零配方——TUSZ 上同一 checkpoint 换回从零配方反而高 6 点。
 按预注册规则不再改配方,逐格如实入表;若最终 ptS 行整体弱于"各语料最好的既有预训练格",

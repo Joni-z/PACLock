@@ -286,6 +286,7 @@ def main():
     # Hours of training after which the run stops and reports what it has. None
     # keeps the old behaviour exactly.
     max_hours = cfg.get("max_hours")
+    budget_hit = False
     stopped_by = "epochs"
     t0 = time.time()
 
@@ -394,6 +395,15 @@ def main():
             if eval_every_steps and (step + 1) % eval_every_steps == 0:
                 validate(f"epoch {epoch} step {step + 1} |")
 
+            # The wall-clock budget is also enforced at eval steps: TUAB epochs
+            # run 3-14 h, so an epoch-end-only check can overshoot a 24 h wall
+            # (PTS_big finished with 3 min to spare, 2026-09-04).
+            if max_hours and (time.time() - t0) / 3600.0 >= max_hours:
+                print(f"stopping: {max_hours}h wall-clock budget reached at "
+                      f"epoch {epoch} step {step + 1}", flush=True)
+                stopped_by = "time_budget"
+                budget_hit = True
+                break
         print(f"epoch {epoch:3d} | train_loss {np.mean(running):.4f}", flush=True)
         validate(f"epoch {epoch:3d} |")
         # No early stop while the encoder is still frozen or the LR still warming
@@ -414,6 +424,8 @@ def main():
         # Breaking here instead keeps the best checkpoint, runs the test pass and
         # writes a real result, with `stopped_by` recording that the schedule did
         # not run to completion so the cell can never be read as if it had.
+        if budget_hit:
+            break
         if max_hours and (time.time() - t0) / 3600.0 >= max_hours:
             print(f"stopping: {max_hours}h wall-clock budget reached at "
                   f"epoch {epoch}", flush=True)
