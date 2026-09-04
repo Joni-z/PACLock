@@ -4,7 +4,7 @@ dataset: tusz_type
 version: v2.0.6
 raw_root: $PACLOCK_DATA/tuh/tusz/edf
 out_dir: $PACLOCK_PROC/processed/tusz_type
-num_classes: 6
+num_classes: 5
 classes: [fnsz, gnsz, cpsz, absz, tcsz, spsz]   # seizure morphology; other types dropped
 
 sample_rate: 200
