@@ -59,6 +59,7 @@ MODEL_ROW_LABEL = {
     "paclock_duplex_pt2": "CroFreMo (预训练 v2)",
     "paclock_duplex_pt3": "CroFreMo (预训练 v3)",
     "paclock_duplex_ptF": "CroFreMo (预训练 v2-full)",
+    "paclock_duplex_ptS": "CroFreMo (预训练 ptS)",
     "paclock_probe_v2": "CroFreMo (冻结探针)",
     "paclock_probe_rand": "CroFreMo (冻结探针, 随机初始化)",
     # classical-feature and tuned-supervised baselines (2026-08-24 plan)

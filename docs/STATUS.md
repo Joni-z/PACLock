@@ -151,7 +151,9 @@ frontend/band_pe=0,encoder.blocks.i=i+1,head/spatial_pe=顶),warmup 2 epoch,前 
 只训未从 checkpoint 加载的张量(patch-50 tokenizer 卷积、head、spatial_pe),之后全解冻。
 不逐语料调参;batch/epochs 与从零配方相同。代码:`freeze_loaded_epochs`、
 `paclock_layer_decay_param_groups`、`model._loaded_keys`、`$PACLOCK_CKPT`(commit fe43a46)。
-checkpoint 走仓库 `ckpt` 分支跨集群(6.8 MB)。
+checkpoint 走仓库 `ckpt` 分支跨集群(6.8 MB)。torch 的结果每 30 min 由 `/scratch/zz5070/sync/push_runs.sh`
+推回 amd 的 `runs/`(仅 json/npz,`--ignore-existing` 不覆盖 amd 已有文件),工作簿在 amd 用
+`scripts/fill_xlsx.py --allow-single-seed` 填;ptS 行已加(`scripts/add_pts_row.py`),单 seed 标注 `(1 seed)`。
 
 | 集群 | 语料 | 任务 |
 |---|---|---|
