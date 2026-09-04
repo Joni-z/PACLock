@@ -181,7 +181,9 @@ CHB-MIT ptS AUC-PR 0.6991(duplex 从零见 runs;v2 短版从零配方 0.7134;最
 CHB-MIT:duplex 从零 0.713 → ptS 0.699,输 0.014。Sleep-EDF ptS(torch)κ 0.6747(从零 0.6533,赢 0.02)。
 TUAB ptS BAcc 0.8054(从零 0.8157;仅约 1.5 epoch——TUAB 一个 epoch 3–14 h,max_hours 只在 epoch 末检查,
 作业以 3 分钟之差险过 24 h wall;已改为 eval 步也检查)。
-目前 ptS 比分 3 赢(Siena、TUSZ、Sleep-EDF)8 输,余 
+ISRUC ptS κ 0.6721(从零 0.712,输 0.04;val 0.726 但 test 掉——ISRUC val/test 差异大)。
+**12 格 seed-0 全部落地:3 赢(Siena、TUSZ、Sleep-EDF)9 输**;TUSZ seed 1/2 在 torch 补。见 FINDINGS 5.9。
+余 
 ISRUC 与 TUSZ seed 1/2(torch 排队)。
 读法:定稿配方不是处处优于从零配方——TUSZ 上同一 checkpoint 换回从零配方反而高 6 点。
 按预注册规则不再改配方,逐格如实入表;若最终 ptS 行整体弱于"各语料最好的既有预训练格",

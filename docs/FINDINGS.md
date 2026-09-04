@@ -1268,6 +1268,36 @@ CHB-MIT 对(同配方,AUC-PR,单 seed):scratch@200 0.5486 vs ptF@200 0.5448(−0
 5.6 的判决原样成立:预训练收益语料相关、平均为零,害处不是 tokenizer 重初始化的工件;
 标题维持 token-content 版,预训练作分析章节;下游网格留在 50。b2 三对镜像均已撤,未耗 SU。
 
+
+## 5.9 预训练行定稿(ptS,2026-09-04):统一配方下 3 赢 9 输
+
+配方(不逐语料调):checkpoint duplex_v2 60k;lr 5e-4 + layer_decay 0.65(frontend/band_pe=0,
+encoder.blocks.i=i+1,head=顶);warmup 2;前 2 epoch 只训未加载张量(patch-50 tokenizer 卷积、head、
+spatial_pe)再全解冻;batch/epochs 同从零配方。单 seed(Siena 三 seed)。
+
+| 语料 | ptS | 从零(duplex) | Δ | 最强 baseline | 对 baseline |
+|---|---|---|---|---|---|
+| TUSZ (AUC-PR) | 0.653 | 0.633 | +0.02 | FFCL 0.545 | 赢 |
+| CHB-MIT (AUC-PR) | 0.699 | 0.713 | −0.01 | TFM-pre 0.627 | 赢 |
+| Siena (AUC-PR) | 0.456±0.034 | 0.110 | +0.35 | REVE 0.518±0.096 | 方差内 |
+| Sleep-EDF (κ) | 0.675 | 0.653 | +0.02 | ContraWR 0.692 | 输 |
+| IIIC (κ) | 0.434 | 0.487 | −0.05 | REVE 0.436 | 平 |
+| TUEV (κ) | 0.642 | 0.709 | −0.07 | REVE 0.685 | 输 |
+| TUEP (AUROC) | 0.769 | 0.805 | −0.04 | EEGPT-scr 0.786 | 输 |
+| TUAB (AUROC) | 0.889 | 0.884(raw) | 0(只训 1.5 epoch) | — | — |
+| ISRUC (κ) | 0.672 | 0.712 | −0.04 | CBraMod-pre 0.754 | 输 |
+| CAUEEG (BAcc) | 0.503 | 0.525 | −0.02 | BIOT-scr 0.561 | 输 |
+| ADFD (BAcc) | 0.453 | 0.562 | −0.11 | BIOT-scr 0.525 | 输 |
+| TUAR (κ) | 0.592 | 0.629 | −0.04 | CBraMod-pre 0.715 | 输 |
+
+读法:
+1. 预训练帮的三格全是标签稀缺或噪声大的语料(Siena 正样本极少、TUSZ 标签噪声、Sleep-EDF 小),
+   与 5.6 的"先验只在标签不足时有用"一致;标签充足的语料(TUEV 6.8 万、ADFD、TUAR)预训练成为约束。
+2. 同一 checkpoint 换回从零配方在 TUSZ 上更高(pt2 0.714 vs ptS 0.653):标准配方也不是处处最优。
+   按预注册规则不再改配方;主表预训练行用 ptS(统一、可辩护),零散的既有预训练格进附录。
+3. 论文定位不变:预训练是分析章节,不是贡献;标题维持 token-content 版。
+4. 工程教训:stage-1 冻结期不能计 patience;max_hours 要在 eval 步检查(TUAB 险过 24 h wall)。
+
 ## 5.7 结案
 
 预训练消融全部完成:11 语料微调对照、TUEV lr 探针、lr 匹配冻结探针 12 个
