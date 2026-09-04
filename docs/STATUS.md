@@ -139,6 +139,10 @@ TUEV 过门:高于 CBraMod 从零 6.8 点,且耦合开/关同前端差 3.7 点�
 不只是 sinc 前端。TUSZ 半边:amd 上 4 卡打包 9.3 h 才到第 5/50 epoch,24 h wall 内跑不完
 (这两个配置没带 max_hours),撤销后转投 torch H100(单卡各一,配置补 max_hours 44)。
 
+**TUSZ 半边,耦合关闭对照先落地(09-04,torch)**:test AUC-PR 0.4223(CBraMod 自带 tokenizer 从零
+0.482±0.043;val 曲线只有 0.21 但 test 0.42——TUSZ dev/eval 分布差异大,val 不能直接推 test)。
+修好版(耦合开)27/50 epoch,val 0.167,预计 test 0.35–0.45,大概率不到 0.48 的判据。
+
 预注册判据:TUEV 移植 ≥ 0.61(且明显高于 CBraMod 从零 0.564)**且** TUSZ 移植 ≥ CBraMod
 从零 0.48 → 线活,再补耦合开/关 3 seed;否则关线,第三点改为"新颖性收回到自己的模型,
 移植作为边界讨论",不再投任何 tokenizer 对照。
