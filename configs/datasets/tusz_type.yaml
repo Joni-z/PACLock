@@ -1,0 +1,38 @@
+# TUSZ seizure-TYPE task (2026-09-05): same recordings/windows/protocol as tusz.yaml, label = morphology.
+# TUSZ v2.0.6 -- PROTOCOLS.md sec.3. FROZEN.
+dataset: tusz_type
+version: v2.0.6
+raw_root: $PACLOCK_DATA/tuh/tusz/edf
+out_dir: $PACLOCK_PROC/processed/tusz_type
+num_classes: 6
+classes: [fnsz, gnsz, cpsz, absz, tcsz, spsz]   # seizure morphology; other types dropped
+
+sample_rate: 200
+band: [0.3, 75.0]
+notch: 60.0
+window_sec: 10.0
+stride_sec: 10.0
+drop_tail: true
+
+channels:
+  [FP1-F7, F7-T3, T3-T5, T5-O1, FP2-F8, F8-T4, T4-T6, T6-O2,
+   FP1-F3, F3-C3, C3-P3, P3-O1, FP2-F4, F4-C4, C4-P4, P4-O2]
+channel_ref_suffix: "-REF"
+# a recording missing any required channel is excluded whole and logged
+exclude_on_missing_channel: true
+
+# overlap > 0 with any seizure interval, half-open [start, end)
+label_rule: majority_seizure_type   # window = the type with most overlap (s x channels); non-seizure windows dropped
+downsample_negatives: false
+normalization: div100
+loss: cross_entropy
+class_weight: null
+primary_metric: cohen_kappa
+report_metrics: [cohen_kappa, balanced_acc, weighted_f1]
+
+# official subject-disjoint dirs map straight through
+split:
+  mode: official_dirs
+  train: train
+  val: dev
+  test: eval
