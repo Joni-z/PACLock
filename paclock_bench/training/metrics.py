@@ -70,6 +70,7 @@ PRIMARY_METRIC = {
     "tuab": "auroc",
     "tuev": "cohen_kappa",
     "tusz": "pr_auc",
+    "tusz_type": "cohen_kappa",   # seizure-morphology task on the TUSZ detection windows (2026-09-05)
     "chbmit": "pr_auc",
     "sleepedf": "cohen_kappa",
     "isruc": "cohen_kappa",
