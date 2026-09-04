@@ -5,7 +5,7 @@ version: v2.0.6
 raw_root: $PACLOCK_DATA/tuh/tusz/edf
 out_dir: $PACLOCK_PROC/processed/tusz_type
 num_classes: 5
-classes: [fnsz, gnsz, cpsz, absz, tcsz, spsz]   # seizure morphology; other types dropped
+classes: [fnsz, gnsz, cpsz, absz, tcsz]   # spsz has no eval windows; tnsz/mysz too rare -> dropped
 
 sample_rate: 200
 band: [0.3, 75.0]

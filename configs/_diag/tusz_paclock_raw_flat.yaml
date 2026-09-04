@@ -36,5 +36,6 @@ model_kwargs:
   interaction_mode: product
   spatial_pe: xyz
   pac_patch_len: 50
+  mixer: attention
 seed: 0
 max_hours: 22.5
