@@ -240,3 +240,12 @@ TUSZ ptS seed 1 = 0.6935(seed 0 0.6525)。
 - 归因的一个有意思的不对称:在 CBraMod 里耦合开/关差 TUEV +0.037、TUSZ +0.052;在我们自己的三轴编码器里 TUSZ 上耦合为零。
   解释候选:三轴编码器有频率轴,能从分频 token 里自己学到跨频关系,耦合 token 只在关系最难学的地方(TUEV 事件形态)才有增量;
   没有频率轴的编码器(CBraMod)则处处受益。架构对照(flat/nb1 崩溃)与此一致。这是比"形态 vs 状态"更稳的主张,写法待定。
+
+### 第 9 波第三批(09-05 下午,62/72)
+
+- **IIIC duplex 三 seed 0.479±0.008 vs raw 0.466±0.008:+0.013**(约 1.5 个 std,方向为正、幅度小)。
+- 门控变体(三 seed):TUSZ fusegate 0.653±0.040、hybrid_gate 0.670±0.020(raw 0.671);CHB-MIT fusegate 0.652±0.065、
+  hybrid_gate 0.713(2 seed)vs raw 0.667。与 raw 同水平,不优于 duplex;C 组结论:不改架构。
+- **耦合 raw→duplex 的全部账(同编码器)**:TUEV **+0.17**(3 seed);IIIC +0.013(3 seed);TUEP/ADFD/CAUEEG/TUAR/TUAB/Sleep-EDF/
+  ISRUC/Siena 0(3 seed);TUSZ 单 seed −0.04(duplex seed 1/2 在 torch 排队);CHB-MIT 单 seed +0.05(同上)。
+- 剩余 10/72 全在 torch 排队(TUEV raw 重跑、tusz/chbmit/isruc/sleepedf duplex seed 1/2、TUSZ ptS seed 2 在跑)。
