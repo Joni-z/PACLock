@@ -39,8 +39,8 @@ ICLR 2027:摘要 9-18,全文 9-25。论文稿(Intro / Related Work / Method v3 /
 3. **贡献三(分析)**:预训练——目标函数消融、lr 匹配探针、标签比例、patch-200 全量对照、统一配方的预训练行(3 赢 9 输)。
 
 已钉死:预训练不是贡献;TUEV 上耦合决定性;耦合在 TUAB/睡眠/TUEP/ADFD/CAUEEG/TUAR/Siena 为零(全三 seed)。
-未钉死(等第 9 波尾巴):TUSZ/CHB-MIT 的 duplex seed 1/2(耦合在发作检测上是 −0.04 还是 +0.05);
-TUEV raw 重跑的逐类别分析;贡献一表里 9 个语料的 duplex 三 seed。
+第 9 波已收官(FINDINGS 6.5):耦合在 TUSZ −0.03、CHB-MIT +0.03(均在 1 std 内,记为零);TUEV 逐类别增益集中在 GPED/PLED(6.4);
+从零 duplex 除 TUAB 外全部三 seed(TUAB seed 1/2 待投)。
 
 ## 3. 主表战绩(我们 vs 最强已复现 baseline;三 seed 标 (3),单 seed 标 (1))
 
@@ -59,7 +59,8 @@ TUEV raw 重跑的逐类别分析;贡献一表里 9 个语料的 duplex 三 seed
 | ISRUC (κ) | 0.712 (1) | CBraMod-pre 0.754±0.006 | −0.04 | 负 |
 | TUAR (κ) | 0.620±0.030 (3);调参 0.658 (1) | CBraMod-pre 0.715 (1) | −0.06~−0.10 | 负 |
 
-5 赢 3 平 4 负(08-27 的"6 胜 2 平 3 小负"里 ADFD 的 +0.036 是单 seed,三 seed 后回到方差内)。
+**09-06 全三 seed 后:4 赢(TUSZ、CHB-MIT、IIIC、TUEP)3 平(TUEV 0.690±0.029 vs REVE 0.685、TUAB、ADFD)5 负**;
+TUEV 的 duplex 三 seed 与 REVE 持平(rot2 变体 0.733 才赢),耦合对 raw 的 +0.15 不受影响。细表见 FINDINGS 6.5。
 
 ## 4. 预训练行(ptS,统一配方;FINDINGS 5.9)
 
@@ -100,13 +101,10 @@ tusz_type(五类发作形态)raw 0.121 vs duplex 0.132:两者近随机(被试不
 第三点写法:可迁移、事件任务提升、发作检测持平、增益归因于耦合内容;不宣称即插即用普遍提升。
 直接移植(频带均值池化)11 语料 1 赢 2 平 7 输 1 无结果,已被修好版取代,只作附录。
 
-## 8. 在跑 / 排队(09-05 下午)
+## 8. 在跑 / 排队(09-06 早)
 
-- amd:T9_tuevraw_chb(TUEV raw ×3 存分数 + CHB-MIT duplex s1)在跑;T9_chb_tusz(CHB-MIT duplex s2、TUSZ duplex s1/2、ISRUC s1)排队;
-  G3(CHB-MIT hybrid_gate s2)收尾。
-- torch:ptS_tusz_s2 在跑;Sleep-EDF duplex s1/2、ISRUC s2 排队(h100_tandon 队列今天饱和)。
-- b2:空。
-- 收集器:`~/.claude/jobs/18b2571f/tmp/wait_set.sh`(目标清单 wave9.list,62/72 落地)。
+- 第 9 波 74/74 落地。amd/b2 空;torch 的 tmux ssh 会话已断(pane 掉回本地 shell),需 Zhizhe 重连。
+- 待投:TUAB duplex seed 1/2(20 h 级,amd)。
 
 ## 9. 集群与预算
 
