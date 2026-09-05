@@ -1,0 +1,80 @@
+\section{Introduction}
+\label{sec:intro}
+
+EEG foundation models tokenize a recording before they model it, and the
+choice of what a token carries decides what the model can learn cheaply and
+what it can learn only by accident. Across the current generation the
+choice varies in how much of the signal survives tokenization --- magnitude
+spectrograms \citep{yang2023biot,pradeepkumar2026tfm}, raw patches
+\citep{wang2025cbramod,wang2024eegpt}, per-bin spectral amplitude and phase
+\citep{jiang2024labram} --- but not in one respect: every token describes
+one frequency band, or one patch of the broadband waveform, on its own. No
+token type represents the \emph{relation} between two bands, and no
+pretraining objective supervises one.
+
+That relation is not an exotic quantity. Phase--amplitude coupling, the
+locking of a fast band's envelope to the phase of a slow rhythm, has a
+standard estimator \citep{tort2010measuring}, a physiology documented for
+two decades \citep{canolty2006high,canolty2010functional}, and direct
+clinical relevance to precisely the tasks foundation models are evaluated
+on: it is stronger in the seizure onset zone than in unaffected tissue,
+interictally as well as ictally \citep{amiri2016phase}, and periodic
+epileptiform discharges are, by definition, fast activity riding a slow
+rhythm. A representation from which such a quantity could in principle be
+decoded is not yet one that encodes it. Magnitude tokenizers make it hard
+to reach, because re-deriving phase from overlapping magnitude frames is a
+phase-retrieval problem \citep{griffin1984signal} that nothing in the
+pipeline performs; waveform tokenizers keep it reachable but give the
+encoder no incentive to extract it, and probing studies find that the
+resulting embeddings under-represent exactly the oscillatory structure
+such relations live in \citep{kommineni2026aperiodic}.
+
+This paper asks what a clinical EEG model gains from cross-frequency
+structure, and finds that the answer depends on where the structure is
+put. We build a small model whose tokenizer decomposes each electrode into
+learned frequency bands and, optionally, measures the coupling between
+them per patch and hands it to the encoder as a first-class token; we then
+evaluate the two ingredients separately, on twelve clinical corpora, with
+an evaluation designed so that either answer can be negative.
+
+\paragraph{Contributions.}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item \textbf{A 1.6M-parameter model that is competitive with 25--69M
+  foundation models on twelve clinical corpora, and far ahead on seizure
+  detection.} Trained from scratch, it wins or ties the strongest
+  reproduced baseline on seven corpora and is within a few points on the
+  rest (Section~\ref{sec:main}). Architectural controls locate the margin:
+  removing the learned band decomposition or the factorized tri-axial
+  attention over it collapses seizure detection to the level of the large
+  baselines. The result is about inductive bias in the clinical label
+  regime, not about scale.
+\item \textbf{Cross-frequency coupling as token content, with its scope
+  measured.} Each band contributes a waveform token and an interaction
+  token built from the band's measured coupling to slower bands; the
+  interaction token is invariant to the phase reference of the analysis,
+  preserves band energy exactly, and is gated so that the uncoupled model
+  is an exactly reachable configuration (Section~\ref{sec:tokenizer}). With
+  the encoder fixed, the token is decisive on epileptiform event
+  classification ($+0.15$ Cohen's $\kappa$ on TUEV over three seeds,
+  concentrated on periodic discharges) and neutral on the ten other corpora
+  (Section~\ref{sec:coupling-results}). Transplanted into CBraMod's encoder
+  in place of its own patch embedding, it improves event classification and
+  ties on seizure detection, and in both cases switching the coupling off
+  inside the transplant gives the gain back (Section~\ref{sec:transplant}).
+\item \textbf{A pretraining study reported to convergence rather than
+  assumed.} We construct the masked-reconstruction objective that
+  supervises coupling directly, compare it against band-normalized
+  amplitude reconstruction \citep{yu2026understanding} with lr-matched
+  frozen probes, label-fraction curves, and clean-transfer controls, and
+  report the pretrained model under one fixed finetuning recipe: it helps
+  where labels are scarce and hurts where they are plentiful
+  (Section~\ref{sec:pretrain-results}).
+\end{itemize}
+
+Two boundaries are stated up front. The coupling token is a mechanism for
+a specific kind of label --- a cross-frequency morphology --- and we claim
+no more than that for it; the general competitiveness of the model rests
+on its band-decomposed tokens and factorized encoder. And sleep staging,
+where coupling is abundant \citep{amiri2016phase} but the model is not
+best, is reported as a boundary condition rather than folded into the
+average.

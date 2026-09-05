@@ -1,0 +1,112 @@
+\section{Experimental Setup}
+\label{sec:setup}
+
+\paragraph{Corpora.}
+We evaluate on twelve clinical EEG corpora, chosen so that the evaluation
+domain matches the claim: paroxysmal and event-level clinical tasks form the
+core, and two sleep-staging corpora are included as a boundary condition on
+which cross-frequency content is abundant but not obviously label-relevant.
+Seizure detection: TUSZ v2.0.6 \citep{shah2018temple}, CHB-MIT
+\citep{shoeb2009application}, and Siena \citep{detti2020eeg}. Event and pattern
+classification: TUEV (six-class epileptiform events), IIIC (six-class ictal--
+interictal--injury continuum patterns), and TUAR (three-class artifact
+labels). Recording-level and cohort-level diagnosis: TUAB (abnormal EEG),
+TUEP (epilepsy vs.\ non-epilepsy), ADFD (Alzheimer's disease, frontotemporal
+dementia, control), and CAUEEG (normal, mild cognitive impairment,
+dementia). Sleep staging: Sleep-EDF (SC subset) and ISRUC. Table~\ref{tab:corpora}
+lists task, primary metric, and split protocol; the appendix gives versions,
+channel sets, window lengths, and per-split counts. All splits are
+subject-disjoint, and where a corpus publishes an official subject-disjoint
+split (TUAB, TUEV, TUSZ, TUEP) we use it unchanged.
+
+\paragraph{Preprocessing.}
+One frozen protocol is applied to every corpus for our model and for every
+from-scratch baseline: 16 bipolar channels of the temporal-central-parietal
+montage where the corpus records it, band-pass 0.3--75\,Hz, a 60\,Hz notch
+(50\,Hz for European recordings), resampling to 200\,Hz, and division by
+100\,$\mu$V. Two corpora keep their established conventions instead:
+CHB-MIT is normalized per window and channel by its 95th percentile, and
+Sleep-EDF is kept at 100\,Hz with train-set standardization. Every processed
+corpus is regenerated from the raw download by the scripts we release, with
+a manifest recording version, split membership, and raw-file checksums.
+Foundation-model baselines evaluated with their released weights use their
+own repositories' preprocessing, since feeding a pretrained model a
+different input convention than it was trained on measures the mismatch
+rather than the model.
+
+\paragraph{Baselines.}
+Three groups. (A) Lightweight supervised models --- SPaRCNet, ContraWR,
+CNN-Transformer, FFCL, ST-Transformer, EEGNet, and EEGConformer --- trained
+from scratch on our protocol, which also calibrate the pipeline against
+published numbers on the official TUAB and TUEV splits. (B) EEG foundation
+models evaluated with their official pretrained weights and finetuning
+recipes: BIOT \citep{yang2023biot}, LaBraM \citep{jiang2024labram}, CBraMod
+\citep{wang2025cbramod}, EEGPT \citep{wang2024eegpt}, TFM-Tokenizer
+\citep{pradeepkumar2026tfm}, CSBrain \citep{zhou2025csbrain}, and REVE
+\citep{bertrand2025reve}. (C) The same foundation-model architectures
+trained from scratch on our protocol, which isolates the architecture from
+its pretraining. Models whose published numbers we could not reproduce
+within two standard deviations of three seeds, or whose validation curve
+peaks at the first evaluation (a sign of a mis-specified recipe rather than
+a converged model), are reported as such rather than entered into the
+comparison. A baseline's recipe is never tuned by us: each model runs the
+configuration its authors published for the closest matching task, and on
+corpora without a published configuration it inherits the recipe of the
+corpus with the same task shape. Where a published protocol differs from
+ours --- IIIC in particular, where we deduplicate windows, drop tied votes,
+and balance the split --- the difference is disclosed and every model is
+scored under the same protocol, so a uniform downward shift of all anchors
+is not a bias in either direction.
+
+\paragraph{Our model.}
+CroFreMo is trained with AdamW (learning rate $10^{-4}$, weight decay
+$10^{-5}$), cosine decay, gradient clipping at 1.0, batch size 32, and the
+loss of the corpus (cross-entropy with label smoothing 0.1 for multi-class
+tasks, binary cross-entropy or focal loss for the two seizure corpora that
+use them), with the number of epochs and evaluation schedule matched to the
+from-scratch baselines of the same corpus. Model selection uses the
+validation split only; the test split is scored once, at the selected
+checkpoint. The pretrained row uses the checkpoint of
+Section~\ref{sec:objective} at 60k steps and the standard finetuning recipe
+for pretrained EEG models: base learning rate $5\times10^{-4}$ with
+layer-wise decay 0.65 by depth, two warmup epochs, and two initial epochs in
+which only the tensors not carried by the checkpoint (the patch-50 tokenizer
+projections, the head, and the spatial embedding) are trained before the
+whole model is unfrozen. This recipe is fixed once for all corpora; it is
+not tuned per corpus.
+
+\paragraph{Seeds and reporting.}
+Every table cell is the mean and standard deviation over three seeds. The
+primary metric per corpus follows the established convention for that
+task: AUC-PR for the three seizure corpora, Cohen's $\kappa$ for TUEV, IIIC,
+TUAR, and the two sleep corpora, balanced accuracy for TUAB, ADFD, and
+CAUEEG, and AUROC for TUEP; balanced accuracy, weighted F1, and AUROC are
+reported alongside in the appendix. Learned gate values
+($\boldsymbol{\beta}$, $\gamma$ of Eq.~(\ref{eq:duplex})) are reported per
+corpus as measurements of how much coupling each task retained.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Corpora. Splits are subject-disjoint throughout; ``official''
+denotes the corpus's released subject-disjoint split.}
+\label{tab:corpora}
+\begin{tabular}{llll}
+\toprule
+Corpus & Task & Primary metric & Split \\
+\midrule
+TUSZ & seizure detection (10\,s windows) & AUC-PR & official train/dev/eval \\
+CHB-MIT & seizure detection (10\,s windows) & AUC-PR & subject-disjoint \\
+Siena & seizure detection (10\,s windows) & AUC-PR & subject-disjoint \\
+TUEV & epileptiform events, 6 classes (5\,s) & Cohen's $\kappa$ & official train/eval, subject split of train \\
+IIIC & IIIC patterns, 6 classes (10\,s) & Cohen's $\kappa$ & subject-disjoint, deduplicated \\
+TUAR & artifacts, 3 classes & Cohen's $\kappa$ & subject-disjoint \\
+TUAB & abnormal EEG, 2 classes & balanced acc.\ & official train/eval \\
+TUEP & epilepsy diagnosis, 2 classes & AUROC & subject-disjoint \\
+ADFD & AD / FTD / control & balanced acc.\ & subject-disjoint \\
+CAUEEG & normal / MCI / dementia & balanced acc.\ & subject-disjoint \\
+Sleep-EDF & sleep stages, 5 classes (30\,s) & Cohen's $\kappa$ & subject-disjoint \\
+ISRUC & sleep stages, 5 classes (30\,s) & Cohen's $\kappa$ & subject-disjoint \\
+\bottomrule
+\end{tabular}
+\end{table}

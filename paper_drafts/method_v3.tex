@@ -1,0 +1,257 @@
+\section{Method}
+\label{sec:method}
+
+Cross-frequency coupling is a relation between two frequency bands, and a
+token grid built from per-band content has no cell in which to write a
+relation. CroFreMo adds one. It maps a multichannel EEG window to a
+three-axis token grid of electrodes $\times$ frequency bands $\times$ time
+patches in which every band contributes two token rows: one carrying the
+band waveform, and one carrying an amplitude-preserving \emph{interaction}
+representation derived from the band's measured phase coupling to slower
+bands. A factorized transformer mixes the grid along each axis in turn.
+Two principles govern the design: coupling may add \emph{structure} but never
+\emph{energy}; and every coupling pathway is gated, so that the
+\emph{uncoupled} model remains an exactly recoverable configuration and
+coupling contributes only when supported by optimization. The full model has
+1.6M parameters.
+
+\subsection{Cross-frequency coupling as a signal phenomenon}
+\label{sec:phenomenon}
+
+Let $x \in \mathbb{R}^{C \times T}$ be a window of $C$ electrodes at
+sampling rate $f_s$. For a band-limited component $x_b(t)$, the analytic
+signal $z_b = x_b + i\,\mathcal{H}[x_b]$ splits the band into an amplitude
+envelope $A_b(t) = |z_b(t)|$ and a unit phase $p_b(t) = z_b(t)/|z_b(t)|
+= e^{i\phi_b(t)}$. Phase--amplitude coupling (PAC) between a slow band $i$
+and a fast band $j$ is the statement that $A_j(t)$ is not independent of
+$\phi_i(t)$: the fast envelope is systematically larger at some phases of
+the slow rhythm than at others. Its classical estimators are all functionals
+of the joint distribution of $(\phi_i, A_j)$. The modulation index of
+\citet{tort2010measuring} bins $\phi_i$, averages $A_j$ within each bin, and
+measures the Kullback--Leibler divergence of the resulting distribution
+from uniform; the mean-vector length of \citet{canolty2006high} is the
+first circular moment,
+\begin{equation}
+\mathrm{MVL}_{ij} \;=\; \Bigl|\,\frac{1}{T}\sum_{t} A_j(t)\,e^{i\phi_i(t)}\Bigr| ,
+\label{eq:mvl-classical}
+\end{equation}
+whose magnitude is zero when $A_j$ carries no phase information and grows
+with the depth of modulation, and whose argument is the preferred phase.
+Both are computed over whole recordings, with band pairs fixed in advance,
+as a single scalar per pair.
+
+CroFreMo keeps the first circular moment but changes three things about how
+it is computed. A learnable sinc filterbank \citep{ravanelli2018sincnet}
+with $n_b$ band-pass filters, parameterized by cutoff pairs initialized on
+a logarithmic (constant-$Q$) grid, produces the band signals $x_b(t)$, so
+the bands are learned rather than fixed. Time is cut into $P$
+non-overlapping patches of length $\ell$ (1\,s throughout), and the moment is
+taken within each patch and channel rather than over the recording, so
+that transient coupling events survive at patch resolution. And the
+amplitude is centered before the moment is taken,
+\begin{equation}
+Z_{ij} \;=\; \frac{1}{\ell}\sum_{t \in \text{patch}}
+p_i(t)\,\bigl(A_j(t) - \bar A_j\bigr),
+\label{eq:mvl}
+\end{equation}
+which removes the term $\bar A_j \cdot \frac{1}{\ell}\sum_t p_i(t)$ that a
+non-uniform phase distribution alone would contribute, so that $Z_{ij}$
+responds to the \emph{co-variation} of envelope and phase and not to
+the mean envelope. $Z_{ij}$ is kept complex: $|Z_{ij}|$ is the strength of
+band-$i$ phase coupling onto band-$j$ amplitude, $\angle Z_{ij}$ its
+preferred phase. For $n_b$ bands this yields a lower-triangular
+$n_b \times n_b$ complex matrix per (channel, patch), computed by the
+tokenizer for every window it sees.
+
+\subsection{Coupling as token content: the duplex tokenizer}
+\label{sec:tokenizer}
+
+Each (channel, band, patch) yields three linear projections: a waveform
+token $\mathbf{r}_b = W_r\,x_b[\text{patch}] \in \mathbb{R}^d$, an
+amplitude feature
+$\mathbf{a}_b = L_a(A_b[\text{patch}]) \in \mathbb{R}^{d/2}$, and a complex
+phase feature
+$\tilde{\mathbf{p}}_b = L_p(p_b[\text{patch}]) \in \mathbb{C}^{d/2}$, where
+$L_p$ is linear and bias-free. The waveform token is what a per-band
+tokenizer would produce on its own; the two analytic features are the raw
+material for the interaction token, and the three properties below say how
+that token must be built so that it carries coupling and nothing else.
+
+\begin{proposition}[Phase-reference equivariance]
+\label{prop:equivariance}
+Let band $i$'s phase convention be shifted by a constant $\delta_i$, i.e.\
+$p_i \mapsto e^{i\delta_i} p_i$. Then $\tilde{\mathbf{p}}_i \mapsto
+e^{i\delta_i}\tilde{\mathbf{p}}_i$ and $Z_{ij} \mapsto e^{i\delta_i} Z_{ij}$
+for every $j$.
+\end{proposition}
+\begin{proof}
+$L_p$ is $\mathbb{C}$-linear without bias, so $L_p(e^{i\delta}p) =
+e^{i\delta}L_p(p)$; and $e^{i\delta_i}$ factors out of the sum in
+Eq.~(\ref{eq:mvl}).
+\end{proof}
+
+Raw phase depends on an arbitrary reference (the Hilbert transform fixes
+it only up to the analysis convention), so by
+Proposition~\ref{prop:equivariance} the phase feature
+$\tilde{\mathbf{p}}_b$ is not, by itself, a well-defined token content.
+We therefore let coupling enter through the \emph{aligned phase}, which
+combines slower bands' phase features under the measured coupling geometry:
+\begin{equation}
+\mathbf{u}_j \;=\; \sum_{i<j} \alpha_{ij}\, e^{-i \angle Z_{ij}}\,
+\tilde{\mathbf{p}}_i,
+\qquad
+\alpha_{ij} = \frac{|Z_{ij}|}{\sum_{i'<j}|Z_{i'j}|},
+\label{eq:aligned}
+\end{equation}
+with $\mathbf{u}_0 = \tilde{\mathbf{p}}_0$ for the slowest band.
+
+\begin{proposition}[Phase-reference invariance]
+\label{prop:invariance}
+$\mathbf{u}_j$ is invariant to the phase convention of every band.
+\end{proposition}
+\begin{proof}
+Under $p_i \mapsto e^{i\delta_i} p_i$, Proposition~\ref{prop:equivariance}
+gives $\tilde{\mathbf{p}}_i \mapsto e^{i\delta_i}\tilde{\mathbf{p}}_i$ and
+$e^{-i\angle Z_{ij}} \mapsto e^{-i\delta_i}e^{-i\angle Z_{ij}}$; the two
+factors cancel term by term in Eq.~(\ref{eq:aligned}), and $\alpha_{ij}$
+depends on $|Z_{ij}|$ only.
+\end{proof}
+
+Proposition~\ref{prop:invariance} is the reason coupling enters through
+Eq.~(\ref{eq:aligned}) rather than through the raw phases: the rotation by
+$e^{-i\angle Z_{ij}}$ re-expresses each slow band's phase feature relative
+to the phase at which it actually modulates band $j$, which is a physical
+quantity, and the weights $\alpha_{ij}$ let the strongest modulators of
+band $j$ dominate its aligned phase.
+
+\begin{proposition}[Magnitude preservation]
+\label{prop:isometry}
+Define the interaction token
+\begin{equation}
+\mathbf{h}_j \;=\; \mathbf{a}_j \odot
+\frac{\mathbf{u}_j}{|\mathbf{u}_j|} .
+\label{eq:rotation}
+\end{equation}
+Then $|\mathbf{h}_j| = |\mathbf{a}_j|$ elementwise, for every value of the
+coupling.
+\end{proposition}
+\begin{proof}
+Each component of $\mathbf{u}_j/|\mathbf{u}_j|$ has unit modulus.
+\end{proof}
+
+Multiplying by $\mathbf{u}_j$ directly would rescale the amplitude feature
+by $|\mathbf{u}_j|$, confounding coupling geometry with changes in band
+power, which is the one quantity every EEG model already exploits. Under
+Eq.~(\ref{eq:rotation}) band power reaches the encoder untouched; the
+coupling geometry is encoded purely in phase, and coupling \emph{strength}
+still enters through the weights $\alpha_{ij}$ of Eq.~(\ref{eq:aligned}).
+The isometry also makes the ablation interpretable: any gain over the
+uncoupled baseline cannot be an energy artifact.
+
+\paragraph{The duplex grid.}
+The final grid stacks, for each physical band $b$, a \emph{fused} row and
+a gated \emph{interaction} row:
+\begin{equation}
+\text{row}_b = \mathbf{r}_b + \boldsymbol{\beta}_b \odot \mathbf{h}_b, \qquad
+\text{row}_{n_b + b} = \gamma_b\, \mathbf{h}_b,
+\label{eq:duplex}
+\end{equation}
+with $\boldsymbol{\beta}_b \in \mathbb{R}^d$ initialized to zero and scalar
+$\gamma_b$ initialized to one. The two rows give coupling two different
+routes into the encoder. The fused row lets coupling modulate the band's
+own waveform representation in place; because $\boldsymbol{\beta}_b$
+starts at zero, its gradient at initialization is
+$\partial\mathcal{L}/\partial\boldsymbol{\beta}_b =
+\partial\mathcal{L}/\partial\,\text{row}_b \odot \mathbf{h}_b$, so
+coupling enters this route only along the directions in which the
+interaction token is correlated with the loss gradient, and the fused rows
+coincide with the uncoupled model until it does. The interaction row makes
+coupling a separately attendable feature from the first step, which is what
+event-level tasks turn out to need (Section~\ref{sec:results}).
+
+\begin{proposition}[Exact recoverability]
+\label{prop:recover}
+With a mean-pooled readout followed by a normalization layer, the
+configuration $\boldsymbol{\beta}_b = 0$, $\gamma_b = 0$ for all $b$
+computes the same function as the uncoupled model with $n_b$ waveform rows.
+\end{proposition}
+\begin{proof}
+At $\boldsymbol{\beta} = 0$ the fused rows are the waveform tokens. At
+$\gamma = 0$ the interaction rows are zero vectors; self-attention with
+zero rows present differs from self-attention without them only through
+those rows' own outputs, and mean-pooling over $2n_b$ rows of which $n_b$
+are zero rescales the pooled representation by $1/2$, which the head's
+normalization removes.
+\end{proof}
+
+The uncoupled model is thus a reachable point of the parameterization
+rather than a separate architecture, and the trained values of
+$\boldsymbol{\beta}$ and $\gamma$ are reported per corpus as measurements
+of how much coupling each task retained.
+
+\subsection{Tri-axial encoder}
+\label{sec:encoder}
+
+The grid $(C \times 2n_b \times P \times d)$ is processed by $N$ pre-norm
+blocks, each applying self-attention along one axis at a time --- time
+(with rotary position encoding), electrodes (with a learned per-electrode
+embedding), and frequency rows (with an embedding of each band's learned
+center frequency and bandwidth) --- followed by a feed-forward layer, each
+as a residual. Factorizing by axis keeps attention quadratic in one short
+axis at a time and gives each axis its natural positional structure. All
+coupling information reaches the encoder through the token content itself;
+the frequency sub-layer is plain attention over the $2n_b$ rows. A
+mean-pooled linear head produces predictions. We use $n_b{=}8$, $d{=}128$,
+$N{=}6$, four heads.
+
+\subsection{A pretraining objective for coupling}
+\label{sec:objective}
+
+If cross-frequency structure belongs in the token, it is natural to ask
+whether it also belongs in the pretraining target. We construct the
+objective that puts it there; Section~\ref{sec:results} evaluates it
+empirically, to convergence.
+
+\paragraph{Masking.} A random subset $\mathcal{M}$ of \emph{physical}
+bands is masked per channel. Because the interaction row of band $b$
+carries $\mathbf{a}_b$ by construction (Eq.~(\ref{eq:rotation})), masking
+hides \emph{both} of $b$'s rows --- fused and interaction --- or the
+visible interaction row would hand the reconstruction its own target; both
+are replaced by a shared learned mask token before the positional
+embeddings. Entries of the coupling matrix consumed by the encoder are
+zeroed wherever either band is masked, so the target cannot travel through
+the coupling input.
+
+\paragraph{Objective.} The loss combines an amplitude term and a coupling
+term,
+\begin{equation}
+\mathcal{L} \;=\; \mathcal{L}_{\mathrm{amp}}
+\;+\; \lambda\, \mathcal{L}_{\mathrm{cfc}},
+\qquad \lambda = 1.
+\label{eq:objective}
+\end{equation}
+$\mathcal{L}_{\mathrm{amp}}$ asks the model to predict, from each masked
+band's fused-row output, the patch log-amplitude standardized \emph{within
+each band} across the batch --- the rebalancing of
+\citet{yu2026understanding}, adopted as-is --- so that every band's
+structure is rewarded equally rather than in proportion to its
+$1/f$-dominated variance:
+\begin{equation}
+\mathcal{L}_{\mathrm{amp}} = \frac{1}{|\mathcal{M}|}
+\sum_{j \in \mathcal{M}}
+\bigl\| \hat{y}_j - \mathrm{std}_b\!\bigl(\log \bar A_j\bigr) \bigr\|^2 .
+\label{eq:lamp}
+\end{equation}
+$\mathcal{L}_{\mathrm{cfc}}$ asks it to predict the masked band's coupling
+column --- the real and imaginary parts of $Z_{ij}$ --- restricted to
+\emph{visible} phase bands $i$, since the phase required to define
+$Z_{ij}$ is unavailable when band $i$ is masked:
+\begin{equation}
+\mathcal{L}_{\mathrm{cfc}} = \frac{1}{Z_{\mathrm{sup}}}
+\sum_{j \in \mathcal{M}} \sum_{i \notin \mathcal{M}}
+\bigl\| \hat{Z}_{ij} - Z_{ij} \bigr\|^2,
+\label{eq:lcfc}
+\end{equation}
+with $Z_{\mathrm{sup}}$ the count of supervised entries. Pretraining uses
+the same corpora pool for every objective variant compared in
+Section~\ref{sec:results}; per-variant schedules are given in the appendix.
