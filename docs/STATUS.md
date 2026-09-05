@@ -22,230 +22,109 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 
 ---
 
-## 1. 活动目标
+## 1. 活动目标(2026-09-05)
 
-1. **ICLR 2027**:摘要 9-18,正文 9-25(AoE)。标题
-   *Cross-Frequency Modulation as Token Content and Pretraining Objective
-   for EEG Foundation Models*,模型名 **CroFreMo**。作者:Zhizhe Zhang
-   (NYU Shanghai)、Yifan Wang(Stony Brook)。
-   ⚠️ 9-18 后不能加作者;须有一名作者满足 reciprocal-review 资格并在
-   OpenReview 注册评审 ≥3 篇 —— Yifan 需在 9-18 前完成注册。
-2. baseline × 9 语料 × 3 seed(goal 仍挂着):297 格已填,
-   8 格按规则留空(其中 7 格是 baseline 自身训练失败,rule 3 扣下)。
-3. `PT_v2full` 判决后,补 5 个缺失语料的 v2 微调(IIIC/TUEP/ADFD/CAUEEG/Siena)。
+`/goal 保证开启的实验正确并完成实验目的 减少时间和资源的浪费 并修改论文`。
+ICLR 2027:摘要 9-18,全文 9-25。论文稿(Intro / Related Work / Method v3 / Setup / results 备注)在 MacBook 本地,
+编译通过,**未推 Overleaf**(Zhizhe 看过再推)。
 
-## 2. 九语料战绩(vs 全表最强 baseline,08-27)
+## 2. 论文主张(当前证据下的诚实版本;第 9 波落地 62/72 后)
 
-| 语料 | 我们 | 最强 baseline | Δ |
-|---|---|---|---|
-| TUSZ (AUC-PR) | v2 0.7143 | FFCL 0.5449±0.024 | **+0.169** |
-| CHB-MIT (AUC-PR) | v2 0.7134 | TFM 0.6269±0.021 | **+0.087** |
-| IIIC (Kappa) | scratch 0.4868 | REVE 0.4363±0.002 | **+0.051** |
-| ADFD (BAcc) | scratch 0.5617 | BIOT-scr 0.5254±0.017 | +0.036 |
-| TUEP (AUROC) | scratch 0.8052 | EEGPT-scr 0.7859±0.018 | +0.019 |
-| TUEV (Kappa) | scratch 0.7094 | Uni-NTFM 0.7030(自报) | +0.006(方差内) |
-| TUAB (BAcc) | scratch 0.8157 | 复现最强 ST-T 0.8198 | −0.004(平;REVE 自报 0.8315) |
-| CAUEEG (BAcc) | scratch 0.5254±0.012 | BIOT-scr 0.5609±0.009 | −0.036 |
-| Siena (AUC-PR) | 0.1098(batch bug) | REVE 0.5181±0.096 | 修复中(SIENA_b128) |
+1. **贡献一(经验+解释)**:1.6M 的"可学习滤波器组分频 token + 三轴注意力"模型,在 12 个临床语料上整体不输 25–69M 的
+   FM;在稀有正样本的发作检测上大幅领先。架构对照证明领先来自分频与三轴两个归纳偏置,不是参数量(§6)。
+2. **贡献二(机制)**:跨频耦合作为 token 内容,在痫样事件分类(TUEV)上决定性(同编码器 +0.17,三 seed);
+   移植进 CBraMod 后 TUEV 赢、TUSZ 平,两处增益都可归因于耦合内容(§7)。在其他 10 个语料上耦合对我们自己的编码器
+   为零(§5)。候选解释:三轴编码器有频率轴,能从分频 token 自学跨频关系,显式耦合 token 只在关系最难学的事件形态上
+   有增量;无频率轴的编码器处处受益。
+3. **贡献三(分析)**:预训练——目标函数消融、lr 匹配探针、标签比例、patch-200 全量对照、统一配方的预训练行(3 赢 9 输)。
 
-6 胜 2 负 1 修复中,1.6M 参数对 25–69M。**以上全部不含新预训练。**
+已钉死:预训练不是贡献;TUEV 上耦合决定性;耦合在 TUAB/睡眠/TUEP/ADFD/CAUEEG/TUAR/Siena 为零(全三 seed)。
+未钉死(等第 9 波尾巴):TUSZ/CHB-MIT 的 duplex seed 1/2(耦合在发作检测上是 −0.04 还是 +0.05);
+TUEV raw 重跑的逐类别分析;贡献一表里 9 个语料的 duplex 三 seed。
 
-## 3. 在跑
+## 3. 主表战绩(我们 vs 最强已复现 baseline;三 seed 标 (3),单 seed 标 (1))
 
-| 作业 | 集群 | 内容 | 状态 |
-|---|---|---|---|
-| PT_v2full 44508503 | b2 h100 | 修正日程预训练:150k 步 × 均值 batch 197 = 15.4 epoch,band_norm_pac,+TUEG | ~50%,ETA 08-27 晚 |
-| SIENA_b128 386667 | amd | Siena 修 batch(32→128, epochs 60) | 排队 |
-
-## 4. 预训练判决(已定稿,见 FINDINGS 5.6)
-
-结局:标题走 token-content 版(已改),预训练为分析章节。机制分语料(TUEV
-优化锁死 / TUSZ 表示退化),耦合项作用 corpus-dependent,低标注例外成立。
-**不再开预训练实验。** 下文为当初的预注册规则,存档:
-- 09-03 patch-200 全量加载对照(TUEV):scratch@200 0.6094 vs ptF@200 0.5306(−0.079);害处不是 tokenizer 重初始化工件,5.6 判决成立。详见 FINDINGS 5.8。TUSZ 对:scratch@200 0.6140 vs ptF@200 0.6296(+0.016,方向与 5.6 一致)。CHB-MIT 对:0.5486 vs 0.5448(−0.004,平)。三对齐,判决不变;b2 镜像全撤。
-
-## 4a. (存档)PT_v2full 出来后的决策规则
-
-| 结果 | 动作 |
-|---|---|
-| 预训练普遍胜 scratch | 按计划写 |
-| 只在阵发类胜(TUSZ/CHB/Siena) | 最好的情况:论点被证实 |
-| 仍只有 TUSZ | 用最后一发:γ 插值目标,一次重训 |
-| γ 后仍不行 | 停手;tokenizer 贡献 + 目标函数诚实负结果,标题砍掉 "and Pretraining Objective" |
-
-**任何情况下不回头动架构** —— scratch 战绩已验证它,预算和时间也不允许。
-
-## 5. 预算与集群
-
-* **b2**:计费滞后,实际可用 ≈ 405 SU,PT_v2full 吃 ~250。Zhizhe 确认
-  **SU 可以再申请** —— 但审批有周期,应尽快提。预训练全部走 b2
-  (TUEG 85G 只在 b2;amd 存储紧、卡慢,不搬)。
-* **amd**:节点小时 1271/2250 已用,剩 ~978。下游微调主力。
-* b2 同账号有另一个项目(object-srcatt-* / color-b01-*)共享 fair-share
-  与 SU 池,排队慢时先查它。
-
-## 6. 悬而未决
-
-* 7 个 rule-3 扣下的 baseline 格:ADFD/EEGNet 与 CAUEEG/LaBraM 是
-  3-seed 全灭(疑配置),其余 5 个是个别 seed 失败 —— 待补跑。
-* IIIC 按 BIOT 原协议的"保险行"(我们模型一次训练)—— Zhizhe 未拍板。
-* 代码层 paclock_* → CroFreMo 重命名,等队列排空。
-* 用户侧:AWS key 与 HF token 建议轮换(注入消息事件后),未确认完成。
-
-## 6. 第三个集群:NYU Torch(2026-09-03 起)
-
-- 仓库 `/scratch/zz5070/PACLock`(与 GitHub main 同步);环境 conda `py312`(torch 2.8+cu128,numpy 2.0.2 / scipy 1.13.1 与 amd 一致;scipy≥1.17 会让 mne 1.8 导入失败)。
-- 数据:`PACLOCK_DATA=/scratch/zz5070/data/raw`,`PACLOCK_PROC=/scratch/zz5070/data`;12 个论文语料的 `processed/` 全部就绪(09-03):tuev/tusz 由 torch 上的原始 edf 重新预处理(split 与计数与 amd 一致,样本顺序不同),其余 10 个经 `/scratch/zz5070/sync/pull.sh` 从 amd rsync(size+mtime 校验无差异)。torch 的公钥已加入 amd 的 authorized_keys(Zhizhe 09-03 手动)。
-- 投递:`sbatch -A torch_pr_63_tandon_advanced -p h100_tandon|a100_tandon|h200_tandon slurm/torch_run.slurm <cfg> [seed]`,或 `-A torch_pr_63_general -p h200_public|l40s_public`;`--array=0-2` 跑三 seed。CPU:`-A torch_pr_63_general -p cpu_short`(≤4h,内存上限 120G)。
-- 队列很深(排 1–2 小时起),适合不赶时间的批量任务;H200 上 TUEV 一个 epoch 约 8 分钟(amd MI210 约 12 分钟)。
-- 跨集群复现(09-03):`tuev_paclock_duplex` seed 0 在 H200 上 test κ 0.6969(amd MI210 同配置 0.7094;best val 0.572 vs 0.609),1.95 h。差 0.0125,在单 seed 噪声内(TUEV 三 seed 的 CBraMod 基线 std ≈ 0.02);torch 结果可入表,但同一格的三个 seed 应在同一集群跑。
-
-## 7. 移植波(TP_*,CBraMod 编码器 + 我们的 duplex 前端,从零训练,3 seed;09-03 中期,8/11 落地)
-
-| 语料 | 移植(3 seed) | CBraMod 从零(3 seed) | Δ | CBraMod 预训练(3 seed) |
+| 语料(指标) | 我们(从零 duplex) | 最强 baseline | Δ | 判 |
 |---|---|---|---|---|
-| TUEV (κ) | 0.6115±0.004 | 0.5638±0.019 | **+0.048** | 0.6449±0.018 |
-| ADFD (BAcc) | 0.4628±0.008 | 0.4810±0.015 | −0.018 | 0.4411±0.013 |
-| CAUEEG (BAcc) | 0.4270±0.068 | 0.4266±0.067 | 0(双方各有 seed 塌到 0.333) | 0.5145±0.025 |
-| Sleep-EDF (κ) | 0.6084±0.001 | 0.6545±0.003 | **−0.046** | 0.6715±0.004 |
-| Siena (AUC-PR) | 0.089±0.065 | 0.199±0.050 | −0.11(两者都在正样本饥饿地板上) | 0.4243±0.052 |
-| IIIC (κ) | 0.3100±0.009 | 0.3935±0.005 | **−0.083** | 0.3133±0.016 |
-| ISRUC (κ) | 0.5099±0.023 | 0.6976±0.005 | **−0.188** | 0.7540±0.006 |
-| TUEP (AUROC) | 0.6330±0.030 | 0.6422±0.028 | −0.009(平) | 0.6647±0.017 |
+| TUSZ (AUC-PR) | 0.633 (1);raw 0.671±0.026 (3);预训练 0.714 | FFCL 0.545±0.024 | +0.09~+0.17 | 赢 |
+| CHB-MIT (AUC-PR) | 0.713 (1);raw 0.667±0.047 (3) | TFM-pre 0.627±0.021 | +0.04~+0.09 | 赢 |
+| TUEV (κ) | 0.709 (1);rot2 0.733±0.016 (3) | REVE-pre 0.685±0.032 | +0.02~+0.05 | 赢 |
+| IIIC (κ) | 0.479±0.008 (3) | REVE-pre 0.436±0.002 | +0.04 | 赢 |
+| TUEP (AUROC) | 0.810±0.004 (3) | EEGPT-scr 0.786±0.018 | +0.02 | 赢 |
+| TUAB (BAcc) | 0.816 (1) | ST-T 0.820±0.004 | −0.004 | 平 |
+| ADFD (BAcc) | 0.505±0.050 (3) | BIOT-scr 0.525±0.017 | −0.02(方差内) | 平 |
+| CAUEEG (BAcc) | 0.525±0.012 (3);调参 0.558 (1) | BIOT-scr 0.561±0.009 | −0.04 / −0.003 | 平/小负 |
+| Siena (AUC-PR) | 0.110 (1);ptS 0.456±0.034 (3) | REVE-pre 0.518±0.096 | −0.06(REVE 方差内) | 小负 |
+| Sleep-EDF (κ) | 0.653 (1) | ContraWR 0.692±0.012 | −0.04 | 负 |
+| ISRUC (κ) | 0.712 (1) | CBraMod-pre 0.754±0.006 | −0.04 | 负 |
+| TUAR (κ) | 0.620±0.030 (3);调参 0.658 (1) | CBraMod-pre 0.715 (1) | −0.06~−0.10 | 负 |
 
-未落地:TUSZ、CHB-MIT、TUAB(仍在跑)。旧 Line-B 单 seed 曾见 CHB-MIT 0.508 vs 0.317。
-中期读法:前端搬到 CBraMod 上,事件/发作类语料受益(TUEV),睡眠分期受损(Sleep-EDF −0.046)——
-移植把 CBraMod 自带的 FFT 谱分支换掉、且把 8 个频带均值池化掉,谱功率信息变粗,睡眠最吃这一块。
-对会议第三点的含义:"即插即用"目前只对 paroxysmal 语料成立;要么在移植里保留频带轴(不池化),
-要么把结论收窄为发作/事件检测。等 6 个语料落地后定。
+5 赢 3 平 4 负(08-27 的"6 胜 2 平 3 小负"里 ADFD 的 +0.036 是单 seed,三 seed 后回到方差内)。
 
-- 09-03 TP_tusz(401197)在 14.7 h 时主动撤销:35/50 epoch,0.42 h/epoch,剩余 15 epoch 需 6.3 h 而
-  wall 只剩 5.3 h;train.py 不存中间 checkpoint、结果只在收尾时写,被 SLURM 杀掉等于全丢。
-  TP_chbmit(7% 超限,赌一把)与 TP_tuab(勉强够)保留。val 轨迹(TUSZ pr_auc 0.23 vs CBraMod 从零
-  test 0.48)已足够说明直接移植在 TUSZ 上输;需要正式数字时在 torch 单 seed 补(H200 约 10 h)。
-  教训:50 epoch 无 patience 的长跑必须带 max_hours(ptS 配置已带 22.5 h)。
+## 4. 预训练行(ptS,统一配方;FINDINGS 5.9)
 
-### 死活门(2026-09-03 投,amd 402075,4 卡打包,seed 0)
+checkpoint duplex_v2 60k + LaBraM/CBraMod 式微调(lr 5e-4、layer decay 0.65、warmup 2、前 2 epoch 只训未加载张量)。
+12 格对从零:**3 赢**(Siena +0.35、TUSZ +0.02、Sleep-EDF +0.02)**9 输**;对 baseline 2 赢 1 平 7 输。
+预训练帮的全是标签稀缺/噪声大的语料;标签充足时成为约束。主表用 ptS 行,零散预训练格进附录。
+TUSZ ptS seed 1 = 0.694,seed 2 在跑。
 
-直接移植 8/11 落地后只赢 TUEV,判定这条线需要先过门再谈对照。修法:适配器加
-`band_mode: channels`——前端的 16 行(8 fused + 8 interaction)不再均值池化,而是
-每个(电极, 行)当作 CBraMod 的一个通道送进 criss-cross 编码器,编码器之后再对行
-取均值,分类头形状与参数量不变(17.90M vs 17.90M)。同时跑耦合关闭对照
-(`tokenizer_mode: raw`,同前端,8 行)。配置 `configs/experiments/{tuev,tusz}_cbramod_{crofremo,rawfe}_bands.yaml`。
+## 5. 耦合消融账(同编码器,raw → duplex;FINDINGS 6.2)
 
-**TUEV 半边结果(09-03 晚,seed 0)**:修好版移植 test κ **0.6322**;同前端耦合关闭 0.5953;
-CBraMod 自带 tokenizer 从零 0.5638±0.019;直接移植(均值池化)0.612;CBraMod 预训练 0.645。
-TUEV 过门:高于 CBraMod 从零 6.8 点,且耦合开/关同前端差 3.7 点——增益可归因于耦合内容,
-不只是 sinc 前端。TUSZ 半边:amd 上 4 卡打包 9.3 h 才到第 5/50 epoch,24 h wall 内跑不完
-(这两个配置没带 max_hours),撤销后转投 torch H100(单卡各一,配置补 max_hours 44)。
+| 语料 | raw | duplex | Δ | seed |
+|---|---|---|---|---|
+| TUEV | 0.536±0.034 | 0.709 / rot2 0.733±0.016 | **+0.17~+0.20** | 3 |
+| IIIC | 0.466±0.008 | 0.479±0.008 | +0.013 | 3 |
+| CHB-MIT | 0.667±0.047 | 0.713 | +0.05 | duplex 1(seed 1/2 amd 在跑) |
+| TUSZ | 0.671±0.026 | 0.633 | −0.04 | duplex 1(seed 1/2 amd 在跑) |
+| TUEP / ADFD / CAUEEG / TUAR / TUAB / Sleep-EDF / ISRUC / Siena | — | — | 0 | 3 |
 
-**TUSZ 半边,耦合关闭对照先落地(09-04,torch)**:test AUC-PR 0.4223(CBraMod 自带 tokenizer 从零
-0.482±0.043;val 曲线只有 0.21 但 test 0.42——TUSZ dev/eval 分布差异大,val 不能直接推 test)。
-修好版(耦合开)27/50 epoch,val 0.167,预计 test 0.35–0.45,大概率不到 0.48 的判据。
+tusz_type(五类发作形态)raw 0.121 vs duplex 0.132:两者近随机(被试不相交下发作类型不可学),**无结论**。
 
-**TUSZ 半边落地(09-05,torch,seed 0)**:修好版移植(耦合开)test AUC-PR **0.4747**;同前端耦合关闭 0.4223;
-CBraMod 自带 tokenizer 从零 0.482±0.043。读法:(1) 耦合开/关差 +0.052,归因在 TUSZ 上也成立;(2) 移植 vs 原生
-0.475 vs 0.482,差 0.007 = 0.17 个 std,统计上平——预注册判据 ≥0.48 以 0.007 之差没过,但"移植不伤"成立。
-门的结论:TUEV 赢 + 归因,TUSZ 平 + 归因。第三点写法:tokenizer 可迁移到另一编码器,事件任务提升、发作检测持平,
-两处增益都归因于耦合内容;不宣称即插即用普遍提升。
+## 6. 架构对照(raw 前端,三 seed;FINDINGS 6.3)
 
-预注册判据:TUEV 移植 ≥ 0.61(且明显高于 CBraMod 从零 0.564)**且** TUSZ 移植 ≥ CBraMod
-从零 0.48 → 线活,再补耦合开/关 3 seed;否则关线,第三点改为"新颖性收回到自己的模型,
-移植作为边界讨论",不再投任何 tokenizer 对照。
-
-## 8. 预训练行定稿配方 ptS(2026-09-03 投,12 语料单 seed,三集群分跑)
-
-不再搜索。checkpoint = duplex_v2 60k(短版;150k 的 v2_full 在所有试过的语料上都更差)。
-微调 = LaBraM/CBraMod 的预训练标准配方:base lr 5e-4 + layer_decay 0.65(按深度,
-frontend/band_pe=0,encoder.blocks.i=i+1,head/spatial_pe=顶),warmup 2 epoch,前 2 epoch
-只训未从 checkpoint 加载的张量(patch-50 tokenizer 卷积、head、spatial_pe),之后全解冻。
-不逐语料调参;batch/epochs 与从零配方相同。代码:`freeze_loaded_epochs`、
-`paclock_layer_decay_param_groups`、`model._loaded_keys`、`$PACLOCK_CKPT`(commit fe43a46)。
-checkpoint 走仓库 `ckpt` 分支跨集群(6.8 MB)。torch 的结果每 30 min 由 `/scratch/zz5070/sync/push_runs.sh`
-推回 amd 的 `runs/`(仅 json/npz,`--ignore-existing` 不覆盖 amd 已有文件),工作簿在 amd 用
-`scripts/fill_xlsx.py --allow-single-seed` 填;ptS 行已加(`scripts/add_pts_row.py`),单 seed 标注 `(1 seed)`。
-
-| 集群 | 语料 | 任务 |
-|---|---|---|
-| amd | adfd caueeg tuep tuar | PTS_small 403027(4 卡打包) |
-| amd | iiic siena tuab chbmit | PTS_big 403028(4 卡打包) |
-| b2 | isruc sleepedf | ptS_isruc 45126830 / ptS_sleepedf 45126831(h100-80) |
-| torch | tuev tusz | 16833442 / 16833443(h100_tandon) |
-
-判读:与"最好从零"逐格比;赢/平/输如实入表,单 seed 定行后补 3 seed。
-
-首批落地(09-03 晚):ADFD 0.4527(从零 0.562,输)、TUAR 0.5923(从零 0.658,输)、
-Siena **0.4912**(从零 0.110;此前最好预训练 0.468)。TUEP 首跑在第 1 epoch 被 patience 砍掉——
-stage-1 冻结期的 val 平台被当成收敛,已修(fd6bcf5:冻结+warmup 期内不早停,解冻时清零计数),
-TUEP 重跑与 Siena seed 1/2 打包在 PTS_rerun 403226。
-torch 落地:TUEV ptS κ 0.6417(从零 0.709;v1 全参数微调 0.689)、TUSZ ptS AUC-PR 0.6525
-(duplex 从零 0.633;同一 60k checkpoint 用从零配方 pt2 = 0.714)。Siena seed 2 = 0.467。
-IIIC ptS κ 0.4339(从零 0.4868,输 0.05);CAUEEG 0.5033(从零 0.5254,输 0.02);Siena 三 seed
-0.456±0.033。TUEP ptS 重跑(早停修复后)AUROC 0.7686(从零 0.805,ptF 0.809):解冻后 val AUROC 从 0.51 掉到 0.46,
-最佳 checkpoint 仍是 stage-1 的——5e-4 顶层 lr 在 TUEP 上让全参数微调发散;按规则不逐语料调,如实入表。
-CHB-MIT ptS AUC-PR 0.6991(duplex 从零见 runs;v2 短版从零配方 0.7134;最好从零 hybrid_gate 0.7513)。
-CHB-MIT:duplex 从零 0.713 → ptS 0.699,输 0.014。Sleep-EDF ptS(torch)κ 0.6747(从零 0.6533,赢 0.02)。
-TUAB ptS BAcc 0.8054(从零 0.8157;仅约 1.5 epoch——TUAB 一个 epoch 3–14 h,max_hours 只在 epoch 末检查,
-作业以 3 分钟之差险过 24 h wall;已改为 eval 步也检查)。
-ISRUC ptS κ 0.6721(从零 0.712,输 0.04;val 0.726 但 test 掉——ISRUC val/test 差异大)。
-**12 格 seed-0 全部落地:3 赢(Siena、TUSZ、Sleep-EDF)9 输**;TUSZ seed 1/2 在 torch 补。见 FINDINGS 5.9。
-余 
-ISRUC 与 TUSZ seed 1/2(torch 排队)。
-读法:定稿配方不是处处优于从零配方——TUSZ 上同一 checkpoint 换回从零配方反而高 6 点。
-按预注册规则不再改配方,逐格如实入表;若最终 ptS 行整体弱于"各语料最好的既有预训练格",
-论文的预训练行用 ptS(统一配方,可辩护),既有格作附录参考。
-
-## 9. 定稿实验波(2026-09-05 投;目的:把"耦合只在部分任务有效"变成可预测的机制主张,并解释贡献一)
-
-| 组 | 内容 | 集群 / 任务 |
-|---|---|---|
-| A raw 对照 | siena/iiic/tuep/adfd/caueeg/tuar × raw 3 seed(此前无) | amd R1–R5(405062–405066) |
-| A′ TUEV raw 重跑 | 3 seed,存 test 分数供逐类别分析 | torch raw_tuev_s0–2 |
-| B duplex 补 seed | adfd/iiic/siena/tuar/tuep seed 1–2(amd D1、D2、G3);tusz/chbmit/isruc/sleepedf seed 1–2(torch dup_*) | amd 405067/405068/405071;torch 8 job |
-| C 设计假设:内容门控 | fusegate、hybrid_gate 在 tuev/tusz/chbmit 补 seed 1–2(单 seed 时在发作语料上高于 raw 与 duplex) | amd G1–G3(405069–405071,与 B 混排) |
-| D 架构对照 | tusz/chbmit × {raw_nb1(不分频), raw_flat(不分轴)} × 3 seed | 配置已建,CPU 冒烟后投 amd |
-| E 形态 vs 状态 | **tusz_type**:同 TUSZ 发作窗口、标签换成发作类型(fnsz/gnsz/cpsz/absz/tcsz/spsz);raw vs duplex 3 seed | 预处理 torch cpu_short 16964310;训练待数据 |
-
-预注册读法:
-- E 是核心检验:同一语料、同一窗口、只换标签类型。耦合在 tusz_type 上显著而在 tusz 检测上中性 → "耦合 token 对形态标签决定性、对状态标签中性"成为经过设计检验的主张;IIIC(形态)应同向。
-- C 若三 seed 下门控变体在发作语料 ≥ raw 且 TUEV 不掉 → 定稿架构改为内容门控 duplex(耦合按测得强度进入),站位更清:处处不差于 raw、形态任务大胜。选择规则:三语料平均名次,test 三 seed,附录披露。
-- D 解释贡献一:哪一个(分频 / 分轴)撑起发作检测的领先。
-
-### 第 9 波首批落地(09-05 上午,46/72)
-
-**耦合 raw vs duplex(同编码器)**,新增 5 个语料,全部三 seed,全部为零:
-TUEP raw 0.810±0.001 vs duplex 0.810±0.004;ADFD 0.501±0.040 vs 0.505±0.050;CAUEEG 0.517±0.027 vs 0.525±0.012;
-TUAR 0.623±0.007 vs 0.620±0.030;Siena 0.171±0.13 vs 0.170±0.07(两者方差都大到没有意义)。
-至此耦合的正效应仍只有 TUEV;IIIC(形态)与 tusz_type(形态)是最后两个未落地的检验。
-
-**架构对照(raw 前端、同配方、三 seed)**——贡献一的解释:
-| | 8 频带 + 三轴(raw) | nb=1 不分频 | flat 不分轴(0.90M) |
+| | 8 频带 + 三轴 | nb=1 不分频 | flat 不分轴(0.90M) |
 |---|---|---|---|
-| TUSZ AUC-PR | 0.671±0.026 | 0.558±0.041 | 0.448±0.048 |
-| CHB-MIT AUC-PR | 0.667±0.047 | 0.245±0.068 | 0.136±0.016 |
-发作检测的领先来自分频 token 和三轴分解两者,三轴更关键;CBraMod 从零(CHB-MIT 0.317)正落在 nb1/flat 的水平。
+| TUSZ | 0.671±0.026 | 0.558±0.041 | 0.448±0.048 |
+| CHB-MIT | 0.667±0.047 | 0.245±0.068 | 0.136±0.016 |
 
-**tusz_type(形态标签)raw**:κ 0.121±0.030(五类,fnsz 占 58%),任务本身难;duplex 三 seed 在跑,这是核心检验。
-**门控变体**:TUEV fusegate seed 1/2 = 0.525/0.564,低于 duplex/rot2;内容门控在 TUEV 上不如硬编码 duplex,C 组假设偏负。
-TUSZ ptS seed 1 = 0.6935(seed 0 0.6525)。
+两者都撑起发作检测,三轴更关键;CBraMod 从零(CHB-MIT 0.317±0.167)落在 nb1/flat 水平。
+门控变体(fusegate / hybrid_gate)三 seed 在 TUEV 低于 duplex、在发作语料与 raw 同水平:不采用。
 
-### 第 9 波第二批(09-05 中午,55/72)
+## 7. 移植门(tokenizer → CBraMod 编码器,频带当通道;FINDINGS 6.1)
 
-- **tusz_type(形态标签,五类)**:raw κ 0.121±0.030,duplex 0.132±0.070——无差异,但两者都接近随机(val 最高 0.41,
-  test 0.1:dev/eval 的发作类型按病人聚集,被试不相交的 10 s 窗口几乎学不到类型)。这个检验**无结论**而非否定:
-  任务本身在此协议下不可学。IIIC 是剩下的形态检验。
-- **IIIC raw** κ 0.466±0.008;duplex seed 0 = 0.487,seed 1/2 在跑(D1)。
-- 门控变体:TUEV hybrid_gate 三 seed 0.673±0.043(duplex 0.709 / rot2 0.733),fusegate 0.559±0.026——内容门控不优于硬编码 duplex;
-  TUSZ fusegate seed 2 = 0.663(seed 0 0.695;raw 0.671)。C 组假设:不采用。
-- 归因的一个有意思的不对称:在 CBraMod 里耦合开/关差 TUEV +0.037、TUSZ +0.052;在我们自己的三轴编码器里 TUSZ 上耦合为零。
-  解释候选:三轴编码器有频率轴,能从分频 token 里自己学到跨频关系,耦合 token 只在关系最难学的地方(TUEV 事件形态)才有增量;
-  没有频率轴的编码器(CBraMod)则处处受益。架构对照(flat/nb1 崩溃)与此一致。这是比"形态 vs 状态"更稳的主张,写法待定。
+| seed 0 | CBraMod 自带(3 seed) | 同前端耦合关 | 移植耦合开 |
+|---|---|---|---|
+| TUEV κ | 0.564±0.019 | 0.595 | **0.632** |
+| TUSZ AUC-PR | 0.482±0.043 | 0.422 | 0.475(平) |
 
-### 第 9 波第三批(09-05 下午,62/72)
+第三点写法:可迁移、事件任务提升、发作检测持平、增益归因于耦合内容;不宣称即插即用普遍提升。
+直接移植(频带均值池化)11 语料 1 赢 2 平 7 输 1 无结果,已被修好版取代,只作附录。
 
-- **IIIC duplex 三 seed 0.479±0.008 vs raw 0.466±0.008:+0.013**(约 1.5 个 std,方向为正、幅度小)。
-- 门控变体(三 seed):TUSZ fusegate 0.653±0.040、hybrid_gate 0.670±0.020(raw 0.671);CHB-MIT fusegate 0.652±0.065、
-  hybrid_gate 0.713(2 seed)vs raw 0.667。与 raw 同水平,不优于 duplex;C 组结论:不改架构。
-- **耦合 raw→duplex 的全部账(同编码器)**:TUEV **+0.17**(3 seed);IIIC +0.013(3 seed);TUEP/ADFD/CAUEEG/TUAR/TUAB/Sleep-EDF/
-  ISRUC/Siena 0(3 seed);TUSZ 单 seed −0.04(duplex seed 1/2 在 torch 排队);CHB-MIT 单 seed +0.05(同上)。
-- 剩余 10/72 全在 torch 排队(TUEV raw 重跑、tusz/chbmit/isruc/sleepedf duplex seed 1/2、TUSZ ptS seed 2 在跑)。
+## 8. 在跑 / 排队(09-05 下午)
+
+- amd:T9_tuevraw_chb(TUEV raw ×3 存分数 + CHB-MIT duplex s1)在跑;T9_chb_tusz(CHB-MIT duplex s2、TUSZ duplex s1/2、ISRUC s1)排队;
+  G3(CHB-MIT hybrid_gate s2)收尾。
+- torch:ptS_tusz_s2 在跑;Sleep-EDF duplex s1/2、ISRUC s2 排队(h100_tandon 队列今天饱和)。
+- b2:空。
+- 收集器:`~/.claude/jobs/18b2571f/tmp/wait_set.sh`(目标清单 wave9.list,62/72 落地)。
+
+## 9. 集群与预算
+
+- **amd**(`/work1/chenyuyou/yifanwang/Zhizhe/PACLock`,mi2104x 4×MI210,强制独占,20 节点):node-hours 约 1450/2250。
+  `slurm/configs_packed.slurm <cfg[:seed]>×4`、`seeds_packed.slurm`。工作簿与文档只在 amd 维护。
+- **b2**(`/ocean/projects/cis260249p/qren2/Zhizhe/PACLock`,h100-80 12 SU/h):唯一有 TUEG 切片与全部预训练 checkpoint 的集群;
+  processed 只有 6 语料;队列慢。scp 不通,用 `ssh b2 'cat …'`。
+- **torch**(NYU,`/scratch/zz5070/PACLock`,只能经 tmux 窗口 `torch`):conda `py312`(numpy 2.0.2 / scipy 1.13.1 钉死);
+  `PACLOCK_DATA=/scratch/zz5070/data/raw`、`PACLOCK_PROC=/scratch/zz5070/data`,12 语料 processed 齐(从 amd rsync,校验一致);
+  `slurm/torch_run.slurm <cfg> [seed]`(h100_tandon,`-A torch_pr_63_tandon_advanced`,通常半小时起,但会整天饱和);
+  `slurm/torch_cpu.slurm`(cpu_short ≤4 h,内存上限 120 G);结果每 30 min 由 `sync/push_runs.sh` 推回 amd。
+  checkpoint 走仓库 `ckpt` 分支。
+- 教训(已写进代码):长跑必须带 `max_hours`,且在 eval 步检查(TUAB 险过 24 h wall);stage-1 冻结期不计 patience;
+  train.py 不存中间 checkpoint,被 wall 杀掉即全丢。
+
+## 10. 悬而未决 / 待 Zhizhe
+
+1. 看稿后推 Overleaf(Intro / RW / Method v3 / Setup / results 备注)。Intro 的贡献顺序要按 §2 倒过来,标题是否去掉
+   "for EEG Foundation Models"待定。
+2. b2 SU 续申;Yifan 在 9-18 前注册 reciprocal reviewer;AWS key / HF token 轮换。
+3. 第 9 波尾巴落地后:重灌工作簿(消融 sheet 加 raw 三 seed、架构对照、门控),写 FINDINGS 6.x 定稿,更新 results.tex。

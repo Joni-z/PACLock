@@ -528,3 +528,23 @@ BCI +0.012(n=3);TUAR −0.021(n=1)、Sleep-EDF −0.001(n=1)。
 * **文献**:Kommineni 2605.26434(重建偏置机制)、Bindra 2606.08583
   (睡眠掉 >0.42 vs 临床 0.07–0.13)、FAME 2608.01898 —— 三篇全部
   独立支撑"阵发性临床"定位与频带标准化动机。
+
+## 2026-09-02 → 09-05
+
+* **第三集群 torch**:仓库 clone、conda py312(numpy 2.0.2 / scipy 1.13.1 钉死,scipy≥1.17 破 mne)、
+  `slurm/torch_run.slurm` / `torch_cpu.slurm`、12 语料 processed(tuev/tusz 本地重预处理并校验,其余 rsync 自 amd)、
+  结果每 30 min 推回 amd(`sync/push_runs.sh`,`--ignore-existing`)、跨集群复现 TUEV κ 0.6969 vs amd 0.7094。
+* **预处理**:七个脚本补 `expand()`(离开 amd 即找不到数据);`astype(copy=False)`;`tusz_type.py` 新任务。
+* **训练代码**:`model._loaded_keys`;`paclock_layer_decay_param_groups`;`freeze_loaded_epochs`(冻结/warmup 期不早停,
+  解冻清零 patience);`$PACLOCK_CKPT`;`max_hours` 在 eval 步也检查;`configs_packed.slurm` 支持 `cfg:seed`。
+* **适配器**:`cbramod_paclockfe` 加 `band_mode: channels`(频带当通道,编码器后池化,头不变);`build.py` 转发。
+* **配置**:`pretrain_ft/*_duplex_ptS.yaml` ×12;`experiments/{tuev,tusz}_cbramod_{crofremo,rawfe}_bands.yaml`;
+  `_diag/{siena,iiic,tuep,adfd,caueeg,tuar}_paclock_rawtok.yaml`;`_diag/{tusz,chbmit}_paclock_raw_{nb1,flat}.yaml`;
+  `_diag/tusz_type_paclock_{duplex,rawtok}.yaml`;`datasets/tusz_type.yaml`。
+* **判决**:patch-200 三对(5.8);ptS 行 3 赢 9 输(5.9);移植门 TUEV 赢 / TUSZ 平、归因成立(6.1);耦合消融 12 语料(6.2);
+  架构对照(6.3);门控变体不采用;tusz_type 无结论。
+* **运维教训**:TP_tusz 撞 20 h wall 撤销、TP_chbmit 撞 wall 丢失、TUAB ptS 以 3 分钟险过——长跑必须带 max_hours;
+  TUEP ptS 被 stage-1 平台早停——已修。amd 移植波 8 节点 × 20 h 的 CHB-MIT/TUSZ 结果因无中间 checkpoint 而丢失。
+* **工作簿**:`scripts/add_pts_row.py` 加 "CroFreMo (预训练 ptS)" 行,`fill_xlsx.py` 映射 `paclock_duplex_ptS`,12 格填齐。
+* **论文**:Related Work 两段式 + 79 条 bib;Method v3(现象段、四条命题、双流梯度动态);Setup;Intro 初稿;
+  results.tex R6/R7 备注;主文件加 amsthm/enumitem。全部本地未推。

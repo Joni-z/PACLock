@@ -670,3 +670,12 @@ v3 赢 tuev、平 isruc、输 sleepedf;两者都打不过 scratch(tuev/isruc)—
 epoch、10h walltime 内注定跑不完,08-26 取消止损(它们还压着 PT_v2full
 的 fair-share 优先级)。**FAME(arXiv:2608.01898)发表后 v3 即 FAME 目标
 —— 正式对比必须在修正日程上重做才对双方公平。**
+
+## F. 预训练行定稿(ptS,2026-09-03/04)
+
+微调配方(不逐语料调):checkpoint duplex_v2 60k;lr 5e-4 + layer_decay 0.65(`paclock_layer_decay_param_groups`:
+frontend/band_pe=0,encoder.blocks.i=i+1,head/spatial_pe=顶;未加载张量走顶速);warmup 2;`freeze_loaded_epochs: 2`;
+冻结/warmup 期不早停。checkpoint 经仓库 `ckpt` 分支跨集群(`$PACLOCK_CKPT`)。
+结果:12 格对从零 3 赢 9 输(FINDINGS 5.9);同 checkpoint 换从零配方在 TUSZ 反而高(pt2 0.714 vs ptS 0.653)。
+patch-200 全量加载对照(5.8):TUEV −0.079、TUSZ +0.016、CHB-MIT −0.004——害处不是 tokenizer 重初始化的工件。
+结论不变:预训练是分析章节;不再动预训练。

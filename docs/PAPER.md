@@ -478,3 +478,15 @@ Mumtaz 出表:补齐 3 seed 后暴露饱和(前五名挤 0.96-0.99,测试集差�
 **TUAR(伪迹三分类)入表为第 12 个**:不饱和、临床工作流真实任务、TUH
 家族一致;小语料(20,650 窗)且 CBraMod 自家预训练在此 +0.064,调参与
 ptF 两条线都有戏。baseline 补 seed 波(TR_*)与我们的 4 探针已提交。
+
+## 论文主张定稿框架(2026-09-05,第 9 波 62/72 后)
+
+贡献顺序倒过来(见 STATUS §2):一、架构的数据效率(主表 + 架构对照);二、耦合作为 token 内容的机制(TUEV 同编码器 +0.17、
+移植归因、其余语料为零如实报);三、预训练分析(ptS 行 + 5.6/5.8/5.9)。
+- 主表:12 语料 × 15+ baseline,我们的行 = 从零 duplex(三 seed,进行中),预训练行 = ptS(统一配方)。
+- 消融表:raw/duplex 逐语料(§6.2);架构对照(§6.3);门控变体进附录。
+- 移植表:CBraMod 自带 / 耦合关 / 耦合开,TUEV 与 TUSZ(§6.1);直接移植进附录。
+- 逐类别分析:TUEV raw vs duplex 在 SPSW/GPED/PLED 上的增益(等 raw 重跑存分数)。
+- 标题:现标题暗示对 FM 普遍有效;候选改法待 Zhizhe 定。Intro 初稿(sections/intro.tex)的贡献顺序需照此改。
+- 审稿风险与防御:baseline 不调参政策(Setup 已写);EEGNet/EEGConformer 调参记录进附录;IIIC 协议差异披露;
+  Siena/TUSZ 的 val→test 分布差异说明;flat 对照参数量 0.90M 的注记。

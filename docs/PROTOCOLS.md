@@ -719,3 +719,15 @@ TUEG 切片在 TUAB 上的重叠实测为 34.8%"是别人给不出的一句话�
 * Siena 微调配方:batch 128 / lr 1e-4 / epochs 60
   (configs/_diag/siena_paclock_duplex_b128.yaml,含完整归因注释);
   batch 32 在 326 正例下 74% 的步无正例梯度,禁用。
+
+## tusz_type(2026-09-05):TUSZ 发作类型任务
+
+`preprocessing/tusz_type.py --config configs/datasets/tusz_type.yaml`。与 tusz.py 同录音、同 10 s 窗、同滤波/蒙太奇/切分;
+标签 = 窗内按(秒 × 通道)重叠最多的发作类型(`.csv` 逐通道标注),非发作窗丢弃;类别 [fnsz, gnsz, cpsz, absz, tcsz]
+(spsz 在 eval 为 0,tnsz/mysz 太少)。train 13,225 / val 3,120 / test 2,722;val 的 cpsz 只有 11 窗。主指标 κ。
+结论:被试不相交下近随机(κ≈0.1),不作证据。
+
+## 集群补充(2026-09-03)
+
+torch 的数据与环境见 STATUS §9;所有预处理脚本必须 `expand()` `$PACLOCK_DATA/$PACLOCK_PROC`(七个脚本 09-03 补齐);
+`astype(copy=False)` 去掉拼接后的整体拷贝;大语料预处理在 120 G 内存上限下用 `--jobs 8`。
