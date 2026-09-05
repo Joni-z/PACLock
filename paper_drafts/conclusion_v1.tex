@@ -1,0 +1,21 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We set out to give an EEG model the one relation its tokens never carry,
+the coupling between frequency bands, and to measure what that buys. Two
+things did. A small model whose tokens are learned frequency bands and
+whose encoder attends along electrodes, bands and time in turn is
+competitive with foundation models twenty to forty times its size on twelve
+clinical corpora and far ahead of them on seizure detection, and
+architectural controls show that both ingredients are necessary. The
+coupling token itself is decisive on one kind of label, epileptiform events
+whose morphology is a slow rhythm carrying fast activity, where it adds
+$0.15$ in Cohen's $\kappa$ inside our encoder and transfers into CBraMod's
+with the gain attributable to the coupling content; on every other label we
+tested it is neutral, and we report it as such. Pretraining, evaluated to
+convergence with probes, label-fraction curves and clean-transfer
+controls, helps this model where labels are scarce and constrains it where
+they are not. The practical conclusion is that cross-frequency structure
+is worth building into a clinical EEG model, and that where it is built in
+--- as token content or as an axis of the encoder --- should follow the
+label the model is asked to predict.
