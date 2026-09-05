@@ -23,6 +23,12 @@ Nothing heavier than an editor belongs on the login node — that includes
 anything importing torch or touching the preprocessed arrays. `slurm/run.slurm`
 takes any module: `sbatch slurm/run.slurm scripts.collect_waves`.
 
+### Third cluster (NYU Torch)
+
+Set `PACLOCK_DATA` / `PACLOCK_PROC` / `PACLOCK_CKPT` (see `paclock_bench/paths.py`), pull the `ckpt` branch for
+pretraining checkpoints (`git checkout origin/ckpt -- ckpt/`), and use `slurm/torch_run.slurm` / `slurm/torch_cpu.slurm`.
+Details and the current cluster split are in `docs/STATUS.md` section 9.
+
 ## Running an experiment
 
 ```bash
