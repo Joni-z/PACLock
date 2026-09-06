@@ -145,3 +145,15 @@ tusz_type(五类发作形态)raw 0.121 vs duplex 0.132:两者近随机(被试不
 | cf2_v1raw | v1 的耦合关闭对照 | 1.22M |
 对照:三轴 duplex(1.63M)。选择规则:四语料相对三轴 duplex 的平均差最大者进阶段二;耦合贡献 = 变体 − 其 raw 对照。
 阶段二:胜者(+ 其 raw 对照)跑其余 8 语料,单 seed。补 seed 只在 Zhizhe 指示后。
+
+## 12. CF1 线:加法移植(2026-09-07 投,单 seed,torch 与 b2 孪生、先起者留)
+
+旧移植(替换 CBraMod 的 patch embedding)不成立:同前端耦合关闭在 TUSZ 只有 0.422,CBraMod 自带 0.482——我们的前端本身
+比它差 0.06,耦合的 +0.052 只是填坑。新设计(`adapter: additive`,`PACLockCBraModAugmented`):CBraMod 的 patch embedding
+(卷积栈 + rfft 分支)、编码器、头全部原样保留;我们的前端每个电极加 8 行作为额外通道(通道优先交错),位置编码卷积在联合
+网格上跑一次;额外行经 LayerNorm 对齐尺度。三臂,参数量相同(TUEV 17.89M,TUSZ 30.69M):
+- add_raw:8 行 raw 波形 token(对照:同前端、同 token 数、无耦合)
+- add_cpl:8 行交互 token h_j = a_j ⊙ u_j/|u_j|(耦合几何),读出仍是 CBraMod 自己的 C×P token
+- add_cplmean:同 add_cpl,读出对 1+8 行取均值
+对照 CBraMod 自带(3 seed):TUEV 0.564±0.019,TUSZ 0.482±0.043。判据:add_cpl > add_raw 且 add_cpl ≥ 自带 → 铺其余 9 语料;
+否则关线。torch(h100_tandon)与 b2(h100-80)各投一份,`twin_watch.sh` 撤后起者。
