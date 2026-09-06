@@ -1,0 +1,31 @@
+# CF1 additive transplant (2026-09-07): CBraMod + 8 extra rows per electrode (add_cpl); recipe = cbramod_scratch. Single seed.
+batch_size: 64
+data_root: $PACLOCK_PROC/processed/tuab
+dataset: tuab
+device: cuda
+epochs: 50
+eval_every_steps: 0
+grad_clip: 1.0
+group: cf1
+loader: null
+loss: bce_with_logits
+lr: 0.0001
+model: cbramod_paclockfe
+model_kwargs:
+  dropout: 0.1
+  interaction_mode: rotation
+  tokenizer_mode: pac_interaction
+  adapter: additive
+  readout: native
+multi_lr: true
+name: tuab-cbramod_add_cpl
+num_classes: 2
+num_workers: 16
+optimizer: adamw
+patience: 0
+sample_rate: 200
+scheduler: cosine
+seed: 0
+select_metric: auroc
+weight_decay: 0.05
+max_hours: 30.0

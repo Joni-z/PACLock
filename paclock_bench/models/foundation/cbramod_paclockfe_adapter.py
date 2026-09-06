@@ -112,7 +112,9 @@ def build_cbramod_paclockfe(n_classes: int, n_channels: int, seq_len: int,
                             *, dropout: float = 0.1, sequence: bool = False,
                             tokenizer_mode: str = "pac_interaction",
                             interaction_mode: str = "product",
-                            band_mode: str = "mean"):
+                            band_mode: str = "mean",
+                            adapter: str = "replace",
+                            readout: str = "native"):
     """Same call convention as build_cbramod (build.py passes seq_len=T).
 
     tokenizer_mode="raw" is the control this ablation needs to mean anything.
@@ -124,10 +126,72 @@ def build_cbramod_paclockfe(n_classes: int, n_channels: int, seq_len: int,
     parameter-matched (both 40,200 in the tokenizer: raw is one Conv1d(1,200,200)
     with bias; pac is Conv1d(1,100,200) without bias plus Conv1d(1,100,200) with
     bias plus a 100-entry scale), so neither arm can win on capacity."""
-    backbone = PACLockCBraModBackbone(tokenizer_mode=tokenizer_mode,
-                                      interaction_mode=interaction_mode,
-                                      band_mode=band_mode)
+    if adapter == "additive":
+        backbone = PACLockCBraModAugmented(tokenizer_mode=tokenizer_mode,
+                                           interaction_mode=interaction_mode,
+                                           readout=readout)
+    else:
+        backbone = PACLockCBraModBackbone(tokenizer_mode=tokenizer_mode,
+                                          interaction_mode=interaction_mode,
+                                          band_mode=band_mode)
     n_patches = seq_len // PATCH
     if sequence:
         return CBraModSequence(backbone, n_channels, n_patches, n_classes)
     return CBraModClassifier(backbone, n_channels, n_patches, n_classes, dropout)
+
+
+class PACLockCBraModAugmented(nn.Module):
+    """Additive transplant (2026-09-07): CBraMod + K extra CroFreMo rows per electrode.
+
+    CBraMod's own PatchEmbedding is reproduced from its submodules (proj_in, spectral_proj,
+    positional_encoding) so that ONE positional-encoding conv runs over the joint
+    (electrode x [native, extra_1..K]) grid, exactly as CBraMod runs it over its own grid.
+    Encoder and proj_out are the vendored modules, untouched. Same forward contract as
+    CBraMod: (B, C, n_patches, 200) -> (B, C, n_patches, 200) when readout='native'.
+    """
+
+    def __init__(self, tokenizer_mode: str = "pac_interaction", interaction_mode: str = "rotation",
+                 readout: str = "native"):
+        super().__init__()
+        if readout not in ("native", "mean"):
+            raise ValueError(f"readout must be native|mean, got {readout!r}")
+        CBraMod = _import_cbramod()
+        real = CBraMod(**BACKBONE_ARGS)
+        self.patch_embedding = real.patch_embedding      # kept whole: proj_in, spectral_proj, PE conv
+        self.encoder = real.encoder
+        self.proj_out = real.proj_out
+        self.readout = readout
+        self.frontend = TriAxialFrontend(
+            n_bands=N_BANDS, hidden_dim=D_MODEL, sample_rate=200,
+            kernel_size=201, patch_len=PATCH, pac_patch_len=PATCH,
+            tokenizer_mode=tokenizer_mode, pac_token_mode="measured",
+            interaction_mode=interaction_mode,
+        )
+        # extra rows enter CBraMod's scale via a LayerNorm (native tokens are GroupNorm-ed
+        # conv features + a spectral projection; ours are a linear patch projection)
+        self.extra_norm = nn.LayerNorm(D_MODEL)
+
+    def _native(self, x: torch.Tensor) -> torch.Tensor:
+        """CBraMod PatchEmbedding.forward without the positional encoding (applied jointly later)."""
+        pe = self.patch_embedding
+        bz, ch, pn, ps = x.shape
+        mx = x.contiguous().view(bz, 1, ch * pn, ps)
+        emb = pe.proj_in(mx).permute(0, 2, 1, 3).contiguous().view(bz, ch, pn, pe.d_model)
+        spec = torch.fft.rfft(mx.contiguous().view(bz * ch * pn, ps), dim=-1, norm="forward")
+        spec = pe.spectral_proj(torch.abs(spec).contiguous().view(bz, ch, pn, 101))
+        return emb + spec
+
+    def forward(self, x: torch.Tensor, mask=None) -> torch.Tensor:
+        B, C, P, ps = x.shape
+        native = self._native(x)                                          # (B,C,P,D)
+        extra = self.frontend(x.reshape(B, C, P * ps))[0]                 # (B,C,K,P,D)
+        extra = self.extra_norm(extra)
+        K = extra.shape[2]
+        grid = torch.cat([native.unsqueeze(2), extra], dim=2)             # (B,C,1+K,P,D), channel-major
+        grid = grid.reshape(B, C * (1 + K), P, native.shape[-1])
+        pe = self.patch_embedding.positional_encoding(grid.permute(0, 3, 1, 2)).permute(0, 2, 3, 1)
+        grid = grid + pe
+        out = self.encoder(grid)                                          # (B,C*(1+K),P,D)
+        out = out.reshape(B, C, 1 + K, P, out.shape[-1])
+        out = out[:, :, 0] if self.readout == "native" else out.mean(dim=2)
+        return self.proj_out(out)
