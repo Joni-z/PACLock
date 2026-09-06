@@ -126,3 +126,22 @@ tusz_type(五类发作形态)raw 0.121 vs duplex 0.132:两者近随机(被试不
    "for EEG Foundation Models"待定。
 2. b2 SU 续申;Yifan 在 9-18 前注册 reciprocal reviewer;AWS key / HF token 轮换。
 3. 第 9 波尾巴落地后:重灌工作簿(消融 sheet 加 raw 三 seed、架构对照、门控),写 FINDINGS 6.x 定稿,更新 results.tex。
+
+## 11. CF2 线:无频率轴的 CroFreMo(2026-09-07 投;Zhizhe:把它当优化任务做,目标是最好的模型,不是消融)
+
+判断依据:同一个耦合 token 放进没有频率轴的 CBraMod 两处都正,放进自带频率轴的三轴编码器十个语料为零——
+轴把 token 的信息吸收了。CF2 去掉频率子层,让 token 承载跨频信息,并在去除的同时加东西。
+代码(默认关,旧配置逐位不变):`freq_mixer: none` 现允许与 duplex 同用(FreqNone 子层直接跳过);
+`space_over_bands`(频带折进空间注意力,每个 patch 上 C×2nb 个 token 一起注意);`coupling_strength`
+(每个频带的 |Z| 列经零初始化线性层加到 fused 行)。
+
+阶段一(单 seed,tuev / iiic / chbmit / tusz):
+| 变体 | 内容 | 参数量 |
+|---|---|---|
+| cf2_v0 | 无轴,行互不通信(只靠 token + 池化) | 1.23M |
+| cf2_v1 | 无轴 + 频带折进空间注意力 | 1.23M |
+| cf2_v2 | v1 + 耦合强度特征 | 1.23M |
+| cf2_v1d192 | v1 + d_model 192 | 2.74M |
+| cf2_v1raw | v1 的耦合关闭对照 | 1.22M |
+对照:三轴 duplex(1.63M)。选择规则:四语料相对三轴 duplex 的平均差最大者进阶段二;耦合贡献 = 变体 − 其 raw 对照。
+阶段二:胜者(+ 其 raw 对照)跑其余 8 语料,单 seed。补 seed 只在 Zhizhe 指示后。
