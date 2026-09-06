@@ -524,8 +524,13 @@ FREQ_MIXERS = {
 class TriAxialBlock(nn.Module):
     """Pre-norm, one sub-layer per axis, then an FFN. Grid in, grid out."""
 
-    def __init__(self, d_model, freq_mixer="coupling", n_heads=4, dropout=0.1, **mk):
+    def __init__(self, d_model, freq_mixer="coupling", n_heads=4, dropout=0.1,
+                 space_over_bands: bool = False, **mk):
         super().__init__()
+        # CF2 (2026-09-07): fold the band rows into the spatial axis so rows interact
+        # through spatial attention; used with freq_mixer="none" to test whether the
+        # coupling token can carry the cross-frequency information on its own.
+        self.space_over_bands = space_over_bands
         self.n_time = nn.LayerNorm(d_model)
         self.time = _MHA(d_model, n_heads, use_rope=True)
         self.n_space = nn.LayerNorm(d_model)
@@ -546,10 +551,20 @@ class TriAxialBlock(nn.Module):
         h = self.n_time(x).reshape(B * C * nb, P, D)
         x = x + self.time(h).reshape(B, C, nb, P, D)
 
-        # space: mix over C, per (B, nb, P)
-        h = self.n_space(x).permute(0, 2, 3, 1, 4).reshape(B * nb * P, C, D)
-        h = self.space(h).reshape(B, nb, P, C, D).permute(0, 3, 1, 2, 4)
+        if self.space_over_bands:
+            # space: mix over (C x nb) jointly, per (B, P) -- bands meet here
+            h = self.n_space(x).permute(0, 3, 1, 2, 4).reshape(B * P, C * nb, D)
+            h = self.space(h).reshape(B, P, C, nb, D).permute(0, 2, 3, 1, 4)
+        else:
+            # space: mix over C, per (B, nb, P)
+            h = self.n_space(x).permute(0, 2, 3, 1, 4).reshape(B * nb * P, C, D)
+            h = self.space(h).reshape(B, nb, P, C, D).permute(0, 3, 1, 2, 4)
         x = x + h
+
+        if isinstance(self.freq, FreqNone):
+            # no frequency axis: skip the sub-layer (its output is identically zero)
+            x = x + self.ffn(self.n_ffn(x))
+            return x
 
         # freq: mix over nb, per (B, C, P), using this (C,P)'s coupling matrix.
         # The coupling matrix keeps its OWN band count: under tokenizer_mode
@@ -571,10 +586,12 @@ class TriAxialBlock(nn.Module):
 
 
 class TriAxialEncoder(nn.Module):
-    def __init__(self, depth, d_model, freq_mixer="coupling", n_heads=4, dropout=0.1, **mk):
+    def __init__(self, depth, d_model, freq_mixer="coupling", n_heads=4, dropout=0.1,
+                 space_over_bands: bool = False, **mk):
         super().__init__()
         self.blocks = nn.ModuleList([
-            TriAxialBlock(d_model, freq_mixer, n_heads, dropout, **mk) for _ in range(depth)
+            TriAxialBlock(d_model, freq_mixer, n_heads, dropout,
+                          space_over_bands=space_over_bands, **mk) for _ in range(depth)
         ])
 
     def forward(self, x, coupling, pac_vector=None):

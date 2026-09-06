@@ -103,15 +103,16 @@ class TriAxialPACLock(nn.Module):
             hybrid_gate=cfg.get("hybrid_gate", "none"),
             fusion_mode=cfg.get("fusion_mode", "blend"),
             raw_stem=cfg.get("raw_stem", "linear"),
+            coupling_strength=cfg.get("coupling_strength", False),
         )
         if self.frontend.tokenizer_mode in ("hybrid", "duplex"):
             # The coupling/phase mixers consume an (nb, nb) coupling matrix and
             # would need it lifted to the 2*nb hybrid grid; nothing defines that
             # lift yet, and the deliverable uses attention anyway. Refuse rather
             # than mis-index.
-            if self.freq_mixer != "attention":
+            if self.freq_mixer not in ("attention", "none"):
                 raise ValueError(
-                    "tokenizer_mode=hybrid/duplex requires freq_mixer=attention, "
+                    "tokenizer_mode=hybrid/duplex requires freq_mixer=attention or none, "
                     f"got {self.freq_mixer!r}"
                 )
             # aux_recon / masked-amplitude pretraining IS supported on these
@@ -128,6 +129,7 @@ class TriAxialPACLock(nn.Module):
             depth=cfg["depth"], d_model=d,
             freq_mixer=self.freq_mixer,
             n_heads=cfg.get("n_heads", 4), dropout=cfg.get("dropout", 0.1),
+            space_over_bands=cfg.get("space_over_bands", False),
             # Only FreqMITopology reads this; every other mixer swallows it via **_,
             # so passing it unconditionally leaves existing configs bit-identical.
             mi_k=cfg.get("mi_k", 3),

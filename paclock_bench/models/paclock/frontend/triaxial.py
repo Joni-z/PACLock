@@ -109,6 +109,7 @@ class TriAxialFrontend(nn.Module):
         hybrid_gate: str = "none",
         fusion_mode: str = "blend",
         raw_stem: str = "linear",
+        coupling_strength: bool = False,
         **_,
     ):
         super().__init__()
@@ -189,6 +190,15 @@ class TriAxialFrontend(nn.Module):
         # on the strength of that evidence -- the forced version is a bet that
         # loses on 8 of 9 corpora, and the bet was the doctrine, not the PAC.
         self.fusion_mode = fusion_mode
+        # CF2 (2026-09-07): explicit coupling-STRENGTH feature on the fused rows.
+        # Band j's column |Z_{i,j}| over slower bands i (n_bands values) is mapped
+        # by a zero-initialised linear layer to d_model and added to the fused
+        # row -- at init the model is unchanged; the magnitudes that the aligned
+        # phase normalises away (Eq. rotation) re-enter here as content.
+        self.coupling_strength = coupling_strength
+        if coupling_strength:
+            self.cs_proj = nn.Linear(n_bands, hidden_dim)
+            nn.init.zeros_(self.cs_proj.weight); nn.init.zeros_(self.cs_proj.bias)
         if tokenizer_mode == "duplex":
             # duplex = fused rows PLUS separate interaction rows: grid
             # (C, 2*nb, P). Rows 0..nb-1 are fused-blend tokens (r + beta*h,
@@ -583,6 +593,10 @@ class TriAxialFrontend(nn.Module):
             )                                                  # (B,C,nb,P,D)
             beta = self.fusion_beta.view(1, 1, self.n_bands, 1, -1)
             fused_rows = tokens + beta * interaction
+            if self.coupling_strength:
+                # |Z| is (B,C,P,nb_i,nb_j); band j's column over i -> (B,C,nb_j,P,nb_i)
+                cs = pac_vector.abs().permute(0, 1, 4, 2, 3).to(fused_rows.dtype)
+                fused_rows = fused_rows + self.cs_proj(cs)
             gated_rows = interaction * self.interaction_gate.view(1, 1, -1, 1, 1)
             tokens = torch.cat([fused_rows, gated_rows], dim=2)  # (B,C,2nb,P,D)
         elif self.tokenizer_mode == "fused":
