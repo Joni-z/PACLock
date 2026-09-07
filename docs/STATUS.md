@@ -37,6 +37,7 @@ add_cpl(8 行耦合交互 token)、add_cplmean(读出取均值)。门:TUEV、TUS
 判据 add_cpl > add_raw 且 ≥ 自带 → 铺其余 9 语料。状态:torch 先起(tuev add_raw、add_cpl),b2 孪生已由 `twin_watch.sh` 撤。
 **首格(09-07 20:24)**:tuev add_raw κ 0.5956(CBraMod 自带 0.564±0.019)——8 行 raw 额外通道本身就 +0.03;add_cpl 在跑,
 它必须再高于 0.596 才算耦合有归因。
+**TUEV 半边过门(22:24)**:add_cpl κ **0.6407** > add_raw 0.5956 > 自带 0.564±0.019——耦合归因 +0.045,对自带 +0.077。TUSZ 半边在排。
 
 ### 部分二:CF2 无轴 CroFreMo,定稿候选 v3
 v3 = 去掉频率注意力子层 + 频带折进空间注意力(`space_over_bands`)+ 耦合强度特征(`coupling_strength`)+ d_model 192(2.74M)。
@@ -64,7 +65,9 @@ duplex 三个 seed 是 0.562/0.512/0.441),单 seed 不能判,记录待议。
 倾向:候选换成 v0d192(+ 耦合强度待定),等 IIIC/CHB-MIT/TUSZ 的 v0d192 落地后用掉那一次换的机会。
 18:30 补:v0d192 落地 TUSZ 0.612(0.639;v1d192 0.698、v3 0.671)、TUEP 0.812(0.810)、TUAR 0.624(0.620;v3 0.545)、
 ADFD 0.498(0.505;v3 0.361)、Siena 0.239(0.170)、Sleep-EDF 0.610(0.642;v3 0.633)。v3 CAUEEG 0.541(0.525)。不折叠在小语料上把 v3 丢掉的分全部拿回,TUSZ 上单 seed 略低于折叠版
-(该语料 std≈0.03)。v0d192 已提前铺到其余语料;v0d192+强度在四决策语料跑。CF1:torch 起了 tuev add_raw,b2 孪生已撤。
+(该语料 std≈0.03)。v0d192 已提前铺到其余语料;v0d192+强度在四决策语料跑。
+22:30 补:**TUEV v0d192cs 0.7207**(老 0.690,v0d192 0.690)——耦合强度特征在 TUEV +0.03,超过 REVE 0.685;IIIC v0d192 0.458 / v3 0.427(老 0.479);
+CHB-MIT v0d192 0.630(老 0.699);ISRUC v3 0.677(老 0.702)。cs 版已提前铺到其余 8 语料(CF2_cs_a/b)。CF1:torch 起了 tuev add_raw,b2 孪生已撤。
 
 ## 3. 已钉死的事实(供写作)
 - 三轴 duplex 主表:4 赢(TUSZ、CHB-MIT、IIIC、TUEP)3 平 5 负(FINDINGS 6.5);耦合在其中只有 TUEV 决定性(+0.15,逐类别集中在 GPED/PLED)。
