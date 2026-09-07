@@ -548,3 +548,14 @@ BCI +0.012(n=3);TUAR −0.021(n=1)、Sleep-EDF −0.001(n=1)。
 * **工作簿**:`scripts/add_pts_row.py` 加 "CroFreMo (预训练 ptS)" 行,`fill_xlsx.py` 映射 `paclock_duplex_ptS`,12 格填齐。
 * **论文**:Related Work 两段式 + 79 条 bib;Method v3(现象段、四条命题、双流梯度动态);Setup;Intro 初稿;
   results.tex R6/R7 备注;主文件加 amsthm/enumitem。全部本地未推。
+
+## 2026-09-06 → 09-07
+
+* **方向重置**(Zhizhe):三轴 duplex 基本死了;部分一 CF1 加法移植、部分二 CF2 无轴模型;单 seed 硬规则;该撤即撤。
+* **CF1 代码**:`PACLockCBraModAugmented`(`adapter: additive`,`readout: native|mean`),`configs/cf1/*_cbramod_add_{raw,cpl,cplmean}.yaml`(12 语料)。
+* **CF2 代码**:`freq_mixer: none` 允许与 duplex 同用(FreqNone 跳过);`space_over_bands`;`coupling_strength`(零初始化);
+  `configs/cf2/*_cf2_{v0,v1,v2,v1d192,v1raw,v3,v0d192,v0cs}.yaml`。
+* **投递/撤销**:CF2 阶段一 20 单 seed(amd)+ tusz/chbmit 孪生(torch);阶段一b(v3、v0d192、v0cs)→ v0cs 撤;v3 铺 12 语料;
+  阶段一 amd 节点空转即撤;TUAB duplex 补 seed 撤;CF1 六门 torch+b2 孪生。
+* **运维**:torch VPN 会话到期、重连;`push_runs.sh` 循环重启;b2 补 vendor/cbramod;`twin_watch.sh`、`wait_b2.sh`。
+* **论文**:Results v1、Intro v2、Conclusion v1、附录全表装入 MacBook,编译 14 页 0 错误;`paper_drafts/` 备份。主张待重写。

@@ -490,3 +490,10 @@ ptF 两条线都有戏。baseline 补 seed 波(TR_*)与我们的 4 探针已提�
 - 标题:现标题暗示对 FM 普遍有效;候选改法待 Zhizhe 定。Intro 初稿(sections/intro.tex)的贡献顺序需照此改。
 - 审稿风险与防御:baseline 不调参政策(Setup 已写);EEGNet/EEGConformer 调参记录进附录;IIIC 协议差异披露;
   Siena/TUSZ 的 val→test 分布差异说明;flat 对照参数量 0.90M 的注记。
+
+## 重置后的论文骨架(2026-09-07)
+
+Zhizhe 提出、采纳的主线:(1) 耦合 token 能给没有频率轴的 FM 编码器带来提升(CF1,加法移植,标题主张);这撑不起一篇论文,
+所以 (2) 我们为耦合 token 设计了自己的无轴小模型(CF2),发现它能与几十 M 的模型平起平坐。三轴 duplex 与它的消融退为附录/对照。
+待 CF1 门与 CF2 v3 落地后重写 Intro 贡献段与 Results;现有本地稿的 Results 表(6.1–6.5)作为附录/对照材料保留。
+不叫 FM;预训练维持分析章节。

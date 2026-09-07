@@ -22,149 +22,54 @@ Siena 损失);**找到预训练不迁移的根因(日程只有 1.58 epoch)并在
 
 ---
 
-## 1. 活动目标(2026-09-05)
+## 1. 现状一句话(2026-09-07 晚)
 
-`/goal 保证开启的实验正确并完成实验目的 减少时间和资源的浪费 并修改论文`。
-ICLR 2027:摘要 9-18,全文 9-25。论文稿(Intro / Related Work / Method v3 / Setup / results 备注)在 MacBook 本地,
-编译通过,**未推 Overleaf**(Zhizhe 看过再推)。
+Zhizhe 9-06/07 的判断:三轴 duplex 那款模型"基本死了"——耦合 token 在它里面十个语料为零,核心设计没有全局分量。
+方向重置为两部分:**部分一** 耦合 token 补进没有频率轴的 FM 编码器(CF1,加法移植);**部分二** 为耦合 token 设计的
+无频率轴小模型(CF2),目标是一个 SOTA 模型,不是消融。**硬规则:所有我们这边的实验单 seed;补 seed 只在 Zhizhe 指示后。**
+ICLR 2027:摘要 9-18,全文 9-25。
 
-## 2. 论文主张(当前证据下的诚实版本;第 9 波落地 62/72 后)
+## 2. 两条线的当前状态
 
-1. **贡献一(经验+解释)**:1.6M 的"可学习滤波器组分频 token + 三轴注意力"模型,在 12 个临床语料上整体不输 25–69M 的
-   FM;在稀有正样本的发作检测上大幅领先。架构对照证明领先来自分频与三轴两个归纳偏置,不是参数量(§6)。
-2. **贡献二(机制)**:跨频耦合作为 token 内容,在痫样事件分类(TUEV)上决定性(同编码器 +0.17,三 seed);
-   移植进 CBraMod 后 TUEV 赢、TUSZ 平,两处增益都可归因于耦合内容(§7)。在其他 10 个语料上耦合对我们自己的编码器
-   为零(§5)。候选解释:三轴编码器有频率轴,能从分频 token 自学跨频关系,显式耦合 token 只在关系最难学的事件形态上
-   有增量;无频率轴的编码器处处受益。
-3. **贡献三(分析)**:预训练——目标函数消融、lr 匹配探针、标签比例、patch-200 全量对照、统一配方的预训练行(3 赢 9 输)。
+### 部分一:CF1 加法移植(STATUS §12 的设计;FINDINGS 6.1 的旧移植作废)
+CBraMod 自带 patch embedding / 编码器 / 头原样保留,我们的前端每电极加 8 行作额外通道。三臂同参数量:add_raw(8 行波形,对照)、
+add_cpl(8 行耦合交互 token)、add_cplmean(读出取均值)。门:TUEV、TUSZ 单 seed;对照 CBraMod 自带 0.564±0.019 / 0.482±0.043。
+判据 add_cpl > add_raw 且 ≥ 自带 → 铺其余 9 语料。状态:6 个门任务在 torch(h100_tandon)与 b2(h100-80)孪生排队,`twin_watch.sh` 撤后起者。
 
-已钉死:预训练不是贡献;TUEV 上耦合决定性;耦合在 TUAB/睡眠/TUEP/ADFD/CAUEEG/TUAR/Siena 为零(全三 seed)。
-第 9 波已收官(FINDINGS 6.5):耦合在 TUSZ −0.03、CHB-MIT +0.03(均在 1 std 内,记为零);TUEV 逐类别增益集中在 GPED/PLED(6.4);
-从零 duplex 除 TUAB 外全部三 seed(TUAB seed 1/2 待投)。
-
-## 3. 主表战绩(我们 vs 最强已复现 baseline;三 seed 标 (3),单 seed 标 (1))
-
-| 语料(指标) | 我们(从零 duplex) | 最强 baseline | Δ | 判 |
-|---|---|---|---|---|
-| TUSZ (AUC-PR) | 0.633 (1);raw 0.671±0.026 (3);预训练 0.714 | FFCL 0.545±0.024 | +0.09~+0.17 | 赢 |
-| CHB-MIT (AUC-PR) | 0.713 (1);raw 0.667±0.047 (3) | TFM-pre 0.627±0.021 | +0.04~+0.09 | 赢 |
-| TUEV (κ) | 0.709 (1);rot2 0.733±0.016 (3) | REVE-pre 0.685±0.032 | +0.02~+0.05 | 赢 |
-| IIIC (κ) | 0.479±0.008 (3) | REVE-pre 0.436±0.002 | +0.04 | 赢 |
-| TUEP (AUROC) | 0.810±0.004 (3) | EEGPT-scr 0.786±0.018 | +0.02 | 赢 |
-| TUAB (BAcc) | 0.816 (1) | ST-T 0.820±0.004 | −0.004 | 平 |
-| ADFD (BAcc) | 0.505±0.050 (3) | BIOT-scr 0.525±0.017 | −0.02(方差内) | 平 |
-| CAUEEG (BAcc) | 0.525±0.012 (3);调参 0.558 (1) | BIOT-scr 0.561±0.009 | −0.04 / −0.003 | 平/小负 |
-| Siena (AUC-PR) | 0.110 (1);ptS 0.456±0.034 (3) | REVE-pre 0.518±0.096 | −0.06(REVE 方差内) | 小负 |
-| Sleep-EDF (κ) | 0.653 (1) | ContraWR 0.692±0.012 | −0.04 | 负 |
-| ISRUC (κ) | 0.712 (1) | CBraMod-pre 0.754±0.006 | −0.04 | 负 |
-| TUAR (κ) | 0.620±0.030 (3);调参 0.658 (1) | CBraMod-pre 0.715 (1) | −0.06~−0.10 | 负 |
-
-**09-06 全三 seed 后:4 赢(TUSZ、CHB-MIT、IIIC、TUEP)3 平(TUEV 0.690±0.029 vs REVE 0.685、TUAB、ADFD)5 负**;
-TUEV 的 duplex 三 seed 与 REVE 持平(rot2 变体 0.733 才赢),耦合对 raw 的 +0.15 不受影响。细表见 FINDINGS 6.5。
-
-## 4. 预训练行(ptS,统一配方;FINDINGS 5.9)
-
-checkpoint duplex_v2 60k + LaBraM/CBraMod 式微调(lr 5e-4、layer decay 0.65、warmup 2、前 2 epoch 只训未加载张量)。
-12 格对从零:**3 赢**(Siena +0.35、TUSZ +0.02、Sleep-EDF +0.02)**9 输**;对 baseline 2 赢 1 平 7 输。
-预训练帮的全是标签稀缺/噪声大的语料;标签充足时成为约束。主表用 ptS 行,零散预训练格进附录。
-TUSZ ptS seed 1 = 0.694,seed 2 在跑。
-
-## 5. 耦合消融账(同编码器,raw → duplex;FINDINGS 6.2)
-
-| 语料 | raw | duplex | Δ | seed |
-|---|---|---|---|---|
-| TUEV | 0.536±0.034 | 0.709 / rot2 0.733±0.016 | **+0.17~+0.20** | 3 |
-| IIIC | 0.466±0.008 | 0.479±0.008 | +0.013 | 3 |
-| CHB-MIT | 0.667±0.047 | 0.713 | +0.05 | duplex 1(seed 1/2 amd 在跑) |
-| TUSZ | 0.671±0.026 | 0.633 | −0.04 | duplex 1(seed 1/2 amd 在跑) |
-| TUEP / ADFD / CAUEEG / TUAR / TUAB / Sleep-EDF / ISRUC / Siena | — | — | 0 | 3 |
-
-tusz_type(五类发作形态)raw 0.121 vs duplex 0.132:两者近随机(被试不相交下发作类型不可学),**无结论**。
-
-## 6. 架构对照(raw 前端,三 seed;FINDINGS 6.3)
-
-| | 8 频带 + 三轴 | nb=1 不分频 | flat 不分轴(0.90M) |
-|---|---|---|---|
-| TUSZ | 0.671±0.026 | 0.558±0.041 | 0.448±0.048 |
-| CHB-MIT | 0.667±0.047 | 0.245±0.068 | 0.136±0.016 |
-
-两者都撑起发作检测,三轴更关键;CBraMod 从零(CHB-MIT 0.317±0.167)落在 nb1/flat 水平。
-门控变体(fusegate / hybrid_gate)三 seed 在 TUEV 低于 duplex、在发作语料与 raw 同水平:不采用。
-
-## 7. 移植门(tokenizer → CBraMod 编码器,频带当通道;FINDINGS 6.1)
-
-| seed 0 | CBraMod 自带(3 seed) | 同前端耦合关 | 移植耦合开 |
-|---|---|---|---|
-| TUEV κ | 0.564±0.019 | 0.595 | **0.632** |
-| TUSZ AUC-PR | 0.482±0.043 | 0.422 | 0.475(平) |
-
-第三点写法:可迁移、事件任务提升、发作检测持平、增益归因于耦合内容;不宣称即插即用普遍提升。
-直接移植(频带均值池化)11 语料 1 赢 2 平 7 输 1 无结果,已被修好版取代,只作附录。
-
-## 8. 在跑 / 排队(09-06 早)
-
-- 第 9 波 74/74 落地。amd/b2 空;torch 的 tmux ssh 会话已断(pane 掉回本地 shell),需 Zhizhe 重连。
-- 待投:TUAB duplex seed 1/2(20 h 级,amd)。
-
-## 9. 集群与预算
-
-- **amd**(`/work1/chenyuyou/yifanwang/Zhizhe/PACLock`,mi2104x 4×MI210,强制独占,20 节点):node-hours 约 1450/2250。
-  `slurm/configs_packed.slurm <cfg[:seed]>×4`、`seeds_packed.slurm`。工作簿与文档只在 amd 维护。
-- **b2**(`/ocean/projects/cis260249p/qren2/Zhizhe/PACLock`,h100-80 12 SU/h):唯一有 TUEG 切片与全部预训练 checkpoint 的集群;
-  processed 只有 6 语料;队列慢。scp 不通,用 `ssh b2 'cat …'`。
-- **torch**(NYU,`/scratch/zz5070/PACLock`,只能经 tmux 窗口 `torch`):conda `py312`(numpy 2.0.2 / scipy 1.13.1 钉死);
-  `PACLOCK_DATA=/scratch/zz5070/data/raw`、`PACLOCK_PROC=/scratch/zz5070/data`,12 语料 processed 齐(从 amd rsync,校验一致);
-  `slurm/torch_run.slurm <cfg> [seed]`(h100_tandon,`-A torch_pr_63_tandon_advanced`,通常半小时起,但会整天饱和);
-  `slurm/torch_cpu.slurm`(cpu_short ≤4 h,内存上限 120 G);结果每 30 min 由 `sync/push_runs.sh` 推回 amd。
-  checkpoint 走仓库 `ckpt` 分支。
-- 教训(已写进代码):长跑必须带 `max_hours`,且在 eval 步检查(TUAB 险过 24 h wall);stage-1 冻结期不计 patience;
-  train.py 不存中间 checkpoint,被 wall 杀掉即全丢。
-
-## 10. 悬而未决 / 待 Zhizhe
-
-1. 看稿后推 Overleaf(Intro / RW / Method v3 / Setup / results 备注)。Intro 的贡献顺序要按 §2 倒过来,标题是否去掉
-   "for EEG Foundation Models"待定。
-2. b2 SU 续申;Yifan 在 9-18 前注册 reciprocal reviewer;AWS key / HF token 轮换。
-3. 第 9 波尾巴落地后:重灌工作簿(消融 sheet 加 raw 三 seed、架构对照、门控),写 FINDINGS 6.x 定稿,更新 results.tex。
-
-## 11. CF2 线:无频率轴的 CroFreMo(2026-09-07 投;Zhizhe:把它当优化任务做,目标是最好的模型,不是消融)
-
-判断依据:同一个耦合 token 放进没有频率轴的 CBraMod 两处都正,放进自带频率轴的三轴编码器十个语料为零——
-轴把 token 的信息吸收了。CF2 去掉频率子层,让 token 承载跨频信息,并在去除的同时加东西。
-代码(默认关,旧配置逐位不变):`freq_mixer: none` 现允许与 duplex 同用(FreqNone 子层直接跳过);
-`space_over_bands`(频带折进空间注意力,每个 patch 上 C×2nb 个 token 一起注意);`coupling_strength`
-(每个频带的 |Z| 列经零初始化线性层加到 fused 行)。
-
-阶段一(单 seed,tuev / iiic / chbmit / tusz):
-| 变体 | 内容 | 参数量 |
-|---|---|---|
-| cf2_v0 | 无轴,行互不通信(只靠 token + 池化) | 1.23M |
-| cf2_v1 | 无轴 + 频带折进空间注意力 | 1.23M |
-| cf2_v2 | v1 + 耦合强度特征 | 1.23M |
-| cf2_v1d192 | v1 + d_model 192 | 2.74M |
-| cf2_v1raw | v1 的耦合关闭对照 | 1.22M |
-对照:三轴 duplex(1.63M)。选择规则:四语料相对三轴 duplex 的平均差最大者进阶段二;耦合贡献 = 变体 − 其 raw 对照。
-阶段二:胜者(+ 其 raw 对照)跑其余 8 语料,单 seed。补 seed 只在 Zhizhe 指示后。
-
-### CF2 阶段一首批(09-07 中午,17/20;单 seed;括号内为三轴 duplex 三 seed 参照)
-| | v1raw(耦合关) | v0 | v1 | v2 | v1d192 |
+### 部分二:CF2 无轴 CroFreMo,定稿候选 v3
+v3 = 去掉频率注意力子层 + 频带折进空间注意力(`space_over_bands`)+ 耦合强度特征(`coupling_strength`)+ d_model 192(2.74M)。
+阶段一(单 seed,括号为三轴 duplex 三 seed):
+| | 耦合关 v1raw | v0 无轴 | v1 折叠 | v2 折叠+强度 | v1+d192 |
 |---|---|---|---|---|---|
-| TUEV κ (0.690) | 0.546 | 0.658 | 0.648 | 0.657 | **0.680** |
-| IIIC κ (0.479) | 0.453 | 0.435 | 0.455 | **0.481** | 0.447 |
-| TUSZ AUC-PR (0.639) | 0.534 | **0.644** | 0.612 | 0.591 | 跑 |
-| CHB-MIT AUC-PR (0.699) | 0.661 | 0.569 | 0.647 | 0.628 | 跑 |
-读法:在无轴家族里耦合 token 承重了——TUEV +0.10~+0.13、TUSZ +0.06~+0.11(三轴里是 −0.03)、IIIC 经耦合强度 +0.03;
-CHB-MIT 单 seed 为负(该语料 std≈0.05)。整体与三轴 duplex 持平(TUEV −0.01、IIIC +0.002、TUSZ +0.005、CHB-MIT −0.05)。
-v0(行互不通信)在 TUSZ/TUEV 不比折叠差:token 本身够。阶段一b(已投):v3 = 折叠 + 耦合强度 + d192;v0d192;v0cs(v0 + 耦合强度)。
+| TUEV (0.690) | 0.546 | 0.658 | 0.648 | 0.657 | 0.680 |
+| IIIC (0.479) | 0.453 | 0.435 | 0.455 | 0.481 | 0.447 |
+| TUSZ (0.639) | 0.534 | 0.644 | 0.612 | 0.591 | torch 跑 |
+| CHB-MIT (0.699) | 0.661 | 0.569 | 0.647 | 0.628 | torch 排 |
+无轴家族里耦合 token 承重(TUEV +0.10~0.13、TUSZ +0.06~0.11、IIIC +0.03 经强度特征),整体与三轴持平。
+状态:v3 在 amd 跑全部 12 个语料(4 节点;同节点还带 v0d192);网格里的 v0cs 已撤,阶段一的 amd 节点已撤(d192 留 torch 孪生)。
+决策规则:v3 四语料 ≥ 三轴 duplex → 定稿,按 Zhizhe 指示补 seed;否则只允许再换一次。
 
-## 12. CF1 线:加法移植(2026-09-07 投,单 seed,torch 与 b2 孪生、先起者留)
+## 3. 已钉死的事实(供写作)
+- 三轴 duplex 主表:4 赢(TUSZ、CHB-MIT、IIIC、TUEP)3 平 5 负(FINDINGS 6.5);耦合在其中只有 TUEV 决定性(+0.15,逐类别集中在 GPED/PLED)。
+- 架构对照:分频与三轴各自必要(CHB-MIT 0.667 → nb1 0.245 / flat 0.136)。
+- 预训练:分析章节,3 赢 9 输,机制两种;不再重跑。CF2 若定稿,其预训练行为空(现有 checkpoint 只能部分迁移),届时决定是否在 b2 重训。
+- 旧移植(替换式)作废:同前端耦合关闭比 CBraMod 自带低 0.06,耦合只是填坑。
 
-旧移植(替换 CBraMod 的 patch embedding)不成立:同前端耦合关闭在 TUSZ 只有 0.422,CBraMod 自带 0.482——我们的前端本身
-比它差 0.06,耦合的 +0.052 只是填坑。新设计(`adapter: additive`,`PACLockCBraModAugmented`):CBraMod 的 patch embedding
-(卷积栈 + rfft 分支)、编码器、头全部原样保留;我们的前端每个电极加 8 行作为额外通道(通道优先交错),位置编码卷积在联合
-网格上跑一次;额外行经 LayerNorm 对齐尺度。三臂,参数量相同(TUEV 17.89M,TUSZ 30.69M):
-- add_raw:8 行 raw 波形 token(对照:同前端、同 token 数、无耦合)
-- add_cpl:8 行交互 token h_j = a_j ⊙ u_j/|u_j|(耦合几何),读出仍是 CBraMod 自己的 C×P token
-- add_cplmean:同 add_cpl,读出对 1+8 行取均值
-对照 CBraMod 自带(3 seed):TUEV 0.564±0.019,TUSZ 0.482±0.043。判据:add_cpl > add_raw 且 add_cpl ≥ 自带 → 铺其余 9 语料;
-否则关线。torch(h100_tandon)与 b2(h100-80)各投一份,`twin_watch.sh` 撤后起者。
+## 4. 在跑 / 排队(09-07 晚)
+- amd:CF2v3_small(siena tuep tuar adfd)、CF2v3_big(caueeg sleepedf tuab isruc)、CF2b_tuev_iiic、CF2b_chb_tusz(v3 + v0d192)。
+- torch:tusz_cf2_v1d192 跑、chbmit_cf2_v1d192 排;CF1 六门排。
+- b2:CF1 六门排(vendor/cbramod 已补)。
+- 收集器:amd `wait_set.sh`(cf2.list,含 CF1)、b2 `wait_b2.sh`、`twin_watch.sh`。
+
+## 5. 集群与规矩
+- amd:20 节点强制独占,`configs_packed.slurm <cfg[:seed]>×4`;节点空转即撤。b2:h100-80,余额不用管,数据只有 6 语料,vendor 只有 cbramod。
+- torch:tmux `torch` 窗口经 vpnbox VPN;VPN 会话约三天到期,断了只能 Zhizhe 重新认证(9-06 openconnect 表单登录被拒,另行重连);
+  重连后 `git pull` 并重启 `sync/push_runs.sh`。账号只有 general / tandon_advanced(无 priority 关联)。
+- 长跑带 max_hours(eval 步检查);stage-1 冻结期不计 patience;train.py 不存中间 checkpoint。
+
+## 6. 论文
+完整稿在 MacBook 本地(Intro / RW / Method v3 / Setup / Results / Conclusion / 附录全表),编译 14 页 0 错误,未推 Overleaf。
+主张按重置改写待 CF1/CF2 落地:部分一 = 标题主张(token content for FMs),部分二 = 无轴小模型。`paper_drafts/` 有备份。
+
+## 7. 待 Zhizhe
+看稿推 Overleaf;标题;补 seed 指令;SU 续申;Yifan reviewer 注册;密钥轮换。
