@@ -34,7 +34,9 @@ ICLR 2027:摘要 9-18,全文 9-25。
 ### 部分一:CF1 加法移植(STATUS §12 的设计;FINDINGS 6.1 的旧移植作废)
 CBraMod 自带 patch embedding / 编码器 / 头原样保留,我们的前端每电极加 8 行作额外通道。三臂同参数量:add_raw(8 行波形,对照)、
 add_cpl(8 行耦合交互 token)、add_cplmean(读出取均值)。门:TUEV、TUSZ 单 seed;对照 CBraMod 自带 0.564±0.019 / 0.482±0.043。
-判据 add_cpl > add_raw 且 ≥ 自带 → 铺其余 9 语料。状态:6 个门任务在 torch(h100_tandon)与 b2(h100-80)孪生排队,`twin_watch.sh` 撤后起者。
+判据 add_cpl > add_raw 且 ≥ 自带 → 铺其余 9 语料。状态:torch 先起(tuev add_raw、add_cpl),b2 孪生已由 `twin_watch.sh` 撤。
+**首格(09-07 20:24)**:tuev add_raw κ 0.5956(CBraMod 自带 0.564±0.019)——8 行 raw 额外通道本身就 +0.03;add_cpl 在跑,
+它必须再高于 0.596 才算耦合有归因。
 
 ### 部分二:CF2 无轴 CroFreMo,定稿候选 v3
 v3 = 去掉频率注意力子层 + 频带折进空间注意力(`space_over_bands`)+ 耦合强度特征(`coupling_strength`)+ d_model 192(2.74M)。
@@ -61,7 +63,7 @@ duplex 三个 seed 是 0.562/0.512/0.441),单 seed 不能判,记录待议。
 | 小语料 v3 | TUAR 0.545 (0.620) / TUEP 0.803 (0.810) / Sleep-EDF 0.633 (0.642) / ADFD 0.361 (0.505, 方差大) | | | | 折叠在小语料疑似过拟合 |
 倾向:候选换成 v0d192(+ 耦合强度待定),等 IIIC/CHB-MIT/TUSZ 的 v0d192 落地后用掉那一次换的机会。
 18:30 补:v0d192 落地 TUSZ 0.612(0.639;v1d192 0.698、v3 0.671)、TUEP 0.812(0.810)、TUAR 0.624(0.620;v3 0.545)、
-ADFD 0.498(0.505;v3 0.361)、Siena 0.239(0.170)。不折叠在小语料上把 v3 丢掉的分全部拿回,TUSZ 上单 seed 略低于折叠版
+ADFD 0.498(0.505;v3 0.361)、Siena 0.239(0.170)、Sleep-EDF 0.610(0.642;v3 0.633)。v3 CAUEEG 0.541(0.525)。不折叠在小语料上把 v3 丢掉的分全部拿回,TUSZ 上单 seed 略低于折叠版
 (该语料 std≈0.03)。v0d192 已提前铺到其余语料;v0d192+强度在四决策语料跑。CF1:torch 起了 tuev add_raw,b2 孪生已撤。
 
 ## 3. 已钉死的事实(供写作)
