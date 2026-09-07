@@ -45,7 +45,7 @@
   },
   "epochs_run": 20,
   "stopped_by": "epochs",
-  "wall_time_sec": 8535.403194904327,
+  "wall_time_sec": 8543.623225927353,
   "config": {
     "name": "tuev-paclock_rawtok",
     "group": "C",

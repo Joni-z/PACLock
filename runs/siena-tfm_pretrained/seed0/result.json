@@ -1,0 +1,79 @@
+{
+  "name": "siena-tfm_pretrained",
+  "dataset": "siena",
+  "model": "tfm",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 1.891174,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.49995414526779164,
+    "pr_auc": 0.0692735090490797,
+    "auroc": 0.8071500306700503
+  },
+  "best_val": 0.06817225643476707,
+  "val_curve": [
+    0.008541575797317975,
+    0.012882457847123188,
+    0.02830472696514448,
+    0.030451023179043465,
+    0.04935061926874014,
+    0.05727801111957433,
+    0.06817225643476707
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 7,
+    "best_val": 0.06817225643476707,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 7,
+  "stopped_by": "epochs",
+  "wall_time_sec": 5402.482259511948,
+  "config": {
+    "name": "siena-tfm_pretrained",
+    "group": "B",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 7,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "val_subsample": 20000,
+    "seed": 0,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

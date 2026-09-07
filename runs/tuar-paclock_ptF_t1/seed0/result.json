@@ -1,0 +1,123 @@
+{
+  "name": "tuar-paclock_ptF_t1",
+  "dataset": "tuar",
+  "model": "paclock",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 1.609371,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7158534535977997,
+    "cohen_kappa": 0.5595867601442615,
+    "weighted_f1": 0.6995944043676879
+  },
+  "best_val": 0.5384425226550815,
+  "val_curve": [
+    0.48243861306097,
+    0.440428356212623,
+    0.5150294108270101,
+    0.510975480347353,
+    0.5329328986034241,
+    0.46714005163106165,
+    0.49574921100809366,
+    0.5384425226550815,
+    0.5198964558576459,
+    0.49107787383562473,
+    0.5318261805918505,
+    0.514341282258642,
+    0.5219273382337194,
+    0.5019554653801621,
+    0.5219409365724943,
+    0.49906149249400944,
+    0.5198589574156236,
+    0.5202514659456303,
+    0.4903221476245093,
+    0.49344567330401967,
+    0.4793305125243532,
+    0.5052654255010647,
+    0.48335636874119703,
+    0.5236086910194053,
+    0.4646381264397157,
+    0.4995041645676723,
+    0.4645528921147296,
+    0.48114474368893523
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 28,
+    "best_val": 0.5384425226550815,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 28,
+  "stopped_by": "patience",
+  "wall_time_sec": 5949.159170627594,
+  "config": {
+    "batch_size": 64,
+    "checkpoint": "pretrain_runs_full/pretrain-duplex_v2_full/checkpoint.pt",
+    "checkpoint_exclude": [
+      "frontend.tokenizer",
+      "frontend.phase_tokenizer",
+      "frontend.amplitude_tokenizer"
+    ],
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "dataset": "tuar",
+    "device": "cuda",
+    "epochs": 50,
+    "eval_every_steps": 0,
+    "grad_clip": 1.0,
+    "group": "C",
+    "label_smoothing": 0.1,
+    "loss": "cross_entropy",
+    "lr": 0.0001,
+    "max_hours": 22.5,
+    "model": "paclock",
+    "model_kwargs": {
+      "arch": "triaxial",
+      "augmentations": [],
+      "band_pe": "index",
+      "d_model": 128,
+      "depth": 6,
+      "dropout": 0.2,
+      "freq_mixer": "attention",
+      "interaction_mode": "rotation",
+      "kernel_size": 201,
+      "n_bands": 8,
+      "n_heads": 4,
+      "pac_patch_len": 50,
+      "pac_token_mode": "measured",
+      "patch_len": 50,
+      "spatial_pe": "xyz",
+      "tokenizer_mode": "duplex"
+    },
+    "name": "tuar-paclock_ptF_t1",
+    "num_classes": 3,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 20,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "weight_decay": 0.05
+  },
+  "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "name": "chbmit-eegconformer_t1",
+  "dataset": "chbmit",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.455746,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5307971014492754,
+    "pr_auc": 0.27520225250715785,
+    "auroc": 0.6714569621968677
+  },
+  "best_val": 0.2574145655564224,
+  "val_curve": [
+    0.0420020777104331,
+    0.15430549188791765,
+    0.07556309488285474,
+    0.1501060066959973,
+    0.2574145655564224,
+    0.021594239919308318,
+    0.1066990554939076,
+    0.011284526078876004,
+    0.12110456012875452,
+    0.1554682779790354,
+    0.18752457646732093,
+    0.14745833613221107,
+    0.11738662543871982
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 13,
+    "best_val": 0.2574145655564224,
+    "chance": 0.0070808157099697885,
+    "reason": "ok"
+  },
+  "epochs_run": 1,
+  "stopped_by": "patience",
+  "wall_time_sec": 531.1307971477509,
+  "config": {
+    "dataset": "chbmit",
+    "data_root": "$PACLOCK_PROC/processed/chbmit",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "focal",
+    "focal_alpha": 0.25,
+    "focal_gamma": 2.0,
+    "epochs": 20,
+    "batch_size": 128,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "chbmit-eegconformer_t1",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.25
+    }
+  },
+  "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}

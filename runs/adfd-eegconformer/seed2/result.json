@@ -1,0 +1,104 @@
+{
+  "name": "adfd-eegconformer",
+  "dataset": "adfd",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 1.460579,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.4886125683506233,
+    "cohen_kappa": 0.27887891776051443,
+    "weighted_f1": 0.5044320173480025
+  },
+  "best_val": 0.44080615427864006,
+  "val_curve": [
+    0.3333333333333333,
+    0.332244008714597,
+    0.3565933646639887,
+    0.29564756699481554,
+    0.3531365609286629,
+    0.3448226633720684,
+    0.4008918426953951,
+    0.35413880825596666,
+    0.2787427626137304,
+    0.44080615427864006,
+    0.2737799834574028,
+    0.3333333333333333,
+    0.2697998226945788,
+    0.332244008714597,
+    0.3322223844045476,
+    0.3333333333333333,
+    0.332244008714597,
+    0.38451537218140636,
+    0.40401320280138764,
+    0.33694459311157604,
+    0.3678387831583098,
+    0.3092627732096423,
+    0.2792651567561781,
+    0.3162258010455354,
+    0.3397941760118141
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 9,
+    "n_evals": 25,
+    "best_val": 0.44080615427864006,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 25,
+  "stopped_by": "patience",
+  "wall_time_sec": 880.2913179397583,
+  "config": {
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "epochs": 100,
+    "batch_size": 128,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "adfd-eegconformer",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.0003,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.25
+    },
+    "tuned_from": {
+      "grid": "lr{1e-3,3e-4} x dropout{0.25,0.5}",
+      "winner": "t3",
+      "selected_by": "best_val seed0"
+    }
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

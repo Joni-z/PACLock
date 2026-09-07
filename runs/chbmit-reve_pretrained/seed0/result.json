@@ -1,0 +1,88 @@
+{
+  "name": "chbmit-reve_pretrained",
+  "dataset": "chbmit",
+  "model": "reve",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 69.45997,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.7043302501291727,
+    "pr_auc": 0.7258368079622748,
+    "auroc": 0.9368513836302189
+  },
+  "best_val": 0.5959180554732435,
+  "val_curve": [
+    0.580598652765159,
+    0.5152065315919971,
+    0.4149032679491681,
+    0.4130819475455748,
+    0.5959180554732435,
+    0.4598417424558278,
+    0.11997322397054361,
+    0.19053621863025672,
+    0.4610894826763847,
+    0.4179306417622844,
+    0.4124984186320552,
+    0.49052913145489513,
+    0.42333099101392946,
+    0.4421062440812041,
+    0.21821549153697772
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 15,
+    "best_val": 0.5959180554732435,
+    "chance": 0.0070808157099697885,
+    "reason": "ok"
+  },
+  "epochs_run": 3,
+  "stopped_by": "patience",
+  "wall_time_sec": 3940.5356373786926,
+  "config": {
+    "name": "chbmit-reve_pretrained",
+    "group": "B",
+    "dataset": "chbmit",
+    "data_root": "$PACLOCK_PROC/processed/chbmit",
+    "model": "reve",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 15,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 500,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "val_subsample": 20000,
+    "recipe_note": "epochs 30->15 on the ~300k-window TUH corpora: 30 epochs of a 69M model exceeds the 24h wall on MI210; patience 10 with eval_every 500 governs stopping"
+  },
+  "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "name": "tuar-paclock_duplex",
+  "dataset": "tuar",
+  "model": "paclock",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 1.609371,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7371620370833454,
+    "cohen_kappa": 0.5789675502085031,
+    "weighted_f1": 0.6987153323878572
+  },
+  "best_val": 0.5993312133688624,
+  "val_curve": [
+    0.46556981915172213,
+    0.46140357448499425,
+    0.359486238225438,
+    0.4752757079989197,
+    0.33902808603269996,
+    0.5909372886934809,
+    0.5429467214185271,
+    0.5874709294123811,
+    0.5856753709252015,
+    0.5903944123631443,
+    0.5993312133688624,
+    0.5970585398327344,
+    0.5081325287074119,
+    0.55032022568555,
+    0.576226793409512,
+    0.5465530219621476,
+    0.5574847868614154,
+    0.5595767279632577,
+    0.5616793738260113,
+    0.5617167129074563
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 20,
+    "best_val": 0.5993312133688624,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 4365.461135864258,
+  "config": {
+    "name": "tuar-paclock_duplex",
+    "group": "C",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 3,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 128,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "duplex",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50
+    },
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      0.1913376897573471,
+      0.143764927983284,
+      0.18664434552192688,
+      0.21495680510997772,
+      0.24663333594799042,
+      0.27461424469947815,
+      0.34309306740760803,
+      0.3971226215362549
+    ],
+    "gamma": [
+      0.9911590218544006,
+      0.98708176612854,
+      1.0171623229980469,
+      1.026152491569519,
+      1.0636588335037231,
+      1.072113037109375,
+      1.0905879735946655,
+      1.0750494003295898
+    ]
+  }
+}

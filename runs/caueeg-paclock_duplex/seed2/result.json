@@ -1,0 +1,108 @@
+{
+  "name": "caueeg-paclock_duplex",
+  "dataset": "caueeg",
+  "model": "paclock",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 1.624347,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5080760505405396,
+    "cohen_kappa": 0.26054734056938633,
+    "weighted_f1": 0.5113522486481966
+  },
+  "best_val": 0.48779687923817167,
+  "val_curve": [
+    0.45871706897170955,
+    0.48779687923817167,
+    0.47164021462343575,
+    0.4831855578525268,
+    0.48641138435558345,
+    0.4513482520032099,
+    0.4741567190241917,
+    0.4544493787350563,
+    0.4526710714274123,
+    0.4179774490201913,
+    0.47220118911565123,
+    0.4627005339139208,
+    0.46223715468076126,
+    0.43733966725798856,
+    0.45172742120710224,
+    0.4340315440760392,
+    0.4460549360717545,
+    0.4463191701182199,
+    0.4502327846666228,
+    0.44992232236887203
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 20,
+    "best_val": 0.48779687923817167,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 21070.28651714325,
+  "config": {
+    "name": "caueeg-paclock_duplex",
+    "group": "C",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 3,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 128,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "duplex",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50
+    },
+    "seed": 2
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

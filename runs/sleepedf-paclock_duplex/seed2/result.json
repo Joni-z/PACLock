@@ -1,0 +1,137 @@
+{
+  "name": "sleepedf-paclock_duplex",
+  "dataset": "sleepedf",
+  "model": "paclock",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 1.624989,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6441601717005557,
+    "cohen_kappa": 0.6265425896422789,
+    "weighted_f1": 0.743379710747885
+  },
+  "best_val": 0.6353023099162345,
+  "val_curve": [
+    0.5722635558715066,
+    0.5997631905946759,
+    0.6066709778681545,
+    0.6300606493245886,
+    0.6353023099162345,
+    0.6094301020990174,
+    0.6122783192255228,
+    0.6081908833259333,
+    0.6097738531305139,
+    0.619949025118102,
+    0.6015532197432537,
+    0.6077643542308204,
+    0.6008800456662458,
+    0.5983250423376827,
+    0.5927541457206729,
+    0.5892369289110584,
+    0.5896882508297042,
+    0.587323586466237,
+    0.5866403078013391,
+    0.5878774298102342
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 20,
+    "best_val": 0.6353023099162345,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 9784.552255392075,
+  "config": {
+    "name": "sleepedf-paclock_duplex",
+    "group": "C",
+    "dataset": "sleepedf",
+    "data_root": "$PACLOCK_PROC/processed/sleepedf",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 5,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 100,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 128,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "duplex",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50
+    },
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+  "class_counts": {
+    "train": [
+      34213,
+      11896,
+      47572,
+      10575,
+      18174
+    ],
+    "val": [
+      14158,
+      4849,
+      10838,
+      1647,
+      4150
+    ],
+    "test": [
+      17570,
+      4777,
+      10722,
+      817,
+      3511
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      0.3157564401626587,
+      0.26812252402305603,
+      0.28008586168289185,
+      0.25684425234794617,
+      0.2590831518173218,
+      0.26196572184562683,
+      0.2985769808292389,
+      0.4344552159309387
+    ],
+    "gamma": [
+      0.9756563305854797,
+      1.032037377357483,
+      1.0043870210647583,
+      1.0050945281982422,
+      1.015132188796997,
+      1.0470716953277588,
+      1.0556869506835938,
+      0.9725955724716187
+    ]
+  }
+}

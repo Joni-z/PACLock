@@ -1,0 +1,102 @@
+{
+  "name": "iiic-cnn_transformer",
+  "dataset": "iiic",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 3.155686,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5176096076141851,
+    "cohen_kappa": 0.4199010087719993,
+    "weighted_f1": 0.5213751314012454
+  },
+  "best_val": 0.4882596668153376,
+  "val_curve": [
+    0.4255329928520656,
+    0.43686201998667906,
+    0.4821413416906716,
+    0.45715627796745373,
+    0.4674537623487449,
+    0.4882596668153376,
+    0.4648161609702751,
+    0.48000140186570994,
+    0.4661329501527103,
+    0.47590176738417767,
+    0.48414188387287216,
+    0.4629448983845611,
+    0.4341562373299338,
+    0.4550098455854543,
+    0.45420945679355806,
+    0.43583312209581027,
+    0.44696056966596676,
+    0.4747266198352238,
+    0.4177916252148689,
+    0.4485079968158593,
+    0.4476679090214434
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 21,
+    "best_val": 0.4882596668153376,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 21,
+  "stopped_by": "patience",
+  "wall_time_sec": 1796.0391600131989,
+  "config": {
+    "name": "iiic-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 1,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

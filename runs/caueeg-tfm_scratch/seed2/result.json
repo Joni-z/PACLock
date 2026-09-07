@@ -1,0 +1,94 @@
+{
+  "name": "caueeg-tfm_scratch",
+  "dataset": "caueeg",
+  "model": "tfm",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 1.891239,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5229469874568929,
+    "cohen_kappa": 0.2840816767825166,
+    "weighted_f1": 0.5262451098982196
+  },
+  "best_val": 0.45981158504460695,
+  "val_curve": [
+    0.3333333333333333,
+    0.4302194840806178,
+    0.3344262295081967,
+    0.423376780391346,
+    0.41563779153966474,
+    0.4296635106124405,
+    0.4125476931681959,
+    0.4308066225985021,
+    0.45981158504460695,
+    0.45422275695303016,
+    0.44746758480349297,
+    0.4102540275325158,
+    0.43810823127211257,
+    0.4376644270060262,
+    0.4583468451818969,
+    0.45735360202996245,
+    0.4376764374809798,
+    0.4551542065453815,
+    0.449536973706236
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 8,
+    "n_evals": 19,
+    "best_val": 0.45981158504460695,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 19,
+  "stopped_by": "patience",
+  "wall_time_sec": 16831.614731311798,
+  "config": {
+    "name": "caueeg-tfm_scratch",
+    "group": "C",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": false,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 3,
+    "loss": "cross_entropy",
+    "seed": 2,
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

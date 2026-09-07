@@ -1,0 +1,93 @@
+{
+  "name": "tuab-reve_pretrained",
+  "dataset": "tuab",
+  "model": "reve",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 69.45997,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.814485277363782,
+    "pr_auc": 0.895016426127791,
+    "auroc": 0.8949569527531807
+  },
+  "best_val": 0.9118297476284531,
+  "val_curve": [
+    0.8374161711904821,
+    0.8963693125787221,
+    0.909165490043259,
+    0.9046470486200352,
+    0.908243691839254,
+    0.9029389783344587,
+    0.9118297476284531,
+    0.90757084863034,
+    0.9086046921223975,
+    0.8805880011993874,
+    0.8801965470159745,
+    0.8897959572640393,
+    0.8877844809109889,
+    0.8918006610707087,
+    0.8842283426323754,
+    0.8682081974801135,
+    0.880319991838054,
+    0.8871424024075817,
+    0.8833526438632473,
+    0.8766732337808116
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 20,
+    "best_val": 0.9118297476284531,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 4,
+  "stopped_by": "patience",
+  "wall_time_sec": 3415.2184879779816,
+  "config": {
+    "name": "tuab-reve_pretrained",
+    "group": "B",
+    "dataset": "tuab",
+    "data_root": "$PACLOCK_PROC/processed/tuab",
+    "model": "reve",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 15,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 500,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "val_subsample": 20000,
+    "recipe_note": "epochs 30->15 on the ~300k-window TUH corpora: 30 epochs of a 69M model exceeds the 24h wall on MI210; patience 10 with eval_every 500 governs stopping"
+  },
+  "data_manifest_created": "2026-08-13T15:04:23.330749+00:00",
+  "class_counts": {
+    "train": [
+      147894,
+      149209
+    ],
+    "val": [
+      35815,
+      39592
+    ],
+    "test": [
+      19907,
+      17038
+    ]
+  }
+}

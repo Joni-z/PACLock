@@ -1,0 +1,92 @@
+{
+  "name": "siena-labram_scratch",
+  "dataset": "siena",
+  "model": "labram",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 5.820338,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.496568386527777,
+    "auroc": 0.823481080788521
+  },
+  "best_val": 0.2215996992941568,
+  "val_curve": [
+    0.03217543923593774,
+    0.02695065080814323,
+    0.1392893022832604,
+    0.2215996992941568,
+    0.08583817642079028,
+    0.07597825357068642,
+    0.05023357964353056,
+    0.025935211805962297,
+    0.02996948083829378,
+    0.03405624435346158,
+    0.0451461211529124,
+    0.02540813134499338,
+    0.03038333521666097,
+    0.037636722733351495
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 14,
+    "best_val": 0.2215996992941568,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 14,
+  "stopped_by": "patience",
+  "wall_time_sec": 881.1205363273621,
+  "config": {
+    "name": "siena-labram_scratch",
+    "group": "C",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

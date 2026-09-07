@@ -1,0 +1,93 @@
+{
+  "name": "tuab-csbrain_pretrained",
+  "dataset": "tuab",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 41.063402,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.8186462843984122,
+    "pr_auc": 0.9045364791980481,
+    "auroc": 0.9004905944464745
+  },
+  "best_val": 0.9073573103933403,
+  "val_curve": [
+    0.8785546782459464,
+    0.8877113965633303,
+    0.8941812838119129,
+    0.9000001393610579,
+    0.9073573103933403,
+    0.8947492954220725,
+    0.8969700088686771,
+    0.9003631699042195,
+    0.8997502018203781,
+    0.8841171846431454,
+    0.8933158716935423,
+    0.8847599950427567,
+    0.8695459834293284,
+    0.8768644792615157,
+    0.887198673194499,
+    0.8886810988777837,
+    0.8827788572912588,
+    0.8768670659631681,
+    0.8886877711644106,
+    0.8887487441337892
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 20,
+    "best_val": 0.9073573103933403,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 2,
+  "stopped_by": "patience",
+  "wall_time_sec": 5056.938062429428,
+  "config": {
+    "name": "tuab-csbrain_pretrained",
+    "group": "B",
+    "dataset": "tuab",
+    "data_root": "$PACLOCK_PROC/processed/tuab",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 25,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 500,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "val_subsample": 20000,
+    "recipe_note": "epochs 50->25 on the ~300k-window TUH corpora (24h wall on MI210); patience 10 governs stopping"
+  },
+  "data_manifest_created": "2026-08-04T12:32:29.190287+00:00",
+  "class_counts": {
+    "train": [
+      147894,
+      149209
+    ],
+    "val": [
+      35815,
+      39592
+    ],
+    "test": [
+      19907,
+      17038
+    ]
+  }
+}

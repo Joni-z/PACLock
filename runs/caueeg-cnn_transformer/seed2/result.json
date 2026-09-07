@@ -1,0 +1,101 @@
+{
+  "name": "caueeg-cnn_transformer",
+  "dataset": "caueeg",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 3.156643,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5371159125756307,
+    "cohen_kappa": 0.3066373697212651,
+    "weighted_f1": 0.5371769214973642
+  },
+  "best_val": 0.4986812891655286,
+  "val_curve": [
+    0.4575248204212364,
+    0.477449982005744,
+    0.49324755603216125,
+    0.45144019817622866,
+    0.4391376024671911,
+    0.4455546517377645,
+    0.41514365994021224,
+    0.4504396099790211,
+    0.4319970030241806,
+    0.4537580481906149,
+    0.4541955866582145,
+    0.4325025669306651,
+    0.4427064207939999,
+    0.4986812891655286,
+    0.4255178369339152,
+    0.4365896878735294,
+    0.4382253264648937,
+    0.4215353798026318,
+    0.43920171332380287,
+    0.4283780644766031,
+    0.4483043721184126,
+    0.4488580272617069,
+    0.4286476875620228,
+    0.4073305515027911,
+    0.4231162013939978,
+    0.39662328862905555,
+    0.4168360720518209,
+    0.3946960380698856,
+    0.4164098286727332
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 29,
+    "best_val": 0.4986812891655286,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 29,
+  "stopped_by": "patience",
+  "wall_time_sec": 1520.8473517894745,
+  "config": {
+    "name": "caueeg-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 2,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

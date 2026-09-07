@@ -1,0 +1,100 @@
+{
+  "name": "tuep-labram_scratch",
+  "dataset": "tuep",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5825655927899881,
+    "pr_auc": 0.765948567513091,
+    "auroc": 0.6618264258485897
+  },
+  "best_val": 0.6529546226656787,
+  "val_curve": [
+    0.6235106846903911,
+    0.5332708715446224,
+    0.6141896871697878,
+    0.6268358438088586,
+    0.537784917677385,
+    0.5478522418988778,
+    0.5471733101278374,
+    0.5429599718350528,
+    0.5669357859595568,
+    0.5866332923224866,
+    0.5556055447190889,
+    0.6529546226656787,
+    0.6437906881370125,
+    0.6014399510106198,
+    0.5699957476323388,
+    0.6395710929768843,
+    0.551077233586535,
+    0.5286058712930322,
+    0.5965161581749219,
+    0.6269251912167724,
+    0.6151486569194375,
+    0.5922518769779841
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 11,
+    "n_evals": 22,
+    "best_val": 0.6529546226656787,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "stopped_by": "patience",
+  "wall_time_sec": 4746.756450653076,
+  "config": {
+    "name": "tuep-labram_scratch",
+    "group": "C",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

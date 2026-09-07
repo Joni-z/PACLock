@@ -1,0 +1,147 @@
+{
+  "name": "tuev-paclock_lf10_ptF",
+  "dataset": "tuev",
+  "model": "paclock",
+  "group": "pretrain_ft",
+  "seed": 0,
+  "n_params_M": 1.625118,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.4883518547298451,
+    "cohen_kappa": 0.5747054109455207,
+    "weighted_f1": 0.7734089434451203
+  },
+  "best_val": 0.48930051467183544,
+  "val_curve": [
+    0.33482238267565556,
+    0.41144419698258294,
+    0.36741644112896465,
+    0.48930051467183544,
+    0.4095188252417177,
+    0.4261381476667251,
+    0.3457504561982576,
+    0.4382200190197507,
+    0.3621728764685951,
+    0.4056004288275892,
+    0.33471060388818763,
+    0.3862885325518458,
+    0.4135850646416487,
+    0.41501944565725357,
+    0.3711594605038605,
+    0.3508825310790733,
+    0.36867166210373026,
+    0.3708289081392314,
+    0.36479603520189186,
+    0.36479603520189186
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 20,
+    "best_val": 0.48930051467183544,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 2176.89448261261,
+  "config": {
+    "batch_size": 32,
+    "checkpoint": "pretrain_runs_full/pretrain-duplex_v2_full/checkpoint.pt",
+    "checkpoint_exclude": [
+      "frontend.tokenizer",
+      "frontend.phase_tokenizer",
+      "frontend.amplitude_tokenizer"
+    ],
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "dataset": "tuev",
+    "device": "cuda",
+    "epochs": 20,
+    "eval_every_steps": 0,
+    "grad_clip": 1.0,
+    "group": "pretrain_ft",
+    "label_smoothing": 0.1,
+    "loss": "cross_entropy",
+    "lr": 0.0001,
+    "model": "paclock",
+    "model_kwargs": {
+      "arch": "triaxial",
+      "augmentations": [],
+      "band_pe": "index",
+      "d_model": 128,
+      "depth": 6,
+      "dropout": 0.2,
+      "freq_mixer": "attention",
+      "interaction_mode": "rotation",
+      "kernel_size": 201,
+      "n_bands": 8,
+      "n_heads": 4,
+      "pac_patch_len": 50,
+      "pac_token_mode": "measured",
+      "patch_len": 50,
+      "spatial_pe": "xyz",
+      "tokenizer_mode": "duplex"
+    },
+    "name": "tuev-paclock_lf10_ptF",
+    "num_classes": 6,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 20,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "train_subsample": 6844,
+    "train_subsample_seed": 0,
+    "weight_decay": 1e-05
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      53,
+      1096,
+      552,
+      98,
+      1055,
+      3990
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      1.7642676830291748,
+      0.9316763281822205,
+      0.9089274406433105,
+      0.6675013899803162,
+      0.690394937992096,
+      2.037719964981079,
+      2.0280585289001465,
+      2.6209940910339355
+    ],
+    "gamma": [
+      0.37380462884902954,
+      0.3913636803627014,
+      0.38457566499710083,
+      0.49913883209228516,
+      0.505427360534668,
+      0.9243178367614746,
+      0.9637237191200256,
+      1.183348298072815
+    ]
+  }
+}

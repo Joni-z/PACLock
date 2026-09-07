@@ -1,0 +1,102 @@
+{
+  "name": "tuev-csbrain_pretrained",
+  "dataset": "tuev",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 25.064206,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6135512111761469,
+    "cohen_kappa": 0.6190617038084345,
+    "weighted_f1": 0.8033159311545234
+  },
+  "best_val": 0.5181835432445387,
+  "val_curve": [
+    0.45803371500635426,
+    0.5038699827172015,
+    0.48280428756147287,
+    0.32699726019605246,
+    0.4118401738380689,
+    0.45132501776356393,
+    0.46525799278897806,
+    0.5181835432445387,
+    0.3886365584780819,
+    0.3818497498762474,
+    0.3928339921585565,
+    0.4188677885633665,
+    0.4658589842842036,
+    0.4030494806459679,
+    0.39420040198505535,
+    0.46226816177086494,
+    0.4561797473449558,
+    0.38428220972969807
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 18,
+    "best_val": 0.5181835432445387,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "stopped_by": "patience",
+  "wall_time_sec": 7878.555769443512,
+  "config": {
+    "name": "tuev-csbrain_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.0
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

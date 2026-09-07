@@ -1,0 +1,96 @@
+{
+  "name": "adfd-biot_prest16",
+  "dataset": "adfd",
+  "model": "biot",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 3.187283,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.47104941399497147,
+    "cohen_kappa": 0.2516008579659319,
+    "weighted_f1": 0.49943108092555005
+  },
+  "best_val": 0.5648979303563109,
+  "val_curve": [
+    0.3945517550830644,
+    0.5307422166231036,
+    0.4479021182566231,
+    0.4728522796744408,
+    0.5212506294425979,
+    0.501524931495369,
+    0.5331525499249518,
+    0.5577657711812495,
+    0.5394900853118475,
+    0.531901367809537,
+    0.5150540929099618,
+    0.5503990276856366,
+    0.5648979303563109,
+    0.5489831458224907,
+    0.5444718437445918,
+    0.4766076241795146,
+    0.539158504823741,
+    0.5399759826305746
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 12,
+    "n_evals": 18,
+    "best_val": 0.5648979303563109,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "stopped_by": "patience",
+  "wall_time_sec": 79.48036789894104,
+  "config": {
+    "name": "adfd-biot_prest16",
+    "group": "B",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "checkpoint": "prest16",
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 2000
+    },
+    "num_classes": 3,
+    "sample_rate": 200,
+    "batch_size": 128,
+    "loss": "cross_entropy",
+    "eval_every_steps": 0,
+    "seed": 2,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

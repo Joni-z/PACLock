@@ -1,0 +1,97 @@
+{
+  "name": "iiic-csbrain_pretrained",
+  "dataset": "iiic",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 41.064206,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5034601774783356,
+    "cohen_kappa": 0.4057903896569467,
+    "weighted_f1": 0.508382036601562
+  },
+  "best_val": 0.44790287283340957,
+  "val_curve": [
+    0.4314985822490255,
+    0.4063531145485684,
+    0.44790287283340957,
+    0.4199723258695992,
+    0.42722005641108973,
+    0.40740025607335106,
+    0.4127779294382774,
+    0.4321234182925201,
+    0.44660488208800553,
+    0.43494404946976195,
+    0.43750561414470246,
+    0.4289207337007025,
+    0.4421611218274637
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 13,
+    "best_val": 0.44790287283340957,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "stopped_by": "patience",
+  "wall_time_sec": 7116.309611558914,
+  "config": {
+    "name": "iiic-csbrain_pretrained",
+    "group": "B",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

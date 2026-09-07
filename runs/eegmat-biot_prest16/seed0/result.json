@@ -1,0 +1,105 @@
+{
+  "name": "eegmat-biot_prest16",
+  "dataset": "eegmat",
+  "model": "biot",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 3.187026,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5172902494331065,
+    "pr_auc": 0.3818366710804464,
+    "auroc": 0.6604308390022676
+  },
+  "best_val": 0.8245370370370371,
+  "val_curve": [
+    0.7128703703703704,
+    0.3459259259259259,
+    0.6951851851851851,
+    0.7296296296296296,
+    0.7587962962962963,
+    0.7737962962962963,
+    0.7822222222222222,
+    0.7933333333333333,
+    0.7940740740740742,
+    0.7951851851851851,
+    0.7960185185185186,
+    0.7954629629629629,
+    0.7947222222222222,
+    0.7961111111111111,
+    0.7968518518518518,
+    0.7976851851851852,
+    0.7986111111111112,
+    0.802037037037037,
+    0.8045370370370372,
+    0.8107407407407408,
+    0.8136111111111111,
+    0.8163888888888889,
+    0.8223148148148148,
+    0.8232407407407407,
+    0.8228703703703704,
+    0.8245370370370371,
+    0.8225925925925927,
+    0.8208333333333333,
+    0.8239814814814815,
+    0.823425925925926,
+    0.8199074074074073
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 25,
+    "n_evals": 31,
+    "best_val": 0.8245370370370371,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 31,
+  "stopped_by": "patience",
+  "wall_time_sec": 35.83658051490784,
+  "config": {
+    "name": "eegmat-biot_prest16",
+    "group": "B",
+    "dataset": "eegmat",
+    "data_root": "$PACLOCK_PROC/processed/eegmat",
+    "checkpoint": "prest16",
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 1000
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "batch_size": 512,
+    "loss": "bce_with_logits",
+    "eval_every_steps": 0,
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      899,
+      300
+    ],
+    "val": [
+      180,
+      60
+    ],
+    "test": [
+      196,
+      72
+    ]
+  }
+}

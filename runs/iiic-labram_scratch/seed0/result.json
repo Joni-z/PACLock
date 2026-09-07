@@ -1,0 +1,105 @@
+{
+  "name": "iiic-labram_scratch",
+  "dataset": "iiic",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.821142,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5098329217940382,
+    "cohen_kappa": 0.41305980887036986,
+    "weighted_f1": 0.5085121269223881
+  },
+  "best_val": 0.45873802236560046,
+  "val_curve": [
+    0.36020918296143534,
+    0.4199313331422697,
+    0.43048617411611145,
+    0.45099217454793994,
+    0.4340264763473358,
+    0.430713018621223,
+    0.45873802236560046,
+    0.4340051680693052,
+    0.45189097042164195,
+    0.428506542782888,
+    0.42840308174696506,
+    0.44043706451766373,
+    0.4385886945241122,
+    0.42539215982539436,
+    0.4275563577889159,
+    0.4229190879928989,
+    0.42727032726158076
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 17,
+    "best_val": 0.45873802236560046,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 2041.336401939392,
+  "config": {
+    "name": "iiic-labram_scratch",
+    "group": "C",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 0,
+    "label_smoothing": 0.1,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

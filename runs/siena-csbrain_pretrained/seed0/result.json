@@ -1,0 +1,93 @@
+{
+  "name": "siena-csbrain_pretrained",
+  "dataset": "siena",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 47.063402,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5647483853120527,
+    "pr_auc": 0.140172835366333,
+    "auroc": 0.7192412470081667
+  },
+  "best_val": 0.2578362403045082,
+  "val_curve": [
+    0.06994976308637411,
+    0.022635021728197886,
+    0.05958716221298872,
+    0.11287785226029891,
+    0.04658501139793913,
+    0.08769626935498243,
+    0.10016681633040415,
+    0.06287723907092384,
+    0.06735778543606474,
+    0.2578362403045082,
+    0.16913831258475667,
+    0.1408845658733182,
+    0.07249502219762255,
+    0.05617743478163238,
+    0.059666669298130644,
+    0.045514556266354415,
+    0.06039183890331569,
+    0.11946702468484113,
+    0.11042852241812831,
+    0.06641173276682752
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 9,
+    "n_evals": 20,
+    "best_val": 0.2578362403045082,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 10,
+  "stopped_by": "patience",
+  "wall_time_sec": 3149.0961673259735,
+  "config": {
+    "name": "siena-csbrain_pretrained",
+    "group": "B",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 25,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 500,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "val_subsample": 20000,
+    "recipe_note": "epochs 50->25 on the ~300k-window TUH corpora (24h wall on MI210); patience 10 governs stopping"
+  },
+  "data_manifest_created": "2026-08-25T15:04:10.877907+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

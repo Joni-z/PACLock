@@ -1,0 +1,100 @@
+{
+  "name": "siena-eegpt_scratch",
+  "dataset": "siena",
+  "model": "eegpt",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 25.685886,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.11069950260369169,
+    "auroc": 0.8738092803964255
+  },
+  "best_val": 0.33417863924694796,
+  "val_curve": [
+    0.02289474014742257,
+    0.027420272034481472,
+    0.04839663114448526,
+    0.03841133720021195,
+    0.033867846847923516,
+    0.032288989446699216,
+    0.04166416312521604,
+    0.005279159652808584,
+    0.09447922596931974,
+    0.09041657826086408,
+    0.006610086933063187,
+    0.16907539835004076,
+    0.15455399712427711,
+    0.0853220465491328,
+    0.33417863924694796,
+    0.15124204295142948,
+    0.21232511458717263,
+    0.12445105514936543,
+    0.0050669207940929545,
+    0.2668110539983481,
+    0.21118453821775385,
+    0.15117759670397662,
+    0.18624251906945707,
+    0.005125899907355525,
+    0.15662865880705984,
+    0.15277171552118074,
+    0.005616873680647443
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 14,
+    "n_evals": 27,
+    "best_val": 0.33417863924694796,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 9,
+  "stopped_by": "patience",
+  "wall_time_sec": 2652.103363752365,
+  "config": {
+    "name": "siena-eegpt_scratch",
+    "group": "C",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": false,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 500,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "epochs": 40,
+    "val_subsample": 20000,
+    "seed": 0,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-25T15:04:10.877907+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

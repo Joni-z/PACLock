@@ -1,0 +1,94 @@
+{
+  "name": "tuep-eegnet_t4",
+  "dataset": "tuep",
+  "model": "eegnet",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 0.003346,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.4997363319435152,
+    "pr_auc": 0.8462159691436884,
+    "auroc": 0.7407494019914962
+  },
+  "best_val": 0.6818454157470469,
+  "val_curve": [
+    0.3982620790427338,
+    0.40938889398646805,
+    0.41831826587591703,
+    0.41704970041033873,
+    0.4378857757479547,
+    0.42939302795874185,
+    0.45891062595312393,
+    0.4655418529338542,
+    0.5304159476613457,
+    0.5580224303350031,
+    0.6367009996846078,
+    0.6441221047805755,
+    0.6573335911721769,
+    0.6735162180303678,
+    0.6818454157470469,
+    0.6703311272326163,
+    0.677914549115833,
+    0.6774642191051348,
+    0.6723004207311639,
+    0.6684146923413641,
+    0.6721277032380153,
+    0.6716058591246173,
+    0.6697444287570556,
+    0.6683445266305758
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 14,
+    "n_evals": 24,
+    "best_val": 0.6818454157470469,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 12,
+  "stopped_by": "patience",
+  "wall_time_sec": 10281.336028575897,
+  "config": {
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "epochs": 20,
+    "batch_size": 512,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "tuep-eegnet_t4",
+    "group": "A",
+    "model": "eegnet",
+    "optimizer": "adamw",
+    "lr": 0.0003,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    }
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

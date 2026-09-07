@@ -1,0 +1,99 @@
+{
+  "name": "tuep-eegpt_pretrained",
+  "dataset": "tuep",
+  "model": "eegpt",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 25.685829,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.7103296854480521,
+    "pr_auc": 0.8437960138819591,
+    "auroc": 0.7689951093916012
+  },
+  "best_val": 0.6612349205753921,
+  "val_curve": [
+    0.6049642747159549,
+    0.5738987895412317,
+    0.5637607623881686,
+    0.5982362865407631,
+    0.5873047036619198,
+    0.5855315118471514,
+    0.56566461977101,
+    0.5904185090453459,
+    0.5073052372858728,
+    0.6158789369576475,
+    0.6612349205753921,
+    0.6057124444184474,
+    0.6372587975418595,
+    0.534698139564867,
+    0.5624741759124946,
+    0.6389476077367637,
+    0.5076979569945739,
+    0.5879018237344926,
+    0.6194812601436364,
+    0.6168528706403179,
+    0.5751324917374581,
+    0.5680420217668196,
+    0.5853828411352047,
+    0.5874213639334952,
+    0.5360840458659117,
+    0.58428381601579,
+    0.6099624396839342
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 27,
+    "best_val": 0.6612349205753921,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 3,
+  "stopped_by": "patience",
+  "wall_time_sec": 4412.966306209564,
+  "config": {
+    "name": "tuep-eegpt_pretrained",
+    "group": "B",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": true,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 500,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "epochs": 40,
+    "val_subsample": 20000,
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

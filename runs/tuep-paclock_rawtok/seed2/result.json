@@ -1,0 +1,107 @@
+{
+  "name": "tuep-paclock_rawtok",
+  "dataset": "tuep",
+  "model": "paclock",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 1.616018,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6749273459307195,
+    "pr_auc": 0.8535436345751148,
+    "auroc": 0.8086473740167811
+  },
+  "best_val": 0.7304534477558977,
+  "val_curve": [
+    0.7304534477558977,
+    0.6996141050344679,
+    0.6703781154019572,
+    0.6253968629826626,
+    0.5704498021645965,
+    0.6321149132474243,
+    0.6074747036744337,
+    0.5390772197737399,
+    0.5711935636320942,
+    0.47651127600957555,
+    0.4590394631558488,
+    0.5926696235914649,
+    0.4124964686931353,
+    0.44918933691676705,
+    0.504938526483897,
+    0.42219511461166803,
+    0.33211081874027965,
+    0.46219304762553115,
+    0.4450541395796108,
+    0.5122202950084176,
+    0.5445590659787896,
+    0.45015633946457
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 22,
+    "best_val": 0.7304534477558977,
+    "chance": 0.5,
+    "reason": "val peaked at the first evaluation, but reached 0.7305 vs chance 0.5000 -- converged early, not untrained"
+  },
+  "epochs_run": 1,
+  "stopped_by": "patience",
+  "wall_time_sec": 2910.90100979805,
+  "config": {
+    "name": "tuep-paclock_rawtok",
+    "group": "C",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 2,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 200,
+    "patience": 20,
+    "loss": "bce_with_logits",
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 128,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "raw",
+      "pac_token_mode": "measured",
+      "interaction_mode": "product",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50
+    },
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "name": "iiic-contrawr",
+  "dataset": "iiic",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 1.572582,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5105448380812246,
+    "cohen_kappa": 0.41294709824065323,
+    "weighted_f1": 0.5189449207191702
+  },
+  "best_val": 0.492526762467107,
+  "val_curve": [
+    0.42336091511166685,
+    0.4252807662635598,
+    0.492526762467107,
+    0.4309112835134783,
+    0.4535919023064948,
+    0.4788506267407423,
+    0.4644971013636906,
+    0.3909814652251298,
+    0.47815525405439063,
+    0.4225203074692584,
+    0.46832666537778334,
+    0.44051567360450883,
+    0.45450410434065536,
+    0.4697424349458148,
+    0.45908496060799076,
+    0.453655204136973,
+    0.4780756717960829,
+    0.43219138615619157
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 18,
+    "best_val": 0.492526762467107,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "stopped_by": "patience",
+  "wall_time_sec": 674.1686635017395,
+  "config": {
+    "name": "iiic-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 2,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

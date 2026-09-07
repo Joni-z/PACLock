@@ -1,0 +1,92 @@
+{
+  "name": "tuep-tfm_scratch",
+  "dataset": "tuep",
+  "model": "tfm",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 1.890854,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5358330580267566,
+    "pr_auc": 0.7585068069247427,
+    "auroc": 0.6192508089582797
+  },
+  "best_val": 0.6041748471125394,
+  "val_curve": [
+    0.5111209867303955,
+    0.5301615429904529,
+    0.5511570450629568,
+    0.5703499220414586,
+    0.5799350373476129,
+    0.584233438929304,
+    0.5887957021628283,
+    0.5917628076045891,
+    0.5916592197205024,
+    0.5948608235030379,
+    0.59682695256223,
+    0.5921179660643152,
+    0.588758362479743,
+    0.5939716679265603,
+    0.5972045824677104,
+    0.6041748471125394,
+    0.6003038577933213,
+    0.5979797598860135,
+    0.6014786118015416,
+    0.6005940857860211,
+    0.6003796683116651
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 15,
+    "n_evals": 21,
+    "best_val": 0.6041748471125394,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 7,
+  "stopped_by": "epochs",
+  "wall_time_sec": 25417.386430978775,
+  "config": {
+    "name": "tuep-tfm_scratch",
+    "group": "C",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": false,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 7,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "val_subsample": 20000,
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

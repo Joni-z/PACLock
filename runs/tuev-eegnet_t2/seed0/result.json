@@ -1,0 +1,106 @@
+{
+  "name": "tuev-eegnet_t2",
+  "dataset": "tuev",
+  "model": "eegnet",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 0.004342,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.32208022236780653,
+    "cohen_kappa": 0.4569524373167415,
+    "weighted_f1": 0.6999998823043461
+  },
+  "best_val": 0.3771332574239893,
+  "val_curve": [
+    0.058693519617986634,
+    0.05614330852896565,
+    0.0698995772108354,
+    0.08301450676664623,
+    0.28284216883261604,
+    0.3272811210011326,
+    0.34246534006579776,
+    0.3771332574239893,
+    0.26723755090277423,
+    0.324529384676035,
+    0.28651159128548187,
+    0.2836523449400489,
+    0.15674434941754867,
+    0.26186400909851726,
+    0.3151145300777788,
+    0.28111799683478855,
+    0.2351759239872726,
+    0.2341213067315202,
+    0.1733319866448828,
+    0.14638784831471807,
+    0.23969938612270658,
+    0.31366879874310016,
+    0.18280917473593927
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 23,
+    "best_val": 0.3771332574239893,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 23,
+  "stopped_by": "patience",
+  "wall_time_sec": 4933.046491622925,
+  "config": {
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "epochs": 100,
+    "batch_size": 512,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "tuev-eegnet_t2",
+    "group": "A",
+    "model": "eegnet",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    }
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

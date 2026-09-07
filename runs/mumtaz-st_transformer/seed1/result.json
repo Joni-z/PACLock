@@ -1,0 +1,83 @@
+{
+  "name": "mumtaz-st_transformer",
+  "dataset": "mumtaz",
+  "model": "st_transformer",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 3.427256,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.8309554291133239,
+    "pr_auc": 0.9982314537413836,
+    "auroc": 0.9976695116168801
+  },
+  "best_val": 0.7895961523916302,
+  "val_curve": [
+    0.5724607697886218,
+    0.6701013956923515,
+    0.7578960949978423,
+    0.7784377321890169,
+    0.7830470317623452,
+    0.7695839617730676,
+    0.7895961523916302,
+    0.7803419601980753,
+    0.7815899414049465,
+    0.787195846291427,
+    0.7865929890595873,
+    0.7891645866979886,
+    0.7776168675449251,
+    0.7778927136583869,
+    0.7833362252683937
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 15,
+    "best_val": 0.7895961523916302,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 15,
+  "stopped_by": "patience",
+  "wall_time_sec": 22.102655172348022,
+  "config": {
+    "name": "mumtaz-st_transformer",
+    "group": "A",
+    "model": "st_transformer",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 1,
+    "device": "cuda",
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-21T09:57:12.546560+00:00",
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

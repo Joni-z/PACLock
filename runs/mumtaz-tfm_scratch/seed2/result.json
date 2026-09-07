@@ -1,0 +1,79 @@
+{
+  "name": "mumtaz-tfm_scratch",
+  "dataset": "mumtaz",
+  "model": "tfm",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 1.891174,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.726166521726575,
+    "auroc": 0.7362446657183499
+  },
+  "best_val": 0.7045287703047209,
+  "val_curve": [
+    0.6186605446626001,
+    0.6283285060263478,
+    0.6661483429212103,
+    0.6838225152716416,
+    0.695741736851706,
+    0.7045287703047209,
+    0.7038258076284798
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 7,
+    "best_val": 0.7045287703047209,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 7,
+  "stopped_by": "epochs",
+  "wall_time_sec": 368.0861887931824,
+  "config": {
+    "name": "mumtaz-tfm_scratch",
+    "group": "C",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": false,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 7,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "val_subsample": 20000,
+    "seed": 2,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

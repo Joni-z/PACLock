@@ -1,0 +1,88 @@
+{
+  "name": "mumtaz-cnn_transformer",
+  "dataset": "mumtaz",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 3.156386,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.7970329540066383,
+    "pr_auc": 0.9370118367260603,
+    "auroc": 0.9174917022285444
+  },
+  "best_val": 0.9234349069909193,
+  "val_curve": [
+    0.6218683680143083,
+    0.6316008417755592,
+    0.6057291458113657,
+    0.5904486058648443,
+    0.6702370941836513,
+    0.7046422231417093,
+    0.6888589314077496,
+    0.7419748802071515,
+    0.750675155608352,
+    0.7917673282524259,
+    0.7465018708595277,
+    0.8517638579303533,
+    0.775859460854322,
+    0.7792052072627613,
+    0.9234349069909193,
+    0.8612716505830584,
+    0.850811743925824,
+    0.8349550415326366,
+    0.9230389343441759,
+    0.9095402713079999
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 14,
+    "n_evals": 20,
+    "best_val": 0.9234349069909193,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 279.0907316207886,
+  "config": {
+    "name": "mumtaz-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 2,
+    "device": "cuda",
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-21T09:57:12.546560+00:00",
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+ "name": "siena-feat_best",
+ "dataset": "siena",
+ "model": "feat_best",
+ "group": "A0",
+ "seed": 2,
+ "n_params_M": 0.000172,
+ "primary_metric": "pr_auc",
+ "best_val": 0.04130508235144293,
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "reason": "ok",
+  "n_evals": 1,
+  "peak_index": 0,
+  "best_val": 0.04130508235144293,
+  "chance": 0.0
+ },
+ "epochs_run": 1,
+ "stopped_by": "closed-form",
+ "wall_time_sec": 68.97397375106812,
+ "winner": "logreg",
+ "val": {
+  "balanced_acc": 0.6254847933641161,
+  "pr_auc": 0.04130508235144293,
+  "auroc": 0.7168053328166988
+ },
+ "test": {
+  "balanced_acc": 0.7095508641737729,
+  "pr_auc": 0.04043966350771432,
+  "auroc": 0.7226630624346005
+ },
+ "class_counts": {
+  "train": [
+   [
+    0,
+    34146
+   ],
+   [
+    1,
+    326
+   ]
+  ]
+ },
+ "config": {
+  "name": "siena-feat_best",
+  "group": "A0",
+  "dataset": "siena",
+  "model": "feat_best",
+  "loss": "closed-form",
+  "lr": null,
+  "batch_size": null,
+  "epochs": 1,
+  "patience": null,
+  "eval_every_steps": null,
+  "features": "bandpower5+hjorth3+spec_entropy per channel",
+  "candidates": [
+   "logreg",
+   "lda"
+  ],
+  "winner": "logreg",
+  "seed": 2
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "name": "tuab-feat_best",
+ "dataset": "tuab",
+ "model": "feat_best",
+ "group": "A0",
+ "seed": 1,
+ "n_params_M": 0.000145,
+ "primary_metric": "auroc",
+ "best_val": 0.8444954556298341,
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "reason": "ok",
+  "n_evals": 1,
+  "peak_index": 0,
+  "best_val": 0.8444954556298341,
+  "chance": 0.0
+ },
+ "epochs_run": 1,
+ "stopped_by": "closed-form",
+ "wall_time_sec": 233.0821762084961,
+ "winner": "lda",
+ "val": {
+  "balanced_acc": 0.7678910701665715,
+  "pr_auc": 0.8513154002463341,
+  "auroc": 0.8444954556298341
+ },
+ "test": {
+  "balanced_acc": 0.7445140460129861,
+  "pr_auc": 0.8154515797456572,
+  "auroc": 0.8248079535328183
+ },
+ "class_counts": {
+  "train": [
+   [
+    0,
+    147894
+   ],
+   [
+    1,
+    149209
+   ]
+  ]
+ },
+ "config": {
+  "name": "tuab-feat_best",
+  "group": "A0",
+  "dataset": "tuab",
+  "model": "feat_best",
+  "loss": "closed-form",
+  "lr": null,
+  "batch_size": null,
+  "epochs": 1,
+  "patience": null,
+  "eval_every_steps": null,
+  "features": "bandpower5+hjorth3+spec_entropy per channel",
+  "candidates": [
+   "logreg",
+   "lda"
+  ],
+  "winner": "lda",
+  "seed": 1
+ }
+}

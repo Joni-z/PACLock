@@ -1,0 +1,99 @@
+{
+  "name": "mumtaz-labram_scratch",
+  "dataset": "mumtaz",
+  "model": "labram",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.7992887624466571,
+    "pr_auc": 0.8133740190069478,
+    "auroc": 0.8254741583688953
+  },
+  "best_val": 0.8414018321520891,
+  "val_curve": [
+    0.5373037377148374,
+    0.6947073139262245,
+    0.7954334120829496,
+    0.8277830425826316,
+    0.8157792875161838,
+    0.7773699407820683,
+    0.8399113733132233,
+    0.8086740255291128,
+    0.78570316288713,
+    0.7642294327803063,
+    0.8414018321520891,
+    0.8330930802667699,
+    0.8237276598016577,
+    0.8372263228378336,
+    0.8323700965016485,
+    0.8401516263797867,
+    0.8296160844978933,
+    0.8388235608173944,
+    0.8252514871219908,
+    0.8229045705921348,
+    0.7392097453762407
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 21,
+    "best_val": 0.8414018321520891,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 21,
+  "stopped_by": "patience",
+  "wall_time_sec": 230.09978866577148,
+  "config": {
+    "name": "mumtaz-labram_scratch",
+    "group": "C",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    },
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

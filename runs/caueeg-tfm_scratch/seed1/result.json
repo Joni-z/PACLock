@@ -1,0 +1,96 @@
+{
+  "name": "caueeg-tfm_scratch",
+  "dataset": "caueeg",
+  "model": "tfm",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 1.891239,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.47897683747038416,
+    "cohen_kappa": 0.2166861766496455,
+    "weighted_f1": 0.4745560814836141
+  },
+  "best_val": 0.45262660337624316,
+  "val_curve": [
+    0.3333333333333333,
+    0.3446785240787294,
+    0.3825853129102736,
+    0.43669721117516774,
+    0.42981085041159783,
+    0.4175482315453161,
+    0.42594342145853586,
+    0.42312667985244135,
+    0.4110575077498207,
+    0.4134206809899726,
+    0.45262660337624316,
+    0.42944675263211646,
+    0.4378737052921922,
+    0.4130257357676958,
+    0.4312622220041116,
+    0.4247245319580995,
+    0.4264702701673599,
+    0.4432208900282548,
+    0.4457690029977544,
+    0.42995162633458467,
+    0.42962709322837217
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 21,
+    "best_val": 0.45262660337624316,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 21,
+  "stopped_by": "patience",
+  "wall_time_sec": 18240.42885184288,
+  "config": {
+    "name": "caueeg-tfm_scratch",
+    "group": "C",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": false,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 3,
+    "loss": "cross_entropy",
+    "seed": 1,
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

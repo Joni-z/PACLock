@@ -1,0 +1,95 @@
+{
+  "name": "tuev-reve_pretrained",
+  "dataset": "tuev",
+  "model": "reve",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 69.476358,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6643642741556137,
+    "cohen_kappa": 0.6927031907395769,
+    "weighted_f1": 0.8424274448258607
+  },
+  "best_val": 0.5486087248696142,
+  "val_curve": [
+    0.5486087248696142,
+    0.4958332977632659,
+    0.5243656321409601,
+    0.41481278081672424,
+    0.5085935496366973,
+    0.5003991031192154,
+    0.5049315016082687,
+    0.5161481001696717,
+    0.496455130395726,
+    0.43706896542829365,
+    0.3640966596269505
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 11,
+    "best_val": 0.5486087248696142,
+    "chance": 0.0,
+    "reason": "val peaked at the first evaluation, but reached 0.5486 vs chance 0.0000 -- converged early, not untrained"
+  },
+  "epochs_run": 11,
+  "stopped_by": "patience",
+  "wall_time_sec": 1360.0417795181274,
+  "config": {
+    "name": "tuev-reve_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "model": "reve",
+    "pretrained": true,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 30,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "label_smoothing": 0.0
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

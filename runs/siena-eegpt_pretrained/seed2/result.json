@@ -1,0 +1,88 @@
+{
+  "name": "siena-eegpt_pretrained",
+  "dataset": "siena",
+  "model": "eegpt",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 25.685886,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.39138331048616487,
+    "auroc": 0.85569064743875
+  },
+  "best_val": 0.4704723101768824,
+  "val_curve": [
+    0.11774101883015692,
+    0.3028026943883069,
+    0.3242150988695379,
+    0.4704723101768824,
+    0.05091054854119936,
+    0.11949884722728818,
+    0.20741228686488217,
+    0.30936224349406843,
+    0.3206490035195044,
+    0.0488090942369122,
+    0.045932129399557445,
+    0.08265401050978706,
+    0.1799241833410897,
+    0.2909169613650201,
+    0.33378229638084944
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 15,
+    "best_val": 0.4704723101768824,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 5,
+  "stopped_by": "patience",
+  "wall_time_sec": 1518.4921679496765,
+  "config": {
+    "name": "siena-eegpt_pretrained",
+    "group": "B",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": true,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 500,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "epochs": 40,
+    "val_subsample": 20000,
+    "seed": 2,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-25T15:04:10.877907+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

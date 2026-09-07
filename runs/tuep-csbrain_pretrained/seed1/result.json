@@ -1,0 +1,83 @@
+{
+  "name": "tuep-csbrain_pretrained",
+  "dataset": "tuep",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 41.063402,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5894614351807027,
+    "pr_auc": 0.7643518156897923,
+    "auroc": 0.6438596295426054
+  },
+  "best_val": 0.6744917384685359,
+  "val_curve": [
+    0.5892592691255415,
+    0.6744917384685359,
+    0.5451053209189192,
+    0.4708989071119123,
+    0.6342865313078514,
+    0.6048118434194694,
+    0.5768697673760853,
+    0.6421711379013563,
+    0.5801494182675532,
+    0.5735677446895558,
+    0.5579149618553083,
+    0.5735770847701107
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 12,
+    "best_val": 0.6744917384685359,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 12,
+  "stopped_by": "patience",
+  "wall_time_sec": 12009.958838224411,
+  "config": {
+    "name": "tuep-csbrain_pretrained",
+    "group": "B",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    }
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

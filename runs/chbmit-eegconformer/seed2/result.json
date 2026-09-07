@@ -1,0 +1,103 @@
+{
+  "name": "chbmit-eegconformer",
+  "dataset": "chbmit",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 1.455746,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.5079374209133786,
+    "auroc": 0.5
+  },
+  "best_val": 0.5035404078549849,
+  "val_curve": [
+    0.007836390757973774,
+    0.021499781263870532,
+    0.019777634180793882,
+    0.019269184684193568,
+    0.009882201116135034,
+    0.0509466479726023,
+    0.14317764631242685,
+    0.01434126886337177,
+    0.015076860469283236,
+    0.038304661984768916,
+    0.009685018564634005,
+    0.006024912144821062,
+    0.01044283779327592,
+    0.027157142073495715,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849,
+    0.5035404078549849
+  ],
+  "verdict": {
+    "ok": false,
+    "status": "mis-configured",
+    "peak_index": 14,
+    "n_evals": 26,
+    "best_val": 0.5035404078549849,
+    "chance": 0.0070808157099697885,
+    "reason": "test AUROC 0.5000 is at chance -- the model does not discriminate, whatever the val curve did"
+  },
+  "epochs_run": 2,
+  "stopped_by": "patience",
+  "wall_time_sec": 993.5214612483978,
+  "config": {
+    "dataset": "chbmit",
+    "data_root": "$PACLOCK_PROC/processed/chbmit",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "focal",
+    "focal_alpha": 0.25,
+    "focal_gamma": 2.0,
+    "epochs": 20,
+    "batch_size": 128,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "chbmit-eegconformer",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    },
+    "tuned_from": {
+      "grid": "lr{1e-3,3e-4} x dropout{0.25,0.5}",
+      "winner": "t2",
+      "selected_by": "best_val seed0"
+    }
+  },
+  "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}

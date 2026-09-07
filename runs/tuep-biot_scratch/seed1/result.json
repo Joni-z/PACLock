@@ -1,0 +1,80 @@
+{
+  "name": "tuep-biot_scratch",
+  "dataset": "tuep",
+  "model": "biot",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 3.186706,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6073011097176997,
+    "pr_auc": 0.843904833633822,
+    "auroc": 0.7374110336375744
+  },
+  "best_val": 0.614062765670205,
+  "val_curve": [
+    0.614062765670205,
+    0.5742836585753286,
+    0.5660430436296869,
+    0.5653491973286054,
+    0.5802550943726343,
+    0.5637794060432295
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 6,
+    "best_val": 0.614062765670205,
+    "chance": 0.5,
+    "reason": "val peaked at the first evaluation, but reached 0.6141 vs chance 0.5000 -- converged early, not untrained"
+  },
+  "epochs_run": 6,
+  "stopped_by": "patience",
+  "wall_time_sec": 373.36251497268677,
+  "config": {
+    "name": "tuep-biot_scratch",
+    "group": "C",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 2000
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "batch_size": 512,
+    "loss": "bce_with_logits",
+    "eval_every_steps": 0,
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

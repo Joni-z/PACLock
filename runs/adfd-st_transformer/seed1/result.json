@@ -1,0 +1,99 @@
+{
+  "name": "adfd-st_transformer",
+  "dataset": "adfd",
+  "model": "st_transformer",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 3.429513,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5487791978882249,
+    "cohen_kappa": 0.3892548766247693,
+    "weighted_f1": 0.5707258886253709
+  },
+  "best_val": 0.5208576679327793,
+  "val_curve": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.46811765787097853,
+    0.37273012320450655,
+    0.3907431734756213,
+    0.4224505257479987,
+    0.4750969039394087,
+    0.4514432498405265,
+    0.43517514449830336,
+    0.46303594500937956,
+    0.5208576679327793,
+    0.4383860877170647,
+    0.5007932664682753,
+    0.5156588079237133,
+    0.3469832150110021,
+    0.42292997289698997,
+    0.4669755949939351,
+    0.4694333068806768,
+    0.3710331137096943,
+    0.42830272066535313,
+    0.4808585992630426,
+    0.4579196494931361,
+    0.414205283055606,
+    0.4448955154870083,
+    0.49008188954520526,
+    0.42537642018874355
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 12,
+    "n_evals": 28,
+    "best_val": 0.5208576679327793,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 28,
+  "stopped_by": "patience",
+  "wall_time_sec": 58.10694885253906,
+  "config": {
+    "name": "adfd-st_transformer",
+    "group": "A",
+    "model": "st_transformer",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 1,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

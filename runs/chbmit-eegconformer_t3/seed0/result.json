@@ -1,0 +1,98 @@
+{
+  "name": "chbmit-eegconformer_t3",
+  "dataset": "chbmit",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.455746,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5289270618927824,
+    "pr_auc": 0.34623054432371975,
+    "auroc": 0.7388697600352365
+  },
+  "best_val": 0.620363433759758,
+  "val_curve": [
+    0.24799193513085943,
+    0.14437820104641857,
+    0.1782363252190133,
+    0.2250135494921594,
+    0.38049208104202475,
+    0.3281147762221556,
+    0.36964671317028713,
+    0.276022546371918,
+    0.35232062313668244,
+    0.27024859148335334,
+    0.36525473442675577,
+    0.43141855721895794,
+    0.4932836698764426,
+    0.4339498238288907,
+    0.4446401767449169,
+    0.3031569894687175,
+    0.5756697748523909,
+    0.620363433759758,
+    0.6116735755512742,
+    0.4264959241956356,
+    0.5141531096451211,
+    0.5386915708291584,
+    0.5657776492293163,
+    0.32908628057056366,
+    0.5513141921563953,
+    0.47487019544245473
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 17,
+    "n_evals": 26,
+    "best_val": 0.620363433759758,
+    "chance": 0.0070808157099697885,
+    "reason": "ok"
+  },
+  "epochs_run": 2,
+  "stopped_by": "patience",
+  "wall_time_sec": 1024.0233359336853,
+  "config": {
+    "dataset": "chbmit",
+    "data_root": "$PACLOCK_PROC/processed/chbmit",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "focal",
+    "focal_alpha": 0.25,
+    "focal_gamma": 2.0,
+    "epochs": 20,
+    "batch_size": 128,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "chbmit-eegconformer_t3",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.0003,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.25
+    }
+  },
+  "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}

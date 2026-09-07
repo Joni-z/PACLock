@@ -1,0 +1,95 @@
+{
+  "name": "siena-labram_pretrained",
+  "dataset": "siena",
+  "model": "labram",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 5.820338,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.6463487605691399,
+    "pr_auc": 0.28068958456783477,
+    "auroc": 0.7635955522413191
+  },
+  "best_val": 0.5260137438529183,
+  "val_curve": [
+    0.01358381701969956,
+    0.14095224972231116,
+    0.28147324279382785,
+    0.3391516730693168,
+    0.32926578326806977,
+    0.4130612793113262,
+    0.5260137438529183,
+    0.2081420909539461,
+    0.2490038958806999,
+    0.4206885765126453,
+    0.11939026065278989,
+    0.2231294045148835,
+    0.3151079060573969,
+    0.19016844058586385,
+    0.39455916026914484,
+    0.3503168726663478,
+    0.34535570660007475
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 17,
+    "best_val": 0.5260137438529183,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 1089.1871831417084,
+  "config": {
+    "name": "siena-labram_pretrained",
+    "group": "B",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

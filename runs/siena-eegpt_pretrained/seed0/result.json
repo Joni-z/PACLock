@@ -1,0 +1,94 @@
+{
+  "name": "siena-eegpt_pretrained",
+  "dataset": "siena",
+  "model": "eegpt",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 25.685886,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5573770491803278,
+    "pr_auc": 0.23896634834729824,
+    "auroc": 0.836253503000854
+  },
+  "best_val": 0.3975228716433827,
+  "val_curve": [
+    0.017009849479973322,
+    0.04222141118994789,
+    0.04814347892312761,
+    0.24230599258548877,
+    0.06064962145759023,
+    0.26044998024471466,
+    0.19066217345463607,
+    0.04695761833479984,
+    0.17611469924219425,
+    0.3892078316271792,
+    0.3975228716433827,
+    0.15519375195227908,
+    0.08871095282529966,
+    0.04276516853477448,
+    0.03064824104649935,
+    0.029354126202448663,
+    0.04121238528797998,
+    0.02527694747462138,
+    0.029723015953680612,
+    0.025747795140296768,
+    0.025049799885194665
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 21,
+    "best_val": 0.3975228716433827,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 7,
+  "stopped_by": "patience",
+  "wall_time_sec": 2105.117146730423,
+  "config": {
+    "name": "siena-eegpt_pretrained",
+    "group": "B",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": true,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 500,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "epochs": 40,
+    "val_subsample": 20000,
+    "seed": 0,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-25T15:04:10.877907+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

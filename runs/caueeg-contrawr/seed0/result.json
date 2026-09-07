@@ -1,0 +1,94 @@
+{
+  "name": "caueeg-contrawr",
+  "dataset": "caueeg",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.573539,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5440940672426482,
+    "cohen_kappa": 0.31724364816324424,
+    "weighted_f1": 0.534774788533112
+  },
+  "best_val": 0.4913957689779438,
+  "val_curve": [
+    0.4387772686893596,
+    0.42231928710857164,
+    0.4399671310765805,
+    0.4911689133591138,
+    0.4151159053103508,
+    0.4522997863782594,
+    0.4913957689779438,
+    0.471394936775886,
+    0.44022991276522744,
+    0.40766207966996176,
+    0.4669063725172355,
+    0.4564667705554763,
+    0.43568778137714287,
+    0.451300858165395,
+    0.4845038074374786,
+    0.4791290145407614,
+    0.47352176267868357,
+    0.4662967394127566,
+    0.47400048674544,
+    0.4421020626366723,
+    0.48093043263352225,
+    0.47531975750342287
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 22,
+    "best_val": 0.4913957689779438,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "stopped_by": "patience",
+  "wall_time_sec": 530.3852081298828,
+  "config": {
+    "name": "caueeg-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 0,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

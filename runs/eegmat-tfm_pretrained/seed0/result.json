@@ -1,0 +1,79 @@
+{
+  "name": "eegmat-tfm_pretrained",
+  "dataset": "eegmat",
+  "model": "tfm",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 1.891174,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5099206349206349,
+    "pr_auc": 0.38174246330382805,
+    "auroc": 0.6927437641723356
+  },
+  "best_val": 0.7968518518518519,
+  "val_curve": [
+    0.38527777777777783,
+    0.7441666666666666,
+    0.7708333333333334,
+    0.7757407407407407,
+    0.7822222222222223,
+    0.7919444444444445,
+    0.7968518518518519
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 7,
+    "best_val": 0.7968518518518519,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 7,
+  "stopped_by": "epochs",
+  "wall_time_sec": 96.78012204170227,
+  "config": {
+    "name": "eegmat-tfm_pretrained",
+    "group": "B",
+    "dataset": "eegmat",
+    "data_root": "$PACLOCK_PROC/processed/eegmat",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 7,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "val_subsample": 20000,
+    "seed": 0,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      899,
+      300
+    ],
+    "val": [
+      180,
+      60
+    ],
+    "test": [
+      196,
+      72
+    ]
+  }
+}

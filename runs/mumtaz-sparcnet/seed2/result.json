@@ -1,0 +1,81 @@
+{
+  "name": "mumtaz-sparcnet",
+  "dataset": "mumtaz",
+  "model": "sparcnet",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 0.991947,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.8641666666666667,
+    "pr_auc": 0.9995343077432742,
+    "auroc": 0.9994286391654812
+  },
+  "best_val": 0.9244359614349337,
+  "val_curve": [
+    0.7252216779452134,
+    0.844213682857054,
+    0.8121932880411812,
+    0.8401293807254752,
+    0.9244359614349337,
+    0.8577612863327149,
+    0.7821661038516126,
+    0.8174699572438524,
+    0.8128028189693144,
+    0.7941542869600423,
+    0.8301766749865414,
+    0.8485048695737287,
+    0.8255851719366623
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 13,
+    "best_val": 0.9244359614349337,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "stopped_by": "patience",
+  "wall_time_sec": 130.14266753196716,
+  "config": {
+    "name": "mumtaz-sparcnet",
+    "group": "A",
+    "model": "sparcnet",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 2,
+    "device": "cuda",
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-21T09:57:12.546560+00:00",
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

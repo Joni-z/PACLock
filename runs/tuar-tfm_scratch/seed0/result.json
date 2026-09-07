@@ -1,0 +1,97 @@
+{
+  "name": "tuar-tfm_scratch",
+  "dataset": "tuar",
+  "model": "tfm",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 1.890919,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5853425013499326,
+    "cohen_kappa": 0.3643723794090399,
+    "weighted_f1": 0.5574513810187469
+  },
+  "best_val": 0.4220475808314742,
+  "val_curve": [
+    0.0,
+    0.13820951122177838,
+    0.08596867654181917,
+    0.23689764622470966,
+    0.2697259138121807,
+    0.25464788858164245,
+    0.2860035426198012,
+    0.38871917018552016,
+    0.3773883313997113,
+    0.3558725557840804,
+    0.3744390013959601,
+    0.3852156797274183,
+    0.4220475808314742,
+    0.41483653722512026,
+    0.325953688055851,
+    0.3831904614515065,
+    0.40697774296080125,
+    0.38366605106557616,
+    0.41668614546814664,
+    0.385274769087647,
+    0.3855140566379922,
+    0.36491356545154285,
+    0.4099899352294485
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 12,
+    "n_evals": 23,
+    "best_val": 0.4220475808314742,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 23,
+  "stopped_by": "patience",
+  "wall_time_sec": 5196.336517095566,
+  "config": {
+    "name": "tuar-tfm_scratch",
+    "group": "C",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": false,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 3,
+    "loss": "cross_entropy",
+    "seed": 0,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

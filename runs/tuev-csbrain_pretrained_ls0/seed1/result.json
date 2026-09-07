@@ -1,0 +1,97 @@
+{
+  "name": "tuev-csbrain_pretrained",
+  "dataset": "tuev",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 25.064206,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5780704023284444,
+    "cohen_kappa": 0.5451476203383612,
+    "weighted_f1": 0.7708245428276341
+  },
+  "best_val": 0.4778260095766532,
+  "val_curve": [
+    0.4132053097712326,
+    0.39796279314966376,
+    0.4778260095766532,
+    0.42794443445506514,
+    0.4415541989510219,
+    0.45506873582167684,
+    0.3236852502473395,
+    0.40927299088179747,
+    0.41595436244265827,
+    0.3699021921608082,
+    0.3660733100091118,
+    0.3741120931474171,
+    0.4299235154751788
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 13,
+    "best_val": 0.4778260095766532,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "stopped_by": "patience",
+  "wall_time_sec": 5376.283046007156,
+  "config": {
+    "name": "tuev-csbrain_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.0
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

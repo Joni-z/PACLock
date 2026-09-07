@@ -1,0 +1,98 @@
+{
+  "name": "iiic-cnn_transformer",
+  "dataset": "iiic",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 3.155686,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.50534725152642,
+    "cohen_kappa": 0.4053779011831571,
+    "weighted_f1": 0.49663606759394013
+  },
+  "best_val": 0.4889886086127563,
+  "val_curve": [
+    0.41256410565976187,
+    0.4889886086127563,
+    0.46818812193973247,
+    0.473240317031021,
+    0.4740998163577296,
+    0.46031817195777536,
+    0.48100845937859804,
+    0.4450664458371104,
+    0.47705181008671993,
+    0.458895907257438,
+    0.4446341808738269,
+    0.4468206852594434,
+    0.4792954976985192,
+    0.44533825795578874,
+    0.4707867500021974,
+    0.4676917861910118,
+    0.45911517720831463
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 17,
+    "best_val": 0.4889886086127563,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 1494.158938884735,
+  "config": {
+    "name": "iiic-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 2,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

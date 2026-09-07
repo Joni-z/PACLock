@@ -1,0 +1,77 @@
+{
+  "name": "tuep-sparcnet",
+  "dataset": "tuep",
+  "model": "sparcnet",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.141665,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5388434347397472,
+    "pr_auc": 0.806040430464949,
+    "auroc": 0.7311530651956764
+  },
+  "best_val": 0.6291444469767902,
+  "val_curve": [
+    0.6291444469767902,
+    0.5645377778303979,
+    0.6154927928452353,
+    0.48841456736845534,
+    0.5767011772776888,
+    0.48407780188439414,
+    0.5728624370572301,
+    0.6136732037364269,
+    0.36541095203375323,
+    0.3996567767053129
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 10,
+    "best_val": 0.6291444469767902,
+    "chance": 0.5,
+    "reason": "val peaked at the first evaluation, but reached 0.6291 vs chance 0.5000 -- converged early, not untrained"
+  },
+  "epochs_run": 5,
+  "stopped_by": "patience",
+  "wall_time_sec": 1466.4707181453705,
+  "config": {
+    "name": "tuep-sparcnet",
+    "group": "A",
+    "model": "sparcnet",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 0,
+    "device": "cuda",
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

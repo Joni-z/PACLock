@@ -1,0 +1,94 @@
+{
+  "name": "siena-labram_scratch",
+  "dataset": "siena",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820338,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.499460469947052,
+    "auroc": 0.8476029250808848
+  },
+  "best_val": 0.5042070844781451,
+  "val_curve": [
+    0.04567989874623055,
+    0.007976192337563182,
+    0.005637318710615098,
+    0.021096830564569343,
+    0.03682120805189817,
+    0.5042070844781451,
+    0.35309873143126047,
+    0.23237563850100823,
+    0.1025525995251715,
+    0.04568033052104195,
+    0.039399624903388455,
+    0.07033645815307607,
+    0.027736911555066742,
+    0.1164119107899879,
+    0.08215707920692206,
+    0.09903166725857307
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 16,
+    "best_val": 0.5042070844781451,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 16,
+  "stopped_by": "patience",
+  "wall_time_sec": 1013.3415265083313,
+  "config": {
+    "name": "siena-labram_scratch",
+    "group": "C",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "name": "adfd-biot_scratch",
+  "dataset": "adfd",
+  "model": "biot",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 3.187734,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5449348047222582,
+    "cohen_kappa": 0.34356343816733603,
+    "weighted_f1": 0.5715808871019018
+  },
+  "best_val": 0.3899375983201345,
+  "val_curve": [
+    0.3791350373428865,
+    0.3817259637963109,
+    0.3776566607596569,
+    0.3899375983201345,
+    0.36604621602300585,
+    0.32032288853635693,
+    0.37729227257368575,
+    0.34293014180790976,
+    0.32319171753657994
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 9,
+    "best_val": 0.3899375983201345,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 9,
+  "stopped_by": "patience",
+  "wall_time_sec": 36.6353964805603,
+  "config": {
+    "name": "adfd-biot_scratch",
+    "group": "C",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 2000
+    },
+    "num_classes": 3,
+    "sample_rate": 200,
+    "batch_size": 128,
+    "loss": "cross_entropy",
+    "eval_every_steps": 0,
+    "seed": 1,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

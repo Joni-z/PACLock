@@ -1,0 +1,121 @@
+{
+  "name": "sleepedf-paclock_duplex_ptF",
+  "dataset": "sleepedf",
+  "model": "paclock",
+  "group": "pretrain_ft",
+  "seed": 0,
+  "n_params_M": 1.624989,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6245731798674049,
+    "cohen_kappa": 0.6672111832043504,
+    "weighted_f1": 0.7721524818306776
+  },
+  "best_val": 0.6327462489838124,
+  "val_curve": [
+    0.5826441325294858,
+    0.614757876332293,
+    0.6310705368603493,
+    0.6224873692347173,
+    0.6240293910536273,
+    0.6317902121510302,
+    0.6327462489838124,
+    0.6266430311488229,
+    0.626511848964747,
+    0.6294579953875167,
+    0.6224240964511586,
+    0.6312575690564752,
+    0.6220803283956385,
+    0.6245713103284627,
+    0.6224472024152903,
+    0.6229396717816429,
+    0.6246236827889631,
+    0.6235638756531527,
+    0.6216921786572666,
+    0.6212787262550044
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 20,
+    "best_val": 0.6327462489838124,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 12755.906564474106,
+  "config": {
+    "batch_size": 32,
+    "checkpoint": "pretrain_runs_full/pretrain-duplex_v2_full/checkpoint.pt",
+    "checkpoint_exclude": [
+      "frontend.tokenizer",
+      "frontend.phase_tokenizer",
+      "frontend.amplitude_tokenizer"
+    ],
+    "data_root": "$PACLOCK_PROC/processed/sleepedf",
+    "dataset": "sleepedf",
+    "device": "cuda",
+    "epochs": 20,
+    "eval_every_steps": 0,
+    "grad_clip": 1.0,
+    "group": "pretrain_ft",
+    "label_smoothing": 0.1,
+    "loss": "cross_entropy",
+    "lr": 0.0001,
+    "max_hours": 22.5,
+    "model": "paclock",
+    "model_kwargs": {
+      "arch": "triaxial",
+      "augmentations": [],
+      "band_pe": "index",
+      "d_model": 128,
+      "depth": 6,
+      "dropout": 0.2,
+      "freq_mixer": "attention",
+      "interaction_mode": "rotation",
+      "kernel_size": 201,
+      "n_bands": 8,
+      "n_heads": 4,
+      "pac_patch_len": 50,
+      "pac_token_mode": "measured",
+      "patch_len": 50,
+      "spatial_pe": "xyz",
+      "tokenizer_mode": "duplex"
+    },
+    "name": "sleepedf-paclock_duplex_ptF",
+    "num_classes": 5,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 20,
+    "sample_rate": 100,
+    "scheduler": "cosine",
+    "seed": 0,
+    "weight_decay": 1e-05
+  },
+  "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+  "class_counts": {
+    "train": [
+      34213,
+      11896,
+      47572,
+      10575,
+      18174
+    ],
+    "val": [
+      14158,
+      4849,
+      10838,
+      1647,
+      4150
+    ],
+    "test": [
+      17570,
+      4777,
+      10722,
+      817,
+      3511
+    ]
+  }
+}

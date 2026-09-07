@@ -1,0 +1,87 @@
+{
+  "name": "adfd-reve_pretrained",
+  "dataset": "adfd",
+  "model": "reve",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 69.617667,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5555657909567686,
+    "cohen_kappa": 0.36261688858328134,
+    "weighted_f1": 0.5802713749404853
+  },
+  "best_val": 0.5996145304319356,
+  "val_curve": [
+    0.437905909703517,
+    0.5996145304319356,
+    0.5170674623484682,
+    0.45413989643208397,
+    0.43517640900999616,
+    0.5709552313904424,
+    0.4638592233285655,
+    0.40569185947511716,
+    0.362571941144475,
+    0.5404929590944852,
+    0.442801948164719,
+    0.5161131736572934
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 12,
+    "best_val": 0.5996145304319356,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 12,
+  "stopped_by": "patience",
+  "wall_time_sec": 286.10211277008057,
+  "config": {
+    "name": "adfd-reve_pretrained",
+    "group": "B",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "model": "reve",
+    "pretrained": true,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 30,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "label_smoothing": 0.0
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

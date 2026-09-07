@@ -1,0 +1,92 @@
+{
+  "name": "mumtaz-eegpt_pretrained",
+  "dataset": "mumtaz",
+  "model": "eegpt",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 25.685886,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.8576126126126127,
+    "pr_auc": 0.9390289227841985,
+    "auroc": 0.9378568041725936
+  },
+  "best_val": 0.8315603546847123,
+  "val_curve": [
+    0.6163514457450736,
+    0.7429915066091839,
+    0.7301646623332132,
+    0.6614389379034806,
+    0.6815445602701512,
+    0.75162504504745,
+    0.7318686794534688,
+    0.7071960242566615,
+    0.8315603546847123,
+    0.7239514510840308,
+    0.631754336790308,
+    0.7080324608587713,
+    0.6893060690594093,
+    0.7576113506226558,
+    0.7400172626277457,
+    0.7276798227466263,
+    0.7793676005392347,
+    0.7140988507894983,
+    0.7230149090375195
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 8,
+    "n_evals": 19,
+    "best_val": 0.8315603546847123,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 19,
+  "stopped_by": "patience",
+  "wall_time_sec": 494.3512568473816,
+  "config": {
+    "name": "mumtaz-eegpt_pretrained",
+    "group": "B",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": true,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 500,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "epochs": 40,
+    "val_subsample": 20000,
+    "seed": 0,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-21T09:57:12.546560+00:00",
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

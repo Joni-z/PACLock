@@ -1,0 +1,64 @@
+{
+ "name": "tuep-feat_best",
+ "dataset": "tuep",
+ "model": "feat_best",
+ "group": "A0",
+ "seed": 1,
+ "n_params_M": 0.000145,
+ "primary_metric": "auroc",
+ "best_val": 0.6271598689626163,
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "reason": "ok",
+  "n_evals": 1,
+  "peak_index": 0,
+  "best_val": 0.6271598689626163,
+  "chance": 0.0
+ },
+ "epochs_run": 1,
+ "stopped_by": "closed-form",
+ "wall_time_sec": 105.71896028518677,
+ "winner": "lda",
+ "val": {
+  "balanced_acc": 0.5282556511598309,
+  "pr_auc": 0.9308861995983834,
+  "auroc": 0.6271598689626163
+ },
+ "test": {
+  "balanced_acc": 0.6421489050468684,
+  "pr_auc": 0.6659987451434507,
+  "auroc": 0.5918867060501416
+ },
+ "class_counts": {
+  "train": [
+   [
+    0,
+    20980
+   ],
+   [
+    1,
+    115545
+   ]
+  ]
+ },
+ "config": {
+  "name": "tuep-feat_best",
+  "group": "A0",
+  "dataset": "tuep",
+  "model": "feat_best",
+  "loss": "closed-form",
+  "lr": null,
+  "batch_size": null,
+  "epochs": 1,
+  "patience": null,
+  "eval_every_steps": null,
+  "features": "bandpower5+hjorth3+spec_entropy per channel",
+  "candidates": [
+   "logreg",
+   "lda"
+  ],
+  "winner": "lda",
+  "seed": 1
+ }
+}

@@ -1,0 +1,94 @@
+{
+  "name": "eegmat-labram_pretrained",
+  "dataset": "eegmat",
+  "model": "labram",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6937358276643991,
+    "pr_auc": 0.7152388158788098,
+    "auroc": 0.8213577097505669
+  },
+  "best_val": 0.8243518518518519,
+  "val_curve": [
+    0.6275,
+    0.690462962962963,
+    0.7193518518518518,
+    0.7292592592592593,
+    0.8103703703703704,
+    0.8243518518518519,
+    0.8082407407407407,
+    0.7313888888888889,
+    0.755,
+    0.7542592592592592,
+    0.8012037037037038,
+    0.7380555555555556,
+    0.7967592592592593,
+    0.7613888888888888,
+    0.7571296296296295,
+    0.7452777777777777
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 16,
+    "best_val": 0.8243518518518519,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 16,
+  "stopped_by": "patience",
+  "wall_time_sec": 55.25701689720154,
+  "config": {
+    "name": "eegmat-labram_pretrained",
+    "group": "B",
+    "dataset": "eegmat",
+    "data_root": "$PACLOCK_PROC/processed/eegmat",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    },
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      899,
+      300
+    ],
+    "val": [
+      180,
+      60
+    ],
+    "test": [
+      196,
+      72
+    ]
+  }
+}

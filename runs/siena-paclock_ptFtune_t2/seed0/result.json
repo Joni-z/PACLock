@@ -1,0 +1,122 @@
+{
+  "name": "siena-paclock_ptFtune_t2",
+  "dataset": "siena",
+  "model": "paclock",
+  "group": "pretrain_ft",
+  "seed": 0,
+  "n_params_M": 1.624218,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.329010211722254,
+    "auroc": 0.8410404363566385
+  },
+  "best_val": 0.5901146173264691,
+  "val_curve": [
+    0.29796053386296356,
+    0.3111167203310035,
+    0.4486977541781897,
+    0.49714265921910544,
+    0.5343143869421273,
+    0.42714838587061743,
+    0.5901146173264691,
+    0.4833606573536583,
+    0.52465378310465,
+    0.41112336561684015,
+    0.5030901138795278,
+    0.4709308742242538,
+    0.44997963851870804,
+    0.47776182226676855,
+    0.5173365521492875,
+    0.38368627425407376,
+    0.4464045405253665,
+    0.4051207157937278,
+    0.39101382967445514,
+    0.46288017127211484,
+    0.42131557818087595,
+    0.36953019236298135,
+    0.4914363675241571,
+    0.47682398003572657,
+    0.3808127162860659,
+    0.36755389637256014,
+    0.3075763545478997,
+    0.3714494113502812,
+    0.34797540370779945,
+    0.3786869649565888
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 30,
+    "best_val": 0.5901146173264691,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 5,
+  "stopped_by": "patience",
+  "wall_time_sec": 4989.157704591751,
+  "config": {
+    "accum_steps": 4,
+    "batch_size": 32,
+    "checkpoint": "pretrain_runs_full/pretrain-duplex_v2_full/checkpoint.pt",
+    "checkpoint_exclude": [
+      "frontend.tokenizer",
+      "frontend.phase_tokenizer",
+      "frontend.amplitude_tokenizer"
+    ],
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "dataset": "siena",
+    "device": "cuda",
+    "epochs": 60,
+    "eval_every_steps": 200,
+    "grad_clip": 1.0,
+    "group": "pretrain_ft",
+    "loss": "bce_with_logits",
+    "lr": 0.0002,
+    "max_hours": 22.5,
+    "model": "paclock",
+    "model_kwargs": {
+      "arch": "triaxial",
+      "augmentations": [],
+      "band_pe": "index",
+      "d_model": 128,
+      "depth": 6,
+      "dropout": 0.2,
+      "freq_mixer": "attention",
+      "interaction_mode": "rotation",
+      "kernel_size": 201,
+      "n_bands": 8,
+      "n_heads": 4,
+      "pac_patch_len": 50,
+      "pac_token_mode": "measured",
+      "patch_len": 50,
+      "spatial_pe": "xyz",
+      "tokenizer_mode": "duplex"
+    },
+    "name": "siena-paclock_ptFtune_t2",
+    "num_classes": 2,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 20,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "weight_decay": 1e-05
+  },
+  "data_manifest_created": "2026-08-27T09:10:24.104049+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

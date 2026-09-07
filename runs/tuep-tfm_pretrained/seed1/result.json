@@ -1,0 +1,86 @@
+{
+  "name": "tuep-tfm_pretrained",
+  "dataset": "tuep",
+  "model": "tfm",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 1.890854,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5412745120937499,
+    "pr_auc": 0.7404313323252567,
+    "auroc": 0.6183104037493625
+  },
+  "best_val": 0.5467578310014806,
+  "val_curve": [
+    0.48886974248632753,
+    0.5065539889836507,
+    0.5212909776783794,
+    0.5306242192134663,
+    0.5467578310014806,
+    0.5308296341158855,
+    0.5054719194854745,
+    0.4745290068931714,
+    0.45693136933597134,
+    0.45465575937440617,
+    0.4729101765353047,
+    0.5245077645550364,
+    0.4502624926078622,
+    0.45820812528296295,
+    0.4694786456661385
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 15,
+    "best_val": 0.5467578310014806,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 5,
+  "stopped_by": "patience",
+  "wall_time_sec": 18654.18046092987,
+  "config": {
+    "name": "tuep-tfm_pretrained",
+    "group": "B",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 7,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "val_subsample": 20000,
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "name": "tuep-paclock_rawtok",
+  "dataset": "tuep",
+  "model": "paclock",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 1.616018,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6308495550734252,
+    "pr_auc": 0.8541208071553412,
+    "auroc": 0.8103771315173659
+  },
+  "best_val": 0.72722689390688,
+  "val_curve": [
+    0.72722689390688,
+    0.648614954850248,
+    0.6441478968868262,
+    0.6079865910646344,
+    0.5276061455756795,
+    0.5102942158262402,
+    0.47206740380950307,
+    0.5211148553652349,
+    0.46900036307918774,
+    0.5229880430525093,
+    0.5675978299441009,
+    0.6016660039813738,
+    0.5545351435330301,
+    0.5590765603772077,
+    0.5683528307514917,
+    0.5807248280718094,
+    0.5641339344530247,
+    0.4801609782616203,
+    0.5055116341556222,
+    0.5332443148014954,
+    0.536597214616963,
+    0.476245461921248
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 22,
+    "best_val": 0.72722689390688,
+    "chance": 0.5,
+    "reason": "val peaked at the first evaluation, but reached 0.7272 vs chance 0.5000 -- converged early, not untrained"
+  },
+  "epochs_run": 1,
+  "stopped_by": "patience",
+  "wall_time_sec": 2933.308799982071,
+  "config": {
+    "name": "tuep-paclock_rawtok",
+    "group": "C",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 2,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 200,
+    "patience": 20,
+    "loss": "bce_with_logits",
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 128,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "raw",
+      "pac_token_mode": "measured",
+      "interaction_mode": "product",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50
+    },
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

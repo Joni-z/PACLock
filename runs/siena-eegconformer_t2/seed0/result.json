@@ -1,0 +1,88 @@
+{
+  "name": "siena-eegconformer_t2",
+  "dataset": "siena",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.460546,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.6885245901639344,
+    "pr_auc": 0.5208024865066407,
+    "auroc": 0.8502925682258278
+  },
+  "best_val": 0.3932403599149719,
+  "val_curve": [
+    0.11990036027850354,
+    0.29742090647566466,
+    0.1149069405794037,
+    0.19599746470199886,
+    0.316951013766259,
+    0.18572888260921516,
+    0.173176480997746,
+    0.22537756385924682,
+    0.3845729666234038,
+    0.3932403599149719,
+    0.3441564557363605,
+    0.2837299818144165,
+    0.3089809804056587,
+    0.262917473171424,
+    0.2500405791733269,
+    0.2536894880609118,
+    0.18733587739518937,
+    0.25030648216411194
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 9,
+    "n_evals": 18,
+    "best_val": 0.3932403599149719,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 9,
+  "stopped_by": "patience",
+  "wall_time_sec": 2213.5601873397827,
+  "config": {
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "epochs": 20,
+    "batch_size": 128,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "siena-eegconformer_t2",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    }
+  },
+  "data_manifest_created": "2026-08-25T15:04:10.877907+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

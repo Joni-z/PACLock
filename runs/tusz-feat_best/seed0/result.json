@@ -1,0 +1,64 @@
+{
+ "name": "tusz-feat_best",
+ "dataset": "tusz",
+ "model": "feat_best",
+ "group": "A0",
+ "seed": 0,
+ "n_params_M": 0.000145,
+ "primary_metric": "pr_auc",
+ "best_val": 0.06292387630702415,
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "reason": "ok",
+  "n_evals": 1,
+  "peak_index": 0,
+  "best_val": 0.06292387630702415,
+  "chance": 0.0
+ },
+ "epochs_run": 1,
+ "stopped_by": "closed-form",
+ "wall_time_sec": 311.86638879776,
+ "winner": "logreg",
+ "val": {
+  "balanced_acc": 0.7023601674323218,
+  "pr_auc": 0.06292387630702415,
+  "auroc": 0.7769300486198433
+ },
+ "test": {
+  "balanced_acc": 0.7412188064115885,
+  "pr_auc": 0.23838388332777558,
+  "auroc": 0.8035110305452954
+ },
+ "class_counts": {
+  "train": [
+   [
+    0,
+    313196
+   ],
+   [
+    1,
+    13472
+   ]
+  ]
+ },
+ "config": {
+  "name": "tusz-feat_best",
+  "group": "A0",
+  "dataset": "tusz",
+  "model": "feat_best",
+  "loss": "closed-form",
+  "lr": null,
+  "batch_size": null,
+  "epochs": 1,
+  "patience": null,
+  "eval_every_steps": null,
+  "features": "bandpower5+hjorth3+spec_entropy per channel",
+  "candidates": [
+   "logreg",
+   "lda"
+  ],
+  "winner": "logreg",
+  "seed": 0
+ }
+}

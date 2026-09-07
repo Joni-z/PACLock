@@ -1,0 +1,89 @@
+{
+  "name": "caueeg-contrawr",
+  "dataset": "caueeg",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 1.573539,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5639791267159707,
+    "cohen_kappa": 0.34749632150705756,
+    "weighted_f1": 0.5228023856494893
+  },
+  "best_val": 0.49544937622452273,
+  "val_curve": [
+    0.41243307458982637,
+    0.49544937622452273,
+    0.4588916690029148,
+    0.4644214977562318,
+    0.47024693374617293,
+    0.41726032190791545,
+    0.4550717022399641,
+    0.4302264842808463,
+    0.4572242013681061,
+    0.41229504457902094,
+    0.40587351694821017,
+    0.39938839341568294,
+    0.4236296705262304,
+    0.37869077225007874,
+    0.4054446268448603,
+    0.3899094891481183,
+    0.44015128963682537
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 17,
+    "best_val": 0.49544937622452273,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 409.91588592529297,
+  "config": {
+    "name": "caueeg-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 1,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

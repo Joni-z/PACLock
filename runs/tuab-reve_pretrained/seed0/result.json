@@ -1,0 +1,88 @@
+{
+  "name": "tuab-reve_pretrained",
+  "dataset": "tuab",
+  "model": "reve",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 69.45997,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.8132325039689043,
+    "pr_auc": 0.9111844032383282,
+    "auroc": 0.9037303452838774
+  },
+  "best_val": 0.9166783845254123,
+  "val_curve": [
+    0.9166783845254123,
+    0.9097608124104011,
+    0.9047539305307584,
+    0.8986813426092455,
+    0.885802811782795,
+    0.8782824379229954,
+    0.8979295949739545,
+    0.865454011908593,
+    0.8829787952926321,
+    0.8881806673547894,
+    0.8860983574855572,
+    0.89608411368257,
+    0.8809322380516666,
+    0.8672606475583005,
+    0.8816838553492774
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 15,
+    "best_val": 0.9166783845254123,
+    "chance": 0.5,
+    "reason": "val peaked at the first evaluation, but reached 0.9167 vs chance 0.5000 -- converged early, not untrained"
+  },
+  "epochs_run": 3,
+  "stopped_by": "patience",
+  "wall_time_sec": 2908.358597278595,
+  "config": {
+    "name": "tuab-reve_pretrained",
+    "group": "B",
+    "dataset": "tuab",
+    "data_root": "$PACLOCK_PROC/processed/tuab",
+    "model": "reve",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 15,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 500,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "val_subsample": 20000,
+    "recipe_note": "epochs 30->15 on the ~300k-window TUH corpora: 30 epochs of a 69M model exceeds the 24h wall on MI210; patience 10 with eval_every 500 governs stopping"
+  },
+  "data_manifest_created": "2026-08-13T15:04:23.330749+00:00",
+  "class_counts": {
+    "train": [
+      147894,
+      149209
+    ],
+    "val": [
+      35815,
+      39592
+    ],
+    "test": [
+      19907,
+      17038
+    ]
+  }
+}

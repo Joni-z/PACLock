@@ -1,0 +1,102 @@
+{
+  "name": "mumtaz-labram_scratch",
+  "dataset": "mumtaz",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.8033333333333333,
+    "pr_auc": 0.9875830486258907,
+    "auroc": 0.9847581792318633
+  },
+  "best_val": 0.8679920627505417,
+  "val_curve": [
+    0.5826225846780831,
+    0.733755110939078,
+    0.7648478619701642,
+    0.7736326708577479,
+    0.7952243029324221,
+    0.8211093462892024,
+    0.8244150505198808,
+    0.8359338503223396,
+    0.8504825082420149,
+    0.8283569804638665,
+    0.8341319523231137,
+    0.8397801239527858,
+    0.8077552800060508,
+    0.8679920627505417,
+    0.7937316195281252,
+    0.8672401596348154,
+    0.8527137473694514,
+    0.839595485022001,
+    0.8348660589153909,
+    0.8200904953217389,
+    0.8094148058176834,
+    0.8565711438270533,
+    0.8476328399247207,
+    0.8485026450082976
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 24,
+    "best_val": 0.8679920627505417,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 24,
+  "stopped_by": "patience",
+  "wall_time_sec": 262.37958574295044,
+  "config": {
+    "name": "mumtaz-labram_scratch",
+    "group": "C",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    },
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

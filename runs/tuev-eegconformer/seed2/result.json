@@ -1,0 +1,109 @@
+{
+  "name": "tuev-eegconformer",
+  "dataset": "tuev",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 0.780038,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.3802477412500335,
+    "cohen_kappa": 0.45252249010344214,
+    "weighted_f1": 0.7133064424998429
+  },
+  "best_val": 0.40734870543483326,
+  "val_curve": [
+    0.13618385184141202,
+    0.3377569704641463,
+    0.3411493744968277,
+    0.25036782255753476,
+    0.3791345670074332,
+    0.40734870543483326,
+    0.2458999954444665,
+    0.29709727841617006,
+    0.35406404882149933,
+    0.3534156632877625,
+    0.3783823666561599,
+    0.2560389696636012,
+    0.3340866307334439,
+    0.32473047953206624,
+    0.3386792853179593,
+    0.08113671209493423,
+    0.35384652063572886,
+    0.29883371967538064,
+    0.39471252937394485,
+    0.2947430194005697,
+    0.36930996976756847
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 21,
+    "best_val": 0.40734870543483326,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 21,
+  "stopped_by": "patience",
+  "wall_time_sec": 910.3105449676514,
+  "config": {
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "epochs": 100,
+    "batch_size": 128,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "tuev-eegconformer",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.25
+    },
+    "tuned_from": {
+      "grid": "lr{1e-3,3e-4} x dropout{0.25,0.5}",
+      "winner": "t1",
+      "selected_by": "best_val seed0"
+    }
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

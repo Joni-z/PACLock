@@ -1,0 +1,97 @@
+{
+  "name": "adfd-eegnet_t4",
+  "dataset": "adfd",
+  "model": "eegnet",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 0.004387,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.3088748347712491,
+    "cohen_kappa": -0.031192380694143207,
+    "weighted_f1": 0.1793226753428874
+  },
+  "best_val": 0.34934344348715113,
+  "val_curve": [
+    0.3164707450811481,
+    0.3327014487197237,
+    0.33918004096600246,
+    0.34402567297486303,
+    0.344178319257926,
+    0.3306531485958317,
+    0.3284628519295555,
+    0.34934344348715113,
+    0.3185266438762216,
+    0.3291976840363937,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "verdict": {
+    "ok": false,
+    "status": "mis-configured",
+    "peak_index": 7,
+    "n_evals": 23,
+    "best_val": 0.34934344348715113,
+    "chance": 0.3333333333333333,
+    "reason": "test Cohen's Kappa -0.0312 is at chance -- the model does not discriminate, whatever the val curve did"
+  },
+  "epochs_run": 23,
+  "stopped_by": "patience",
+  "wall_time_sec": 839.5163037776947,
+  "config": {
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "epochs": 100,
+    "batch_size": 512,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "adfd-eegnet_t4",
+    "group": "A",
+    "model": "eegnet",
+    "optimizer": "adamw",
+    "lr": 0.0003,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    }
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

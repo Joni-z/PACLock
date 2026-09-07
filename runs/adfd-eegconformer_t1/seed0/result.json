@@ -1,0 +1,103 @@
+{
+  "name": "adfd-eegconformer_t1",
+  "dataset": "adfd",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.460579,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.3476791010835356,
+    "cohen_kappa": 0.06538877960260459,
+    "weighted_f1": 0.3955943856784956
+  },
+  "best_val": 0.5130118137178915,
+  "val_curve": [
+    0.3333333333333333,
+    0.3361271153047423,
+    0.3480130031709545,
+    0.3254755996691481,
+    0.3333333333333333,
+    0.3811122463873888,
+    0.4787799856615975,
+    0.33769063180827885,
+    0.3333333333333333,
+    0.3610386453102939,
+    0.40474253602251586,
+    0.3333333333333333,
+    0.40416646393875993,
+    0.5130118137178915,
+    0.3474945533769063,
+    0.3379528265676273,
+    0.3333333333333333,
+    0.3325062034739454,
+    0.35011920400914703,
+    0.35729847494553374,
+    0.3358147229114971,
+    0.27769198820008734,
+    0.36448315195943276,
+    0.38005864132371775,
+    0.3333333333333333,
+    0.3104548133011131,
+    0.4494474559544475,
+    0.46320607403667236,
+    0.31679073614557485
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 29,
+    "best_val": 0.5130118137178915,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 29,
+  "stopped_by": "patience",
+  "wall_time_sec": 1019.3698225021362,
+  "config": {
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "epochs": 100,
+    "batch_size": 128,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "adfd-eegconformer_t1",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.25
+    }
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

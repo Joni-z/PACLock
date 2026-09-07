@@ -1,0 +1,141 @@
+{
+  "name": "tuev-paclock_lf10_scratch",
+  "dataset": "tuev",
+  "model": "paclock",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 1.625118,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5657722948616649,
+    "cohen_kappa": 0.6936138339658515,
+    "weighted_f1": 0.8360301973688486
+  },
+  "best_val": 0.697364097812101,
+  "val_curve": [
+    0.09370619452860796,
+    0.5600224635411415,
+    0.46677596766228757,
+    0.5043058162267903,
+    0.5956767644170893,
+    0.6072945368345165,
+    0.6439154455204534,
+    0.6382154856595308,
+    0.6026398479919033,
+    0.5517641554419439,
+    0.697364097812101,
+    0.639435702547307,
+    0.666541689954063,
+    0.6218987522181136,
+    0.6675549567513757,
+    0.6790600717964079,
+    0.6582277310278826,
+    0.6624428173720815,
+    0.680037440047145,
+    0.6776669038609392
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 20,
+    "best_val": 0.697364097812101,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 2171.2353541851044,
+  "config": {
+    "batch_size": 32,
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "dataset": "tuev",
+    "device": "cuda",
+    "epochs": 20,
+    "eval_every_steps": 0,
+    "grad_clip": 1.0,
+    "group": "C",
+    "label_smoothing": 0.1,
+    "loss": "cross_entropy",
+    "lr": 0.0001,
+    "model": "paclock",
+    "model_kwargs": {
+      "arch": "triaxial",
+      "augmentations": [],
+      "band_pe": "index",
+      "d_model": 128,
+      "depth": 6,
+      "dropout": 0.2,
+      "freq_mixer": "attention",
+      "interaction_mode": "rotation",
+      "kernel_size": 201,
+      "n_bands": 8,
+      "n_heads": 4,
+      "pac_patch_len": 50,
+      "pac_token_mode": "measured",
+      "patch_len": 50,
+      "spatial_pe": "xyz",
+      "tokenizer_mode": "duplex"
+    },
+    "name": "tuev-paclock_lf10_scratch",
+    "num_classes": 6,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 20,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "train_subsample": 6844,
+    "train_subsample_seed": 0,
+    "weight_decay": 1e-05
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      53,
+      1096,
+      552,
+      98,
+      1055,
+      3990
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      0.07631062716245651,
+      0.18564841151237488,
+      0.17997917532920837,
+      0.20031003654003143,
+      0.21328909695148468,
+      0.33170178532600403,
+      0.3861396312713623,
+      0.3845384120941162
+    ],
+    "gamma": [
+      1.01039457321167,
+      1.0192896127700806,
+      1.0386427640914917,
+      1.0561134815216064,
+      1.0480471849441528,
+      1.0727406740188599,
+      1.0888246297836304,
+      1.0849941968917847
+    ]
+  }
+}

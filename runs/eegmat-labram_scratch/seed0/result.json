@@ -1,0 +1,95 @@
+{
+  "name": "eegmat-labram_scratch",
+  "dataset": "eegmat",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.49744897959183676,
+    "pr_auc": 0.34455728119845497,
+    "auroc": 0.6579506802721088
+  },
+  "best_val": 0.7307407407407407,
+  "val_curve": [
+    0.36712962962962964,
+    0.48157407407407404,
+    0.6507407407407407,
+    0.673425925925926,
+    0.715,
+    0.6832407407407407,
+    0.7307407407407407,
+    0.6749074074074075,
+    0.6474074074074073,
+    0.6175925925925926,
+    0.5507407407407408,
+    0.6100925925925925,
+    0.5684259259259259,
+    0.5780555555555555,
+    0.6247222222222223,
+    0.6152777777777778,
+    0.5812962962962963
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 17,
+    "best_val": 0.7307407407407407,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 57.528618574142456,
+  "config": {
+    "name": "eegmat-labram_scratch",
+    "group": "C",
+    "dataset": "eegmat",
+    "data_root": "$PACLOCK_PROC/processed/eegmat",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    },
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      899,
+      300
+    ],
+    "val": [
+      180,
+      60
+    ],
+    "test": [
+      196,
+      72
+    ]
+  }
+}

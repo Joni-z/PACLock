@@ -1,0 +1,90 @@
+{
+  "name": "tuep-eegnet_t2",
+  "dataset": "tuep",
+  "model": "eegnet",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 0.003346,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5041318062644311,
+    "pr_auc": 0.859103706011737,
+    "auroc": 0.7740943066456852
+  },
+  "best_val": 0.7273514228330109,
+  "val_curve": [
+    0.4272390129902761,
+    0.42213550582291537,
+    0.4835296394630243,
+    0.5678807455883741,
+    0.7217856063438879,
+    0.6779424542508712,
+    0.7191521722758125,
+    0.718525572910346,
+    0.7155491375389348,
+    0.7237538638827965,
+    0.7273514228330109,
+    0.7024849300760131,
+    0.6686244248368527,
+    0.7164513432778881,
+    0.7223579493787367,
+    0.7178134164337402,
+    0.7169517035616293,
+    0.7241735097556155,
+    0.7258482453968038,
+    0.7083695919206987
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 20,
+    "best_val": 0.7273514228330109,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 10,
+  "stopped_by": "patience",
+  "wall_time_sec": 8590.216861724854,
+  "config": {
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "epochs": 20,
+    "batch_size": 512,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "tuep-eegnet_t2",
+    "group": "A",
+    "model": "eegnet",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    }
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "name": "mumtaz-labram_pretrained",
+  "dataset": "mumtaz",
+  "model": "labram",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.8,
+    "pr_auc": 0.9291741990275474,
+    "auroc": 0.9393883357041252
+  },
+  "best_val": 0.844433914834737,
+  "val_curve": [
+    0.7310989798142933,
+    0.756183179615862,
+    0.7943077819747913,
+    0.8184087238557949,
+    0.6960932181898266,
+    0.7465686078224619,
+    0.8405542727228235,
+    0.8086651272673884,
+    0.7787602941765325,
+    0.8265728789880896,
+    0.8398602083083069,
+    0.8008101867300222,
+    0.7369762816833731,
+    0.7699777098543799,
+    0.8217833896148388,
+    0.8125558922064575,
+    0.844433914834737,
+    0.8250334797097387,
+    0.7734880741047236,
+    0.8203463203463204,
+    0.7867687297286476,
+    0.7980250308102311,
+    0.8421648580949712,
+    0.812811717231039,
+    0.8017178094259286,
+    0.8050190645257449,
+    0.8022783999145766
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 16,
+    "n_evals": 27,
+    "best_val": 0.844433914834737,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 27,
+  "stopped_by": "patience",
+  "wall_time_sec": 293.1583664417267,
+  "config": {
+    "name": "mumtaz-labram_pretrained",
+    "group": "B",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    },
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

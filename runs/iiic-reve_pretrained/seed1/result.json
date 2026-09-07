@@ -1,0 +1,101 @@
+{
+  "name": "iiic-reve_pretrained",
+  "dataset": "iiic",
+  "model": "reve",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 69.820422,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5279272897345263,
+    "cohen_kappa": 0.43427069137491336,
+    "weighted_f1": 0.5365256506851038
+  },
+  "best_val": 0.49865224237323336,
+  "val_curve": [
+    0.48341662584063705,
+    0.44729220921694945,
+    0.4658213102127665,
+    0.4528394425646387,
+    0.44660736030595805,
+    0.4375676212977936,
+    0.49865224237323336,
+    0.4426017356245462,
+    0.4807452819887149,
+    0.41244092732480253,
+    0.44288823956951817,
+    0.4469029996530439,
+    0.4299730594784551,
+    0.4930703880927594,
+    0.45665371446368874,
+    0.45261403660527477,
+    0.463043396339484
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 17,
+    "best_val": 0.49865224237323336,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 5044.332761287689,
+  "config": {
+    "name": "iiic-reve_pretrained",
+    "group": "B",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "model": "reve",
+    "pretrained": true,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 30,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "label_smoothing": 0.0
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

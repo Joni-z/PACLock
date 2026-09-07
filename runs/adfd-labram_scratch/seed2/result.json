@@ -1,0 +1,97 @@
+{
+  "name": "adfd-labram_scratch",
+  "dataset": "adfd",
+  "model": "labram",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 5.820539,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.4919602504370322,
+    "cohen_kappa": 0.30136447335302774,
+    "weighted_f1": 0.5071752906055262
+  },
+  "best_val": 0.5592650064068979,
+  "val_curve": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.40296901776977684,
+    0.5592650064068979,
+    0.46462800003368937,
+    0.4555405693518422,
+    0.4990489479947176,
+    0.5197830534133683,
+    0.45808574136383173,
+    0.4537818656076509,
+    0.5046424980662833,
+    0.5246707275357584,
+    0.47948402864886974,
+    0.4699286590345382
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 18,
+    "best_val": 0.5592650064068979,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "stopped_by": "patience",
+  "wall_time_sec": 169.0944275856018,
+  "config": {
+    "name": "adfd-labram_scratch",
+    "group": "C",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 2,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    }
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

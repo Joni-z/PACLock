@@ -1,0 +1,122 @@
+{
+  "name": "isruc-paclock_duplex_pt2",
+  "dataset": "isruc",
+  "model": "paclock",
+  "group": "pretrain_ft",
+  "seed": 0,
+  "n_params_M": 1.608349,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.75752799167578,
+    "cohen_kappa": 0.699962064169033,
+    "weighted_f1": 0.7639864417470634
+  },
+  "best_val": 0.7331943283183546,
+  "val_curve": [
+    0.658306146475258,
+    0.6978682327947021,
+    0.6995307442605243,
+    0.697463247310159,
+    0.6953637430839579,
+    0.7312517596957113,
+    0.7245419715520318,
+    0.7076289527046191,
+    0.7068774611063975,
+    0.706571156803126,
+    0.7331943283183546,
+    0.7116057271039582,
+    0.7203862266050378,
+    0.7082097212690914,
+    0.7154794215979883,
+    0.7221488813601209,
+    0.7083615145124762,
+    0.7140679604369864,
+    0.7153566680376344,
+    0.7152107527857527
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 20,
+    "best_val": 0.7331943283183546,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 33951.0055475235,
+  "config": {
+    "name": "isruc-paclock_duplex_pt2",
+    "group": "pretrain_ft",
+    "dataset": "isruc",
+    "data_root": "$PACLOCK_PROC/processed/isruc",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 5,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 200,
+    "flatten_sequences": true,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 128,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "duplex",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "index",
+      "pac_patch_len": 50
+    },
+    "seed": 0,
+    "max_hours": 22.5,
+    "checkpoint": "pretrain_runs_60k/pretrain-duplex_v2/checkpoint.pt",
+    "checkpoint_exclude": [
+      "frontend.tokenizer",
+      "frontend.phase_tokenizer",
+      "frontend.amplitude_tokenizer"
+    ]
+  },
+  "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+  "class_counts": {
+    "train": [
+      16493,
+      9147,
+      21310,
+      13234,
+      9236
+    ],
+    "val": [
+      2072,
+      1015,
+      3226,
+      1980,
+      1067
+    ],
+    "test": [
+      1348,
+      1031,
+      3120,
+      1808,
+      1393
+    ]
+  }
+}

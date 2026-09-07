@@ -1,0 +1,97 @@
+{
+  "name": "adfd-contrawr",
+  "dataset": "adfd",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 1.573539,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.4507025981602733,
+    "cohen_kappa": 0.17838612448551694,
+    "weighted_f1": 0.44968215815080315
+  },
+  "best_val": 0.4083125657589584,
+  "val_curve": [
+    0.3210399826764218,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3135745144605729,
+    0.3347639484978541,
+    0.35962733425088156,
+    0.33208549231303347,
+    0.33063292800977157,
+    0.36490379351419655,
+    0.33158227466442236,
+    0.4083125657589584,
+    0.3048097662808839,
+    0.3589729900534438,
+    0.35368019654734484,
+    0.3505398339628862,
+    0.2859396555066433,
+    0.40011062969178796,
+    0.36002268557178935,
+    0.34451580466760734,
+    0.36544897206916405,
+    0.2737842874375682,
+    0.21873986142947222,
+    0.24827499143206322,
+    0.33905603761293507,
+    0.3669673721876245,
+    0.2895147432898571
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 26,
+    "best_val": 0.4083125657589584,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 26,
+  "stopped_by": "patience",
+  "wall_time_sec": 95.64519190788269,
+  "config": {
+    "name": "adfd-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 2,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

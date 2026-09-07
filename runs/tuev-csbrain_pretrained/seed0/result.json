@@ -1,0 +1,104 @@
+{
+  "name": "tuev-csbrain_pretrained",
+  "dataset": "tuev",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 25.064206,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6085257891130625,
+    "cohen_kappa": 0.6132065088302936,
+    "weighted_f1": 0.8002069007648607
+  },
+  "best_val": 0.5061715509912548,
+  "val_curve": [
+    0.42256010339492944,
+    0.4363426897894612,
+    0.45958779017498885,
+    0.4085681164095405,
+    0.4233393314020335,
+    0.47840653667924427,
+    0.4677907900643865,
+    0.3981503113563265,
+    0.3858477259889138,
+    0.5061715509912548,
+    0.42919372877166817,
+    0.4053510891918387,
+    0.41036805698413825,
+    0.46306848955682933,
+    0.4382932518293934,
+    0.43839477568233154,
+    0.4705060309415122,
+    0.4737269424537144,
+    0.3800752766043791,
+    0.3818231941246275
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 9,
+    "n_evals": 20,
+    "best_val": 0.5061715509912548,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "patience",
+  "wall_time_sec": 8569.005140781403,
+  "config": {
+    "name": "tuev-csbrain_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

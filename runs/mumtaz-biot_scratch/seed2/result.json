@@ -1,0 +1,92 @@
+{
+  "name": "mumtaz-biot_scratch",
+  "dataset": "mumtaz",
+  "model": "biot",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 3.187477,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.7992887624466571,
+    "pr_auc": 0.9477827384480177,
+    "auroc": 0.9296088193456615
+  },
+  "best_val": 0.8465183326437181,
+  "val_curve": [
+    0.7788114591814489,
+    0.7740909313365634,
+    0.7909687092626455,
+    0.8097729608520976,
+    0.8118373575721983,
+    0.811165538811993,
+    0.8202773588179549,
+    0.8150629774473556,
+    0.820450874921584,
+    0.8208112545214293,
+    0.8135458238233162,
+    0.8357670079150038,
+    0.8465183326437181,
+    0.8188402895494366,
+    0.809968722610038,
+    0.8151697565880505,
+    0.8320475345141327,
+    0.8068432081792822
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 12,
+    "n_evals": 18,
+    "best_val": 0.8465183326437181,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "stopped_by": "patience",
+  "wall_time_sec": 37.11016654968262,
+  "config": {
+    "name": "mumtaz-biot_scratch",
+    "group": "C",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 1000
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "batch_size": 512,
+    "loss": "bce_with_logits",
+    "eval_every_steps": 0,
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

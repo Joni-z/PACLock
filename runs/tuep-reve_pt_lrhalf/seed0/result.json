@@ -1,0 +1,92 @@
+{
+  "name": "tuep-reve_pt_lrhalf",
+  "dataset": "tuep",
+  "model": "reve",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 69.45997,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6411432985736598,
+    "pr_auc": 0.860637258844611,
+    "auroc": 0.6801220186547517
+  },
+  "best_val": 0.5148243111115057,
+  "val_curve": [
+    0.45655024124704546,
+    0.45655047968220047,
+    0.41689374737515783,
+    0.45272800238369376,
+    0.47714966558236227,
+    0.42581156749244164,
+    0.357411584133571,
+    0.4888215432904512,
+    0.4303287297260232,
+    0.4732275470547667,
+    0.5148243111115057,
+    0.4710621365302719,
+    0.41322306282947213,
+    0.4584120991535059,
+    0.49957337373247046,
+    0.4827239588523409,
+    0.48168501466293984,
+    0.507887944685675,
+    0.4894748062837694,
+    0.4612356071496344,
+    0.45518920405083235
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 21,
+    "best_val": 0.5148243111115057,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 21,
+  "stopped_by": "patience",
+  "wall_time_sec": 10929.347696781158,
+  "config": {
+    "batch_size": 128,
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "dataset": "tuep",
+    "device": "cuda",
+    "epochs": 30,
+    "eval_every_steps": 0,
+    "grad_clip": 1.0,
+    "group": "B",
+    "loss": "bce_with_logits",
+    "lr": 5e-05,
+    "max_hours": 22.5,
+    "model": "reve",
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "name": "tuep-reve_pt_lrhalf",
+    "num_classes": 2,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 10,
+    "pretrained": true,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "weight_decay": 0.01
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

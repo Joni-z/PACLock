@@ -1,0 +1,94 @@
+{
+  "name": "tuab-eegconformer_t2",
+  "dataset": "tuab",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.455746,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.7572789625060912,
+    "pr_auc": 0.8708457603893588,
+    "auroc": 0.8671521365286485
+  },
+  "best_val": 0.8778661413145905,
+  "val_curve": [
+    0.8324036524638426,
+    0.8594027156008458,
+    0.8734729406778683,
+    0.8631414940278598,
+    0.8208556982463626,
+    0.8778661413145905,
+    0.8310105534218117,
+    0.8596159865247893,
+    0.8490591711712433,
+    0.8706983139230537,
+    0.8749771979651048,
+    0.8603004841058258,
+    0.8229237274365779,
+    0.8641258669646363,
+    0.8778335726208245,
+    0.8758190051156163,
+    0.8705944191411337,
+    0.862272060399292,
+    0.86101750841975,
+    0.8119593153953659,
+    0.793697159089162,
+    0.8723168550120062,
+    0.8774445240517922,
+    0.8643681025307783
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 24,
+    "best_val": 0.8778661413145905,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 2,
+  "stopped_by": "patience",
+  "wall_time_sec": 1144.565973520279,
+  "config": {
+    "dataset": "tuab",
+    "data_root": "$PACLOCK_PROC/processed/tuab",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "epochs": 20,
+    "batch_size": 128,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "tuab-eegconformer_t2",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    }
+  },
+  "data_manifest_created": "2026-08-04T12:32:29.190287+00:00",
+  "class_counts": {
+    "train": [
+      147894,
+      149209
+    ],
+    "val": [
+      35815,
+      39592
+    ],
+    "test": [
+      19907,
+      17038
+    ]
+  }
+}

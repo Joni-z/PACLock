@@ -1,0 +1,92 @@
+{
+  "name": "caueeg-eegpt_pretrained",
+  "dataset": "caueeg",
+  "model": "eegpt",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 25.685951,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5500154710771628,
+    "cohen_kappa": 0.32245079984014235,
+    "weighted_f1": 0.5520415483455314
+  },
+  "best_val": 0.5038977622118527,
+  "val_curve": [
+    0.42486609418945936,
+    0.4596832805891296,
+    0.4825782595185963,
+    0.5038977622118527,
+    0.4749306890368623,
+    0.4819205845143036,
+    0.43232372854315093,
+    0.4225678890362241,
+    0.48340381598588406,
+    0.4846541994493339,
+    0.47286926651718536,
+    0.44556266231855607,
+    0.5016095580788397,
+    0.455648649584621,
+    0.482051943752114,
+    0.49539214428135764
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 16,
+    "best_val": 0.5038977622118527,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 2,
+  "stopped_by": "patience",
+  "wall_time_sec": 828.6137573719025,
+  "config": {
+    "name": "caueeg-eegpt_pretrained",
+    "group": "B",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": true,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 200,
+    "num_classes": 3,
+    "loss": "cross_entropy",
+    "epochs": 40,
+    "seed": 0,
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

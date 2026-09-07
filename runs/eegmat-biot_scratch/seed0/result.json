@@ -1,0 +1,84 @@
+{
+  "name": "eegmat-biot_scratch",
+  "dataset": "eegmat",
+  "model": "biot",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 3.187477,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5717120181405896,
+    "pr_auc": 0.336480358672417,
+    "auroc": 0.649092970521542
+  },
+  "best_val": 0.6906481481481481,
+  "val_curve": [
+    0.5921296296296296,
+    0.6547222222222222,
+    0.6735185185185185,
+    0.6833333333333335,
+    0.6906481481481481,
+    0.6899074074074073,
+    0.687962962962963,
+    0.6844444444444444,
+    0.6797222222222223,
+    0.6781481481481482
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 10,
+    "best_val": 0.6906481481481481,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 10,
+  "stopped_by": "patience",
+  "wall_time_sec": 12.738693952560425,
+  "config": {
+    "name": "eegmat-biot_scratch",
+    "group": "C",
+    "dataset": "eegmat",
+    "data_root": "$PACLOCK_PROC/processed/eegmat",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 1000
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "batch_size": 512,
+    "loss": "bce_with_logits",
+    "eval_every_steps": 0,
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      899,
+      300
+    ],
+    "val": [
+      180,
+      60
+    ],
+    "test": [
+      196,
+      72
+    ]
+  }
+}

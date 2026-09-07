@@ -1,0 +1,94 @@
+{
+  "name": "adfd-eegconformer_t2",
+  "dataset": "adfd",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.460579,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.48447382651658194,
+    "cohen_kappa": 0.2916790727350064,
+    "weighted_f1": 0.49774008378324147
+  },
+  "best_val": 0.47606046184932255,
+  "val_curve": [
+    0.3333333333333333,
+    0.30387021089108374,
+    0.3433433239037884,
+    0.32940041194310643,
+    0.47606046184932255,
+    0.3250620347394541,
+    0.3669529521139166,
+    0.3123908967130376,
+    0.3322979302774239,
+    0.428646424224276,
+    0.40337737383937844,
+    0.3333333333333333,
+    0.3287138400990393,
+    0.44350297488556806,
+    0.4060547743309509,
+    0.44527166711203003,
+    0.36389118647183166,
+    0.4581708696831141,
+    0.32551427748551315,
+    0.3474945533769063
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 20,
+    "best_val": 0.47606046184932255,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "patience",
+  "wall_time_sec": 705.375482082367,
+  "config": {
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "epochs": 100,
+    "batch_size": 128,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "adfd-eegconformer_t2",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    }
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

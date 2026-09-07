@@ -1,0 +1,86 @@
+{
+  "name": "siena-biot_scratch",
+  "dataset": "siena",
+  "model": "biot",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 3.187477,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5407084781641269,
+    "pr_auc": 0.12647139497771617,
+    "auroc": 0.7916796964266385
+  },
+  "best_val": 0.4516725532357758,
+  "val_curve": [
+    0.0353386751364552,
+    0.21619181247505684,
+    0.3048942335996623,
+    0.21480791951953238,
+    0.04039542337486367,
+    0.09107725790958014,
+    0.4516725532357758,
+    0.09941469593794944,
+    0.13454838382952833,
+    0.13729615051303753,
+    0.04814751974824002,
+    0.08388639352226769
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 12,
+    "best_val": 0.4516725532357758,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 12,
+  "stopped_by": "patience",
+  "wall_time_sec": 243.06963062286377,
+  "config": {
+    "name": "siena-biot_scratch",
+    "group": "C",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 2000
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "batch_size": 512,
+    "loss": "bce_with_logits",
+    "eval_every_steps": 0,
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

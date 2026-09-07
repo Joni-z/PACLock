@@ -1,0 +1,84 @@
+{
+  "name": "chbmit-eegnet_t2",
+  "dataset": "chbmit",
+  "model": "eegnet",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 0.003346,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5820754876798889,
+    "pr_auc": 0.09865522537955271,
+    "auroc": 0.7475912467495066
+  },
+  "best_val": 0.07579216210209114,
+  "val_curve": [
+    0.008781781630941642,
+    0.02624878050654231,
+    0.049012085801856946,
+    0.07579216210209114,
+    0.01776377348245689,
+    0.01623072045594147,
+    0.015131112525363196,
+    0.011722689029237739,
+    0.014204369062408071,
+    0.016182717800425205,
+    0.019927398695791524,
+    0.02150837343709253
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 12,
+    "best_val": 0.07579216210209114,
+    "chance": 0.0070808157099697885,
+    "reason": "ok"
+  },
+  "epochs_run": 3,
+  "stopped_by": "patience",
+  "wall_time_sec": 5987.647501707077,
+  "config": {
+    "dataset": "chbmit",
+    "data_root": "$PACLOCK_PROC/processed/chbmit",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "focal",
+    "focal_alpha": 0.25,
+    "focal_gamma": 2.0,
+    "epochs": 20,
+    "batch_size": 512,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "chbmit-eegnet_t2",
+    "group": "A",
+    "model": "eegnet",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    }
+  },
+  "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}

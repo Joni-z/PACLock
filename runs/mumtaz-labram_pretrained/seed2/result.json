@@ -1,0 +1,95 @@
+{
+  "name": "mumtaz-labram_pretrained",
+  "dataset": "mumtaz",
+  "model": "labram",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.8,
+    "pr_auc": 0.9633333610526834,
+    "auroc": 0.9654220009483168
+  },
+  "best_val": 0.8639900695399154,
+  "val_curve": [
+    0.8082914002749563,
+    0.8021693962084506,
+    0.8533077063395664,
+    0.7620337866997683,
+    0.7819458718739296,
+    0.830964171149166,
+    0.8639900695399154,
+    0.8432459968945066,
+    0.7723401983422539,
+    0.8508473369727224,
+    0.8504869573728773,
+    0.8429545788230269,
+    0.7780951491126208,
+    0.8128228400581946,
+    0.8219213126715696,
+    0.8041247892224254,
+    0.8411615790855257
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 17,
+    "best_val": 0.8639900695399154,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 187.25267505645752,
+  "config": {
+    "name": "mumtaz-labram_pretrained",
+    "group": "B",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    },
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

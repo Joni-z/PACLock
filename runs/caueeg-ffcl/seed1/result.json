@@ -1,0 +1,94 @@
+{
+  "name": "caueeg-ffcl",
+  "dataset": "caueeg",
+  "model": "ffcl",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 2.467235,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5505695208345266,
+    "cohen_kappa": 0.32589799079736215,
+    "weighted_f1": 0.5544455481284071
+  },
+  "best_val": 0.4646538148777289,
+  "val_curve": [
+    0.46427163560315615,
+    0.43443872898472996,
+    0.4057538449252442,
+    0.43052346473052466,
+    0.4588504998494232,
+    0.43716017361349685,
+    0.4646538148777289,
+    0.43750500221249444,
+    0.3826536672624648,
+    0.40183573351523066,
+    0.39502831143126604,
+    0.431444978571388,
+    0.44433490911843965,
+    0.39868816422452263,
+    0.42937400266194164,
+    0.42990359728294686,
+    0.4367456955661641,
+    0.3850016662927976,
+    0.400308333611946,
+    0.4516621637792613,
+    0.3845530264871804,
+    0.42615646271849766
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 22,
+    "best_val": 0.4646538148777289,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "stopped_by": "patience",
+  "wall_time_sec": 731.447986125946,
+  "config": {
+    "name": "caueeg-ffcl",
+    "group": "A",
+    "model": "ffcl",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 1,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

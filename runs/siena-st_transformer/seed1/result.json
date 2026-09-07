@@ -1,0 +1,88 @@
+{
+  "name": "siena-st_transformer",
+  "dataset": "siena",
+  "model": "st_transformer",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 3.429256,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.6304138652682727,
+    "pr_auc": 0.33288240583801915,
+    "auroc": 0.8377494196745366
+  },
+  "best_val": 0.17732673928214326,
+  "val_curve": [
+    0.007907521584966442,
+    0.00801411281813277,
+    0.012350323170147216,
+    0.011381869135544346,
+    0.02059728495234576,
+    0.03147060785242809,
+    0.04614246576710531,
+    0.042991949985319335,
+    0.047324281831103376,
+    0.06027737783619224,
+    0.0782492381998031,
+    0.07965667844051466,
+    0.06318114632370256,
+    0.11439462551213378,
+    0.10452286011266711,
+    0.12405042730861063,
+    0.11427462319939223,
+    0.17732673928214326,
+    0.10229180385987549,
+    0.1000728451985095
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 17,
+    "n_evals": 20,
+    "best_val": 0.17732673928214326,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 240.37917399406433,
+  "config": {
+    "name": "siena-st_transformer",
+    "group": "A",
+    "model": "st_transformer",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 1,
+    "device": "cuda",
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-25T15:04:10.877907+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

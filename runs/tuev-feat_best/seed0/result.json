@@ -1,0 +1,80 @@
+{
+ "name": "tuev-feat_best",
+ "dataset": "tuev",
+ "model": "feat_best",
+ "group": "A0",
+ "seed": 0,
+ "n_params_M": 0.00087,
+ "primary_metric": "cohen_kappa",
+ "best_val": 0.4874567349090766,
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "reason": "ok",
+  "n_evals": 1,
+  "peak_index": 0,
+  "best_val": 0.4874567349090766,
+  "chance": 0.0
+ },
+ "epochs_run": 1,
+ "stopped_by": "closed-form",
+ "wall_time_sec": 51.59185767173767,
+ "winner": "lda",
+ "val": {
+  "balanced_acc": 0.5030795616920182,
+  "cohen_kappa": 0.4874567349090766,
+  "weighted_f1": 0.8916615676021991
+ },
+ "test": {
+  "balanced_acc": 0.44810922340253234,
+  "cohen_kappa": 0.5049309175741346,
+  "weighted_f1": 0.7445454120394426
+ },
+ "class_counts": {
+  "train": [
+   [
+    0,
+    526
+   ],
+   [
+    1,
+    10963
+   ],
+   [
+    2,
+    5515
+   ],
+   [
+    3,
+    984
+   ],
+   [
+    4,
+    10553
+   ],
+   [
+    5,
+    39904
+   ]
+  ]
+ },
+ "config": {
+  "name": "tuev-feat_best",
+  "group": "A0",
+  "dataset": "tuev",
+  "model": "feat_best",
+  "loss": "closed-form",
+  "lr": null,
+  "batch_size": null,
+  "epochs": 1,
+  "patience": null,
+  "eval_every_steps": null,
+  "features": "bandpower5+hjorth3+spec_entropy per channel",
+  "candidates": [
+   "logreg",
+   "lda"
+  ],
+  "winner": "lda",
+  "seed": 0
+ }
+}

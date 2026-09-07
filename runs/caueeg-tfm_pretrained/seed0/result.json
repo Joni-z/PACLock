@@ -1,0 +1,87 @@
+{
+  "name": "caueeg-tfm_pretrained",
+  "dataset": "caueeg",
+  "model": "tfm",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 1.891239,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5591020619937809,
+    "cohen_kappa": 0.3393102657313014,
+    "weighted_f1": 0.563798515963136
+  },
+  "best_val": 0.4508019861029143,
+  "val_curve": [
+    0.4241569961593487,
+    0.4508019861029143,
+    0.44575430674008354,
+    0.4421122944101361,
+    0.44060009389909577,
+    0.4205386440025252,
+    0.4238120190354362,
+    0.44678877095214053,
+    0.43563372447523846,
+    0.43406288797235654,
+    0.44359821628977736,
+    0.43885948519563395
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 12,
+    "best_val": 0.4508019861029143,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 12,
+  "stopped_by": "patience",
+  "wall_time_sec": 10890.505235671997,
+  "config": {
+    "name": "caueeg-tfm_pretrained",
+    "group": "B",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 3,
+    "loss": "cross_entropy",
+    "seed": 0,
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

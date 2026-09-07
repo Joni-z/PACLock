@@ -1,0 +1,89 @@
+{
+  "name": "caueeg-ffcl",
+  "dataset": "caueeg",
+  "model": "ffcl",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 2.467235,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5599116445479816,
+    "cohen_kappa": 0.33585802368946616,
+    "weighted_f1": 0.5567829451986719
+  },
+  "best_val": 0.49247004711788467,
+  "val_curve": [
+    0.34858117656334303,
+    0.49247004711788467,
+    0.47554708336549556,
+    0.4554415873518567,
+    0.46520543692564814,
+    0.4489294081302441,
+    0.45130615418355485,
+    0.4408240417187265,
+    0.42779747133351576,
+    0.45151277906440695,
+    0.4268209822031254,
+    0.4525023887521598,
+    0.4091725641786115,
+    0.42713895348887565,
+    0.4073818923002826,
+    0.43079138980100024,
+    0.4103974589165246
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 17,
+    "best_val": 0.49247004711788467,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 562.4756214618683,
+  "config": {
+    "name": "caueeg-ffcl",
+    "group": "A",
+    "model": "ffcl",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 0,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

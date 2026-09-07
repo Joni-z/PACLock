@@ -1,0 +1,101 @@
+{
+  "name": "tusz-eegconformer",
+  "dataset": "tusz",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.455746,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.36237829215507855,
+    "auroc": 0.8335530940327682
+  },
+  "best_val": 0.13313687405564884,
+  "val_curve": [
+    0.021582446045833835,
+    0.023135893069988638,
+    0.08389309512390081,
+    0.07994409903761977,
+    0.06753582499175528,
+    0.09100627155040021,
+    0.02163148478629827,
+    0.07276387482591076,
+    0.06976743703027023,
+    0.07413084124764484,
+    0.08169819052300085,
+    0.07430582196744615,
+    0.09930658042119833,
+    0.09304206534528009,
+    0.09357906395806764,
+    0.10239519303099269,
+    0.13313687405564884,
+    0.06416964044784063,
+    0.08966053326592985,
+    0.10976849596699217,
+    0.114003272293767,
+    0.0839203947791564,
+    0.04871754064149071,
+    0.09894710855726511,
+    0.08540355646843444,
+    0.07904052762588445
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 16,
+    "n_evals": 26,
+    "best_val": 0.13313687405564884,
+    "chance": 0.020051791937082387,
+    "reason": "ok"
+  },
+  "epochs_run": 2,
+  "stopped_by": "patience",
+  "wall_time_sec": 1513.8687100410461,
+  "config": {
+    "dataset": "tusz",
+    "data_root": "$PACLOCK_PROC/processed/tusz",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "epochs": 20,
+    "batch_size": 128,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "tusz-eegconformer",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.25
+    },
+    "tuned_from": {
+      "grid": "lr{1e-3,3e-4} x dropout{0.25,0.5}",
+      "winner": "t1",
+      "selected_by": "best_val seed0"
+    }
+  },
+  "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+  "class_counts": {
+    "train": [
+      313196,
+      13472
+    ],
+    "val": [
+      153259,
+      3136
+    ],
+    "test": [
+      43364,
+      2727
+    ]
+  }
+}

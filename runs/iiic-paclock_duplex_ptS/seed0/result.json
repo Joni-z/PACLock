@@ -1,0 +1,143 @@
+{
+  "name": "iiic-paclock_duplex_ptS",
+  "dataset": "iiic",
+  "model": "paclock",
+  "group": "pretrain_ft",
+  "seed": 0,
+  "n_params_M": 1.625118,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5292004102329269,
+    "cohen_kappa": 0.43391285694365644,
+    "weighted_f1": 0.5322188231662633
+  },
+  "best_val": 0.49956173034597096,
+  "val_curve": [
+    0.31375157061351133,
+    0.3600785218227358,
+    0.4763613140955544,
+    0.46767322005190304,
+    0.49956173034597096,
+    0.46152923652307143,
+    0.4633807429985095,
+    0.4642160580482909,
+    0.4925743918403457,
+    0.45874319244042605,
+    0.46974368185880444,
+    0.43636317054479934,
+    0.4537146907017794,
+    0.453288852384763,
+    0.4444560137270649,
+    0.4471175976141456,
+    0.43035140775393754,
+    0.42939922941847686,
+    0.43091197674799187,
+    0.42941546509521766
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 20,
+    "best_val": 0.49956173034597096,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 29235.50745511055,
+  "config": {
+    "batch_size": 32,
+    "checkpoint": "$PACLOCK_CKPT/pretrain-duplex_v2_60k.pt",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "dataset": "iiic",
+    "device": "cuda",
+    "epochs": 20,
+    "eval_every_steps": 0,
+    "grad_clip": 1.0,
+    "group": "pretrain_ft",
+    "label_smoothing": 0.1,
+    "loss": "cross_entropy",
+    "lr": 0.0005,
+    "layer_decay": 0.65,
+    "warmup_epochs": 2,
+    "freeze_loaded_epochs": 2,
+    "model": "paclock",
+    "model_kwargs": {
+      "arch": "triaxial",
+      "augmentations": [],
+      "band_pe": "index",
+      "d_model": 128,
+      "depth": 6,
+      "dropout": 0.2,
+      "freq_mixer": "attention",
+      "interaction_mode": "rotation",
+      "kernel_size": 201,
+      "n_bands": 8,
+      "n_heads": 4,
+      "pac_patch_len": 50,
+      "pac_token_mode": "measured",
+      "patch_len": 50,
+      "spatial_pe": "xyz",
+      "tokenizer_mode": "duplex"
+    },
+    "name": "iiic-paclock_duplex_ptS",
+    "num_classes": 6,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 20,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "weight_decay": 1e-05
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      0.9909898042678833,
+      1.5561637878417969,
+      0.7649373412132263,
+      0.9381158947944641,
+      1.2860816717147827,
+      1.6309815645217896,
+      1.6277719736099243,
+      3.321612596511841
+    ],
+    "gamma": [
+      0.38897305727005005,
+      1.057148814201355,
+      1.2966300249099731,
+      1.1215723752975464,
+      0.9162893891334534,
+      1.152791142463684,
+      1.3667011260986328,
+      1.6002041101455688
+    ]
+  }
+}

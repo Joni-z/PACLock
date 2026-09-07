@@ -1,0 +1,92 @@
+{
+  "name": "caueeg-cnn_transformer",
+  "dataset": "caueeg",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 3.156643,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.4921119474082896,
+    "cohen_kappa": 0.2369279883214057,
+    "weighted_f1": 0.4927896411179475
+  },
+  "best_val": 0.49884920403378147,
+  "val_curve": [
+    0.4519042650437693,
+    0.44875483533717214,
+    0.4487158503736058,
+    0.48038682733351906,
+    0.49884920403378147,
+    0.4300985118222376,
+    0.4094654892300074,
+    0.425085028650803,
+    0.427334076682545,
+    0.46374257598020074,
+    0.4636252279353153,
+    0.45125684545358435,
+    0.4292958672503017,
+    0.4766753706121259,
+    0.43551471695993693,
+    0.4333691743482249,
+    0.40319729121801956,
+    0.3884552668023069,
+    0.4191953738795713,
+    0.39143130215053773
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 20,
+    "best_val": 0.49884920403378147,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "patience",
+  "wall_time_sec": 1055.803629398346,
+  "config": {
+    "name": "caueeg-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 0,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

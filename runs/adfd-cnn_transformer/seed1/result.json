@@ -1,0 +1,88 @@
+{
+  "name": "adfd-cnn_transformer",
+  "dataset": "adfd",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 3.156643,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.49253277848635135,
+    "cohen_kappa": 0.300050374305333,
+    "weighted_f1": 0.49398248802781275
+  },
+  "best_val": 0.4790595587559534,
+  "val_curve": [
+    0.3333333333333333,
+    0.4790595587559534,
+    0.42627545319925053,
+    0.3425587814060911,
+    0.29696123222928933,
+    0.4002559325262129,
+    0.39633627110722336,
+    0.3437792208060387,
+    0.3367593595501179,
+    0.3365813534270506,
+    0.3174513680984025,
+    0.4034228382551957,
+    0.24840821759977072,
+    0.22320914459589117,
+    0.35727774391438666,
+    0.3957978327476092,
+    0.3612436238157993
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 17,
+    "best_val": 0.4790595587559534,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 143.81739258766174,
+  "config": {
+    "name": "adfd-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 1,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

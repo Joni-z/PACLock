@@ -1,0 +1,140 @@
+{
+  "name": "tuev-paclock_duplex_p200ptF",
+  "dataset": "tuev",
+  "model": "paclock",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 1.663518,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5522142628868575,
+    "cohen_kappa": 0.5306192967842736,
+    "weighted_f1": 0.7506430952142116
+  },
+  "best_val": 0.40946526095067104,
+  "val_curve": [
+    0.4059597198790408,
+    0.3521019035083197,
+    0.3716607512370316,
+    0.40946526095067104,
+    0.3491529965839538,
+    0.3471726774202726,
+    0.3152382954011854,
+    0.36477422680632254,
+    0.3425281115102238,
+    0.36138000728281783,
+    0.3049750619456726,
+    0.35191973018900946,
+    0.32777275453725896,
+    0.3515990948923694,
+    0.32003961958149496,
+    0.31994579526616485,
+    0.3241514897799397,
+    0.3267020699453419,
+    0.3256042651360481,
+    0.3244184704429113
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 20,
+    "best_val": 0.40946526095067104,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 6058.8015105724335,
+  "config": {
+    "batch_size": 32,
+    "checkpoint": "pretrain_runs_full/pretrain-duplex_v2_full/checkpoint.pt",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "dataset": "tuev",
+    "device": "cuda",
+    "epochs": 20,
+    "eval_every_steps": 0,
+    "grad_clip": 1.0,
+    "group": "C",
+    "label_smoothing": 0.1,
+    "loss": "cross_entropy",
+    "lr": 0.0001,
+    "model": "paclock",
+    "model_kwargs": {
+      "arch": "triaxial",
+      "augmentations": [],
+      "band_pe": "index",
+      "d_model": 128,
+      "depth": 6,
+      "dropout": 0.2,
+      "freq_mixer": "attention",
+      "interaction_mode": "rotation",
+      "kernel_size": 201,
+      "n_bands": 8,
+      "n_heads": 4,
+      "pac_patch_len": 200,
+      "pac_token_mode": "measured",
+      "patch_len": 200,
+      "spatial_pe": "xyz",
+      "tokenizer_mode": "duplex"
+    },
+    "name": "tuev-paclock_duplex_p200ptF",
+    "num_classes": 6,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 20,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "weight_decay": 1e-05
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      1.7528342008590698,
+      0.8780250549316406,
+      0.8615303635597229,
+      0.6522570848464966,
+      0.6765692830085754,
+      2.0749545097351074,
+      2.0714285373687744,
+      2.607370138168335
+    ],
+    "gamma": [
+      0.38150450587272644,
+      0.3816009759902954,
+      0.37619441747665405,
+      0.47964781522750854,
+      0.47571861743927,
+      0.9063663482666016,
+      0.960673987865448,
+      1.1744638681411743
+    ]
+  }
+}

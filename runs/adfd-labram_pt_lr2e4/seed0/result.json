@@ -1,0 +1,90 @@
+{
+  "name": "adfd-labram_pt_lr2e4",
+  "dataset": "adfd",
+  "model": "labram",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 5.820539,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.3333333333333333,
+    "cohen_kappa": 0.0,
+    "weighted_f1": 0.2185072394080248
+  },
+  "best_val": 0.3333333333333333,
+  "val_curve": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "verdict": {
+    "ok": false,
+    "status": "mis-configured",
+    "peak_index": 0,
+    "n_evals": 11,
+    "best_val": 0.3333333333333333,
+    "chance": 0.3333333333333333,
+    "reason": "val peak at first evaluation and never cleared chance (0.3333 vs 0.3333)"
+  },
+  "epochs_run": 11,
+  "stopped_by": "patience",
+  "wall_time_sec": 106.52118754386902,
+  "config": {
+    "batch_size": 64,
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "dataset": "adfd",
+    "device": "cuda",
+    "epochs": 50,
+    "eval_every_steps": 100,
+    "grad_clip": null,
+    "group": "B",
+    "label_smoothing": 0.1,
+    "layer_decay": 0.65,
+    "loader": "labram",
+    "loss": "cross_entropy",
+    "lr": 0.0002,
+    "max_hours": 22.5,
+    "model": "labram",
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "name": "adfd-labram_pt_lr2e4",
+    "num_classes": 3,
+    "num_workers": 16,
+    "optimizer": "adamw",
+    "patience": 10,
+    "pretrained": true,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "warmup_epochs": 5,
+    "weight_decay": 0.05
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

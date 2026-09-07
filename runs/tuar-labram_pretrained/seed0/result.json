@@ -1,0 +1,107 @@
+{
+  "name": "tuar-labram_pretrained",
+  "dataset": "tuar",
+  "model": "labram",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 5.820539,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7432697636762708,
+    "cohen_kappa": 0.5931246138902186,
+    "weighted_f1": 0.7149835745808748
+  },
+  "best_val": 0.6279720073117793,
+  "val_curve": [
+    0.0,
+    0.0793389859056377,
+    0.5156840157630057,
+    0.48878980038670483,
+    0.5278344456872859,
+    0.5433980918463917,
+    0.42269924743686116,
+    0.48743759842707834,
+    0.5008109416285011,
+    0.581200691518073,
+    0.5300436919468382,
+    0.6071399993433381,
+    0.5394629495569445,
+    0.5180587663046867,
+    0.6279720073117793,
+    0.5334204047665829,
+    0.5658795519345681,
+    0.5680662882496963,
+    0.5725344827928531,
+    0.5222772957570982,
+    0.5794305265923843,
+    0.5353062584304357,
+    0.5781111613403204,
+    0.5666321587774936,
+    0.6149851778011248,
+    0.5915719589869106,
+    0.5680498644910064,
+    0.4578867242168272
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 14,
+    "n_evals": 28,
+    "best_val": 0.6279720073117793,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 7,
+  "stopped_by": "patience",
+  "wall_time_sec": 276.92815709114075,
+  "config": {
+    "name": "tuar-labram_pretrained",
+    "group": "B",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 0,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    }
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

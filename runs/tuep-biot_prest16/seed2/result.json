@@ -1,0 +1,80 @@
+{
+  "name": "tuep-biot_prest16",
+  "dataset": "tuep",
+  "model": "biot",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 3.186706,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6854472357159004,
+    "pr_auc": 0.8689621468940065,
+    "auroc": 0.7823055688295582
+  },
+  "best_val": 0.6541113209340476,
+  "val_curve": [
+    0.6541113209340476,
+    0.6362161952392557,
+    0.583182765643895,
+    0.5317285003020726,
+    0.5684693104356655,
+    0.6164687161565963
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 6,
+    "best_val": 0.6541113209340476,
+    "chance": 0.5,
+    "reason": "val peaked at the first evaluation, but reached 0.6541 vs chance 0.5000 -- converged early, not untrained"
+  },
+  "epochs_run": 6,
+  "stopped_by": "patience",
+  "wall_time_sec": 368.41766834259033,
+  "config": {
+    "name": "tuep-biot_prest16",
+    "group": "B",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "checkpoint": "prest16",
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 2000
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "batch_size": 512,
+    "loss": "bce_with_logits",
+    "eval_every_steps": 0,
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

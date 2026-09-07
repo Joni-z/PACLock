@@ -1,0 +1,86 @@
+{
+  "name": "adfd-csbrain_pretrained",
+  "dataset": "adfd",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 47.063603,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.4448268822695108,
+    "cohen_kappa": 0.2074744628031906,
+    "weighted_f1": 0.48380616713292
+  },
+  "best_val": 0.5154462307470263,
+  "val_curve": [
+    0.5154462307470263,
+    0.3690707771788633,
+    0.3977513757017141,
+    0.33740094262038056,
+    0.391578598067673,
+    0.4633714350428116,
+    0.38578012749572554,
+    0.4054867533583401,
+    0.37962219917330636,
+    0.45221373189628195,
+    0.40372071776653545
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 11,
+    "best_val": 0.5154462307470263,
+    "chance": 0.3333333333333333,
+    "reason": "val peaked at the first evaluation, but reached 0.5154 vs chance 0.3333 -- converged early, not untrained"
+  },
+  "epochs_run": 11,
+  "stopped_by": "patience",
+  "wall_time_sec": 493.6343500614166,
+  "config": {
+    "name": "adfd-csbrain_pretrained",
+    "group": "B",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

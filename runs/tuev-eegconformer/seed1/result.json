@@ -1,0 +1,117 @@
+{
+  "name": "tuev-eegconformer",
+  "dataset": "tuev",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 0.780038,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.470034795653806,
+    "cohen_kappa": 0.45958654646395247,
+    "weighted_f1": 0.7234209910684298
+  },
+  "best_val": 0.4401432587151506,
+  "val_curve": [
+    0.26057412560736504,
+    0.28740142177883166,
+    0.16816845016280701,
+    0.09060241819337822,
+    0.35050388846064506,
+    0.2667060675753431,
+    0.36199032789237906,
+    0.3333003535073612,
+    0.3302413630921276,
+    0.09927916577566387,
+    0.33316972755481156,
+    0.3390669094544905,
+    0.3431300248581943,
+    0.4401432587151506,
+    0.3144502035708916,
+    0.30600443721097015,
+    0.31724542225643315,
+    0.3103158957280959,
+    0.34110397162589134,
+    0.26872056599468896,
+    0.3674080029072756,
+    0.33990704346964384,
+    0.3003882525036532,
+    0.4321168569146463,
+    0.18878277398106913,
+    0.39163957821665907,
+    0.13504074267647448,
+    0.19619882404576117,
+    0.30079838789770275
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 29,
+    "best_val": 0.4401432587151506,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 29,
+  "stopped_by": "patience",
+  "wall_time_sec": 1232.6251244544983,
+  "config": {
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "epochs": 100,
+    "batch_size": 128,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "tuev-eegconformer",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.25
+    },
+    "tuned_from": {
+      "grid": "lr{1e-3,3e-4} x dropout{0.25,0.5}",
+      "winner": "t1",
+      "selected_by": "best_val seed0"
+    }
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

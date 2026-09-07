@@ -1,0 +1,68 @@
+{
+ "name": "adfd-feat_best",
+ "dataset": "adfd",
+ "model": "feat_best",
+ "group": "A0",
+ "seed": 0,
+ "n_params_M": 0.000516,
+ "primary_metric": "balanced_acc",
+ "best_val": 0.45220689889273097,
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "reason": "ok",
+  "n_evals": 1,
+  "peak_index": 0,
+  "best_val": 0.45220689889273097,
+  "chance": 0.0
+ },
+ "epochs_run": 1,
+ "stopped_by": "closed-form",
+ "wall_time_sec": 6.91008186340332,
+ "winner": "logreg",
+ "val": {
+  "balanced_acc": 0.45220689889273097,
+  "cohen_kappa": 0.17292362245643111,
+  "weighted_f1": 0.455886889620977
+ },
+ "test": {
+  "balanced_acc": 0.40071398688237747,
+  "cohen_kappa": 0.1299776297740327,
+  "weighted_f1": 0.4296290287165134
+ },
+ "class_counts": {
+  "train": [
+   [
+    0,
+    1670
+   ],
+   [
+    1,
+    1162
+   ],
+   [
+    2,
+    2063
+   ]
+  ]
+ },
+ "config": {
+  "name": "adfd-feat_best",
+  "group": "A0",
+  "dataset": "adfd",
+  "model": "feat_best",
+  "loss": "closed-form",
+  "lr": null,
+  "batch_size": null,
+  "epochs": 1,
+  "patience": null,
+  "eval_every_steps": null,
+  "features": "bandpower5+hjorth3+spec_entropy per channel",
+  "candidates": [
+   "logreg",
+   "lda"
+  ],
+  "winner": "logreg",
+  "seed": 0
+ }
+}

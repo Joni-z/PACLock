@@ -1,0 +1,91 @@
+{
+  "name": "mumtaz-eegpt_pretrained",
+  "dataset": "mumtaz",
+  "model": "eegpt",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 25.685886,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.945637743006164,
+    "pr_auc": 0.990272637651,
+    "auroc": 0.9888738738738739
+  },
+  "best_val": 0.7992107241850305,
+  "val_curve": [
+    0.6475242811316809,
+    0.7190284877849111,
+    0.6874263112700935,
+    0.6179953995986883,
+    0.6855309815227595,
+    0.7030472097275797,
+    0.6452129576487233,
+    0.7992107241850305,
+    0.6967739352117565,
+    0.7168973541018762,
+    0.7176025413435486,
+    0.665492096119023,
+    0.7451982755168778,
+    0.7423775265501884,
+    0.6983934188456284,
+    0.703269666270694,
+    0.6992031606625646,
+    0.6975525331126564
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 18,
+    "best_val": 0.7992107241850305,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "stopped_by": "patience",
+  "wall_time_sec": 423.0157697200775,
+  "config": {
+    "name": "mumtaz-eegpt_pretrained",
+    "group": "B",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": true,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 500,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "epochs": 40,
+    "val_subsample": 20000,
+    "seed": 1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-21T09:57:12.546560+00:00",
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

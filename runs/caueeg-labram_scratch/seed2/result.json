@@ -1,0 +1,104 @@
+{
+  "name": "caueeg-labram_scratch",
+  "dataset": "caueeg",
+  "model": "labram",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 5.820539,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5185774470269386,
+    "cohen_kappa": 0.27666922299384356,
+    "weighted_f1": 0.5240967634070365
+  },
+  "best_val": 0.4646025496275124,
+  "val_curve": [
+    0.3333333333333333,
+    0.3343105666300794,
+    0.34170905671808555,
+    0.34059885045261956,
+    0.3424840766837014,
+    0.3454590518004461,
+    0.3523200374163555,
+    0.44354819165943843,
+    0.4409972613418989,
+    0.4209946977196392,
+    0.45209057695831695,
+    0.4596830303066605,
+    0.4616234790261762,
+    0.44872163102496554,
+    0.4646025496275124,
+    0.4429899959707349,
+    0.4454537113275972,
+    0.4474026403572202,
+    0.44572626122751674,
+    0.43977249868323537,
+    0.43981971470229403,
+    0.441436749648693,
+    0.43111131349557996,
+    0.4360072708033728,
+    0.4466463627968708
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 14,
+    "n_evals": 25,
+    "best_val": 0.4646025496275124,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 25,
+  "stopped_by": "patience",
+  "wall_time_sec": 2011.9164175987244,
+  "config": {
+    "name": "caueeg-labram_scratch",
+    "group": "C",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 2,
+    "label_smoothing": 0.1,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

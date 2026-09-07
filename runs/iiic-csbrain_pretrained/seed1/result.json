@@ -1,0 +1,95 @@
+{
+  "name": "iiic-csbrain_pretrained",
+  "dataset": "iiic",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 41.064206,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.4985384057810598,
+    "cohen_kappa": 0.40204947358718124,
+    "weighted_f1": 0.5003793142884951
+  },
+  "best_val": 0.45277774330865517,
+  "val_curve": [
+    0.45277774330865517,
+    0.4512423727244115,
+    0.4185963947617939,
+    0.43364922088376245,
+    0.3912949522089014,
+    0.4147725348352529,
+    0.41480898895311835,
+    0.4036121142640485,
+    0.43478920881110594,
+    0.4284447546782052,
+    0.41952973477052313
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 11,
+    "best_val": 0.45277774330865517,
+    "chance": 0.0,
+    "reason": "val peaked at the first evaluation, but reached 0.4528 vs chance 0.0000 -- converged early, not untrained"
+  },
+  "epochs_run": 11,
+  "stopped_by": "patience",
+  "wall_time_sec": 6056.867577552795,
+  "config": {
+    "name": "iiic-csbrain_pretrained",
+    "group": "B",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

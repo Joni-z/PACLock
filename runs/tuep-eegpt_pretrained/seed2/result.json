@@ -1,0 +1,90 @@
+{
+  "name": "tuep-eegpt_pretrained",
+  "dataset": "tuep",
+  "model": "eegpt",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 25.685829,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6344064043861364,
+    "pr_auc": 0.8381074568777255,
+    "auroc": 0.7486364208789289
+  },
+  "best_val": 0.672931348905264,
+  "val_curve": [
+    0.672931348905264,
+    0.6307977496182303,
+    0.6179834047615116,
+    0.6030967774617393,
+    0.6376742452462922,
+    0.58674004882286,
+    0.6348246163714896,
+    0.6139695754116532,
+    0.5465755055970343,
+    0.5576532286721374,
+    0.618241867202455,
+    0.6687825509445284,
+    0.5541079878561368,
+    0.5206969711896241,
+    0.49630102744067883,
+    0.5736580990169098,
+    0.5446829480745645,
+    0.535088783551023
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 18,
+    "best_val": 0.672931348905264,
+    "chance": 0.5,
+    "reason": "val peaked at the first evaluation, but reached 0.6729 vs chance 0.5000 -- converged early, not untrained"
+  },
+  "epochs_run": 2,
+  "stopped_by": "patience",
+  "wall_time_sec": 2955.363857269287,
+  "config": {
+    "name": "tuep-eegpt_pretrained",
+    "group": "B",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": true,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 500,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "epochs": 40,
+    "val_subsample": 20000,
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

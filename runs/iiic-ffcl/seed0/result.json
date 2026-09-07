@@ -1,0 +1,101 @@
+{
+  "name": "iiic-ffcl",
+  "dataset": "iiic",
+  "model": "ffcl",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 2.467046,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5332185467556653,
+    "cohen_kappa": 0.43963989152239213,
+    "weighted_f1": 0.5377830902077798
+  },
+  "best_val": 0.49489254585992426,
+  "val_curve": [
+    0.44447109945310015,
+    0.44713556598885384,
+    0.49246753067365656,
+    0.4636822310801497,
+    0.49489254585992426,
+    0.43383519669116444,
+    0.4512088511147513,
+    0.4249473656623445,
+    0.45112525796506986,
+    0.43690653099477184,
+    0.432059299825152,
+    0.4342718283275754,
+    0.4552327152317218,
+    0.45057918250109186,
+    0.44835988213417677,
+    0.4729473257630974,
+    0.42524788769329125,
+    0.4483963095493727,
+    0.40903717534951467,
+    0.4463661617028024
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 20,
+    "best_val": 0.49489254585992426,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "patience",
+  "wall_time_sec": 1103.023108959198,
+  "config": {
+    "name": "iiic-ffcl",
+    "group": "A",
+    "model": "ffcl",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 0,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

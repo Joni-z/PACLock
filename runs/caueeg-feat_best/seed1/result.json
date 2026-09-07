@@ -1,0 +1,68 @@
+{
+ "name": "caueeg-feat_best",
+ "dataset": "caueeg",
+ "model": "feat_best",
+ "group": "A0",
+ "seed": 1,
+ "n_params_M": 0.000516,
+ "primary_metric": "balanced_acc",
+ "best_val": 0.41294668145450614,
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "reason": "ok",
+  "n_evals": 1,
+  "peak_index": 0,
+  "best_val": 0.41294668145450614,
+  "chance": 0.0
+ },
+ "epochs_run": 1,
+ "stopped_by": "closed-form",
+ "wall_time_sec": 41.36057424545288,
+ "winner": "logreg",
+ "val": {
+  "balanced_acc": 0.41294668145450614,
+  "cohen_kappa": 0.08990995566057824,
+  "weighted_f1": 0.3988006647830479
+ },
+ "test": {
+  "balanced_acc": 0.4986534626637594,
+  "cohen_kappa": 0.24579436588086867,
+  "weighted_f1": 0.4891911437134628
+ },
+ "class_counts": {
+  "train": [
+   [
+    0,
+    13812
+   ],
+   [
+    1,
+    17455
+   ],
+   [
+    2,
+    13740
+   ]
+  ]
+ },
+ "config": {
+  "name": "caueeg-feat_best",
+  "group": "A0",
+  "dataset": "caueeg",
+  "model": "feat_best",
+  "loss": "closed-form",
+  "lr": null,
+  "batch_size": null,
+  "epochs": 1,
+  "patience": null,
+  "eval_every_steps": null,
+  "features": "bandpower5+hjorth3+spec_entropy per channel",
+  "candidates": [
+   "logreg",
+   "lda"
+  ],
+  "winner": "logreg",
+  "seed": 1
+ }
+}

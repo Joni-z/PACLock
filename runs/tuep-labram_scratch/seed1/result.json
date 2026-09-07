@@ -1,0 +1,91 @@
+{
+  "name": "tuep-labram_scratch",
+  "dataset": "tuep",
+  "model": "labram",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6415722080661108,
+    "pr_auc": 0.8644679903701956,
+    "auroc": 0.7645827866837924
+  },
+  "best_val": 0.6531478538040603,
+  "val_curve": [
+    0.6488077748935346,
+    0.6215100246361068,
+    0.6531478538040603,
+    0.6409813135902447,
+    0.6053761947656742,
+    0.6355956307497815,
+    0.6225370881772668,
+    0.6202198191247358,
+    0.6014739485749635,
+    0.5994121833457813,
+    0.572142560214743,
+    0.5699207474432352,
+    0.5927585516823819
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 13,
+    "best_val": 0.6531478538040603,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "stopped_by": "patience",
+  "wall_time_sec": 2827.5887796878815,
+  "config": {
+    "name": "tuep-labram_scratch",
+    "group": "C",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

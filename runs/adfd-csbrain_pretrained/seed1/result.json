@@ -1,0 +1,93 @@
+{
+  "name": "adfd-csbrain_pretrained",
+  "dataset": "adfd",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 47.063603,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.45763114124348525,
+    "cohen_kappa": 0.22053739010174844,
+    "weighted_f1": 0.4944046438320354
+  },
+  "best_val": 0.43479896967123227,
+  "val_curve": [
+    0.43098871751623175,
+    0.4140974863340509,
+    0.3783432906088475,
+    0.38311821437213367,
+    0.382181037192398,
+    0.4128879402963008,
+    0.34478250062454113,
+    0.43479896967123227,
+    0.395641462535616,
+    0.38787002889420824,
+    0.3704392224519921,
+    0.3606674821258952,
+    0.33529302483053164,
+    0.3855962628551825,
+    0.36563559775358684,
+    0.3713413297340458,
+    0.43084281142852215,
+    0.37745554539537807
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 18,
+    "best_val": 0.43479896967123227,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 18,
+  "stopped_by": "patience",
+  "wall_time_sec": 797.3158037662506,
+  "config": {
+    "name": "adfd-csbrain_pretrained",
+    "group": "B",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

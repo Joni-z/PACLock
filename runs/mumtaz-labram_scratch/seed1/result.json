@@ -1,0 +1,100 @@
+{
+  "name": "mumtaz-labram_scratch",
+  "dataset": "mumtaz",
+  "model": "labram",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.8016666666666667,
+    "pr_auc": 0.8683046748028141,
+    "auroc": 0.8805737316263632
+  },
+  "best_val": 0.8715847359218377,
+  "val_curve": [
+    0.5249040100016462,
+    0.677762799037208,
+    0.7228680877190641,
+    0.7697752744001459,
+    0.7759328715135498,
+    0.754690496211565,
+    0.7808825295978431,
+    0.7553556412754769,
+    0.8412060703941485,
+    0.8695514831177729,
+    0.8626063898417444,
+    0.8715847359218377,
+    0.8149828930918346,
+    0.8681700279850331,
+    0.8698273292312346,
+    0.8319229588499888,
+    0.82550286301571,
+    0.8386366973211783,
+    0.838583307750831,
+    0.8246664264136001,
+    0.8246308333667018,
+    0.8271490414347556
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 11,
+    "n_evals": 22,
+    "best_val": 0.8715847359218377,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "stopped_by": "patience",
+  "wall_time_sec": 240.98962497711182,
+  "config": {
+    "name": "mumtaz-labram_scratch",
+    "group": "C",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    },
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

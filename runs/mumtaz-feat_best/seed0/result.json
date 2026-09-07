@@ -1,0 +1,64 @@
+{
+ "name": "mumtaz-feat_best",
+ "dataset": "mumtaz",
+ "model": "feat_best",
+ "group": "A0",
+ "seed": 0,
+ "n_params_M": 0.000172,
+ "primary_metric": "auroc",
+ "best_val": 0.8158816175260164,
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "reason": "ok",
+  "n_evals": 1,
+  "peak_index": 0,
+  "best_val": 0.8158816175260164,
+  "chance": 0.0
+ },
+ "epochs_run": 1,
+ "stopped_by": "closed-form",
+ "wall_time_sec": 4.054652452468872,
+ "winner": "logreg",
+ "val": {
+  "balanced_acc": 0.715773948559149,
+  "pr_auc": 0.8570899670493768,
+  "auroc": 0.8158816175260164
+ },
+ "test": {
+  "balanced_acc": 0.8004883831199621,
+  "pr_auc": 0.9326499014922742,
+  "auroc": 0.916330014224751
+ },
+ "class_counts": {
+  "train": [
+   [
+    0,
+    2420
+   ],
+   [
+    1,
+    2106
+   ]
+  ]
+ },
+ "config": {
+  "name": "mumtaz-feat_best",
+  "group": "A0",
+  "dataset": "mumtaz",
+  "model": "feat_best",
+  "loss": "closed-form",
+  "lr": null,
+  "batch_size": null,
+  "epochs": 1,
+  "patience": null,
+  "eval_every_steps": null,
+  "features": "bandpower5+hjorth3+spec_entropy per channel",
+  "candidates": [
+   "logreg",
+   "lda"
+  ],
+  "winner": "logreg",
+  "seed": 0
+ }
+}

@@ -1,0 +1,93 @@
+{
+  "name": "siena-biot_prest16",
+  "dataset": "siena",
+  "model": "biot",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 3.187026,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.06876900270054792,
+    "auroc": 0.822787246070024
+  },
+  "best_val": 0.44595646569706177,
+  "val_curve": [
+    0.009890171844075764,
+    0.011492613251122337,
+    0.10790796474173499,
+    0.05073761428642554,
+    0.05621394348860725,
+    0.250059711407951,
+    0.3801948486096811,
+    0.29071552328811,
+    0.3854594340537728,
+    0.3905303374240309,
+    0.3720631136730797,
+    0.33479361642652095,
+    0.3480424034515751,
+    0.44595646569706177,
+    0.2795465004279152,
+    0.2777946398119261,
+    0.1194943305836147,
+    0.44232598358130504,
+    0.406579368309308
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 19,
+    "best_val": 0.44595646569706177,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 19,
+  "stopped_by": "patience",
+  "wall_time_sec": 428.2728497982025,
+  "config": {
+    "name": "siena-biot_prest16",
+    "group": "B",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "checkpoint": "prest16",
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 2000
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "batch_size": 512,
+    "loss": "bce_with_logits",
+    "eval_every_steps": 0,
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

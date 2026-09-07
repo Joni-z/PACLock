@@ -1,0 +1,98 @@
+{
+  "name": "eegmat-eegpt_scratch",
+  "dataset": "eegmat",
+  "model": "eegpt",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 25.685886,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5,
+    "pr_auc": 0.38620067156424753,
+    "auroc": 0.69015731292517
+  },
+  "best_val": 0.6550925925925927,
+  "val_curve": [
+    0.4769444444444445,
+    0.48703703703703705,
+    0.5195833333333333,
+    0.537962962962963,
+    0.558888888888889,
+    0.5607407407407408,
+    0.5668518518518518,
+    0.5568055555555556,
+    0.5702777777777779,
+    0.5903240740740741,
+    0.5804629629629628,
+    0.5740740740740741,
+    0.5880555555555556,
+    0.6130092592592592,
+    0.6550925925925927,
+    0.5984259259259259,
+    0.597824074074074,
+    0.586574074074074,
+    0.5903240740740742,
+    0.5735185185185184,
+    0.5835648148148148,
+    0.5703703703703704,
+    0.5763425925925926,
+    0.5772685185185186,
+    0.5782407407407407
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 14,
+    "n_evals": 25,
+    "best_val": 0.6550925925925927,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 25,
+  "stopped_by": "patience",
+  "wall_time_sec": 168.754944562912,
+  "config": {
+    "name": "eegmat-eegpt_scratch",
+    "group": "C",
+    "dataset": "eegmat",
+    "data_root": "$PACLOCK_PROC/processed/eegmat",
+    "model": "eegpt",
+    "loader": "default",
+    "pretrained": false,
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.01,
+    "lr": 0.0004,
+    "max_lr": 0.0004,
+    "scheduler": "onecycle",
+    "pct_start": 0.2,
+    "batch_size": 32,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 500,
+    "num_classes": 2,
+    "loss": "bce_with_logits",
+    "epochs": 40,
+    "val_subsample": 20000,
+    "seed": 0,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-21T09:57:23.714216+00:00",
+  "class_counts": {
+    "train": [
+      899,
+      300
+    ],
+    "val": [
+      180,
+      60
+    ],
+    "test": [
+      196,
+      72
+    ]
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "iiic-ffcl",
+  "dataset": "iiic",
+  "model": "ffcl",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 2.467046,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.49999468310648765,
+    "cohen_kappa": 0.40121972186439636,
+    "weighted_f1": 0.505425642724961
+  },
+  "best_val": 0.4926911569214545,
+  "val_curve": [
+    0.38145400571865495,
+    0.4926911569214545,
+    0.47946366979037647,
+    0.4756382609765122,
+    0.4198941297333496,
+    0.4292239402879543,
+    0.44849841307507243,
+    0.4598229377522842,
+    0.4676488712383946,
+    0.4718337422415587,
+    0.4205733982794879,
+    0.46164717916754094,
+    0.4543183197190146,
+    0.46085871731583417,
+    0.4721877150033068,
+    0.45900178097701083,
+    0.461334176492311
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 17,
+    "best_val": 0.4926911569214545,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 935.6459395885468,
+  "config": {
+    "name": "iiic-ffcl",
+    "group": "A",
+    "model": "ffcl",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 1,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

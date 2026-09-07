@@ -1,0 +1,102 @@
+{
+  "name": "iiic-labram_scratch",
+  "dataset": "iiic",
+  "model": "labram",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 5.821142,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.503112455604662,
+    "cohen_kappa": 0.40413226292899584,
+    "weighted_f1": 0.5057697212986343
+  },
+  "best_val": 0.451852233453764,
+  "val_curve": [
+    0.26663718646462775,
+    0.3761167206298067,
+    0.41274591925467197,
+    0.451852233453764,
+    0.4425540079077307,
+    0.4363185063985243,
+    0.43927463255876764,
+    0.44261908053300936,
+    0.44575581982331824,
+    0.44781652103664715,
+    0.4251810975897339,
+    0.4165946058524116,
+    0.4317720057712051,
+    0.43053086246127104
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 14,
+    "best_val": 0.451852233453764,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 14,
+  "stopped_by": "patience",
+  "wall_time_sec": 1683.0527396202087,
+  "config": {
+    "name": "iiic-labram_scratch",
+    "group": "C",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 2,
+    "label_smoothing": 0.1,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

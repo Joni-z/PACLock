@@ -1,0 +1,94 @@
+{
+  "name": "iiic-biot_scratch",
+  "dataset": "iiic",
+  "model": "biot",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 3.187734,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.4463630805393321,
+    "cohen_kappa": 0.3425021300327542,
+    "weighted_f1": 0.44586420359423234
+  },
+  "best_val": 0.4222915615382846,
+  "val_curve": [
+    0.3632048039793305,
+    0.4176748619177597,
+    0.4222915615382846,
+    0.42216216533861817,
+    0.410572372603338,
+    0.39008288128425206,
+    0.39028006613409505,
+    0.3911616089253136
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 8,
+    "best_val": 0.4222915615382846,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 8,
+  "stopped_by": "patience",
+  "wall_time_sec": 303.1341755390167,
+  "config": {
+    "name": "iiic-biot_scratch",
+    "group": "C",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100
+    },
+    "num_classes": 6,
+    "sample_rate": 200,
+    "batch_size": 128,
+    "loss": "cross_entropy",
+    "eval_every_steps": 0,
+    "seed": 1,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

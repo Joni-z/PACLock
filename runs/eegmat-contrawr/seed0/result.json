@@ -1,0 +1,88 @@
+{
+  "name": "eegmat-contrawr",
+  "dataset": "eegmat",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.573282,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5804988662131519,
+    "pr_auc": 0.5437760546041855,
+    "auroc": 0.7721797052154195
+  },
+  "best_val": 0.7473148148148149,
+  "val_curve": [
+    0.45287037037037037,
+    0.6091666666666666,
+    0.6297222222222223,
+    0.6560185185185186,
+    0.6674074074074074,
+    0.6713888888888889,
+    0.6791666666666666,
+    0.6825,
+    0.6859259259259259,
+    0.6993518518518518,
+    0.7133333333333335,
+    0.7212037037037037,
+    0.7285185185185185,
+    0.7376851851851851,
+    0.7387037037037036,
+    0.7473148148148149,
+    0.7430555555555556,
+    0.7274074074074075,
+    0.7119444444444445,
+    0.7293518518518519
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 15,
+    "n_evals": 20,
+    "best_val": 0.7473148148148149,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 26.440061330795288,
+  "config": {
+    "name": "eegmat-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "eegmat",
+    "data_root": "$PACLOCK_PROC/processed/eegmat",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 0,
+    "device": "cuda",
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-21T09:57:23.714216+00:00",
+  "class_counts": {
+    "train": [
+      899,
+      300
+    ],
+    "val": [
+      180,
+      60
+    ],
+    "test": [
+      196,
+      72
+    ]
+  }
+}

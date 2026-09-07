@@ -1,0 +1,95 @@
+{
+  "name": "caueeg-labram_pt_lr1e4",
+  "dataset": "caueeg",
+  "model": "labram",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 5.820539,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.3333333333333333,
+    "cohen_kappa": 0.0,
+    "weighted_f1": 0.16884849495539067
+  },
+  "best_val": 0.3333333333333333,
+  "val_curve": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "verdict": {
+    "ok": false,
+    "status": "mis-configured",
+    "peak_index": 0,
+    "n_evals": 16,
+    "best_val": 0.3333333333333333,
+    "chance": 0.3333333333333333,
+    "reason": "val curve is flat (model not learning)"
+  },
+  "epochs_run": 2,
+  "stopped_by": "patience",
+  "wall_time_sec": 202.18006944656372,
+  "config": {
+    "batch_size": 64,
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "dataset": "caueeg",
+    "device": "cuda",
+    "epochs": 50,
+    "eval_every_steps": 100,
+    "grad_clip": null,
+    "group": "B",
+    "label_smoothing": 0.1,
+    "layer_decay": 0.65,
+    "loader": "labram",
+    "loss": "cross_entropy",
+    "lr": 0.0001,
+    "max_hours": 22.5,
+    "model": "labram",
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "name": "caueeg-labram_pt_lr1e4",
+    "num_classes": 3,
+    "num_workers": 16,
+    "optimizer": "adamw",
+    "patience": 10,
+    "pretrained": true,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "warmup_epochs": 5,
+    "weight_decay": 0.05
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

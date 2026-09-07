@@ -1,0 +1,100 @@
+{
+  "name": "adfd-labram_scratch",
+  "dataset": "adfd",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820539,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.48402634389328947,
+    "cohen_kappa": 0.2687395053353522,
+    "weighted_f1": 0.5168745832312188
+  },
+  "best_val": 0.5410584162406363,
+  "val_curve": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3959438200424918,
+    0.40350601760232757,
+    0.44845135717023715,
+    0.41738894066426213,
+    0.4901584679092803,
+    0.4257738944971723,
+    0.4353200528978884,
+    0.5410584162406363,
+    0.4241538113971761,
+    0.4296631264283617,
+    0.5158386238066345,
+    0.4665146050752487,
+    0.49962637739836396,
+    0.4552186061132157,
+    0.47547614143700173,
+    0.5085787025465014,
+    0.5239023568664992,
+    0.47938054750850473
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 21,
+    "best_val": 0.5410584162406363,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 21,
+  "stopped_by": "patience",
+  "wall_time_sec": 197.8400912284851,
+  "config": {
+    "name": "adfd-labram_scratch",
+    "group": "C",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 0,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    }
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

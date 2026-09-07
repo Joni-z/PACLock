@@ -1,0 +1,93 @@
+{
+  "name": "tuep-csbrain_pretrained",
+  "dataset": "tuep",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 41.063402,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.5639902922323579,
+    "pr_auc": 0.7636545998179173,
+    "auroc": 0.5580766617394205
+  },
+  "best_val": 0.6716092629920027,
+  "val_curve": [
+    0.6018587911370528,
+    0.5947888845806124,
+    0.5577333400424054,
+    0.6546900852742776,
+    0.621590821266048,
+    0.5612942210882576,
+    0.6494550523422719,
+    0.6224912839617991,
+    0.6167677056190779,
+    0.603528108544891,
+    0.5868947159152013,
+    0.6716092629920027,
+    0.5967051303681208,
+    0.6163718210427411,
+    0.572186514502284,
+    0.5876584730481123,
+    0.5824585065276968,
+    0.6125165547994695,
+    0.5475321468142268,
+    0.557964285044788,
+    0.5851940812830376,
+    0.5834792720920038
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 11,
+    "n_evals": 22,
+    "best_val": 0.6716092629920027,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "stopped_by": "patience",
+  "wall_time_sec": 21817.61502146721,
+  "config": {
+    "name": "tuep-csbrain_pretrained",
+    "group": "B",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    }
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

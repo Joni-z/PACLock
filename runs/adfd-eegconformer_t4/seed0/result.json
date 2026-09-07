@@ -1,0 +1,95 @@
+{
+  "name": "adfd-eegconformer_t4",
+  "dataset": "adfd",
+  "model": "eegconformer",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.460579,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.48509196533725496,
+    "cohen_kappa": 0.28564899091389073,
+    "weighted_f1": 0.5131875440351003
+  },
+  "best_val": 0.48121361382105254,
+  "val_curve": [
+    0.3420365380769645,
+    0.368372824729561,
+    0.407277081495876,
+    0.38116257163255723,
+    0.4234701398092852,
+    0.48121361382105254,
+    0.3864101327433331,
+    0.3176178660049628,
+    0.2947204247014494,
+    0.2952368327151495,
+    0.4784732545684081,
+    0.27094770928602396,
+    0.3691737594751659,
+    0.28376301324644443,
+    0.3007847559565519,
+    0.32058039648172476,
+    0.4385345924343082,
+    0.42021170199538327,
+    0.32671629445822997,
+    0.30957376187889823,
+    0.2772446990915771
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 21,
+    "best_val": 0.48121361382105254,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 21,
+  "stopped_by": "patience",
+  "wall_time_sec": 740.6287307739258,
+  "config": {
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "epochs": 100,
+    "batch_size": 128,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "num_workers": 16,
+    "device": "cuda",
+    "name": "adfd-eegconformer_t4",
+    "group": "A",
+    "model": "eegconformer",
+    "optimizer": "adamw",
+    "lr": 0.0003,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.5
+    }
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "name": "mumtaz-biot_prest16",
+  "dataset": "mumtaz",
+  "model": "biot",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 3.187026,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.835,
+    "pr_auc": 0.9836498306266164,
+    "auroc": 0.9863963963963964
+  },
+  "best_val": 0.8689641978439512,
+  "val_curve": [
+    0.80909669296103,
+    0.7920921148053728,
+    0.8557369317903747,
+    0.8689641978439512,
+    0.8490676846278079,
+    0.8449210946641573,
+    0.7890889514733297,
+    0.8257542389094291,
+    0.7729163607889198
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 9,
+    "best_val": 0.8689641978439512,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 9,
+  "stopped_by": "patience",
+  "wall_time_sec": 25.465495347976685,
+  "config": {
+    "name": "mumtaz-biot_prest16",
+    "group": "B",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "checkpoint": "prest16",
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 1000
+    },
+    "num_classes": 2,
+    "sample_rate": 200,
+    "batch_size": 512,
+    "loss": "bce_with_logits",
+    "eval_every_steps": 0,
+    "seed": 1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

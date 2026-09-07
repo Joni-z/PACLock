@@ -1,0 +1,99 @@
+{
+  "name": "tuev-csbrain_pretrained",
+  "dataset": "tuev",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 25.064206,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5577582625001312,
+    "cohen_kappa": 0.5544451614797663,
+    "weighted_f1": 0.7687917145193012
+  },
+  "best_val": 0.47629292691042224,
+  "val_curve": [
+    0.4247291127650835,
+    0.4091016664542303,
+    0.36915334042163495,
+    0.41245665997663405,
+    0.47629292691042224,
+    0.3972001375893176,
+    0.38760841110866096,
+    0.41584185198208135,
+    0.4134942295054448,
+    0.36583438671281376,
+    0.3882051628131291,
+    0.4506093213290572,
+    0.45624913487584484,
+    0.43639183274359017,
+    0.408704827040991
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 15,
+    "best_val": 0.47629292691042224,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 15,
+  "stopped_by": "patience",
+  "wall_time_sec": 6704.7610630989075,
+  "config": {
+    "name": "tuev-csbrain_pretrained",
+    "group": "B",
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.0
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

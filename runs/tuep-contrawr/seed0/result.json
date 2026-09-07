@@ -1,0 +1,77 @@
+{
+  "name": "tuep-contrawr",
+  "dataset": "tuep",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.571554,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.633786501794495,
+    "pr_auc": 0.7569219025999259,
+    "auroc": 0.6938347160827963
+  },
+  "best_val": 0.6485222857939676,
+  "val_curve": [
+    0.5849734629894375,
+    0.6485222857939676,
+    0.5531241582827933,
+    0.5555512143913539,
+    0.5208766257577716,
+    0.5576431951100074,
+    0.5566335044475555,
+    0.5570280981852946,
+    0.4733588261623549,
+    0.5536778211565322
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 10,
+    "best_val": 0.6485222857939676,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 5,
+  "stopped_by": "patience",
+  "wall_time_sec": 380.64841413497925,
+  "config": {
+    "name": "tuep-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 0,
+    "device": "cuda",
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

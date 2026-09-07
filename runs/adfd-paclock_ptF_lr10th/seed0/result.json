@@ -1,0 +1,123 @@
+{
+  "name": "adfd-paclock_ptF_lr10th",
+  "dataset": "adfd",
+  "model": "paclock",
+  "group": "pretrain_ft",
+  "seed": 0,
+  "n_params_M": 1.609755,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.42412245975191337,
+    "cohen_kappa": 0.19484962847852494,
+    "weighted_f1": 0.4572194401300629
+  },
+  "best_val": 0.47367566240284925,
+  "val_curve": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.34174248690377723,
+    0.3861555366551661,
+    0.40621233944848867,
+    0.46504177378182804,
+    0.47367566240284925,
+    0.41475947560676896,
+    0.47009092256708124,
+    0.4629905618007352,
+    0.4544734142913163,
+    0.45692467600832226,
+    0.44763672161445617,
+    0.4293952703689574,
+    0.44369942663791556,
+    0.46257892264114214,
+    0.4492448324569571,
+    0.41642937350684656,
+    0.42024464890554425,
+    0.45151345924203873,
+    0.44390305942455527,
+    0.4178403597375672,
+    0.4224060474192813,
+    0.43369438970500934,
+    0.4267633458942268,
+    0.43453316699320066,
+    0.4296109334182157
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 27,
+    "best_val": 0.47367566240284925,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 27,
+  "stopped_by": "patience",
+  "wall_time_sec": 3201.107829093933,
+  "config": {
+    "batch_size": 32,
+    "checkpoint": "pretrain_runs_full/pretrain-duplex_v2_full/checkpoint.pt",
+    "checkpoint_exclude": [
+      "frontend.tokenizer",
+      "frontend.phase_tokenizer",
+      "frontend.amplitude_tokenizer"
+    ],
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "dataset": "adfd",
+    "device": "cuda",
+    "epochs": 30,
+    "eval_every_steps": 200,
+    "focal_alpha": 0.25,
+    "focal_gamma": 2.0,
+    "grad_clip": 1.0,
+    "group": "pretrain_ft",
+    "loss": "cross_entropy",
+    "lr": 1e-05,
+    "max_hours": 22.5,
+    "model": "paclock",
+    "model_kwargs": {
+      "arch": "triaxial",
+      "augmentations": [],
+      "band_pe": "index",
+      "d_model": 128,
+      "depth": 6,
+      "dropout": 0.2,
+      "freq_mixer": "attention",
+      "interaction_mode": "rotation",
+      "kernel_size": 201,
+      "n_bands": 8,
+      "n_heads": 4,
+      "pac_patch_len": 50,
+      "pac_token_mode": "measured",
+      "patch_len": 50,
+      "spatial_pe": "xyz",
+      "tokenizer_mode": "duplex"
+    },
+    "name": "adfd-paclock_ptF_lr10th",
+    "num_classes": 3,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 20,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "weight_decay": 1e-05
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "name": "tusz-csbrain_pretrained",
+  "dataset": "tusz",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 41.063402,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.6617129708696972,
+    "pr_auc": 0.5413772034752274,
+    "auroc": 0.8662172673467574
+  },
+  "best_val": 0.32755279912746027,
+  "val_curve": [
+    0.3178365291646443,
+    0.2644671356009618,
+    0.25872976862021324,
+    0.32755279912746027,
+    0.30690659095856293,
+    0.28567484013987954,
+    0.2879102195998866,
+    0.30444532671498,
+    0.2961262763212497,
+    0.3019959710947904,
+    0.29129624465868936,
+    0.29063978764501636,
+    0.2686292661228681,
+    0.3030530361279279,
+    0.26234966392506925,
+    0.2275206286129384,
+    0.2714481855613173,
+    0.2512248908350849,
+    0.26974526039230456,
+    0.24238744981044677,
+    0.23384366844576368,
+    0.24368794058039184
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 22,
+    "best_val": 0.32755279912746027,
+    "chance": 0.020051791937082387,
+    "reason": "ok"
+  },
+  "epochs_run": 2,
+  "stopped_by": "patience",
+  "wall_time_sec": 5327.472706079483,
+  "config": {
+    "name": "tusz-csbrain_pretrained",
+    "group": "B",
+    "dataset": "tusz",
+    "data_root": "$PACLOCK_PROC/processed/tusz",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 25,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 500,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "val_subsample": 20000,
+    "recipe_note": "epochs 50->25 on the ~300k-window TUH corpora (24h wall on MI210); patience 10 governs stopping"
+  },
+  "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+  "class_counts": {
+    "train": [
+      313196,
+      13472
+    ],
+    "val": [
+      153259,
+      3136
+    ],
+    "test": [
+      43364,
+      2727
+    ]
+  }
+}

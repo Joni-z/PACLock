@@ -1,0 +1,64 @@
+{
+ "name": "chbmit-feat_best",
+ "dataset": "chbmit",
+ "model": "feat_best",
+ "group": "A0",
+ "seed": 0,
+ "n_params_M": 0.000145,
+ "primary_metric": "pr_auc",
+ "best_val": 0.135771385057041,
+ "verdict": {
+  "ok": true,
+  "status": "ok",
+  "reason": "ok",
+  "n_evals": 1,
+  "peak_index": 0,
+  "best_val": 0.135771385057041,
+  "chance": 0.0
+ },
+ "epochs_run": 1,
+ "stopped_by": "closed-form",
+ "wall_time_sec": 210.53899574279785,
+ "winner": "lda",
+ "val": {
+  "balanced_acc": 0.5630243098475484,
+  "pr_auc": 0.135771385057041,
+  "auroc": 0.5766812462362525
+ },
+ "test": {
+  "balanced_acc": 0.49979544126241965,
+  "pr_auc": 0.046822795591663885,
+  "auroc": 0.711731845941436
+ },
+ "class_counts": {
+  "train": [
+   [
+    0,
+    313322
+   ],
+   [
+    1,
+    2883
+   ]
+  ]
+ },
+ "config": {
+  "name": "chbmit-feat_best",
+  "group": "A0",
+  "dataset": "chbmit",
+  "model": "feat_best",
+  "loss": "closed-form",
+  "lr": null,
+  "batch_size": null,
+  "epochs": 1,
+  "patience": null,
+  "eval_every_steps": null,
+  "features": "bandpower5+hjorth3+spec_entropy per channel",
+  "candidates": [
+   "logreg",
+   "lda"
+  ],
+  "winner": "lda",
+  "seed": 0
+ }
+}

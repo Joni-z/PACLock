@@ -1,0 +1,91 @@
+{
+  "name": "tusz-reve_pretrained",
+  "dataset": "tusz",
+  "model": "reve",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 69.45997,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5268950437613635,
+    "pr_auc": 0.583780082841552,
+    "auroc": 0.906784910649845
+  },
+  "best_val": 0.3366571792581058,
+  "val_curve": [
+    0.3087322179451888,
+    0.2652860779932657,
+    0.256871735202412,
+    0.27314810419999086,
+    0.3181625010155336,
+    0.30201900968445106,
+    0.3366571792581058,
+    0.2692725578507924,
+    0.30823095979719967,
+    0.2769771009580842,
+    0.28282360818203545,
+    0.2322056243140168,
+    0.3043932347580781,
+    0.25205401886071466,
+    0.2602906002836653,
+    0.2672960081466764,
+    0.25593752610097503,
+    0.2516019935833323
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 18,
+    "best_val": 0.3366571792581058,
+    "chance": 0.020051791937082387,
+    "reason": "ok"
+  },
+  "epochs_run": 3,
+  "stopped_by": "patience",
+  "wall_time_sec": 4227.90228843689,
+  "config": {
+    "name": "tusz-reve_pretrained",
+    "group": "B",
+    "dataset": "tusz",
+    "data_root": "$PACLOCK_PROC/processed/tusz",
+    "model": "reve",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 15,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 500,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "val_subsample": 20000,
+    "recipe_note": "epochs 30->15 on the ~300k-window TUH corpora: 30 epochs of a 69M model exceeds the 24h wall on MI210; patience 10 with eval_every 500 governs stopping"
+  },
+  "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+  "class_counts": {
+    "train": [
+      313196,
+      13472
+    ],
+    "val": [
+      153259,
+      3136
+    ],
+    "test": [
+      43364,
+      2727
+    ]
+  }
+}

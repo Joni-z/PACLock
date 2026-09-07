@@ -1,0 +1,91 @@
+{
+  "name": "adfd-tfm_pretrained",
+  "dataset": "adfd",
+  "model": "tfm",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 1.891239,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.4644957718932603,
+    "cohen_kappa": 0.22001951083548188,
+    "weighted_f1": 0.49184405171755263
+  },
+  "best_val": 0.4222161154428177,
+  "val_curve": [
+    0.3357925185502126,
+    0.3198586851338275,
+    0.2861626039994161,
+    0.30113203263108385,
+    0.3568487380208109,
+    0.3847133320669655,
+    0.4222161154428177,
+    0.3965379085176139,
+    0.39519256088467186,
+    0.403916345846129,
+    0.33712665959328986,
+    0.33799233965777115,
+    0.4070347708928712,
+    0.36902110159107826,
+    0.3808984395020831,
+    0.37943930901883843,
+    0.36541260285671523
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 17,
+    "best_val": 0.4222161154428177,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 1905.333178281784,
+  "config": {
+    "name": "adfd-tfm_pretrained",
+    "group": "B",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 3,
+    "loss": "cross_entropy",
+    "seed": 0,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "name": "caueeg-csbrain_pretrained",
+  "dataset": "caueeg",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 47.063603,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5279045540680014,
+    "cohen_kappa": 0.2914083650723006,
+    "weighted_f1": 0.5311536633890973
+  },
+  "best_val": 0.48503686489888764,
+  "val_curve": [
+    0.43971119232648753,
+    0.4249364934573478,
+    0.4215645914156551,
+    0.4163923212341469,
+    0.4554965631553108,
+    0.418117351781135,
+    0.4667208366325201,
+    0.4517169751260623,
+    0.4476605042780097,
+    0.48503686489888764,
+    0.4190857522138236,
+    0.44244526825407376,
+    0.45208940212110077,
+    0.4417112982108758,
+    0.42776068546375895,
+    0.43673767933217505,
+    0.43156100068450715,
+    0.4132567947957959,
+    0.4307682625702179,
+    0.44582912115518303
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 9,
+    "n_evals": 20,
+    "best_val": 0.48503686489888764,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "patience",
+  "wall_time_sec": 7776.82976269722,
+  "config": {
+    "name": "caueeg-csbrain_pretrained",
+    "group": "B",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

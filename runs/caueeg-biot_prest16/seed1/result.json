@@ -1,0 +1,86 @@
+{
+  "name": "caueeg-biot_prest16",
+  "dataset": "caueeg",
+  "model": "biot",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 3.187283,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5141469714642595,
+    "cohen_kappa": 0.2685202929686312,
+    "weighted_f1": 0.5172494649683521
+  },
+  "best_val": 0.5097783734089399,
+  "val_curve": [
+    0.49963490751473033,
+    0.5091468449567967,
+    0.5097783734089399,
+    0.4933273843194749,
+    0.49943602905617074,
+    0.4404767539788366,
+    0.4786941551748276,
+    0.4502026978358484
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 8,
+    "best_val": 0.5097783734089399,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 8,
+  "stopped_by": "patience",
+  "wall_time_sec": 257.63266491889954,
+  "config": {
+    "name": "caueeg-biot_prest16",
+    "group": "B",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "checkpoint": "prest16",
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 2000
+    },
+    "num_classes": 3,
+    "sample_rate": 200,
+    "batch_size": 128,
+    "loss": "cross_entropy",
+    "eval_every_steps": 0,
+    "seed": 1,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

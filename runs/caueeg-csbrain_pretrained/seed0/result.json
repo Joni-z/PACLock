@@ -1,0 +1,97 @@
+{
+  "name": "caueeg-csbrain_pretrained",
+  "dataset": "caueeg",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 47.063603,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.488942364540061,
+    "cohen_kappa": 0.23451970680693213,
+    "weighted_f1": 0.49191783680618584
+  },
+  "best_val": 0.44578470346886395,
+  "val_curve": [
+    0.4150538044223972,
+    0.43548061995645976,
+    0.3875994179334281,
+    0.37480234937738266,
+    0.42178725544553686,
+    0.41998199883170506,
+    0.42141222438218046,
+    0.39401531857706446,
+    0.41054014099490727,
+    0.42463710937089766,
+    0.4322309287373167,
+    0.44578470346886395,
+    0.3809472999759788,
+    0.42123455723439335,
+    0.41337040350752946,
+    0.41303813374363835,
+    0.4334208512540014,
+    0.41813302861160057,
+    0.4046200571174916,
+    0.40274116503719287,
+    0.3823789115876844,
+    0.39698800569062165
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 11,
+    "n_evals": 22,
+    "best_val": 0.44578470346886395,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "stopped_by": "patience",
+  "wall_time_sec": 8786.295950651169,
+  "config": {
+    "name": "caueeg-csbrain_pretrained",
+    "group": "B",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  }
+}

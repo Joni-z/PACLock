@@ -1,0 +1,106 @@
+{
+  "name": "tusz-csbrain_pretrained",
+  "dataset": "tusz",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 41.063402,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5561370007184896,
+    "pr_auc": 0.3889049646578976,
+    "auroc": 0.8787091039608528
+  },
+  "best_val": 0.32093833720151077,
+  "val_curve": [
+    0.2995521483849693,
+    0.31569064577538314,
+    0.2752693680769725,
+    0.30832891976942955,
+    0.264745029560293,
+    0.2952538442466072,
+    0.24120669338546233,
+    0.28736150873137706,
+    0.2932336031467935,
+    0.305617506716273,
+    0.2789617355260227,
+    0.27435996266337287,
+    0.26171293143909613,
+    0.32093833720151077,
+    0.26423699104444215,
+    0.30910416685121384,
+    0.2536078384419514,
+    0.28996759032714714,
+    0.2595938094700911,
+    0.22283790501326917,
+    0.2643774606036638,
+    0.28015031733237256,
+    0.3011760885577396,
+    0.194778516358456,
+    0.2852910438430012,
+    0.305433881100851,
+    0.3167661994845155,
+    0.2796972727215103,
+    0.25975375485876345,
+    0.28139396546410966,
+    0.28031408734779634,
+    0.25901688800027234,
+    0.2994679500011771
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 33,
+    "best_val": 0.32093833720151077,
+    "chance": 0.020051791937082387,
+    "reason": "ok"
+  },
+  "epochs_run": 3,
+  "stopped_by": "patience",
+  "wall_time_sec": 7976.692637205124,
+  "config": {
+    "name": "tusz-csbrain_pretrained",
+    "group": "B",
+    "dataset": "tusz",
+    "data_root": "$PACLOCK_PROC/processed/tusz",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 25,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 500,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "val_subsample": 20000,
+    "recipe_note": "epochs 50->25 on the ~300k-window TUH corpora (24h wall on MI210); patience 10 governs stopping"
+  },
+  "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+  "class_counts": {
+    "train": [
+      313196,
+      13472
+    ],
+    "val": [
+      153259,
+      3136
+    ],
+    "test": [
+      43364,
+      2727
+    ]
+  }
+}

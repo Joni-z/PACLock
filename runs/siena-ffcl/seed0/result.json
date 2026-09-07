@@ -1,0 +1,88 @@
+{
+  "name": "siena-ffcl",
+  "dataset": "siena",
+  "model": "ffcl",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 2.466722,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.6143414057707804,
+    "pr_auc": 0.3083512872269595,
+    "auroc": 0.8207335554406262
+  },
+  "best_val": 0.42247987140044124,
+  "val_curve": [
+    0.029923098980791853,
+    0.13824245711642316,
+    0.15267923180529716,
+    0.10333755812953814,
+    0.23305463805012203,
+    0.24634970911044124,
+    0.21301158070566154,
+    0.34352531181409446,
+    0.23175743390259865,
+    0.26565107258290893,
+    0.3205695392802973,
+    0.3628955057476541,
+    0.42247987140044124,
+    0.25081551513548506,
+    0.14778101524093434,
+    0.29155560319793217,
+    0.24042555816870517,
+    0.13653458657011897,
+    0.28529393057093977,
+    0.15751270884944876
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 12,
+    "n_evals": 20,
+    "best_val": 0.42247987140044124,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 525.3301866054535,
+  "config": {
+    "name": "siena-ffcl",
+    "group": "A",
+    "model": "ffcl",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 0,
+    "device": "cuda",
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-25T15:04:10.877907+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

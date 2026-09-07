@@ -1,0 +1,97 @@
+{
+  "name": "adfd-csbrain_pretrained",
+  "dataset": "adfd",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 47.063603,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.4252158829573636,
+    "cohen_kappa": 0.17234178801124822,
+    "weighted_f1": 0.4640154686017555
+  },
+  "best_val": 0.403239507261789,
+  "val_curve": [
+    0.3978386502105667,
+    0.34719013088763323,
+    0.37401823138155604,
+    0.3544243558780455,
+    0.37138310502400707,
+    0.3689078871909861,
+    0.3739357364948817,
+    0.33986026704955613,
+    0.4000898870596161,
+    0.3751905845341032,
+    0.34381017233995054,
+    0.403239507261789,
+    0.36167462508562426,
+    0.37606353844107426,
+    0.3911445689304001,
+    0.3750583908575944,
+    0.35876499528151523,
+    0.3923900897457591,
+    0.3816484109461608,
+    0.36921913108278553,
+    0.3831221471195085,
+    0.3811007845749806
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 11,
+    "n_evals": 22,
+    "best_val": 0.403239507261789,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "stopped_by": "patience",
+  "wall_time_sec": 975.6374003887177,
+  "config": {
+    "name": "adfd-csbrain_pretrained",
+    "group": "B",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 50,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "label_smoothing": 0.1
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  }
+}

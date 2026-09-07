@@ -1,0 +1,146 @@
+{
+  "name": "tuev-paclock_v3traj_20000frozenL3",
+  "dataset": "tuev",
+  "model": "paclock",
+  "group": "pretrain_ft",
+  "seed": 0,
+  "n_params_M": 1.625118,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.43186164188111337,
+    "cohen_kappa": 0.5391831434368992,
+    "weighted_f1": 0.7526450641954192
+  },
+  "best_val": 0.3967650336030468,
+  "val_curve": [
+    0.28684131425556925,
+    0.3323472747270202,
+    0.2955275398346361,
+    0.2723502041817343,
+    0.31255267762339267,
+    0.3310657853765103,
+    0.32240734897106604,
+    0.35291468795315273,
+    0.3428579286852661,
+    0.34383220165981765,
+    0.367349477351001,
+    0.35928910058936425,
+    0.3871052261374768,
+    0.35261731396080154,
+    0.37860092922275,
+    0.37960320293469396,
+    0.3803491864592533,
+    0.3967650336030468,
+    0.38396767872200166,
+    0.3837805281089255
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 17,
+    "n_evals": 20,
+    "best_val": 0.3967650336030468,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 10233.275027751923,
+  "config": {
+    "batch_size": 32,
+    "checkpoint": "pretrain_runs_traj/pretrain-duplex_v3_traj/checkpoint_20000.pt",
+    "checkpoint_exclude": [
+      "frontend.tokenizer",
+      "frontend.phase_tokenizer",
+      "frontend.amplitude_tokenizer"
+    ],
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "dataset": "tuev",
+    "device": "cuda",
+    "epochs": 20,
+    "eval_every_steps": 0,
+    "freeze_backbone": true,
+    "grad_clip": 1.0,
+    "group": "pretrain_ft",
+    "label_smoothing": 0.1,
+    "loss": "cross_entropy",
+    "lr": 0.001,
+    "model": "paclock",
+    "model_kwargs": {
+      "arch": "triaxial",
+      "augmentations": [],
+      "band_pe": "index",
+      "d_model": 128,
+      "depth": 6,
+      "dropout": 0.2,
+      "freq_mixer": "attention",
+      "interaction_mode": "rotation",
+      "kernel_size": 201,
+      "n_bands": 8,
+      "n_heads": 4,
+      "pac_patch_len": 50,
+      "pac_token_mode": "measured",
+      "patch_len": 50,
+      "spatial_pe": "xyz",
+      "tokenizer_mode": "duplex"
+    },
+    "name": "tuev-paclock_v3traj_20000frozenL3",
+    "num_classes": 6,
+    "num_workers": 8,
+    "optimizer": "adamw",
+    "patience": 20,
+    "sample_rate": 200,
+    "scheduler": "cosine",
+    "seed": 0,
+    "weight_decay": 1e-05
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      3.442476272583008,
+      1.4572867155075073,
+      1.8439303636550903,
+      1.513306736946106,
+      2.824345111846924,
+      3.6104657649993896,
+      1.5798438787460327,
+      6.032130241394043
+    ],
+    "gamma": [
+      0.6664716005325317,
+      0.6800063848495483,
+      0.6681037545204163,
+      0.7020673155784607,
+      0.781928300857544,
+      0.9936270713806152,
+      1.135660171508789,
+      1.453709602355957
+    ]
+  }
+}

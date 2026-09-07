@@ -1,0 +1,88 @@
+{
+  "name": "siena-contrawr",
+  "dataset": "siena",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.573282,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.670801360306941,
+    "pr_auc": 0.3799586050335039,
+    "auroc": 0.7983609564244735
+  },
+  "best_val": 0.2797460550258892,
+  "val_curve": [
+    0.05265307768163468,
+    0.1410095470971775,
+    0.058153641720298244,
+    0.12966753254738755,
+    0.19690638611911843,
+    0.2018718732605687,
+    0.2327448327180568,
+    0.16775395709990246,
+    0.10256853603895358,
+    0.18446057897076748,
+    0.15247815684649885,
+    0.1923322213814013,
+    0.2186353945977111,
+    0.23690080372122194,
+    0.2208577887253538,
+    0.19894453209936547,
+    0.21372176798576717,
+    0.2797460550258892,
+    0.2080214939602626,
+    0.17767197836339385
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 17,
+    "n_evals": 20,
+    "best_val": 0.2797460550258892,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 378.87097930908203,
+  "config": {
+    "name": "siena-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 0,
+    "device": "cuda",
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-25T15:04:10.877907+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

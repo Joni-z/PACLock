@@ -1,0 +1,84 @@
+{
+  "name": "siena-sparcnet",
+  "dataset": "siena",
+  "model": "sparcnet",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 1.142337,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.6229049649399228,
+    "pr_auc": 0.3291149395818295,
+    "auroc": 0.7610472318776085
+  },
+  "best_val": 0.3259144062590614,
+  "val_curve": [
+    0.2395232850438214,
+    0.024171404275878217,
+    0.23179963974987872,
+    0.18547119021923497,
+    0.18106656417322542,
+    0.22133579838380787,
+    0.12313559383502751,
+    0.3259144062590614,
+    0.3231010836150705,
+    0.17566935053264862,
+    0.19077366598955264,
+    0.31044562360542105,
+    0.11791237458966897,
+    0.11582085725010119,
+    0.13727373272978996,
+    0.2788705798202412
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 7,
+    "n_evals": 16,
+    "best_val": 0.3259144062590614,
+    "chance": 0.009977409638554216,
+    "reason": "ok"
+  },
+  "epochs_run": 16,
+  "stopped_by": "patience",
+  "wall_time_sec": 1184.4777941703796,
+  "config": {
+    "name": "siena-sparcnet",
+    "group": "A",
+    "model": "sparcnet",
+    "dataset": "siena",
+    "data_root": "$PACLOCK_PROC/processed/siena",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 1,
+    "device": "cuda",
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-25T15:04:10.877907+00:00",
+  "class_counts": {
+    "train": [
+      34146,
+      326
+    ],
+    "val": [
+      5259,
+      53
+    ],
+    "test": [
+      10904,
+      61
+    ]
+  }
+}

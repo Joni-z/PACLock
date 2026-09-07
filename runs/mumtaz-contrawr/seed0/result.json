@@ -1,0 +1,85 @@
+{
+  "name": "mumtaz-contrawr",
+  "dataset": "mumtaz",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 0,
+  "n_params_M": 1.573282,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.7984554291133239,
+    "pr_auc": 0.9735351976798828,
+    "auroc": 0.9658653390232337
+  },
+  "best_val": 0.9309628364099074,
+  "val_curve": [
+    0.8121421230362649,
+    0.7579984250076748,
+    0.8699652522879655,
+    0.772062127663361,
+    0.920287146905852,
+    0.8503534834470087,
+    0.9242735681584602,
+    0.9127547683560017,
+    0.9309628364099074,
+    0.9250810854099653,
+    0.8284949035205973,
+    0.8921797626833596,
+    0.893785898924645,
+    0.8938615341493039,
+    0.8537904370381245,
+    0.9174152329342463,
+    0.8617388093235986
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 8,
+    "n_evals": 17,
+    "best_val": 0.9309628364099074,
+    "chance": 0.5,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 51.33474779129028,
+  "config": {
+    "name": "mumtaz-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "mumtaz",
+    "data_root": "$PACLOCK_PROC/processed/mumtaz",
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 20,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 8,
+    "eval_every_steps": 200,
+    "seed": 0,
+    "device": "cuda",
+    "model_kwargs": {},
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-21T09:57:12.546560+00:00",
+  "class_counts": {
+    "train": [
+      2420,
+      2106
+    ],
+    "val": [
+      417,
+      539
+    ],
+    "test": [
+      600,
+      703
+    ]
+  }
+}

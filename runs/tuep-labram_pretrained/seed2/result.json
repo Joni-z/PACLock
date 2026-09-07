@@ -1,0 +1,89 @@
+{
+  "name": "tuep-labram_pretrained",
+  "dataset": "tuep",
+  "model": "labram",
+  "group": "B",
+  "seed": 2,
+  "n_params_M": 5.820338,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6917181508936778,
+    "pr_auc": 0.8672505324511737,
+    "auroc": 0.788508093967363
+  },
+  "best_val": 0.646147874523253,
+  "val_curve": [
+    0.646147874523253,
+    0.6153071916318139,
+    0.6077749757536113,
+    0.6082993111032838,
+    0.5482767962471293,
+    0.5708161536693197,
+    0.5926552763726547,
+    0.5362136135620601,
+    0.45681076865245324,
+    0.5282669316092334,
+    0.4696642898792663
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 11,
+    "best_val": 0.646147874523253,
+    "chance": 0.5,
+    "reason": "val peaked at the first evaluation, but reached 0.6461 vs chance 0.5000 -- converged early, not untrained"
+  },
+  "epochs_run": 11,
+  "stopped_by": "patience",
+  "wall_time_sec": 2430.7466173171997,
+  "config": {
+    "name": "tuep-labram_pretrained",
+    "group": "B",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 64,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "bce_with_logits",
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000
+    },
+    "seed": 2,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  }
+}

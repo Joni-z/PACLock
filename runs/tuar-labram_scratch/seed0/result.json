@@ -1,0 +1,109 @@
+{
+  "name": "tuar-labram_scratch",
+  "dataset": "tuar",
+  "model": "labram",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 5.820539,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6991046864261143,
+    "cohen_kappa": 0.5265353569199643,
+    "weighted_f1": 0.6640668369789974
+  },
+  "best_val": 0.5756458080164522,
+  "val_curve": [
+    0.49074779436407245,
+    0.3091884189158973,
+    0.4850259199690212,
+    0.46182350738278677,
+    0.4701339574115839,
+    0.5197835540554394,
+    0.5190062197947869,
+    0.5496493656299233,
+    0.5153963726172459,
+    0.5656241032998566,
+    0.5136465168759211,
+    0.49600740676963884,
+    0.47109561769581265,
+    0.5338489913861966,
+    0.5647076880292049,
+    0.55639615042705,
+    0.5524902482203038,
+    0.5137300830444678,
+    0.5621396447757943,
+    0.5756458080164522,
+    0.5136024123522451,
+    0.5415212565089622,
+    0.5555352403182443,
+    0.5172095385044961,
+    0.5673882397371994,
+    0.5438340883825643,
+    0.5307293742526902,
+    0.5510169556574454,
+    0.5673133846994545,
+    0.5347694979930282
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 19,
+    "n_evals": 30,
+    "best_val": 0.5756458080164522,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 30,
+  "stopped_by": "patience",
+  "wall_time_sec": 1008.0410447120667,
+  "config": {
+    "name": "tuar-labram_scratch",
+    "group": "C",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 0,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    }
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

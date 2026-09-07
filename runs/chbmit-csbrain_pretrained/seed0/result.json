@@ -1,0 +1,103 @@
+{
+  "name": "chbmit-csbrain_pretrained",
+  "dataset": "chbmit",
+  "model": "csbrain",
+  "group": "B",
+  "seed": 0,
+  "n_params_M": 41.063402,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.5253623188405797,
+    "pr_auc": 0.4020097061006418,
+    "auroc": 0.8856579125691393
+  },
+  "best_val": 0.48509143455644965,
+  "val_curve": [
+    0.11767341230082315,
+    0.1682979690813886,
+    0.2018393971031403,
+    0.24329240386612658,
+    0.2596250329136639,
+    0.18286206654195475,
+    0.23516782749565673,
+    0.21179372054936252,
+    0.3430176360376783,
+    0.30070119374309606,
+    0.364996271545016,
+    0.3091064788986202,
+    0.33132780100688725,
+    0.36571404701114124,
+    0.3190246692769855,
+    0.40787311474005516,
+    0.48509143455644965,
+    0.37436745941883814,
+    0.45285275003588393,
+    0.46294301947767263,
+    0.4586335295400909,
+    0.41612673617771345,
+    0.2777237390143409,
+    0.3958660980219767,
+    0.3477889113899455,
+    0.3667945006575155,
+    0.392166245538622,
+    0.48282586380317805,
+    0.3975759111935699,
+    0.3806005168295814
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 16,
+    "n_evals": 30,
+    "best_val": 0.48509143455644965,
+    "chance": 0.0070808157099697885,
+    "reason": "ok"
+  },
+  "epochs_run": 3,
+  "stopped_by": "patience",
+  "wall_time_sec": 7800.349841117859,
+  "config": {
+    "name": "chbmit-csbrain_pretrained",
+    "group": "B",
+    "dataset": "chbmit",
+    "data_root": "$PACLOCK_PROC/processed/chbmit",
+    "model": "csbrain",
+    "pretrained": true,
+    "num_classes": 2,
+    "sample_rate": 200,
+    "loss": "bce_with_logits",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 25,
+    "batch_size": 64,
+    "patience": 10,
+    "eval_every_steps": 500,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.1
+    },
+    "val_subsample": 20000,
+    "recipe_note": "epochs 50->25 on the ~300k-window TUH corpora (24h wall on MI210); patience 10 governs stopping"
+  },
+  "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}
