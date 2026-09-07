@@ -48,6 +48,8 @@ v3 = 去掉频率注意力子层 + 频带折进空间注意力(`space_over_bands
 无轴家族里耦合 token 承重(TUEV +0.10~0.13、TUSZ +0.06~0.11、IIIC +0.03 经强度特征),整体与三轴持平。
 状态:v3 在 amd 跑全部 12 个语料(4 节点;同节点还带 v0d192);网格里的 v0cs 已撤,阶段一的 amd 节点已撤(d192 留 torch 孪生)。
 决策规则:v3 四语料 ≥ 三轴 duplex → 定稿,按 Zhizhe 指示补 seed;否则只允许再换一次。
+v3 首个落地:ADFD 0.361(三轴 duplex 三 seed 0.505±0.050;val 曲线两者同水平 0.44 vs 0.43,test 差是该语料的被试级方差——
+duplex 三个 seed 是 0.562/0.512/0.441),单 seed 不能判,记录待议。
 
 ## 3. 已钉死的事实(供写作)
 - 三轴 duplex 主表:4 赢(TUSZ、CHB-MIT、IIIC、TUEP)3 平 5 负(FINDINGS 6.5);耦合在其中只有 TUEV 决定性(+0.15,逐类别集中在 GPED/PLED)。
