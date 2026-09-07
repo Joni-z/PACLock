@@ -67,7 +67,12 @@ duplex 三个 seed 是 0.562/0.512/0.441),单 seed 不能判,记录待议。
 ADFD 0.498(0.505;v3 0.361)、Siena 0.239(0.170)、Sleep-EDF 0.610(0.642;v3 0.633)。v3 CAUEEG 0.541(0.525)。不折叠在小语料上把 v3 丢掉的分全部拿回,TUSZ 上单 seed 略低于折叠版
 (该语料 std≈0.03)。v0d192 已提前铺到其余语料;v0d192+强度在四决策语料跑。
 22:30 补:**TUEV v0d192cs 0.7207**(老 0.690,v0d192 0.690)——耦合强度特征在 TUEV +0.03,超过 REVE 0.685;IIIC v0d192 0.458 / v3 0.427(老 0.479);
-CHB-MIT v0d192 0.630(老 0.699);ISRUC v3 0.677(老 0.702)。cs 版已提前铺到其余 8 语料(CF2_cs_a/b)。CF1:torch 起了 tuev add_raw,b2 孪生已撤。
+CHB-MIT v0d192 0.630(老 0.699);ISRUC v3 0.677(老 0.702)。cs 版已提前铺到其余 8 语料(CF2_cs_a/b)。
+09-08 04:30 补:CHB-MIT v1d192(折叠+d192)**0.716**(老 0.699)、v3 0.671、v0d192 0.630;IIIC v0d192cs 0.448(老 0.479;阶段一 v2 折叠+强度 d128 0.481);
+Siena v0d192cs **0.398**(老 0.170);Sleep-EDF v0d192cs 0.614(0.642);ISRUC v0d192 0.696(0.702)。
+两个家族:不折叠(v0d192 / +cs)在小语料、TUEV、Siena、CAUEEG ≥ 老模型,但 TUSZ/CHB-MIT 低于老模型;折叠+d192(v1d192)在 TUSZ +0.06、CHB-MIT +0.02,
+小语料未知(v3 = 折叠+强度+d192 在小语料崩,不知是折叠还是强度所致)。已投 v1d192 到其余 8 语料(CF2_v1d192_a/b)以定夺。
+CF1:TUEV add_cplmean 0.6419(≈ add_cpl 0.6407);TUSZ 三臂在 b2/torch 跑。CF1:torch 起了 tuev add_raw,b2 孪生已撤。
 
 ## 3. 已钉死的事实(供写作)
 - 三轴 duplex 主表:4 赢(TUSZ、CHB-MIT、IIIC、TUEP)3 平 5 负(FINDINGS 6.5);耦合在其中只有 TUEV 决定性(+0.15,逐类别集中在 GPED/PLED)。
