@@ -34,7 +34,20 @@ ICLR 2027:摘要 9-18,全文 9-25。
 ### 部分一:CF1 加法移植(STATUS §12 的设计;FINDINGS 6.1 的旧移植作废)
 CBraMod 自带 patch embedding / 编码器 / 头原样保留,我们的前端每电极加 8 行作额外通道。三臂同参数量:add_raw(8 行波形,对照)、
 add_cpl(8 行耦合交互 token)、add_cplmean(读出取均值)。门:TUEV、TUSZ 单 seed;对照 CBraMod 自带 0.564±0.019 / 0.482±0.043。
-判据 add_cpl > add_raw 且 ≥ 自带 → 铺其余 9 语料。状态:torch 先起(tuev add_raw、add_cpl),b2 孪生已由 `twin_watch.sh` 撤。
+判据 add_cpl > add_raw 且 ≥ 自带 → 铺其余 9 语料。
+
+**门的判决(09-08 20:30,单 seed;CBraMod 自带为三 seed):**
+| | 自带 tokenizer | add_raw(加 8 行波形) | add_cpl(加 8 行耦合) | add_cplmean |
+|---|---|---|---|---|
+| TUEV κ | 0.564±0.019 | 0.596 | **0.641** | 0.642 |
+| TUSZ AUC-PR | 0.482±0.043 | 0.476 | **0.384** | 0.379 |
+TUEV 过:耦合对 raw +0.045、对自带 +0.077。TUSZ 不过:耦合比 raw 低 0.092、比自带低 0.098,两种读出一致(0.384/0.379),不是单次噪声。
+读法:加法移植下 CBraMod 已有自己的 rfft 谱分支(每 patch 的频带能量),状态类标签不缺跨频信息,多出的 8 倍 token 只带来稀释;
+事件形态标签(TUEV)才需要显式耦合。与我们自己两代编码器的规律一致(耦合在 TUEV 决定性、TUSZ 中性或有害)。
+**处置**:不按原计划铺 9 个语料;只补 4 个语料定范围——IIIC、TUEP(torch)与 CHB-MIT、Sleep-EDF(b2),各 add_raw + add_cpl,
+共 8 个单 seed(`add_cplmean` 两格与 `add_cpl` 相同,已从铺开中去掉,省一半)。若 IIIC 与 TUEV 同向,部分一的主张写成
+"耦合 token 提升 FM 编码器在痫样事件/形态任务上的表现",TUSZ/睡眠作为负结果如实报;若 IIIC 也负,部分一只剩 TUEV 一格,退为附录。
+状态:torch 先起(tuev add_raw、add_cpl),b2 孪生已由 `twin_watch.sh` 撤。
 **首格(09-07 20:24)**:tuev add_raw κ 0.5956(CBraMod 自带 0.564±0.019)——8 行 raw 额外通道本身就 +0.03;add_cpl 在跑,
 它必须再高于 0.596 才算耦合有归因。
 **TUSZ 半边(09-08 14:41,b2)**:add_raw 0.4762(自带 0.482±0.043,平——TUSZ 上加 raw 通道没有 TUEV 那种红利);add_cpl / add_cplmean 在 torch 跑。

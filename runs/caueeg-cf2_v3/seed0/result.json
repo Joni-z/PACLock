@@ -1,0 +1,132 @@
+{
+  "name": "caueeg-cf2_v3",
+  "dataset": "caueeg",
+  "model": "paclock",
+  "group": "cf2",
+  "seed": 0,
+  "n_params_M": 2.740827,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.5409400269415815,
+    "cohen_kappa": 0.3132066308912853,
+    "weighted_f1": 0.5219526609005624
+  },
+  "best_val": 0.45756427973946173,
+  "val_curve": [
+    0.4472854660196746,
+    0.45756427973946173,
+    0.4378689648291639,
+    0.4508111879665875,
+    0.4396152359807661,
+    0.41034676772281325,
+    0.40231564886486865,
+    0.428505029124284,
+    0.4120778780266991,
+    0.40256183841898957,
+    0.41806452933198374,
+    0.4244501483664969,
+    0.40106447292592134,
+    0.40077700937719246,
+    0.42107530974569074,
+    0.42778623226305124,
+    0.4352877302897114,
+    0.43977713430514725,
+    0.4359119635475044,
+    0.4343836221298803
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 20,
+    "best_val": 0.45756427973946173,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 26505.074399232864,
+  "config": {
+    "name": "caueeg-cf2_v3",
+    "group": "cf2",
+    "dataset": "caueeg",
+    "data_root": "$PACLOCK_PROC/processed/caueeg",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 3,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 192,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "none",
+      "band_pe": "index",
+      "tokenizer_mode": "duplex",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50,
+      "space_over_bands": true,
+      "coupling_strength": true
+    },
+    "seed": 0
+  },
+  "data_manifest_created": "2026-08-24T13:43:42.262721+00:00",
+  "class_counts": {
+    "train": [
+      13812,
+      17455,
+      13740
+    ],
+    "val": [
+      1531,
+      1389,
+      915
+    ],
+    "test": [
+      1433,
+      1395,
+      1326
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      0.15703462064266205,
+      0.1954159140586853,
+      0.15515033900737762,
+      0.23045648634433746,
+      0.17098307609558105,
+      0.13503263890743256,
+      0.22350330650806427,
+      0.19209040701389313
+    ],
+    "gamma": [
+      1.020559310913086,
+      1.0163623094558716,
+      1.0120702981948853,
+      1.0396758317947388,
+      1.0346271991729736,
+      1.0293878316879272,
+      1.0870692729949951,
+      0.9947133660316467
+    ]
+  }
+}

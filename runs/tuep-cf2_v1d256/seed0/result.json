@@ -1,0 +1,130 @@
+{
+  "name": "tuep-cf2_v1d256",
+  "dataset": "tuep",
+  "model": "paclock",
+  "group": "cf2",
+  "seed": 0,
+  "n_params_M": 4.848666,
+  "primary_metric": "auroc",
+  "test": {
+    "balanced_acc": 0.6197339812945959,
+    "pr_auc": 0.8446430734275328,
+    "auroc": 0.796733165236308
+  },
+  "best_val": 0.7452028737849263,
+  "val_curve": [
+    0.7452028737849263,
+    0.7011063062316425,
+    0.6840784349708403,
+    0.6746624580395237,
+    0.6728790864085713,
+    0.6999603046576417,
+    0.7158535205690608,
+    0.7269618444554289,
+    0.7261837894351191,
+    0.7002496087196888,
+    0.6821134579707886,
+    0.6069619940940435,
+    0.6526617996296198,
+    0.5563867898373346,
+    0.5626061570863422,
+    0.6313471767139952,
+    0.6218265349715308,
+    0.5550977189484253,
+    0.5442463459401399,
+    0.5389984703973711,
+    0.57392699247104,
+    0.6194415667787805
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "peaked-first-eval",
+    "peak_index": 0,
+    "n_evals": 22,
+    "best_val": 0.7452028737849263,
+    "chance": 0.5,
+    "reason": "val peaked at the first evaluation, but reached 0.7452 vs chance 0.5000 -- converged early, not untrained"
+  },
+  "epochs_run": 1,
+  "stopped_by": "patience",
+  "wall_time_sec": 8635.837010860443,
+  "config": {
+    "name": "tuep-cf2_v1d256",
+    "group": "cf2",
+    "dataset": "tuep",
+    "data_root": "$PACLOCK_PROC/processed/tuep",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 2,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 200,
+    "patience": 20,
+    "loss": "bce_with_logits",
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 256,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "none",
+      "band_pe": "index",
+      "tokenizer_mode": "duplex",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50,
+      "space_over_bands": true
+    },
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-19T15:40:43.059470+00:00",
+  "class_counts": {
+    "train": [
+      20980,
+      115545
+    ],
+    "val": [
+      2910,
+      20898
+    ],
+    "test": [
+      7907,
+      16499
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      0.09261352568864822,
+      0.07265429943799973,
+      0.07382654398679733,
+      0.05233607068657875,
+      0.022341355681419373,
+      0.04093880206346512,
+      0.0599236823618412,
+      0.05881229415535927
+    ],
+    "gamma": [
+      1.010526180267334,
+      1.0109658241271973,
+      1.0107470750808716,
+      1.005202293395996,
+      1.002280592918396,
+      1.0063748359680176,
+      0.9979150295257568,
+      0.9990138411521912
+    ]
+  }
+}

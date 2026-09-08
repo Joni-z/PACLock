@@ -1,0 +1,143 @@
+{
+  "name": "adfd-cf2_v1d192",
+  "dataset": "adfd",
+  "model": "paclock",
+  "group": "cf2",
+  "seed": 0,
+  "n_params_M": 2.704923,
+  "primary_metric": "balanced_acc",
+  "test": {
+    "balanced_acc": 0.46081623339338323,
+    "cohen_kappa": 0.21509362191032166,
+    "weighted_f1": 0.48693753188399763
+  },
+  "best_val": 0.4774065635488704,
+  "val_curve": [
+    0.32376727917524883,
+    0.34321293998713354,
+    0.3835774177330155,
+    0.3582331463039332,
+    0.40364862899902115,
+    0.3842423652670332,
+    0.46261156792466096,
+    0.3371307083509118,
+    0.3786712399762216,
+    0.26076156875645434,
+    0.3350942296711938,
+    0.3663681792616324,
+    0.4172761090979853,
+    0.35827915596791166,
+    0.40856350752434345,
+    0.3348773369133167,
+    0.3969278305589599,
+    0.46813906176155856,
+    0.4307667783126082,
+    0.36571649169885195,
+    0.3871223776550714,
+    0.4219553940136067,
+    0.4483866698564844,
+    0.4774065635488704,
+    0.403281526173269,
+    0.43389741923836445,
+    0.443807722203533,
+    0.44455537344266977,
+    0.44605144158857374,
+    0.443872792351101
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 23,
+    "n_evals": 30,
+    "best_val": 0.4774065635488704,
+    "chance": 0.3333333333333333,
+    "reason": "ok"
+  },
+  "epochs_run": 30,
+  "stopped_by": "epochs",
+  "wall_time_sec": 4358.652352333069,
+  "config": {
+    "name": "adfd-cf2_v1d192",
+    "group": "cf2",
+    "dataset": "adfd",
+    "data_root": "$PACLOCK_PROC/processed/adfd",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 3,
+    "epochs": 30,
+    "batch_size": 32,
+    "eval_every_steps": 200,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "focal_alpha": 0.25,
+    "focal_gamma": 2.0,
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 192,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "none",
+      "band_pe": "index",
+      "tokenizer_mode": "duplex",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50,
+      "space_over_bands": true
+    },
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-20T13:03:25.271983+00:00",
+  "class_counts": {
+    "train": [
+      1670,
+      1162,
+      2063
+    ],
+    "val": [
+      306,
+      233,
+      403
+    ],
+    "test": [
+      421,
+      251,
+      429
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      0.12429503351449966,
+      0.1642904132604599,
+      0.1808447688817978,
+      0.1873939484357834,
+      0.16312287747859955,
+      0.1335768848657608,
+      0.2348225861787796,
+      0.11567497998476028
+    ],
+    "gamma": [
+      1.0038142204284668,
+      1.0067417621612549,
+      1.0095510482788086,
+      1.0268802642822266,
+      1.039519190788269,
+      0.9936462044715881,
+      0.9780377149581909,
+      1.016234040260315
+    ]
+  }
+}
