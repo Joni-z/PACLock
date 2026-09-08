@@ -37,6 +37,7 @@ add_cpl(8 行耦合交互 token)、add_cplmean(读出取均值)。门:TUEV、TUS
 判据 add_cpl > add_raw 且 ≥ 自带 → 铺其余 9 语料。状态:torch 先起(tuev add_raw、add_cpl),b2 孪生已由 `twin_watch.sh` 撤。
 **首格(09-07 20:24)**:tuev add_raw κ 0.5956(CBraMod 自带 0.564±0.019)——8 行 raw 额外通道本身就 +0.03;add_cpl 在跑,
 它必须再高于 0.596 才算耦合有归因。
+**TUSZ 半边(09-08 14:41,b2)**:add_raw 0.4762(自带 0.482±0.043,平——TUSZ 上加 raw 通道没有 TUEV 那种红利);add_cpl / add_cplmean 在 torch 跑。
 **TUEV 半边过门(22:24)**:add_cpl κ **0.6407** > add_raw 0.5956 > 自带 0.564±0.019——耦合归因 +0.045,对自带 +0.077。TUSZ 半边在排。
 
 ### 部分二:CF2 无轴 CroFreMo,定稿候选 v3
@@ -94,7 +95,8 @@ CF1:TUEV add_cplmean 0.6419(≈ add_cpl 0.6407);TUSZ 三臂在 b2/torch 跑。
 依据(单 seed vs 老三轴 duplex):TUSZ 0.698 ✓(+0.06)、CHB-MIT 0.716 ✓(+0.02)、Siena 0.201 ✓、TUEV 0.680 ≈、TUEP 0.799 ≈、Sleep-EDF 0.639 ≈、
 IIIC 0.447(−0.03)、TUAR 0.600(−0.02)、CAUEEG 0.511(−0.01)、ADFD 0.461(−0.04);TUAB/ISRUC 在跑。对 baseline:TUSZ +0.15、CHB-MIT +0.09、
 IIIC +0.01、TUEP +0.01 赢,TUEV 平,其余同老模型输。耦合归因(同族 v1 vs v1raw):TUEV +0.10、TUSZ +0.08、CHB-MIT −0.01、IIIC 0。
-不选 v0d192(发作两格输 0.03/0.07)、不选强度版(CHB-MIT 0.513)。TUAB/ISRUC 落地后进主表;不补 seed。CF1:torch 起了 tuev add_raw,b2 孪生已撤。
+不选 v0d192(发作两格输 0.03/0.07)、不选强度版(CHB-MIT 0.513)。ISRUC v1d192 0.698(老 0.702 ≈)。TUAB 落地后进主表;不补 seed。
+Zhizhe 09-08 指示:跑 d256(v1d256,4.85M),12 语料单 seed 在 amd(CF2_d256_a/b/c);若 ≥ v1d192 则定稿升级。CF1:torch 起了 tuev add_raw,b2 孪生已撤。
 
 ## 3. 已钉死的事实(供写作)
 - 三轴 duplex 主表:4 赢(TUSZ、CHB-MIT、IIIC、TUEP)3 平 5 负(FINDINGS 6.5);耦合在其中只有 TUEV 决定性(+0.15,逐类别集中在 GPED/PLED)。
