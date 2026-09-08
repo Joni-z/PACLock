@@ -131,6 +131,7 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
             band_mode=mk.get("band_mode", "mean"),
             adapter=mk.get("adapter", "replace"),
             readout=mk.get("readout", "native"),
+            pretrained=cfg.get("pretrained", False),
         )
 
     if name == "tfm":

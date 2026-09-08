@@ -114,7 +114,8 @@ def build_cbramod_paclockfe(n_classes: int, n_channels: int, seq_len: int,
                             interaction_mode: str = "product",
                             band_mode: str = "mean",
                             adapter: str = "replace",
-                            readout: str = "native"):
+                            readout: str = "native",
+                            pretrained: bool = False):
     """Same call convention as build_cbramod (build.py passes seq_len=T).
 
     tokenizer_mode="raw" is the control this ablation needs to mean anything.
@@ -129,7 +130,7 @@ def build_cbramod_paclockfe(n_classes: int, n_channels: int, seq_len: int,
     if adapter == "additive":
         backbone = PACLockCBraModAugmented(tokenizer_mode=tokenizer_mode,
                                            interaction_mode=interaction_mode,
-                                           readout=readout)
+                                           readout=readout, pretrained=pretrained)
     else:
         backbone = PACLockCBraModBackbone(tokenizer_mode=tokenizer_mode,
                                           interaction_mode=interaction_mode,
@@ -151,12 +152,19 @@ class PACLockCBraModAugmented(nn.Module):
     """
 
     def __init__(self, tokenizer_mode: str = "pac_interaction", interaction_mode: str = "rotation",
-                 readout: str = "native"):
+                 readout: str = "native", pretrained: bool = False):
         super().__init__()
         if readout not in ("native", "mean"):
             raise ValueError(f"readout must be native|mean, got {readout!r}")
         CBraMod = _import_cbramod()
         real = CBraMod(**BACKBONE_ARGS)
+        if pretrained:
+            # The released checkpoint, loaded strictly into the vendored backbone BEFORE its
+            # submodules are borrowed, so patch_embedding / encoder / proj_out are the published
+            # weights and only our frontend is fresh. This is the form of the claim that matters:
+            # extra coupling rows bolted onto a released foundation model.
+            from .cbramod_adapter import load_pretrained
+            load_pretrained(real)
         self.patch_embedding = real.patch_embedding      # kept whole: proj_in, spectral_proj, PE conv
         self.encoder = real.encoder
         self.proj_out = real.proj_out
