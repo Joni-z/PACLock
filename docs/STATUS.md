@@ -44,6 +44,10 @@ add_cpl(8 行耦合交互 token)、add_cplmean(读出取均值)。门:TUEV、TUS
 TUEV 过:耦合对 raw +0.045、对自带 +0.077。TUSZ 不过:耦合比 raw 低 0.092、比自带低 0.098,两种读出一致(0.384/0.379),不是单次噪声。
 读法:加法移植下 CBraMod 已有自己的 rfft 谱分支(每 patch 的频带能量),状态类标签不缺跨频信息,多出的 8 倍 token 只带来稀释;
 事件形态标签(TUEV)才需要显式耦合。与我们自己两代编码器的规律一致(耦合在 TUEV 决定性、TUSZ 中性或有害)。
+**铺开首格(09-09,torch)**:IIIC add_raw 0.3815 / add_cpl 0.3962(CBraMod 自带 0.393±0.005)——耦合对 raw +0.015,但只追平自带。
+至此 CF1 三格:TUEV 耦合 +0.045(对自带 +0.077,唯一实打实的赢)、IIIC +0.015(追平自带)、TUSZ −0.092(负)。
+形态类正、状态类负的规律与两代自研编码器一致;CHB-MIT / Sleep-EDF 在 b2 跑。
+
 **处置**:不按原计划铺 9 个语料;只补 4 个语料定范围——IIIC、TUEP(torch)与 CHB-MIT、Sleep-EDF(b2),各 add_raw + add_cpl,
 共 8 个单 seed(`add_cplmean` 两格与 `add_cpl` 相同,已从铺开中去掉,省一半)。若 IIIC 与 TUEV 同向,部分一的主张写成
 "耦合 token 提升 FM 编码器在痫样事件/形态任务上的表现",TUSZ/睡眠作为负结果如实报;若 IIIC 也负,部分一只剩 TUEV 一格,退为附录。
