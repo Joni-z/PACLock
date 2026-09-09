@@ -1,0 +1,35 @@
+# CF1 replacement transplant (2026-09-10): CroFreMo tokenizer (coupling on) in place of LaBraM's patch embedding;
+# recipe, data and montage mode identical to the corpus's labram_scratch row. Single seed.
+name: chbmit-labram_crofremo
+group: cf1
+dataset: chbmit
+data_root: $PACLOCK_PROC/processed/chbmit
+sample_rate: 200
+optimizer: adamw
+weight_decay: 0.05
+lr: 0.0005
+max_lr: 0.0004
+scheduler: cosine
+pct_start: 0.2
+batch_size: 64
+grad_clip: null
+patience: 10
+num_workers: 16
+device: cuda
+eval_every_steps: 0
+num_classes: 2
+epochs: 50
+loss: cross_entropy
+warmup_epochs: 5
+layer_decay: null
+model: labram_paclockfe
+loader: labram
+pretrained: false
+loader_divisor: 1.0
+model_kwargs:
+  montage_mode: positional
+  target_len: 2000
+  tokenizer_mode: pac_interaction
+  interaction_mode: rotation
+seed: 0
+max_hours: 22.0

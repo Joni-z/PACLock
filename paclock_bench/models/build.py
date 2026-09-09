@@ -80,6 +80,18 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
             target_len=mk.get("target_len"),
         )
 
+    if name == "labram_paclockfe":
+        # CF1 replacement transplant: CroFreMo tokenizer inside LaBraM's encoder.
+        from .foundation.labram_paclockfe_adapter import build_labram_paclockfe
+        mk = cfg.get("model_kwargs", {}) or {}
+        return build_labram_paclockfe(
+            n_classes=cfg["num_classes"], n_channels=C,
+            montage_mode=mk.get("montage_mode", "electrode"),
+            target_len=mk.get("target_len"),
+            tokenizer_mode=mk.get("tokenizer_mode", "pac_interaction"),
+            interaction_mode=mk.get("interaction_mode", "rotation"),
+        )
+
     if name == "eegpt":
         # Group B/C: official EEGPT code + eegpt_mcae_58chs_4s_large4E.ckpt.
         # The channel list and window length come from the dataset, since
