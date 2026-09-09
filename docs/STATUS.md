@@ -75,3 +75,23 @@ ICLR 2027:摘要 9-18,全文 9-25。论文按新主线在 MacBook 本地重写�
 
 ## 7. 待 Zhizhe
 补 seed 指令(建议:TUSZ/CHB-MIT/TUEV/IIIC/TUEP/TUAB 各 +2 seed,四格耦合关闭 +2 seed,约 20 任务、amd 一天半);看稿推 Overleaf;标题。
+
+## 15. CF1 新宿主移植(2026-09-10 投递;预测事先写下)
+
+**设计**:替换式(宿主的 patch 嵌入换成我们的 tokenizer,编码器与头不动;每个(电极,行)当一个宿主"电极",位置 = 电极位置 + 可学行偏置;
+行在编码器后均值池化,头形状与原生相同),只报"宿主从零 → 宿主 + 我们的 tokenizer(开耦合)",单 seed。归因不在此表做(消融节已有)。
+依据:CBraMod / LaBraM / TFM-Tokenizer 的惯例——主表一行全模型,消融另起一节;TFM 插进 BIOT/LaBraM 也是单臂。
+
+**矩阵**(单 seed;native 三 seed 已有者标 *):
+| 宿主 | 跨频通路 | TUEV | IIIC | CHB-MIT | 预测 |
+|---|---|---|---|---|---|
+| LaBraM 5.86M(从零) | 无 | 0.372* → ? | 0.406* → ? | 0.360* → ? | 三格正(CHB-MIT 因宿主训不好) |
+| REVE 69.5M(从零) | 无 | native ? → ? | native ? → ? | — | 两格正 |
+| CBraMod(已完成) | rFFT 分支 | 0.564 → 0.632/0.641 | 0.393 → 0.396 | 0.317 → 0.465 | 已得:形态类正、TUSZ 负 |
+判据:换头 − native 超过 native 行的 seed 标准差。不跑 TUSZ/TUAB/睡眠/认知(机制预测零或负;TUSZ 边界已由 CBraMod 给出)。
+
+**实现**:`labram_paclockfe_adapter.py`(d 200、patch 200 与我们网格对齐;rel_pos_bias 关,偏差已记)、`reve_paclockfe_adapter.py`
+(前端 patch 180 = REVE 步长,P = h 网格对齐;d 512);`slurm/smoke_gpu.slurm` GPU smoke 通过(REVE 换头 batch 16 峰值 20.7 GB)。
+**投递**:amd — CF1_labram2(IIIC、CHB-MIT,batch 16×4)、CF1_reve(4 个:两 native + 两换头,batch 16×8)、LaBraM TUEV 由 auto-launcher
+在 `processed_labram/tuev` 重建完成后投(数据曾丢失,已重建)。
+**教训**:配置注释里写了 `\\n` 字面量把 `name:` 吞进注释(REVE 首投 KeyError),已修;LaBraM batch 64 OOM → 16×4。
