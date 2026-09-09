@@ -1,4 +1,5 @@
-# Group C: REVE architecture trained from scratch (2026-09-10), recipe = reve_pretrained. Single seed (CF1 native row).\nname: tuev-reve_scratch
+# Group C: REVE architecture trained from scratch (2026-09-10), recipe = reve_pretrained. Single seed (CF1 native row).
+name: tuev-reve_scratch
 group: C
 dataset: tuev
 data_root: $PACLOCK_PROC/processed/tuev

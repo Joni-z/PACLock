@@ -1,4 +1,6 @@
-# CF1 replacement transplant (2026-09-10): CroFreMo tokenizer in place of REVE's patch embedding, REVE from scratch;\n# recipe = reve_pretrained except batch 16 x accum 8 (= 128) for the 8x token grid. Single seed.\nname: tuev-reve_crofremo
+# CF1 replacement transplant (2026-09-10): CroFreMo tokenizer in place of REVE's patch embedding, REVE from scratch;
+# recipe = reve_pretrained except batch 16 x accum 8 (= 128) for the 8x token grid. Single seed.
+name: tuev-reve_crofremo
 group: cf1
 dataset: tuev
 data_root: $PACLOCK_PROC/processed/tuev
