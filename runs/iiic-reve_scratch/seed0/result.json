@@ -1,0 +1,99 @@
+{
+  "name": "iiic-reve_scratch",
+  "dataset": "iiic",
+  "model": "reve",
+  "group": "C",
+  "seed": 0,
+  "n_params_M": 69.820422,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.4123016459170316,
+    "cohen_kappa": 0.2989136431719681,
+    "weighted_f1": 0.41220182156402174
+  },
+  "best_val": 0.32545130069114114,
+  "val_curve": [
+    0.0,
+    0.09665135613280917,
+    0.23714027307945684,
+    0.30607454684921453,
+    0.32545130069114114,
+    0.2944909398480421,
+    0.3132880554834263,
+    0.28003448574104717,
+    0.30672777710864507,
+    0.2822188687716617,
+    0.27730038402978074,
+    0.27180914325847316,
+    0.28835713359420867,
+    0.2944008757551311,
+    0.28483076459330825
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 15,
+    "best_val": 0.32545130069114114,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 15,
+  "stopped_by": "patience",
+  "wall_time_sec": 4494.784644365311,
+  "config": {
+    "name": "iiic-reve_scratch",
+    "group": "C",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "model": "reve",
+    "pretrained": false,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 30,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 0,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "label_smoothing": 0.0
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}
