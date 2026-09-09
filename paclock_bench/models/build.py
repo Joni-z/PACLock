@@ -38,6 +38,17 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
                           pretrained=cfg.get("pretrained", True),
                           dropout=mk.get("dropout", 0.15))
 
+    if name == "reve_paclockfe":
+        # CF1 replacement transplant: CroFreMo tokenizer inside REVE's encoder (from scratch).
+        from .foundation.reve_paclockfe_adapter import build_reve_paclockfe
+        mk = cfg.get("model_kwargs", {}) or {}
+        return build_reve_paclockfe(
+            cfg["num_classes"], C, T, cfg.get("dataset"),
+            dropout=float(mk.get("dropout", 0.15)),
+            tokenizer_mode=mk.get("tokenizer_mode", "pac_interaction"),
+            interaction_mode=mk.get("interaction_mode", "rotation"),
+        )
+
     if name == "csbrain":
         # Group B: CSBrain (NeurIPS 2025 spotlight), official code + released
         # weights; pretrained=False would be a group-C row (not scheduled).

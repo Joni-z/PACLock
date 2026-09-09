@@ -1,0 +1,27 @@
+# CF1 replacement transplant (2026-09-10): CroFreMo tokenizer in place of REVE's patch embedding, REVE from scratch;\n# recipe = reve_pretrained except batch 16 x accum 8 (= 128) for the 8x token grid. Single seed.\nname: iiic-reve_crofremo
+group: cf1
+dataset: iiic
+data_root: $PACLOCK_PROC/processed/iiic
+model: reve_paclockfe
+num_classes: 6
+sample_rate: 200
+loss: cross_entropy
+optimizer: adamw
+lr: 0.0001
+weight_decay: 0.01
+scheduler: cosine
+grad_clip: 1.0
+epochs: 30
+batch_size: 16
+patience: 10
+eval_every_steps: 0
+num_workers: 8
+device: cuda
+seed: 0
+max_hours: 22.5
+model_kwargs:
+  dropout: 0.15
+  tokenizer_mode: pac_interaction
+  interaction_mode: rotation
+label_smoothing: 0.0
+accum_steps: 8
