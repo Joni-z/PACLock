@@ -497,3 +497,13 @@ Zhizhe 提出、采纳的主线:(1) 耦合 token 能给没有频率轴的 FM 编
 所以 (2) 我们为耦合 token 设计了自己的无轴小模型(CF2),发现它能与几十 M 的模型平起平坐。三轴 duplex 与它的消融退为附录/对照。
 待 CF1 门与 CF2 v3 落地后重写 Intro 贡献段与 Results;现有本地稿的 Results 表(6.1–6.5)作为附录/对照材料保留。
 不叫 FM;预训练维持分析章节。
+
+## 定稿骨架(2026-09-09)
+
+标题方向:cross-frequency coupling as token content + an axis-free encoder built for it。不叫 FM。
+1. Intro 贡献:(a) 耦合 token(相位参考不变、幅度保持、可门控);(b) 为它设计的无轴编码器(2.7M),四格归因全正;
+   (c) 对 FM 的账:发作检测大幅领先、事件分类持平、其余如实;(d) 机制:content vs structure,三种编码器对照;(e) 预训练分析。
+2. Method:tokenizer(v3 稿)+ 新小节 axis-free encoder(去频率子层、折叠、宽度)+ 三轴作为"structure"对照。
+3. Results:主表(v1d192 vs baseline,老三轴列)→ 归因表(核心)→ 三编码器 × 开关表 → 设计对照 → 移植段 → 预训练段。
+4. 附录:全矩阵、设计变体、CF1 官方权重、三轴旧表、逐类别 TUEV、预训练分析。
+5. 诚实声明:新模型单 seed,baseline 三 seed;补 seed 后替换。

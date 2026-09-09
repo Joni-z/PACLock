@@ -559,3 +559,13 @@ BCI +0.012(n=3);TUAR −0.021(n=1)、Sleep-EDF −0.001(n=1)。
   阶段一 amd 节点空转即撤;TUAB duplex 补 seed 撤;CF1 六门 torch+b2 孪生。
 * **运维**:torch VPN 会话到期、重连;`push_runs.sh` 循环重启;b2 补 vendor/cbramod;`twin_watch.sh`、`wait_b2.sh`。
 * **论文**:Results v1、Intro v2、Conclusion v1、附录全表装入 MacBook,编译 14 页 0 错误;`paper_drafts/` 备份。主张待重写。
+
+## 2026-09-08 → 09-09
+
+* **CF2**:v3 落地(小语料崩)→ v0d192 / v0d192cs / v1d192 / v1d256 铺 12 语料 → 定稿 **v1d192**;耦合关闭对照(d192/d256 × 四语料)四格全正。
+  `configs/cf2/*_cf2_{v0d192cs,v1d256,v1d192raw,v1d256raw}.yaml`。
+* **CF1**:门 TUEV 过 / TUSZ 不过;铺 IIIC/TUEP(torch)、CHB-MIT/Sleep-EDF(b2);官方权重版(`pretrained: true` 接进 `PACLockCBraModAugmented`)
+  TUEV/TUAR 负,ISRUC OOM 放弃。
+* **修正**:TUAB 口径(BAcc);"CHB-MIT 耦合不发力"为 d128 假象。
+* **运维**:torch 会话两次断开(VPN 未过期,直连需认证);ControlMaster 配置;`runs/**/result.json` 全部提交;`*.npz` 忽略;
+  torch/b2 未跟踪结果备份后 pull 恢复;收集器清理。`results/canon_2026-09-09.json` 为写作用的规范数字。

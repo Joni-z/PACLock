@@ -1,0 +1,1125 @@
+{
+ "tusz": {
+  "sheet": "TUSZ",
+  "baselines": [
+   {
+    "name": "FFCL",
+    "mean": 0.5449,
+    "std": 0.0242,
+    "single": false
+   },
+   {
+    "name": "EEGPT",
+    "mean": 0.5446,
+    "std": 0.0575,
+    "single": false
+   },
+   {
+    "name": "CSBrain (pretrained)",
+    "mean": 0.517,
+    "std": 0.0962,
+    "single": false
+   }
+  ],
+  "metric": "pr_auc",
+  "paclock_duplex": {
+   "mean": 0.6389129775280367,
+   "std": 0.03503144822587286,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.671010423754567,
+   "std": 0.03241055741640025,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.6530147307378092,
+   "std": 0.04028868262424068,
+   "n": 3
+  },
+  "cf2_v1d192": {
+   "mean": 0.6979473917566501,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192raw": {
+   "mean": 0.6347258984100967,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.6310899871159001,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256raw": {
+   "mean": 0.5404576865715671,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.6115003937497198,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.6429081184322282,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.6710773542617594,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1": {
+   "mean": 0.6120434333542197,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1raw": {
+   "mean": 0.5339913050668111,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0": {
+   "mean": 0.6438196450002509,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v2": {
+   "mean": 0.5906992848006056,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.48182004717598803,
+   "std": 0.05221053850616957,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.43435225151163415,
+   "std": 0.04240222403279065,
+   "n": 3
+  },
+  "cbramod_add_raw": {
+   "mean": 0.47623662249563226,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_cpl": {
+   "mean": 0.38386215249281586,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_cplmean": {
+   "mean": 0.3793001966309854,
+   "std": null,
+   "n": 1
+  }
+ },
+ "chbmit": {
+  "sheet": "CHB-MIT",
+  "baselines": [
+   {
+    "name": "TFM-Tokenizer",
+    "mean": 0.6269,
+    "std": 0.0205,
+    "single": false
+   },
+   {
+    "name": "REVE-Base (pretrained)",
+    "mean": 0.5802,
+    "std": 0.1597,
+    "single": false
+   },
+   {
+    "name": "BIOT (scratch)",
+    "mean": 0.5661,
+    "std": 0.0589,
+    "single": false
+   }
+  ],
+  "metric": "pr_auc",
+  "paclock_duplex": {
+   "mean": 0.6984694581348343,
+   "std": 0.05491817965353232,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.6671745734350285,
+   "std": 0.05737298725313799,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.6991398937164718,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.7163468138227895,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192raw": {
+   "mean": 0.5796839828441349,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.6076901722194719,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256raw": {
+   "mean": 0.5825975462132361,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.6301828490183607,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.5132678350086735,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.6708854480883996,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1": {
+   "mean": 0.6466422398990039,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1raw": {
+   "mean": 0.6605774921300684,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0": {
+   "mean": 0.5692673194722895,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v2": {
+   "mean": 0.6283595398968093,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.31688170468234256,
+   "std": 0.2050232658752232,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.2331551036781142,
+   "std": 0.0977611954477959,
+   "n": 3
+  }
+ },
+ "siena": {
+  "sheet": "Siena",
+  "baselines": [
+   {
+    "name": "REVE-Base (pretrained)",
+    "mean": 0.5181,
+    "std": 0.0958,
+    "single": false
+   },
+   {
+    "name": "LaBraM-Base (scratch)",
+    "mean": 0.4913,
+    "std": 0.0096,
+    "single": false
+   },
+   {
+    "name": "ContraWR",
+    "mean": 0.4513,
+    "std": 0.0505,
+    "single": false
+   }
+  ],
+  "metric": "pr_auc",
+  "paclock_duplex": {
+   "mean": 0.17016689034652185,
+   "std": 0.08620646993352092,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.17095932326387386,
+   "std": 0.1629962013796048,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.4564355155223695,
+   "std": 0.041004206760680874,
+   "n": 3
+  },
+  "cf2_v1d192": {
+   "mean": 0.20092031854810583,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.26914332517966894,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.2393198295024546,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.3981881433487264,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.2799558106125793,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.19928102931781802,
+   "std": 0.060719462722753845,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.4242860367407063,
+   "std": 0.06374581204458529,
+   "n": 3
+  },
+  "cbramod_crofremo": {
+   "mean": 0.08897088789290628,
+   "std": 0.0801412391081305,
+   "n": 3
+  }
+ },
+ "tuev": {
+  "sheet": "TUEV",
+  "baselines": [
+   {
+    "name": "REVE-Base (pretrained)",
+    "mean": 0.6846,
+    "std": 0.0318,
+    "single": false
+   },
+   {
+    "name": "TFM-Tokenizer",
+    "mean": 0.6519,
+    "std": 0.017,
+    "single": false
+   },
+   {
+    "name": "CBraMod (pretrained)",
+    "mean": 0.6449,
+    "std": 0.0177,
+    "single": false
+   }
+  ],
+  "metric": "cohen_kappa",
+  "paclock_duplex": {
+   "mean": 0.6895485559945098,
+   "std": 0.03566504236374689,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.5359416422287133,
+   "std": 0.04140723520531296,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.6416958929854728,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.6804138482423736,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192raw": {
+   "mean": 0.572992397429102,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.6791954455268553,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256raw": {
+   "mean": 0.6008829606091629,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.6895614017438743,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.7206662730153246,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.6605923085819896,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1": {
+   "mean": 0.6478308294866375,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1raw": {
+   "mean": 0.5455657208877596,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0": {
+   "mean": 0.6583640334180563,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v2": {
+   "mean": 0.6573000812893388,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.5638376367081208,
+   "std": 0.023635314759073555,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.6448711017693751,
+   "std": 0.021660988701367942,
+   "n": 3
+  },
+  "cbramod_add_raw": {
+   "mean": 0.5955586394086541,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_cpl": {
+   "mean": 0.6406519113921864,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_cplmean": {
+   "mean": 0.6419046606703005,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_rawpre": {
+   "mean": 0.571922244735419,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_cplpre": {
+   "mean": 0.6232771770933042,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_crofremo": {
+   "mean": 0.6115082187830703,
+   "std": 0.004796451666175581,
+   "n": 3
+  }
+ },
+ "iiic": {
+  "sheet": "IIIC",
+  "baselines": [
+   {
+    "name": "REVE-Base (pretrained)",
+    "mean": 0.4363,
+    "std": 0.0024,
+    "single": false
+   },
+   {
+    "name": "FFCL",
+    "mean": 0.4231,
+    "std": 0.0161,
+    "single": false
+   },
+   {
+    "name": "CNN-Transformer",
+    "mean": 0.4162,
+    "std": 0.0078,
+    "single": false
+   }
+  ],
+  "metric": "cohen_kappa",
+  "paclock_duplex": {
+   "mean": 0.47870986596883963,
+   "std": 0.009241653976150297,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.46574605502034644,
+   "std": 0.00967368577935747,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.43391285694365644,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.44680332366034925,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192raw": {
+   "mean": 0.42032398995257014,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.46514259979180106,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256raw": {
+   "mean": 0.41794117202406145,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.4577412640911479,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.44748311144239006,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.4267916474639528,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1": {
+   "mean": 0.45529496168349437,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1raw": {
+   "mean": 0.45338561121118515,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0": {
+   "mean": 0.4352789277773921,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v2": {
+   "mean": 0.4807432103141005,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.3934997849906838,
+   "std": 0.005815910361805518,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.3132538270236282,
+   "std": 0.019144030966880072,
+   "n": 3
+  },
+  "cbramod_add_raw": {
+   "mean": 0.3814665594666462,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_cpl": {
+   "mean": 0.39618048063590394,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_crofremo": {
+   "mean": 0.3100719881499524,
+   "std": 0.010565666215650762,
+   "n": 3
+  }
+ },
+ "tuar": {
+  "sheet": "TUAR",
+  "baselines": [
+   {
+    "name": "CBraMod (pretrained)",
+    "mean": 0.7147,
+    "std": null,
+    "single": true
+   },
+   {
+    "name": "CNN-Transformer",
+    "mean": 0.712,
+    "std": null,
+    "single": true
+   },
+   {
+    "name": "FFCL",
+    "mean": 0.6959,
+    "std": null,
+    "single": true
+   }
+  ],
+  "metric": "cohen_kappa",
+  "paclock_duplex": {
+   "mean": 0.6199128739609319,
+   "std": 0.03726498135692024,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.623514372132379,
+   "std": 0.008064815624465588,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.5922666081649748,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.5997105344774113,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.6567150203117186,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.6237284942486385,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.6260730892333579,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.5451799389429299,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.6503294025600175,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_pretrained": {
+   "mean": 0.7146867552530503,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_rawpre": {
+   "mean": 0.681113291715276,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_cplpre": {
+   "mean": 0.5877488458472192,
+   "std": null,
+   "n": 1
+  }
+ },
+ "tuab": {
+  "sheet": "TUAB",
+  "baselines": [
+   {
+    "name": "ST-Transformer",
+    "mean": 0.8198,
+    "std": 0.0036,
+    "single": false
+   },
+   {
+    "name": "EEGPT",
+    "mean": 0.8137,
+    "std": 0.0052,
+    "single": false
+   },
+   {
+    "name": "CSBrain (pretrained)",
+    "mean": 0.8093,
+    "std": 0.0074,
+    "single": false
+   }
+  ],
+  "metric": "balanced_acc",
+  "paclock_duplex": {
+   "mean": 0.8156904426571938,
+   "std": null,
+   "n": 1
+  },
+  "paclock_rawtok": {
+   "mean": 0.805372108881641,
+   "std": 0.006108416515553879,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.8053853149272301,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.8196163427693205,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.7925937057605458,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.7952615092743767,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.8123443795902383,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.807475044495111,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.7919912378528778,
+   "std": 0.007865213967964416,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.7869490394292453,
+   "std": 0.012740054844261254,
+   "n": 3
+  },
+  "cbramod_crofremo": {
+   "mean": 0.7764953239080487,
+   "std": 0.002405804166202921,
+   "n": 3
+  }
+ },
+ "tuep": {
+  "sheet": "TUEP",
+  "baselines": [
+   {
+    "name": "EEGPT (scratch)",
+    "mean": 0.7859,
+    "std": 0.0175,
+    "single": false
+   },
+   {
+    "name": "EEGNet (\u8c03\u53c2)",
+    "mean": 0.7848,
+    "std": 0.006,
+    "single": false
+   },
+   {
+    "name": "LaBraM-Base (pretrained)",
+    "mean": 0.7777,
+    "std": 0.0153,
+    "single": false
+   }
+  ],
+  "metric": "auroc",
+  "paclock_duplex": {
+   "mean": 0.809730428390371,
+   "std": 0.003923949172440012,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.8097007508025998,
+   "std": 0.0009244510700406213,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.7685554301158999,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.7994281521045694,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.796733165236308,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.8124355322116055,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.8118063737386295,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.8027669650474081,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.6422261587589871,
+   "std": 0.03385576194471136,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.6646650979781095,
+   "std": 0.02119541507284256,
+   "n": 3
+  },
+  "cbramod_add_raw": {
+   "mean": 0.5928792661382307,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_add_cpl": {
+   "mean": 0.6496175351020006,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_crofremo": {
+   "mean": 0.6330301334012808,
+   "std": 0.03701651001473166,
+   "n": 3
+  }
+ },
+ "adfd": {
+  "sheet": "ADFD",
+  "baselines": [
+   {
+    "name": "BIOT (scratch)",
+    "mean": 0.5254,
+    "std": 0.0171,
+    "single": false
+   },
+   {
+    "name": "REVE-Base (pretrained)",
+    "mean": 0.5006,
+    "std": 0.0398,
+    "single": false
+   },
+   {
+    "name": "LaBraM-Base (scratch)",
+    "mean": 0.4992,
+    "std": 0.0162,
+    "single": false
+   }
+  ],
+  "metric": "balanced_acc",
+  "paclock_duplex": {
+   "mean": 0.5047003298179117,
+   "std": 0.06093620382370216,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.5014770706019961,
+   "std": 0.04870030411435618,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.4526525817987051,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.46081623339338323,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.4540131033871038,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.49819269064852056,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.466668044622261,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.3609975051430134,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.48097718453823723,
+   "std": 0.0185773752160124,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.4411364024786818,
+   "std": 0.0165135114494026,
+   "n": 3
+  },
+  "cbramod_crofremo": {
+   "mean": 0.4627857196868563,
+   "std": 0.009759964233627441,
+   "n": 3
+  }
+ },
+ "caueeg": {
+  "sheet": "CAUEEG",
+  "baselines": [
+   {
+    "name": "BIOT (scratch)",
+    "mean": 0.5609,
+    "std": 0.0094,
+    "single": false
+   },
+   {
+    "name": "FFCL",
+    "mean": 0.5569,
+    "std": 0.0045,
+    "single": false
+   },
+   {
+    "name": "EEGPT",
+    "mean": 0.5471,
+    "std": 0.0174,
+    "single": false
+   }
+  ],
+  "metric": "balanced_acc",
+  "paclock_duplex": {
+   "mean": 0.5253734021688089,
+   "std": 0.014991206421634188,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.5172889326591281,
+   "std": 0.032067547590595935,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.5033267439171376,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.5107855034020733,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.47534652324950405,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.5377531423617778,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.5406947008039976,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.5409400269415815,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.426574005089683,
+   "std": 0.08237975087648394,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.5144818203088672,
+   "std": 0.030818786745626856,
+   "n": 3
+  },
+  "cbramod_crofremo": {
+   "mean": 0.42695648048373386,
+   "std": 0.08317124251284992,
+   "n": 3
+  }
+ },
+ "sleepedf": {
+  "sheet": "Sleep-EDF",
+  "baselines": [
+   {
+    "name": "ContraWR",
+    "mean": 0.6916,
+    "std": 0.0119,
+    "single": false
+   },
+   {
+    "name": "FFCL",
+    "mean": 0.678,
+    "std": 0.0039,
+    "single": false
+   },
+   {
+    "name": "CNN-Transformer",
+    "mean": 0.6778,
+    "std": 0.0116,
+    "single": false
+   }
+  ],
+  "metric": "cohen_kappa",
+  "paclock_duplex": {
+   "mean": 0.6418120437227006,
+   "std": 0.013769363990567234,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.6502718882040747,
+   "std": 0.001857209821423526,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.6746679960600596,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.6392589714095493,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.6529035010657628,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.6099007758139201,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.6144013708387807,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.6324607272941699,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.6544630510447027,
+   "std": 0.003547053930018416,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.6714542470461871,
+   "std": 0.004862953782034958,
+   "n": 3
+  },
+  "cbramod_crofremo": {
+   "mean": 0.6083730954087722,
+   "std": 0.0008954861477565402,
+   "n": 3
+  }
+ },
+ "isruc": {
+  "sheet": "ISRUC",
+  "baselines": [
+   {
+    "name": "CBraMod (pretrained)",
+    "mean": 0.754,
+    "std": 0.0063,
+    "single": false
+   },
+   {
+    "name": "CNN-Transformer",
+    "mean": 0.7532,
+    "std": 0.0058,
+    "single": false
+   },
+   {
+    "name": "ContraWR",
+    "mean": 0.752,
+    "std": 0.0045,
+    "single": false
+   }
+  ],
+  "metric": "cohen_kappa",
+  "paclock_duplex": {
+   "mean": 0.7018309470001864,
+   "std": 0.008785235399633728,
+   "n": 3
+  },
+  "paclock_rawtok": {
+   "mean": 0.7012670048937172,
+   "std": 0.030495428708699413,
+   "n": 3
+  },
+  "paclock_duplex_ptS": {
+   "mean": 0.6720846433221463,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d192": {
+   "mean": 0.6979291283362897,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v1d256": {
+   "mean": 0.700262311655717,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192": {
+   "mean": 0.695901204756971,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v0d192cs": {
+   "mean": 0.6825420383205449,
+   "std": null,
+   "n": 1
+  },
+  "cf2_v3": {
+   "mean": 0.6770204955778453,
+   "std": null,
+   "n": 1
+  },
+  "cbramod_scratch": {
+   "mean": 0.6975595877903408,
+   "std": 0.00642472459461133,
+   "n": 3
+  },
+  "cbramod_pretrained": {
+   "mean": 0.7540164515230596,
+   "std": 0.00768012645335035,
+   "n": 3
+  },
+  "cbramod_crofremo": {
+   "mean": 0.5099309164042607,
+   "std": 0.027918375990848367,
+   "n": 3
+  }
+ }
+}
