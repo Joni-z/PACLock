@@ -1,5 +1,5 @@
-# CF1 replacement transplant (2026-09-10): CroFreMo tokenizer (coupling on) in place of LaBraM's patch embedding;
-# recipe, data and montage mode identical to the corpus's labram_scratch row. Single seed.
+# CF1 replacement transplant (2026-09-10): CroFreMo tokenizer in place of LaBraM patch embedding; recipe = labram_scratch
+# except batch 16 x accum 4 (= 64): the row-expanded grid (8 rows/electrode) OOMs the 64 GB MI210 at batch 64. Single seed.
 name: chbmit-labram_crofremo
 group: cf1
 dataset: chbmit
@@ -11,7 +11,7 @@ lr: 0.0005
 max_lr: 0.0004
 scheduler: cosine
 pct_start: 0.2
-batch_size: 64
+batch_size: 16
 grad_clip: null
 patience: 10
 num_workers: 16
@@ -33,3 +33,4 @@ model_kwargs:
   interaction_mode: rotation
 seed: 0
 max_hours: 22.0
+accum_steps: 4
