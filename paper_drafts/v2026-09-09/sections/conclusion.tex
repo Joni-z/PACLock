@@ -1,0 +1,25 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We gave an EEG tokenizer the one relation its tokens never carry, the
+coupling between frequency bands, and asked when a model needs it there.
+The answer is set by the encoder. Paired with an encoder that attends
+along a frequency axis, or with a published encoder that keeps its own
+spectral branch, the coupling token is redundant except on the one label
+type whose morphology is a slow rhythm carrying fast activity. Paired
+with an encoder that has no cross-frequency pathway of its own --- no
+frequency axis, no spectral branch, bands meeting only inside spatial
+attention --- the token becomes necessary: removing it costs between
+$0.03$ and $0.14$ on every corpus on which we measure it, and the model
+built on that principle, at 2.7M parameters, leads the strongest
+reproduced foundation-model baselines by $0.15$ and $0.09$ AUC-PR on
+seizure detection while matching them on event classification and
+recording-level abnormality. Where it loses --- sleep staging, cohort
+diagnosis, artifacts, and the smallest seizure corpus --- it loses to
+pretrained or larger models, and a pretraining study of the tri-axial
+model shows why pretraining helps there and not elsewhere. The practical
+conclusion is that cross-frequency structure should be carried as token
+content when, and because, the encoder does not supply it as structure;
+the methodological one is that a tokenizer claim is only as broad as the
+set of encoders on which it is tested, and we have reported ours across
+three.

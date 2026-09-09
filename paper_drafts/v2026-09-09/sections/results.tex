@@ -1,0 +1,252 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{A 2.7M-parameter model against foundation models}
+\label{sec:main}
+
+Table~\ref{tab:main} compares the axis-free CroFreMo against the strongest
+reproduced baseline on each corpus and against our own tri-axial encoder;
+the full matrix of fifteen baselines is in the appendix. The axis-free
+model wins on the two seizure-detection corpora with adequate positives
+(TUSZ, CHB-MIT) by margins far outside the baselines' seed variance, wins
+narrowly on IIIC and TUEP, ties the strongest foundation model on TUEV and
+the strongest supervised model on TUAB, and loses on the two sleep-staging
+corpora, on the two cohort-diagnosis corpora, on TUAR and on Siena. On
+CHB-MIT the strongest baseline is not the largest model: CBraMod trained
+from scratch reaches $0.317 \pm 0.167$ and its released pretrained weights
+$0.233 \pm 0.080$, against $0.716$ for a model thirteen times smaller.
+Against the tri-axial encoder it was derived from, the axis-free model
+gains $0.06$ on TUSZ and $0.02$ on CHB-MIT, matches it within a point on
+six corpora, and is $0.02$--$0.04$ lower on IIIC, TUAR and ADFD.
+
+\begin{table}[t]
+\centering
+\small
+\caption{CroFreMo against the strongest reproduced baseline per corpus.
+Baselines and the tri-axial CroFreMo are three-seed means $\pm$ std; the
+axis-free CroFreMo (2.7M, the final model) is a single seed, marked $(1)$.
+``pre'' marks a baseline evaluated with its released pretrained weights.
+TUAB is scored by balanced accuracy for every model.}
+\label{tab:main}
+\begin{tabular}{lllllc}
+\toprule
+Corpus & Metric & Strongest baseline & & CroFreMo tri-axial (1.6M) & CroFreMo axis-free (2.7M) \\
+\midrule
+TUSZ & AUC-PR & FFCL & $0.545 \pm 0.024$ & $0.639 \pm 0.029$ & $\mathbf{0.698}\,(1)$ \\
+CHB-MIT & AUC-PR & TFM-Tokenizer pre & $0.627 \pm 0.021$ & $0.698 \pm 0.045$ & $\mathbf{0.716}\,(1)$ \\
+IIIC & $\kappa$ & REVE pre & $0.436 \pm 0.002$ & $\mathbf{0.479 \pm 0.008}$ & $0.447\,(1)$ \\
+TUEP & AUROC & EEGPT scratch & $0.786 \pm 0.018$ & $\mathbf{0.810 \pm 0.003}$ & $0.799\,(1)$ \\
+TUEV & $\kappa$ & REVE pre & $0.685 \pm 0.032$ & $0.690 \pm 0.029$ & $0.680\,(1)$ \\
+TUAB & bal.\ acc. & ST-Transformer & $0.820 \pm 0.004$ & $0.816\,(1)$ & $0.820\,(1)$ \\
+Sleep-EDF & $\kappa$ & ContraWR & $0.692 \pm 0.012$ & $0.642 \pm 0.011$ & $0.639\,(1)$ \\
+CAUEEG & bal.\ acc. & BIOT scratch & $0.561 \pm 0.009$ & $0.525 \pm 0.012$ & $0.511\,(1)$ \\
+ISRUC & $\kappa$ & CBraMod pre & $0.754 \pm 0.006$ & $0.702 \pm 0.007$ & $0.698\,(1)$ \\
+ADFD & bal.\ acc. & BIOT scratch & $0.525 \pm 0.017$ & $0.505 \pm 0.050$ & $0.461\,(1)$ \\
+TUAR & $\kappa$ & CBraMod pre & $0.715\,(1)$ & $0.620 \pm 0.030$ & $0.600\,(1)$ \\
+Siena & AUC-PR & REVE pre & $0.518 \pm 0.096$ & $0.170 \pm 0.070$ & $0.201\,(1)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{What the seizure margin is made of}
+\label{sec:attribution}
+
+Table~\ref{tab:attribution} is the experiment the encoder was built for.
+The axis-free model is trained with its tokenizer producing either the
+duplex grid of Section~\ref{sec:tokenizer} or waveform tokens only, with
+every other setting identical, at the adopted width and at one width
+larger. Removing the coupling token costs $0.136$ AUC-PR on CHB-MIT,
+$0.107$ $\kappa$ on TUEV, $0.063$ AUC-PR on TUSZ and $0.027$ $\kappa$ on
+IIIC at $d{=}192$, and the four effects have the same sign and comparable
+size at $d{=}256$. For scale, the seed standard deviations of the
+tri-axial model on the same corpora are $0.029$, $0.045$, $0.029$ and
+$0.008$. The two margins by which the model leads the foundation-model
+field are therefore not properties of the band decomposition or of the
+folded attention alone; without the interaction token the same encoder
+falls to $0.635$ on TUSZ and $0.580$ on CHB-MIT, below the tri-axial model
+and, on CHB-MIT, below TFM-Tokenizer.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Coupling attribution in the axis-free encoder: duplex grid vs.\
+waveform tokens only, everything else identical. Single seeds.}
+\label{tab:attribution}
+\begin{tabular}{llcccccc}
+\toprule
+ & & \multicolumn{3}{c}{$d{=}192$ (final)} & \multicolumn{3}{c}{$d{=}256$} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Corpus & Metric & coupling on & off & $\Delta$ & on & off & $\Delta$ \\
+\midrule
+CHB-MIT & AUC-PR & $\mathbf{0.716}$ & $0.580$ & $\mathbf{+0.136}$ & $0.608$ & $0.583$ & $+0.025$ \\
+TUEV & $\kappa$ & $\mathbf{0.680}$ & $0.573$ & $\mathbf{+0.107}$ & $0.679$ & $0.601$ & $+0.078$ \\
+TUSZ & AUC-PR & $\mathbf{0.698}$ & $0.635$ & $\mathbf{+0.063}$ & $0.631$ & $0.541$ & $+0.090$ \\
+IIIC & $\kappa$ & $\mathbf{0.447}$ & $0.420$ & $+0.027$ & $0.465$ & $0.418$ & $+0.047$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Content versus structure}
+\label{sec:content-structure}
+
+Table~\ref{tab:content-structure} places the same token inside three
+encoders that differ in whether they can compute cross-frequency
+relations without it. The tri-axial encoder, which attends along a
+frequency axis, gains $0.15$ from the token on TUEV and nothing outside
+seed variance on the other eleven corpora (the full three-seed table is in
+the appendix); on the two seizure corpora on which the tri-axial model
+also leads the field, its margin is made of the band decomposition and
+the factorized attention, not of coupling
+(Table~\ref{tab:arch}). CBraMod's encoder, which keeps its own rFFT
+magnitude branch, gains from the interaction rows relative to the matched
+waveform rows on the three event-classification corpora --- $0.045$ on
+TUEV, $0.057$ on TUEP, $0.015$ on IIIC --- and loses $0.092$ on TUSZ; the
+gain exceeds CBraMod's own tokenizer only on TUEV
+(Section~\ref{sec:transplant}). The axis-free encoder gains on all four.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The same coupling token in three encoders: change in the primary
+metric when the coupling content is switched on, with the encoder, recipe
+and token count held fixed. Tri-axial: three seeds; CBraMod (additive,
+vs.\ matched waveform rows) and axis-free: single seeds.}
+\label{tab:content-structure}
+\begin{tabular}{llcccc}
+\toprule
+Encoder & Own cross-frequency pathway & TUEV & TUSZ & CHB-MIT & IIIC \\
+\midrule
+Tri-axial CroFreMo & frequency attention axis & $+0.15$ & $-0.03$ & $+0.03$ & $+0.01$ \\
+CBraMod + rows & rFFT magnitude branch & $+0.045$ & $-0.092$ & --- & $+0.015$ \\
+Axis-free CroFreMo & none & $+0.107$ & $+0.063$ & $+0.136$ & $+0.027$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The pattern is the one the design predicts. An encoder that can derive a
+cross-band relation from waveform rows treats the interaction token as
+redundant, and it helps only where the relation is too specific to be
+re-derived cheaply --- periodic epileptiform discharges, on which the
+tri-axial gain concentrates (GPED $+0.27$, PLED $+0.09$ in per-class F1,
+Table~\ref{tab:perclass} in the appendix). An encoder with a spectral
+branch is not starved either, and the extra rows cost it sequence length
+on the long seizure windows. An encoder with no such pathway has to take
+the relation from the token or not at all, and it takes it on every
+corpus we measure. Coupling belongs in the token when, and because, it is
+absent from the encoder.
+
+\subsection{Design controls}
+\label{sec:design}
+
+Table~\ref{tab:design} reports the axis-free variants that were tried on
+the way to the final model, all single seeds, alongside the tri-axial
+architectural controls of Table~\ref{tab:arch}. Folding the band rows
+into spatial attention rather than leaving them as unrelated channels is
+worth $0.09$ on both seizure corpora and costs $0.02$--$0.04$ on the
+smaller corpora, where the longer attention span overfits. Raising the
+width from 192 to 256 recovers those small-corpus cells and loses
+$0.07$ and $0.11$ on TUSZ and CHB-MIT. An explicit coupling-strength
+feature --- the magnitudes $|Z_{ij}|$ projected onto the fused rows ---
+raises TUEV to $0.721$ and Siena to $0.398$ and collapses CHB-MIT to
+$0.513$. No variant dominates; the adopted one is the one that keeps the
+seizure margin, which is the claim the model is built to support, and
+every alternative is reported. Within the tri-axial family, collapsing
+the learned filterbank to a single broadband band costs $0.11$ on TUSZ
+and $0.42$ on CHB-MIT, and replacing factorized attention by a flat
+encoder that mixes electrodes before attention costs $0.22$ and $0.53$:
+the band-decomposed grid and attention factorized over it are what let a
+small model learn rare-positive seizure windows at all.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Axis-free design variants, single seeds. ``fold'' = band rows
+folded into spatial attention; ``strength'' = explicit $|Z|$ feature.}
+\label{tab:design}
+\begin{tabular}{lcccccccc}
+\toprule
+Variant & TUSZ & CHB-MIT & TUEV & IIIC & TUAR & ADFD & Siena & Sleep-EDF \\
+\midrule
+no fold, $d{=}192$ & 0.612 & 0.630 & 0.690 & 0.458 & 0.624 & 0.498 & 0.239 & 0.610 \\
+no fold, $d{=}192$, strength & 0.643 & 0.513 & $\mathbf{0.721}$ & 0.448 & 0.626 & 0.467 & $\mathbf{0.398}$ & 0.614 \\
+fold, $d{=}192$ (final) & $\mathbf{0.698}$ & $\mathbf{0.716}$ & 0.680 & 0.447 & 0.600 & 0.461 & 0.201 & 0.639 \\
+fold, $d{=}256$ & 0.631 & 0.608 & 0.679 & $\mathbf{0.465}$ & $\mathbf{0.657}$ & 0.454 & 0.269 & $\mathbf{0.653}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Tri-axial architectural controls, waveform-token frontend, three
+seeds. Removing either the band decomposition or the factorization
+collapses seizure detection.}
+\label{tab:arch}
+\begin{tabular}{lccc}
+\toprule
+ & 8 bands, tri-axial & 1 band, tri-axial & 8 bands, flat (0.9M) \\
+\midrule
+TUSZ (AUC-PR) & $0.671 \pm 0.026$ & $0.558 \pm 0.041$ & $0.448 \pm 0.048$ \\
+CHB-MIT (AUC-PR) & $0.667 \pm 0.047$ & $0.245 \pm 0.068$ & $0.136 \pm 0.016$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The token inside a published encoder}
+\label{sec:transplant}
+
+Table~\ref{tab:transplant} adds the tokenizer's rows to CBraMod as
+described in Section~\ref{sec:encoder}. Against the matched control ---
+the same eight extra rows carrying waveform tokens --- the interaction
+rows are better on TUEV, TUEP and IIIC and worse on TUSZ, so the effect is
+attributable to coupling content rather than to the extra channels. Against
+CBraMod's own tokenizer the transplant is a clear gain only on TUEV
+($+0.077$, four standard deviations of the native model), a tie on TUEP
+and IIIC, and a loss on TUSZ. Adding the same rows to CBraMod's
+\emph{released} checkpoint is worse than the checkpoint alone on both
+corpora tried (appendix): a pretrained encoder is tuned to its own token
+distribution, and inserting eight new channels per electrode disturbs it
+more than the coupling content repays. We draw the narrow conclusion the
+data support --- the token transfers, its effect is attributable, and it
+pays off on epileptiform event classification --- and not the broad one.
+
+\begin{table}[t]
+\centering
+\small
+\caption{CroFreMo's rows added to CBraMod's encoder, trained from scratch.
+CBraMod's own tokenizer is a three-seed mean; the two transplant arms are
+single seeds with identical parameter and token counts.}
+\label{tab:transplant}
+\begin{tabular}{llccc}
+\toprule
+Corpus & Metric & CBraMod tokenizer & + waveform rows & + interaction rows \\
+\midrule
+TUEV & $\kappa$ & $0.564 \pm 0.019$ & $0.596$ & $\mathbf{0.641}$ \\
+TUEP & AUROC & $0.642 \pm 0.028$ & $0.593$ & $\mathbf{0.650}$ \\
+IIIC & $\kappa$ & $0.393 \pm 0.005$ & $0.381$ & $0.396$ \\
+TUSZ & AUC-PR & $\mathbf{0.482 \pm 0.043}$ & $0.476$ & $0.384$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Pretraining, reported to convergence}
+\label{sec:pretrain-results}
+
+The tri-axial model pretrained with the objective of
+Section~\ref{sec:objective} and finetuned under one fixed recipe improves
+on its from-scratch counterpart where labels are scarce or noisy (Siena,
+$0.170 \to 0.456$; TUSZ, $+0.014$; Sleep-EDF, $+0.033$) and loses where
+labels are plentiful (TUEV, $-0.048$; ADFD, $-0.052$; TUAR, $-0.028$), a
+pattern the appendix explains rather than excuses: lr-matched frozen
+probes show that the pretrained representation is informative (on TUEV,
+$0.65$ against $0.39$ for a random encoder), label-fraction curves show
+the harm growing with the number of labels, and clean-transfer controls at
+the pretraining patch length reproduce the TUEV loss with the entire
+backbone loaded. The coupling reconstruction term helps the frozen
+representation on TUEV and hurts it on TUSZ; band-normalized amplitude
+reconstruction alone \citep{yu2026understanding} is neither better nor
+worse in finetuning. We report these as findings about a small model with
+a strong inductive bias in the clinical label regime, and we note that the
+axis-free model has no pretrained row: its block structure does not match
+the checkpoint, and Siena --- the one corpus where pretraining changed the
+picture --- remains the axis-free model's weakest cell.

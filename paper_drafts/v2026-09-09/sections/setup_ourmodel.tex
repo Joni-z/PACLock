@@ -1,0 +1,34 @@
+\paragraph{Our model.}
+Both CroFreMo encoders are trained with AdamW (learning rate $10^{-4}$,
+weight decay $10^{-5}$), cosine decay, gradient clipping at 1.0, batch
+size 32, and the loss of the corpus (cross-entropy with label smoothing
+0.1 for multi-class tasks, binary cross-entropy or focal loss for the two
+seizure corpora that use them), with the number of epochs and evaluation
+schedule matched to the from-scratch baselines of the same corpus. Model
+selection uses the validation split only; the test split is scored once,
+at the selected checkpoint. The recipe was fixed for the tri-axial encoder
+and inherited unchanged by the axis-free one. The pretrained row of the
+tri-axial model uses the checkpoint of Section~\ref{sec:objective} at 60k
+steps and the standard finetuning recipe for pretrained EEG models: base
+learning rate $5\times10^{-4}$ with layer-wise decay 0.65 by depth, two
+warmup epochs, and two initial epochs in which only the tensors not
+carried by the checkpoint are trained before the whole model is unfrozen;
+this recipe is fixed once for all corpora. The axis-free encoder has no
+pretrained row: its block structure does not match the checkpoint, and we
+did not pretrain it separately.
+
+\paragraph{Seeds and reporting.}
+Every baseline cell and every tri-axial CroFreMo cell is the mean and
+standard deviation over three seeds. The axis-free CroFreMo cells and the
+CBraMod transplant cells are single seeds, marked $(1)$ throughout, and
+will be replaced by three-seed values; the seed standard deviations we
+measure on the tri-axial model with the same recipe (0.01--0.05 depending
+on the corpus, Table~\ref{tab:main}) are the reference against which the
+single-seed differences should be read. The primary metric per corpus
+follows the established convention for that task: AUC-PR for the three
+seizure corpora, Cohen's $\kappa$ for TUEV, IIIC, TUAR and the two sleep
+corpora, balanced accuracy for TUAB, ADFD and CAUEEG, and AUROC for TUEP;
+balanced accuracy, weighted F1 and AUROC are reported alongside in the
+appendix. Learned gate values ($\boldsymbol{\beta}$, $\gamma$ of
+Eq.~(\ref{eq:duplex})) are reported per corpus as measurements of how much
+coupling each task retained.

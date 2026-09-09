@@ -1,0 +1,94 @@
+\section{Introduction}
+\label{sec:intro}
+
+EEG foundation models tokenize a recording before they model it, and the
+choice of what a token carries decides what the model can learn cheaply and
+what it can learn only by accident. Across the current generation the
+choice varies in how much of the signal survives tokenization --- magnitude
+spectrograms \citep{yang2023biot,pradeepkumar2026tfm}, raw patches
+\citep{wang2025cbramod,wang2024eegpt}, per-bin spectral amplitude and phase
+\citep{jiang2024labram} --- but not in one respect: every token describes
+one frequency band, or one patch of the broadband waveform, on its own. No
+token type represents the \emph{relation} between two bands.
+
+That relation is not an exotic quantity. Phase--amplitude coupling, the
+locking of a fast band's envelope to the phase of a slow rhythm, has a
+standard estimator \citep{tort2010measuring}, a physiology documented for
+two decades \citep{canolty2006high,canolty2010functional}, and direct
+clinical relevance to precisely the tasks foundation models are evaluated
+on: it is stronger in the seizure onset zone than in unaffected tissue,
+interictally as well as ictally \citep{amiri2016phase}, and periodic
+epileptiform discharges are, by definition, fast activity riding a slow
+rhythm. A representation from which such a quantity could in principle be
+decoded is not yet one that encodes it. Magnitude tokenizers make it hard
+to reach, because re-deriving phase from overlapping magnitude frames is a
+phase-retrieval problem \citep{griffin1984signal} that nothing in the
+pipeline performs; waveform tokenizers keep it reachable but give the
+encoder no incentive to extract it, and probing studies find that the
+resulting embeddings under-represent exactly the oscillatory structure
+such relations live in \citep{kommineni2026aperiodic}.
+
+This paper puts the relation into the token and asks a question that turns
+out to have a sharp answer: \emph{when does a model need it there?} We
+build a tokenizer that decomposes each electrode into learned frequency
+bands, measures the coupling between them per patch, and hands it to the
+encoder as a first-class token with three guarantees (phase-reference
+invariance, magnitude preservation, exact recoverability of the uncoupled
+model). We then hold the tokenizer fixed and vary the encoder. An encoder
+that attends along a frequency axis can compute cross-band relations for
+itself, and for it the coupling token is redundant on eleven of twelve
+corpora. A published foundation-model encoder that keeps its own spectral
+branch behaves the same way. An encoder with \emph{no} cross-frequency
+pathway --- no frequency axis, no spectral branch, bands meeting only
+inside the spatial attention --- makes the token load-bearing: removing it
+costs between $0.03$ and $0.14$ on every one of the four corpora on which
+we measure it. Coupling is therefore worth carrying as \emph{content}
+exactly when the encoder does not supply it as \emph{structure}, and the
+model built on that principle is the smallest and, on seizure detection,
+the strongest in our comparison.
+
+\paragraph{Contributions.}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item \textbf{Cross-frequency coupling as token content.} Each band
+  contributes a waveform token and an interaction token built from the
+  band's measured coupling to slower bands; the interaction token is
+  invariant to the phase reference of the analysis, preserves band energy
+  exactly, and is gated so that the uncoupled model is an exactly
+  reachable configuration (Section~\ref{sec:tokenizer}).
+\item \textbf{An axis-free encoder designed for it, and the attribution
+  that goes with it.} CroFreMo folds the band rows into spatial attention
+  and has no frequency sub-layer; at 2.7M parameters it is competitive
+  with 25--69M foundation models on twelve clinical corpora and ahead of
+  the strongest reproduced baseline by $0.15$ and $0.09$ AUC-PR on the two
+  seizure-detection corpora with adequate positives. With the encoder
+  fixed, switching the coupling token off costs $0.136$ on CHB-MIT,
+  $0.107$ on TUEV, $0.063$ on TUSZ and $0.027$ on IIIC
+  (Section~\ref{sec:attribution}): the seizure margin is made of coupling
+  content.
+\item \textbf{Content versus structure, measured across three encoders.}
+  The same token inside a tri-axial encoder with a frequency axis is
+  decisive on one corpus and neutral on the rest; added to CBraMod's
+  encoder next to its own spectral branch, it is attributable on
+  event-classification corpora and harmful on seizure detection; inside
+  the axis-free encoder it is necessary everywhere we look
+  (Section~\ref{sec:content-structure}). The scope of a tokenizer claim is
+  set by the encoder it is paired with, and we report it that way.
+\item \textbf{A pretraining study reported to convergence rather than
+  assumed.} We construct the masked-reconstruction objective that
+  supervises coupling directly, evaluate it with lr-matched frozen probes,
+  label-fraction curves and clean-transfer controls, and report the
+  pretrained tri-axial model under one fixed finetuning recipe: it helps
+  where labels are scarce and hurts where they are plentiful
+  (Section~\ref{sec:pretrain-results}).
+\end{itemize}
+
+Two boundaries are stated up front. The axis-free model wins or ties on
+the six corpora whose label is a paroxysmal event, a pattern, or a
+recording-level abnormality, and loses to a pretrained or a larger
+from-scratch model on sleep staging, cohort-level diagnosis, artifact
+labelling and the smallest seizure corpus; those six cells are reported,
+not averaged away. And the cells of the axis-free model are single-seed
+at the time of writing, against three-seed baselines; the attribution
+effects are several times the seed variance we measure on the same
+corpora, the main-table margins on the small corpora are not, and the
+text says which is which.

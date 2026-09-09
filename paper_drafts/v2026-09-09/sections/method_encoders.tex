@@ -1,0 +1,48 @@
+\subsection{Encoders: cross-frequency structure, or none}
+\label{sec:encoder}
+
+The grid $(C \times 2n_b \times P \times d)$ can be processed by an encoder
+that supplies cross-frequency relations itself, or by one that does not.
+We build both, with the same tokenizer, the same recipe and the same
+mean-pooled linear head, because the difference between them is the
+experiment of Section~\ref{sec:content-structure}.
+
+\paragraph{Tri-axial encoder (structure).}
+$N$ pre-norm blocks each apply self-attention along one axis at a time ---
+time (with rotary position encoding), electrodes (with a learned
+per-electrode embedding), and the $2n_b$ frequency rows (with an embedding
+of each band's learned center frequency and bandwidth) --- followed by a
+feed-forward layer, each as a residual. The frequency sub-layer is plain
+attention over rows: it gives the encoder a path along which it can
+compute any cross-band relation from the waveform rows on its own, so the
+interaction token competes with structure that can re-derive it. We use
+$n_b{=}8$, $d{=}128$, $N{=}6$, four heads, 1.6M parameters.
+
+\paragraph{Axis-free encoder (content only).}
+The final model removes the frequency sub-layer entirely and folds the band
+rows into the spatial one: in each block, attention runs first along time
+per (electrode, row), then jointly over the $C \cdot 2n_b$ tokens of each
+patch, then through the feed-forward layer. Rows of different bands meet
+only inside this folded spatial attention, which carries no band
+embedding and no frequency-specific parameters. The encoder therefore has
+no pathway of its own for cross-frequency relations; the only place such a
+relation can enter is the interaction token of Eq.~(\ref{eq:rotation}),
+and switching that token off (Proposition~\ref{prop:recover}) leaves a
+model that sees eight bands as eight unrelated channels. Width is raised
+to $d{=}192$ to spend the parameters the frequency sub-layer no longer
+uses; $N{=}6$, four heads, 2.7M parameters. Section~\ref{sec:design}
+reports the alternatives (no folding, $d{=}256$, an explicit
+coupling-strength feature) that were tried and not adopted.
+
+\paragraph{The token inside a published encoder.}
+To test the same distinction in an encoder we did not design, we add the
+tokenizer's rows to CBraMod \citep{wang2025cbramod} without removing
+anything: CBraMod's patch embedding (a convolutional stem plus an rFFT
+magnitude branch), its criss-cross encoder, positional convolution and
+classifier are kept verbatim, and each electrode receives $n_b$ extra
+channels carrying either the $n_b$ interaction tokens or, as the matched
+control, the $n_b$ waveform tokens of the same frontend. The two arms have
+the same parameter count and the same token count and differ only in what
+the extra rows carry. CBraMod's own spectral branch remains in place, so
+this encoder, unlike the axis-free one, is never starved of
+cross-frequency information.

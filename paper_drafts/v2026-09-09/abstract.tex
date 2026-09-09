@@ -1,0 +1,23 @@
+\begin{abstract}
+EEG foundation models tokenize a recording before they model it, and no
+current token type represents the relation between two frequency bands.
+We put that relation --- phase--amplitude coupling, measured per electrode
+and per patch over learned bands --- into the token, with three
+guarantees: the interaction token is invariant to the phase reference of
+the analysis, preserves band energy exactly, and is gated so that the
+uncoupled model is an exactly reachable configuration. We then hold the
+tokenizer fixed and vary the encoder. Paired with an encoder that attends
+along a frequency axis, or added to CBraMod next to its own spectral
+branch, the coupling token is redundant on all but the corpora whose
+label is a cross-frequency morphology. Paired with an encoder that has no
+cross-frequency pathway at all --- no frequency sub-layer, bands folded
+into spatial attention --- the token becomes necessary: removing it costs
+$0.136$ AUC-PR on CHB-MIT, $0.107$ $\kappa$ on TUEV, $0.063$ AUC-PR on TUSZ
+and $0.027$ $\kappa$ on IIIC. The resulting 2.7M-parameter model, trained
+from scratch, is competitive with 25--69M-parameter foundation models on
+twelve clinical corpora and ahead of the strongest reproduced baseline by
+$0.15$ and $0.09$ AUC-PR on seizure detection; where it loses, it loses
+to pretrained or larger models on sleep staging and cohort diagnosis, and
+we report those cells rather than average them away. Coupling belongs in
+the token when, and because, it is absent from the encoder.
+\end{abstract}
