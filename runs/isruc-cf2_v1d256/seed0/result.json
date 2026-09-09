@@ -1,0 +1,139 @@
+{
+  "name": "isruc-cf2_v1d256",
+  "dataset": "isruc",
+  "model": "paclock",
+  "group": "cf2",
+  "seed": 0,
+  "n_params_M": 4.783389,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7613885845584625,
+    "cohen_kappa": 0.700262311655717,
+    "weighted_f1": 0.7667907462612938
+  },
+  "best_val": 0.7265854456341051,
+  "val_curve": [
+    0.6636135188611871,
+    0.6948256477285354,
+    0.6990340080446543,
+    0.6874189975993512,
+    0.7160174797465183,
+    0.7021644666968789,
+    0.7167858623398685,
+    0.7122889741206675,
+    0.7144626714914708,
+    0.7265854456341051,
+    0.7023775330867356,
+    0.7147944737901903,
+    0.6928096277749978,
+    0.7035360577153287,
+    0.7043112920939149,
+    0.6932881250621762,
+    0.6992081704306411,
+    0.6918699462832495,
+    0.6920122628556999,
+    0.6918349460195437
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 9,
+    "n_evals": 20,
+    "best_val": 0.7265854456341051,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 50408.74658918381,
+  "config": {
+    "name": "isruc-cf2_v1d256",
+    "group": "cf2",
+    "dataset": "isruc",
+    "data_root": "$PACLOCK_PROC/processed/isruc",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 5,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 200,
+    "flatten_sequences": true,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 256,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "none",
+      "band_pe": "index",
+      "tokenizer_mode": "duplex",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "index",
+      "pac_patch_len": 50,
+      "space_over_bands": true
+    },
+    "seed": 0,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+  "class_counts": {
+    "train": [
+      16493,
+      9147,
+      21310,
+      13234,
+      9236
+    ],
+    "val": [
+      2072,
+      1015,
+      3226,
+      1980,
+      1067
+    ],
+    "test": [
+      1348,
+      1031,
+      3120,
+      1808,
+      1393
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      0.3057480752468109,
+      0.5033164620399475,
+      0.4053691625595093,
+      0.4331604838371277,
+      0.5013856291770935,
+      0.7974773645401001,
+      0.9179443717002869,
+      0.48565179109573364
+    ],
+    "gamma": [
+      1.0299004316329956,
+      0.9990625977516174,
+      1.015463948249817,
+      1.0060418844223022,
+      1.0704617500305176,
+      1.128649115562439,
+      1.1278636455535889,
+      1.0498679876327515
+    ]
+  }
+}
