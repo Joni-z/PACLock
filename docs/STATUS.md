@@ -158,3 +158,5 @@ GPED 0.59→0.83、PLED 0.50→0.58、SPSW 0.07→0.20,macro-F1 0.48→0.58);Ove
 配置 `configs/cf2/{tuev,iiic,tusz,chbmit}_cf2_v1d192own.yaml`,amd 一个节点,单 seed。
 **事先写下的读法**:own ≈ duplex → 收益来自解析信号特征(幅度+相位),跨频对齐不是原因,摘要归因改写为"解析信号前端";
 own ≈ waveform-only < duplex → 跨频对齐本身带来增益;介于两者之间 → 两者各占一部分,按差值报。token 数对照引用 CBraMod 加行实验(同八行,波形 vs 交互)。
+**09-11 05:30,Zhizhe:重预训练这条线在他考虑完之前一切停止——12k 步明显不成立,要跑就跑完整预算。** 已撤 CHB-MIT/TUSZ 两个未完成的
+微调(FT_ds4_b);amd/b2 上该线无任何任务、无自动投递。已落地的 TUEV/IIIC 两格仅作记录。保留这条线时不得再投任何任务。
