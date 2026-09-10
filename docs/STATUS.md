@@ -179,3 +179,12 @@ clip 1、batch 128、**40 epoch = 219,000 步**,池 = `tueg_slice_clean`(700,126
 
 **算力**:切片正经 Mac 中转从 b2 流向 amd(89.6 GB,`stream_slice.sh`),amd /work1 有 133 TB 空闲;到位后 native 单卡(≈8 h)、
 crofremo 4 卡 DP(≈20 h,续跑链)、我们的模型探针后定步数。全部在 amd,不用 b2 的 SU。
+
+## 20. 补 seed 到 3(2026-09-11 Zhizhe 指示:只补进论文表格的实验)
+
+清单 `results/seed_plan_2026-09-11.json`(127 个缺失的 (实验, seed)):定稿模型 12 语料 ×2、消融(waveform-only / d256 / d256-raw / own)4 语料、
+CBraMod 加行 5 语料 ×2 臂、CBraMod 替换 tuev/tusz、LaBraM 换头 3 语料、REVE 从零与换头 tuev/iiic、TUAB 三轴、TUAR 全部 baseline 单 seed 格。
+不补:设计变体表(思路性消融)、CBraMod 官方权重版、d128 阶段一变体。
+**amd**:113 个任务、29 个打包节点已投(SEED_00..28),收集器 `wait_set.sh` 盯 `results/seed_amd_targets.txt`。
+**torch 待投**(MI210 上跑不进 24 h 的 10 个:CBraMod add_raw/add_cpl × tusz/chbmit × seed 1,2 + tusz crofremo_bands × seed 1,2):
+`results/seed_torch_pending.txt`,等 torch 会话重连后用 `torch_run.slurm <cfg> <seed>` 投。
