@@ -1,0 +1,77 @@
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Seizure detection. Mean $\pm$ std over three seeds; a superscript gives the seed count when fewer. Best per column in bold.}
+\label{tab:seizure}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{Method} & \multicolumn{3}{c}{TUSZ} & \multicolumn{3}{c}{CHB-MIT} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+ & Bal.\ Acc. & AUC-PR & AUROC & Bal.\ Acc. & AUC-PR & AUROC \\
+\midrule
+SPaRCNet & 0.5609 $\pm$ 0.0380 & 0.5020 $\pm$ 0.0213 & 0.8888 $\pm$ 0.0018 & 0.5127 $\pm$ 0.0079 & 0.1976 $\pm$ 0.0715 & 0.7995 $\pm$ 0.0374 \\
+ContraWR & 0.5601 $\pm$ 0.0176 & 0.5043 $\pm$ 0.0175 & 0.8871 $\pm$ 0.0035 & 0.6362 $\pm$ 0.0168 & 0.5072 $\pm$ 0.0360 & 0.8905 $\pm$ 0.0239 \\
+CNN-Transformer & 0.5389 $\pm$ 0.0548 & 0.3707 $\pm$ 0.1934 & 0.8455 $\pm$ 0.0420 & \textbf{0.6420 $\pm$ 0.0583} & 0.5057 $\pm$ 0.0741 & 0.9106 $\pm$ 0.0083 \\
+FFCL & 0.5953 $\pm$ 0.0334 & 0.5449 $\pm$ 0.0296 & 0.8924 $\pm$ 0.0112 & 0.6163 $\pm$ 0.0146 & 0.5341 $\pm$ 0.0540 & 0.9124 $\pm$ 0.0107 \\
+ST-Transformer & 0.5514 $\pm$ 0.0424 & 0.3589 $\pm$ 0.0314 & 0.8148 $\pm$ 0.0199 & 0.5551 $\pm$ 0.1040 & 0.2407 $\pm$ 0.1134 & 0.7208 $\pm$ 0.1037 \\
+EEGNet & 0.5215 $\pm$ 0.0111 & 0.4921 $\pm$ 0.0302 & 0.8727 $\pm$ 0.0039 & 0.6016 $\pm$ 0.1455 & 0.1406 $\pm$ 0.1345 & 0.7442 $\pm$ 0.1100 \\
+EEGConformer & 0.5216 $\pm$ 0.0374 & 0.3190 $\pm$ 0.0376 & 0.8186 $\pm$ 0.0283 & 0.5000 $\pm$ 0.0000 & 0.3054 $\pm$ 0.2530 & 0.5974 $\pm$ 0.1680 \\
+\midrule
+\multicolumn{7}{l}{\textit{Foundation models, released pretrained weights}} \\
+BIOT & 0.5634 $\pm$ 0.0328 & 0.3379 $\pm$ 0.0379 & 0.8382 $\pm$ 0.0135 & 0.6190 $\pm$ 0.0447 & 0.5601 $\pm$ 0.0771 & 0.8738 $\pm$ 0.0036 \\
+LaBraM-Base & 0.6139 $\pm$ 0.0378 & 0.4754 $\pm$ 0.0473 & 0.8687 $\pm$ 0.0252 & 0.5855 $\pm$ 0.0474 & 0.4519 $\pm$ 0.0969 & 0.8709 $\pm$ 0.0621 \\
+CBraMod & 0.6347 $\pm$ 0.0342 & 0.4344 $\pm$ 0.0424 & 0.8520 $\pm$ 0.0050 & 0.5446 $\pm$ 0.0198 & 0.2332 $\pm$ 0.0978 & 0.7828 $\pm$ 0.0474 \\
+EEGPT & 0.6587 $\pm$ 0.0619 & 0.5446 $\pm$ 0.0704 & 0.8821 $\pm$ 0.0122 & 0.5468 $\pm$ 0.0632 & 0.2811 $\pm$ 0.1325 & 0.8574 $\pm$ 0.0378 \\
+TFM-Tokenizer & 0.5645 $\pm$ 0.0275 & 0.3474 $\pm$ 0.0185 & 0.8286 $\pm$ 0.0059 & 0.6344 $\pm$ 0.0163 & 0.6269 $\pm$ 0.0251 & \textbf{0.9291 $\pm$ 0.0055} \\
+REVE-Base & 0.5523 $\pm$ 0.0372 & 0.5026 $\pm$ 0.0746 & 0.8885 $\pm$ 0.0158 & 0.6320 $\pm$ 0.0675 & 0.5802 $\pm$ 0.1956 & 0.8977 $\pm$ 0.0641 \\
+\midrule
+\multicolumn{7}{l}{\textit{Foundation models, trained from scratch}} \\
+BIOT & 0.6156 $\pm$ 0.0645 & 0.3475 $\pm$ 0.0258 & 0.8256 $\pm$ 0.0166 & 0.6240 $\pm$ 0.0711 & 0.5661 $\pm$ 0.0722 & 0.8748 $\pm$ 0.0185 \\
+LaBraM-Base & 0.5814 $\pm$ 0.0355 & 0.4752 $\pm$ 0.0477 & 0.8575 $\pm$ 0.0191 & 0.5854 $\pm$ 0.0649 & 0.3596 $\pm$ 0.0498 & 0.8226 $\pm$ 0.0298 \\
+CBraMod & 0.5761 $\pm$ 0.0494 & 0.4818 $\pm$ 0.0522 & 0.8753 $\pm$ 0.0334 & 0.6018 $\pm$ 0.0883 & 0.3169 $\pm$ 0.2050 & 0.7802 $\pm$ 0.1333 \\
+\midrule
+CroFreMo (2.7M) & \textbf{0.6901$^{(1)}$} & \textbf{0.6979$^{(1)}$} & \textbf{0.9285$^{(1)}$} & 0.5308$^{(1)}$ & \textbf{0.7163$^{(1)}$} & 0.9288$^{(1)}$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Epileptiform event and pattern classification. Format as in Table~\ref{tab:seizure}.}
+\label{tab:events}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{Method} & \multicolumn{3}{c}{TUEV, 6-class} & \multicolumn{3}{c}{IIIC, 6-class} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+ & Bal.\ Acc. & Cohen's $\kappa$ & Weighted F1 & Bal.\ Acc. & Cohen's $\kappa$ & Weighted F1 \\
+\midrule
+SPaRCNet & 0.4654 $\pm$ 0.0346 & 0.4885 $\pm$ 0.0279 & 0.7354 $\pm$ 0.0146 & 0.4767 $\pm$ 0.0103 & 0.3719 $\pm$ 0.0118 & 0.4791 $\pm$ 0.0113 \\
+ContraWR & 0.4195 $\pm$ 0.1258 & 0.4076 $\pm$ 0.0984 & 0.6962 $\pm$ 0.0455 & 0.5121 $\pm$ 0.0072 & 0.4135 $\pm$ 0.0053 & 0.5149 $\pm$ 0.0047 \\
+CNN-Transformer & 0.3679 $\pm$ 0.1026 & 0.4098 $\pm$ 0.1165 & 0.6916 $\pm$ 0.0744 & 0.5148 $\pm$ 0.0084 & 0.4162 $\pm$ 0.0095 & 0.5131 $\pm$ 0.0143 \\
+FFCL & 0.4376 $\pm$ 0.0687 & 0.4776 $\pm$ 0.0322 & 0.7366 $\pm$ 0.0169 & 0.5200 $\pm$ 0.0176 & 0.4231 $\pm$ 0.0197 & 0.5240 $\pm$ 0.0167 \\
+ST-Transformer & 0.4731 $\pm$ 0.0199 & 0.5006 $\pm$ 0.0117 & 0.7411 $\pm$ 0.0087 & 0.4065 $\pm$ 0.0025 & 0.2961 $\pm$ 0.0021 & 0.4084 $\pm$ 0.0081 \\
+EEGNet & 0.4152 $\pm$ 0.0575 & 0.4788 $\pm$ 0.0908 & 0.7389 $\pm$ 0.0367 & -- & -- & -- \\
+EEGConformer & 0.4212 $\pm$ 0.0454 & 0.4548 $\pm$ 0.0041 & 0.7166 $\pm$ 0.0059 & -- & -- & -- \\
+\midrule
+\multicolumn{7}{l}{\textit{Foundation models, released pretrained weights}} \\
+BIOT & 0.4894 $\pm$ 0.0302 & 0.5304 $\pm$ 0.0277 & 0.7532 $\pm$ 0.0158 & 0.4650 $\pm$ 0.0154 & 0.3605 $\pm$ 0.0163 & 0.4665 $\pm$ 0.0128 \\
+LaBraM-Base & 0.6305 $\pm$ 0.0306 & 0.5984 $\pm$ 0.0031 & 0.8086 $\pm$ 0.0048 & 0.4830 $\pm$ 0.0177 & 0.3834 $\pm$ 0.0204 & 0.4852 $\pm$ 0.0189 \\
+CBraMod & 0.6029 $\pm$ 0.0108 & 0.6449 $\pm$ 0.0217 & 0.8130 $\pm$ 0.0117 & 0.4161 $\pm$ 0.0151 & 0.3133 $\pm$ 0.0191 & 0.4178 $\pm$ 0.0179 \\
+EEGPT & 0.5131 $\pm$ 0.0750 & 0.5736 $\pm$ 0.0396 & 0.7766 $\pm$ 0.0200 & 0.4965 $\pm$ 0.0179 & 0.3966 $\pm$ 0.0195 & 0.4996 $\pm$ 0.0138 \\
+TFM-Tokenizer & 0.5959 $\pm$ 0.0359 & 0.6519 $\pm$ 0.0209 & 0.8171 $\pm$ 0.0105 & 0.5058 $\pm$ 0.0094 & 0.4060 $\pm$ 0.0090 & 0.5080 $\pm$ 0.0066 \\
+REVE-Base & \textbf{0.6477 $\pm$ 0.0183} & \textbf{0.6846 $\pm$ 0.0389} & \textbf{0.8378 $\pm$ 0.0187} & 0.5290 $\pm$ 0.0032 & 0.4363 $\pm$ 0.0030 & 0.5338 $\pm$ 0.0025 \\
+\midrule
+\multicolumn{7}{l}{\textit{Foundation models, trained from scratch}} \\
+BIOT & 0.5351 $\pm$ 0.0625 & 0.5324 $\pm$ 0.0250 & 0.7612 $\pm$ 0.0126 & 0.4601 $\pm$ 0.0137 & 0.3557 $\pm$ 0.0144 & 0.4618 $\pm$ 0.0151 \\
+LaBraM-Base & 0.3724 $\pm$ 0.0853 & 0.3717 $\pm$ 0.0089 & 0.6928 $\pm$ 0.0133 & 0.5047 $\pm$ 0.0045 & 0.4057 $\pm$ 0.0067 & 0.5038 $\pm$ 0.0059 \\
+CBraMod & 0.5744 $\pm$ 0.0105 & 0.5638 $\pm$ 0.0236 & 0.7671 $\pm$ 0.0041 & 0.4892 $\pm$ 0.0050 & 0.3935 $\pm$ 0.0058 & 0.4975 $\pm$ 0.0043 \\
+EEGPT & -- & -- & -- & 0.4717 $\pm$ 0.0214 & 0.3680 $\pm$ 0.0236 & 0.4762 $\pm$ 0.0203 \\
+TFM-Tokenizer & -- & -- & -- & 0.3848 $\pm$ 0.0064 & 0.2627 $\pm$ 0.0081 & 0.3806 $\pm$ 0.0094 \\
+\midrule
+CroFreMo (2.7M) & 0.5831$^{(1)}$ & 0.6804$^{(1)}$ & 0.8338$^{(1)}$ & \textbf{0.5405$^{(1)}$} & \textbf{0.4468$^{(1)}$} & \textbf{0.5497$^{(1)}$} \\
+\bottomrule
+\end{tabular}}
+\end{table}
