@@ -1,0 +1,112 @@
+{
+  "name": "iiic-labram_crofremo",
+  "dataset": "iiic",
+  "model": "labram_paclockfe",
+  "group": "cf1",
+  "seed": 0,
+  "n_params_M": 5.862958,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5183160918869086,
+    "cohen_kappa": 0.420163711609438,
+    "weighted_f1": 0.5093021708391295
+  },
+  "best_val": 0.4549975771219986,
+  "val_curve": [
+    0.14337516540037976,
+    0.23706335744119733,
+    0.3352817986089466,
+    0.35630870595328834,
+    0.3715034844617754,
+    0.3658335703582287,
+    0.42744593448311485,
+    0.4379240118660468,
+    0.44193490337928354,
+    0.4502321966382664,
+    0.4549975771219986,
+    0.41718576352297476,
+    0.43381232809543935,
+    0.4310214951626843,
+    0.44083525770135745,
+    0.43244067044021195,
+    0.40069473248472953,
+    0.40313749284249556,
+    0.4038346348687333,
+    0.4239802416983781,
+    0.43008660098740314
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 21,
+    "best_val": 0.4549975771219986,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 21,
+  "stopped_by": "patience",
+  "wall_time_sec": 37152.49300003052,
+  "config": {
+    "name": "iiic-labram_crofremo",
+    "group": "cf1",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "model": "labram_paclockfe",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 16,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 0,
+    "label_smoothing": 0.1,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000,
+      "tokenizer_mode": "pac_interaction",
+      "interaction_mode": "rotation"
+    },
+    "max_hours": 22.0,
+    "accum_steps": 4
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}
