@@ -1,0 +1,90 @@
+\documentclass{article} % For LaTeX2e
+\usepackage{iclr2027_conference,times}
+
+% Optional math commands from https://github.com/goodfeli/dlbook_notation.
+\input{math_commands.tex}
+
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow}
+
+\title{Cross-Frequency Coupling as Token Content: Encoder-Dependent Benefits for Clinical EEG}
+
+% The style file IGNORES this block entirely while \iclrfinalcopy is
+% commented out -- it prints "Anonymous authors / Paper under double-blind
+% review" instead (iclr2027_conference.sty line 100). The name below is
+% therefore invisible in the submitted PDF, but it IS in this source file:
+% do not ship the .tex as supplementary material.
+\author{%
+Zhizhe Zhang \\
+NYU Shanghai \\
+Shanghai, China \\
+\texttt{zz5070@nyu.edu} \\
+\And
+Yifan Wang \\
+Stony Brook University \\
+Stony Brook, NY, USA \\
+\texttt{yifan.wang.5@stonybrook.edu}
+}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+% Uncomment ONLY for the camera-ready version of an ACCEPTED paper.
+% Uncommenting it for the submission de-anonymises the PDF and the paper is
+% rejected without review.
+%\iclrfinalcopy
+
+\usepackage{amsthm}
+\newtheorem{proposition}{Proposition}
+\usepackage{enumitem}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+EEG foundation models tokenize a recording before they model it, and no
+current token type represents the relation between two frequency bands.
+We put that relation --- phase--amplitude coupling, measured per electrode
+and per patch over learned bands --- into the token. The interaction token
+is invariant to the phase reference of the analysis for every band that
+has a slower band to align to, preserves each band's amplitude features
+exactly, and is gated so that the coupling content can be switched off
+within one parameterization. We then hold the tokenizer fixed and vary
+the encoder. In a small encoder built around the token --- no frequency
+sub-layer, bands folded into spatial attention --- the duplex tokenizer
+improves on a waveform-only one by $0.136$ AUC-PR on CHB-MIT, $0.107$
+$\kappa$ on TUEV, $0.063$ AUC-PR on TUSZ and $0.027$ $\kappa$ on IIIC. In place of the native
+tokenizer, it lifts LaBraM and REVE trained from scratch by $0.15$ and
+$0.24$ $\kappa$ on TUEV; added to CBraMod next to its own spectral branch,
+the gains are smaller and corpus-dependent. The 2.7M-parameter model,
+trained from scratch, is competitive with 25--69M-parameter foundation
+models on twelve clinical corpora and ahead of the strongest reproduced
+baseline by $0.15$ and $0.09$ AUC-PR on seizure detection; where it loses,
+it loses to pretrained or larger models on sleep staging and cohort
+diagnosis. The benefit of explicit cross-frequency content depends on the
+encoder's inductive bias, and we report it across four encoders.
+\end{abstract}
+
+\input{sections/intro}
+\input{sections/related_work}
+\input{sections/method}
+\input{sections/setup}
+\input{sections/results}
+\input{sections/conclusion}
+
+% The three statements below do NOT count toward the 9-page limit.
+% "AI use statement" is REQUIRED by ICLR 2027; the other two are recommended.
+\input{sections/statements}
+
+\bibliography{iclr2027_conference}
+\bibliographystyle{iclr2027_conference}
+
+\appendix
+\input{sections/appendix}
+
+\end{document}

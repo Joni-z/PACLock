@@ -1,0 +1,26 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We gave an EEG tokenizer the one relation its tokens never carry, the
+coupling between frequency bands, and measured what a clinical model
+gains from having it explicitly. In a small encoder built around the
+token, the duplex tokenizer improves on a waveform-only one by $0.03$ to
+$0.14$ on every corpus on which we measure it, and the model, at 2.7M parameters,
+leads the strongest reproduced foundation-model baselines by $0.15$ and
+$0.09$ AUC-PR on seizure detection while matching them on event
+classification and recording-level abnormality. In place of the native
+tokenizer, the token lifts two published encoders trained from scratch
+by $0.15$ and $0.24$ $\kappa$ on epileptiform event classification; added
+next to an encoder's own spectral branch, the gains are smaller and
+corpus-dependent. Where the model loses --- sleep staging, cohort
+diagnosis, artifacts, and the smallest seizure corpus --- it loses to
+pretrained or larger models. The benefit of explicit cross-frequency
+content therefore depends on the encoder's inductive bias, and a
+tokenizer claim is only as broad as the set of encoders on which it is
+tested; we have reported ours across four. What this work does not yet
+establish is how much of that gain is the cross-frequency alignment
+rather than the explicit envelope the interaction rows also carry, nor
+the physiological reading of the statistic the token carries: the coupling is measured at patch resolution over learned bands,
+and separating genuine cross-frequency interaction from co-varying
+non-stationarity, as well as reporting event-level sensitivity and
+false-alarm rates for the seizure corpora, is left to future work.

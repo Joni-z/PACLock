@@ -1,0 +1,296 @@
+\appendix
+\section{Full comparison matrix}
+\label{app:matrix}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Full comparison matrix (part 1). Generated from the per-run result files: mean $\pm$ sample standard deviation over three seeds; a superscript gives the seed count when fewer. ``--'' = not run.}
+\begin{tabular}{lcccccc}
+\toprule
+Model & TUSZ (AUC-PR) & CHB-MIT (AUC-PR) & Siena (AUC-PR) & TUEV ($\kappa$) & IIIC ($\kappa$) & TUAR ($\kappa$) \\
+\midrule
+SPaRCNet & $0.502 \pm 0.021$ & $0.198 \pm 0.071$ & $0.357 \pm 0.042$ & $0.488 \pm 0.028$ & $0.372 \pm 0.012$ & $0.601^{(1)}$ \\
+ContraWR & $0.504 \pm 0.017$ & $0.507 \pm 0.036$ & $0.451 \pm 0.062$ & $0.408 \pm 0.098$ & $0.413 \pm 0.005$ & $0.663^{(1)}$ \\
+CNN-Transformer & $0.371 \pm 0.193$ & $0.506 \pm 0.074$ & $0.423 \pm 0.100$ & $0.410 \pm 0.116$ & $0.416 \pm 0.009$ & $0.712^{(1)}$ \\
+FFCL & $0.545 \pm 0.030$ & $0.534 \pm 0.054$ & $0.421 \pm 0.102$ & $0.478 \pm 0.032$ & $0.423 \pm 0.020$ & $0.696^{(1)}$ \\
+ST-Transformer & $0.359 \pm 0.031$ & $0.241 \pm 0.113$ & $0.218 \pm 0.185$ & $0.501 \pm 0.012$ & $0.296 \pm 0.002$ & $0.521^{(1)}$ \\
+EEGNet (tuned) & $0.492 \pm 0.030$ & $0.141 \pm 0.135$ & -- & $0.479 \pm 0.091$ & -- & -- \\
+EEGConformer (tuned) & $0.319 \pm 0.038$ & $0.305 \pm 0.253$ & -- & $0.455 \pm 0.004$ & -- & -- \\
+BIOT (pretrained) & $0.338 \pm 0.038$ & $0.560 \pm 0.077$ & $0.090 \pm 0.019$ & $0.530 \pm 0.028$ & $0.361 \pm 0.016$ & $0.540^{(2)}$ \\
+LaBraM-Base (pretrained) & $0.475 \pm 0.047$ & $0.452 \pm 0.097$ & $0.303 \pm 0.019$ & $0.598 \pm 0.003$ & $0.383 \pm 0.020$ & $0.593^{(1)}$ \\
+CBraMod (pretrained) & $0.434 \pm 0.042$ & $0.233 \pm 0.098$ & $0.424 \pm 0.064$ & $0.645 \pm 0.022$ & $0.313 \pm 0.019$ & $0.715^{(1)}$ \\
+TFM-Tokenizer & $0.347 \pm 0.018$ & $0.627 \pm 0.025$ & $0.060 \pm 0.012$ & $0.652 \pm 0.021$ & $0.406 \pm 0.009$ & $0.648^{(1)}$ \\
+REVE-Base (pretrained) & $0.503 \pm 0.075$ & $0.580 \pm 0.196$ & $0.518 \pm 0.117$ & $0.685 \pm 0.039$ & $0.436 \pm 0.003$ & -- \\
+CSBrain (pretrained) & -- & -- & -- & -- & -- & -- \\
+BIOT (scratch) & $0.347 \pm 0.026$ & $0.566 \pm 0.072$ & $0.167 \pm 0.045$ & $0.532 \pm 0.025$ & $0.356 \pm 0.014$ & $0.499^{(1)}$ \\
+LaBraM-Base (scratch) & $0.475 \pm 0.048$ & $0.360 \pm 0.050$ & $0.491 \pm 0.012$ & $0.372 \pm 0.009$ & $0.406 \pm 0.007$ & $0.527^{(1)}$ \\
+CBraMod (scratch) & $0.482 \pm 0.052$ & $0.317 \pm 0.205$ & $0.199 \pm 0.061$ & $0.564 \pm 0.024$ & $0.393 \pm 0.006$ & $0.650^{(1)}$ \\
+CroFreMo tri-axial (scratch) & $0.639 \pm 0.035$ & $0.698 \pm 0.055$ & $0.170 \pm 0.086$ & $0.690 \pm 0.036$ & $0.479 \pm 0.009$ & $0.620 \pm 0.037$ \\
+EEGPT (scratch) & -- & -- & $0.128 \pm 0.031$ & -- & $0.368 \pm 0.024$ & $0.582^{(1)}$ \\
+TFM-Tokenizer (scratch) & -- & -- & $0.012 \pm 0.009$ & -- & $0.263 \pm 0.008$ & $0.364^{(1)}$ \\
+CroFreMo axis-free (final) & $0.698^{(1)}$ & $0.716^{(1)}$ & $0.201^{(1)}$ & $0.680^{(1)}$ & $0.447^{(1)}$ & $0.600^{(1)}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Full comparison matrix (part 2). Generated from the per-run result files: mean $\pm$ sample standard deviation over three seeds; a superscript gives the seed count when fewer. ``--'' = not run.}
+\begin{tabular}{lcccccc}
+\toprule
+Model & TUAB (bal.\ acc.) & TUEP (AUROC) & ADFD (bal.\ acc.) & CAUEEG (bal.\ acc.) & Sleep-EDF ($\kappa$) & ISRUC ($\kappa$) \\
+\midrule
+SPaRCNet & $0.792 \pm 0.011$ & $0.731 \pm 0.010$ & $0.383 \pm 0.008$ & $0.441 \pm 0.046$ & $0.671 \pm 0.012$ & $0.735 \pm 0.020$ \\
+ContraWR & $0.789 \pm 0.002$ & $0.646 \pm 0.063$ & $0.449 \pm 0.024$ & $0.532 \pm 0.039$ & $0.692 \pm 0.015$ & $0.752 \pm 0.006$ \\
+CNN-Transformer & $0.782 \pm 0.039$ & $0.663 \pm 0.014$ & $0.480 \pm 0.016$ & $0.512 \pm 0.023$ & $0.678 \pm 0.014$ & $0.753 \pm 0.007$ \\
+FFCL & $0.765 \pm 0.040$ & $0.641 \pm 0.053$ & $0.382 \pm 0.033$ & $0.557 \pm 0.005$ & $0.678 \pm 0.005$ & $0.734 \pm 0.015$ \\
+ST-Transformer & $0.820 \pm 0.004$ & $0.618 \pm 0.046$ & $0.490 \pm 0.051$ & $0.505 \pm 0.031$ & $0.655 \pm 0.004$ & $0.393 \pm 0.135$ \\
+EEGNet (tuned) & $0.768 \pm 0.004$ & $0.785 \pm 0.007$ & $0.326 \pm 0.016$ & -- & -- & -- \\
+EEGConformer (tuned) & $0.789 \pm 0.019$ & $0.721 \pm 0.043$ & $0.406 \pm 0.076$ & -- & -- & -- \\
+BIOT (pretrained) & $0.795 \pm 0.003$ & $0.760 \pm 0.020$ & $0.483 \pm 0.024$ & $0.527 \pm 0.021$ & $0.594 \pm 0.019$ & $0.736 \pm 0.006$ \\
+LaBraM-Base (pretrained) & $0.796 \pm 0.002$ & $0.778 \pm 0.019$ & $0.417 \pm 0.023$ & $0.333 \pm 0.000$ & $0.610 \pm 0.008$ & $0.737 \pm 0.018$ \\
+CBraMod (pretrained) & $0.787 \pm 0.013$ & $0.665 \pm 0.021$ & $0.441 \pm 0.017$ & $0.514 \pm 0.031$ & $0.671 \pm 0.005$ & $0.754 \pm 0.008$ \\
+TFM-Tokenizer & $0.796 \pm 0.007$ & $0.625 \pm 0.016$ & $0.446 \pm 0.020$ & $0.528 \pm 0.033$ & $0.614 \pm 0.002$ & $0.710 \pm 0.004$ \\
+REVE-Base (pretrained) & $0.805 \pm 0.015$ & $0.664 \pm 0.026$ & $0.501 \pm 0.049$ & $0.430 \pm 0.026$ & -- & -- \\
+CSBrain (pretrained) & -- & -- & -- & -- & -- & -- \\
+BIOT (scratch) & $0.791 \pm 0.004$ & $0.752 \pm 0.013$ & $0.525 \pm 0.021$ & $0.561 \pm 0.012$ & $0.655 \pm 0.019$ & $0.738 \pm 0.004$ \\
+LaBraM-Base (scratch) & $0.777 \pm 0.005$ & $0.719 \pm 0.052$ & $0.499 \pm 0.020$ & $0.507 \pm 0.010$ & $0.598 \pm 0.010$ & $0.624 \pm 0.013$ \\
+CBraMod (scratch) & $0.792 \pm 0.008$ & $0.642 \pm 0.034$ & $0.481 \pm 0.019$ & $0.427 \pm 0.082$ & $0.654 \pm 0.004$ & $0.698 \pm 0.006$ \\
+CroFreMo tri-axial (scratch) & $0.816^{(1)}$ & $0.810 \pm 0.004$ & $0.505 \pm 0.061$ & $0.525 \pm 0.015$ & $0.642 \pm 0.014$ & $0.702 \pm 0.009$ \\
+EEGPT (scratch) & -- & $0.786 \pm 0.021$ & $0.454 \pm 0.056$ & $0.427 \pm 0.073$ & -- & -- \\
+TFM-Tokenizer (scratch) & -- & $0.607 \pm 0.020$ & $0.454 \pm 0.022$ & $0.502 \pm 0.022$ & -- & -- \\
+CroFreMo axis-free (final) & $0.820^{(1)}$ & $0.799^{(1)}$ & $0.461^{(1)}$ & $0.511^{(1)}$ & $0.639^{(1)}$ & $0.698^{(1)}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{An earlier design: the tri-axial encoder}
+\label{app:triaxial}
+\label{app:triaxial-coupling}
+
+Before the folded-attention encoder of Section~\ref{sec:encoder}, the
+same tokenizer was paired with a tri-axial encoder of 1.6M parameters
+whose blocks attend along one axis at a time --- time (rotary position
+encoding), electrodes (learned per-electrode embedding), and the $2n_b$
+frequency rows (an embedding of each band's learned center frequency and
+bandwidth) --- with $d{=}128$, $N{=}6$, four heads. Its frequency
+sub-layer is a dedicated path along which cross-band relations can be
+formed from the waveform rows. With that path present, the duplex
+tokenizer improved on the waveform-only one on TUEV alone
+(Table~\ref{tab:coupling-triaxial}; per class in
+Table~\ref{tab:perclass-triaxial}), which is what motivated removing the
+frequency sub-layer. Two architectural controls on this design
+(Table~\ref{tab:arch}) locate a small model's seizure-detection margin in
+the band decomposition and the factorized attention. Its main-table
+numbers are the ``CroFreMo tri-axial'' rows of Appendix~\ref{app:matrix}.
+\begin{table}[h]
+\centering
+\small
+\caption{Tri-axial architectural controls, waveform-token frontend, three
+seeds. Removing either the band decomposition or the factorization
+collapses seizure detection.}
+\label{tab:arch}
+\begin{tabular}{lccc}
+\toprule
+ & 8 bands, tri-axial & 1 band, tri-axial & 8 bands, flat (0.9M) \\
+\midrule
+TUSZ (AUC-PR) & $0.671 \pm 0.032$ & $0.558 \pm 0.050$ & $0.448 \pm 0.060$ \\
+CHB-MIT (AUC-PR) & $0.667 \pm 0.057$ & $0.245 \pm 0.083$ & $0.136 \pm 0.019$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\small
+\caption{Tri-axial encoder: waveform-only vs.\ duplex tokenizer, same
+encoder and recipe. Three seeds where $\pm$ is given, otherwise the seed
+count is superscripted.}
+\label{tab:coupling-triaxial}
+\begin{tabular}{llccc}
+\toprule
+Corpus & Metric & Waveform tokens & Duplex & $\Delta$ \\
+\midrule
+TUEV & $\kappa$ & $0.536 \pm 0.041$ & $0.690 \pm 0.036$ & $+0.15$ \\
+IIIC & $\kappa$ & $0.466 \pm 0.010$ & $0.479 \pm 0.009$ & $+0.01$ \\
+CHB-MIT & AUC-PR & $0.667 \pm 0.057$ & $0.698 \pm 0.055$ & $+0.03$ \\
+TUSZ & AUC-PR & $0.671 \pm 0.032$ & $0.639 \pm 0.035$ & $-0.03$ \\
+TUEP & AUROC & $0.810 \pm 0.001$ & $0.810 \pm 0.004$ & $+0.00$ \\
+ADFD & bal.\ acc. & $0.501 \pm 0.049$ & $0.505 \pm 0.061$ & $+0.00$ \\
+CAUEEG & bal.\ acc. & $0.517 \pm 0.032$ & $0.525 \pm 0.015$ & $+0.01$ \\
+TUAR & $\kappa$ & $0.624 \pm 0.008$ & $0.620 \pm 0.037$ & $-0.00$ \\
+Sleep-EDF & $\kappa$ & $0.650 \pm 0.002$ & $0.642 \pm 0.014$ & $-0.01$ \\
+ISRUC & $\kappa$ & $0.701 \pm 0.030$ & $0.702 \pm 0.009$ & $+0.00$ \\
+Siena & AUC-PR & $0.171 \pm 0.163$ & $0.170 \pm 0.086$ & $-0.00$ \\
+TUAB & bal.\ acc. & $0.805 \pm 0.006$ & $0.816^{(1)}$ & $+0.01$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\caption{TUEV per-class F1 in the tri-axial encoder, waveform tokens vs.\
+duplex, averaged over three seeds each (29,421 test windows).}
+\label{tab:perclass-triaxial}
+\begin{tabular}{lcccccc}
+\toprule
+ & SPSW & GPED & PLED & EYEM & ARTF & BCKG \\
+\midrule
+Waveform tokens & 0.16 & 0.55 & 0.52 & 0.57 & 0.40 & 0.88 \\
+Duplex & 0.00 & $\mathbf{0.82}$ & $\mathbf{0.61}$ & 0.31 & 0.56 & 0.92 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Axis-free variants on all corpora}
+\label{app:variants}
+
+\begin{table}[h]
+\centering
+\small
+\caption{Every axis-free variant on every corpus, single seeds; the
+tri-axial duplex model (three seeds) for reference. ``all'' = fold +
+strength + $d{=}192$.}
+\label{tab:variants-all}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+Corpus & tri-axial & no fold $d$192 & no fold + strength & fold $d$192 (final) & fold $d$256 & all \\
+\midrule
+TUSZ & 0.639 & 0.612 & 0.643 & 0.698 & 0.631 & 0.671 \\
+CHB-MIT & 0.698 & 0.630 & 0.513 & 0.716 & 0.608 & 0.671 \\
+TUEV & 0.690 & 0.690 & 0.721 & 0.680 & 0.679 & 0.661 \\
+IIIC & 0.479 & 0.458 & 0.448 & 0.447 & 0.465 & 0.427 \\
+TUEP & 0.810 & 0.812 & 0.812 & 0.799 & 0.797 & 0.803 \\
+TUAB (bal.\ acc.) & 0.816 & 0.795 & 0.812 & 0.820 & 0.793 & --- \\
+TUAR & 0.620 & 0.624 & 0.626 & 0.600 & 0.657 & 0.545 \\
+ADFD & 0.505 & 0.498 & 0.467 & 0.461 & 0.454 & 0.361 \\
+CAUEEG & 0.525 & 0.538 & 0.541 & 0.511 & 0.475 & 0.541 \\
+Sleep-EDF & 0.642 & 0.610 & 0.614 & 0.639 & 0.653 & 0.633 \\
+ISRUC & 0.702 & 0.696 & 0.683 & 0.698 & 0.700 & 0.677 \\
+Siena & 0.170 & 0.239 & 0.398 & 0.201 & 0.269 & --- \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\section{Transplant onto the released CBraMod checkpoint}
+\label{app:transplant-pre}
+
+\begin{table}[h]
+\centering
+\small
+\caption{The same additive transplant applied to CBraMod's released
+pretrained weights (encoder, patch embedding and head loaded; the added
+rows fresh). Single seeds; the native pretrained row is three seeds on
+TUEV and one on TUAR.}
+\label{tab:transplant-pre}
+\begin{tabular}{llccc}
+\toprule
+Corpus & Metric & CBraMod pretrained & + waveform rows & + interaction rows \\
+\midrule
+TUEV & $\kappa$ & $\mathbf{0.645 \pm 0.022}$ & $0.572$ & $0.623$ \\
+TUAR & $\kappa$ & $\mathbf{0.715}\,(1)$ & $0.681$ & $0.588$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Pretraining the tri-axial model: an exploratory result}
+\label{app:pretrain}
+
+The tri-axial model was pretrained with the objective of
+Appendix~\ref{app:objective} on a pool of the twelve corpora's training
+splits plus a 2,000-hour, subject-diverse slice of TUEG with every session
+shared with TUSZ removed, for 60k steps, and finetuned under the fixed
+recipe of Section~\ref{sec:setup}. Table~\ref{tab:pretrain-triaxial}
+gives the outcome next to the from-scratch model. The pretrained model
+improves where labels are scarce or positives rare (Siena, TUSZ,
+Sleep-EDF) and loses where labels are plentiful (TUEV, IIIC, TUEP, TUAR,
+ADFD, CAUEEG, ISRUC). Frozen-probe and label-fraction analyses that would
+support a mechanistic reading were run but are not reported here, because
+their settings differ from the finetuning protocol of this table and we
+have not yet reconciled them; the pattern is offered as an observation
+about a small, strongly biased model under a reconstruction objective,
+not as a property of the objective. The axis-free model has no
+pretrained row: its block structure does not match the checkpoint and we
+did not pretrain it separately.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Tri-axial CroFreMo, from scratch vs.\ pretrained and finetuned
+under one fixed recipe. Three seeds where $\pm$ is given, otherwise single
+seed.}
+\label{tab:pretrain-triaxial}
+\begin{tabular}{llcc}
+\toprule
+Corpus & Metric & From scratch & Pretrained \\
+\midrule
+Siena & AUC-PR & $0.170 \pm 0.086$ & $\mathbf{0.456 \pm 0.041}$ \\
+TUSZ & AUC-PR & $0.639 \pm 0.035$ & $\mathbf{0.653 \pm 0.040}$ \\
+Sleep-EDF & $\kappa$ & $0.642 \pm 0.014$ & $\mathbf{0.675^{(1)}}$ \\
+TUAB & bal.\ acc. & $\mathbf{0.816^{(1)}}$ & $0.805^{(1)}$ \\
+CHB-MIT & AUC-PR & $0.698 \pm 0.055$ & $0.699^{(1)}$ \\
+TUEV & $\kappa$ & $\mathbf{0.690 \pm 0.036}$ & $0.642^{(1)}$ \\
+IIIC & $\kappa$ & $\mathbf{0.479 \pm 0.009}$ & $0.434^{(1)}$ \\
+TUEP & AUROC & $\mathbf{0.810 \pm 0.004}$ & $0.769^{(1)}$ \\
+ISRUC & $\kappa$ & $\mathbf{0.702 \pm 0.009}$ & $0.672^{(1)}$ \\
+TUAR & $\kappa$ & $\mathbf{0.620 \pm 0.037}$ & $0.592^{(1)}$ \\
+ADFD & bal.\ acc. & $\mathbf{0.505 \pm 0.061}$ & $0.453^{(1)}$ \\
+CAUEEG & bal.\ acc. & $\mathbf{0.525 \pm 0.015}$ & $0.503^{(1)}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{A pretraining objective for coupling}
+\label{app:objective}
+
+If cross-frequency structure belongs in the token, it is natural to ask
+whether it also belongs in the pretraining target. We construct the
+objective that puts it there; its outcome on the tri-axial model is
+reported in Appendix~\ref{app:pretrain}.
+
+\paragraph{Masking.} A random subset $\mathcal{M}$ of \emph{physical}
+bands is masked per channel. Because the interaction row of band $b$
+carries $\mathbf{a}_b$ by construction (Eq.~(\ref{eq:rotation})), masking
+hides \emph{both} of $b$'s rows --- fused and interaction --- or the
+visible interaction row would hand the reconstruction its own target; both
+are replaced by a shared learned mask token before the positional
+embeddings. Entries of the coupling matrix consumed by the encoder are
+zeroed wherever either band is masked, so the target cannot travel through
+the coupling input.
+
+\paragraph{Objective.} The loss combines an amplitude term and a coupling
+term,
+\begin{equation}
+\mathcal{L} \;=\; \mathcal{L}_{\mathrm{amp}}
+\;+\; \lambda\, \mathcal{L}_{\mathrm{cfc}},
+\qquad \lambda = 1.
+\label{eq:objective}
+\end{equation}
+$\mathcal{L}_{\mathrm{amp}}$ asks the model to predict, from each masked
+band's fused-row output, the patch log-amplitude standardized \emph{within
+each band} across the batch --- the rebalancing of
+\citet{yu2026understanding}, adopted as-is --- so that every band's
+structure is rewarded equally rather than in proportion to its
+$1/f$-dominated variance:
+\begin{equation}
+\mathcal{L}_{\mathrm{amp}} = \frac{1}{|\mathcal{M}|}
+\sum_{j \in \mathcal{M}}
+\bigl\| \hat{y}_j - \mathrm{std}_b\!\bigl(\log \bar A_j\bigr) \bigr\|^2 .
+\label{eq:lamp}
+\end{equation}
+$\mathcal{L}_{\mathrm{cfc}}$ asks it to predict the masked band's coupling
+column --- the real and imaginary parts of $Z_{ij}$ --- restricted to
+\emph{visible} phase bands $i$, since the phase required to define
+$Z_{ij}$ is unavailable when band $i$ is masked:
+\begin{equation}
+\mathcal{L}_{\mathrm{cfc}} = \frac{1}{Z_{\mathrm{sup}}}
+\sum_{j \in \mathcal{M}} \sum_{i \notin \mathcal{M}}
+\bigl\| \hat{Z}_{ij} - Z_{ij} \bigr\|^2,
+\label{eq:lcfc}
+\end{equation}
+with $Z_{\mathrm{sup}}$ the count of supervised entries. The pool and schedule are those of Appendix~\ref{app:pretrain}.
