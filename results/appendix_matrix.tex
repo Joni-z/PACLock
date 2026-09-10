@@ -1,0 +1,66 @@
+\section{Full comparison matrix}
+\label{app:matrix}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Full comparison matrix (part 1). Generated from the per-run result files: mean $\pm$ sample standard deviation over three seeds; a superscript gives the seed count when fewer. ``--'' = not run.}
+\begin{tabular}{lcccccc}
+\toprule
+Model & TUSZ (AUC-PR) & CHB-MIT (AUC-PR) & Siena (AUC-PR) & TUEV ($\kappa$) & IIIC ($\kappa$) & TUAR ($\kappa$) \\
+\midrule
+SPaRCNet & $0.502 \pm 0.021$ & $0.198 \pm 0.071$ & $0.357 \pm 0.042$ & $0.488 \pm 0.028$ & $0.372 \pm 0.012$ & $0.601^{(1)}$ \\
+ContraWR & $0.504 \pm 0.017$ & $0.507 \pm 0.036$ & $0.451 \pm 0.062$ & $0.408 \pm 0.098$ & $0.413 \pm 0.005$ & $0.663^{(1)}$ \\
+CNN-Transformer & $0.371 \pm 0.193$ & $0.506 \pm 0.074$ & $0.423 \pm 0.100$ & $0.410 \pm 0.116$ & $0.416 \pm 0.009$ & $0.712^{(1)}$ \\
+FFCL & $0.545 \pm 0.030$ & $0.534 \pm 0.054$ & $0.421 \pm 0.102$ & $0.478 \pm 0.032$ & $0.423 \pm 0.020$ & $0.696^{(1)}$ \\
+ST-Transformer & $0.359 \pm 0.031$ & $0.241 \pm 0.113$ & $0.218 \pm 0.185$ & $0.501 \pm 0.012$ & $0.296 \pm 0.002$ & $0.521^{(1)}$ \\
+EEGNet (tuned) & $0.492 \pm 0.030$ & $0.141 \pm 0.135$ & -- & $0.479 \pm 0.091$ & -- & -- \\
+EEGConformer (tuned) & $0.319 \pm 0.038$ & $0.305 \pm 0.253$ & -- & $0.455 \pm 0.004$ & -- & -- \\
+BIOT (pretrained) & -- & -- & -- & -- & -- & -- \\
+LaBraM-Base (pretrained) & $0.475 \pm 0.047$ & $0.452 \pm 0.097$ & $0.303 \pm 0.019$ & $0.598 \pm 0.003$ & $0.383 \pm 0.020$ & $0.593^{(1)}$ \\
+CBraMod (pretrained) & $0.434 \pm 0.042$ & $0.233 \pm 0.098$ & $0.424 \pm 0.064$ & $0.645 \pm 0.022$ & $0.313 \pm 0.019$ & $0.715^{(1)}$ \\
+TFM-Tokenizer & -- & -- & -- & -- & -- & -- \\
+REVE-Base (pretrained) & $0.503 \pm 0.075$ & $0.580 \pm 0.196$ & $0.518 \pm 0.117$ & $0.685 \pm 0.039$ & $0.436 \pm 0.003$ & -- \\
+CSBrain (pretrained) & -- & -- & -- & -- & -- & -- \\
+BIOT (scratch) & $0.347 \pm 0.026$ & $0.566 \pm 0.072$ & $0.167 \pm 0.045$ & $0.532 \pm 0.025$ & $0.356 \pm 0.014$ & $0.499^{(1)}$ \\
+LaBraM-Base (scratch) & $0.475 \pm 0.048$ & $0.360 \pm 0.050$ & $0.491 \pm 0.012$ & $0.372 \pm 0.009$ & $0.406 \pm 0.007$ & $0.527^{(1)}$ \\
+CBraMod (scratch) & $0.482 \pm 0.052$ & $0.317 \pm 0.205$ & $0.199 \pm 0.061$ & $0.564 \pm 0.024$ & $0.393 \pm 0.006$ & $0.650^{(1)}$ \\
+CroFreMo tri-axial (scratch) & $0.639 \pm 0.035$ & $0.698 \pm 0.055$ & $0.170 \pm 0.086$ & $0.690 \pm 0.036$ & $0.479 \pm 0.009$ & $0.620 \pm 0.037$ \\
+EEGPT (scratch) & -- & -- & $0.128 \pm 0.031$ & -- & $0.368 \pm 0.024$ & $0.582^{(1)}$ \\
+TFM-Tokenizer (scratch) & -- & -- & -- & -- & -- & -- \\
+CroFreMo axis-free (final) & $0.698^{(1)}$ & $0.716^{(1)}$ & $0.201^{(1)}$ & $0.680^{(1)}$ & $0.447^{(1)}$ & $0.600^{(1)}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Full comparison matrix (part 2). Generated from the per-run result files: mean $\pm$ sample standard deviation over three seeds; a superscript gives the seed count when fewer. ``--'' = not run.}
+\begin{tabular}{lcccccc}
+\toprule
+Model & TUAB (bal.\ acc.) & TUEP (AUROC) & ADFD (bal.\ acc.) & CAUEEG (bal.\ acc.) & Sleep-EDF ($\kappa$) & ISRUC ($\kappa$) \\
+\midrule
+SPaRCNet & $0.792 \pm 0.011$ & $0.731 \pm 0.010$ & $0.383 \pm 0.008$ & $0.441 \pm 0.046$ & $0.671 \pm 0.012$ & $0.735 \pm 0.020$ \\
+ContraWR & $0.789 \pm 0.002$ & $0.646 \pm 0.063$ & $0.449 \pm 0.024$ & $0.532 \pm 0.039$ & $0.692 \pm 0.015$ & $0.752 \pm 0.006$ \\
+CNN-Transformer & $0.782 \pm 0.039$ & $0.663 \pm 0.014$ & $0.480 \pm 0.016$ & $0.512 \pm 0.023$ & $0.678 \pm 0.014$ & $0.753 \pm 0.007$ \\
+FFCL & $0.765 \pm 0.040$ & $0.641 \pm 0.053$ & $0.382 \pm 0.033$ & $0.557 \pm 0.005$ & $0.678 \pm 0.005$ & $0.734 \pm 0.015$ \\
+ST-Transformer & $0.820 \pm 0.004$ & $0.618 \pm 0.046$ & $0.490 \pm 0.051$ & $0.505 \pm 0.031$ & $0.655 \pm 0.004$ & $0.393 \pm 0.135$ \\
+EEGNet (tuned) & $0.768 \pm 0.004$ & $0.785 \pm 0.007$ & $0.326 \pm 0.016$ & -- & -- & -- \\
+EEGConformer (tuned) & $0.789 \pm 0.019$ & $0.721 \pm 0.043$ & $0.406 \pm 0.076$ & -- & -- & -- \\
+BIOT (pretrained) & -- & -- & -- & -- & -- & -- \\
+LaBraM-Base (pretrained) & $0.796 \pm 0.002$ & $0.778 \pm 0.019$ & $0.417 \pm 0.023$ & $0.333 \pm 0.000$ & $0.610 \pm 0.008$ & $0.737 \pm 0.018$ \\
+CBraMod (pretrained) & $0.787 \pm 0.013$ & $0.665 \pm 0.021$ & $0.441 \pm 0.017$ & $0.514 \pm 0.031$ & $0.671 \pm 0.005$ & $0.754 \pm 0.008$ \\
+TFM-Tokenizer & -- & -- & -- & -- & -- & -- \\
+REVE-Base (pretrained) & $0.805 \pm 0.015$ & $0.664 \pm 0.026$ & $0.501 \pm 0.049$ & $0.430 \pm 0.026$ & -- & -- \\
+CSBrain (pretrained) & -- & -- & -- & -- & -- & -- \\
+BIOT (scratch) & $0.791 \pm 0.004$ & $0.752 \pm 0.013$ & $0.525 \pm 0.021$ & $0.561 \pm 0.012$ & $0.655 \pm 0.019$ & $0.738 \pm 0.004$ \\
+LaBraM-Base (scratch) & $0.777 \pm 0.005$ & $0.719 \pm 0.052$ & $0.499 \pm 0.020$ & $0.507 \pm 0.010$ & $0.598 \pm 0.010$ & $0.624 \pm 0.013$ \\
+CBraMod (scratch) & $0.792 \pm 0.008$ & $0.642 \pm 0.034$ & $0.481 \pm 0.019$ & $0.427 \pm 0.082$ & $0.654 \pm 0.004$ & $0.698 \pm 0.006$ \\
+CroFreMo tri-axial (scratch) & $0.816^{(1)}$ & $0.810 \pm 0.004$ & $0.505 \pm 0.061$ & $0.525 \pm 0.015$ & $0.642 \pm 0.014$ & $0.702 \pm 0.009$ \\
+EEGPT (scratch) & -- & $0.786 \pm 0.021$ & $0.454 \pm 0.056$ & $0.427 \pm 0.073$ & -- & -- \\
+TFM-Tokenizer (scratch) & -- & -- & -- & -- & -- & -- \\
+CroFreMo axis-free (final) & $0.820^{(1)}$ & $0.799^{(1)}$ & $0.461^{(1)}$ & $0.511^{(1)}$ & $0.639^{(1)}$ & $0.698^{(1)}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
