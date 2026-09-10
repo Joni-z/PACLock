@@ -118,6 +118,8 @@ def main():
                         "opt": opt.state_dict(), "sched": sched.state_dict(), "step": step, "cfg": cfg},
                        ckpt_path + ".tmp")
             os.replace(ckpt_path + ".tmp", ckpt_path)
+            if cfg.get("save_numbered"):
+                import shutil; shutil.copyfile(ckpt_path, ckpt_path.replace("checkpoint.pt", f"checkpoint_{step}.pt"))
             print("  -> saved %s (step %d)" % (ckpt_path, step), flush=True)
     print("pretraining done -> %s" % ckpt_path, flush=True)
 

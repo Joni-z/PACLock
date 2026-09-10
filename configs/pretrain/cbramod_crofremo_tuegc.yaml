@@ -1,0 +1,26 @@
+# CBraMod pretraining, kind=crofremo, in CBraMod's ORIGINAL setting (2026-09-11): masked-patch MSE, mask 0.5, AdamW 5e-4 / wd 0.05,
+# cosine to 1e-5 with no warmup, clip 1, batch 128, 40 epochs. Pool: the clean TUEG slice (700126 x 10 s windows, 1,945 h,
+# downstream subjects and TUSZ sessions removed). 40 epochs = 219000 steps. Their windows are 30 s x 19 ch; ours 10 s x 16 ch.
+name: pretrain-cbramod_crofremo_tuegc
+group: pretrain
+kind: crofremo
+corpora:
+- name: tueg_slice_clean
+  data_root: $PACLOCK_PROC/processed/tueg_slice_clean
+  flatten_sequences: false
+  batch_size: 128
+model_kwargs:
+  tokenizer_mode: pac_interaction
+  interaction_mode: rotation
+lr: 0.0005
+weight_decay: 0.05
+eta_min: 1.0e-05
+grad_clip: 1.0
+mask_ratio: 0.5
+steps: 219000
+warmup_steps: 0
+num_workers: 8
+log_every_steps: 500
+save_every_steps: 20000
+seed: 0
+save_numbered: true

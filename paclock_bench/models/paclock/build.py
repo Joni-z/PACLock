@@ -169,14 +169,45 @@ class TriAxialPACLock(nn.Module):
             #                    VISIBLE phase-band i -- the pretraining task
             #                    becomes the tokenizer's native quantity
             self.aux_target = cfg.get("aux_target", "amp")
-            if self.aux_target not in ("amp", "band_norm", "band_norm_pac"):
+            if self.aux_target not in ("amp", "band_norm", "band_norm_pac", "raw_patch"):
                 raise ValueError(f"aux_target must be amp/band_norm/"
-                                 f"band_norm_pac, got {self.aux_target!r}")
+                                 f"band_norm_pac/raw_patch, got {self.aux_target!r}")
+            if self.aux_target == "raw_patch":
+                # CBraMod-style masked-patch reconstruction (2026-09-11): mask whole
+                # (electrode, patch) cells, zero the raw signal there BEFORE the
+                # frontend (so the filterbank's receptive field cannot leak the
+                # target into neighbouring cells), replace every row of a masked
+                # cell by the mask token, and predict the cell's raw patch_len
+                # samples from the mean of its rows after the encoder.
+                self.recon_raw = nn.Sequential(nn.Linear(d, d), nn.GELU(),
+                                               nn.Linear(d, cfg.get("patch_len", 200)))
             self.aux_pac_weight = cfg.get("aux_pac_weight", 1.0)
             if self.aux_target == "band_norm_pac":
                 self.recon_pac = nn.Sequential(
                     nn.Linear(d, d), nn.GELU(),
                     nn.Linear(d, 2 * cfg["n_bands"]))
+
+    def _raw_patch_loss(self, x: torch.Tensor) -> torch.Tensor:
+        """Masked (electrode, patch)-cell reconstruction of the raw waveform."""
+        B, C, T = x.shape
+        L = self.frontend.patch_len
+        P = T // L
+        x = x[..., : P * L]
+        cell = torch.rand(B, C, P, device=x.device) < self.aux_mask_ratio      # (B,C,P)
+        xm = x.reshape(B, C, P, L).masked_fill(cell.unsqueeze(-1), 0.0).reshape(B, C, P * L)
+        tokens, coupling, band_hz = self.frontend(xm)[:3]                      # from the MASKED signal
+        _, _, nb, P2, D = tokens.shape
+        assert P2 == P, (P2, P)
+        m = cell.unsqueeze(2).expand(B, C, nb, P)
+        tok = torch.where(m.unsqueeze(-1), self.mask_token.view(1, 1, 1, 1, D), tokens)
+        tok = tok + self.band_pe(band_hz).view(1, 1, nb, 1, D)
+        tok = tok + self.spatial_pe(C, x.device).view(1, C, 1, 1, D)
+        # coupling is (B,C,P,nb,nb): zero every entry of a masked cell (leakage control)
+        cpl = coupling * (~cell).to(coupling.dtype).view(B, C, P, 1, 1)
+        h = self.encoder(tok, cpl, None)                                        # (B,C,nb,P,D)
+        pred = self.recon_raw(h.mean(dim=2))                                    # (B,C,P,L)
+        target = x.reshape(B, C, P, L).detach()
+        return F.mse_loss(pred[cell], target[cell])
 
     def crossfreq_aux_loss(self, x: torch.Tensor) -> torch.Tensor:
         """Masked band-amplitude reconstruction as a supervised auxiliary.
@@ -187,6 +218,8 @@ class TriAxialPACLock(nn.Module):
         the classifier uses. No augmentation here -- the reconstruction target
         must stay clean. Only called during training when aux_recon_weight > 0.
         """
+        if getattr(self, "aux_target", "amp") == "raw_patch":
+            return self._raw_patch_loss(x)
         want_pac = getattr(self, "aux_target", "amp") == "band_norm_pac"
         restore = False
         if want_pac and not self.frontend.return_pac_vector:

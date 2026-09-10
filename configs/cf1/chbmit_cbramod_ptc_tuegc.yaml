@@ -1,0 +1,36 @@
+# CF1 re-pretraining pair, CBraMod original setting on the clean TUEG slice: crofremo tokenizer, cbramod_pretrained finetune recipe. Single seed.
+name: chbmit-cbramod_ptc_tuegc
+group: cf1
+dataset: chbmit
+data_root: $PACLOCK_PROC/processed/chbmit
+model: cbramod_paclockfe
+loader: null
+pretrained: false
+optimizer: adamw
+lr: 0.0001
+weight_decay: 0.05
+epochs: 50
+batch_size: 16
+multi_lr: true
+scheduler: cosine
+grad_clip: 1.0
+patience: 0
+num_workers: 16
+device: cuda
+eval_every_steps: 0
+model_kwargs:
+  dropout: 0.1
+  adapter: replace
+  band_mode: channels
+  tokenizer_mode: pac_interaction
+  interaction_mode: rotation
+num_classes: 2
+sample_rate: 200
+loss: focal
+focal_alpha: 0.25
+focal_gamma: 2.0
+seed: 0
+select_metric: auroc
+pretrained_path: pretrain_runs_cbramod/pretrain-cbramod_crofremo_tuegc/checkpoint.pt
+accum_steps: 4
+max_hours: 22.0

@@ -160,3 +160,22 @@ GPED 0.59→0.83、PLED 0.50→0.58、SPSW 0.07→0.20,macro-F1 0.48→0.58);Ove
 own ≈ waveform-only < duplex → 跨频对齐本身带来增益;介于两者之间 → 两者各占一部分,按差值报。token 数对照引用 CBraMod 加行实验(同八行,波形 vs 交互)。
 **09-11 05:30,Zhizhe:重预训练这条线在他考虑完之前一切停止——12k 步明显不成立,要跑就跑完整预算。** 已撤 CHB-MIT/TUSZ 两个未完成的
 微调(FT_ds4_b);amd/b2 上该线无任何任务、无自动投递。已落地的 TUEV/IIIC 两格仅作记录。保留这条线时不得再投任何任务。
+
+## 19. 两条预训练线(2026-09-11,Zhizhe 拍板:要提升——好的语料不掉、差的往上拉;宿主按 CBraMod 原始设定跑,一次跑对)
+
+**发现并修正**:定稿模型的 patch 是 **50 采样 = 0.25 s,PAC 窗口也是 0.25 s**(cf2 配置继承自 _diag duplex),论文里写的"1 s throughout"是错的;
+CBraMod/LaBraM 移植用 1 s、REVE 用 0.9 s。论文已改。旧预训练 checkpoint 是 1 s 网格,所以 ptS/ptR 加载时跳过 3 个 tokenizer 张量。
+
+**A. 我们的模型**:`aux_target: raw_patch` + `aux_mask_mode: cell`(build.py `_raw_patch_loss`)——CBraMod 式:按 (电极, patch) 格掩 0.5,
+先把原始信号在被掩格置零再过前端(滤波器感受野不泄露),整格所有行换 mask token,编码后对格内行取均值预测该格 50 个原始采样。
+GPU smoke:损失有限;泄露检验——只改被掩格的原始采样,被掩格的预测变化 0.000e+00。配置 `configs/pretrain/axisfree_rawpatch.yaml`:
+架构 = 定稿 v1d192(patch 50),池 = 12 语料训练集 + 干净 TUEG 切片,AdamW 5e-4 / 0.05,余弦,clip 1,步数待探针,编号存 checkpoint。
+微调:`checkpoint:` + 从零配方(ptR 式);验收标准 = 好的不掉、差的上拉,逐语料对从零比。
+
+**B. 宿主 CBraMod,原始设定**:`configs/pretrain/cbramod_{native,crofremo}_tuegc.yaml`——掩码 0.5、AdamW 5e-4 / 0.05、余弦到 1e-5 无 warmup、
+clip 1、batch 128、**40 epoch = 219,000 步**,池 = `tueg_slice_clean`(700,126 × 10 s,1,945 h,下游被试与 TUSZ 会话已剔除)。
+差异如实记:他们 30 s × 19 通道,我们 10 s × 16 通道;数据 1,945 h 对 27,000 h。每 20k 步存编号 checkpoint(预算曲线)。
+微调 `configs/cf1/*_cbramod_{ptn,ptc}_tuegc.yaml`。
+
+**算力**:切片正经 Mac 中转从 b2 流向 amd(89.6 GB,`stream_slice.sh`),amd /work1 有 133 TB 空闲;到位后 native 单卡(≈8 h)、
+crofremo 4 卡 DP(≈20 h,续跑链)、我们的模型探针后定步数。全部在 amd,不用 b2 的 SU。

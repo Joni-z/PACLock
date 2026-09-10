@@ -1,0 +1,94 @@
+# Pretraining of the FINAL axis-free model (v1d192 architecture, patch 50 = 0.25 s, PAC window 0.25 s) with CBraMod's objective:
+# masked (electrode, patch)-cell reconstruction of the raw waveform, mask 0.5, AdamW 5e-4 / wd 0.05, cosine, clip 1 (2026-09-11).
+# Pool: the twelve corpora's train splits + the clean 1,945 h TUEG slice (downstream subjects and TUSZ sessions removed).
+# Batch sizes are shape-aware (C*T*batch ~ constant). steps sized after the probe; checkpoints numbered for a budget curve.
+name: pretrain-axisfree_rawpatch
+group: pretrain
+corpora:
+- name: tuab
+  data_root: $PACLOCK_PROC/processed/tuab
+  flatten_sequences: false
+  batch_size: 96
+- name: tuev
+  data_root: $PACLOCK_PROC/processed/tuev
+  flatten_sequences: false
+  batch_size: 128
+- name: tusz
+  data_root: $PACLOCK_PROC/processed/tusz
+  flatten_sequences: false
+  batch_size: 96
+- name: chbmit
+  data_root: $PACLOCK_PROC/processed/chbmit
+  flatten_sequences: false
+  batch_size: 96
+- name: iiic
+  data_root: $PACLOCK_PROC/processed/iiic
+  flatten_sequences: false
+  batch_size: 96
+- name: tuep
+  data_root: $PACLOCK_PROC/processed/tuep
+  flatten_sequences: false
+  batch_size: 96
+- name: tuar
+  data_root: $PACLOCK_PROC/processed/tuar
+  flatten_sequences: false
+  batch_size: 128
+- name: adfd
+  data_root: $PACLOCK_PROC/processed/adfd
+  flatten_sequences: false
+  batch_size: 96
+- name: caueeg
+  data_root: $PACLOCK_PROC/processed/caueeg
+  flatten_sequences: false
+  batch_size: 96
+- name: siena
+  data_root: $PACLOCK_PROC/processed/siena
+  flatten_sequences: false
+  batch_size: 96
+- name: sleepedf
+  data_root: $PACLOCK_PROC/processed/sleepedf
+  flatten_sequences: false
+  batch_size: 64
+- name: isruc
+  data_root: $PACLOCK_PROC/processed/isruc
+  flatten_sequences: true
+  batch_size: 64
+- name: tueg_slice_clean
+  data_root: $PACLOCK_PROC/processed/tueg_slice_clean
+  flatten_sequences: false
+  batch_size: 96
+model_kwargs:
+  arch: triaxial
+  d_model: 192
+  depth: 6
+  n_bands: 8
+  n_heads: 4
+  dropout: 0.2
+  kernel_size: 201
+  patch_len: 50
+  augmentations: []
+  freq_mixer: none
+  band_pe: index
+  tokenizer_mode: duplex
+  pac_token_mode: measured
+  interaction_mode: rotation
+  spatial_pe: xyz
+  pac_patch_len: 50
+  space_over_bands: true
+  aux_recon_weight: 1.0
+  aux_target: raw_patch
+  aux_mask_mode: cell
+  aux_mask_ratio: 0.5
+sample_rate: 200
+optimizer: adamw
+lr: 0.0005
+weight_decay: 0.05
+grad_clip: 1.0
+steps: 120000
+warmup_steps: 2000
+batch_size: 96
+num_workers: 8
+log_every_steps: 250
+save_every_steps: 10000
+save_numbered: true
+seed: 0
