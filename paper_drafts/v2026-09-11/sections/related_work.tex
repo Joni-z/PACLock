@@ -1,0 +1,86 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{EEG foundation models, and where they leave a gap.}
+Self-supervised pretraining for EEG has grown from contrastive and
+masked-reconstruction objectives on raw windows
+\citep{kostas2021bendr,chien2022maeeg,wang2023brainbert} into a family of
+foundation models that differ widely in architecture but answer two design
+questions in a narrow set of ways: what a token carries, and what the
+pretraining objective supervises. On the token side, one line embeds
+magnitude time--frequency representations: BIOT \citep{yang2023biot}
+projects STFT magnitudes (1\,s windows, 0.5\,s hop) and TFM-Tokenizer
+\citep{pradeepkumar2026tfm} learns a vector-quantized vocabulary of
+time--frequency motifs over the same representation. A second line
+tokenizes the waveform directly, with objectives ranging from raw masked
+reconstruction \citep{chien2022maeeg,chen2024eegformer,wang2025cbramod,doner2025luna}
+and autoregressive prediction \citep{cui2024neurogpt} to discrete-code
+prediction, where LaBraM \citep{jiang2024labram} supervises the Fourier
+amplitude and angle of each patch per frequency bin and CodeBrain
+\citep{ma2026codebrain} decouples temporal and spectral codebooks, and to
+latent-space targets in the spirit of data2vec and JEPA
+\citep{baevski2022data2vec,assran2023self}, adopted by EEGPT
+\citep{wang2024eegpt} and EEG2Rep \citep{foumani2024eeg2rep}. A third line
+scales data and coverage rather than the target: topology-agnostic
+electrode handling \citep{yi2023learning,doner2025luna}, cross-modality and
+language coupling \citep{yuan2024brant2,jiang2025neurolm}, and corpus scale
+up to 60{,}000 hours in REVE \citep{bertrand2025reve}, with CSBrain
+\citep{zhou2025csbrain} and Uni-NTFM \citep{chen2026unintfm} adding
+multi-scale and mixture-of-experts encoders. Despite this breadth, careful
+fine-tuning studies find only marginal gains over small supervised networks
+\citep{lee2025are}, and probing studies trace the shortfall to the
+reconstruction objective itself: EEG spectra are dominated by an aperiodic
+$1/f^{\alpha}$ component \citep{donoghue2020parameterizing}, neural
+networks fit low frequencies first \citep{rahaman2019spectral}, and
+reconstruction-based EEG models consequently encode aperiodic activity and
+subject identity over the oscillatory structure clinical tasks depend on
+\citep{kommineni2026aperiodic,bindra2026spectral}. FAME
+\citep{yu2026understanding} responds on the supervision side by
+standardizing targets within each band, a rebalancing we adopt as a
+control. Across all of these, token content and supervision are organized
+around per-band or per-bin quantities: magnitude-based representations
+discard the carrier phase and so cannot directly encode phase--amplitude
+coupling, waveform-based models retain phase in principle but nothing in
+their objectives rewards extracting a relation between bands, and no
+model represents or supervises that relation as token content.
+
+\paragraph{Cross-frequency coupling as an established prior.}
+The relation in question is not a hypothesis of ours. That the phase of a
+slow rhythm organizes the amplitude of a faster one is a foundational
+observation of systems neuroscience \citep{jensen2007cross,canolty2006high},
+with a proposed computational role in neural coding \citep{lisman2013theta}
+and reviews of its architectures and mechanisms
+\citep{canolty2010functional,hyafil2015neural}. Its measurement is mature:
+the modulation index \citep{tort2010measuring} and mean-vector estimators
+\citep{canolty2006high}, event-related and time-resolved variants
+\citep{voytek2013method}, debiasing against phase clustering
+\citep{vandriel2015phase}, and a critical literature on spurious coupling
+from non-sinusoidal waveforms and non-stationarity
+\citep{aru2015untangling,cole2017brain}; the bispectrum and bicoherence
+quantify the same quadratic phase relation and have been applied to EEG for
+decades, most visibly in the BIS index of anaesthetic depth
+\citep{sigl1994introduction,rampil1998primer}. Clinically, coupling is a
+biomarker across exactly the conditions this paper evaluates. In epilepsy,
+coupling between low- and high-frequency pairs is significantly stronger
+in the seizure onset zone than in unaffected tissue, interictally as well
+as ictally \citep{amiri2016phase}, ictal high-gamma is phase-locked to the
+seizure rhythm \citep{weiss2013ictal}, high-frequency oscillations serve as
+biomarkers of the epileptogenic zone \citep{jacobs2012high,zijlmans2012high},
+and PAC features have driven seizure detectors \citep{edakawa2016detection}.
+Slow--alpha coupling tracks propofol-induced unconsciousness
+\citep{purdon2013electroencephalogram}; exaggerated beta--gamma coupling
+characterizes the parkinsonian motor cortex
+\citep{dehemptinne2013exaggerated}; slow-oscillation--spindle--ripple
+nesting organizes memory consolidation in sleep
+\citep{staresina2015hierarchical}; and theta--gamma coupling predicts
+working memory in dementia \citep{goodman2018theta}. Audio processing has
+likewise built joint representations of amplitude modulation across
+carriers \citep{singh2003modulation}. In every one of these settings the
+coupling is computed outside the model, as a hand-specified statistic over
+band pairs fixed in advance. In contrast, we use coupling to construct the
+learned token representation itself, with frequency decomposition,
+band-pair weighting, and downstream usage optimized jointly with the
+encoder rather than treated as a fixed input feature; and we report the
+learned gate values for each corpus to quantify where the model retains or
+suppresses cross-frequency content. This work addresses the token side of
+the gap above, and evaluates the supervision side to convergence.

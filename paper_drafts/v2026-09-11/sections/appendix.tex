@@ -1,0 +1,225 @@
+\appendix
+\section{Full comparison matrix}
+\label{app:matrix}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Full comparison matrix (part). Three seeds, mean $\pm$ std; superscript marks fewer seeds. ``--'' = not run or withheld under the reproduction/mis-configuration rules of Section~\ref{sec:setup}.}
+\begin{tabular}{lcccccc}
+\toprule
+Model & TUSZ (AUC-PR) & CHB-MIT (AUC-PR) & Siena (AUC-PR) & TUEV ($\kappa$) & IIIC ($\kappa$) & TUAR ($\kappa$) \\
+\midrule
+Hand-crafted features (best of LR/LDA) & $0.238 \pm 0.000$ & $0.046 \pm 0.000$ & $0.040 \pm 0.000$ & $0.504 \pm 0.000$ & -- & -- \\
+SPaRCNet & $0.502 \pm 0.017$ & $0.197 \pm 0.058$ & $0.357 \pm 0.034$ & $0.488 \pm 0.022$ & $0.371 \pm 0.009$ & $0.601^{(1)}$ \\
+ContraWR & $0.504 \pm 0.014$ & $0.507 \pm 0.029$ & $0.451 \pm 0.050$ & $0.407 \pm 0.080$ & $0.413 \pm 0.004$ & $0.663^{(1)}$ \\
+CNN-Transformer & $0.370 \pm 0.157$ & $0.505 \pm 0.060$ & $0.422 \pm 0.081$ & $0.409 \pm 0.095$ & $0.416 \pm 0.007$ & $0.712^{(1)}$ \\
+FFCL & $0.544 \pm 0.024$ & $0.534 \pm 0.044$ & $0.421 \pm 0.083$ & $0.477 \pm 0.026$ & $0.423 \pm 0.016$ & $0.695^{(1)}$ \\
+ST-Transformer & $0.358 \pm 0.025$ & $0.240 \pm 0.092$ & -- & $0.500 \pm 0.009$ & $0.296 \pm 0.001$ & $0.521^{(1)}$ \\
+EEGNet (tuned) & $0.492 \pm 0.024$ & $0.140 \pm 0.109$ & -- & $0.478 \pm 0.074$ & -- & -- \\
+EEGConformer (tuned) & $0.319 \pm 0.030$ & -- & -- & $0.454 \pm 0.003$ & -- & -- \\
+BIOT (pretrained) & $0.337 \pm 0.031$ & $0.560 \pm 0.063$ & $0.090 \pm 0.015$ & $0.530 \pm 0.022$ & $0.360 \pm 0.013$ & $0.540^{(2)}$ \\
+LaBraM-Base (pretrained) & $0.475 \pm 0.038$ & $0.451 \pm 0.079$ & $0.302 \pm 0.015$ & $0.598 \pm 0.002$ & $0.383 \pm 0.016$ & $0.593^{(1)}$ \\
+CBraMod (pretrained) & $0.434 \pm 0.034$ & $0.233 \pm 0.079$ & $0.424 \pm 0.052$ & $0.644 \pm 0.017$ & $0.313 \pm 0.015$ & $0.714^{(1)}$ \\
+EEGPT & $0.544 \pm 0.057$ & $0.281 \pm 0.108$ & $0.331 \pm 0.066$ & $0.573 \pm 0.032$ & $0.396 \pm 0.015$ & $0.523^{(1)}$ \\
+TFM-Tokenizer & $0.347 \pm 0.015$ & $0.626 \pm 0.020$ & $0.060 \pm 0.009$ & $0.651 \pm 0.017$ & $0.406 \pm 0.007$ & $0.648^{(1)}$ \\
+REVE-Base (pretrained) & $0.502 \pm 0.060$ & $0.580 \pm 0.159$ & $0.518 \pm 0.095$ & $0.684 \pm 0.031$ & $0.436 \pm 0.002$ & -- \\
+CSBrain (pretrained) & $0.517 \pm 0.096$ & $0.357 \pm 0.078$ & $0.233 \pm 0.089$ & $0.636 \pm 0.039$ & $0.410 \pm 0.009$ & -- \\
+BIOT (scratch) & $0.347 \pm 0.021$ & $0.566 \pm 0.058$ & $0.166 \pm 0.036$ & $0.532 \pm 0.020$ & $0.355 \pm 0.011$ & $0.498^{(1)}$ \\
+LaBraM-Base (scratch) & $0.475 \pm 0.039$ & $0.359 \pm 0.040$ & $0.491 \pm 0.009$ & $0.371 \pm 0.007$ & $0.405 \pm 0.005$ & $0.526^{(1)}$ \\
+CBraMod (scratch) & $0.481 \pm 0.042$ & $0.316 \pm 0.167$ & $0.199 \pm 0.049$ & $0.563 \pm 0.019$ & $0.393 \pm 0.004$ & $0.650^{(1)}$ \\
+CroFreMo (scratch) & $0.638 \pm 0.028$ & $0.698 \pm 0.044$ & $0.170 \pm 0.070$ & $0.689 \pm 0.029$ & $0.478 \pm 0.007$ & $0.619 \pm 0.030$ \\
+CroFreMo (pretrained v2, 60k) & $0.714^{(1)}$ & $0.713^{(1)}$ & -- & $0.653^{(1)}$ & -- & -- \\
+CroFreMo (pretrained, fixed recipe) & $0.653 \pm 0.032$ & $0.699^{(1)}$ & $0.456 \pm 0.033$ & $0.641^{(1)}$ & $0.433^{(1)}$ & $0.592^{(1)}$ \\
+CroFreMo (frozen probe) & $0.541^{(1)}$ & $0.049^{(1)}$ & -- & $0.518^{(1)}$ & -- & -- \\
+CroFreMo (frozen probe, random init) & $0.407^{(1)}$ & $0.014^{(1)}$ & -- & $0.385^{(1)}$ & -- & -- \\
+EEGPT (scratch) & -- & -- & $0.128 \pm 0.025$ & -- & $0.368 \pm 0.019$ & $0.582^{(1)}$ \\
+TFM-Tokenizer (scratch) & -- & -- & $0.012 \pm 0.007$ & -- & $0.262 \pm 0.006$ & $0.364^{(1)}$ \\
+CroFreMo (pretrained v3) & -- & -- & -- & $0.675^{(1)}$ & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Full comparison matrix (part). Three seeds, mean $\pm$ std; superscript marks fewer seeds. ``--'' = not run or withheld under the reproduction/mis-configuration rules of Section~\ref{sec:setup}.}
+\begin{tabular}{lcccccc}
+\toprule
+Model & TUAB (bal.\ acc.) & TUEP (AUROC) & ADFD (bal.\ acc.) & CAUEEG (bal.\ acc.) & Sleep-EDF ($\kappa$) & ISRUC ($\kappa$) \\
+\midrule
+Hand-crafted features (best of LR/LDA) & $0.744 \pm 0.000$ & $0.591 \pm 0.000$ & $0.400 \pm 0.000$ & $0.498 \pm 0.000$ & -- & -- \\
+SPaRCNet & $0.792 \pm 0.009$ & $0.731 \pm 0.008$ & $0.383 \pm 0.006$ & $0.441 \pm 0.037$ & $0.671 \pm 0.009$ & $0.734 \pm 0.016$ \\
+ContraWR & $0.789 \pm 0.001$ & $0.646 \pm 0.051$ & $0.449 \pm 0.019$ & $0.532 \pm 0.031$ & $0.691 \pm 0.011$ & $0.752 \pm 0.004$ \\
+CNN-Transformer & $0.781 \pm 0.032$ & $0.663 \pm 0.011$ & $0.480 \pm 0.013$ & $0.511 \pm 0.018$ & $0.677 \pm 0.011$ & $0.753 \pm 0.005$ \\
+FFCL & $0.764 \pm 0.033$ & $0.640 \pm 0.043$ & $0.381 \pm 0.027$ & $0.556 \pm 0.004$ & $0.678 \pm 0.003$ & $0.733 \pm 0.012$ \\
+ST-Transformer & $0.819 \pm 0.003$ & $0.617 \pm 0.037$ & $0.490 \pm 0.041$ & $0.504 \pm 0.025$ & $0.655 \pm 0.003$ & $0.392 \pm 0.110$ \\
+EEGNet (tuned) & $0.768 \pm 0.003$ & $0.784 \pm 0.006$ & -- & -- & -- & -- \\
+EEGConformer (tuned) & $0.789 \pm 0.015$ & $0.721 \pm 0.035$ & $0.405 \pm 0.061$ & -- & -- & -- \\
+BIOT (pretrained) & $0.795 \pm 0.002$ & $0.759 \pm 0.016$ & $0.482 \pm 0.019$ & $0.526 \pm 0.016$ & $0.594 \pm 0.015$ & $0.736 \pm 0.004$ \\
+LaBraM-Base (pretrained) & $0.795 \pm 0.001$ & $0.777 \pm 0.015$ & $0.417 \pm 0.019$ & -- & $0.610 \pm 0.006$ & $0.736 \pm 0.014$ \\
+CBraMod (pretrained) & $0.786 \pm 0.010$ & $0.664 \pm 0.017$ & $0.441 \pm 0.013$ & $0.514 \pm 0.025$ & $0.671 \pm 0.004$ & $0.754 \pm 0.006$ \\
+EEGPT & $0.813 \pm 0.005$ & $0.744 \pm 0.022$ & $0.496 \pm 0.016$ & $0.547 \pm 0.017$ & $0.597 \pm 0.010$ & $0.700 \pm 0.016$ \\
+TFM-Tokenizer & $0.796 \pm 0.005$ & $0.625 \pm 0.013$ & $0.446 \pm 0.016$ & $0.527 \pm 0.026$ & $0.613 \pm 0.002$ & $0.710 \pm 0.003$ \\
+REVE-Base (pretrained) & $0.805 \pm 0.011$ & $0.664 \pm 0.021$ & $0.500 \pm 0.039$ & $0.429 \pm 0.021$ & -- & -- \\
+CSBrain (pretrained) & $0.809 \pm 0.007$ & $0.599 \pm 0.035$ & $0.442 \pm 0.013$ & $0.495 \pm 0.024$ & -- & -- \\
+BIOT (scratch) & $0.790 \pm 0.003$ & $0.752 \pm 0.010$ & $0.525 \pm 0.017$ & $0.560 \pm 0.009$ & $0.654 \pm 0.015$ & $0.737 \pm 0.003$ \\
+LaBraM-Base (scratch) & $0.776 \pm 0.004$ & $0.718 \pm 0.042$ & $0.499 \pm 0.016$ & $0.506 \pm 0.008$ & $0.598 \pm 0.008$ & $0.623 \pm 0.010$ \\
+CBraMod (scratch) & $0.792 \pm 0.006$ & $0.642 \pm 0.027$ & $0.481 \pm 0.015$ & -- & $0.654 \pm 0.002$ & $0.697 \pm 0.005$ \\
+CroFreMo (scratch) & $0.815^{(1)}$ & $0.809 \pm 0.003$ & $0.504 \pm 0.049$ & $0.525 \pm 0.012$ & $0.641 \pm 0.011$ & $0.701 \pm 0.007$ \\
+CroFreMo (pretrained v2, 60k) & $0.815^{(1)}$ & -- & -- & -- & $0.677^{(1)}$ & $0.700^{(1)}$ \\
+CroFreMo (pretrained, fixed recipe) & $0.805^{(1)}$ & $0.768^{(1)}$ & $0.452^{(1)}$ & $0.503^{(1)}$ & $0.674^{(1)}$ & $0.672^{(1)}$ \\
+EEGPT (scratch) & -- & $0.785 \pm 0.017$ & $0.453 \pm 0.046$ & $0.426 \pm 0.059$ & -- & -- \\
+TFM-Tokenizer (scratch) & -- & $0.607 \pm 0.016$ & $0.454 \pm 0.018$ & $0.502 \pm 0.018$ & -- & -- \\
+CroFreMo (pretrained v3) & -- & -- & -- & -- & $0.666^{(1)}$ & $0.696^{(1)}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Coupling in the tri-axial encoder, all corpora}
+\label{app:triaxial-coupling}
+
+Table~\ref{tab:coupling-triaxial} is the three-seed coupling ablation in
+the tri-axial encoder on every corpus, and Table~\ref{tab:perclass} the
+per-class breakdown of the one large effect.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Tri-axial encoder: waveform tokens vs.\ the duplex grid, same
+encoder and recipe, three seeds each except where marked $(1)$.}
+\label{tab:coupling-triaxial}
+\begin{tabular}{llccc}
+\toprule
+Corpus & Metric & Waveform tokens & Duplex & $\Delta$ \\
+\midrule
+TUEV & $\kappa$ & $0.536 \pm 0.034$ & $0.690 \pm 0.029$ & $\mathbf{+0.15}$ \\
+IIIC & $\kappa$ & $0.466 \pm 0.008$ & $0.479 \pm 0.008$ & $+0.01$ \\
+CHB-MIT & AUC-PR & $0.667 \pm 0.047$ & $0.699 \pm 0.045$ & $+0.03$ \\
+TUSZ & AUC-PR & $0.671 \pm 0.026$ & $0.639 \pm 0.029$ & $-0.03$ \\
+TUEP & AUROC & $0.810 \pm 0.001$ & $0.810 \pm 0.003$ & $0$ \\
+ADFD & bal.\ acc. & $0.501 \pm 0.040$ & $0.505 \pm 0.050$ & $0$ \\
+CAUEEG & bal.\ acc. & $0.517 \pm 0.027$ & $0.525 \pm 0.012$ & $0$ \\
+TUAR & $\kappa$ & $0.623 \pm 0.007$ & $0.620 \pm 0.030$ & $0$ \\
+Sleep-EDF & $\kappa$ & $0.650 \pm 0.002$ & $0.642 \pm 0.011$ & $0$ \\
+ISRUC & $\kappa$ & $0.701 \pm 0.025$ & $0.702 \pm 0.007$ & $0$ \\
+Siena & AUC-PR & $0.171 \pm 0.130$ & $0.170 \pm 0.070$ & $0$ \\
+TUAB & bal.\ acc. & $0.805 \pm 0.006$ & $0.816\,(1)$ & $+0.01$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\caption{TUEV per-class F1 in the tri-axial encoder, waveform tokens vs.\
+duplex, averaged over three seeds each (29,421 test windows).}
+\label{tab:perclass}
+\begin{tabular}{lcccccc}
+\toprule
+ & SPSW & GPED & PLED & EYEM & ARTF & BCKG \\
+\midrule
+Waveform tokens & 0.16 & 0.55 & 0.52 & 0.57 & 0.40 & 0.88 \\
+Duplex & 0.00 & $\mathbf{0.82}$ & $\mathbf{0.61}$ & 0.31 & 0.56 & 0.92 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Axis-free variants on all corpora}
+\label{app:variants}
+
+\begin{table}[h]
+\centering
+\small
+\caption{Every axis-free variant on every corpus, single seeds; the
+tri-axial duplex model (three seeds) for reference. ``all'' = fold +
+strength + $d{=}192$.}
+\label{tab:variants-all}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+Corpus & tri-axial & no fold $d$192 & no fold + strength & fold $d$192 (final) & fold $d$256 & all \\
+\midrule
+TUSZ & 0.639 & 0.612 & 0.643 & 0.698 & 0.631 & 0.671 \\
+CHB-MIT & 0.698 & 0.630 & 0.513 & 0.716 & 0.608 & 0.671 \\
+TUEV & 0.690 & 0.690 & 0.721 & 0.680 & 0.679 & 0.661 \\
+IIIC & 0.479 & 0.458 & 0.448 & 0.447 & 0.465 & 0.427 \\
+TUEP & 0.810 & 0.812 & 0.812 & 0.799 & 0.797 & 0.803 \\
+TUAB (bal.\ acc.) & 0.816 & 0.795 & 0.812 & 0.820 & 0.793 & --- \\
+TUAR & 0.620 & 0.624 & 0.626 & 0.600 & 0.657 & 0.545 \\
+ADFD & 0.505 & 0.498 & 0.467 & 0.461 & 0.454 & 0.361 \\
+CAUEEG & 0.525 & 0.538 & 0.541 & 0.511 & 0.475 & 0.541 \\
+Sleep-EDF & 0.642 & 0.610 & 0.614 & 0.639 & 0.653 & 0.633 \\
+ISRUC & 0.702 & 0.696 & 0.683 & 0.698 & 0.700 & 0.677 \\
+Siena & 0.170 & 0.239 & 0.398 & 0.201 & 0.269 & --- \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\section{Transplant onto the released CBraMod checkpoint}
+\label{app:transplant-pre}
+
+\begin{table}[h]
+\centering
+\small
+\caption{The same additive transplant applied to CBraMod's released
+pretrained weights (encoder, patch embedding and head loaded; the added
+rows fresh). Single seeds; the native pretrained row is three seeds on
+TUEV and one on TUAR.}
+\label{tab:transplant-pre}
+\begin{tabular}{llccc}
+\toprule
+Corpus & Metric & CBraMod pretrained & + waveform rows & + interaction rows \\
+\midrule
+TUEV & $\kappa$ & $\mathbf{0.645 \pm 0.018}$ & $0.572$ & $0.623$ \\
+TUAR & $\kappa$ & $\mathbf{0.715}\,(1)$ & $0.681$ & $0.588$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Pretraining the tri-axial model: an exploratory result}
+\label{app:pretrain}
+
+The tri-axial model was pretrained with the objective of
+Section~\ref{sec:objective} on a pool of the twelve corpora's training
+splits plus a 2,000-hour, subject-diverse slice of TUEG with every session
+shared with TUSZ removed, for 60k steps, and finetuned under the fixed
+recipe of Section~\ref{sec:setup}. Table~\ref{tab:pretrain-triaxial}
+gives the outcome next to the from-scratch model. The pretrained model
+improves where labels are scarce or positives rare (Siena, TUSZ,
+Sleep-EDF) and loses where labels are plentiful (TUEV, IIIC, TUEP, TUAR,
+ADFD, CAUEEG, ISRUC). Frozen-probe and label-fraction analyses that would
+support a mechanistic reading were run but are not reported here, because
+their settings differ from the finetuning protocol of this table and we
+have not yet reconciled them; the pattern is offered as an observation
+about a small, strongly biased model under a reconstruction objective,
+not as a property of the objective. The axis-free model has no
+pretrained row: its block structure does not match the checkpoint and we
+did not pretrain it separately.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Tri-axial CroFreMo, from scratch vs.\ pretrained and finetuned
+under one fixed recipe. Three seeds where $\pm$ is given, otherwise single
+seed.}
+\label{tab:pretrain-triaxial}
+\begin{tabular}{llcc}
+\toprule
+Corpus & Metric & From scratch & Pretrained \\
+\midrule
+Siena & AUC-PR & $0.170 \pm 0.070$ & $\mathbf{0.456 \pm 0.034}$ \\
+TUSZ & AUC-PR & $0.639 \pm 0.029$ & $\mathbf{0.653 \pm 0.033}$ \\
+Sleep-EDF & $\kappa$ & $0.642 \pm 0.011$ & $\mathbf{0.675}\,(1)$ \\
+TUAB & bal.\ acc. & $0.816\,(1)$ & $0.805\,(1)$ \\
+CHB-MIT & AUC-PR & $0.698 \pm 0.045$ & $0.699\,(1)$ \\
+TUEV & $\kappa$ & $\mathbf{0.690 \pm 0.029}$ & $0.642\,(1)$ \\
+IIIC & $\kappa$ & $\mathbf{0.479 \pm 0.008}$ & $0.434\,(1)$ \\
+TUEP & AUROC & $\mathbf{0.810 \pm 0.003}$ & $0.769\,(1)$ \\
+ISRUC & $\kappa$ & $\mathbf{0.702 \pm 0.007}$ & $0.672\,(1)$ \\
+TUAR & $\kappa$ & $\mathbf{0.620 \pm 0.030}$ & $0.592\,(1)$ \\
+ADFD & bal.\ acc. & $\mathbf{0.505 \pm 0.050}$ & $0.453\,(1)$ \\
+CAUEEG & bal.\ acc. & $\mathbf{0.525 \pm 0.012}$ & $0.503\,(1)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
