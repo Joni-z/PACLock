@@ -149,3 +149,12 @@ TUEV 0.493 / IIIC 0.291,低于从零(0.564 / 0.393)——12k 步(1.5 遍池子)�
 高于从零(0.564)也高于 CBraMod 官方 27k 小时预训练(0.645)。这是"同预算下我们的 token 让宿主预训练学到更多"的第一格证据(单 seed)。
 第三版(09-11 晚):正文只讲一个模型——三轴全部退入附录"早期设计"一节;新增定稿模型的 TUEV 逐类别表(每类都涨,
 GPED 0.59→0.83、PLED 0.50→0.58、SPSW 0.07→0.20,macro-F1 0.48→0.58);Overleaf 9bfa2b3;`paper_drafts/v2026-09-11c/NOTE.md`。
+
+## 18. 归因对照:逐频带解析特征、无跨频对齐(2026-09-11 投递)
+
+审稿意见第 4 条的最小版本(领域标准是"关键部件对一两个合理替代",见 CBraMod/LaBraM/TFM 的消融规模):在 duplex 与 waveform-only 之间加一臂——
+`pac_token_mode: own`:每个频带的交互 token 用**自己的**相位特征,不做跨频对齐(h_j = a_j ⊙ p_j/|p_j|),行数、门、编码器、配方、seed 全同于定稿。
+验证(GPU smoke,`smoke/smoke_own.py`):扰动低四个频带的相位,`own` 下高四个频带的交互 token 变化 0.000e+00,`measured` 下 1.97——干预精确。
+配置 `configs/cf2/{tuev,iiic,tusz,chbmit}_cf2_v1d192own.yaml`,amd 一个节点,单 seed。
+**事先写下的读法**:own ≈ duplex → 收益来自解析信号特征(幅度+相位),跨频对齐不是原因,摘要归因改写为"解析信号前端";
+own ≈ waveform-only < duplex → 跨频对齐本身带来增益;介于两者之间 → 两者各占一部分,按差值报。token 数对照引用 CBraMod 加行实验(同八行,波形 vs 交互)。

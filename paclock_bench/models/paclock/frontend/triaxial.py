@@ -144,7 +144,7 @@ class TriAxialFrontend(nn.Module):
             )
         if fusion_mode not in ("blend", "gated"):
             raise ValueError(f"fusion_mode must be blend/gated, got {fusion_mode!r}")
-        if pac_token_mode not in ("measured", "uniform", "scramble", "magnitude"):
+        if pac_token_mode not in ("measured", "uniform", "scramble", "magnitude", "own"):
             raise ValueError(
                 "pac_token_mode must be measured/uniform/scramble/magnitude, got "
                 f"{pac_token_mode!r}"
@@ -448,9 +448,17 @@ class TriAxialFrontend(nn.Module):
             fallback = valid.to(edge.dtype) / count
             coeff = torch.where(denom > 1e-8, measured, fallback)
 
-        aligned_phase = torch.einsum(
-            "bcpji,bcpik->bcpjk", coeff, phase_feat
-        )
+        if self.pac_token_mode == "own":
+            # Control (2026-09-11): per-band analytic features WITHOUT cross-band
+            # alignment. Every band keeps its own phase feature, so h_j = a_j (.)
+            # p_j/|p_j| carries the band's amplitude and its own phase geometry and
+            # no information from any other band. Same rows, gates, encoder and
+            # recipe as "measured"; the only difference is the alignment step.
+            aligned_phase = phase_feat
+        else:
+            aligned_phase = torch.einsum(
+                "bcpji,bcpik->bcpjk", coeff, phase_feat
+            )
         # The slowest band has no lower-frequency driver. Preserve its own
         # analytic token as the root of the directed hierarchy.
         #
