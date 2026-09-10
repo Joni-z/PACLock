@@ -1,0 +1,36 @@
+# CBraMod pretraining, kind=crofremo, four-corpus pool, budget MATCHED to CBraMod's own 40 epochs (2026-09-10):
+# 1,008,421 windows x 40 = 40.3M presentations = 315,000 steps x batch 128. 12k / 60k runs are the shorter points of the budget curve.
+name: pretrain-cbramod_crofremo_ds4_ep40
+group: pretrain
+kind: crofremo
+corpora:
+- name: tuab
+  data_root: $PACLOCK_PROC/processed/tuab
+  flatten_sequences: false
+  batch_size: 128
+- name: tuev
+  data_root: $PACLOCK_PROC/processed/tuev
+  flatten_sequences: false
+  batch_size: 128
+- name: tusz
+  data_root: $PACLOCK_PROC/processed/tusz
+  flatten_sequences: false
+  batch_size: 128
+- name: chbmit
+  data_root: $PACLOCK_PROC/processed/chbmit
+  flatten_sequences: false
+  batch_size: 128
+model_kwargs:
+  tokenizer_mode: pac_interaction
+  interaction_mode: rotation
+lr: 0.0005
+weight_decay: 0.05
+eta_min: 1.0e-05
+grad_clip: 1.0
+mask_ratio: 0.5
+steps: 315000
+warmup_steps: 5000
+num_workers: 8
+log_every_steps: 500
+save_every_steps: 10000
+seed: 0

@@ -82,7 +82,7 @@ def main():
         core.load_state_dict(ck["full_model"]); opt.load_state_dict(ck["opt"]); sched.load_state_dict(ck["sched"])
         start = int(ck["step"]) + 1; print("resumed from step %d" % ck["step"], flush=True)
 
-    iters = [iter(l) for _, l, _, _ in corpora]; running = []; t0 = time.time(); model.train()
+    iters = [iter(l) for _, l, _, _ in corpora]; running = []; percorp = {n: [] for n, _, _, _ in corpora}; t0 = time.time(); model.train()  # per-corpus loss logging
     log_every = cfg.get("log_every_steps", 100); save_every = cfg.get("save_every_steps", 2000)
     for step in range(start, steps + 1):
         ci = int(np.random.choice(len(corpora), p=weights)); name, loader, _, _ = corpora[ci]
@@ -103,13 +103,14 @@ def main():
         loss.backward()
         if clip:
             torch.nn.utils.clip_grad_norm_(model.parameters(), clip)
-        opt.step(); sched.step(); running.append(loss.item())
+        opt.step(); sched.step(); running.append(loss.item()); percorp[name].append(loss.item())
         if step % log_every == 0:
             el = time.time() - t0
             peak = torch.cuda.max_memory_allocated() / 2**30 if torch.cuda.is_available() else 0.0
-            print("step %6d/%d  %.3fs/step  %4.1fGiB  lr=%.2e  loss=%.5f" % (
-                step, steps, el / log_every, peak, sched.get_last_lr()[0], float(np.mean(running))), flush=True)
-            running = []; t0 = time.time()
+            parts = "  ".join("%s=%.3f(%d)" % (n, np.mean(v) if v else float("nan"), len(v)) for n, v in percorp.items())
+            print("step %6d/%d  %.3fs/step  %4.1fGiB  lr=%.2e  loss=%.5f  %s" % (
+                step, steps, el / log_every, peak, sched.get_last_lr()[0], float(np.mean(running)), parts), flush=True)
+            running = []; percorp = {n: [] for n in percorp}; t0 = time.time()
             if torch.cuda.is_available():
                 torch.cuda.reset_peak_memory_stats()
         if step % save_every == 0 or step == steps:
