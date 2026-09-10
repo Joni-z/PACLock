@@ -152,7 +152,7 @@ class CBraModSequence(nn.Module):
 
 def build_cbramod(n_classes: int, n_channels: int, seq_len: int, *,
                   pretrained: bool = True, dropout: float = 0.1,
-                  sequence: bool = False) -> nn.Module:
+                  sequence: bool = False, pretrained_path: str | None = None) -> nn.Module:
     """Build CBraMod; ``pretrained=False`` is the group-C from-scratch row.
 
     ``sequence=True`` selects the ISRUC variant (model_for_isruc.py), which is
@@ -160,7 +160,12 @@ def build_cbramod(n_classes: int, n_channels: int, seq_len: int, *,
     """
     CBraMod = _import_cbramod()
     backbone = CBraMod(**BACKBONE_ARGS)
-    if pretrained:
+    if pretrained_path:
+        # our own re-pretrained CBraMod (training/pretrain_cbramod.py, kind=native)
+        ck = torch.load(pretrained_path, map_location="cpu", weights_only=False)
+        backbone.load_state_dict(ck["model"] if isinstance(ck, dict) and "model" in ck else ck, strict=True)
+        print(f"  CBraMod: loaded our checkpoint {pretrained_path} (step {ck.get('step') if isinstance(ck, dict) else '?'})", flush=True)
+    elif pretrained:
         load_pretrained(backbone)
     n_patches = seq_len // PATCH
     if sequence:

@@ -115,7 +115,8 @@ def build_cbramod_paclockfe(n_classes: int, n_channels: int, seq_len: int,
                             band_mode: str = "mean",
                             adapter: str = "replace",
                             readout: str = "native",
-                            pretrained: bool = False):
+                            pretrained: bool = False,
+                            pretrained_path: str | None = None):
     """Same call convention as build_cbramod (build.py passes seq_len=T).
 
     tokenizer_mode="raw" is the control this ablation needs to mean anything.
@@ -135,6 +136,15 @@ def build_cbramod_paclockfe(n_classes: int, n_channels: int, seq_len: int,
         backbone = PACLockCBraModBackbone(tokenizer_mode=tokenizer_mode,
                                           interaction_mode=interaction_mode,
                                           band_mode=band_mode)
+        if pretrained_path:
+            # our CBraMod-with-CroFreMo-tokenizer checkpoint (pretrain_cbramod.py, kind=crofremo):
+            # frontend / positional_encoding / encoder / proj_out, every key must match
+            ck = torch.load(pretrained_path, map_location="cpu", weights_only=False)
+            missing, unexpected = backbone.load_state_dict(ck["model"], strict=False)
+            if unexpected or any(not k.startswith("frontend.") for k in missing):
+                raise RuntimeError(f"checkpoint mismatch: missing={missing[:5]} unexpected={unexpected[:5]}")
+            print(f"  CBraMod+CroFreMo: loaded {pretrained_path} (step {ck.get('step')}); "
+                  f"{len(missing)} frontend keys left fresh", flush=True)
     n_patches = seq_len // PATCH
     if sequence:
         return CBraModSequence(backbone, n_channels, n_patches, n_classes)

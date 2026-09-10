@@ -1,0 +1,24 @@
+# CBraMod masked-patch pretraining on our TUEG slice (2026-09-10): kind=native.
+# Pool: tueg_slice (706,817 x 10 s windows, 1,963 h, 5,224 subjects, TUSZ-shared sessions excluded;
+# 16 bipolar channels @ 200 Hz, same recipe as tuab.yaml). Objective / optimizer = vendor/cbramod/pretrain_trainer.py.
+# steps is set from the 300-step probe so that one run fits ~12 h on one H100.
+name: pretrain-cbramod_native_tueg
+group: pretrain
+kind: native
+corpora:
+- name: tueg_slice
+  data_root: $PACLOCK_PROC/processed/tueg_slice
+  flatten_sequences: false
+  batch_size: 128
+model_kwargs: {}
+lr: 0.0005
+weight_decay: 0.05
+eta_min: 0.00001
+grad_clip: 1.0
+mask_ratio: 0.5
+steps: 40000
+warmup_steps: 1000
+num_workers: 8
+log_every_steps: 100
+save_every_steps: 2000
+seed: 0

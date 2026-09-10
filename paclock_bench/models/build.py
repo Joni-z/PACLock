@@ -122,7 +122,9 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
         # frozen protocol (see cbramod_adapter docstring).
         from .foundation.cbramod_adapter import build_cbramod
 
+        from ..paths import expand as _expand
         return build_cbramod(
+            pretrained_path=_expand(cfg["pretrained_path"]) if cfg.get("pretrained_path") else None,
             n_classes=cfg["num_classes"],
             n_channels=C,
             seq_len=T,
@@ -143,7 +145,9 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
         from .foundation.cbramod_paclockfe_adapter import build_cbramod_paclockfe
 
         mk = cfg.get("model_kwargs", {})
+        from ..paths import expand as _expand
         return build_cbramod_paclockfe(
+            pretrained_path=_expand(cfg["pretrained_path"]) if cfg.get("pretrained_path") else None,
             n_classes=cfg["num_classes"],
             n_channels=C,
             seq_len=T,

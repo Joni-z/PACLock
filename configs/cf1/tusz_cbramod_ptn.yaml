@@ -1,0 +1,31 @@
+# CF1 re-pretraining pair (2026-09-10): CBraMod pretrained BY US on the TUEG slice, then finetuned with the
+# cbramod_pretrained recipe. ptn = native tokenizer, ptc = CroFreMo tokenizer (replacement, rows as channels). Single seed.
+name: tusz-cbramod_ptn
+group: cf1
+dataset: tusz
+data_root: $PACLOCK_PROC/processed/tusz
+model: cbramod
+loader: null
+pretrained: false
+optimizer: adamw
+lr: 0.0001
+weight_decay: 0.05
+epochs: 50
+batch_size: 64
+multi_lr: true
+scheduler: cosine
+grad_clip: 1.0
+patience: 0
+num_workers: 16
+device: cuda
+eval_every_steps: 0
+model_kwargs:
+  dropout: 0.1
+num_classes: 2
+sample_rate: 200
+val_subsample: 20000
+loss: bce_with_logits
+seed: 0
+select_metric: auroc
+pretrained_path: $PACLOCK_CKPT/pretrain-cbramod_native_tueg.pt
+max_hours: 22.0
