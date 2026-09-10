@@ -188,3 +188,6 @@ CBraMod 加行 5 语料 ×2 臂、CBraMod 替换 tuev/tusz、LaBraM 换头 3 语
 **amd**:113 个任务、29 个打包节点已投(SEED_00..28),收集器 `wait_set.sh` 盯 `results/seed_amd_targets.txt`。
 **torch 待投**(MI210 上跑不进 24 h 的 10 个:CBraMod add_raw/add_cpl × tusz/chbmit × seed 1,2 + tusz crofremo_bands × seed 1,2):
 `results/seed_torch_pending.txt`,等 torch 会话重连后用 `torch_run.slurm <cfg> <seed>` 投。
+**b2 投递(09-11 08:10)**:CBraMod 原始设定对已在 b2 L40S 上起——native(约 0.2 s/步,219k 步 ≈ 12 h,一次续跑保险)、crofremo(0.92 s/步 ≈ 56 h,
+两次续跑链;续跑路径已用探针验证"resumed from step 300")。L40S 计费约 1 SU/GPU·h,合计 ≈ 70 SU。我们模型的预训练探针在 L40S 上 OOM(batch 96),
+batch 改为 24/48(0.25 s 网格每 10 s 窗口 40 patch × 256 token),探针重投中,出每步耗时后定步数。
