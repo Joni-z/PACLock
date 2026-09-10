@@ -46,6 +46,7 @@ def main():
     ap.add_argument("--out", default="pretrain_runs_cbramod")
     ap.add_argument("--resume", action="store_true")
     ap.add_argument("--steps", type=int, default=None, help="override cfg steps (probe runs)")
+    ap.add_argument("--dp", action="store_true", help="DataParallel over all visible GPUs (amd: 4 x MI210 per exclusive node)")
     args = ap.parse_args()
     cfg = yaml.safe_load(open(args.config))
     if args.steps:
@@ -58,6 +59,9 @@ def main():
     weights = np.array([n for _, _, n, _ in corpora], dtype=np.float64); weights /= weights.sum()
 
     model = build_mpm(cfg["kind"], **(cfg.get("model_kwargs") or {})).to(device)
+    core = model
+    if args.dp and torch.cuda.device_count() > 1:
+        model = torch.nn.DataParallel(model); print("DataParallel over %d GPUs" % torch.cuda.device_count(), flush=True)
     n_params = sum(p.numel() for p in model.parameters()) / 1e6
     print("model: kind=%s %.2fM params" % (cfg["kind"], n_params), flush=True)
     opt = torch.optim.AdamW(model.parameters(), lr=cfg.get("lr", 5e-4), weight_decay=cfg.get("weight_decay", 5e-2))
@@ -75,7 +79,7 @@ def main():
     ckpt_path = os.path.join(out_dir, "checkpoint.pt"); start = 1
     if args.resume and os.path.exists(ckpt_path):
         ck = torch.load(ckpt_path, map_location=device, weights_only=False)
-        model.load_state_dict(ck["full_model"]); opt.load_state_dict(ck["opt"]); sched.load_state_dict(ck["sched"])
+        core.load_state_dict(ck["full_model"]); opt.load_state_dict(ck["opt"]); sched.load_state_dict(ck["sched"])
         start = int(ck["step"]) + 1; print("resumed from step %d" % ck["step"], flush=True)
 
     iters = [iter(l) for _, l, _, _ in corpora]; running = []; t0 = time.time(); model.train()
@@ -109,7 +113,7 @@ def main():
             if torch.cuda.is_available():
                 torch.cuda.reset_peak_memory_stats()
         if step % save_every == 0 or step == steps:
-            torch.save({"model": model.export_state_dict(), "full_model": model.state_dict(),
+            torch.save({"model": core.export_state_dict(), "full_model": core.state_dict(),
                         "opt": opt.state_dict(), "sched": sched.state_dict(), "step": step, "cfg": cfg},
                        ckpt_path + ".tmp")
             os.replace(ckpt_path + ".tmp", ckpt_path)
