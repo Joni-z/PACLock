@@ -86,7 +86,7 @@ ICLR 2027:摘要 9-18,全文 9-25。论文按新主线在 MacBook 本地重写�
 | 宿主 | 跨频通路 | TUEV | IIIC | CHB-MIT | 预测 |
 |---|---|---|---|---|---|
 | LaBraM 5.86M(从零) | 无 | 0.372* → **0.522**(+0.150,09-10 04:40 命中) | 0.406* → 0.420(+0.014,≈2σ,弱正,09-10 11:01) | 0.360* → 跑 | 三格正(CHB-MIT 因宿主训不好) |
-| REVE 69.5M(从零) | 无 | native 0.303 → **0.544**(+0.241,09-10 06:01 命中) | native 0.299 → 跑 | — | 两格正(69M 从零训不起来,预训练版 0.685/0.436) |
+| REVE 69.5M(从零) | 无 | native 0.303 → **0.544**(+0.241,09-10 06:01 命中) | native 0.299 → **0.377**(+0.078,09-10 15:42 命中) | — | 两格正(69M 从零训不起来,预训练版 0.685/0.436) |
 | CBraMod(已完成) | rFFT 分支 | 0.564 → 0.632/0.641 | 0.393 → 0.396 | 0.317 → 0.465 | 已得:形态类正、TUSZ 负 |
 判据:换头 − native 超过 native 行的 seed 标准差。不跑 TUSZ/TUAB/睡眠/认知(机制预测零或负;TUSZ 边界已由 CBraMod 给出)。
 
@@ -115,3 +115,7 @@ token 分布)在这个设置下不存在。
   `build_cbramod` / `build_cbramod_paclockfe` 加 `pretrained_path`;amd GPU smoke 通过(两模型前向反向、checkpoint 往返加载严格匹配)。
 - 算力:MI210 上 crofremo batch 128 一步 25 s、native 2.9 s;b2 H100 上 300 步探针在跑,按探针把 steps 定到单卡 ≤ 14 h;
   两个预训练并行跑在 b2,微调 8 个单 seed 回 amd。**预测**:ptc > ptn 在 TUEV / IIIC / CHB-MIT;TUSZ 是边界。
+
+**算力调度(09-10 17:30)**:b2 的 h100-80 队列前有 2,500+ 任务,L40S 孪生也在排(`~/twin_pre.sh` 撤后起者);
+另在 torch(h100_tandon,空)投同一对预训练的 **TFM 同款池版本**:池 = TUAB/TUEV/TUSZ/CHB-MIT 的训练集(TFM 就是四个下游集合起来预训练),
+`configs/pretrain/cbramod_{native,crofremo}_ds4.yaml`,同样 12k 步。两套池各自成对比较;先出哪套用哪套,另一套作补充。
