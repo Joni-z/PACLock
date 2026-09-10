@@ -1,0 +1,365 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{A 2.7M-parameter model against foundation models}
+\label{sec:main}
+
+Tables~\ref{tab:seizure} and~\ref{tab:events} report the four corpora
+whose labels are paroxysmal events --- seizure detection on TUSZ and
+CHB-MIT, epileptiform event and pattern classification on TUEV and IIIC
+--- against seven supervised architectures and the foundation-model
+baselines with their released weights and trained from scratch; the
+remaining eight corpora are in Appendix~\ref{app:matrix} in the same
+format. On seizure detection CroFreMo leads every baseline on the primary
+metric by margins far outside the baselines' seed variance ($0.698$
+vs.\ $0.545$ AUC-PR on TUSZ, $0.716$ vs.\ $0.627$ on CHB-MIT), and the
+strongest baselines there are not the largest models. On TUEV it ties the
+strongest pretrained foundation model and on IIIC it leads narrowly.
+Across the eight remaining corpora it leads narrowly on TUEP, ties the
+strongest supervised model on TUAB, and loses to a pretrained or a larger
+from-scratch model on the two sleep-staging corpora, the two
+cohort-diagnosis corpora, TUAR and Siena.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Seizure detection. Mean $\pm$ std over three seeds; a superscript gives the seed count when fewer. Best per column in bold.}
+\label{tab:seizure}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{Method} & \multicolumn{3}{c}{TUSZ} & \multicolumn{3}{c}{CHB-MIT} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+ & Bal.\ Acc. & AUC-PR & AUROC & Bal.\ Acc. & AUC-PR & AUROC \\
+\midrule
+SPaRCNet & 0.5609 $\pm$ 0.0380 & 0.5020 $\pm$ 0.0213 & 0.8888 $\pm$ 0.0018 & 0.5127 $\pm$ 0.0079 & 0.1976 $\pm$ 0.0715 & 0.7995 $\pm$ 0.0374 \\
+ContraWR & 0.5601 $\pm$ 0.0176 & 0.5043 $\pm$ 0.0175 & 0.8871 $\pm$ 0.0035 & 0.6362 $\pm$ 0.0168 & 0.5072 $\pm$ 0.0360 & 0.8905 $\pm$ 0.0239 \\
+CNN-Transformer & 0.5389 $\pm$ 0.0548 & 0.3707 $\pm$ 0.1934 & 0.8455 $\pm$ 0.0420 & \textbf{0.6420 $\pm$ 0.0583} & 0.5057 $\pm$ 0.0741 & 0.9106 $\pm$ 0.0083 \\
+FFCL & 0.5953 $\pm$ 0.0334 & 0.5449 $\pm$ 0.0296 & 0.8924 $\pm$ 0.0112 & 0.6163 $\pm$ 0.0146 & 0.5341 $\pm$ 0.0540 & 0.9124 $\pm$ 0.0107 \\
+ST-Transformer & 0.5514 $\pm$ 0.0424 & 0.3589 $\pm$ 0.0314 & 0.8148 $\pm$ 0.0199 & 0.5551 $\pm$ 0.1040 & 0.2407 $\pm$ 0.1134 & 0.7208 $\pm$ 0.1037 \\
+EEGNet & 0.5215 $\pm$ 0.0111 & 0.4921 $\pm$ 0.0302 & 0.8727 $\pm$ 0.0039 & 0.6016 $\pm$ 0.1455 & 0.1406 $\pm$ 0.1345 & 0.7442 $\pm$ 0.1100 \\
+EEGConformer & 0.5216 $\pm$ 0.0374 & 0.3190 $\pm$ 0.0376 & 0.8186 $\pm$ 0.0283 & 0.5000 $\pm$ 0.0000 & 0.3054 $\pm$ 0.2530 & 0.5974 $\pm$ 0.1680 \\
+\midrule
+\multicolumn{7}{l}{\textit{Foundation models, released pretrained weights}} \\
+BIOT & 0.5634 $\pm$ 0.0328 & 0.3379 $\pm$ 0.0379 & 0.8382 $\pm$ 0.0135 & 0.6190 $\pm$ 0.0447 & 0.5601 $\pm$ 0.0771 & 0.8738 $\pm$ 0.0036 \\
+LaBraM-Base & 0.6139 $\pm$ 0.0378 & 0.4754 $\pm$ 0.0473 & 0.8687 $\pm$ 0.0252 & 0.5855 $\pm$ 0.0474 & 0.4519 $\pm$ 0.0969 & 0.8709 $\pm$ 0.0621 \\
+CBraMod & 0.6347 $\pm$ 0.0342 & 0.4344 $\pm$ 0.0424 & 0.8520 $\pm$ 0.0050 & 0.5446 $\pm$ 0.0198 & 0.2332 $\pm$ 0.0978 & 0.7828 $\pm$ 0.0474 \\
+EEGPT & 0.6587 $\pm$ 0.0619 & 0.5446 $\pm$ 0.0704 & 0.8821 $\pm$ 0.0122 & 0.5468 $\pm$ 0.0632 & 0.2811 $\pm$ 0.1325 & 0.8574 $\pm$ 0.0378 \\
+TFM-Tokenizer & 0.5645 $\pm$ 0.0275 & 0.3474 $\pm$ 0.0185 & 0.8286 $\pm$ 0.0059 & 0.6344 $\pm$ 0.0163 & 0.6269 $\pm$ 0.0251 & \textbf{0.9291 $\pm$ 0.0055} \\
+REVE-Base & 0.5523 $\pm$ 0.0372 & 0.5026 $\pm$ 0.0746 & 0.8885 $\pm$ 0.0158 & 0.6320 $\pm$ 0.0675 & 0.5802 $\pm$ 0.1956 & 0.8977 $\pm$ 0.0641 \\
+\midrule
+\multicolumn{7}{l}{\textit{Foundation models, trained from scratch}} \\
+BIOT & 0.6156 $\pm$ 0.0645 & 0.3475 $\pm$ 0.0258 & 0.8256 $\pm$ 0.0166 & 0.6240 $\pm$ 0.0711 & 0.5661 $\pm$ 0.0722 & 0.8748 $\pm$ 0.0185 \\
+LaBraM-Base & 0.5814 $\pm$ 0.0355 & 0.4752 $\pm$ 0.0477 & 0.8575 $\pm$ 0.0191 & 0.5854 $\pm$ 0.0649 & 0.3596 $\pm$ 0.0498 & 0.8226 $\pm$ 0.0298 \\
+CBraMod & 0.5761 $\pm$ 0.0494 & 0.4818 $\pm$ 0.0522 & 0.8753 $\pm$ 0.0334 & 0.6018 $\pm$ 0.0883 & 0.3169 $\pm$ 0.2050 & 0.7802 $\pm$ 0.1333 \\
+\midrule
+CroFreMo (2.7M) & \textbf{0.6901$^{(1)}$} & \textbf{0.6979$^{(1)}$} & \textbf{0.9285$^{(1)}$} & 0.5308$^{(1)}$ & \textbf{0.7163$^{(1)}$} & 0.9288$^{(1)}$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Epileptiform event and pattern classification. Format as in Table~\ref{tab:seizure}.}
+\label{tab:events}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{Method} & \multicolumn{3}{c}{TUEV, 6-class} & \multicolumn{3}{c}{IIIC, 6-class} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+ & Bal.\ Acc. & Cohen's $\kappa$ & Weighted F1 & Bal.\ Acc. & Cohen's $\kappa$ & Weighted F1 \\
+\midrule
+SPaRCNet & 0.4654 $\pm$ 0.0346 & 0.4885 $\pm$ 0.0279 & 0.7354 $\pm$ 0.0146 & 0.4767 $\pm$ 0.0103 & 0.3719 $\pm$ 0.0118 & 0.4791 $\pm$ 0.0113 \\
+ContraWR & 0.4195 $\pm$ 0.1258 & 0.4076 $\pm$ 0.0984 & 0.6962 $\pm$ 0.0455 & 0.5121 $\pm$ 0.0072 & 0.4135 $\pm$ 0.0053 & 0.5149 $\pm$ 0.0047 \\
+CNN-Transformer & 0.3679 $\pm$ 0.1026 & 0.4098 $\pm$ 0.1165 & 0.6916 $\pm$ 0.0744 & 0.5148 $\pm$ 0.0084 & 0.4162 $\pm$ 0.0095 & 0.5131 $\pm$ 0.0143 \\
+FFCL & 0.4376 $\pm$ 0.0687 & 0.4776 $\pm$ 0.0322 & 0.7366 $\pm$ 0.0169 & 0.5200 $\pm$ 0.0176 & 0.4231 $\pm$ 0.0197 & 0.5240 $\pm$ 0.0167 \\
+ST-Transformer & 0.4731 $\pm$ 0.0199 & 0.5006 $\pm$ 0.0117 & 0.7411 $\pm$ 0.0087 & 0.4065 $\pm$ 0.0025 & 0.2961 $\pm$ 0.0021 & 0.4084 $\pm$ 0.0081 \\
+EEGNet & 0.4152 $\pm$ 0.0575 & 0.4788 $\pm$ 0.0908 & 0.7389 $\pm$ 0.0367 & -- & -- & -- \\
+EEGConformer & 0.4212 $\pm$ 0.0454 & 0.4548 $\pm$ 0.0041 & 0.7166 $\pm$ 0.0059 & -- & -- & -- \\
+\midrule
+\multicolumn{7}{l}{\textit{Foundation models, released pretrained weights}} \\
+BIOT & 0.4894 $\pm$ 0.0302 & 0.5304 $\pm$ 0.0277 & 0.7532 $\pm$ 0.0158 & 0.4650 $\pm$ 0.0154 & 0.3605 $\pm$ 0.0163 & 0.4665 $\pm$ 0.0128 \\
+LaBraM-Base & 0.6305 $\pm$ 0.0306 & 0.5984 $\pm$ 0.0031 & 0.8086 $\pm$ 0.0048 & 0.4830 $\pm$ 0.0177 & 0.3834 $\pm$ 0.0204 & 0.4852 $\pm$ 0.0189 \\
+CBraMod & 0.6029 $\pm$ 0.0108 & 0.6449 $\pm$ 0.0217 & 0.8130 $\pm$ 0.0117 & 0.4161 $\pm$ 0.0151 & 0.3133 $\pm$ 0.0191 & 0.4178 $\pm$ 0.0179 \\
+EEGPT & 0.5131 $\pm$ 0.0750 & 0.5736 $\pm$ 0.0396 & 0.7766 $\pm$ 0.0200 & 0.4965 $\pm$ 0.0179 & 0.3966 $\pm$ 0.0195 & 0.4996 $\pm$ 0.0138 \\
+TFM-Tokenizer & 0.5959 $\pm$ 0.0359 & 0.6519 $\pm$ 0.0209 & 0.8171 $\pm$ 0.0105 & 0.5058 $\pm$ 0.0094 & 0.4060 $\pm$ 0.0090 & 0.5080 $\pm$ 0.0066 \\
+REVE-Base & \textbf{0.6477 $\pm$ 0.0183} & \textbf{0.6846 $\pm$ 0.0389} & \textbf{0.8378 $\pm$ 0.0187} & 0.5290 $\pm$ 0.0032 & 0.4363 $\pm$ 0.0030 & 0.5338 $\pm$ 0.0025 \\
+\midrule
+\multicolumn{7}{l}{\textit{Foundation models, trained from scratch}} \\
+BIOT & 0.5351 $\pm$ 0.0625 & 0.5324 $\pm$ 0.0250 & 0.7612 $\pm$ 0.0126 & 0.4601 $\pm$ 0.0137 & 0.3557 $\pm$ 0.0144 & 0.4618 $\pm$ 0.0151 \\
+LaBraM-Base & 0.3724 $\pm$ 0.0853 & 0.3717 $\pm$ 0.0089 & 0.6928 $\pm$ 0.0133 & 0.5047 $\pm$ 0.0045 & 0.4057 $\pm$ 0.0067 & 0.5038 $\pm$ 0.0059 \\
+CBraMod & 0.5744 $\pm$ 0.0105 & 0.5638 $\pm$ 0.0236 & 0.7671 $\pm$ 0.0041 & 0.4892 $\pm$ 0.0050 & 0.3935 $\pm$ 0.0058 & 0.4975 $\pm$ 0.0043 \\
+EEGPT & -- & -- & -- & 0.4717 $\pm$ 0.0214 & 0.3680 $\pm$ 0.0236 & 0.4762 $\pm$ 0.0203 \\
+TFM-Tokenizer & -- & -- & -- & 0.3848 $\pm$ 0.0064 & 0.2627 $\pm$ 0.0081 & 0.3806 $\pm$ 0.0094 \\
+\midrule
+CroFreMo (2.7M) & 0.5831$^{(1)}$ & 0.6804$^{(1)}$ & 0.8338$^{(1)}$ & \textbf{0.5405$^{(1)}$} & \textbf{0.4468$^{(1)}$} & \textbf{0.5497$^{(1)}$} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsection{What the seizure margin is made of}
+\label{sec:attribution}
+
+Tables~\ref{tab:abl-seizure} and~\ref{tab:abl-events} are the experiment the encoder was built for.
+The axis-free model is trained with its tokenizer producing either the
+duplex grid of Section~\ref{sec:tokenizer} or waveform tokens only, with
+every other setting identical, at the adopted width and at one width
+larger. Compared with the waveform-only tokenizer, the duplex tokenizer improves
+CHB-MIT by $0.136$ AUC-PR, TUEV by $0.107$ $\kappa$, TUSZ by $0.063$ AUC-PR
+and IIIC by $0.027$ $\kappa$ at $d{=}192$. At $d{=}256$ the four effects keep their sign; three
+are of similar size and the CHB-MIT effect drops to $0.025$, so the size
+of the effect is sensitive to capacity and optimization state, not only
+to the corpus. For scale, the seed standard deviations of the same
+recipe on the same corpora, measured on an earlier design with a
+dedicated frequency axis (Appendix~\ref{app:triaxial}), are $0.055$, $0.036$, $0.035$ and $0.009$; they
+are a reference for the recipe, not a substitute for this model's own
+variance. The two margins by which the model leads the
+foundation-model field are therefore not properties of the band
+decomposition or of the folded attention alone: without the interaction
+rows the same encoder falls to $0.635$ on TUSZ and $0.580$ on CHB-MIT,
+and on CHB-MIT below TFM-Tokenizer.
+
+Table~\ref{tab:perclass} breaks the TUEV effect down by class. Every
+class improves, and the gain is largest on the two periodic-discharge
+classes (GPED F1 $0.59 \to 0.83$, PLED $0.50 \to 0.58$), whose defining
+morphology is fast activity locked to a slow rhythm; the rare
+spike-and-sharp-wave class moves from near-zero recall to $0.16$, and
+background, artifact and eye movement change little. The confusion that
+remains is between GPED and PLED and between artifact and background.
+
+This comparison changes more than one thing at once --- the waveform-only
+grid has half the rows, no explicit envelope feature and no phase
+representation --- so it attributes the gain to the interaction rows as a
+whole, not yet to the cross-frequency alignment inside them. Controls
+that hold the row count fixed and vary what the extra rows carry ---
+waveform rows, amplitude-only rows, analytic features without cross-band
+alignment --- are the experiment that would separate these, and they are
+not in this version.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Duplex vs.\ waveform-only tokenizer in the same encoder, seizure detection. Single seeds.}
+\label{tab:abl-seizure}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{Tokenizer, width} & \multicolumn{3}{c}{TUSZ} & \multicolumn{3}{c}{CHB-MIT} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+ & Bal.\ Acc. & AUC-PR & AUROC & Bal.\ Acc. & AUC-PR & AUROC \\
+\midrule
+waveform-only, $d{=}192$ & 0.6395$^{(1)}$ & 0.6347$^{(1)}$ & 0.9238$^{(1)}$ & \textbf{0.5670$^{(1)}$} & 0.5797$^{(1)}$ & 0.9079$^{(1)}$ \\
+duplex, $d{=}192$ (final) & \textbf{0.6901$^{(1)}$} & \textbf{0.6979$^{(1)}$} & 0.9285$^{(1)}$ & 0.5308$^{(1)}$ & \textbf{0.7163$^{(1)}$} & \textbf{0.9288$^{(1)}$} \\
+waveform-only, $d{=}256$ & 0.5728$^{(1)}$ & 0.5405$^{(1)}$ & 0.9144$^{(1)}$ & 0.5199$^{(1)}$ & 0.5826$^{(1)}$ & 0.9035$^{(1)}$ \\
+duplex, $d{=}256$ & 0.5991$^{(1)}$ & 0.6311$^{(1)}$ & \textbf{0.9299$^{(1)}$} & 0.5399$^{(1)}$ & 0.6077$^{(1)}$ & 0.9120$^{(1)}$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Duplex vs.\ waveform-only tokenizer in the same encoder, event classification. Single seeds.}
+\label{tab:abl-events}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{Tokenizer, width} & \multicolumn{3}{c}{TUEV, 6-class} & \multicolumn{3}{c}{IIIC, 6-class} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+ & Bal.\ Acc. & Cohen's $\kappa$ & Weighted F1 & Bal.\ Acc. & Cohen's $\kappa$ & Weighted F1 \\
+\midrule
+waveform-only, $d{=}192$ & 0.4786$^{(1)}$ & 0.5730$^{(1)}$ & 0.7754$^{(1)}$ & 0.5159$^{(1)}$ & 0.4203$^{(1)}$ & 0.5150$^{(1)}$ \\
+duplex, $d{=}192$ (final) & \textbf{0.5831$^{(1)}$} & \textbf{0.6804$^{(1)}$} & \textbf{0.8338$^{(1)}$} & 0.5405$^{(1)}$ & 0.4468$^{(1)}$ & 0.5497$^{(1)}$ \\
+waveform-only, $d{=}256$ & 0.5660$^{(1)}$ & 0.6009$^{(1)}$ & 0.7918$^{(1)}$ & 0.5133$^{(1)}$ & 0.4179$^{(1)}$ & 0.5195$^{(1)}$ \\
+duplex, $d{=}256$ & 0.5224$^{(1)}$ & 0.6792$^{(1)}$ & 0.8259$^{(1)}$ & \textbf{0.5550$^{(1)}$} & \textbf{0.4651$^{(1)}$} & \textbf{0.5558$^{(1)}$} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{TUEV per class, CroFreMo with the waveform-only vs.\ the duplex
+tokenizer (single seed each, 29,421 test windows): test-set count and
+precision / recall / F1. Macro-F1 $0.48 \to 0.58$.}
+\label{tab:perclass}
+\begin{tabular}{lrccc}
+\toprule
+Class & $n$ & waveform-only P / R / F1 & duplex P / R / F1 & $\Delta$F1 \\
+\midrule
+SPSW & 567 & 0.87 / 0.04 / 0.07 & 0.29 / 0.16 / 0.20 & $+0.13$ \\
+GPED & 4,677 & 0.61 / 0.56 / 0.59 & 0.82 / 0.83 / 0.83 & $+0.24$ \\
+PLED & 1,998 & 0.48 / 0.53 / 0.50 & 0.63 / 0.54 / 0.58 & $+0.08$ \\
+EYEM & 329 & 0.94 / 0.23 / 0.37 & 0.44 / 0.42 / 0.43 & $+0.06$ \\
+ARTF & 2,204 & 0.35 / 0.62 / 0.44 & 0.42 / 0.65 / 0.51 & $+0.07$ \\
+BCKG & 19,646 & 0.93 / 0.89 / 0.91 & 0.94 / 0.91 / 0.92 & $+0.01$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{The same token in other encoders}
+\label{sec:content-structure}
+
+Table~\ref{tab:content-structure} collects the tokenizer's effect across
+four encoders. The interventions are not the same experiment, and the
+table says which is which: for CroFreMo it is the duplex tokenizer against
+a waveform-only one; for CBraMod it is interaction rows against matched
+waveform rows added to the native tokenizer; for LaBraM and REVE it is the
+whole CroFreMo tokenizer, band decomposition included, against the host's
+own. CBraMod's encoder, which keeps its own rFFT magnitude branch, gains from
+the interaction rows relative to matched waveform rows on TUEV ($0.045$),
+TUEP ($0.057$), IIIC ($0.015$) and CHB-MIT ($0.124$), and loses $0.092$ on
+TUSZ. LaBraM and REVE, trained from scratch with no spectral pathway,
+gain $0.150$ and $0.241$ on TUEV when the tokenizer replaces their patch
+embedding. CroFreMo gains on all four corpora measured.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Tokenizer benefit across four encoders. The interventions differ
+and the numbers are not one quantity: duplex vs.\ waveform-only tokenizer
+(CroFreMo); interaction rows vs.\ matched waveform rows added to the
+native tokenizer (CBraMod); the whole CroFreMo tokenizer vs.\ the native
+tokenizer (LaBraM, REVE). Single seeds.}
+\label{tab:content-structure}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllccccc}
+\toprule
+Encoder & Intervention & Control & TUEV & TUSZ & CHB-MIT & IIIC & TUEP \\
+\midrule
+CroFreMo & duplex tokenizer & waveform-only tokenizer & $+0.107$ & $+0.063$ & $+0.136$ & $+0.027$ & --- \\
+CBraMod (scratch) & + interaction rows & + waveform rows & $+0.045$ & $-0.092$ & $+0.124$ & $+0.015$ & $+0.057$ \\
+LaBraM (scratch) & CroFreMo tokenizer & native tokenizer & $+0.150$ & --- & $+0.017$ & $+0.014$ & --- \\
+REVE (scratch) & CroFreMo tokenizer & native tokenizer & $+0.241$ & --- & --- & $+0.078$ & --- \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Read within each intervention, the pattern is this. With its own
+tokenizer replaced, LaBraM and REVE gain most on TUEV; that gain includes
+the band decomposition and cannot yet be split between it and the
+interaction rows, which would need the CroFreMo waveform-only tokenizer
+in the same hosts. With the native tokenizer kept and rows added, CBraMod
+gains on the three event-classification corpora and on CHB-MIT, where it
+trains poorly from scratch and the interaction rows give it a foothold,
+and loses on TUSZ. Whether an encoder with a spectral branch computes for
+itself what the interaction rows supply is a question for probing or
+intervention experiments; the table records that the benefit of explicit
+cross-frequency content varies with the encoder and the corpus, not why.
+
+\subsection{Design controls}
+\label{sec:design}
+
+Table~\ref{tab:design} reports the variants that were tried on the way
+to the final model, all single seeds. Folding the band rows
+into spatial attention rather than leaving them as unrelated channels is
+worth $0.09$ on both seizure corpora and costs $0.02$--$0.04$ on the
+smaller corpora, where the longer attention span overfits. Raising the
+width from 192 to 256 recovers those small-corpus cells and loses
+$0.07$ and $0.11$ on TUSZ and CHB-MIT. An explicit coupling-strength
+feature --- the magnitudes $|Z_{ij}|$ projected onto the fused rows ---
+raises TUEV to $0.721$ and Siena to $0.398$ and collapses CHB-MIT to
+$0.513$. No variant dominates; the adopted one is the one that keeps the
+seizure margin, and every alternative is reported. Two controls run on an earlier design with a dedicated frequency axis,
+reported in Appendix~\ref{app:triaxial}, locate where a small model's
+seizure-detection margin comes from: collapsing the learned filterbank to
+one broadband band costs $0.11$ AUC-PR on TUSZ and $0.42$ on CHB-MIT, and
+replacing factorized attention by a flat encoder costs $0.22$ and $0.53$.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Design variants of the final model, primary metric per corpus, single seeds. ``fold'' = band rows folded into spatial attention; ``strength'' = explicit $|Z|$ feature.}
+\label{tab:design}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccccc}
+\toprule
+Variant & TUSZ (AUC-PR) & CHB-MIT (AUC-PR) & TUEV (Cohen's $\kappa$) & IIIC (Cohen's $\kappa$) & TUAR (Cohen's $\kappa$) & ADFD (Bal.\ Acc.) & Siena (AUC-PR) & Sleep-EDF (Cohen's $\kappa$) \\
+\midrule
+no fold, $d{=}192$ & 0.6115$^{(1)}$ & 0.6302$^{(1)}$ & 0.6896$^{(1)}$ & 0.4577$^{(1)}$ & 0.6237$^{(1)}$ & \textbf{0.4982$^{(1)}$} & 0.2393$^{(1)}$ & 0.6099$^{(1)}$ \\
+no fold, $d{=}192$, strength & 0.6429$^{(1)}$ & 0.5133$^{(1)}$ & \textbf{0.7207$^{(1)}$} & 0.4475$^{(1)}$ & 0.6261$^{(1)}$ & 0.4667$^{(1)}$ & \textbf{0.3982$^{(1)}$} & 0.6144$^{(1)}$ \\
+fold, $d{=}192$ (final) & \textbf{0.6979$^{(1)}$} & \textbf{0.7163$^{(1)}$} & 0.6804$^{(1)}$ & 0.4468$^{(1)}$ & 0.5997$^{(1)}$ & 0.4608$^{(1)}$ & 0.2009$^{(1)}$ & 0.6393$^{(1)}$ \\
+fold, $d{=}256$ & 0.6311$^{(1)}$ & 0.6077$^{(1)}$ & 0.6792$^{(1)}$ & \textbf{0.4651$^{(1)}$} & \textbf{0.6567$^{(1)}$} & 0.4540$^{(1)}$ & 0.2691$^{(1)}$ & \textbf{0.6529$^{(1)}$} \\
+fold, strength, $d{=}192$ & 0.6711$^{(1)}$ & 0.6709$^{(1)}$ & 0.6606$^{(1)}$ & 0.4268$^{(1)}$ & 0.5452$^{(1)}$ & 0.3610$^{(1)}$ & 0.2800$^{(1)}$ & 0.6325$^{(1)}$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsection{The token inside published encoders}
+\label{sec:transplant}
+
+Table~\ref{tab:transplant} adds the tokenizer's rows to CBraMod as
+described in Section~\ref{sec:encoder}. Against the matched control ---
+the same eight extra rows carrying waveform tokens --- the interaction
+rows are better on TUEV, TUEP, IIIC and CHB-MIT and worse on TUSZ, so
+the effect is attributable to what the rows carry rather than to the
+extra channels. Against CBraMod's own tokenizer the transplant is a clear
+gain on TUEV ($+0.077$, three standard deviations of the native model) and
+on CHB-MIT ($+0.148$, where the native model is unstable across seeds), a
+tie on TUEP and IIIC, and a loss on TUSZ.
+Table~\ref{tab:hosts} widens the test to two further encoders, with
+the tokenizer now \emph{replacing} the host's patch embedding (every
+electrode--row pair becomes one host channel, rows are pooled after the
+encoder, the head is unchanged). Trained from scratch, LaBraM gains
+$0.150$ $\kappa$ on TUEV and REVE $0.241$; on IIIC the gains are
+$0.014$ and $0.078$; on CHB-MIT LaBraM gains $0.017$, within its own
+seed variance. The three hosts span 4M to 69M parameters and three
+encoder designs, and the ordering of the TUEV gains follows how far each
+host is from what it can learn from $10^5$ labelled windows on its own.
+Adding the same rows to CBraMod's \emph{released} checkpoint is worse
+than the checkpoint alone on both corpora tried (appendix): a pretrained
+encoder is tuned to its own token distribution, and inserting eight new
+channels per electrode disturbs it more than the coupling content
+repays. We draw the conclusion the data support --- the token transfers
+into encoders trained from scratch, its effect is attributable to the
+content of the added rows, and it pays off on epileptiform event
+classification --- and not the broad one about released checkpoints.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{CroFreMo's rows added to CBraMod's encoder, trained from scratch: the same eight extra rows per electrode carrying waveform tokens (control) or interaction tokens. Native: three seeds; transplants: single seeds.}
+\label{tab:transplant}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llccccc}
+\toprule
+Encoder & Tokenizer & TUEV (Cohen's $\kappa$) & TUEP (AUROC) & IIIC (Cohen's $\kappa$) & CHB-MIT (AUC-PR) & TUSZ (AUC-PR) \\
+\midrule
+CBraMod (from scratch) & native & 0.5638 $\pm$ 0.0236 & 0.6422 $\pm$ 0.0339 & 0.3935 $\pm$ 0.0058 & 0.3169 $\pm$ 0.2050 & \textbf{0.4818 $\pm$ 0.0522} \\
+ & native + 8 waveform rows & 0.5956$^{(1)}$ & 0.5929$^{(1)}$ & 0.3815$^{(1)}$ & 0.3406$^{(1)}$ & 0.4762$^{(1)}$ \\
+ & native + 8 interaction rows & \textbf{0.6407$^{(1)}$} & \textbf{0.6496$^{(1)}$} & \textbf{0.3962$^{(1)}$} & \textbf{0.4650$^{(1)}$} & 0.3839$^{(1)}$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{CroFreMo's tokenizer in place of the host's own, hosts trained from scratch (every electrode--row pair becomes one host channel; rows pooled after the encoder; head unchanged). Native rows: three seeds except REVE (single); transplants: single seeds.}
+\label{tab:hosts}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcccc}
+\toprule
+Encoder & Tokenizer & TUEV (Cohen's $\kappa$) & IIIC (Cohen's $\kappa$) & CHB-MIT (AUC-PR) & TUSZ (AUC-PR) \\
+\midrule
+CBraMod (4M) & native & 0.5638 $\pm$ 0.0236 & 0.3935 $\pm$ 0.0058 & 0.3169 $\pm$ 0.2050 & \textbf{0.4818 $\pm$ 0.0522} \\
+ & CroFreMo tokenizer & \textbf{0.6322$^{(1)}$} & -- & -- & 0.4747$^{(1)}$ \\
+\midrule
+LaBraM (5.9M) & native & 0.3717 $\pm$ 0.0089 & 0.4057 $\pm$ 0.0067 & 0.3596 $\pm$ 0.0498 & 0.4752 $\pm$ 0.0477 \\
+ & CroFreMo tokenizer & \textbf{0.5220$^{(1)}$} & \textbf{0.4202$^{(1)}$} & \textbf{0.3771$^{(1)}$} & -- \\
+\midrule
+REVE (69M) & native & 0.3033$^{(1)}$ & 0.2989$^{(1)}$ & -- & -- \\
+ & CroFreMo tokenizer & \textbf{0.5437$^{(1)}$} & \textbf{0.3774$^{(1)}$} & -- & -- \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsection{Pretraining}
+\label{sec:pretrain-results}
+
+CroFreMo is trained from scratch throughout. A pretraining study on an
+earlier design with a dedicated frequency axis --- gains where labels are
+scarce or noisy, losses where they are plentiful --- is reported as an
+exploratory result in Appendix~\ref{app:pretrain}; we do not build on it.
