@@ -1,0 +1,92 @@
+{
+  "name": "chbmit-labram_crofremo",
+  "dataset": "chbmit",
+  "model": "labram_paclockfe",
+  "group": "cf1",
+  "seed": 0,
+  "n_params_M": 5.862154,
+  "primary_metric": "pr_auc",
+  "test": {
+    "balanced_acc": 0.6355481157726222,
+    "pr_auc": 0.37714838863947303,
+    "auroc": 0.8452638087735793
+  },
+  "best_val": 0.28060223193882416,
+  "val_curve": [
+    0.01462487201756501,
+    0.028063067407785063,
+    0.14938161038146264,
+    0.05528767078197307,
+    0.16077601228164062,
+    0.12991668200793202,
+    0.19683374153552266,
+    0.2451176937163501,
+    0.27321880028622203,
+    0.28060223193882416,
+    0.1859620872978054
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 9,
+    "n_evals": 11,
+    "best_val": 0.28060223193882416,
+    "chance": 0.0070808157099697885,
+    "reason": "ok"
+  },
+  "epochs_run": 11,
+  "stopped_by": "time_budget",
+  "wall_time_sec": 79471.77324390411,
+  "config": {
+    "name": "chbmit-labram_crofremo",
+    "group": "cf1",
+    "dataset": "chbmit",
+    "data_root": "$PACLOCK_PROC/processed/chbmit",
+    "sample_rate": 200,
+    "optimizer": "adamw",
+    "weight_decay": 0.05,
+    "lr": 0.0005,
+    "max_lr": 0.0004,
+    "scheduler": "cosine",
+    "pct_start": 0.2,
+    "batch_size": 16,
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 2,
+    "epochs": 50,
+    "loss": "cross_entropy",
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "model": "labram_paclockfe",
+    "loader": "labram",
+    "pretrained": false,
+    "loader_divisor": 1.0,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 2000,
+      "tokenizer_mode": "pac_interaction",
+      "interaction_mode": "rotation"
+    },
+    "seed": 0,
+    "max_hours": 22.0,
+    "accum_steps": 4
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      313322,
+      2883
+    ],
+    "val": [
+      21034,
+      150
+    ],
+    "test": [
+      17110,
+      276
+    ]
+  }
+}
