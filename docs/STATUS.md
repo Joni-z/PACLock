@@ -95,3 +95,23 @@ ICLR 2027:摘要 9-18,全文 9-25。论文按新主线在 MacBook 本地重写�
 **投递**:amd — CF1_labram2(IIIC、CHB-MIT,batch 16×4)、CF1_reve(4 个:两 native + 两换头,batch 16×8)、LaBraM TUEV 由 auto-launcher
 在 `processed_labram/tuev` 重建完成后投(数据曾丢失,已重建)。
 **教训**:配置注释里写了 `\\n` 字面量把 `name:` 吞进注释(REVE 首投 KeyError),已修;LaBraM batch 64 OOM → 16×4。
+
+## 16. CBraMod 重预训练对(TFM 设置,2026-09-10 搭建;Zhizhe 拍板)
+
+**为什么**:TFM-Tokenizer 的宿主实验不是"从零"也不是"挂发布权重",是**用新 tokenizer 把宿主重新预训练一遍再微调**
+(BIOT "replaced raw EEG inputs with token embeddings while following the original training protocol";LaBraM "substituted its
+neural tokenizer with ours during masked EEG modeling",预训练数据就是四个下游集)。我们挂发布权重失败的原因(编码器绑定自己的
+token 分布)在这个设置下不存在。
+
+**设计**(一对,同一循环、同一池、同一目标,唯一变量是 tokenizer):
+- `native`:vendored CBraMod 原样(PatchEmbedding + mask_encoding + 位置卷积 + criss-cross + proj_out)。
+- `crofremo`:同一编码器/位置卷积/proj_out,PatchEmbedding 换成我们的前端(8 行/电极,行当通道);被掩的 (电极, patch) 在
+  原始信号上先置零(滤波器组感受野不泄露)再把整格的行换成可学 mask token;行在编码器后均值池化再 proj_out。
+- 目标 / 掩码 / 优化器 = `vendor/cbramod/pretrain_trainer.py`:MSE on masked cells、Bernoulli 0.5、AdamW 5e-4 / wd 5e-2、余弦到 1e-5、clip 1。
+- 池:`tueg_slice`(706,817 × 10 s,1,963 h,5,224 被试,已剔除与 TUSZ 共享的 session;16 双极通道 @200 Hz),CBraMod 自家也是 TUEG。
+- 微调:`experiments/*_cbramod_pretrained` 配方(lr 1e-4、multi_lr、50 epoch),`pretrained_path` 指向我们的 checkpoint;
+  `configs/cf1/{tuev,iiic,chbmit,tusz}_cbramod_{ptn,ptc}.yaml`(ptc 在 10 s 语料 batch 16×4)。
+- 代码:`models/foundation/cbramod_pretrain.py`、`training/pretrain_cbramod.py`、两个 `configs/pretrain/cbramod_*_tueg.yaml`;
+  `build_cbramod` / `build_cbramod_paclockfe` 加 `pretrained_path`;amd GPU smoke 通过(两模型前向反向、checkpoint 往返加载严格匹配)。
+- 算力:MI210 上 crofremo batch 128 一步 25 s、native 2.9 s;b2 H100 上 300 步探针在跑,按探针把 steps 定到单卡 ≤ 14 h;
+  两个预训练并行跑在 b2,微调 8 个单 seed 回 amd。**预测**:ptc > ptn 在 TUEV / IIIC / CHB-MIT;TUSZ 是边界。
