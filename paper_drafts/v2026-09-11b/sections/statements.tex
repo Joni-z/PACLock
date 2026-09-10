@@ -1,0 +1,30 @@
+% ---------------------------------------------------------------------------
+% None of the three statements below counts toward the 9-page main-text limit
+% (ICLR 2027 template, original lines 399/416/430). The AI use statement is
+% REQUIRED; the other two are recommended. Each is capped at one page. They
+% belong at the end of the main text, BEFORE the references.
+% ---------------------------------------------------------------------------
+
+\subsection*{AI use statement}
+Large language models were used as a coding and writing assistant: to
+implement experiment configurations and cluster job scripts from the
+authors' specifications, to maintain the experiment log, and to draft and
+edit prose under the authors' direction. Every experimental design
+decision, every number reported, and every claim made was specified,
+checked, and approved by the authors, who take full responsibility for
+the content.
+
+\subsection*{Ethics statement}
+All corpora are publicly available, de-identified clinical EEG datasets
+used under their respective data-use agreements; no new data were
+collected. The models are research artifacts and are not intended for
+clinical decision-making.
+
+\subsection*{Reproducibility statement}
+Preprocessing scripts regenerate every processed corpus from the raw
+download with a manifest recording versions, split membership and raw-file
+checksums (Section~\ref{sec:setup}). Model code, all configuration files
+(including every variant of Table~\ref{tab:variants-all} and every
+baseline recipe), and per-run result files will be released. Single-seed
+cells are marked as such throughout and will be replaced by three-seed
+values.

@@ -135,3 +135,5 @@ TUEV 0.493 / IIIC 0.291,低于从零(0.564 / 0.393)——12k 步(1.5 遍池子)�
 
 0503c83 + 022f59d,18 页、0 未定义引用;清单见 `paper_drafts/v2026-09-11/NOTE.md`。以后每次改动经 `push_overleaf.sh`(编译门控)推送。
 第二类(图表)与第三类(实验:同 token 数幅度-only、自身相位、surrogate、合成 PAC)待做。
+第二轮(09-11):审稿人第二次意见的写作/逻辑项全部处理,Overleaf 296050d;清单 `paper_drafts/v2026-09-11b/NOTE.md`。
+所有表格数字改为从 `results/cells_2026-09-11.json` 生成(样本标准差),附录全矩阵由 `gen_matrix` 从 runs 重建。
