@@ -119,3 +119,8 @@ token 分布)在这个设置下不存在。
 **算力调度(09-10 17:30)**:b2 的 h100-80 队列前有 2,500+ 任务,L40S 孪生也在排(`~/twin_pre.sh` 撤后起者);
 另在 torch(h100_tandon,空)投同一对预训练的 **TFM 同款池版本**:池 = TUAB/TUEV/TUSZ/CHB-MIT 的训练集(TFM 就是四个下游集合起来预训练),
 `configs/pretrain/cbramod_{native,crofremo}_ds4.yaml`,同样 12k 步。两套池各自成对比较;先出哪套用哪套,另一套作补充。
+
+**进展(09-10 19:30)**:amd 上四语料池 12k 步对已完成(原生 0.125 s/步、带前端 4 卡 DP 0.33 s/步——smoke 的 25 s 是首次内核编译的假象);
+8 个微调(`*_cbramod_{ptn,ptc}_ds4`)已起,checkpoint 严格加载(step 12000)。60k 步对在跑(FT 由 `slurm/auto_ft.sh ds4_60k` 自动投,
+按日志"pretraining done"判完成——登录节点 python 无 torch,首版用 torch.load 判的启动器不会触发,已换)。b2 上 TUEG 池对在 L40S 上跑
+(孪生守护已撤 h100 版)。三套池 × 两种 tokenizer,微调各 4 语料。
