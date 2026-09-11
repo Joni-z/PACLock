@@ -220,3 +220,4 @@ IIIC 0.434 / 0.439 / 0.455(小);CHB-MIT raw 0.633±0.076(2;seed 1 = 0.687!)/ own
 换头三 seed:CBraMod TUEV scratch 0.564 / +raw 0.584 / +cpl 0.634(归因 +0.05、净 +0.07,稳);LaBraM TUEV 0.372 → 0.502、REVE 0.319 → 0.556(稳);
 LaBraM IIIC 0.406 → 0.401(2)——变零。
 结论:稳的是 TUSZ 的领先、TUEV 上三个宿主的换头收益、CBraMod 的归因;缩水的是 CHB-MIT 头条和 TUEV 持平;论文里的数字和措辞要按三 seed 重写。
+**CHB-MIT own(23:29,seed 0)**:0.651——raw 0.633±0.076(2)/ own 0.651 / duplex 0.669±0.041,三臂全在噪声内,CHB-MIT 上分不出;四语料对照臂 seed 0 全齐。
