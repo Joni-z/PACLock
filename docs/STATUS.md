@@ -202,3 +202,5 @@ own ≈ waveform-only,duplex 高 0.10 → 按事先写下的读法:TUEV 上的�
 **TUSZ(12:47)**:waveform-only 0.635 / own 0.578 / duplex 0.698——own 甚至低于 waveform-only,duplex 高 0.12;同向。IIIC/CHB-MIT 在跑。
 **IIIC(15:08)**:waveform-only 0.420 / own 0.430 / duplex 0.447——同向,量小(IIIC 一贯如此)。CHB-MIT 在跑。
 **CBraMod 原生 tuegc 预训练完成(219k 步,b2 15:59)**,checkpoint 已流到 amd,4 个 ptn_tuegc 微调投 amd。
+**论文(09-11 17:30,Overleaf 75fc07e)**:归因对照三臂表进正文(`tab:control`),摘要/引言/方法/结论的归因从"交互行整体"收紧到"跨频对齐本身";
+`paper_drafts/v2026-09-11e/NOTE.md`。待办:补 seed 落地后重跑 `scripts/gen_tables.py` 重生成所有表,并把 caption/setup 里"单 seed"的说法改掉。
