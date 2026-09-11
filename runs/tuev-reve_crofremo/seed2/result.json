@@ -1,0 +1,99 @@
+{
+  "name": "tuev-reve_crofremo",
+  "dataset": "tuev",
+  "model": "reve_paclockfe",
+  "group": "cf1",
+  "seed": 2,
+  "n_params_M": 69.573142,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.5153489937847955,
+    "cohen_kappa": 0.5281780916701335,
+    "weighted_f1": 0.755396638813796
+  },
+  "best_val": 0.5032191040723288,
+  "val_curve": [
+    0.4640221207108094,
+    0.396651372717978,
+    0.5032191040723288,
+    0.3650343986462635,
+    0.4192147889853878,
+    0.44751509916955523,
+    0.42167680071738933,
+    0.46446235749370834,
+    0.4473532588244028,
+    0.43930059760032103,
+    0.38219479466758177,
+    0.3952456289457337,
+    0.45743588686771675
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 13,
+    "best_val": 0.5032191040723288,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "stopped_by": "patience",
+  "wall_time_sec": 17458.924091100693,
+  "config": {
+    "name": "tuev-reve_crofremo",
+    "group": "cf1",
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "model": "reve_paclockfe",
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 30,
+    "batch_size": 16,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15,
+      "tokenizer_mode": "pac_interaction",
+      "interaction_mode": "rotation"
+    },
+    "label_smoothing": 0.0,
+    "accum_steps": 8
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}

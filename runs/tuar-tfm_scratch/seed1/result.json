@@ -1,0 +1,103 @@
+{
+  "name": "tuar-tfm_scratch",
+  "dataset": "tuar",
+  "model": "tfm",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 1.890919,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6113823955330603,
+    "cohen_kappa": 0.40361825557034325,
+    "weighted_f1": 0.587647257536488
+  },
+  "best_val": 0.41034740322528873,
+  "val_curve": [
+    0.0,
+    0.0,
+    0.15796084096537,
+    0.18665220669194593,
+    0.25234422473309925,
+    0.2968163782487335,
+    0.3254739649835958,
+    0.3201820997978009,
+    0.30587974542092433,
+    0.3521005621541171,
+    0.3147886786031373,
+    0.3895039456423367,
+    0.37182179648195335,
+    0.3581285946231997,
+    0.35415951952157654,
+    0.3748694618127617,
+    0.39328877570615894,
+    0.311001006162561,
+    0.41034740322528873,
+    0.38027398156867676,
+    0.3881072274601335,
+    0.4007507116968215,
+    0.38242236303719523,
+    0.38328344806944037,
+    0.3820607306024546,
+    0.3823647485231023,
+    0.3573645903602376,
+    0.3201825750651993,
+    0.38922284643837235
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 18,
+    "n_evals": 29,
+    "best_val": 0.41034740322528873,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 29,
+  "stopped_by": "patience",
+  "wall_time_sec": 6623.534593582153,
+  "config": {
+    "name": "tuar-tfm_scratch",
+    "group": "C",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": false,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 3,
+    "loss": "cross_entropy",
+    "seed": 1,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

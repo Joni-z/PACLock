@@ -1,0 +1,98 @@
+{
+  "name": "tuar-cnn_transformer",
+  "dataset": "tuar",
+  "model": "cnn_transformer",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 3.154915,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.8002372999344471,
+    "cohen_kappa": 0.6865424985483943,
+    "weighted_f1": 0.784793692476613
+  },
+  "best_val": 0.608108887180994,
+  "val_curve": [
+    0.4970192833310192,
+    0.43117879124792713,
+    0.5832211569756454,
+    0.5779056329530443,
+    0.5715208744545116,
+    0.5937360156108282,
+    0.5340878750943178,
+    0.5284692940858311,
+    0.5220315655579594,
+    0.5579509193095065,
+    0.5761447171315703,
+    0.608108887180994,
+    0.5479799202864697,
+    0.5744971052229109,
+    0.5349136205553202,
+    0.49004927593481973,
+    0.5829190010437965,
+    0.5893662724924593,
+    0.545923447908794,
+    0.48411947081913054,
+    0.5835382668022446,
+    0.5537114439892541,
+    0.5112420869611422,
+    0.5380598312501403,
+    0.5186654811736956,
+    0.41666807645738124,
+    0.6066624853488326
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 11,
+    "n_evals": 27,
+    "best_val": 0.608108887180994,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 27,
+  "stopped_by": "patience",
+  "wall_time_sec": 1635.51415681839,
+  "config": {
+    "name": "tuar-cnn_transformer",
+    "group": "A",
+    "model": "cnn_transformer",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 2,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

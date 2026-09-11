@@ -1,0 +1,91 @@
+{
+  "name": "tuar-contrawr",
+  "dataset": "tuar",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 1.571811,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.8200359548630832,
+    "cohen_kappa": 0.7210629193301283,
+    "weighted_f1": 0.8123811715651138
+  },
+  "best_val": 0.5978933169230769,
+  "val_curve": [
+    0.3741927614557876,
+    0.45550497788475075,
+    0.44504352604400277,
+    0.4781245429656693,
+    0.5978933169230769,
+    0.5034854513556072,
+    0.5308007850538929,
+    0.5373032620990805,
+    0.47599279213086965,
+    0.5061734836827962,
+    0.5377357984666205,
+    0.4849524030118011,
+    0.5212545363303631,
+    0.5368556340979576,
+    0.567689444853937,
+    0.491643234044722,
+    0.46677779949789244,
+    0.5681242009187594,
+    0.5873485622726735,
+    0.5624172412175612
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 4,
+    "n_evals": 20,
+    "best_val": 0.5978933169230769,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "patience",
+  "wall_time_sec": 193.6372139453888,
+  "config": {
+    "name": "tuar-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 2,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

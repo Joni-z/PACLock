@@ -1,0 +1,87 @@
+{
+  "name": "tuar-biot_scratch",
+  "dataset": "tuar",
+  "model": "biot",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 3.186963,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7418107273537474,
+    "cohen_kappa": 0.5974825064102847,
+    "weighted_f1": 0.7234914558759876
+  },
+  "best_val": 0.5698029830193321,
+  "val_curve": [
+    0.49469760967867793,
+    0.562450969099637,
+    0.5311687903388445,
+    0.5698029830193321,
+    0.506263068680245,
+    0.5428512113362791,
+    0.47913352477190396,
+    0.5349674207206103,
+    0.5497346811820205
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 9,
+    "best_val": 0.5698029830193321,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 9,
+  "stopped_by": "patience",
+  "wall_time_sec": 63.52900552749634,
+  "config": {
+    "name": "tuar-biot_scratch",
+    "group": "C",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "checkpoint": null,
+    "model": "biot",
+    "loader": "biot",
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 100,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 5,
+    "num_workers": 16,
+    "device": "cuda",
+    "model_kwargs": {
+      "token_size": 200,
+      "hop_length": 100,
+      "target_len": 1000
+    },
+    "num_classes": 3,
+    "sample_rate": 200,
+    "batch_size": 128,
+    "loss": "cross_entropy",
+    "eval_every_steps": 0,
+    "seed": 1,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "name": "tuar-ffcl",
+  "dataset": "tuar",
+  "model": "ffcl",
+  "group": "A",
+  "seed": 2,
+  "n_params_M": 2.414307,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.8039864297118754,
+    "cohen_kappa": 0.6949217995752075,
+    "weighted_f1": 0.7944296787831137
+  },
+  "best_val": 0.6281802788643919,
+  "val_curve": [
+    0.44314583346742276,
+    0.527963784021158,
+    0.5273294419659624,
+    0.5082280262300662,
+    0.565774816075708,
+    0.5521332981735161,
+    0.6281802788643919,
+    0.5470717762610915,
+    0.5688804679017143,
+    0.5427383323647295,
+    0.5635474494442295,
+    0.5993423174219747,
+    0.6010019715745853,
+    0.6119052540556255,
+    0.5657451151848831,
+    0.6197995607097755,
+    0.5212798244839225,
+    0.606268693499423,
+    0.587049346674823,
+    0.5106953515305594,
+    0.5992650199841867,
+    0.593039881929884
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 22,
+    "best_val": 0.6281802788643919,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 22,
+  "stopped_by": "patience",
+  "wall_time_sec": 318.91872811317444,
+  "config": {
+    "name": "tuar-ffcl",
+    "group": "A",
+    "model": "ffcl",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 2,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

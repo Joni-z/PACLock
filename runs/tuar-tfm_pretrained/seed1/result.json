@@ -1,0 +1,90 @@
+{
+  "name": "tuar-tfm_pretrained",
+  "dataset": "tuar",
+  "model": "tfm",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 1.890919,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7637661229346587,
+    "cohen_kappa": 0.6414787451177622,
+    "weighted_f1": 0.7578983591497058
+  },
+  "best_val": 0.5752273539788835,
+  "val_curve": [
+    0.48164782075616075,
+    0.5039624117581836,
+    0.570844429475531,
+    0.5684809786735,
+    0.5167559905292829,
+    0.5752273539788835,
+    0.5648005345417932,
+    0.5576579119479537,
+    0.5616396927827627,
+    0.552065449607225,
+    0.5677079792395077,
+    0.5409159533850723,
+    0.5432361417355185,
+    0.5499359740908745,
+    0.5664969470837548,
+    0.5595392867767073
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 16,
+    "best_val": 0.5752273539788835,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 16,
+  "stopped_by": "patience",
+  "wall_time_sec": 3616.050843477249,
+  "config": {
+    "name": "tuar-tfm_pretrained",
+    "group": "B",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "tfm",
+    "loader": "tfm",
+    "pretrained": true,
+    "tfm_setting": "multiple",
+    "optimizer": "adamw",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "epochs": 50,
+    "batch_size": 512,
+    "warmup_epochs": 5,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 3,
+    "loss": "cross_entropy",
+    "seed": 1,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

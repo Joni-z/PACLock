@@ -1,0 +1,101 @@
+{
+  "name": "iiic-reve_scratch",
+  "dataset": "iiic",
+  "model": "reve",
+  "group": "C",
+  "seed": 1,
+  "n_params_M": 69.820422,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.3919249717528372,
+    "cohen_kappa": 0.2760925610128091,
+    "weighted_f1": 0.3905767801952368
+  },
+  "best_val": 0.320173515084743,
+  "val_curve": [
+    0.0,
+    0.08423419110414998,
+    0.20027889883006755,
+    0.25973608993918706,
+    0.28506256448878775,
+    0.2902607356350262,
+    0.320173515084743,
+    0.2793238462643044,
+    0.2733787135469997,
+    0.2804901395233703,
+    0.26041604234118765,
+    0.27040770188167673,
+    0.27399319217261076,
+    0.27724202185011304,
+    0.27823949677759774,
+    0.2789484117426415,
+    0.27844696397029645
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 6,
+    "n_evals": 17,
+    "best_val": 0.320173515084743,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 17,
+  "stopped_by": "patience",
+  "wall_time_sec": 5070.521077871323,
+  "config": {
+    "name": "iiic-reve_scratch",
+    "group": "C",
+    "dataset": "iiic",
+    "data_root": "$PACLOCK_PROC/processed/iiic",
+    "model": "reve",
+    "pretrained": false,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 30,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "label_smoothing": 0.0
+  },
+  "data_manifest_created": "2026-08-26T03:32:57.096698+00:00",
+  "class_counts": {
+    "train": [
+      13536,
+      14426,
+      10460,
+      11212,
+      11236,
+      12767
+    ],
+    "val": [
+      2901,
+      3092,
+      2240,
+      2402,
+      2407,
+      2736
+    ],
+    "test": [
+      2900,
+      3091,
+      2244,
+      2402,
+      2407,
+      2736
+    ]
+  }
+}

@@ -204,3 +204,7 @@ own ≈ waveform-only,duplex 高 0.10 → 按事先写下的读法:TUEV 上的�
 **CBraMod 原生 tuegc 预训练完成(219k 步,b2 15:59)**,checkpoint 已流到 amd,4 个 ptn_tuegc 微调投 amd。
 **论文(09-11 17:30,Overleaf 75fc07e)**:归因对照三臂表进正文(`tab:control`),摘要/引言/方法/结论的归因从"交互行整体"收紧到"跨频对齐本身";
 `paper_drafts/v2026-09-11e/NOTE.md`。待办:补 seed 落地后重跑 `scripts/gen_tables.py` 重生成所有表,并把 caption/setup 里"单 seed"的说法改掉。
+**CBraMod 原生 tokenizer、原始设定预训练(40 epoch,1,945 h 切片)后微调(09-11 19:49,单 seed)**:TUEV 0.500、IIIC 0.324
+(12k 步版 0.493 / 0.291;从零 0.564 / 0.393;官方 27k h 权重 0.645 / 0.313)。40 epoch 也没让原生 CBraMod 在 TUEV 追平从零——
+在 1,945 h 的数据量上,原生目标的先验本身就弱;官方的 27k h 才是它起作用的原因。带前端的配对项 47k/219k,约两天后出,届时对着这两格读。
+CHB-MIT / TUSZ 的 ptn_tuegc 微调在跑。

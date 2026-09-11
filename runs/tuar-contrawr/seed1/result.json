@@ -1,0 +1,97 @@
+{
+  "name": "tuar-contrawr",
+  "dataset": "tuar",
+  "model": "contrawr",
+  "group": "A",
+  "seed": 1,
+  "n_params_M": 1.571811,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.8049021473759636,
+    "cohen_kappa": 0.6950368921135979,
+    "weighted_f1": 0.7934112780473095
+  },
+  "best_val": 0.6328035943125345,
+  "val_curve": [
+    0.4046778581820053,
+    0.5120207178725782,
+    0.522955761974603,
+    0.5337603005313009,
+    0.5199075721978625,
+    0.47561335556694573,
+    0.46799012074852286,
+    0.4789523043040341,
+    0.48125810335891717,
+    0.5216171863963787,
+    0.6328035943125345,
+    0.6057964316955223,
+    0.600478820828196,
+    0.5448214342391223,
+    0.5409258912586747,
+    0.5412441428934796,
+    0.5688908458803504,
+    0.5818065318282697,
+    0.5371340079029716,
+    0.5215308845474057,
+    0.5373517894024412,
+    0.519651397155537,
+    0.5893786215783732,
+    0.5801065039780362,
+    0.5861983739714123,
+    0.47814508129555355
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 10,
+    "n_evals": 26,
+    "best_val": 0.6328035943125345,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 26,
+  "stopped_by": "patience",
+  "wall_time_sec": 242.9930820465088,
+  "config": {
+    "name": "tuar-contrawr",
+    "group": "A",
+    "model": "contrawr",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "batch_size": 512,
+    "num_workers": 16,
+    "epochs": 100,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": null,
+    "grad_clip": null,
+    "patience": 15,
+    "eval_every_steps": 0,
+    "seed": 1,
+    "device": "cuda",
+    "label_smoothing": 0.1,
+    "max_hours": 22.5
+  },
+  "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}
