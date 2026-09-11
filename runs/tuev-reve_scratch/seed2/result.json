@@ -1,0 +1,97 @@
+{
+  "name": "tuev-reve_scratch",
+  "dataset": "tuev",
+  "model": "reve",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 69.476358,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.4039493211707099,
+    "cohen_kappa": 0.32272547966905907,
+    "weighted_f1": 0.6498830456209992
+  },
+  "best_val": 0.3314810582381761,
+  "val_curve": [
+    0.1832574996345261,
+    0.3159415914015189,
+    0.3314810582381761,
+    0.24264619929461917,
+    0.2296985804258712,
+    0.21247167398723021,
+    0.22016360052349948,
+    0.21708577569677623,
+    0.28170959224235914,
+    0.2685975477596916,
+    0.26099769339948165,
+    0.27845994297289756,
+    0.22845247437348726
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 2,
+    "n_evals": 13,
+    "best_val": 0.3314810582381761,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 13,
+  "stopped_by": "patience",
+  "wall_time_sec": 1624.7491445541382,
+  "config": {
+    "name": "tuev-reve_scratch",
+    "group": "C",
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "model": "reve",
+    "pretrained": false,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "epochs": 30,
+    "batch_size": 128,
+    "patience": 10,
+    "eval_every_steps": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "seed": 2,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "dropout": 0.15
+    },
+    "label_smoothing": 0.0
+  },
+  "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  }
+}
