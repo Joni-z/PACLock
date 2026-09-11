@@ -221,3 +221,4 @@ IIIC 0.434 / 0.439 / 0.455(小);CHB-MIT raw 0.633±0.076(2;seed 1 = 0.687!)/ own
 LaBraM IIIC 0.406 → 0.401(2)——变零。
 结论:稳的是 TUSZ 的领先、TUEV 上三个宿主的换头收益、CBraMod 的归因;缩水的是 CHB-MIT 头条和 TUEV 持平;论文里的数字和措辞要按三 seed 重写。
 **CHB-MIT own(23:29,seed 0)**:0.651——raw 0.633±0.076(2)/ own 0.651 / duplex 0.669±0.041,三臂全在噪声内,CHB-MIT 上分不出;四语料对照臂 seed 0 全齐。
+**ptn_tuegc CHB-MIT / TUSZ(09-12 00:10,单 seed)**:0.440 / 0.491(从零 0.317±0.205 / 0.482±0.052;官方权重 0.233 / 0.434)——原生 tokenizer 的 40 epoch 预训练在发作两格帮(CHB-MIT +0.12),在 TUEV/IIIC 伤;四格齐。带前端配对项 66k/219k。
