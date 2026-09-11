@@ -199,3 +199,4 @@ batch 改为 24/48(0.25 s 网格每 10 s 窗口 40 patch × 256 token),探针重
 **归因对照首格(09-11 09:47)——TUEV:waveform-only 0.573 / own(逐频带解析特征,无跨频对齐)0.578 / duplex 0.680。**
 own ≈ waveform-only,duplex 高 0.10 → 按事先写下的读法:TUEV 上的增益来自跨频对齐本身,不是解析信号特征。单 seed;IIIC/TUSZ/CHB-MIT 在跑。
 **ptR TUEV(10:07)**:预训练起点 + 从零配方 = 0.636(从零 0.690±0.036,ptS 0.642)——换配方没救回来,差在起点不在配方;Siena 0.422 则说明标签稀缺处先验有效。
+**TUSZ(12:47)**:waveform-only 0.635 / own 0.578 / duplex 0.698——own 甚至低于 waveform-only,duplex 高 0.12;同向。IIIC/CHB-MIT 在跑。

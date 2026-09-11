@@ -1,0 +1,103 @@
+{
+  "name": "tuar-labram_pretrained",
+  "dataset": "tuar",
+  "model": "labram",
+  "group": "B",
+  "seed": 1,
+  "n_params_M": 5.820539,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.754109851468363,
+    "cohen_kappa": 0.6141546259392525,
+    "weighted_f1": 0.7349385075751337
+  },
+  "best_val": 0.6137466576977222,
+  "val_curve": [
+    0.0,
+    0.15683178841073575,
+    0.5086831916960046,
+    0.4895199817281526,
+    0.4735404240640433,
+    0.5279418665487768,
+    0.4967341558725855,
+    0.4522447684219436,
+    0.4832233032567378,
+    0.5401847382616848,
+    0.5315033547052611,
+    0.5294085350111621,
+    0.5469464697854844,
+    0.6137466576977222,
+    0.603074548370323,
+    0.583912582394492,
+    0.5868054316597962,
+    0.5869287668770782,
+    0.5220905156845502,
+    0.578507675412977,
+    0.5194029862179566,
+    0.5703541638702263,
+    0.6095383747007646,
+    0.5520796825187904
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 13,
+    "n_evals": 24,
+    "best_val": 0.6137466576977222,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 6,
+  "stopped_by": "patience",
+  "wall_time_sec": 239.91818571090698,
+  "config": {
+    "name": "tuar-labram_pretrained",
+    "group": "B",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": true,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": 0.65,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 100,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 1,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    }
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "name": "tuev-labram_crofremo",
+  "dataset": "tuev",
+  "model": "labram_paclockfe",
+  "group": "cf1",
+  "seed": 1,
+  "n_params_M": 5.862958,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.3914408143279622,
+    "cohen_kappa": 0.4826602353897459,
+    "weighted_f1": 0.7213421227602257
+  },
+  "best_val": 0.6348498517378615,
+  "val_curve": [
+    0.5023744080985908,
+    0.6348498517378615,
+    0.6030789090195389,
+    0.617753983482284,
+    0.5659328316279957,
+    0.5484890468450131,
+    0.5605280933639364,
+    0.48537484729698854,
+    0.503159235604395,
+    0.5252660607790436,
+    0.5353060780887414,
+    0.519017950713756
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 1,
+    "n_evals": 12,
+    "best_val": 0.6348498517378615,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 12,
+  "stopped_by": "patience",
+  "wall_time_sec": 11735.52660560608,
+  "config": {
+    "name": "tuev-labram_crofremo",
+    "group": "cf1",
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed_labram/tuev",
+    "model": "labram_paclockfe",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 16,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "seed": 1,
+    "model_kwargs": {
+      "tokenizer_mode": "pac_interaction",
+      "interaction_mode": "rotation"
+    },
+    "max_hours": 22.0,
+    "accum_steps": 4
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      581,
+      7732,
+      5199,
+      916,
+      8264,
+      41758
+    ],
+    "val": [
+      64,
+      3522,
+      985,
+      146,
+      2638,
+      11682
+    ],
+    "test": [
+      249,
+      3430,
+      1864,
+      310,
+      1980,
+      18234
+    ]
+  }
+}

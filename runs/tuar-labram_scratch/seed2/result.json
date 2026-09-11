@@ -1,0 +1,93 @@
+{
+  "name": "tuar-labram_scratch",
+  "dataset": "tuar",
+  "model": "labram",
+  "group": "C",
+  "seed": 2,
+  "n_params_M": 5.820539,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.7034388428198269,
+    "cohen_kappa": 0.5411012197450134,
+    "weighted_f1": 0.688531528462568
+  },
+  "best_val": 0.5688670642119791,
+  "val_curve": [
+    0.06418456407378059,
+    0.43189076555998385,
+    0.46567863021372613,
+    0.5688670642119791,
+    0.5145923339110836,
+    0.5344925208072608,
+    0.542258828953615,
+    0.5443261108787631,
+    0.4673275652397113,
+    0.5605768284318245,
+    0.48618165203901653,
+    0.5173768788519013,
+    0.5227888739694794,
+    0.49455080770710125
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 3,
+    "n_evals": 14,
+    "best_val": 0.5688670642119791,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 14,
+  "stopped_by": "patience",
+  "wall_time_sec": 473.04889011383057,
+  "config": {
+    "name": "tuar-labram_scratch",
+    "group": "C",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "labram",
+    "loader": "labram",
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0005,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "warmup_epochs": 5,
+    "layer_decay": null,
+    "scheduler": "cosine",
+    "grad_clip": null,
+    "patience": 10,
+    "num_workers": 16,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "num_classes": 3,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "seed": 2,
+    "label_smoothing": 0.1,
+    "max_hours": 22.5,
+    "model_kwargs": {
+      "montage_mode": "positional",
+      "target_len": 1000
+    }
+  },
+  "data_manifest_created": null,
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  }
+}
