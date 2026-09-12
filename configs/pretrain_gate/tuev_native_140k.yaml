@@ -1,0 +1,30 @@
+name: tuev-cbramod_ptn_tuegc_140k_gate
+group: pretrain_gate
+dataset: tuev
+data_root: $PACLOCK_PROC/processed/tuev
+model: cbramod
+loader: null
+pretrained: false
+optimizer: adamw
+lr: 0.0001
+weight_decay: 0.05
+epochs: 50
+batch_size: 64
+multi_lr: true
+scheduler: cosine
+grad_clip: 1.0
+patience: 0
+num_workers: 8
+device: cuda
+eval_every_steps: 0
+model_kwargs:
+  dropout: 0.1
+num_classes: 6
+sample_rate: 200
+loss: cross_entropy
+label_smoothing: 0.1
+seed: 0
+pretrained_path: pretrain_runs_cbramod/transfer_140k/native_140000.pt
+max_hours: 11.0
+gate_note: Matched 140k native/coupling transfer diagnostic; seed 0 screening is not
+  a final architecture decision.
