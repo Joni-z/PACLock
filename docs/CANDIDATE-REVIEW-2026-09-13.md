@@ -176,6 +176,41 @@ to canonical AMD `runs/` so the same passive monitor collects their progress.
 
 ## What changes the next decision
 
+### Interim validation and control audit
+
+The latest manually fetched progress files contain 41 native and 9 coupling
+validations in the 140k transfer pair. Through the same first 9 epochs, best
+validation kappa is .403105 for native and .422662 for coupling. Neither has
+completed its 50-epoch recipe at this observation. Native's historical scratch
+run finished at .419841, but its runtime differs from the current run.
+
+The historical `tuev-cbramod_crofremo_bands` scratch configuration is **duplex**,
+whereas the current pretrained coupling configuration is **pac_interaction**
+with rotation and bands represented as channels. The adapter forwards this
+choice to `TriAxialFrontend`; these are distinct constructions. The historical
+duplex result (.439489 at seed 0) is contextual evidence, not a matched scratch
+control for the current coupling transfer. No completed exact counterpart was
+found in the collected TUEV results. A promising transfer result would require
+that counterpart before attributing a gain to pretraining or resuming B2 spend.
+
+For the local-lane scale screen, equal-epoch best validation kappa is:
+
+| Dataset | Completed epochs in both arms | Scale 1.0 | Scale 0.3 |
+|---|---:|---:|---:|
+| TUEV | 3 | .616866 | .644781 |
+| TUAR | 11 | .598155 | .618194 |
+
+Both pairs have matching manifests and class counts. They are unfinished,
+seed-0 screens; retain the current bounded runs without expanding replication.
+These observations do not select a final model or establish SOTA.
+
+Direct process inspection found 19 training roots across the 12 active
+four-card AMD allocations, with at least one trainer in every allocation.
+The seven single-card allocations are separate. Idle cards alone are not a
+reason to restart old trainers without optimizer checkpoints. No new work was
+submitted in this audit. B2 has zero project jobs; Torch has two running and
+four pending project jobs, now reporting `QOSMaxGRESPerUser`.
+
 1. All three valid TUEV pilots have now completed 20 epochs. Compare their
    matching validation histories;
    retain the global f1/f2 tradeoff rather than choosing a different architecture
