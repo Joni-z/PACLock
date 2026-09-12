@@ -2,8 +2,10 @@
 
 AMD is allocation-limited. An independent `sbatch --test-only` check of the
 site submission filter reports `Used 1793.10 of 2250`, expiring 2027-06-30:
-456.90 remaining before subsequent usage is posted. The earlier 1786.35 figure
-was a prior reading, not a current balance. Reproduce without submitting work:
+456.90 remaining before subsequent usage is posted. A later independent check
+reported `Used 1799.10 of 2250` (450.90 remaining). The earlier 1786.35 figure
+was supplied by another AI and its original source was not independently
+verified. Reproduce without submitting work:
 
 ```bash
 sbatch --test-only -p mi2101x -N 1 -n 1 -c 16 --exclusive \
