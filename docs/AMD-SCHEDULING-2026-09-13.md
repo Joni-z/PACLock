@@ -1,8 +1,20 @@
 # AMD allocation and scheduling, 2026-09-13
 
-AMD is allocation-limited. The site submission filter currently reports
-`Used 1786.35 of 2250`, expiring 2027-06-30: 463.65 remaining before subsequent
-usage is posted. Running cancellations consume elapsed allocation time;
+AMD is allocation-limited. An independent `sbatch --test-only` check of the
+site submission filter reports `Used 1793.10 of 2250`, expiring 2027-06-30:
+456.90 remaining before subsequent usage is posted. The earlier 1786.35 figure
+was a prior reading, not a current balance. Reproduce without submitting work:
+
+```bash
+sbatch --test-only -p mi2101x -N 1 -n 1 -c 16 --exclusive \
+  --time=00:01:00 --wrap=true
+```
+
+The allocation meter is separate from Slurm's billing fields. Its conversion
+to ordinary node hours is not established; do not infer a remaining lifetime
+from an unweighted sum of node hours. The raw verification is retained locally
+at `/Users/mr.z/PACLock-monitor/amd-allocation-check.txt`.
+Running cancellations consume elapsed allocation time;
 cancelling a pending job consumes no runtime. Releasing one trainer while
 retaining its exclusive node does not release that node's allocation.
 
