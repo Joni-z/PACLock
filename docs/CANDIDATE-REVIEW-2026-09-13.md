@@ -34,6 +34,41 @@ step validations as well as epoch ends. Their validation cadence differs from
 TUEV; equal epoch numbers alone do not establish equal training progress.
 Do not discard an entire model family from these seed-0 pilots.
 
+## Cross-dataset shortlist audit
+
+The local `scripts/monitor/candidate_matrix.py` audit uses canonical result
+identities and validation scores only. It excludes partial/budget runs,
+training subsets, missing manifest identities and runs whose selected primary
+validation score was not persisted. It refuses to average seeds with different
+validation subsets, manifests, target counts or model construction. The JSON
+artifact is `/Users/mr.z/PACLock-monitor/candidate-matrix.json`.
+
+At this snapshot, rot2 has eligible completed evidence on 15 datasets, with
+seeds 0/1/2 on 12; duplex has 16 datasets, with seeds 0/1/2 on 12. Ten datasets
+have the same validation cohort and all three seeds for both families. Duplex
+has the higher mean on seven (ADFD, CAUEEG, CHB-MIT, ISRUC, TUAR, TUEP, TUSZ);
+rot2 has the higher mean on IIIC, Sleep-EDF and TUEV. These are descriptive
+validation means, not significance tests or a SOTA comparison. TUSZ uses the
+same 20k validation cap for both; the other paired rows use full validation.
+
+This supports retaining a waveform-information lane in the shortlist while
+addressing TUEV, rather than using TUEV alone to discard it. The new f1/f2
+variants still have only seed-0 screening evidence and cannot replace that
+broader comparison yet. Do not choose different content sources per dataset
+and present them as one frozen candidate.
+
+The historical rot2 label covers three configuration constructions: the main
+11-corpus setup, index spatial embeddings on BCI-IV-2a/ISRUC, and 200-sample
+patch/PAC windows on FACED/PhysioNet-MI. Duplex has two constructions differing
+in spatial embedding choice. Configuration hashes do not establish historical
+source identity. Final freeze must explicitly define the montage/patch policy.
+
+Some official-loader baseline records lack manifest timestamps; others do not
+persist a completion reason or selected primary validation metric. Exclusion
+from this conservative audit is missing evidence, not evidence of a weak
+baseline. These provenance gaps must be resolved before claiming near-SOTA
+coverage; do not silently compare against only the baselines that remain.
+
 ## Metric and identity safeguards
 
 `best_val` is the **checkpoint-selection metric**, which is AUROC for some
