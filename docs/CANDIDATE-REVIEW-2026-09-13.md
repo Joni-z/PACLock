@@ -1,6 +1,10 @@
 # Candidate review — 2026-09-13
 
-## Decision
+## Status correction
+
+There is no frozen or qualified new candidate. Subsequent frequency-response diagnostics invalidated the intended 200 Hz f3 low-band contrast; four affected live runs were stopped and prepared 200 Hz f3 configurations were blocked. The provisional prioritization below was too early: compare historical validation curves before interpreting the .64 value. See [TUEV diagnosis](TUEV-DIAGNOSIS-2026-09-13.md) for the correction, latest .6562 validation result, scale diagnostic and stopping limitations.
+
+## Earlier provisional decision
 
 Treat factorized **f3 as the provisional primary candidate**, with **f2 as the alternate**. This is a prioritization decision, not a final architecture freeze or a claim of improvement over the historical best model. Keep f0/f1 as matched controls through the already-running pilot; do not discard a design scientifically from seed 0 alone. Do not add architecture sweeps or full-scale pretraining on the basis of this snapshot.
 

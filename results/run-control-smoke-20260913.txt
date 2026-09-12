@@ -1,0 +1,53 @@
+
+The following have been reloaded with a version change:
+  1) rocm/7.2.0 => rocm/6.3.1
+
+[smoke_unmonitored] seed=0 0.00M params on cuda
+  input (1, 8) | samples {'train': 72, 'val': 72, 'test': 72}
+  primary metric: cohen_kappa | loss: cross_entropy
+epoch   0 | train_loss 1.8432
+  epoch   0 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1548
+epoch   1 | train_loss 1.8367
+  epoch   1 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1558
+epoch   2 | train_loss 1.8331
+  epoch   2 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1558
+epoch   3 | train_loss 1.8320
+  epoch   3 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1558
+test | balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1548
+WARNING mis-configured: val peak at first evaluation and never cleared chance (0.0167 vs 0.0000) -- this cell must not be written to the matrix
+-> /tmp/paclock-control-smoke-i_d1fbiq/smoke_unmonitored/seed0/result.json
+[smoke_normal] seed=0 0.00M params on cuda
+  input (1, 8) | samples {'train': 72, 'val': 72, 'test': 72}
+  primary metric: cohen_kappa | loss: cross_entropy
+epoch   0 | train_loss 1.8432
+  epoch   0 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1548
+epoch   1 | train_loss 1.8367
+  epoch   1 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1558
+epoch   2 | train_loss 1.8331
+  epoch   2 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1558
+epoch   3 | train_loss 1.8320
+  epoch   3 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1558
+test | balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1548
+WARNING mis-configured: val peak at first evaluation and never cleared chance (0.0167 vs 0.0000) -- this cell must not be written to the matrix
+-> /tmp/paclock-control-smoke-i_d1fbiq/smoke_normal/seed0/result.json
+[smoke_signal] seed=0 0.00M params on cuda
+  input (1, 8) | samples {'train': 72, 'val': 72, 'test': 72}
+  primary metric: cohen_kappa | loss: cross_entropy
+epoch   0 | train_loss 1.8432
+  epoch   0 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1548
+epoch   1 | train_loss 1.8367
+  epoch   1 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1558
+operator stop: signal:SIGTERM; best checkpoint retained; test not evaluated
+[smoke_file] seed=0 0.00M params on cuda
+  input (1, 8) | samples {'train': 72, 'val': 72, 'test': 72}
+  primary metric: cohen_kappa | loss: cross_entropy
+epoch   0 | train_loss 1.8432
+  epoch   0 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1548
+epoch   1 | train_loss 1.8367
+  epoch   1 | val balanced_acc=0.1806 cohen_kappa=0.0167 weighted_f1=0.1558
+operator stop: stop_file; best checkpoint retained; test not evaluated
+PASS: actual CUDA trainer; identical monitored/unmonitored metrics; signal and file stops; no test scoring on operator stop; checkpoint strict reload; complete class accounting.
+SMOKE_ARTIFACTS /tmp/paclock-control-smoke-i_d1fbiq
+PASS: inherited worker SIGTERM exits normally; binary head shapes score correctly.
+PASS: existing completed run is protected from overwrite.
+PASS: blocked configurations fail before loading data or constructing a model.

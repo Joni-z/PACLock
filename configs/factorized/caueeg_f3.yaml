@@ -44,3 +44,5 @@ model_kwargs:
   - 75.0
 seed: 0
 max_hours: 22.5
+
+disabled_reason: "2026-09-13: lowest 201-tap sinc band peaks at DC at 200 Hz; redesign and re-smoke before training."

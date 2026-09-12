@@ -10,6 +10,7 @@ import time
 sys.path.insert(0, os.getcwd())
 import torch
 import yaml
+from smoke.filter_response import check_low_band_response
 from paclock_bench.models.paclock.frontend.factorized import FactorizedFrontend
 from paclock_bench.models.paclock.frontend.triaxial import TriAxialFrontend, _patch_project
 from paclock_bench.models.paclock.build import TriAxialPACLock
@@ -56,6 +57,8 @@ bh = wide.band_hz()
 torch.testing.assert_close(bh[0, 0] - bh[0, 1]/2, torch.tensor(.5, device="cuda"))
 torch.testing.assert_close(bh[-1, 0] + bh[-1, 1]/2, torch.tensor(75., device="cuda"))
 assert torch.isfinite(wide(x)[0]).all()
+# The previous cutoff-only assertion missed the f3 DC-dominated filter.
+check_low_band_response(wide)
 # Both halves must learn on the first optimizer step; zero-init gates would
 # block one half's gradient and do not satisfy this test.
 model_cfg = dict(d_model=192, n_bands=8, sample_rate=200, patch_len=50,
@@ -126,7 +129,7 @@ paths = ["paclock_bench/models/paclock/frontend/factorized.py", "paclock_bench/m
          "paclock_bench/models/paclock/head.py",
          "paclock_bench/models/build.py", "paclock_bench/training/train.py",
          "scripts/launch_factorized.py", "slurm/configs_packed.slurm",
-         "smoke/smoke_factorized.py"] + sorted(str(p) for p in Path("configs/factorized").glob("*.yaml"))
+         "smoke/smoke_factorized.py", "smoke/filter_response.py"] + sorted(str(p) for p in Path("configs/factorized").glob("*.yaml"))
 hashes = {p: hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths}
 result = dict(ok=True, job_id=os.environ.get("SLURM_JOB_ID"),
               step_id=os.environ.get("SLURM_STEP_ID"), sha256=hashes, timing=report)
