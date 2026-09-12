@@ -14,7 +14,7 @@ The completed seed-0 factorized pilots on Sleep-EDF and TUAR favor f2:
 | Sleep-EDF, completed 20 epochs | .6403 | .6416 | .6729 |
 | TUAR, completed 20 epochs | .6049 | .6014 | .6231 |
 | ISRUC, live through epoch 6 | .7133 | .7211 | .7580 |
-| TUEV, f0/f1 through epoch 16; f2 completed 20 epochs | .5920 | .6294 | .6006 |
+| TUEV, completed 20 epochs | .5920 | .6294 | .6006 |
 
 These are best logged **validation kappa**, not test scores. Completed pilots
 have one seed; live rows are provisional. f2 has useful evidence on both sleep
@@ -92,10 +92,14 @@ windows and measured step times suggest the pair can fit independently on
 single-card nodes; actual loader/evaluation overhead still needs observation.
 Per-job smoke receipts preserve source/config/checkpoint hashes. A successful
 load does not establish pretraining benefit; compare downstream validation.
+The paired single-card jobs are **416829** (native) and **416830** (coupling),
+submitted from factorized source commit `77aa69b`. Their run directories link
+to canonical AMD `runs/` so the same passive monitor collects their progress.
 
 ## What changes the next decision
 
-1. Finish the imminent TUEV pilots and compare matching validation histories;
+1. All three valid TUEV pilots have now completed 20 epochs. Compare their
+   matching validation histories;
    retain the global f1/f2 tradeoff rather than choosing a different architecture
    for each dataset. Diagnose a proposed fix before expanding a sweep.
 2. Validate the existing 140k pretraining exports against a matched native
