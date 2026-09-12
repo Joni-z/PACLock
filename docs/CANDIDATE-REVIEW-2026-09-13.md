@@ -178,7 +178,7 @@ to canonical AMD `runs/` so the same passive monitor collects their progress.
 
 ### Interim validation and control audit
 
-The latest manually fetched progress files contain 41 native and 9 coupling
+An interim manually fetched snapshot contained 41 native and 9 coupling
 validations in the 140k transfer pair. Through the same first 9 epochs, best
 validation kappa is .403105 for native and .422662 for coupling. Neither has
 completed its 50-epoch recipe at this observation. Native's historical scratch
@@ -203,6 +203,23 @@ For the local-lane scale screen, equal-epoch best validation kappa is:
 Both pairs have matching manifests and class counts. They are unfinished,
 seed-0 screens; retain the current bounded runs without expanding replication.
 These observations do not select a final model or establish SOTA.
+
+At the next observation, native transfer **416829** completed all **50 epochs**
+with best validation kappa **.403105**, below the historical native scratch
+seed-0 result **.419841**. Both have matching manifests and class counts, but
+their runtime/backend and worker counts differ. This result does not justify
+more native pretraining spend; it is not a causal rejection of pretraining
+from one seed. Coupling transfer remains in progress (11 epochs, best .424513).
+B2 remains paused and no replacement job is submitted for the freed allocation.
+
+Secondary metrics also constrain the scale screen. Within the first four TUEV
+epochs, the checkpoints selected by each arm's best kappa have balanced
+accuracy **.631361** (scale 1) and **.569114** (scale .3). At fixed epoch index 2,
+both kappa and balanced accuracy improve with scale .3 instead. This is an
+unstable early checkpoint comparison, not evidence of a uniform improvement
+or a stable minority-class regression. Continue the original bounded recipes
+and report balanced accuracy and class recall at the kappa-selected checkpoint;
+do not select separate checkpoints for each headline metric.
 
 Direct process inspection found 19 training roots across the 12 active
 four-card AMD allocations, with at least one trainer in every allocation.
