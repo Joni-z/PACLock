@@ -12,6 +12,13 @@ def main():
     ap.add_argument('--seed',type=int,default=0)
     ap.add_argument('--dry-run',action='store_true')
     args=ap.parse_args()
+    match=re.fullmatch(r'(\d+):([0-5]\d):([0-5]\d)',args.time)
+    if not match:ap.error('--time must use HH:MM:SS')
+    hours,minutes,seconds=map(int,match.groups())
+    duration=3600*hours+60*minutes+seconds
+    if duration<=0:ap.error('--time must be positive')
+    if args.partition=='mi2101x' and duration>12*3600:
+        ap.error('AMD limits mi2101x to 12 hours for this account; long runs need optimizer resume')
     root=Path(__file__).resolve().parents[2]
     import os
     os.chdir(root)

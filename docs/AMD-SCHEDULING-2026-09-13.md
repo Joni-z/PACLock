@@ -29,13 +29,20 @@ From the repository root, smoke the intended configuration before training:
 sbatch -J smoke_one slurm/smoke_gpu.slurm smoke/smoke_amd_partition.py \
   --config configs/selfcoup/chbmit_crofremo_s2.yaml
 python3 scripts/slurm/submit_packed.py --dry-run configs/selfcoup/chbmit_crofremo_s2.yaml:0
-python3 scripts/slurm/submit_packed.py -J NAME --time 20:00:00 cfg.yaml:0
+python3 scripts/slurm/submit_packed.py -J NAME --time 12:00:00 cfg.yaml:0
 ```
 
 The submitter defaults to mi2101x and submits each configuration separately,
 allowing its node to release independently. It checks configuration validity,
 disabled experiments, duplicate outputs, and existing result/checkpoint/stop
 artifacts before reserving a node. It never submits in `--dry-run` mode.
+
+The site's submission filter imposes a **12-hour mi2101x wall-time limit**,
+despite the partition showing a four-day generic maximum. A 20-hour held
+migration submission was rejected before allocation. Set a bounded pilot's
+`max_hours` below the wall time (for example 11 hours in a 12-hour job).
+Long experiments need actual optimizer-resume support before they can span
+single-card jobs; current selection checkpoints alone cannot provide this.
 
 ```bash
 # Equivalent direct one-card submission:
