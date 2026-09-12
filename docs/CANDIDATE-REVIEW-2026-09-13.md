@@ -221,6 +221,17 @@ or a stable minority-class regression. Continue the original bounded recipes
 and report balanced accuracy and class recall at the kappa-selected checkpoint;
 do not select separate checkpoints for each headline metric.
 
+The TUAR scale pair subsequently completed all 20 epochs with matching data
+manifests, class counts and recipes except run name and `content_scale`.
+Scale .3 achieved validation kappa **.618194** versus **.598155** for scale 1;
+balanced accuracy at those checkpoints was **.730853** versus **.731856**,
+and weighted F1 **.782195** versus **.767187**. Both Slurm jobs completed with
+exit code 0 and released their single-card nodes. Validation curves, source
+hashes and scheduler receipts are in
+`results/audits/tuar-scale-gate-20260913.json`. This is one completed positive
+seed-0 screen. Retain scale .3 for confirmation; wait for full TUEV and additional
+seeds before final selection or wider replication.
+
 Direct process inspection found 19 training roots across the 12 active
 four-card AMD allocations, with at least one trainer in every allocation.
 The seven single-card allocations are separate. Idle cards alone are not a
