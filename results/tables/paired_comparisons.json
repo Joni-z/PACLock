@@ -1,0 +1,282 @@
+{
+  "chbmit:cbramod_add_cpl-cbramod_add_raw": {
+    "deltas": [
+      0.1243584717978034,
+      -0.07227522861134983,
+      -0.13637546720370758
+    ],
+    "flags": [],
+    "mean": -0.028097408005751334,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "chbmit:cf2_v1d192-cf2_v1d192own": {
+    "deltas": [
+      0.06503351682219438,
+      0.06606452982554656,
+      -0.03386470645043893
+    ],
+    "flags": [],
+    "mean": 0.03241111339910067,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "chbmit:cf2_v1d192-cf2_v1d192raw": {
+    "deltas": [
+      0.13666283097865461,
+      -0.04705013343283815
+    ],
+    "flags": [],
+    "mean": 0.04480634877290823,
+    "seeds": [
+      0,
+      2
+    ]
+  },
+  "chbmit:labram_crofremo-labram_scratch": {
+    "deltas": [
+      -0.024886361617497854,
+      -0.053080172647098633,
+      0.13305001748126838
+    ],
+    "flags": [
+      "budget"
+    ],
+    "mean": 0.018361161072223964,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "chbmit:reve_crofremo-reve_scratch": {
+    "deltas": [],
+    "flags": [],
+    "mean": null,
+    "seeds": []
+  },
+  "iiic:cbramod_add_cpl-cbramod_add_raw": {
+    "deltas": [
+      0.014713921169257738,
+      -0.008430742870388475,
+      0.029752332809699022
+    ],
+    "flags": [],
+    "mean": 0.012011837036189429,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "iiic:cf2_v1d192-cf2_v1d192own": {
+    "deltas": [
+      0.01698039010672847,
+      0.00875036290917608,
+      0.019721294828503932
+    ],
+    "flags": [],
+    "mean": 0.015150682614802827,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "iiic:cf2_v1d192-cf2_v1d192raw": {
+    "deltas": [
+      0.026479333707779107,
+      -0.003949220644863138,
+      0.04061144187594157
+    ],
+    "flags": [],
+    "mean": 0.021047184979619177,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "iiic:labram_crofremo-labram_scratch": {
+    "deltas": [
+      0.007103902739068135,
+      -0.00796353174053932,
+      -0.02156817050953941
+    ],
+    "flags": [],
+    "mean": -0.007475933170336864,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "iiic:reve_crofremo-reve_scratch": {
+    "deltas": [
+      0.07845165016791444,
+      0.08632980447559235,
+      0.1100454658278921
+    ],
+    "flags": [],
+    "mean": 0.0916089734904663,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "tuep:cbramod_add_cpl-cbramod_add_raw": {
+    "deltas": [
+      0.05673826896376988,
+      0.0047099136652015705,
+      0.028757532725596113
+    ],
+    "flags": [],
+    "mean": 0.030068571784855853,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "tuep:cf2_v1d192-cf2_v1d192raw": {
+    "deltas": [],
+    "flags": [],
+    "mean": null,
+    "seeds": []
+  },
+  "tuep:labram_crofremo-labram_scratch": {
+    "deltas": [],
+    "flags": [],
+    "mean": null,
+    "seeds": []
+  },
+  "tuep:reve_crofremo-reve_scratch": {
+    "deltas": [],
+    "flags": [],
+    "mean": null,
+    "seeds": []
+  },
+  "tuev:cbramod_add_cpl-cbramod_add_raw": {
+    "deltas": [
+      0.0450932719835323,
+      0.07755563756275885,
+      0.026266268757819344
+    ],
+    "flags": [],
+    "mean": 0.04963839276803683,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "tuev:cf2_v1d192-cf2_v1d192own": {
+    "deltas": [
+      0.10260726378464524,
+      0.041533754209597484
+    ],
+    "flags": [],
+    "mean": 0.07207050899712136,
+    "seeds": [
+      0,
+      2
+    ]
+  },
+  "tuev:cf2_v1d192-cf2_v1d192raw": {
+    "deltas": [
+      0.10742145081327159,
+      0.0931632884491782
+    ],
+    "flags": [],
+    "mean": 0.1002923696312249,
+    "seeds": [
+      0,
+      2
+    ]
+  },
+  "tuev:labram_crofremo-labram_scratch": {
+    "deltas": [
+      0.1595797949978257,
+      0.109958740932533,
+      0.12257500099839314
+    ],
+    "flags": [],
+    "mean": 0.13070451230958394,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "tuev:reve_crofremo-reve_scratch": {
+    "deltas": [
+      0.24035439331281583,
+      0.2659611016959571,
+      0.20545261200107445
+    ],
+    "flags": [],
+    "mean": 0.23725603566994913,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "tusz:cbramod_add_cpl-cbramod_add_raw": {
+    "deltas": [
+      -0.0923744700028164
+    ],
+    "flags": [],
+    "mean": -0.0923744700028164,
+    "seeds": [
+      0
+    ]
+  },
+  "tusz:cf2_v1d192-cf2_v1d192own": {
+    "deltas": [
+      0.11953064721952511,
+      0.014594269105836721,
+      0.07407319017118119
+    ],
+    "flags": [],
+    "mean": 0.06939936883218101,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "tusz:cf2_v1d192-cf2_v1d192raw": {
+    "deltas": [
+      0.06322149334655336,
+      -0.017803325678187765,
+      0.09069063949090206
+    ],
+    "flags": [],
+    "mean": 0.04536960238642255,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "tusz:labram_crofremo-labram_scratch": {
+    "deltas": [],
+    "flags": [],
+    "mean": null,
+    "seeds": []
+  },
+  "tusz:reve_crofremo-reve_scratch": {
+    "deltas": [],
+    "flags": [],
+    "mean": null,
+    "seeds": []
+  }
+}

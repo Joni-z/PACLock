@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Additive rows with the released CBraMod checkpoint. Native and added-row arms have unequal seed coverage; a difference of these aggregate means is not a paired estimate.}
+\label{tab:transplant-pre}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcc}
+\toprule
+Encoder & Tokenizer & TUEV (Cohen's $\kappa$) & TUAR (Cohen's $\kappa$) \\
+\midrule
+CBraMod pretrained & Native & \textbf{0.6449 $\pm$ 0.0217} & \textbf{0.6979 $\pm$ 0.0150} \\
+ & + waveform & 0.5719$^{(1)}$ & 0.6811$^{(1)}$ \\
+ & + interaction & 0.6233$^{(1)}$ & 0.5877$^{(1)}$ \\
+\bottomrule
+\end{tabular}}
+\end{table}

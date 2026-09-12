@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Earlier tri-axial duplex: scratch and exploratory amplitude-plus-coupling pretraining. These are not pretraining results for a new candidate. Seed counts and diagnostic markers follow Table~\ref{tab:seizure}.}
+\label{tab:pretrain-triaxial}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcc}
+\toprule
+Corpus (primary metric) & Scratch & 60k pretraining \\
+\midrule
+TUSZ (AUC-PR) & 0.6389 $\pm$ 0.0350 & 0.6530 $\pm$ 0.0403 \\
+CHB-MIT (AUC-PR) & 0.6985 $\pm$ 0.0549 & 0.6991$^{(1)}$ \\
+Siena (AUC-PR) & 0.1702 $\pm$ 0.0862 & 0.4564 $\pm$ 0.0410 \\
+TUEV (Cohen's $\kappa$) & 0.6895 $\pm$ 0.0357 & 0.6417$^{(1)}$ \\
+IIIC (Cohen's $\kappa$) & 0.4787 $\pm$ 0.0092 & 0.4339$^{(1)}$ \\
+TUAR (Cohen's $\kappa$) & 0.6199 $\pm$ 0.0373 & 0.5923$^{(1)}$ \\
+TUAB (Bal.\ Acc.) & 0.8132 $\pm$ 0.0064 & 0.8054$^{(1)}$ \\
+TUEP (AUROC) & 0.8097 $\pm$ 0.0039 & 0.7686$^{(1)}$ \\
+ADFD (Bal.\ Acc.) & 0.5047 $\pm$ 0.0609 & 0.4527$^{(1)}$ \\
+CAUEEG (Bal.\ Acc.) & 0.5254 $\pm$ 0.0150 & 0.5033$^{(1)}$ \\
+Sleep-EDF (Cohen's $\kappa$) & 0.6418 $\pm$ 0.0138 & 0.6747$^{(1)}$ \\
+ISRUC (Cohen's $\kappa$) & 0.7018 $\pm$ 0.0088 & 0.6721$^{(1)}$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
