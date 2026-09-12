@@ -104,6 +104,7 @@ class TriAxialPACLock(nn.Module):
             fusion_mode=cfg.get("fusion_mode", "blend"),
             raw_stem=cfg.get("raw_stem", "linear"),
             coupling_strength=cfg.get("coupling_strength", False),
+            coupling_self=cfg.get("coupling_self", False),
         )
         if self.frontend.tokenizer_mode in ("hybrid", "duplex"):
             # The coupling/phase mixers consume an (nb, nb) coupling matrix and

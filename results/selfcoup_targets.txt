@@ -1,0 +1,16 @@
+tuev-crofremo_s1/seed0
+tuev-crofremo_s2/seed0
+tuev-crofremo_s3/seed0
+tuev-crofremo_s4/seed0
+tusz-crofremo_s1/seed0
+tusz-crofremo_s2/seed0
+tusz-crofremo_s3/seed0
+tusz-crofremo_s4/seed0
+chbmit-crofremo_s1/seed0
+chbmit-crofremo_s2/seed0
+chbmit-crofremo_s3/seed0
+chbmit-crofremo_s4/seed0
+iiic-crofremo_s1/seed0
+iiic-crofremo_s2/seed0
+iiic-crofremo_s3/seed0
+iiic-crofremo_s4/seed0

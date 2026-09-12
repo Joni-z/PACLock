@@ -1,0 +1,47 @@
+# Self-inclusive coupling (2026-09-12): band j's aligned phase now includes its OWN phase weighted by the
+# within-band coupling Z_jj (phase-amplitude asymmetry = waveform shape). This restores the within-band
+# information a coupling-only grid loses -- the reason duplex was adopted -- without doubling the row count,
+# and it makes phase-reference invariance hold for every band including the slowest.
+# arm s3: tokenizer=pac_interaction n_bands=16
+name: chbmit-crofremo_s3
+group: selfcoup
+dataset: chbmit
+data_root: $PACLOCK_PROC/processed/chbmit
+model: paclock
+optimizer: adamw
+lr: 0.0001
+weight_decay: 1.0e-05
+scheduler: cosine
+grad_clip: 1.0
+num_workers: 8
+device: cuda
+num_classes: 2
+epochs: 20
+batch_size: 32
+eval_every_steps: 200
+patience: 20
+loss: focal
+focal_alpha: 0.25
+focal_gamma: 2.0
+sample_rate: 200
+model_kwargs:
+  arch: triaxial
+  d_model: 128
+  depth: 6
+  n_bands: 16
+  n_heads: 4
+  dropout: 0.2
+  kernel_size: 201
+  patch_len: 50
+  augmentations: []
+  freq_mixer: attention
+  band_pe: index
+  tokenizer_mode: pac_interaction
+  pac_token_mode: measured
+  interaction_mode: rotation
+  spatial_pe: xyz
+  pac_patch_len: 50
+  coupling_self: true
+seed: 0
+max_hours: 22.5
+coupling_self: true

@@ -1,0 +1,16 @@
+configs/selfcoup/tuev_crofremo_s1.yaml:0
+configs/selfcoup/tuev_crofremo_s2.yaml:0
+configs/selfcoup/tuev_crofremo_s3.yaml:0
+configs/selfcoup/tuev_crofremo_s4.yaml:0
+configs/selfcoup/tusz_crofremo_s1.yaml:0
+configs/selfcoup/tusz_crofremo_s2.yaml:0
+configs/selfcoup/tusz_crofremo_s3.yaml:0
+configs/selfcoup/tusz_crofremo_s4.yaml:0
+configs/selfcoup/chbmit_crofremo_s1.yaml:0
+configs/selfcoup/chbmit_crofremo_s2.yaml:0
+configs/selfcoup/chbmit_crofremo_s3.yaml:0
+configs/selfcoup/chbmit_crofremo_s4.yaml:0
+configs/selfcoup/iiic_crofremo_s1.yaml:0
+configs/selfcoup/iiic_crofremo_s2.yaml:0
+configs/selfcoup/iiic_crofremo_s3.yaml:0
+configs/selfcoup/iiic_crofremo_s4.yaml:0

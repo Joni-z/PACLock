@@ -109,6 +109,7 @@ class TriAxialFrontend(nn.Module):
         hybrid_gate: str = "none",
         fusion_mode: str = "blend",
         raw_stem: str = "linear",
+        coupling_self: bool = False,
         coupling_strength: bool = False,
         **_,
     ):
@@ -196,6 +197,14 @@ class TriAxialFrontend(nn.Module):
         # row -- at init the model is unchanged; the magnitudes that the aligned
         # phase normalises away (Eq. rotation) re-enter here as content.
         self.coupling_strength = coupling_strength
+        # Self-inclusive coupling (2026-09-12): let band j's aligned phase include its OWN
+        # phase feature, weighted by its within-band coupling Z_jj = <p_j, A_j - mean A_j>.
+        # Z_jj is the band's phase-amplitude asymmetry, i.e. waveform shape (Cole & Voytek 2017),
+        # which the strictly-lower-triangular sum discards -- the information a coupling-only
+        # grid loses relative to a duplex grid, without paying duplex's doubled row count.
+        # It also removes the j=0 exception: with the diagonal present every band's token is
+        # phase-reference invariant, because exp(-i angle Z_jj) cancels p_j's own rotation.
+        self.coupling_self = coupling_self
         if coupling_strength:
             self.cs_proj = nn.Linear(n_bands, hidden_dim)
             nn.init.zeros_(self.cs_proj.weight); nn.init.zeros_(self.cs_proj.bias)
@@ -407,7 +416,7 @@ class TriAxialFrontend(nn.Module):
         edge = pac_vector.transpose(-2, -1)               # (B,C,P,target,source)
         valid = torch.tril(
             torch.ones(nb, nb, dtype=torch.bool, device=edge.device),
-            diagonal=-1,
+            diagonal=0 if getattr(self, "coupling_self", False) else -1,
         )
         mag = edge.abs() * valid
         unit = edge / edge.abs().clamp_min(1e-8)
@@ -469,8 +478,9 @@ class TriAxialFrontend(nn.Module):
         # selected values are identical -- band 0 takes its own phase feature,
         # every other band keeps the aligned sum. Verified numerically by
         # tests/test_paclock_equivalence.py.
-        nb_idx = torch.arange(nb, device=aligned_phase.device).view(1, 1, 1, nb, 1)
-        aligned_phase = torch.where(nb_idx == 0, phase_feat, aligned_phase)
+        if not getattr(self, "coupling_self", False):
+            nb_idx = torch.arange(nb, device=aligned_phase.device).view(1, 1, 1, nb, 1)
+            aligned_phase = torch.where(nb_idx == 0, phase_feat, aligned_phase)
 
         if self.interaction_mode == "product":
             return amplitude_feat.to(aligned_phase.dtype) * aligned_phase
