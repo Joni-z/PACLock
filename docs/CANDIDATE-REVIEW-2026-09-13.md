@@ -69,6 +69,13 @@ from this conservative audit is missing evidence, not evidence of a weak
 baseline. These provenance gaps must be resolved before claiming near-SOTA
 coverage; do not silently compare against only the baselines that remain.
 
+The [TUEV protocol audit](TUEV-PROTOCOL-AUDIT-2026-09-13.md) confirms a substantive
+cohort difference: frozen/LaBraM validation sets share only 9 of 58 subjects,
+and test window counts are 29,421/26,067. This is more than a missing timestamp;
+their historical validation scores must not be ranked as a matched comparison.
+The native loaders now propagate manifests for future runs. Historical scores
+and dataset files are preserved.
+
 ## Bounded scale comparison
 
 The next controlled screen changes only the f1 local-lane multiplier: 1.0
