@@ -24,6 +24,7 @@ from torch.utils.data import DataLoader
 
 from ..data.datasets import build_dataloaders
 from ..models.build import build_model, count_params
+from .run_control import RunControl
 from .losses import build_loss
 from .metrics import compute_metrics, epoch0_peak_check, primary_metric
 
@@ -111,6 +112,8 @@ def main():
     args = ap.parse_args()
 
     cfg = yaml.safe_load(open(args.config))
+    if cfg.get("disabled_reason"):
+        raise ValueError("Disabled experiment: " + str(cfg["disabled_reason"]))
     if args.seed is not None:
         cfg["seed"] = args.seed
     seed = cfg.get("seed", 0)
@@ -289,20 +292,30 @@ def main():
     budget_hit = False
     stopped_by = "epochs"
     t0 = time.time()
+    out_dir = os.path.join(args.out, cfg["name"], f"seed{seed}")
+    control = RunControl(out_dir, cfg, info) if cfg.get("run_monitor", True) else None
+    current_train_loss = None
 
     def validate(tag: str):
         nonlocal best, best_state, since_best
-        _, m = evaluate(model, val_loader, device, criterion, cfg["num_classes"], cfg)
+        val_loss, m, val_logits, val_y = evaluate(
+            model, val_loader, device, criterion, cfg["num_classes"], cfg, return_raw=True)
         # The curve stays on the reported metric -- it is what rule 3 reads and
         # what the workbook's provenance notes quote -- while selection follows
         # select_key.
         val_curve.append(m[key])
         print(f"  {tag} val " + " ".join(f"{k}={v:.4f}" for k, v in m.items()), flush=True)
-        if m[select_key] > best:
+        improved = m[select_key] > best
+        if improved:
             best, since_best = m[select_key], 0
             best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
         else:
             since_best += 1
+        if control is not None:
+            control.record(tag=tag, val_loss=val_loss, metrics=m, logits=val_logits,
+                           labels=val_y, lr=[g["lr"] for g in optimizer.param_groups],
+                           train_loss=current_train_loss, best=best,
+                           best_state=best_state if improved else None)
         model.train()
 
     # Staged finetune (LP-FT style): for the first N epochs only the tensors
@@ -392,7 +405,11 @@ def main():
                         print(f"    {k:5s} {v:7.2f}s  {100*v/tot:5.1f}%", flush=True)
                     raise SystemExit(0)
                 _mark = time.time()
+            if control is not None and (step + 1) % 50 == 0 and control.requested():
+                stopped_by = "operator_stop"
+                break
             if eval_every_steps and (step + 1) % eval_every_steps == 0:
+                current_train_loss = float(np.mean(running))
                 validate(f"epoch {epoch} step {step + 1} |")
 
             # The wall-clock budget is also enforced at eval steps: TUAB epochs
@@ -404,8 +421,12 @@ def main():
                 stopped_by = "time_budget"
                 budget_hit = True
                 break
-        print(f"epoch {epoch:3d} | train_loss {np.mean(running):.4f}", flush=True)
+        current_train_loss = float(np.mean(running))
+        print(f"epoch {epoch:3d} | train_loss {current_train_loss:.4f}", flush=True)
         validate(f"epoch {epoch:3d} |")
+        if control is not None and control.requested():
+            stopped_by = "operator_stop"
+            break
         # No early stop while the encoder is still frozen or the LR still warming
         # up: a stage-1 plateau is by construction, not a converged model (TUEP
         # ptS was cut at epoch 1 by exactly this, 2026-09-03).
@@ -432,6 +453,11 @@ def main():
             stopped_by = "time_budget"
             break
 
+    if control is not None and control.requested():
+        control.finish_stop(best)
+        control.restore_handlers()
+        print(f"operator stop: {control.reason}; best checkpoint retained; test not evaluated", flush=True)
+        return
     if best_state is not None:
         model.load_state_dict(best_state)
     _, test_m, test_logits, test_y = evaluate(
@@ -500,6 +526,8 @@ def main():
     with open(os.path.join(out_dir, "result.json"), "w") as f:
         json.dump(result, f, indent=2)
     print(f"-> {out_dir}/result.json", flush=True)
+    if control is not None:
+        control.restore_handlers()
 
 
 if __name__ == "__main__":
