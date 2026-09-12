@@ -1,0 +1,910 @@
+{
+  "at": 1789237280.7408738,
+  "queue": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913",
+  "counts": {
+    "pending": 5,
+    "running": 31,
+    "done": 0,
+    "failed": 0
+  },
+  "datasets": {
+    "pending": {
+      "sleepedf": 4,
+      "tuar": 1
+    },
+    "running": {
+      "chbmit": 8,
+      "tusz": 8,
+      "tuar": 3,
+      "tuev": 4,
+      "iiic": 4,
+      "isruc": 4
+    },
+    "done": {},
+    "failed": {}
+  },
+  "nodes": [
+    {
+      "state": "running",
+      "heartbeat": 1789237272.6622052,
+      "job": "416043",
+      "node": "k003-006",
+      "controller_pid": 142827,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "isruc-factorized_f2",
+        "1": "isruc-factorized_f3"
+      },
+      "remaining_hours": 10.521775783565309,
+      "training_roots": [
+        {
+          "pid": 121061,
+          "state": "Rl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 121063,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 142874,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 142875,
+          "state": "Rsl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237273.148763,
+      "job": "416044",
+      "node": "k003-003",
+      "controller_pid": 2274252,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "tuev-factorized_f2",
+        "1": "tuar-factorized_f0",
+        "2": "tuar-factorized_f2"
+      },
+      "remaining_hours": 10.521640303201146,
+      "training_roots": [
+        {
+          "pid": 2259057,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 2274298,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 2274299,
+          "state": "Rsl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 2274300,
+          "state": "Rsl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237272.1886985,
+      "job": "416422",
+      "node": "k002-005",
+      "controller_pid": 1342521,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "chbmit-factorized_f2",
+        "3": "chbmit-factorized_f3"
+      },
+      "remaining_hours": 17.344963971442645,
+      "training_roots": [
+        {
+          "pid": 1334176,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1334178,
+          "state": "Rl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1342568,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 1342569,
+          "state": "Rsl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237271.6412194,
+      "job": "416426",
+      "node": "k005-003",
+      "controller_pid": 3073131,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "tusz-factorized_f2",
+        "1": "tusz-factorized_f3",
+        "3": "chbmit-crofremo_s1"
+      },
+      "remaining_hours": 17.345948071744708,
+      "training_roots": [
+        {
+          "pid": 3057291,
+          "state": "Rl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 3073176,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 3073177,
+          "state": "Rsl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 3073178,
+          "state": "Rsl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237272.4485676,
+      "job": "416453",
+      "node": "k005-004",
+      "controller_pid": 355807,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "iiic-crofremo_s2",
+        "1": "isruc-factorized_f0",
+        "2": "isruc-factorized_f1"
+      },
+      "remaining_hours": 17.738222804400657,
+      "training_roots": [
+        {
+          "pid": 347580,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 355851,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 355852,
+          "state": "Rsl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 355853,
+          "state": "Rsl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237273.197815,
+      "job": "416454",
+      "node": "k005-005",
+      "controller_pid": 1063584,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "2": "tuev-factorized_f3",
+        "3": "tuar-factorized_f1"
+      },
+      "remaining_hours": 17.738016209668583,
+      "training_roots": [
+        {
+          "pid": 1055430,
+          "state": "Rl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1055432,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1063629,
+          "state": "Rsl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 1063630,
+          "state": "Rsl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237273.0430963,
+      "job": "416455",
+      "node": "k005-006",
+      "controller_pid": 3504885,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "tuev-factorized_f0"
+      },
+      "remaining_hours": 17.73889180117183,
+      "training_roots": [
+        {
+          "pid": 3496799,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 3496801,
+          "state": "Rl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 3496803,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 3504931,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237271.6736367,
+      "job": "416456",
+      "node": "k005-007",
+      "controller_pid": 553984,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "tusz-crofremo_s4",
+        "1": "tusz-factorized_f0",
+        "2": "tusz-factorized_f1"
+      },
+      "remaining_hours": 17.739272642334303,
+      "training_roots": [
+        {
+          "pid": 545649,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 554030,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 554031,
+          "state": "Rsl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 554032,
+          "state": "Rsl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237272.0820928,
+      "job": "416457",
+      "node": "k005-008",
+      "controller_pid": 1910229,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "2": "chbmit-crofremo_s4",
+        "3": "chbmit-factorized_f1"
+      },
+      "remaining_hours": 17.739159147871867,
+      "training_roots": [
+        {
+          "pid": 1901451,
+          "state": "Rl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1901453,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1910274,
+          "state": "Rsl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 1910275,
+          "state": "Rsl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237272.5990627,
+      "job": "416459",
+      "node": "k005-010",
+      "controller_pid": 1117407,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "iiic-crofremo_s1",
+        "2": "iiic-crofremo_s4"
+      },
+      "remaining_hours": 17.779294476774005,
+      "training_roots": [
+        {
+          "pid": 1109016,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1109020,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1117457,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 1117458,
+          "state": "Rsl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237271.5870976,
+      "job": "416460",
+      "node": "k003-010",
+      "controller_pid": 3009963,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "tusz-crofremo_s1",
+        "2": "tusz-crofremo_s2",
+        "3": "tusz-crofremo_s3"
+      },
+      "remaining_hours": 18.2117986806896,
+      "training_roots": [
+        {
+          "pid": 3002554,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 3010009,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 3010010,
+          "state": "Rsl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 3010011,
+          "state": "Rsl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237272.1068437,
+      "job": "416483",
+      "node": "k005-009",
+      "controller_pid": 4266,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "chbmit-crofremo_s2",
+        "1": "chbmit-crofremo_s3"
+      },
+      "remaining_hours": 19.26609695593516,
+      "training_roots": [
+        {
+          "pid": 4313,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 4314,
+          "state": "Rsl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": true
+        },
+        {
+          "pid": 4190700,
+          "state": "Rl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 4190702,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237272.1293216,
+      "job": "416484",
+      "node": "k003-004",
+      "controller_pid": 1445819,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "2": "chbmit-factorized_f0"
+      },
+      "remaining_hours": 22.460534560283026,
+      "training_roots": [
+        {
+          "pid": 1440901,
+          "state": "Rl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1440903,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1440907,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 1445900,
+          "state": "Rsl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237272.523121,
+      "job": "416485",
+      "node": "k003-008",
+      "controller_pid": 2734298,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "3": "iiic-crofremo_s3"
+      },
+      "remaining_hours": 22.46042551987701,
+      "training_roots": [
+        {
+          "pid": 2729488,
+          "state": "Rl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 2729490,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 2729492,
+          "state": "Rl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 2734346,
+          "state": "Rsl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237271.5273879,
+      "job": "416486",
+      "node": "k003-007",
+      "controller_pid": 787166,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {},
+      "remaining_hours": 22.477369109259712,
+      "training_roots": [
+        {
+          "pid": 783993,
+          "state": "Rl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 783995,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 783997,
+          "state": "Rl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 783999,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237272.9825711,
+      "job": "416487",
+      "node": "k003-001",
+      "controller_pid": 264939,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {
+        "0": "tuev-factorized_f1"
+      },
+      "remaining_hours": 23.185852842264705,
+      "training_roots": [
+        {
+          "pid": 262538,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 262540,
+          "state": "Rl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 262542,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 264985,
+          "state": "Rsl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": true
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "heartbeat": 1789237273.0940628,
+      "job": "416537",
+      "node": "k005-002",
+      "controller_pid": 107491,
+      "busy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "added": {},
+      "remaining_hours": 23.18582254277335,
+      "training_roots": [
+        {
+          "pid": 104804,
+          "state": "Rl",
+          "gpu": [
+            "0"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 104806,
+          "state": "Rl",
+          "gpu": [
+            "1"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 104808,
+          "state": "Rl",
+          "gpu": [
+            "2"
+          ],
+          "backfill": false
+        },
+        {
+          "pid": 104810,
+          "state": "Rl",
+          "gpu": [
+            "3"
+          ],
+          "backfill": false
+        }
+      ]
+    }
+  ],
+  "live_total": 68,
+  "live_backfill": 31,
+  "stopped_training": []
+}
