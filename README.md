@@ -33,15 +33,18 @@ Details and the current cluster split are in `docs/STATUS.md` section 9.
 
 ```bash
 sbatch slurm/preprocess.slurm frozen tuev              # once per corpus+protocol
-sbatch slurm/seeds_packed.slurm configs/experiments/tuev_paclock_full.yaml
+sbatch slurm/seeds_single.slurm configs/experiments/tuev_paclock_full.yaml
 sbatch slurm/run.slurm scripts.fill_xlsx --xlsx results/_in.xlsx
 ```
 
-`seeds_packed` runs three seeds of one config on one node, one GPU each;
-`configs_packed` runs up to four different configs. Both exist because this
-cluster exposes no GPU GRES, so `--exclusive` is the only way to get a GPU and
-it hands over all four. With proper GRES, ask for one GPU per job and use
-`train.slurm`.
+AMD has a finite allocation balance. `train.slurm`, `seeds_single.slurm`, and
+the legacy `seeds_packed.slurm` entry point now request single-card `mi2101x`
+nodes. No GPU GRES flags are used. `configs_packed.slurm` supports 1, 4, or 8
+independent trainers according to the selected partition and rejects
+underfilled multi-card packs. `python3 scripts/slurm/submit_packed.py --dry-run
+cfg.yaml:0` validates a submission before allocating a node. See
+[AMD scheduling and verification](docs/AMD-SCHEDULING-2026-09-13.md) for runtime
+requirements, billing caveats, and commands.
 
 ## Layout
 

@@ -1,0 +1,11 @@
+# Supplemental CPU dependencies for the single-card pytorch/2.10.0 module.
+# Install with python3.12 -m pip install --only-binary=:all: --target DIR -r THIS_FILE
+# Set PACLOCK_AMD_DEPS=DIR when using a different shared installation path.
+einops==0.8.1
+scikit-learn==1.6.1
+numpy==2.2.6
+scipy==1.15.3
+PyYAML==6.0.2
+joblib==1.6.0
+threadpoolctl==3.6.0
+cloudpickle==3.1.2

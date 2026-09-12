@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=run
-#SBATCH --partition=mi2104x
+#SBATCH --partition=mi2101x
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
@@ -21,6 +21,6 @@
 set -euo pipefail
 MODULE=${1:?usage: sbatch slurm/run.slurm <module.path> [args...]}
 shift
-module load pytorch/2.7.1
+source "$SLURM_SUBMIT_DIR/slurm/amd_env.sh"
 cd "$SLURM_SUBMIT_DIR"
-python3 -u -m "$MODULE" "$@"
+"$PACLOCK_PYTHON" -u -m "$MODULE" "$@"

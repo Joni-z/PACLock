@@ -3,57 +3,25 @@
 #SBATCH --partition=mi2104x
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=32
+#SBATCH --cpus-per-task=128
 #SBATCH --exclusive
 #SBATCH --time=24:00:00
+#SBATCH --signal=B:TERM@120
 #SBATCH --output=logs/%x-%j.out
 #SBATCH --error=logs/%x-%j.out
-#
-# Usage: sbatch slurm/configs_packed.slurm <cfg1.yaml> [cfg2.yaml] [cfg3.yaml] [cfg4.yaml]
-#
-# Same packing as seeds_packed.slurm, but across DIFFERENT configs at one seed
-# instead of one config at three seeds. That is the shape a diagnostic wants:
-# three corpora, one hypothesis, one node, one answer -- rather than three whole
-# nodes each running a single GPU because --exclusive hands over the whole node
-# whether or not you asked for it.
-#
-# Not for matrix cells. A cell needs three seeds of one config and must go
-# through seeds_packed.slurm so a partially completed cell fails the job.
+# Four-card default: sbatch slurm/configs_packed.slurm cfg1 cfg2 cfg3 cfg4
+# Eight-card pack: sbatch -p mi2508x slurm/configs_packed.slurm cfg1 ... cfg8
+# One card: sbatch -p mi2101x -c 16 slurm/configs_packed.slurm cfg.yaml:seed
+# More configs than cards form a queue; each finished slot gets the next config.
+# Underfilled multi-GPU packs and duplicate (run name, seed) outputs are rejected.
 set -euo pipefail
-
-if [ $# -lt 1 ] || [ $# -gt 4 ]; then
-    echo "usage: sbatch slurm/configs_packed.slurm <cfg1> [cfg2] [cfg3] [cfg4]" >&2
-    exit 2
-fi
-SEED=${SEED:-0}
-
-module load pytorch/2.7.1
-
 cd "$SLURM_SUBMIT_DIR"
-
-pids=()
-gpu=0
-for spec in "$@"; do
-    # <cfg.yaml> or <cfg.yaml>:<seed> -- a per-config seed lets one node pack
-    # e.g. a rerun of one corpus with extra seeds of another.
-    cfg=${spec%%:*}; s=${spec#*:}; [ "$s" = "$spec" ] && s=$SEED
-    tag=$(basename "$cfg" .yaml)-s$s
-    # Per-process MIOpen cache: concurrent processes sharing one SQLite DB on
-    # the shared filesystem corrupt it ("database disk image is malformed").
-    HIP_VISIBLE_DEVICES=$gpu \
-    MIOPEN_USER_DB_PATH="/tmp/miopen_${SLURM_JOB_ID}_${gpu}" \
-    MIOPEN_CUSTOM_CACHE_DIR="/tmp/miopen_${SLURM_JOB_ID}_${gpu}" \
-    python3 -u -m paclock_bench.training.train \
-        --config "$cfg" --seed "$s" \
-        > "logs/${SLURM_JOB_NAME}-${SLURM_JOB_ID}-${tag}.out" 2>&1 &
-    pids+=($!)
-    echo "launched $tag on GPU $gpu (pid ${pids[-1]})"
-    gpu=$((gpu + 1))
-done
-
+source "$SLURM_SUBMIT_DIR/slurm/amd_env.sh"
+"$PACLOCK_PYTHON" -u scripts/slurm/run_packed.py "$@" &
+runner=$!
+trap 'kill -TERM "$runner" 2>/dev/null || true' TERM INT
 rc=0
-for p in "${pids[@]}"; do
-    wait "$p" || rc=1
-done
-echo "all configs finished, rc=$rc"
-exit $rc
+wait "$runner" || rc=$?
+# An interrupted wait must not let the batch shell exit before its runner.
+if kill -0 "$runner" 2>/dev/null; then wait "$runner" || rc=$?; fi
+exit "$rc"
