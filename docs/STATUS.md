@@ -222,3 +222,11 @@ LaBraM IIIC 0.406 → 0.401(2)——变零。
 结论:稳的是 TUSZ 的领先、TUEV 上三个宿主的换头收益、CBraMod 的归因;缩水的是 CHB-MIT 头条和 TUEV 持平;论文里的数字和措辞要按三 seed 重写。
 **CHB-MIT own(23:29,seed 0)**:0.651——raw 0.633±0.076(2)/ own 0.651 / duplex 0.669±0.041,三臂全在噪声内,CHB-MIT 上分不出;四语料对照臂 seed 0 全齐。
 **ptn_tuegc CHB-MIT / TUSZ(09-12 00:10,单 seed)**:0.440 / 0.491(从零 0.317±0.205 / 0.482±0.052;官方权重 0.233 / 0.434)——原生 tokenizer 的 40 epoch 预训练在发作两格帮(CHB-MIT +0.12),在 TUEV/IIIC 伤;四格齐。带前端配对项 66k/219k。
+
+## 22. 我们模型的新预训练完成并投微调(2026-09-12 07:40)
+
+`pretrain-axisfree_rawpatch_b2` 150k 步跑完(b2 L40S,25 h,编号 checkpoint 25k/50k/75k/100k/125k/150k 都在)。
+加载**零 shape 不匹配**(133 个张量全对上——预训练用的就是定稿架构 patch 50,不像旧的 1 s checkpoint 要跳 3 个)。
+12 个语料的微调已投 amd(`AXFPT_a/b/c`,预训练起点 + 从零配方,单 seed 0):验收按 Zhizhe 的标准——
+好语料不许掉、差语料要往上拉,逐语料对三 seed 的从零行比。
+b2 上只剩带前端的 CBraMod 预训练在跑(86k/219k),多余的 `pre_axf_r` 续跑任务已撤。
