@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --exclusive
 #SBATCH --array=0-2
-#SBATCH --time=24:00:00
+#SBATCH --time=12:00:00
 #SBATCH --signal=B:TERM@120
 #SBATCH --output=logs/%x-%A_%a.out
 #SBATCH --error=logs/%x-%A_%a.out
