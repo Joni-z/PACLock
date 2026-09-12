@@ -19,3 +19,10 @@ isruc-cf2_v1d192_r3/seed0
 adfd-cf2_v1d192_r1/seed0
 adfd-cf2_v1d192_r2/seed0
 adfd-cf2_v1d192_r3/seed0
+tuev-cf2_v1d192_r4/seed0
+iiic-cf2_v1d192_r4/seed0
+tuar-cf2_v1d192_r4/seed0
+caueeg-cf2_v1d192_r4/seed0
+sleepedf-cf2_v1d192_r4/seed0
+isruc-cf2_v1d192_r4/seed0
+adfd-cf2_v1d192_r4/seed0
