@@ -1,0 +1,43 @@
+# Same model and recipe as cf2/tusz_cf2_v1d192.yaml with the TRAINING BUDGET matched to the baselines
+# (epochs 20 -> 60, patience 15). Seven of twelve corpora were stopping at the epoch cap with validation still
+# improving, while CBraMod/LaBraM train 50 and ContraWR 60. One budget for all twelve corpora, not per-corpus tuning.
+name: tusz-cf2_v1d192_e60
+group: long
+dataset: tusz
+data_root: $PACLOCK_PROC/processed/tusz
+model: paclock
+optimizer: adamw
+lr: 0.0001
+weight_decay: 1.0e-05
+scheduler: cosine
+grad_clip: 1.0
+num_workers: 8
+device: cuda
+num_classes: 2
+epochs: 60
+batch_size: 32
+eval_every_steps: 200
+patience: 15
+loss: bce_with_logits
+sample_rate: 200
+val_subsample: 20000
+model_kwargs:
+  arch: triaxial
+  d_model: 192
+  depth: 6
+  n_bands: 8
+  n_heads: 4
+  dropout: 0.2
+  kernel_size: 201
+  patch_len: 50
+  augmentations: []
+  freq_mixer: none
+  band_pe: index
+  tokenizer_mode: duplex
+  pac_token_mode: measured
+  interaction_mode: rotation
+  spatial_pe: xyz
+  pac_patch_len: 50
+  space_over_bands: true
+seed: 0
+max_hours: 22.0
