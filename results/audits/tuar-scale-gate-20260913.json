@@ -1,0 +1,80 @@
+{
+  "dataset": "tuar",
+  "seed": 0,
+  "completed_epochs": 20,
+  "same_recipe_except_name_and_content_scale": true,
+  "same_manifest_and_counts": true,
+  "kappa_delta": 0.02003906271958522,
+  "decision": "Retain scale 0.3 for confirmation; wait for full TUEV and additional seeds before final selection or wider replication.",
+  "scheduler_receipt": "416842|COMPLETED|0:0|01:13:51\n416843|COMPLETED|0:0|01:16:36\n416841|mi2101x|RUNNING\n416840|mi2101x|RUNNING\n416830|mi2101x|RUNNING\n416751|mi2101x|RUNNING\n416486|mi2104x|RUNNING\n416484|mi2104x|RUNNING\n416485|mi2104x|RUNNING\n416460|mi2104x|RUNNING\n416457|mi2104x|RUNNING\n416453|mi2104x|RUNNING\n416426|mi2104x|RUNNING\n416422|mi2104x|RUNNING\n416043|mi2104x|RUNNING\n416044|mi2104x|RUNNING\n",
+  "arms": [
+    {
+      "name": "tuar-factorized_f1_scale1_mi2101x",
+      "content_scale": 1.0,
+      "selected_validation": {
+        "balanced_acc": 0.7318563185993736,
+        "cohen_kappa": 0.598155327052347,
+        "weighted_f1": 0.767187478021741
+      },
+      "validation_kappa_curve": [
+        0.35302536456250067,
+        0.4982098225230529,
+        0.5633614675118055,
+        0.5812468492690304,
+        0.5680414072701844,
+        0.518313511269568,
+        0.5456591396145285,
+        0.598155327052347,
+        0.5426408477224316,
+        0.5837246771041765,
+        0.5183957873117662,
+        0.5702193105467201,
+        0.5105414954421493,
+        0.5331284350885325,
+        0.5324901838590911,
+        0.5434250335237862,
+        0.5360959801420395,
+        0.5377179252966715,
+        0.5310706583570521,
+        0.5351256688952728
+      ],
+      "source_result": "runs/tuar-factorized_f1_scale1_mi2101x/seed0/result.json",
+      "source_sha256": "99e58057e43842af90d39afa95b2231aeee515aa8eeb785cac9c341ed1da788d",
+      "manifest": "2026-08-17T11:03:32.287406+00:00"
+    },
+    {
+      "name": "tuar-factorized_f1_scale03_mi2101x",
+      "content_scale": 0.3,
+      "selected_validation": {
+        "balanced_acc": 0.7308532831261617,
+        "cohen_kappa": 0.6181943897719322,
+        "weighted_f1": 0.7821950272563742
+      },
+      "validation_kappa_curve": [
+        0.38631114130434785,
+        0.4894251510020563,
+        0.5815459630739205,
+        0.6140988870853703,
+        0.5520747826378302,
+        0.5428818999447766,
+        0.5575764688468499,
+        0.6181943897719322,
+        0.5557833942628948,
+        0.5735558366935247,
+        0.5378709286334242,
+        0.5501028671448296,
+        0.5465893833296722,
+        0.5406421774939896,
+        0.5446853778028875,
+        0.5456141159384129,
+        0.5509467892678424,
+        0.5410141490523508,
+        0.5408799024078934,
+        0.5409080233889743
+      ],
+      "source_result": "runs/tuar-factorized_f1_scale03_mi2101x/seed0/result.json",
+      "source_sha256": "3c17e1a1a82402888139bd70b1ac1d677de4c7d29a7c240ef8a12499fa1a8570",
+      "manifest": "2026-08-17T11:03:32.287406+00:00"
+    }
+  ]
+}
