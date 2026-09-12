@@ -107,3 +107,26 @@ over the cluster's shared Torch trees. All GPU calculations ran in SLURM jobs.
   give identical metrics, SIGTERM and STOP preserve selection weights without
   scoring the test split, checkpoints reload, inherited workers terminate,
   binary heads work, and existing/disabled runs are rejected.
+
+## Live migration
+
+Allocation **416483**, k005-009, was rechecked for owner, source PID/start time,
+command/configuration and cgroup. It contained only the CHB-MIT self-coupling
+s2 trainer. The source had run about 2.5 hours, remained in epoch 0, and had no
+saved model/optimizer state. Replacement **416751** was submitted held, then
+released only after the old allocation disappeared from squeue.
+
+The replacement is `chbmit-crofremo_s2_mi2101x_pilot`, group `scheduling_pilot`,
+seed 0, 11-hour training budget within the site's 12-hour limit. It starts
+from the seed and is a separately named diagnostic run; its shorter budget
+does not stand in for the originally planned full comparison. Original logs
+and the cancellation record are retained. The new monitored trainer saves
+progress and selection weights. Canonical output is under
+`PACLock/runs/chbmit-crofremo_s2_mi2101x_pilot/seed0`.
+
+The factorized worktree keeps the complete transition receipt at
+`results/migrations/416483-to-single.json` and the explicit configuration at
+`configs/migrations/chbmit_crofremo_s2_single.yaml`. The resource footprint
+changed from 17 four-card allocations to 16 four-card allocations plus one
+single-card allocation. TUEV f0/f1 single-occupancy allocations were retained:
+they were already well into training and could not resume on another node.
