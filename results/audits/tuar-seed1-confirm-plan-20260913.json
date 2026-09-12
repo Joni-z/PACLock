@@ -1,0 +1,98 @@
+{
+  "purpose": "Paired seed-1 TUAR confirmation after both seed-0 arms completed 20 epochs.",
+  "arms": [
+    {
+      "queue_key": "20_confirm_tuar_scale1_s1",
+      "source_job": null,
+      "source_name": "TUAR_scale_seed1_confirmation",
+      "origin": "prospective_confirmation",
+      "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized",
+      "config": "configs/factorized_scale_confirm/tuar_scale1_s1.yaml",
+      "seed": 1,
+      "name": "tuar-factorized_f1_scale1_confirm",
+      "dataset": "tuar",
+      "min_remaining_hours": 4,
+      "sha256": "7177d730e3d722a47596f457a327ed361f98fcdd894635368ebb7d5ee0905184",
+      "smoke": {
+        "ok": true,
+        "partition": "mi2104x",
+        "job": "416043",
+        "config": "configs/factorized_scale_confirm/tuar_scale1_s1.yaml",
+        "seed": 1,
+        "host": "k003-006.hpcfund",
+        "torch": "2.7.1+rocm6.3",
+        "rocm": "6.3.42131-fa1d09cbd",
+        "device": "AMD Instinct MI210",
+        "visible_gpus": 1,
+        "input_shape": [
+          32,
+          16,
+          1000
+        ],
+        "steps": 5,
+        "warmup_excluded": 2,
+        "steady_step_seconds": [
+          0.22240935894660652,
+          0.22920638998039067,
+          0.22249338898109272
+        ],
+        "peak_GiB": 10.308542728424072,
+        "projected_train_seconds": 2903.163353924174,
+        "projection_note": "Excludes data loading and evaluation; not a completion guarantee.",
+        "config_sha256": "7177d730e3d722a47596f457a327ed361f98fcdd894635368ebb7d5ee0905184",
+        "smoke_sha256": "5c827b6aa32b691d2258d7bb897544364399f34b02abca0f95ae3518cc249ab5",
+        "git_commit": "313aba84c5b7382e7376bdac283c0a347c8d1f5b"
+      }
+    },
+    {
+      "queue_key": "20_confirm_tuar_scale03_s1",
+      "source_job": null,
+      "source_name": "TUAR_scale_seed1_confirmation",
+      "origin": "prospective_confirmation",
+      "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized",
+      "config": "configs/factorized_scale_confirm/tuar_scale03_s1.yaml",
+      "seed": 1,
+      "name": "tuar-factorized_f1_scale03_confirm",
+      "dataset": "tuar",
+      "min_remaining_hours": 4,
+      "sha256": "fef864411c10cdca3081effa65f8cf1fae844817032dac1bfed821535f743d08",
+      "smoke": {
+        "ok": true,
+        "partition": "mi2104x",
+        "job": "416043",
+        "config": "configs/factorized_scale_confirm/tuar_scale03_s1.yaml",
+        "seed": 1,
+        "host": "k003-006.hpcfund",
+        "torch": "2.7.1+rocm6.3",
+        "rocm": "6.3.42131-fa1d09cbd",
+        "device": "AMD Instinct MI210",
+        "visible_gpus": 1,
+        "input_shape": [
+          32,
+          16,
+          1000
+        ],
+        "steps": 5,
+        "warmup_excluded": 2,
+        "steady_step_seconds": [
+          0.22240694100037217,
+          0.2225854319985956,
+          0.22257832798641175
+        ],
+        "peak_GiB": 10.308542728424072,
+        "projected_train_seconds": 2875.0044855770348,
+        "projection_note": "Excludes data loading and evaluation; not a completion guarantee.",
+        "config_sha256": "fef864411c10cdca3081effa65f8cf1fae844817032dac1bfed821535f743d08",
+        "smoke_sha256": "5c827b6aa32b691d2258d7bb897544364399f34b02abca0f95ae3518cc249ab5",
+        "git_commit": "313aba84c5b7382e7376bdac283c0a347c8d1f5b"
+      }
+    }
+  ],
+  "training_cap_hours_per_arm": 2,
+  "total_training_cap_gpu_hours": 4,
+  "new_slurm_allocations": 0,
+  "admission": "Existing active controllers only; require at least four hours left in allocation.",
+  "runtime_cohort": "mi2104x; report separately from the earlier mi2101x seed-0 screen.",
+  "allocation_caveat": "Backfill may extend an existing allocation until the bounded task finishes; no zero-cost claim.",
+  "status": "smoke_passed_prepared"
+}
