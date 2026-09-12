@@ -1,0 +1,383 @@
+{
+  "at": 1789237843.2624676,
+  "results": [
+    {
+      "job": "416484",
+      "node": "k003-004",
+      "pid": 1440907,
+      "name": "tusz-crofremo_n3",
+      "seed": 0,
+      "group": "design",
+      "dataset": "tusz",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/configs/design/tusz_crofremo_n3.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/logs/DSN_01-416484-tusz_crofremo_n3-s0.out",
+      "elapsed_h": 1.66,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 3600 | val balanced_acc=0.6042 pr_auc=0.2388 auroc=0.9092"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 8,
+      "forced_cleanup": [],
+      "at": 1789237833.0800738
+    },
+    {
+      "job": "416457",
+      "node": "k005-008",
+      "pid": 1910274,
+      "name": "chbmit-crofremo_s4",
+      "seed": 0,
+      "group": "selfcoup",
+      "dataset": "chbmit",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/configs/10_416539_chbmit_crofremo_s4_s0.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/10_416539_chbmit_crofremo_s4_s0.out",
+      "elapsed_h": 0.17,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 800 | val balanced_acc=0.5000 pr_auc=0.0065 auroc=0.4744"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 16,
+      "forced_cleanup": [],
+      "at": 1789237833.0768561
+    },
+    {
+      "job": "416456",
+      "node": "k005-007",
+      "pid": 554030,
+      "name": "tusz-crofremo_s4",
+      "seed": 0,
+      "group": "selfcoup",
+      "dataset": "tusz",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/configs/08_416538_tusz_crofremo_s4_s0.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/08_416538_tusz_crofremo_s4_s0.out",
+      "elapsed_h": 0.17,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 800 | val balanced_acc=0.5000 pr_auc=0.1360 auroc=0.8889"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 8,
+      "forced_cleanup": [],
+      "at": 1789237833.1094558
+    },
+    {
+      "job": "416485",
+      "node": "k003-008",
+      "pid": 2729488,
+      "name": "tusz-crofremo_n4",
+      "seed": 0,
+      "group": "design",
+      "dataset": "tusz",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/configs/design/tusz_crofremo_n4.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/logs/DSN_02-416485-tusz_crofremo_n4-s0.out",
+      "elapsed_h": 1.66,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 3800 | val balanced_acc=0.6599 pr_auc=0.2048 auroc=0.8993"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 16,
+      "forced_cleanup": [],
+      "at": 1789237833.081841
+    },
+    {
+      "job": "416485",
+      "node": "k003-008",
+      "pid": 2729490,
+      "name": "tusz-crofremo_n5",
+      "seed": 0,
+      "group": "design",
+      "dataset": "tusz",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/configs/design/tusz_crofremo_n5.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/logs/DSN_02-416485-tusz_crofremo_n5-s0.out",
+      "elapsed_h": 1.66,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 5200 | val balanced_acc=0.5845 pr_auc=0.2641 auroc=0.9191"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 8,
+      "forced_cleanup": [],
+      "at": 1789237836.4882104
+    },
+    {
+      "job": "416485",
+      "node": "k003-008",
+      "pid": 2734346,
+      "name": "iiic-crofremo_s3",
+      "seed": 0,
+      "group": "selfcoup",
+      "dataset": "iiic",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/configs/15_416540_iiic_crofremo_s3_s0.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/15_416540_iiic_crofremo_s3_s0.out",
+      "elapsed_h": 0.17,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  primary metric: cohen_kappa | loss: cross_entropy"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 8,
+      "forced_cleanup": [],
+      "at": 1789237836.4862795
+    },
+    {
+      "job": "416459",
+      "node": "k005-010",
+      "pid": 1117458,
+      "name": "iiic-crofremo_s4",
+      "seed": 0,
+      "group": "selfcoup",
+      "dataset": "iiic",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/configs/15_416540_iiic_crofremo_s4_s0.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/15_416540_iiic_crofremo_s4_s0.out",
+      "elapsed_h": 0.17,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  primary metric: cohen_kappa | loss: cross_entropy"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 8,
+      "forced_cleanup": [],
+      "at": 1789237836.4680872
+    },
+    {
+      "job": "416487",
+      "node": "k003-001",
+      "pid": 262538,
+      "name": "iiic-crofremo_n3",
+      "seed": 0,
+      "group": "design",
+      "dataset": "iiic",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/configs/design/iiic_crofremo_n3.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/logs/DSN_04-416487-iiic_crofremo_n3-s0.out",
+      "elapsed_h": 0.94,
+      "epoch": 0,
+      "epochs": 20,
+      "last_val": [
+        "0",
+        "balanced_acc=0.5776 cohen_kappa=0.4840 weighted_f1=0.5706"
+      ],
+      "tail": [
+        "  epoch   0 | val balanced_acc=0.5776 cohen_kappa=0.4840 weighted_f1=0.5706"
+      ],
+      "best_val": {
+        "balanced_acc": 0.5776,
+        "cohen_kappa": 0.484
+      },
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 16,
+      "forced_cleanup": [],
+      "at": 1789237836.5157595
+    },
+    {
+      "job": "416487",
+      "node": "k003-001",
+      "pid": 262540,
+      "name": "iiic-crofremo_n4",
+      "seed": 0,
+      "group": "design",
+      "dataset": "iiic",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/configs/design/iiic_crofremo_n4.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/logs/DSN_04-416487-iiic_crofremo_n4-s0.out",
+      "elapsed_h": 0.94,
+      "epoch": 0,
+      "epochs": 20,
+      "last_val": [
+        "0",
+        "balanced_acc=0.5917 cohen_kappa=0.5063 weighted_f1=0.5970"
+      ],
+      "tail": [
+        "  epoch   0 | val balanced_acc=0.5917 cohen_kappa=0.5063 weighted_f1=0.5970"
+      ],
+      "best_val": {
+        "balanced_acc": 0.5917,
+        "cohen_kappa": 0.5063
+      },
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 16,
+      "forced_cleanup": [],
+      "at": 1789237839.862733
+    },
+    {
+      "job": "416487",
+      "node": "k003-001",
+      "pid": 262542,
+      "name": "iiic-crofremo_n5",
+      "seed": 0,
+      "group": "design",
+      "dataset": "iiic",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/configs/design/iiic_crofremo_n5.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/logs/DSN_04-416487-iiic_crofremo_n5-s0.out",
+      "elapsed_h": 0.94,
+      "epoch": 1,
+      "epochs": 20,
+      "last_val": [
+        "1",
+        "balanced_acc=0.6032 cohen_kappa=0.5111 weighted_f1=0.5767"
+      ],
+      "tail": [
+        "  epoch   1 | val balanced_acc=0.6032 cohen_kappa=0.5111 weighted_f1=0.5767"
+      ],
+      "best_val": {
+        "balanced_acc": 0.6032,
+        "cohen_kappa": 0.5111
+      },
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 16,
+      "forced_cleanup": [],
+      "at": 1789237839.8631735
+    },
+    {
+      "job": "416486",
+      "node": "k003-007",
+      "pid": 783993,
+      "name": "chbmit-crofremo_n3",
+      "seed": 0,
+      "group": "design",
+      "dataset": "chbmit",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/configs/design/chbmit_crofremo_n3.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/logs/DSN_03-416486-chbmit_crofremo_n3-s0.out",
+      "elapsed_h": 1.65,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 3600 | val balanced_acc=0.5000 pr_auc=0.0063 auroc=0.4769"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 16,
+      "forced_cleanup": [],
+      "at": 1789237839.8906302
+    },
+    {
+      "job": "416486",
+      "node": "k003-007",
+      "pid": 783995,
+      "name": "chbmit-crofremo_n4",
+      "seed": 0,
+      "group": "design",
+      "dataset": "chbmit",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/configs/design/chbmit_crofremo_n4.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/logs/DSN_03-416486-chbmit_crofremo_n4-s0.out",
+      "elapsed_h": 1.65,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 3600 | val balanced_acc=0.5000 pr_auc=0.0068 auroc=0.4746"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 16,
+      "forced_cleanup": [],
+      "at": 1789237839.8803265
+    },
+    {
+      "job": "416486",
+      "node": "k003-007",
+      "pid": 783997,
+      "name": "chbmit-crofremo_n5",
+      "seed": 0,
+      "group": "design",
+      "dataset": "chbmit",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/configs/design/chbmit_crofremo_n5.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock/logs/DSN_03-416486-chbmit_crofremo_n5-s0.out",
+      "elapsed_h": 1.65,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 5000 | val balanced_acc=0.5000 pr_auc=0.0064 auroc=0.4848"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 16,
+      "forced_cleanup": [],
+      "at": 1789237843.2288046
+    },
+    {
+      "job": "416483",
+      "node": "k005-009",
+      "pid": 4314,
+      "name": "chbmit-crofremo_s3",
+      "seed": 0,
+      "group": "selfcoup",
+      "dataset": "chbmit",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/configs/10_416539_chbmit_crofremo_s3_s0.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/10_416539_chbmit_crofremo_s3_s0.out",
+      "elapsed_h": 0.17,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 400 | val balanced_acc=0.5000 pr_auc=0.0060 auroc=0.4635"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 16,
+      "forced_cleanup": [],
+      "at": 1789237843.23888
+    },
+    {
+      "job": "416460",
+      "node": "k003-010",
+      "pid": 3010011,
+      "name": "tusz-crofremo_s3",
+      "seed": 0,
+      "group": "selfcoup",
+      "dataset": "tusz",
+      "config": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/configs/08_416538_tusz_crofremo_s3_s0.yaml",
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/08_416538_tusz_crofremo_s3_s0.out",
+      "elapsed_h": 0.17,
+      "epoch": -1,
+      "epochs": 20,
+      "last_val": null,
+      "tail": [
+        "  epoch 0 step 400 | val balanced_acc=0.5000 pr_auc=0.0996 auroc=0.8520"
+      ],
+      "best_val": {},
+      "reason": "Defer combined capacity/regularization extensions until core tokenizer comparisons finish; not a model rejection.",
+      "status": "stopped_for_priority",
+      "descendants": 8,
+      "forced_cleanup": [],
+      "at": 1789237843.2505724
+    }
+  ]
+}

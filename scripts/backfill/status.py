@@ -2,6 +2,7 @@
 import argparse
 from collections import Counter
 import concurrent.futures
+import getpass
 import json
 from pathlib import Path
 import shlex
@@ -15,7 +16,12 @@ ap.add_argument("--save")
 args = ap.parse_args()
 queue = Path(args.queue)
 report = dict(at=time.time(), queue=str(queue), counts={}, datasets={}, nodes=[])
-for state in ("pending", "running", "done", "failed"):
+slurm = {}
+if args.live:
+    raw = subprocess.check_output(["squeue", "-h", "-u", getpass.getuser(),
+                                   "-o", "%i|%T|%N"], text=True)
+    slurm = {row.split("|")[0]: row.split("|")[1:] for row in raw.splitlines()}
+for state in ("pending", "running", "done", "failed", "deferred"):
     entries = []
     for p in (queue / state).glob("*.json"):
         try:
@@ -25,7 +31,7 @@ for state in ("pending", "running", "done", "failed"):
     report["counts"][state] = len(entries)
     report["datasets"][state] = dict(Counter(e["dataset"] for e in entries))
     print(state, len(entries), report["datasets"][state])
-    if state in ("pending", "failed"):
+    if state in ("pending", "failed", "deferred"):
         for entry in entries:
             print(" ", entry["name"], entry.get("error", ""))
 
@@ -52,9 +58,16 @@ print(json.dumps(roots))
 
 def inspect(path):
     state = json.loads(path.read_text())
-    if args.live and state.get("state") == "running":
+    # A drained controller releases the batch shell while original training
+    # can remain active. Controller state is not the allocation's Slurm state.
+    live_job = slurm.get(state["job"], ["NOT_RUNNING", ""])
+    state["slurm_state"] = live_job[0]
+    if args.live and live_job[0] == "RUNNING":
+        state["node"] = live_job[1]
         cmd = ["ssh", "-o", "BatchMode=yes", state["node"], shlex.join(["python3", "-c", probe])]
         state["training_roots"] = json.loads(subprocess.check_output(cmd, text=True, timeout=30))
+        state["busy"] = sorted({int(g) for r in state["training_roots"]
+                                for field in r["gpu"] for g in field.split(",") if g.isdigit()})
     return state
 
 paths = [p for p in (queue / "nodes").glob("*.json") if ".guardian." not in p.name]
