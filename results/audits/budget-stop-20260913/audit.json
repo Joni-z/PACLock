@@ -1,0 +1,24 @@
+[
+  {
+    "key": "tuab-cf2_v1d192:0",
+    "path": "runs/tuab-cf2_v1d192/seed0/result.json",
+    "original_sha256": "a068f4e65de6a176b3d85ef9ed7614b74397daf3f29eff648940c8e68cbfc850",
+    "original_stopped_by": "patience",
+    "corrected_stopped_by": "time_budget",
+    "log": "logs/CF2_v1d192_b-407990-tuab_cf2_v1d192-s0.out",
+    "log_sha256": "46ff6e2f3a5c50e40d9a53f1fc29b839110b20f38f11e2ef56998e036503faa2",
+    "budget_line": "stopping: 22.5h wall-clock budget reached at epoch 2 step 9000",
+    "corrected_sha256": "6ea3a577a8deebe65a721cbbca666e9680760424db5447cb4adcf2f3b762512c"
+  },
+  {
+    "key": "tuab-cf2_v1d192:1",
+    "path": "runs/tuab-cf2_v1d192/seed1/result.json",
+    "original_sha256": "cd3f3372a823e14f5dd591f7fd711b35f4ad4720dc7f8ad79fa4b594abc6dc11",
+    "original_stopped_by": "patience",
+    "corrected_stopped_by": "time_budget",
+    "log": "logs/SEED_03-413806-tuab_cf2_v1d192-s1.out",
+    "log_sha256": "a0e2bfb3d2004a8f044d7e4acd02068f817a9f31bd8a6dfb1137236f3c34f883",
+    "budget_line": "stopping: 22.5h wall-clock budget reached at epoch 2 step 8400",
+    "corrected_sha256": "ab9d557a37e3d1e87c68483fd9809855c2b30dd70dda6e21766919fe7a2b9164"
+  }
+]

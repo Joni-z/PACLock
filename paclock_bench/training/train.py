@@ -427,6 +427,11 @@ def main():
         if control is not None and control.requested():
             stopped_by = "operator_stop"
             break
+        # A budget-interrupted epoch remains censored even when its final
+        # validation also exhausts patience. Do not relabel it as normal early
+        # stopping and admit it to the completed candidate matrix.
+        if budget_hit:
+            break
         # No early stop while the encoder is still frozen or the LR still warming
         # up: a stage-1 plateau is by construction, not a converged model (TUEP
         # ptS was cut at epoch 1 by exactly this, 2026-09-03).
@@ -445,8 +450,6 @@ def main():
         # Breaking here instead keeps the best checkpoint, runs the test pass and
         # writes a real result, with `stopped_by` recording that the schedule did
         # not run to completion so the cell can never be read as if it had.
-        if budget_hit:
-            break
         if max_hours and (time.time() - t0) / 3600.0 >= max_hours:
             print(f"stopping: {max_hours}h wall-clock budget reached at "
                   f"epoch {epoch}", flush=True)
