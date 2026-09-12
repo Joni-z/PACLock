@@ -2,7 +2,8 @@
 
 Run as an srun step. Hold only the batch *shell*, never its training children,
 so it cannot exit and destroy added work. Always resume it when draining.
-The shared queue contains only explicitly migrated, cancelled pending jobs.
+Queue entries are explicitly authorized configurations: migrated pending jobs
+or bounded confirmations that have passed a GPU smoke.
 """
 import argparse
 import hashlib

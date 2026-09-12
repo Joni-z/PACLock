@@ -243,6 +243,12 @@ The admission plan and smoke/config hashes are in
 `results/audits/tuar-seed1-confirm-plan-20260913.json`. No new Slurm allocation
 is requested; added work can still extend the duration of an existing allocation.
 
+Both seed-1 arms were admitted to existing allocation **416426**, on GPU 1
+(scale .3) and GPU 2 (scale 1). Their processes and allocation membership were
+verified. Admission receipts are in
+`results/audits/tuar-seed1-confirm-admission-20260913.json`; source/config hashes
+pin the comparison to branch commit `9665c7e`. No new Slurm job was submitted.
+
 Direct process inspection found 19 training roots across the 12 active
 four-card AMD allocations, with at least one trainer in every allocation.
 The seven single-card allocations are separate. Idle cards alone are not a
