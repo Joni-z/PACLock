@@ -232,6 +232,17 @@ hashes and scheduler receipts are in
 seed-0 screen. Retain scale .3 for confirmation; wait for full TUEV and additional
 seeds before final selection or wider replication.
 
+A bounded TUAR seed-1 pair is prepared for spare cards in existing mi2104x
+allocations while the TUEV screen finishes. Each arm retains a two-hour training
+cap and needs at least four hours left in the allocation. Real-batch smokes at
+seed 1 passed finite-loss/gradient/parameter checks, measured about .22 seconds
+per step after two warmups and used 10.31 GiB. Projected training alone is about
+.8 hours per arm. Runtime differs from the mi2101x seed-0 pair, so compare the
+new pair within its own runtime cohort rather than silently pooling results.
+The admission plan and smoke/config hashes are in
+`results/audits/tuar-seed1-confirm-plan-20260913.json`. No new Slurm allocation
+is requested; added work can still extend the duration of an existing allocation.
+
 Direct process inspection found 19 training roots across the 12 active
 four-card AMD allocations, with at least one trainer in every allocation.
 The seven single-card allocations are separate. Idle cards alone are not a

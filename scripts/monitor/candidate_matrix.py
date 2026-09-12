@@ -5,6 +5,8 @@ from pathlib import Path
 FAMILIES = (
     'paclock_rot2', 'paclock_duplex', 'factorized_f0', 'factorized_f1',
     'factorized_f2', 'crofremo_s1', 'crofremo_s2', 'crofremo_n1',
+    'factorized_f1_scale1_mi2101x', 'factorized_f1_scale03_mi2101x',
+    'factorized_f1_scale1_confirm', 'factorized_f1_scale03_confirm',
     'cf2_v0d192', 'cf2_v0d192cs', 'labram_pretrained', 'cbramod_pretrained',
     'biot_prest16', 'reve_pretrained', 'eegpt_pretrained',
 )
