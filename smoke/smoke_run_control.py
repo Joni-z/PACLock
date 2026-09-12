@@ -40,12 +40,17 @@ class Tiny(torch.nn.Module):
         return self.linear(x.flatten(1))
 
 results = {}
-for mode in ['unmonitored','normal','signal','file']:
+for mode in ['unmonitored','normal','signal','file','budget']:
     cfg = dict(name='smoke_'+mode, dataset='tuev', model='paclock', seed=0,
                device='cuda', num_classes=6, loss='cross_entropy',
                optimizer='adamw', lr=1e-3, weight_decay=1e-5,
                label_smoothing=.1, batch_size=8, epochs=4, patience=0,
                scheduler='cosine', num_workers=0, run_monitor=mode!='unmonitored')
+    if mode == 'budget':
+        # First-step validation improves, then the exhausted budget interrupts
+        # the epoch. The repeated final validation also exhausts patience.
+        # The receipt must preserve the budget interruption for selection.
+        cfg.update(max_hours=1e-12, eval_every_steps=1, patience=1)
     directory=root/cfg['name']/'seed0'
     cfgfile=root/(mode+'.yaml');cfgfile.write_text(yaml.safe_dump(cfg))
     with patch.object(train,'build_dataloaders',loaders), \
@@ -60,6 +65,9 @@ for mode in ['unmonitored','normal','signal','file']:
         assert len(json.loads((directory/'progress.json').read_text())['history'])<4
     else:
         results[mode]=json.loads((directory/'result.json').read_text())
+        if mode == 'budget':
+            assert results[mode]['stopped_by']=='time_budget', results[mode]['stopped_by']
+            assert results[mode]['epochs_run']==1
     if mode!='unmonitored':
         cp=torch.load(directory/'best.pt',map_location='cpu',weights_only=False)
         Tiny('',directory).load_state_dict(cp['model'],strict=True)

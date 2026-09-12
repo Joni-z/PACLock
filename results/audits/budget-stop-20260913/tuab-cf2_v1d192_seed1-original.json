@@ -161,7 +161,7 @@
     "reason": "ok"
   },
   "epochs_run": 3,
-  "stopped_by": "time_budget",
+  "stopped_by": "patience",
   "wall_time_sec": 81678.6241095066,
   "config": {
     "name": "tuab-cf2_v1d192",
@@ -241,13 +241,5 @@
       1.0563116073608398,
       1.0324548482894897
     ]
-  },
-  "completion_audit": {
-    "key": "tuab-cf2_v1d192:1",
-    "original_sha256": "cd3f3372a823e14f5dd591f7fd711b35f4ad4720dc7f8ad79fa4b594abc6dc11",
-    "original_stopped_by": "patience",
-    "log": "logs/SEED_03-413806-tuab_cf2_v1d192-s1.out",
-    "log_sha256": "a0e2bfb3d2004a8f044d7e4acd02068f817a9f31bd8a6dfb1137236f3c34f883",
-    "budget_line": "stopping: 22.5h wall-clock budget reached at epoch 2 step 8400"
   }
 }
