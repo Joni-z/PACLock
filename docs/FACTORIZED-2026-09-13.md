@@ -93,3 +93,21 @@ successful JSON receipt containing hashes of tested source and configuration
 files and all 24 timing records; code changes invalidate that receipt.
 `scripts/launch_factorized.py` records each submission and refuses a duplicate
 launch. It submits exactly four configurations per allocated node.
+
+## Verified execution
+
+Implementation commit: f25d0e2, pushed to the branch above. GPU smoke succeeded
+on an unused GPU 2 inside allocation 416457, through an explicit SLURM job
+step. All 24 real-batch configurations completed four optimization steps;
+TUEV f1: .280 s/step, 10.31 GiB; CHB-MIT f1: .518 s/step, 20.43 GiB;
+maximum across the pilot: 23.05 GiB. Full receipts are
+`results/factorized_smoke.json` and `results/factorized_launch.json`.
+The first smoke correctly rejected a 75-Hz edge on 100-Hz Sleep-EDF; the
+configuration was capped at 49 Hz and the complete smoke was rerun successfully.
+
+Submitted jobs: TUEV 416626, CHB-MIT 416627, TUSZ 416629, TUAR 416630,
+Sleep-EDF 416631, ISRUC 416632. All six were pending Priority at submission.
+Each job contains f0/f1/f2/f3 at seed 0. Classification results are not yet
+available. Worktree run directories for these 24 new experiment names link
+to the canonical `PACLock/runs/` directories, so existing result collection
+can discover them; no existing experiment directory was replaced.

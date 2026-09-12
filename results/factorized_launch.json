@@ -1,0 +1,65 @@
+{
+  "jobs": [
+    {
+      "dataset": "tuev",
+      "job_id": "416626",
+      "configs": [
+        "configs/factorized/tuev_f0.yaml:0",
+        "configs/factorized/tuev_f1.yaml:0",
+        "configs/factorized/tuev_f2.yaml:0",
+        "configs/factorized/tuev_f3.yaml:0"
+      ]
+    },
+    {
+      "dataset": "chbmit",
+      "job_id": "416627",
+      "configs": [
+        "configs/factorized/chbmit_f0.yaml:0",
+        "configs/factorized/chbmit_f1.yaml:0",
+        "configs/factorized/chbmit_f2.yaml:0",
+        "configs/factorized/chbmit_f3.yaml:0"
+      ]
+    },
+    {
+      "dataset": "tusz",
+      "job_id": "416629",
+      "configs": [
+        "configs/factorized/tusz_f0.yaml:0",
+        "configs/factorized/tusz_f1.yaml:0",
+        "configs/factorized/tusz_f2.yaml:0",
+        "configs/factorized/tusz_f3.yaml:0"
+      ]
+    },
+    {
+      "dataset": "tuar",
+      "job_id": "416630",
+      "configs": [
+        "configs/factorized/tuar_f0.yaml:0",
+        "configs/factorized/tuar_f1.yaml:0",
+        "configs/factorized/tuar_f2.yaml:0",
+        "configs/factorized/tuar_f3.yaml:0"
+      ]
+    },
+    {
+      "dataset": "sleepedf",
+      "job_id": "416631",
+      "configs": [
+        "configs/factorized/sleepedf_f0.yaml:0",
+        "configs/factorized/sleepedf_f1.yaml:0",
+        "configs/factorized/sleepedf_f2.yaml:0",
+        "configs/factorized/sleepedf_f3.yaml:0"
+      ]
+    },
+    {
+      "dataset": "isruc",
+      "job_id": "416632",
+      "configs": [
+        "configs/factorized/isruc_f0.yaml:0",
+        "configs/factorized/isruc_f1.yaml:0",
+        "configs/factorized/isruc_f2.yaml:0",
+        "configs/factorized/isruc_f3.yaml:0"
+      ]
+    }
+  ],
+  "smoke_job": "416457"
+}

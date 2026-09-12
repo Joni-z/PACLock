@@ -1,0 +1,381 @@
+{
+  "ok": true,
+  "job_id": "416457",
+  "step_id": "1",
+  "sha256": {
+    "paclock_bench/models/paclock/frontend/factorized.py": "2bda446f4f9fc4bb64ebbc90a644b35ec30a9f6dee70c8885c2ac7af0fc4d091",
+    "paclock_bench/models/paclock/build.py": "3be731e943d465d7d6f646ff750831bb6c84449c90aab4b65d17f0530c6cfe5d",
+    "paclock_bench/models/paclock/frontend/triaxial.py": "2092893d45a6621629f6d432c1af7cbcf9f82e47c2f995fe4829c005a4aa6cba",
+    "paclock_bench/models/paclock/frontend/sinc.py": "94ebd9ef7610854e9c799d6737af3e534c283b1623a9645ef745698c74cc3269",
+    "paclock_bench/models/paclock/frontend/analytic.py": "e681dea38ab23e63be540c8abfed539cb2dd659d6cce30e27d92bf623ee12b22",
+    "paclock_bench/models/paclock/triaxial.py": "08ea20014236aaaf72393b960339774d99c25d0761839c5fe097e3f9a68011a4",
+    "paclock_bench/models/paclock/head.py": "f1d06db827e5501881329619b4872890751d8c7bee47127cfb35d5c1eef971e2",
+    "paclock_bench/models/build.py": "50928abb29c997660ec55a49537e8788f7e842795f5742f650ddb4dd87c683e7",
+    "paclock_bench/training/train.py": "cd94917a6167b8a9904bb5f322255f2997c117be7adb2271f223dd2974975f18",
+    "scripts/launch_factorized.py": "ec3dcdf05c4f1e538ed530e0fa603fba0bead1b419324d0a4e60781bd4c1ef6c",
+    "slurm/configs_packed.slurm": "1ce3a91b05d3e49153f401afc687bb53efcdf41aadb7af70874db152307577f6",
+    "smoke/smoke_factorized.py": "0fd6235013a986b7de7349a4b23aea457a8feb0181c0fdf3dfaf39cfad5b336f",
+    "configs/factorized/adfd_f0.yaml": "3547ab9d88ba1dcaa1e6c7730ae801061db82eadf1ca951327eb15e1c3766662",
+    "configs/factorized/adfd_f1.yaml": "eed9c260f0b0c7982447c7cc9f5cd7a24ff4ed179100116e6a8193ba98511c33",
+    "configs/factorized/adfd_f2.yaml": "d9bdb4b4128a1105cfd344e69bebf824b0f31ca6ec1e4cda886c67e7e7eb3f6c",
+    "configs/factorized/adfd_f3.yaml": "6469c2e367014252c1ac934c9ba8b0afa0c8a84a85ee28f52cdd861581d3c415",
+    "configs/factorized/caueeg_f0.yaml": "d21675db9d00d2acd09c18c85c5e0eb499454574746dc192a4034097c5a3e12b",
+    "configs/factorized/caueeg_f1.yaml": "b217c5d9854490986459a4a3c74d79f576813b39c9da09b051bf9da1b16b1e1d",
+    "configs/factorized/caueeg_f2.yaml": "de11a0f27d0042c14bddf4ba288db4d12b6090a9df9000e50fe9cb4ad5426ff8",
+    "configs/factorized/caueeg_f3.yaml": "62cfff4c5f3c0df6b4a1ebd72fb4edd8a0b45fc629f8d655d79ead46245aca79",
+    "configs/factorized/chbmit_f0.yaml": "912c03721eecbbb9d9af22051aba54bcc489570aa835f46766b4daba631f60c6",
+    "configs/factorized/chbmit_f1.yaml": "790ce9529afe71196bc12fd33c72e53cf0354a6cc93b84b9821820a1ceac100a",
+    "configs/factorized/chbmit_f2.yaml": "645ce3a56f3f7a8c619a124e97643e6043e3319c0f412304f8cfd4c2cbe0039c",
+    "configs/factorized/chbmit_f3.yaml": "3a8b1353f8106c350388f4f23cd060f78396ebb491364cda91f4b342c507527a",
+    "configs/factorized/iiic_f0.yaml": "79b99cf81f0955d36ceb7b441940b4d8de09ecec2c3c45331d25e2aeb36ec27f",
+    "configs/factorized/iiic_f1.yaml": "f54de8ff410ab3e31634680dacaf2be8e5fea4c60cefcda17df837060a643c25",
+    "configs/factorized/iiic_f2.yaml": "a8fdb2946132d1482b1d7c376d554d56e9931f6525d4d69e98f99682e4c5bf0a",
+    "configs/factorized/iiic_f3.yaml": "3171fd11077416432eadab35ca5b10cffb4b3e3ad147ea152830db0dc0011e53",
+    "configs/factorized/isruc_f0.yaml": "f013f16161160b1158f31c2e1a251baabe059031a541dff46255906439d629b7",
+    "configs/factorized/isruc_f1.yaml": "b6bcb12946f85d9d1b1ec479b259e18b8411a2c86a1702228dd487707285db0b",
+    "configs/factorized/isruc_f2.yaml": "a07337d7b43ff604e889c10046e1cc9198028ca018abf1423db029bb569d57bb",
+    "configs/factorized/isruc_f3.yaml": "58bbe812c8d9cfc42b36fcb496e7de378f7ddd789edf23abc82a45c170f168dd",
+    "configs/factorized/siena_f0.yaml": "dd26ac7fdf3d065a362be733cbea92b909e20ebbc3da051fa1586a0dca30d6ce",
+    "configs/factorized/siena_f1.yaml": "8dad14cb0692f6b311fb02883c9bd7a5569d21103e5f71d9adbeab983e3ad2f4",
+    "configs/factorized/siena_f2.yaml": "8db9ccfe07fedf67159a70b2a178aa1ad6b2931a3962f8a7d8d78490cd316612",
+    "configs/factorized/siena_f3.yaml": "ab8efbca515ddc3a4c4baea66ab9c8305b69bd8a7fdfd0158c36124fc4a8c2d2",
+    "configs/factorized/sleepedf_f0.yaml": "e9eaf365125ae2f1e33838a1cfd093d37c8c5b700619dd9c304c60895131e29a",
+    "configs/factorized/sleepedf_f1.yaml": "41131226bd9aec8647607eaca4686df8ea111541bed8402719978aeb52f7166d",
+    "configs/factorized/sleepedf_f2.yaml": "d93670adedd7ed2b1c1d9d21cc2d98d1f4c7895d737694dba054d906eaaef0a5",
+    "configs/factorized/sleepedf_f3.yaml": "d687ed200bea4ab3115ce84af069e445eb3a602f3dfa3c14d78faa4e09c16399",
+    "configs/factorized/tuab_f0.yaml": "6b9dcc2778f4666e037776906931214412984a06983e72f29ef6ef03bfc19cd1",
+    "configs/factorized/tuab_f1.yaml": "54adc42629761d179c4c5c1bd19acf1311748994e55123170933ba19845eedc2",
+    "configs/factorized/tuab_f2.yaml": "3ad65eabb19a8bda85aa0f28b4210100f456c29adbca430f01b86e016e0dd06a",
+    "configs/factorized/tuab_f3.yaml": "f8c861e1c242011ac276518d1ffe69dd32488f258922d34c4f06f35922e95505",
+    "configs/factorized/tuar_f0.yaml": "aa5018eb1f9d20299d03f8fdb5759f473a23d278a80e2afa8f02a8be6a27a025",
+    "configs/factorized/tuar_f1.yaml": "f3eee4cac8de797a1c8aa4d71c76edaf71a6f6c51674fb86be5c8ba69bffb5bc",
+    "configs/factorized/tuar_f2.yaml": "23afbaa241e7fe45283b58e20de174958d04a8367a7889e89691903f8e75dc20",
+    "configs/factorized/tuar_f3.yaml": "24a381386d48b0443c2dda29f5d06881d7976e6a318230e5c65bc86332141bae",
+    "configs/factorized/tuep_f0.yaml": "adb8664edef033fb286ac43803aeb34d11e5f1373ad7456cac5aaf4da449604f",
+    "configs/factorized/tuep_f1.yaml": "25a4f6df86819d51cb998f2839f66002f14aad33032148925d3fab164e863e92",
+    "configs/factorized/tuep_f2.yaml": "ba723baea3f076a1fc77cd8f09b614033a0b67141a7cfdac830bd104dedbfde3",
+    "configs/factorized/tuep_f3.yaml": "8c71c5db158bd58f2cbca9ec6c40724a24816ef23343a11e2981a2efb41e972f",
+    "configs/factorized/tuev_f0.yaml": "5c5fdf88a6cf0454b4d05fed54386d5443a286908ad4cd70ff5487bb9d35452a",
+    "configs/factorized/tuev_f1.yaml": "fb89ac9ba9db9832b10373efd1201db28ccccb3f80db450c37ec36c386262c45",
+    "configs/factorized/tuev_f2.yaml": "4a5157dde92daa50108c3c99b3fb70faadaf2b4017048fe4d29e35be2bc2a57a",
+    "configs/factorized/tuev_f3.yaml": "382967e537b0915a30d2b8146803bf276d5526f204469a5e03ea33b36a76db1d",
+    "configs/factorized/tusz_f0.yaml": "7bad3d3d5d7a8405806ad936e4c899eceabc797b7c43d57f3a4f7ea22426aadd",
+    "configs/factorized/tusz_f1.yaml": "89bd41293c716f4a35d43703e1c1100da018df09c86096552cc6656ceb596cdb",
+    "configs/factorized/tusz_f2.yaml": "f0384849a1e9aa014495f1a2767f07dc091f3f0972ffa713b077b26f693010e9",
+    "configs/factorized/tusz_f3.yaml": "5c31b6157874e815a04731d51c5bff49d4f87ff6a46fc4c6a966a39db5d74ad5"
+  },
+  "timing": [
+    {
+      "dataset": "tuev",
+      "arm": "f0",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "params_M": 3.616726,
+      "seconds_per_step": 0.2794411526992917,
+      "peak_GiB": 10.311110973358154,
+      "loss": 1.2414355278015137
+    },
+    {
+      "dataset": "tuev",
+      "arm": "f1",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "params_M": 3.616726,
+      "seconds_per_step": 0.2798935044556856,
+      "peak_GiB": 10.311110973358154,
+      "loss": 1.2305216789245605
+    },
+    {
+      "dataset": "tuev",
+      "arm": "f2",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "params_M": 3.616726,
+      "seconds_per_step": 0.27945619262754917,
+      "peak_GiB": 10.311110973358154,
+      "loss": 1.2367146015167236
+    },
+    {
+      "dataset": "tuev",
+      "arm": "f3",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "params_M": 3.616726,
+      "seconds_per_step": 0.27966055553406477,
+      "peak_GiB": 10.311110973358154,
+      "loss": 1.1901912689208984
+    },
+    {
+      "dataset": "chbmit",
+      "arm": "f0",
+      "batch": [
+        32,
+        16,
+        2000
+      ],
+      "params_M": 3.615954,
+      "seconds_per_step": 0.5188531605526805,
+      "peak_GiB": 20.43146800994873,
+      "loss": 1.2916126479467493e-07
+    },
+    {
+      "dataset": "chbmit",
+      "arm": "f1",
+      "batch": [
+        32,
+        16,
+        2000
+      ],
+      "params_M": 3.615954,
+      "seconds_per_step": 0.5176088688895106,
+      "peak_GiB": 20.43146800994873,
+      "loss": 1.752062672721877e-07
+    },
+    {
+      "dataset": "chbmit",
+      "arm": "f2",
+      "batch": [
+        32,
+        16,
+        2000
+      ],
+      "params_M": 3.615954,
+      "seconds_per_step": 0.5165943987667561,
+      "peak_GiB": 20.43146800994873,
+      "loss": 1.3942089083229803e-07
+    },
+    {
+      "dataset": "chbmit",
+      "arm": "f3",
+      "batch": [
+        32,
+        16,
+        2000
+      ],
+      "params_M": 3.615954,
+      "seconds_per_step": 0.5177985951304436,
+      "peak_GiB": 20.43146800994873,
+      "loss": 2.646082464252686e-07
+    },
+    {
+      "dataset": "tusz",
+      "arm": "f0",
+      "batch": [
+        32,
+        16,
+        2000
+      ],
+      "params_M": 3.615954,
+      "seconds_per_step": 0.5190216656774282,
+      "peak_GiB": 20.43146800994873,
+      "loss": 0.0016864687204360962
+    },
+    {
+      "dataset": "tusz",
+      "arm": "f1",
+      "batch": [
+        32,
+        16,
+        2000
+      ],
+      "params_M": 3.615954,
+      "seconds_per_step": 0.5169304944574833,
+      "peak_GiB": 20.43146800994873,
+      "loss": 0.0026686936616897583
+    },
+    {
+      "dataset": "tusz",
+      "arm": "f2",
+      "batch": [
+        32,
+        16,
+        2000
+      ],
+      "params_M": 3.615954,
+      "seconds_per_step": 0.5166128044947982,
+      "peak_GiB": 20.43146800994873,
+      "loss": 0.002026796340942383
+    },
+    {
+      "dataset": "tusz",
+      "arm": "f3",
+      "batch": [
+        32,
+        16,
+        2000
+      ],
+      "params_M": 3.615954,
+      "seconds_per_step": 0.5166399488225579,
+      "peak_GiB": 20.43146800994873,
+      "loss": 0.002817779779434204
+    },
+    {
+      "dataset": "tuar",
+      "arm": "f0",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "params_M": 3.580819,
+      "seconds_per_step": 0.2797059752047062,
+      "peak_GiB": 10.310691356658936,
+      "loss": 1.0987699031829834
+    },
+    {
+      "dataset": "tuar",
+      "arm": "f1",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "params_M": 3.580819,
+      "seconds_per_step": 0.279727878049016,
+      "peak_GiB": 10.310691356658936,
+      "loss": 1.095768928527832
+    },
+    {
+      "dataset": "tuar",
+      "arm": "f2",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "params_M": 3.580819,
+      "seconds_per_step": 0.27986729983240366,
+      "peak_GiB": 10.310691356658936,
+      "loss": 1.0961648225784302
+    },
+    {
+      "dataset": "tuar",
+      "arm": "f3",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "params_M": 3.580819,
+      "seconds_per_step": 0.27987231872975826,
+      "peak_GiB": 10.310691356658936,
+      "loss": 1.08750319480896
+    },
+    {
+      "dataset": "sleepedf",
+      "arm": "f0",
+      "batch": [
+        32,
+        2,
+        3000
+      ],
+      "params_M": 3.616533,
+      "seconds_per_step": 0.14535057172179222,
+      "peak_GiB": 3.993645191192627,
+      "loss": 1.5620286464691162
+    },
+    {
+      "dataset": "sleepedf",
+      "arm": "f1",
+      "batch": [
+        32,
+        2,
+        3000
+      ],
+      "params_M": 3.616533,
+      "seconds_per_step": 0.13832769077271223,
+      "peak_GiB": 3.993645191192627,
+      "loss": 1.5520212650299072
+    },
+    {
+      "dataset": "sleepedf",
+      "arm": "f2",
+      "batch": [
+        32,
+        2,
+        3000
+      ],
+      "params_M": 3.616533,
+      "seconds_per_step": 0.13838500902056694,
+      "peak_GiB": 3.993645191192627,
+      "loss": 1.5660637617111206
+    },
+    {
+      "dataset": "sleepedf",
+      "arm": "f3",
+      "batch": [
+        32,
+        2,
+        3000
+      ],
+      "params_M": 3.616533,
+      "seconds_per_step": 0.140543713234365,
+      "peak_GiB": 3.993645191192627,
+      "loss": 1.501259446144104
+    },
+    {
+      "dataset": "isruc",
+      "arm": "f0",
+      "batch": [
+        32,
+        6,
+        6000
+      ],
+      "params_M": 3.579285,
+      "seconds_per_step": 0.597942003980279,
+      "peak_GiB": 23.047553062438965,
+      "loss": 1.624211311340332
+    },
+    {
+      "dataset": "isruc",
+      "arm": "f1",
+      "batch": [
+        32,
+        6,
+        6000
+      ],
+      "params_M": 3.579285,
+      "seconds_per_step": 0.5998186375945807,
+      "peak_GiB": 23.047553062438965,
+      "loss": 1.6532634496688843
+    },
+    {
+      "dataset": "isruc",
+      "arm": "f2",
+      "batch": [
+        32,
+        6,
+        6000
+      ],
+      "params_M": 3.579285,
+      "seconds_per_step": 0.5981161147356033,
+      "peak_GiB": 23.047553062438965,
+      "loss": 1.6536558866500854
+    },
+    {
+      "dataset": "isruc",
+      "arm": "f3",
+      "batch": [
+        32,
+        6,
+        6000
+      ],
+      "params_M": 3.579285,
+      "seconds_per_step": 0.5989575451239944,
+      "peak_GiB": 23.047553062438965,
+      "loss": 1.6369491815567017
+    }
+  ]
+}
