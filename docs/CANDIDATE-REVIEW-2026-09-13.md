@@ -69,6 +69,33 @@ from this conservative audit is missing evidence, not evidence of a weak
 baseline. These provenance gaps must be resolved before claiming near-SOTA
 coverage; do not silently compare against only the baselines that remain.
 
+## Bounded scale comparison
+
+The next controlled screen changes only the f1 local-lane multiplier: 1.0
+versus 0.3, on TUEV and TUAR. The existing real-batch diagnostic found initial
+coupling/local RMS .22795/.72937 on TUEV. A .3 multiplier brings the two lanes
+near the same initial RMS while retaining all local coordinates. This tests
+whether their relative scale contributes to the observed tradeoff; it does
+not establish that scale caused the earlier performance decline.
+
+All four configurations in `configs/factorized_scale/` use seed 0 and the
+original 20-epoch recipe. Fresh controls run on the same mi2101x/rocBLAS setup
+as the scaled arms, so a backend change is not silently attributed to scaling.
+Prior f1 runtimes were 3.21 hours on TUEV and .97 on TUAR; approximately 8–10
+single-card hours is an estimate for the paired screen, not an allocation-meter
+conversion. Training caps are five hours per TUEV run and two per TUAR run.
+Slurm limits are six and three hours respectively. A capped run cannot stand
+in for a completed 20-epoch comparison.
+
+`slurm/smoke_then_train.slurm` validates the output identity, checks a real
+batch with finite gradients and parameters, and excludes two warmup steps.
+Training starts only if the measured training-only estimate consumes less
+than 80% of the configured training cap. This estimate excludes loader and
+evaluation overhead. Per-job receipts preserve config/smoke hashes and commit.
+These factorized experiments require the factorized branch; main does not
+yet carry the experimental frontend. No B2 pretraining continuation is added.
+One seed can motivate replication, not freeze or eliminate a model family.
+
 ## Metric and identity safeguards
 
 `best_val` is the **checkpoint-selection metric**, which is AUROC for some
