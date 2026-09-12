@@ -96,6 +96,15 @@ These factorized experiments require the factorized branch; main does not
 yet carry the experimental frontend. No B2 pretraining continuation is added.
 One seed can motivate replication, not freeze or eliminate a model family.
 
+Jobs **416840/416841** (TUEV, scale 1/.3) and **416842/416843** (TUAR, scale
+1/.3) passed the single-card gate and launched training from `a832159`.
+Measured steps were .312–.329 seconds, with 10.25 GiB peak allocated memory.
+The revised training-only projection totals **9.88 single-card hours**;
+loading/evaluation overhead is additional, so the earlier 8–10-hour total
+estimate should not be treated as the measured total. The four training caps
+sum to 14 hours and Slurm limits to 18 hours. Receipts and config-hash checks
+are retained at `/Users/mr.z/PACLock-monitor/scale-screen-jobs.json`.
+
 ## Metric and identity safeguards
 
 `best_val` is the **checkpoint-selection metric**, which is AUROC for some
