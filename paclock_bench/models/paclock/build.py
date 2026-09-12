@@ -92,7 +92,19 @@ class TriAxialPACLock(nn.Module):
         if self.learned_montage:
             self.montage_delta = nn.Parameter(
                 torch.zeros(cfg["n_channels"], cfg["n_channels"]))
-        self.frontend = TriAxialFrontend(
+        frontend_cls = TriAxialFrontend
+        frontend_extra = {}
+        if cfg.get("tokenizer_mode") == "factorized":
+            from .frontend.factorized import FactorizedFrontend
+            frontend_cls = FactorizedFrontend
+            frontend_extra = dict(
+                coupling_dim=cfg.get("coupling_dim", 128),
+                content_source=cfg.get("content_source", "band"),
+                content_scale=cfg.get("content_scale", 1.0),
+                filter_range=cfg.get("filter_range"),
+            )
+        self.frontend = frontend_cls(
+            **frontend_extra,
             n_bands=cfg["n_bands"], hidden_dim=d, sample_rate=cfg["sample_rate"],
             kernel_size=cfg.get("kernel_size", 201), patch_len=cfg.get("patch_len", 200),
             pac_patch_len=cfg.get("pac_patch_len"),

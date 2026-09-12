@@ -12,4 +12,4 @@
 set -euo pipefail
 module load pytorch/2.7.1
 cd "$SLURM_SUBMIT_DIR"
-HIP_VISIBLE_DEVICES=0 MIOPEN_USER_DB_PATH=/tmp/miopen_smoke_$SLURM_JOB_ID MIOPEN_CUSTOM_CACHE_DIR=/tmp/miopen_smoke_$SLURM_JOB_ID python3 -u "$@"
+HIP_VISIBLE_DEVICES=${SMOKE_GPU_ID:-0} MIOPEN_USER_DB_PATH=/tmp/miopen_smoke_${SLURM_JOB_ID}_${SLURM_STEP_ID:-batch} MIOPEN_CUSTOM_CACHE_DIR=/tmp/miopen_smoke_${SLURM_JOB_ID}_${SLURM_STEP_ID:-batch} python3 -u "$@"

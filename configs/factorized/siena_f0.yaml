@@ -1,0 +1,42 @@
+# 2026-09-13: one-row coupling(128) + local-content(64), controlled width and recipe.
+name: siena-factorized_f0
+group: factorized
+dataset: siena
+data_root: $PACLOCK_PROC/processed/siena
+model: paclock
+optimizer: adamw
+lr: 0.0001
+weight_decay: 1.0e-05
+scheduler: cosine
+grad_clip: 1.0
+num_workers: 8
+device: cuda
+num_classes: 2
+epochs: 60
+batch_size: 128
+eval_every_steps: 200
+patience: 20
+loss: bce_with_logits
+sample_rate: 200
+model_kwargs:
+  arch: triaxial
+  d_model: 192
+  depth: 6
+  n_bands: 8
+  n_heads: 4
+  dropout: 0.2
+  kernel_size: 201
+  patch_len: 50
+  augmentations: []
+  freq_mixer: attention
+  band_pe: index
+  tokenizer_mode: factorized
+  pac_token_mode: measured
+  interaction_mode: rotation
+  spatial_pe: xyz
+  pac_patch_len: 50
+  coupling_dim: 128
+  content_source: zero
+  content_scale: 1.0
+seed: 0
+max_hours: 22.5
