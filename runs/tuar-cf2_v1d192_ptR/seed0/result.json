@@ -1,0 +1,133 @@
+{
+  "name": "tuar-cf2_v1d192_ptR",
+  "dataset": "tuar",
+  "model": "paclock",
+  "group": "pretrain_ft",
+  "seed": 0,
+  "n_params_M": 2.704347,
+  "primary_metric": "cohen_kappa",
+  "test": {
+    "balanced_acc": 0.6786323745192223,
+    "cohen_kappa": 0.497808216074228,
+    "weighted_f1": 0.6465173439146004
+  },
+  "best_val": 0.5269046830863607,
+  "val_curve": [
+    0.36437636359574765,
+    0.3930309785866155,
+    0.38077313983845573,
+    0.3092663737997591,
+    0.43659841186147763,
+    0.5269046830863607,
+    0.48062490916678124,
+    0.5001577128244767,
+    0.4085481237307478,
+    0.4030691871229256,
+    0.3881478587851246,
+    0.4731367427816122,
+    0.4876868627441897,
+    0.4884450886257591,
+    0.4761522534696647,
+    0.47006695003438526,
+    0.4834178392534041,
+    0.4678657120743034,
+    0.47366619186264924,
+    0.4745285071516585
+  ],
+  "verdict": {
+    "ok": true,
+    "status": "ok",
+    "peak_index": 5,
+    "n_evals": 20,
+    "best_val": 0.5269046830863607,
+    "chance": 0.0,
+    "reason": "ok"
+  },
+  "epochs_run": 20,
+  "stopped_by": "epochs",
+  "wall_time_sec": 5173.516623973846,
+  "config": {
+    "name": "tuar-cf2_v1d192_ptR",
+    "group": "pretrain_ft",
+    "dataset": "tuar",
+    "data_root": "$PACLOCK_PROC/processed/tuar",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 3,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 0,
+    "patience": 20,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "sample_rate": 200,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 192,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "none",
+      "band_pe": "index",
+      "tokenizer_mode": "duplex",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50,
+      "space_over_bands": true
+    },
+    "seed": 0,
+    "max_hours": 22.5,
+    "checkpoint": "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+  },
+  "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+  "class_counts": {
+    "train": [
+      8642,
+      7192,
+      4816
+    ],
+    "val": [
+      1833,
+      2712,
+      501
+    ],
+    "test": [
+      661,
+      543,
+      732
+    ]
+  },
+  "gates": {
+    "beta_norm": [
+      3.479869842529297,
+      1.6040512323379517,
+      1.915482997894287,
+      1.7195382118225098,
+      1.4870460033416748,
+      1.76100754737854,
+      1.1474186182022095,
+      1.0823084115982056
+    ],
+    "gamma": [
+      0.2969861328601837,
+      -0.00011851242743432522,
+      0.07454584538936615,
+      0.3051674962043762,
+      0.3108809292316437,
+      0.272044837474823,
+      0.2709171175956726,
+      0.2596193552017212
+    ]
+  }
+}
