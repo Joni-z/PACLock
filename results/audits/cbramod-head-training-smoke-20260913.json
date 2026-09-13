@@ -1,0 +1,88 @@
+{
+  "allocation": "416422",
+  "step": "7",
+  "host": "k002-005.hpcfund",
+  "device": "AMD Instinct MI210",
+  "torch": "2.7.1+rocm6.3",
+  "gpu_selector": "1",
+  "records": [
+    {
+      "config": "configs/baseline_head_confirm/tuev_cbramod_h800_s1.yaml",
+      "config_sha256": "7fdb898dc7471418bcb8e8ce439535e15e7b15c7f93e032987e13dcdbfda69d5",
+      "width": 800,
+      "seed": 1,
+      "input_shape": [
+        64,
+        16,
+        1000
+      ],
+      "train_rows": 68445,
+      "steps_per_epoch": 1070,
+      "epochs": 50,
+      "optimizer_lrs": [
+        0.0001,
+        0.0005
+      ],
+      "warmup_steps_excluded": 2,
+      "steady_step_seconds": [
+        0.07174689101520926,
+        0.06974717898992822,
+        0.07004413101822138,
+        0.0712340009631589,
+        0.07177290000254288,
+        0.07090036000590771,
+        0.06989342498127371,
+        0.06988062203163281
+      ],
+      "projected_training_seconds": 3779.9054664901632,
+      "peak_GiB": 1.2366557121276855,
+      "finite_loss_gradients_parameters": true,
+      "training_cap_hours": 2.0,
+      "fits_80_percent_of_cap": true
+    },
+    {
+      "config": "configs/baseline_head_confirm/tuev_cbramod_h1000_s1.yaml",
+      "config_sha256": "9074ebf39119c73136b4f6849ecfdcb68d605bed222ce5132de0f7e5cc1f5bbe",
+      "width": 1000,
+      "seed": 1,
+      "input_shape": [
+        64,
+        16,
+        1000
+      ],
+      "train_rows": 68445,
+      "steps_per_epoch": 1070,
+      "epochs": 50,
+      "optimizer_lrs": [
+        0.0001,
+        0.0005
+      ],
+      "warmup_steps_excluded": 2,
+      "steady_step_seconds": [
+        0.0703475340269506,
+        0.07162694400176406,
+        0.07113699696492404,
+        0.07035921700298786,
+        0.07023933000164106,
+        0.07125491998158395,
+        0.07159698702162132,
+        0.07108208298450336
+      ],
+      "projected_training_seconds": 3796.119330156216,
+      "peak_GiB": 1.2854418754577637,
+      "finite_loss_gradients_parameters": true,
+      "training_cap_hours": 2.0,
+      "fits_80_percent_of_cap": true
+    }
+  ],
+  "all_fit": true,
+  "projection_limitation": "Training compute only; excludes loading, validation, final evaluation and saving.",
+  "validation_or_test_arrays_loaded": false,
+  "source_sha256": {
+    "smoke/cbramod_head_training_budget.py": "713eb8cb3bd686b89ede8d37f4e8566abe0cb48ea5cfc881ba7f25b3961a2dbc",
+    "paclock_bench/models/build.py": "ef57d740f510499b515e5b9f20f06a0e633a2177c22882e29546ca8ca54e5a2c",
+    "paclock_bench/models/foundation/cbramod_adapter.py": "3fdf18e0c2d5262e3826c2e7ed632dcbdb29542f12175bde54119f3613e2e984",
+    "paclock_bench/training/train.py": "ec8c15480fb734b47716e16100ac3afdcf3b99344c20d975a47b3e6a98192084",
+    "paclock_bench/training/losses.py": "a51c7aac6eec9d57f4e475eb6021dd90fab1fcaac5a404b44755e4794bf0f6f7"
+  }
+}

@@ -1,0 +1,29 @@
+name: tuev-cbramod_pretrained_nativehead
+group: baseline_head_confirm
+dataset: tuev
+data_root: $PACLOCK_PROC/processed/tuev
+model: cbramod
+loader: null
+pretrained: true
+optimizer: adamw
+lr: 0.0001
+weight_decay: 0.05
+epochs: 50
+batch_size: 64
+multi_lr: true
+scheduler: cosine
+grad_clip: 1.0
+patience: 0
+num_workers: 8
+device: cuda
+eval_every_steps: 0
+model_kwargs:
+  dropout: 0.1
+  classifier_hidden_dim: 1000
+num_classes: 6
+sample_rate: 200
+loss: cross_entropy
+label_smoothing: 0.1
+seed: 1
+max_hours: 2.0
+screening_note: Prepared head-fidelity pair on a shared frozen cohort. Admit only after real-training-batch timing fits 80 percent of the cap and an existing allocation has at least three hours remaining. No new allocation.
