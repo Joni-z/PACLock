@@ -151,6 +151,35 @@ processes remained live afterward. The factorized-branch script revision is
 records their hashes and observed training state. Finish the original TUEV
 training comparison before changing architecture or admitting more runs.
 
+A more targeted preferred-phase diagnostic uses the existing frontend
+`magnitude` and `scramble` controls on the same f4 checkpoints. The first
+validation batch preserves content coordinates and coupling magnitudes exactly;
+rotation-token modulus changes by at most 1.91e-6. Both measured-mode baselines
+reproduce their saved validation scores, and weights/metadata hashes are unchanged.
+
+| f4 checkpoint | Measured kappa | Preferred-phase alignment removed | Phase-edge scramble, mean ± SD |
+|---|---:|---:|---:|
+| TUAR, completed seed 1 | .615751 | .602219 | .610663 ± .005465 |
+| TUEV, provisional seed 1 snapshot | .637154 | .171473 | .395576 ± .006057 |
+
+The scramble seeds 0/1/2 are intervention draws on one trained checkpoint,
+not three independent training seeds. TUEV scramble kappas are .390653,
+.402340 and .393736. This supports task-dependent sensitivity to the measured
+preferred-phase alignment: strong on this TUEV checkpoint, much smaller on
+TUAR. It also shows why deleting all coupling coordinates overstates the
+specific phase mechanism on TUAR. These interventions break the trained
+alignment/gauge structure and change input directions; they do not prove a
+causal physiological relationship or the gain from training with the prior.
+A trained magnitude/scramble control would answer a different question.
+
+The script is `smoke/diagnose_preferred_phase.py` at factorized revision
+`20b132d`. Step 416422.3 completed normally in 3:32 on existing idle GPU 2;
+the measured probe runtime was 198.3 seconds. TUEV training stayed live.
+No test evaluation or new training allocation occurred. Detailed hashes,
+metrics and control checks are in
+`results/audits/preferred-phase-knockout-20260913.json`. This sharpens the
+mechanism claim while the final candidate and broad performance remain open.
+
 The 200-Hz f3 implementation remains blocked after its realized lowest filter
 peaked at DC with gain 70.156. That invalidates the intended low-frequency
 contrast; the completed TUAR f3 record is retained but excluded from candidate

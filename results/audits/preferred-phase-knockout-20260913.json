@@ -1,0 +1,174 @@
+{
+  "rows": [
+    {
+      "name": "tuar-factorized_f4_joint_confirm",
+      "dataset": "tuar",
+      "seed": 1,
+      "completed_training": true,
+      "selected_tag": "epoch   7 |",
+      "checkpoint": "runs/tuar-factorized_f4_joint_confirm/seed1/best.pt",
+      "metadata": "runs/tuar-factorized_f4_joint_confirm/seed1/result.json",
+      "hashes": {
+        "checkpoint": "b50a70b4e5fccdb87d75372fe429ddd5b280141f960cc6e630f9fdf2ef475bb4",
+        "metadata": "bb5c8d70f071cf396ff9726e701a594376fc856dd2948071fc9a343083a53bde"
+      },
+      "interventions": [
+        {
+          "mode": "measured",
+          "intervention_seed": 0,
+          "metrics": {
+            "balanced_acc": 0.7315773912058372,
+            "cohen_kappa": 0.6157507528394341,
+            "weighted_f1": 0.7738690763820588
+          },
+          "val_loss": 0.7951044317664979,
+          "elapsed_seconds": 9.286702610028442,
+          "first_batch_max_modulus_error": 0.0,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        },
+        {
+          "mode": "magnitude",
+          "intervention_seed": 0,
+          "metrics": {
+            "balanced_acc": 0.7308311552090986,
+            "cohen_kappa": 0.6022190585948977,
+            "weighted_f1": 0.7654136998739947
+          },
+          "val_loss": 0.8034354748227929,
+          "elapsed_seconds": 9.327786453999579,
+          "first_batch_max_modulus_error": 1.9073486328125e-06,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        },
+        {
+          "mode": "scramble",
+          "intervention_seed": 0,
+          "metrics": {
+            "balanced_acc": 0.7305808591961104,
+            "cohen_kappa": 0.6044803483240943,
+            "weighted_f1": 0.7658923017613242
+          },
+          "val_loss": 0.804117549635187,
+          "elapsed_seconds": 9.41292384796543,
+          "first_batch_max_modulus_error": 1.9073486328125e-06,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        },
+        {
+          "mode": "scramble",
+          "intervention_seed": 1,
+          "metrics": {
+            "balanced_acc": 0.7402235694401598,
+            "cohen_kappa": 0.6126572897131076,
+            "weighted_f1": 0.771095222766432
+          },
+          "val_loss": 0.8013612573282628,
+          "elapsed_seconds": 9.411436245951336,
+          "first_batch_max_modulus_error": 1.9073486328125e-06,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        },
+        {
+          "mode": "scramble",
+          "intervention_seed": 2,
+          "metrics": {
+            "balanced_acc": 0.737042371186059,
+            "cohen_kappa": 0.6148502260232394,
+            "weighted_f1": 0.772565776570473
+          },
+          "val_loss": 0.7992854603106463,
+          "elapsed_seconds": 9.424467426957563,
+          "first_batch_max_modulus_error": 1.9073486328125e-06,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        }
+      ]
+    },
+    {
+      "name": "tuev-factorized_f4_joint_confirm",
+      "dataset": "tuev",
+      "seed": 1,
+      "completed_training": false,
+      "selected_tag": "epoch   1 |",
+      "checkpoint": "results/audits/tuev-content-knockout-snapshot-20260913/tuev-factorized_f4_joint_confirm-best.pt",
+      "metadata": "results/audits/tuev-content-knockout-snapshot-20260913/tuev-factorized_f4_joint_confirm-metadata.json",
+      "hashes": {
+        "checkpoint": "85eefbb09375cf0f9c10343d3ffd4ed67021b4967cd4adf0462310ff196a1175",
+        "metadata": "7a4c08b1a922c0c26bc84b2b28772383a6f661f47a469d27c8f05abbaae3dee2"
+      },
+      "interventions": [
+        {
+          "mode": "measured",
+          "intervention_seed": 0,
+          "metrics": {
+            "balanced_acc": 0.5777963481204268,
+            "cohen_kappa": 0.637153617192539,
+            "weighted_f1": 0.9267173945396459
+          },
+          "val_loss": 0.6515707122392891,
+          "elapsed_seconds": 28.682392977993004,
+          "first_batch_max_modulus_error": 0.0,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        },
+        {
+          "mode": "magnitude",
+          "intervention_seed": 0,
+          "metrics": {
+            "balanced_acc": 0.3421925501650793,
+            "cohen_kappa": 0.1714729150340305,
+            "weighted_f1": 0.7396369260001648
+          },
+          "val_loss": 1.376143457906798,
+          "elapsed_seconds": 28.68577500304673,
+          "first_batch_max_modulus_error": 1.430511474609375e-06,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        },
+        {
+          "mode": "scramble",
+          "intervention_seed": 0,
+          "metrics": {
+            "balanced_acc": 0.2909998293334563,
+            "cohen_kappa": 0.3906532582345549,
+            "weighted_f1": 0.8798252244520242
+          },
+          "val_loss": 0.6840580722763518,
+          "elapsed_seconds": 28.92472791299224,
+          "first_batch_max_modulus_error": 1.9073486328125e-06,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        },
+        {
+          "mode": "scramble",
+          "intervention_seed": 1,
+          "metrics": {
+            "balanced_acc": 0.2967024299418845,
+            "cohen_kappa": 0.40233963039773923,
+            "weighted_f1": 0.8816309575365895
+          },
+          "val_loss": 0.6782450054056388,
+          "elapsed_seconds": 28.900940052990336,
+          "first_batch_max_modulus_error": 1.430511474609375e-06,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        },
+        {
+          "mode": "scramble",
+          "intervention_seed": 2,
+          "metrics": {
+            "balanced_acc": 0.2882027053615373,
+            "cohen_kappa": 0.3937359604871351,
+            "weighted_f1": 0.8799103285704751
+          },
+          "val_loss": 0.6809383087660655,
+          "elapsed_seconds": 28.90544141398277,
+          "first_batch_max_modulus_error": 1.9073486328125e-06,
+          "first_batch_content_and_coupling_magnitude_unchanged": true
+        }
+      ]
+    }
+  ],
+  "job": "416422",
+  "host": "k002-005.hpcfund",
+  "gpu_selector": "2",
+  "torch": "2.7.1+rocm6.3",
+  "script_sha256": "940418d1c69cd6b3748ead5dcdd82a8e500041885ad9693bb56f53c4af1a749c",
+  "elapsed_seconds": 198.28050813497975,
+  "git_commit": "20b132df9552aeb6fc5948c5fa5272c868f29623",
+  "training_performed": false,
+  "test_evaluated": false,
+  "limitations": "Post-training sensitivity, not retrained ablation or causal physiological evidence. Magnitude removes preferred-phase alignment and breaks gauge invariance; scramble additionally permutes edge phases per patch. First-batch invariants do not measure every batch. Intervention seeds are not training seeds."
+}
