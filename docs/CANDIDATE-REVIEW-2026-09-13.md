@@ -943,3 +943,24 @@ selected-checkpoint confusion matrices and per-class recalls are retained in
 `results/audits/tuev-augmentation-completion-20260913.json`. No test values
 were used for this review. Allocation 416422 remains for the two baseline
 head confirmations; the completed augmentation trainer has released GPU 2.
+
+## CBraMod head fidelity pair closed; four-card allocation released
+
+Both seed-1 runs completed 50 epochs with exit 0 within their two-hour caps.
+The legacy 800-wide head exactly reproduced all 50 historical validation-kappa
+entries. Its selected checkpoint has kappa .443026, balanced accuracy .464050
+and weighted F1 .881880. The upstream-sized 1000-wide head has .450285,
+.408304 and .878740: differences +.007259, -.055746 and -.003140.
+
+Keep the 1000-wide head for future TUEV task-faithful baseline work, with the
+remaining preprocessing-fidelity caveat. This is a one-seed reproduction
+check, not a reason to sweep head sizes, certify SOTA parity, or reduce the
+final candidate's performance requirements. The head change adds 3,240,200
+parameters and changes initialization RNG consumption; it is not an
+equal-parameter causal estimate. Historical 800-wide records remain separate.
+
+Allocation 416422 completed normally with exit 0:0 after 21:51:45 and released
+its four GPUs. Evidence, matched configuration differences, selected metrics
+and child completion receipts are in
+`results/audits/cbramod-head-completion-20260913.json`. No test scores were
+used for the comparison.
