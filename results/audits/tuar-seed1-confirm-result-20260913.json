@@ -1,0 +1,83 @@
+{
+  "observed_at": 1789260624.850257,
+  "runtime_cohort": "mi2104x, both arms on allocation 416426",
+  "arms": [
+    {
+      "name": "tuar-factorized_f1_scale1_confirm",
+      "seed": 1,
+      "content_scale": 1.0,
+      "selected_validation": {
+        "balanced_acc": 0.7172088721860578,
+        "cohen_kappa": 0.6086675656752666,
+        "weighted_f1": 0.7737198380392811
+      },
+      "validation_kappa_curve": [
+        0.4224791134839866,
+        0.47233167960259714,
+        0.4785847769606747,
+        0.490295273989215,
+        0.5246774667639545,
+        0.5114497147534249,
+        0.5871199363872791,
+        0.6086675656752666,
+        0.5604514695588162,
+        0.5206564112439895,
+        0.5603692971119942,
+        0.5165280157930348,
+        0.5563945850231335,
+        0.5515013576595758,
+        0.554680150746999,
+        0.5570613460742919,
+        0.5501649346519812,
+        0.5556275806469184,
+        0.5458679056256601,
+        0.5422232914997858
+      ],
+      "manifest": "2026-08-17T11:03:32.287406+00:00",
+      "source_result": "runs/tuar-factorized_f1_scale1_confirm/seed1/result.json",
+      "source_sha256": "3fbbdb307b9d8f98d95f956abce086d66476442931c9d587bd19380971bb8a27",
+      "completed_epochs": 20,
+      "stopped_by": "epochs"
+    },
+    {
+      "name": "tuar-factorized_f1_scale03_confirm",
+      "seed": 1,
+      "content_scale": 0.3,
+      "selected_validation": {
+        "balanced_acc": 0.7219833708113033,
+        "cohen_kappa": 0.606874774187182,
+        "weighted_f1": 0.771903355032396
+      },
+      "validation_kappa_curve": [
+        0.3822383054057704,
+        0.48637324672388127,
+        0.5133099012644566,
+        0.5479833158079486,
+        0.5811555404805824,
+        0.5399012460700006,
+        0.5802264423781939,
+        0.606874774187182,
+        0.5199802050373274,
+        0.5438121884216256,
+        0.5599239168000782,
+        0.5378646344984198,
+        0.5775930202598355,
+        0.5656037700725993,
+        0.5523936743524474,
+        0.5541328594800673,
+        0.5584211114423372,
+        0.5655674542819102,
+        0.5523117877356778,
+        0.5539561953511424
+      ],
+      "manifest": "2026-08-17T11:03:32.287406+00:00",
+      "source_result": "runs/tuar-factorized_f1_scale03_confirm/seed1/result.json",
+      "source_sha256": "215972656f2736f7b4170cb84466870d9773e3cf11e5161891847ad79fa16c66",
+      "completed_epochs": 20,
+      "stopped_by": "epochs"
+    }
+  ],
+  "kappa_delta": -0.001792791488084533,
+  "decision": "No reproducible TUAR kappa improvement across the completed seed/runtime pairs. No further TUAR scale replication for now; keep TUEV screen running. Do not pool this cohort silently with mi2101x seed 0.",
+  "scheduler_receipt": "416426|RUNNING|0:0|13:08:31\n416841|mi2101x|RUNNING\n416840|mi2101x|RUNNING\n416830|mi2101x|RUNNING\n416751|mi2101x|RUNNING\n416486|mi2104x|RUNNING\n416484|mi2104x|RUNNING\n416485|mi2104x|RUNNING\n416457|mi2104x|RUNNING\n416453|mi2104x|RUNNING\n416426|mi2104x|RUNNING\n416422|mi2104x|RUNNING\n416043|mi2104x|RUNNING\n416044|mi2104x|RUNNING\ndone/20_confirm_tuar_scale03_s1.json\ndone/20_confirm_tuar_scale1_s1.json\n"
+}
