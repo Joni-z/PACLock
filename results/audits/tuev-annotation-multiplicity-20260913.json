@@ -1,0 +1,136 @@
+{
+  "recorded_at": "2026-09-13T05:30:53.765008+00:00",
+  "dataset": "tuev",
+  "source": "Raw train/validation .rec annotations, parsed on local Mac; no test annotations or EEG arrays read by this annotation audit",
+  "manifest_sha256": "5fd1f6a4162aecc165a53a9de38832f5e9c81e02c2e201704ee41032c184f661",
+  "annotation_archive_sha256": "527bfb682eb041b12c8c4f8a7e6931a24598c11a869f6015bfe3257f52caf963",
+  "manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "method": "Use manifest train/val subject membership and accepted EDF basenames. Map label codes 1..6 to 0..5; group annotation windows by (recording, round(start_seconds*200)-400), matching current preprocessing start index before wraparound. Assert exact per-class counts and recording counts against manifest. Actual signal-byte grouping is a separate compute-node audit.",
+  "splits": {
+    "train": {
+      "recordings": 297,
+      "window_keys": 8697,
+      "classes": [
+        {
+          "index": 0,
+          "label": "SPSW",
+          "rows": 526,
+          "subjects": 20,
+          "largest_subject_fraction": 0.188212927756654,
+          "top3_subject_fraction": 0.4448669201520912,
+          "unique_window_keys": 118
+        },
+        {
+          "index": 1,
+          "label": "GPED",
+          "rows": 10963,
+          "subjects": 29,
+          "largest_subject_fraction": 0.3618535072516647,
+          "top3_subject_fraction": 0.6172580498038858,
+          "unique_window_keys": 2408
+        },
+        {
+          "index": 2,
+          "label": "PLED",
+          "rows": 5515,
+          "subjects": 25,
+          "largest_subject_fraction": 0.19510426110607434,
+          "top3_subject_fraction": 0.429011786038078,
+          "unique_window_keys": 1873
+        },
+        {
+          "index": 3,
+          "label": "EYEM",
+          "rows": 984,
+          "subjects": 36,
+          "largest_subject_fraction": 0.18089430894308944,
+          "top3_subject_fraction": 0.4339430894308943,
+          "unique_window_keys": 476
+        },
+        {
+          "index": 4,
+          "label": "ARTF",
+          "rows": 10553,
+          "subjects": 124,
+          "largest_subject_fraction": 0.06292049654126788,
+          "top3_subject_fraction": 0.1730313654884867,
+          "unique_window_keys": 1630
+        },
+        {
+          "index": 5,
+          "label": "BCKG",
+          "rows": 39904,
+          "subjects": 158,
+          "largest_subject_fraction": 0.022829791499599038,
+          "top3_subject_fraction": 0.05946772253408179,
+          "unique_window_keys": 2527
+        }
+      ]
+    },
+    "val": {
+      "recordings": 62,
+      "window_keys": 1038,
+      "classes": [
+        {
+          "index": 0,
+          "label": "SPSW",
+          "rows": 119,
+          "subjects": 7,
+          "largest_subject_fraction": 0.29411764705882354,
+          "top3_subject_fraction": 0.6890756302521008,
+          "unique_window_keys": 23
+        },
+        {
+          "index": 1,
+          "label": "GPED",
+          "rows": 291,
+          "subjects": 2,
+          "largest_subject_fraction": 0.9587628865979382,
+          "top3_subject_fraction": 1.0,
+          "unique_window_keys": 18
+        },
+        {
+          "index": 2,
+          "label": "PLED",
+          "rows": 669,
+          "subjects": 4,
+          "largest_subject_fraction": 0.49327354260089684,
+          "top3_subject_fraction": 0.9252615844544095,
+          "unique_window_keys": 158
+        },
+        {
+          "index": 3,
+          "label": "EYEM",
+          "rows": 86,
+          "subjects": 5,
+          "largest_subject_fraction": 0.4883720930232558,
+          "top3_subject_fraction": 0.9069767441860465,
+          "unique_window_keys": 50
+        },
+        {
+          "index": 4,
+          "label": "ARTF",
+          "rows": 500,
+          "subjects": 11,
+          "largest_subject_fraction": 0.44,
+          "top3_subject_fraction": 0.748,
+          "unique_window_keys": 69
+        },
+        {
+          "index": 5,
+          "label": "BCKG",
+          "rows": 13822,
+          "subjects": 43,
+          "largest_subject_fraction": 0.07003328027781797,
+          "top3_subject_fraction": 0.15916654608594993,
+          "unique_window_keys": 749
+        }
+      ]
+    }
+  },
+  "caveats": [
+    "Annotation window keys can overcount distinct EEG inputs; use the exact-input audit for actual uniqueness.",
+    "Subject concentration and low diversity do not prove that any proposed balancing or augmentation improves generalization.",
+    "Raw annotation version is pinned by archive hash; original manifest records EDF hashes, not .rec hashes."
+  ]
+}

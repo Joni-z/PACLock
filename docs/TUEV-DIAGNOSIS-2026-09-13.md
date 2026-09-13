@@ -19,7 +19,7 @@ The most recent inspection covered f0–f3 through epoch 9. Best validations: f0
 ## Evidence
 
 - Class counts (train/val/test background fractions): 39,904/68,445 = 58.30%; 13,822/15,487 = 89.25%; 19,646/29,421 = 66.78%. Class prevalence and subject composition differ across splits. This is a reason to examine class metrics and not equate validation with test kappa, not proof that prevalence alone explains the gap.
-- Training loss decreases toward .44–.45 while validation fluctuates or declines. With six classes and label smoothing .1, the optimum target entropy is .420956. This is consistent with fitting training data well while generalization deteriorates. Validation loss and per-class trajectories were not persisted by the old trainer, so a more specific mechanism is not established.
+- Training loss decreases toward .44–.45 while validation fluctuates or declines. With six classes and label smoothing .1, the single-label target entropy is .420956. A later exact-input audit found repeated inputs with conflicting labels, raising the empirical fixed-model lower bound on this training set to **.436594**; see `results/audits/tuev-input-duplicates-20260913.json`. This is consistent with fitting training data well while generalization deteriorates. Online training loss is measured with changing weights/dropout and is not an exact test against a fixed-model bound. Validation loss and per-class trajectories were not persisted by the old trainer, so a more specific mechanism is not established.
 - No missing-gradient or non-finite-forward failure was found in the real-batch frontend diagnostic. f0 intentionally has zero local-projector gradient; f1/f2/f3 have nonzero gradients in both projectors.
 - Initial token RMS on the same real TUEV training batch:
 

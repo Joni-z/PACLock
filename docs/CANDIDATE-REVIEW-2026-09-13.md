@@ -579,6 +579,50 @@ four pending project jobs, now reporting `QOSMaxGRESPerUser`.
    broader >10-dataset target. Preserve test evaluation as reporting evidence;
    do not use repeated best-test selection to manufacture a winning main row.
 
+## TUEV effective input diversity and minority-class check
+
+An exact-byte audit on the allocated compute node found **8,650 distinct
+training inputs among 68,445 rows** and **1,028 validation inputs among 15,487
+rows**. No identical input bytes crossed train and validation. Grouping uses
+SHA-256 of the actual arrays; all class counts match the training manifest.
+The read-only step `416422.4` completed in 10 seconds (9.01 seconds inside the
+script), without a new allocation or any test-array access. Source revision
+`2e1eccd` and full input/script hashes are recorded in
+`results/audits/tuev-input-duplicates-20260913.json`.
+
+SPSW has only **118 distinct training inputs** (526 rows) and **23 validation
+inputs** (119 rows). The raw annotation audit attributes those rows to 20
+training subjects and seven validation subjects. The three largest subjects
+account for 44.49% and 68.91% of SPSW rows, respectively. Validation GPED is
+even more concentrated: two subjects, one accounting for 95.88% of its rows.
+The annotation audit exactly reconciles all train/validation class counts and
+recording counts with the manifest; its window-key counts are slightly larger
+than the exact-array counts and must not be substituted for them. See
+`results/audits/tuev-annotation-multiplicity-20260913.json`.
+
+Identical training inputs sometimes have different labels: 344 input groups,
+covering 3,484 rows. For a fixed input-only classifier with smoothing .1, the
+empirical row-weighted cross-entropy lower bound is **.436594**, rather than
+the single-label smoothing entropy .420956. This is derived by averaging the
+entropy of `.9 * empirical_label_distribution + .1 / 6` over input groups,
+weighted by their row counts. Online training loss is measured while weights
+and dropout change, so its proximity to this fixed-model bound is descriptive,
+not an equality test or a generalization guarantee.
+
+The current provisional f4 and both scale-control kappa-selected checkpoints
+have zero SPSW recall. Across the observed f4 trajectory, even the highest
+SPSW recall is .17647, with precision .08787; changing checkpoint selection
+alone has not demonstrated a solution. The immutable interim histories and
+derived checkpoint metrics are in
+`results/audits/tuev-class-trajectory-snapshot-20260913.json`.
+None of the 119 validation SPSW rows
+shares an identical input with another label, so input-label contradiction
+cannot explain away its zero recall. These observations favor investigating
+generalization and effective sample diversity before merely increasing model
+capacity. They do not establish that reweighting, deduplication, augmentation,
+or pretraining will help. No training/evaluation data or recipe was changed;
+the existing unweighted-CE benchmark and in-flight gates remain intact.
+
 ## Monitoring without model calls
 
 `scripts/monitor/watch_clusters.py` runs locally every 900 seconds. It reads

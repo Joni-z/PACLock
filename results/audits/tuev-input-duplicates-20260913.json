@@ -1,0 +1,221 @@
+{
+  "dataset": "tuev",
+  "job": "416422",
+  "host": "k002-005.hpcfund",
+  "manifest_created": "2026-08-05T01:56:41.969236+00:00",
+  "manifest_sha256": "5fd1f6a4162aecc165a53a9de38832f5e9c81e02c2e201704ee41032c184f661",
+  "script_sha256": "dd36f8c26177b495b01d2c8871b8d1d23818ff9377da3e36b479051da15b8c79",
+  "label_smoothing": 0.1,
+  "splits": {
+    "train": {
+      "samples": 68445,
+      "class_counts": [
+        526,
+        10963,
+        5515,
+        984,
+        10553,
+        39904
+      ],
+      "unique_inputs": 8650,
+      "multiplicities": {
+        "1": 2140,
+        "2": 1240,
+        "3": 738,
+        "4": 634,
+        "5": 311,
+        "6": 252,
+        "7": 248,
+        "8": 188,
+        "9": 228,
+        "10": 191,
+        "11": 144,
+        "12": 128,
+        "13": 113,
+        "14": 26,
+        "15": 62,
+        "16": 76,
+        "17": 36,
+        "18": 46,
+        "19": 57,
+        "20": 59,
+        "21": 122,
+        "22": 1611
+      },
+      "mixed_label_inputs": 344,
+      "mixed_label_rows": 3484,
+      "deterministic_accuracy_upper_bound": 0.9920666228358536,
+      "smoothed_cross_entropy_lower_bound": 0.43659401733424025,
+      "classes": [
+        {
+          "index": 0,
+          "samples": 526,
+          "unique_inputs": 118,
+          "mixed_label_rows": 36
+        },
+        {
+          "index": 1,
+          "samples": 10963,
+          "unique_inputs": 2397,
+          "mixed_label_rows": 871
+        },
+        {
+          "index": 2,
+          "samples": 5515,
+          "unique_inputs": 1847,
+          "mixed_label_rows": 107
+        },
+        {
+          "index": 3,
+          "samples": 984,
+          "unique_inputs": 476,
+          "mixed_label_rows": 137
+        },
+        {
+          "index": 4,
+          "samples": 10553,
+          "unique_inputs": 1630,
+          "mixed_label_rows": 709
+        },
+        {
+          "index": 5,
+          "samples": 39904,
+          "unique_inputs": 2527,
+          "mixed_label_rows": 1624
+        }
+      ],
+      "shape": [
+        68445,
+        16,
+        1000
+      ],
+      "dtype": "float32",
+      "input_data_sha256": "00e88ea4d4d2c8f0d69b6069bab0ec5b5fde1d39e284a41770f03305041af3ef",
+      "labels_file_sha256": "bf739cc5b6871625fc476abb57cdfb4520336fea941df54c9e6c7fbc95fd14b6",
+      "file_signatures": {
+        "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev/train_signals.npy": {
+          "size": 4380480128,
+          "mtime_ns": 1785895016225069225,
+          "inode": 14264059148466520065
+        },
+        "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev/train_labels.npy": {
+          "size": 547688,
+          "mtime_ns": 1785895017192089334,
+          "inode": 643220772431331329
+        }
+      }
+    },
+    "val": {
+      "samples": 15487,
+      "class_counts": [
+        119,
+        291,
+        669,
+        86,
+        500,
+        13822
+      ],
+      "unique_inputs": 1028,
+      "multiplicities": {
+        "1": 82,
+        "2": 77,
+        "3": 44,
+        "4": 50,
+        "5": 28,
+        "6": 12,
+        "7": 7,
+        "8": 39,
+        "9": 17,
+        "10": 12,
+        "11": 4,
+        "12": 12,
+        "13": 7,
+        "14": 2,
+        "15": 13,
+        "16": 5,
+        "17": 2,
+        "18": 5,
+        "19": 12,
+        "20": 10,
+        "21": 20,
+        "22": 565,
+        "27": 1,
+        "28": 1,
+        "34": 1
+      },
+      "mixed_label_inputs": 32,
+      "mixed_label_rows": 656,
+      "deterministic_accuracy_upper_bound": 0.9948343772196035,
+      "smoothed_cross_entropy_lower_bound": 0.43087910307258714,
+      "classes": [
+        {
+          "index": 0,
+          "samples": 119,
+          "unique_inputs": 23,
+          "mixed_label_rows": 0
+        },
+        {
+          "index": 1,
+          "samples": 291,
+          "unique_inputs": 18,
+          "mixed_label_rows": 50
+        },
+        {
+          "index": 2,
+          "samples": 669,
+          "unique_inputs": 151,
+          "mixed_label_rows": 47
+        },
+        {
+          "index": 3,
+          "samples": 86,
+          "unique_inputs": 50,
+          "mixed_label_rows": 0
+        },
+        {
+          "index": 4,
+          "samples": 500,
+          "unique_inputs": 69,
+          "mixed_label_rows": 41
+        },
+        {
+          "index": 5,
+          "samples": 13822,
+          "unique_inputs": 749,
+          "mixed_label_rows": 518
+        }
+      ],
+      "shape": [
+        15487,
+        16,
+        1000
+      ],
+      "dtype": "float32",
+      "input_data_sha256": "72cfddc6fdf8c32c127c98b2cd30c15e0f6a579df9b07530d4c006361052783a",
+      "labels_file_sha256": "e34d2c9c2bb8a08c4fc0c1b778d7ed96b6c872b3583a542d992ef200e51ec999",
+      "file_signatures": {
+        "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev/val_signals.npy": {
+          "size": 991168128,
+          "mtime_ns": 1785895021597180936,
+          "inode": 6478349268151894017
+        },
+        "/work1/chenyuyou/yifanwang/Zhizhe/processed/tuev/val_labels.npy": {
+          "size": 124024,
+          "mtime_ns": 1785895021799185153,
+          "inode": 3191562598026313729
+        }
+      }
+    }
+  },
+  "cross_split_identical_inputs": 0,
+  "cross_split_identical_rows": {
+    "train": 0,
+    "val": 0
+  },
+  "elapsed_sec": 9.009816461999435,
+  "interpretation": [
+    "Exact input bytes grouped by SHA-256; no test arrays read.",
+    "Loss bound is for a deterministic input-only classifier on empirical row-weighted labels; it does not estimate generalization.",
+    "Duplicate counts alone do not authorize changing the benchmark or deduplicating evaluation."
+  ]
+}
