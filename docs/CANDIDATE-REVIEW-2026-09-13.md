@@ -59,15 +59,31 @@ within this mi2104x cohort. No new Slurm allocation was requested, although
 added work can extend existing allocation duration. The process receipt is
 `results/audits/tuev-seed1-pair-admission-20260913.json`.
 
-The fixed-width joint-content alternative, f4, is now **running** as a bounded
-TUEV/TUAR seed-1 trial after both admission gates were reviewed. Both run on
-existing allocation 416422: TUEV on GPU 3 and TUAR on GPU 2. The TUEV band
-control is running on GPU 1 of the same allocation; the TUAR band control is
-already complete. Runtime configs match their smokes, and owner/process/GPU/
-cgroup checks passed. Model source matches smoke commit `1ac4ddd` exactly.
+The fixed-width joint-content alternative, f4, has completed its TUAR seed-1
+trial; its TUEV trial remains running on allocation 416422 GPU 3 alongside
+the band-content control on GPU 1. TUAR used GPU 2, and its trainer has exited.
 No new allocation or pretraining job was requested. Training caps are five
 hours for TUEV and two for TUAR; added work may extend allocation duration.
-See `results/audits/factorized-joint-admission-20260913.json`.
+Runtime/source admission checks are recorded in
+`results/audits/factorized-joint-admission-20260913.json`.
+
+All three TUAR content arms completed 20 epochs with matching recipes, cohorts
+and parameter counts. At their kappa-selected checkpoints:
+
+| TUAR seed 1 content | Validation kappa | Balanced accuracy | Weighted F1 |
+|---|---:|---:|---:|
+| Band, 64 coordinates | .608668 | .717209 | .773720 |
+| Broadband, 64 coordinates | .630976 | .756006 | .783590 |
+| Joint, 32 + 32 coordinates | .615751 | .731577 | .773869 |
+
+Joint content improves kappa by .007083 over band content but trails broadband
+by .015225, with lower balanced accuracy and weighted F1 as well. Controls
+completed earlier on different mi2104x allocations. This one seed has not
+shown that splitting content capacity preserves the stronger TUAR result.
+Do not expand joint content to other corpora yet; finish the already-running
+TUEV comparison before the next architecture decision. Detailed config checks,
+selected metrics and original hashes are in
+`results/audits/tuar-joint-completion-20260913.json`.
 
 f4 keeps 128 coupling coordinates and splits the existing 64 content coordinates
 into 32 band-local and 32 broadband coordinates, with unchanged parameterization
@@ -76,7 +92,7 @@ this is not a signal-invertibility claim. Contract checks cover exact coordinate
 finite random/flat/near-flat gradients, three-lane trainability and checkpoint
 reload. Smokes measured about .257/.256 s per TUEV/TUAR step after two warmups,
 10.31 GiB peak memory, and 3.05/.92 hours of projected training without loading
-or evaluation. Performance results for f4 remain pending.
+or evaluation. The TUEV performance result for f4 remains pending.
 
 The 200-Hz f3 implementation remains blocked after its realized lowest filter
 peaked at DC with gain 70.156. That invalidates the intended low-frequency
