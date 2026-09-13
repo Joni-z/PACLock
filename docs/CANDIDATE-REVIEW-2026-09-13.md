@@ -7,13 +7,13 @@ is not sufficient to declare that goal achieved.
 
 ## Current validation evidence
 
-The completed seed-0 factorized pilots on Sleep-EDF and TUAR favor f2:
+The completed seed-0 factorized pilots on Sleep-EDF, TUAR and ISRUC favor f2:
 
 | Dataset | f0: coupling control | f1: band-local lane | f2: broadband-local lane |
 |---|---:|---:|---:|
 | Sleep-EDF, completed 20 epochs | .6403 | .6416 | .6729 |
 | TUAR, completed 20 epochs | .6049 | .6014 | .6231 |
-| ISRUC, live through epoch 6 | .7133 | .7211 | .7580 |
+| ISRUC, completed 20 epochs | .7232 | .7258 | .7584 |
 | TUEV, completed 20 epochs | .5920 | .6294 | .6006 |
 
 These are best logged **validation kappa**, not test scores. Completed pilots
@@ -22,6 +22,20 @@ and artifact corpora, but does not resolve the main TUEV weakness. f1 is closer
 on TUEV: its seed-0 .6294 compares with historical rotation-only seed-0 .6339.
 Historical rotation-only has three-seed validation mean .6504; duplex .6188.
 Do not compare a new .64 validation number with an old .73 test number.
+
+All three ISRUC arms completed without a budget stop despite differing
+backfill time caps. Their learning recipes match except for content source;
+all use index spatial embeddings. The completed f2–f1 validation difference
+is +.032663. Original result hashes and execution differences are recorded
+in `results/audits/isruc-factorized-completion-20260913.json`.
+
+The TUEV seed-1 scale pair is prepared but **not admitted**. Both real-batch
+GPU smokes passed on an idle slot of existing allocation 416043, at about
+.256 seconds/step after two warmups and 10.31 GiB peak memory. Projected
+training is about 3.04 hours per arm, excluding loading and evaluation;
+each has a five-hour training cap and needs six hours left in an allocation.
+Review the completed seed-0 TUEV pair before admission. The conditional plan
+and smoke receipts are in `results/audits/tuev-seed1-confirm-preparation-20260913.json`.
 
 The 200-Hz f3 implementation remains blocked after its realized lowest filter
 peaked at DC with gain 70.156. That invalidates the intended low-frequency
