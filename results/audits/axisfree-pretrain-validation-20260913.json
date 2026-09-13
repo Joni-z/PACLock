@@ -1,0 +1,296 @@
+{
+  "at": "2026-09-13T02:36:49.591963+00:00",
+  "family": "cf2_v1d192_ptR",
+  "matched_seed0_pairs": 9,
+  "higher": 4,
+  "lower": 5,
+  "rows": [
+    {
+      "dataset": "adfd",
+      "metric": "balanced_acc",
+      "pt_val": 0.4134757294150084,
+      "scratch_val": 0.4774065635488704,
+      "delta": -0.06393083413386202,
+      "cohort_match": true,
+      "pt_stop": "patience",
+      "scratch_stop": "epochs",
+      "diff": {
+        "name": [
+          "adfd-cf2_v1d192",
+          "adfd-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/adfd-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/adfd-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "4f095154abd246b7bf413dabf9604224115d88242519ed06765baf4400d1fa2c",
+      "scratch_sha256": "86088d7641218e5f96a7241776ca6203f873f9bf67fd2a61ca5b93300ace2ea2"
+    },
+    {
+      "dataset": "caueeg",
+      "metric": "balanced_acc",
+      "pt_val": 0.5219146068233164,
+      "scratch_val": 0.48905840258416705,
+      "delta": 0.03285620423914931,
+      "cohort_match": true,
+      "pt_stop": "epochs",
+      "scratch_stop": "epochs",
+      "diff": {
+        "name": [
+          "caueeg-cf2_v1d192",
+          "caueeg-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/caueeg-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/caueeg-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "f75d1737f40b05cd3f184baa3b6f14bffb7223ae9f1ef7a11dec110b500e7cab",
+      "scratch_sha256": "e223ea71a493e592f1ef7c1f8bf8d8ebd95fec8f6bcfd7035ac95da68cf97241"
+    },
+    {
+      "dataset": "iiic",
+      "metric": "cohen_kappa",
+      "pt_val": 0.4918678150872169,
+      "scratch_val": 0.5137470299211336,
+      "delta": -0.02187921483391675,
+      "cohort_match": true,
+      "pt_stop": "epochs",
+      "scratch_stop": "epochs",
+      "diff": {
+        "name": [
+          "iiic-cf2_v1d192",
+          "iiic-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/iiic-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/iiic-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "daedf4dfd716f912eafffdbb616becdbfefa2e82ae9b1d42bb2db24d47f79924",
+      "scratch_sha256": "6ae2e65f1af2b8a30d4fbf67a1c7f6346a2bb8969ac8939b76efa28a36cc8fa5"
+    },
+    {
+      "dataset": "isruc",
+      "metric": "cohen_kappa",
+      "pt_val": 0.7235996081775959,
+      "scratch_val": 0.7284239695465877,
+      "delta": -0.004824361368991781,
+      "cohort_match": true,
+      "pt_stop": "epochs",
+      "scratch_stop": "epochs",
+      "diff": {
+        "name": [
+          "isruc-cf2_v1d192",
+          "isruc-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/isruc-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/isruc-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "c2ac2756155ce9eb716d3b56d23af321fe49c8bc201b87e076e9ba5e0d7e2285",
+      "scratch_sha256": "ed7e008a3290b94f55cb1c4931d5f296ec9f0a02858dda0ca86096e2aa5860f5"
+    },
+    {
+      "dataset": "siena",
+      "metric": "pr_auc",
+      "pt_val": 0.38767205673568605,
+      "scratch_val": 0.30969078656680255,
+      "delta": 0.07798127016888351,
+      "cohort_match": true,
+      "pt_stop": "patience",
+      "scratch_stop": "patience",
+      "diff": {
+        "name": [
+          "siena-cf2_v1d192",
+          "siena-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/siena-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/siena-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "d4be42040d1dba4fca1c7551598338945c238482900c756e8858703da7b4a7a8",
+      "scratch_sha256": "28cbdc9709434d2ad2d188c5ef7bb88cc213b55828c25bedc30a1da798aa6fff"
+    },
+    {
+      "dataset": "sleepedf",
+      "metric": "cohen_kappa",
+      "pt_val": 0.6392384369161601,
+      "scratch_val": 0.6308803725734793,
+      "delta": 0.008358064342680827,
+      "cohort_match": true,
+      "pt_stop": "epochs",
+      "scratch_stop": "epochs",
+      "diff": {
+        "name": [
+          "sleepedf-cf2_v1d192",
+          "sleepedf-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/sleepedf-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/sleepedf-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "ee73cf3196fa870a936a2d39b17e693215cf4cf475c4939989ee188ea2157537",
+      "scratch_sha256": "15d14c988b34c6c44268c6babb91ad3bfee1c024086ddc480b67f422978f4a81"
+    },
+    {
+      "dataset": "tuar",
+      "metric": "cohen_kappa",
+      "pt_val": 0.5269046830863607,
+      "scratch_val": 0.5952503223892178,
+      "delta": -0.06834563930285709,
+      "cohort_match": true,
+      "pt_stop": "epochs",
+      "scratch_stop": "epochs",
+      "diff": {
+        "name": [
+          "tuar-cf2_v1d192",
+          "tuar-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/tuar-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/tuar-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "91bcec1d2c1c6f489e3ccd4bf2ecc79405897740e834e6eb384507e91d8def36",
+      "scratch_sha256": "40bb1fefbbc0caf8c0ae40261ca6eba44a315a96188742e078ca2d831655c4a2"
+    },
+    {
+      "dataset": "tuep",
+      "metric": "auroc",
+      "pt_val": 0.7295414086222756,
+      "scratch_val": 0.7461791506380689,
+      "delta": -0.016637742015793378,
+      "cohort_match": true,
+      "pt_stop": "patience",
+      "scratch_stop": "patience",
+      "diff": {
+        "name": [
+          "tuep-cf2_v1d192",
+          "tuep-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/tuep-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/tuep-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "65e050c2762d04b15c5b553564b36b5f625f9c64be815976b1303271116c9f02",
+      "scratch_sha256": "bae2592f8249cb06a4ffd5e60fc5e4f3a0c3f754776686278e97e9a3e6a7fe8e"
+    },
+    {
+      "dataset": "tuev",
+      "metric": "cohen_kappa",
+      "pt_val": 0.5575775405172392,
+      "scratch_val": 0.5216950247787022,
+      "delta": 0.03588251573853696,
+      "cohort_match": true,
+      "pt_stop": "epochs",
+      "scratch_stop": "epochs",
+      "diff": {
+        "name": [
+          "tuev-cf2_v1d192",
+          "tuev-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/tuev-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/tuev-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "28b5284d2881830103a660b18a7715815ac309738d0bc333b5428257581947e4",
+      "scratch_sha256": "7a8453674189d8bcdfe5ac063e8461adbf0afafc8833484e3261832759665e16"
+    },
+    {
+      "dataset": "tusz",
+      "metric": "pr_auc",
+      "pt_val": 0.3570918823168742,
+      "scratch_val": 0.32442361483655174,
+      "delta": 0.03266826748032248,
+      "cohort_match": false,
+      "pt_stop": "patience",
+      "scratch_stop": "patience",
+      "diff": {
+        "name": [
+          "tusz-cf2_v1d192",
+          "tusz-cf2_v1d192_ptR"
+        ],
+        "checkpoint": [
+          null,
+          "pretrain_runs_axisfree/pretrain-axisfree_rawpatch_b2/checkpoint.pt"
+        ],
+        "group": [
+          "cf2",
+          "pretrain_ft"
+        ]
+      },
+      "pt_path": "PACLock-monitor/hosts/amd/runs/tusz-cf2_v1d192_ptR/seed0/result.json",
+      "scratch_path": "PACLock-monitor/hosts/amd/runs/tusz-cf2_v1d192/seed0/result.json",
+      "pt_sha256": "2a1665b2cde0964c37fd2a086369381abc69ae2673c7705e08016ee8b9e57333",
+      "scratch_sha256": "7f2917739e4d6e19e5076fdc9df736647d3425f470e00f9265b402bea89224e5"
+    }
+  ],
+  "caveats": [
+    "Validation only; all pretraining arms have one seed.",
+    "Historical training-source and checkpoint identities are not proven by matching configurations.",
+    "TUSZ class counts agree, but manifest timestamps differ (2026-09-02 versus 2026-08-04); this is unverified cohort identity, not proof of different examples.",
+    "Do not average deltas across different metrics."
+  ],
+  "decision": "Include scratch and pretrained axisfree families in the candidate inventory. No evidence here justifies additional pretraining allocation before candidate architecture is settled."
+}

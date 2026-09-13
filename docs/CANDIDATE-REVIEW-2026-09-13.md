@@ -86,6 +86,20 @@ step validations as well as epoch ends. Their validation cadence differs from
 TUEV; equal epoch numbers alone do not establish equal training progress.
 Do not discard an entire model family from these seed-0 pilots.
 
+## Existing axisfree pretraining candidate
+
+The inventory now includes both `cf2_v1d192` and `cf2_v1d192_ptR`, which were
+previously absent from the monitor's family allowlist. The pretrained variant
+has ten completed seed-0 datasets. Nine have matching manifest identities,
+class counts and recipes against scratch after removing name/group/checkpoint:
+four improve and five decline. TUEV kappa changes .521695 to .557578, while
+TUAR changes .595250 to .526905. These single-seed observations do not establish
+a stable pretraining benefit and do not justify more pretraining allocation.
+TUSZ has equal counts but different manifest timestamps, so its apparent gain
+is excluded from the matched count; the timestamp difference alone does not
+prove different examples. Historical source/checkpoint provenance remains a
+limitation. See `results/audits/axisfree-pretrain-validation-20260913.json`.
+
 ## Historical readout check
 
 The readout alternatives are already implemented and have historical results.
