@@ -1,0 +1,155 @@
+{
+  "job": "416422",
+  "host": "k002-005.hpcfund",
+  "gpu_selector": "2",
+  "git_commit": "c80edab597b04aca482980cde9960b1751defe8f",
+  "script_sha256": "2ba683ad9788f035ffaa7d9cc64e397940080aec828fe19470bbde24b9a05296",
+  "torch": "2.7.1+rocm6.3",
+  "rows": [
+    {
+      "name": "tuar-factorized_f1_scale1_confirm",
+      "checkpoint": "runs/tuar-factorized_f1_scale1_confirm/seed1/best.pt",
+      "checkpoint_sha256": "2881ae512a338539a29bb2499369bbb956eb5e3ebb0a5493a26e2256c6926ba7",
+      "result_sha256": "3fbbdb307b9d8f98d95f956abce086d66476442931c9d587bd19380971bb8a27",
+      "selected_tag": "epoch   7 |",
+      "first_validation_batch_token_rms": {
+        "coupling": 0.6845236420631409,
+        "content_first32": 0.5785008668899536,
+        "content_last32": 0.5558704733848572
+      },
+      "evaluations": {
+        "full": {
+          "val_loss": 0.7918076417114162,
+          "metrics": {
+            "balanced_acc": 0.7172088721860578,
+            "cohen_kappa": 0.6086675656752666,
+            "weighted_f1": 0.7737198380392811
+          },
+          "elapsed_seconds": 9.284303402004298
+        },
+        "zero_coupling": {
+          "val_loss": 2.3394641397120077,
+          "metrics": {
+            "balanced_acc": 0.4861744051449746,
+            "cohen_kappa": 0.09881157654863515,
+            "weighted_f1": 0.21945873650814055
+          },
+          "elapsed_seconds": 9.333279738028068
+        },
+        "zero_content": {
+          "val_loss": 0.7693624634154236,
+          "metrics": {
+            "balanced_acc": 0.6427889396917918,
+            "cohen_kappa": 0.5844307926879571,
+            "weighted_f1": 0.758129145060009
+          },
+          "elapsed_seconds": 9.345593992969953
+        }
+      }
+    },
+    {
+      "name": "tuar-factorized_f2_confirm",
+      "checkpoint": "runs/tuar-factorized_f2_confirm/seed1/best.pt",
+      "checkpoint_sha256": "2b0555d6559ff94ed5e099f4f7c920d090cc5e41caed78f30f727674c62d3136",
+      "result_sha256": "02208b3e47cca891eb4010edc8f0117556746befccc4625e2fea6c9410842d3f",
+      "selected_tag": "epoch   7 |",
+      "first_validation_batch_token_rms": {
+        "coupling": 0.7754949927330017,
+        "content_first32": 0.21639373898506165,
+        "content_last32": 0.23408256471157074
+      },
+      "evaluations": {
+        "full": {
+          "val_loss": 0.7793402147443989,
+          "metrics": {
+            "balanced_acc": 0.7560062225678271,
+            "cohen_kappa": 0.6309756851583201,
+            "weighted_f1": 0.7835904057388446
+          },
+          "elapsed_seconds": 9.318559845967684
+        },
+        "zero_coupling": {
+          "val_loss": 2.1079405150081536,
+          "metrics": {
+            "balanced_acc": 0.5630615473907613,
+            "cohen_kappa": 0.18351410858159878,
+            "weighted_f1": 0.2694441205841325
+          },
+          "elapsed_seconds": 9.350313857023139
+        },
+        "zero_content": {
+          "val_loss": 0.947724475702153,
+          "metrics": {
+            "balanced_acc": 0.6019986059966351,
+            "cohen_kappa": 0.4753159824101716,
+            "weighted_f1": 0.7079872356066579
+          },
+          "elapsed_seconds": 9.34304632502608
+        }
+      }
+    },
+    {
+      "name": "tuar-factorized_f4_joint_confirm",
+      "checkpoint": "runs/tuar-factorized_f4_joint_confirm/seed1/best.pt",
+      "checkpoint_sha256": "b50a70b4e5fccdb87d75372fe429ddd5b280141f960cc6e630f9fdf2ef475bb4",
+      "result_sha256": "bb5c8d70f071cf396ff9726e701a594376fc856dd2948071fc9a343083a53bde",
+      "selected_tag": "epoch   7 |",
+      "first_validation_batch_token_rms": {
+        "coupling": 0.7218673229217529,
+        "content_first32": 0.6542409658432007,
+        "content_last32": 0.29406026005744934
+      },
+      "evaluations": {
+        "full": {
+          "val_loss": 0.7951044317664979,
+          "metrics": {
+            "balanced_acc": 0.7315773912058372,
+            "cohen_kappa": 0.6157507528394341,
+            "weighted_f1": 0.7738690763820588
+          },
+          "elapsed_seconds": 9.347743046004325
+        },
+        "zero_coupling": {
+          "val_loss": 1.9754383047170276,
+          "metrics": {
+            "balanced_acc": 0.5598056478423404,
+            "cohen_kappa": 0.17654210622788935,
+            "weighted_f1": 0.26734710541683365
+          },
+          "elapsed_seconds": 9.370990383031312
+        },
+        "zero_content": {
+          "val_loss": 0.9737872149370894,
+          "metrics": {
+            "balanced_acc": 0.5995976776080099,
+            "cohen_kappa": 0.4699192086888875,
+            "weighted_f1": 0.7039485076742511
+          },
+          "elapsed_seconds": 9.372028756013606
+        },
+        "zero_band": {
+          "val_loss": 0.7821484864512577,
+          "metrics": {
+            "balanced_acc": 0.7122125439025343,
+            "cohen_kappa": 0.6141578515875121,
+            "weighted_f1": 0.7734995210494926
+          },
+          "elapsed_seconds": 9.379450068983715
+        },
+        "zero_broadband": {
+          "val_loss": 0.9044870113647436,
+          "metrics": {
+            "balanced_acc": 0.6496132001551214,
+            "cohen_kappa": 0.5252181023461675,
+            "weighted_f1": 0.7345993768520801
+          },
+          "elapsed_seconds": 9.376027017016895
+        }
+      }
+    }
+  ],
+  "elapsed_seconds": 110.5446428139694,
+  "test_evaluated": false,
+  "training_performed": false,
+  "interpretation": "Post-training coordinate-zeroing before positional embeddings; attention ignores the side coupling matrix. Distribution shifts and shared normalization preclude interpreting drops as causal PAC benefit or retrained-ablation scores."
+}
