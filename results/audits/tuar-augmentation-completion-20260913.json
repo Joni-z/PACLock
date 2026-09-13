@@ -1,0 +1,3171 @@
+{
+  "observed_at": "2026-09-13T07:08:15.008047+00:00",
+  "results": [
+    {
+      "path": "runs/tuar-factorized_f4_aug_confirm/seed1/result.json",
+      "sha256": "a790c09e774967519f882cb27dd69d9a8cf1b6731c7b9525c1d4205df9dd163a",
+      "progress_sha256": "5799ec1347fd1cfd4ffec51d486c48f29a9a394d9c6494f3cd799e462a80a63b",
+      "name": "tuar-factorized_f4_aug_confirm",
+      "seed": 1,
+      "epochs_run": 20,
+      "stopped_by": "epochs",
+      "wall_time_sec": 3501.778149366379,
+      "n_params_M": 3.580819,
+      "selected_tag": "epoch   8 |",
+      "selected_validation": {
+        "balanced_acc": 0.7550383990310107,
+        "cohen_kappa": 0.631884378545802,
+        "weighted_f1": 0.7822923138552283
+      },
+      "class_counts": {
+        "train": [
+          8642,
+          7192,
+          4816
+        ],
+        "val": [
+          1833,
+          2712,
+          501
+        ],
+        "test": [
+          661,
+          543,
+          732
+        ]
+      },
+      "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+      "config": {
+        "batch_size": 32,
+        "data_root": "$PACLOCK_PROC/processed/tuar",
+        "dataset": "tuar",
+        "device": "cuda",
+        "epochs": 20,
+        "eval_every_steps": 0,
+        "grad_clip": 1.0,
+        "group": "factorized_joint_augment_confirm",
+        "label_smoothing": 0.1,
+        "loss": "cross_entropy",
+        "lr": 0.0001,
+        "max_hours": 2.0,
+        "model": "paclock",
+        "model_kwargs": {
+          "arch": "triaxial",
+          "augmentations": [
+            "flip0.5",
+            "jitter0.05",
+            "mask0.2",
+            "channel0.2",
+            "frequency0.2"
+          ],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band_broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        },
+        "name": "tuar-factorized_f4_aug_confirm",
+        "num_classes": 3,
+        "num_workers": 8,
+        "optimizer": "adamw",
+        "patience": 20,
+        "sample_rate": 200,
+        "scheduler": "cosine",
+        "seed": 1,
+        "weight_decay": 1e-05,
+        "screening_note": "Prepared, not admitted. Historical augmentation-only comparison supports a bounded TUEV/TUAR transfer gate. Preserve baseline f4 recipe except augmentation. Admit only after full current TUEV gate review and successful real-batch smoke; prefer existing mi2104x allocation with cap plus 30 minutes remaining. This is a recipe change, not a new architecture or evidence of final-candidate success.",
+        "backfill": {
+          "source_job": null,
+          "allocation": "416422",
+          "gpu": 1,
+          "original_max_hours": 2,
+          "max_hours": 2.0
+        }
+      },
+      "validation_history": [
+        {
+          "tag": "epoch   0 |",
+          "elapsed_sec": 182.7457196712494,
+          "val_loss": 0.9272341452821901,
+          "train_loss": 0.9554724420187274,
+          "metrics": {
+            "balanced_acc": 0.5385340378052657,
+            "cohen_kappa": 0.33846458802310364,
+            "weighted_f1": 0.5819403693614525
+          },
+          "lr": [
+            9.938441702975719e-05
+          ],
+          "best_val": 0.33846458802310364,
+          "confusion": [
+            [
+              1781,
+              40,
+              12
+            ],
+            [
+              1550,
+              1151,
+              11
+            ],
+            [
+              326,
+              65,
+              110
+            ]
+          ],
+          "class_f1": [
+            0.648816029143898,
+            0.5801411290322581,
+            0.3470031545741325
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            3657,
+            1256,
+            133
+          ]
+        },
+        {
+          "tag": "epoch   1 |",
+          "elapsed_sec": 357.21868920326233,
+          "val_loss": 0.7955397863554049,
+          "train_loss": 0.7613894209127308,
+          "metrics": {
+            "balanced_acc": 0.642163488153395,
+            "cohen_kappa": 0.5219102468309187,
+            "weighted_f1": 0.7143497617971692
+          },
+          "lr": [
+            9.755282581475777e-05
+          ],
+          "best_val": 0.5219102468309187,
+          "confusion": [
+            [
+              1740,
+              79,
+              14
+            ],
+            [
+              918,
+              1730,
+              64
+            ],
+            [
+              202,
+              129,
+              170
+            ]
+          ],
+          "class_f1": [
+            0.7415299382058385,
+            0.7440860215053764,
+            0.4539385847797063
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2860,
+            1938,
+            248
+          ]
+        },
+        {
+          "tag": "epoch   2 |",
+          "elapsed_sec": 531.737536907196,
+          "val_loss": 0.7510766147435466,
+          "train_loss": 0.6789034678840047,
+          "metrics": {
+            "balanced_acc": 0.7184021704043984,
+            "cohen_kappa": 0.5934167357595426,
+            "weighted_f1": 0.7580637139379802
+          },
+          "lr": [
+            9.455032620941844e-05
+          ],
+          "best_val": 0.5934167357595426,
+          "confusion": [
+            [
+              1709,
+              87,
+              37
+            ],
+            [
+              630,
+              1844,
+              238
+            ],
+            [
+              126,
+              103,
+              272
+            ]
+          ],
+          "class_f1": [
+            0.7952536063285249,
+            0.7770754319426886,
+            0.5190839694656488
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2465,
+            2034,
+            547
+          ]
+        },
+        {
+          "tag": "epoch   3 |",
+          "elapsed_sec": 706.2193925380707,
+          "val_loss": 0.8307833196241644,
+          "train_loss": 0.637178573815077,
+          "metrics": {
+            "balanced_acc": 0.7181897797422069,
+            "cohen_kappa": 0.5719044005260898,
+            "weighted_f1": 0.7402085126817102
+          },
+          "lr": [
+            9.045084971874727e-05
+          ],
+          "best_val": 0.5934167357595426,
+          "confusion": [
+            [
+              1750,
+              37,
+              46
+            ],
+            [
+              714,
+              1695,
+              303
+            ],
+            [
+              142,
+              71,
+              288
+            ]
+          ],
+          "class_f1": [
+            0.7884658706915972,
+            0.7508305647840532,
+            0.5061511423550088
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2606,
+            1803,
+            637
+          ]
+        },
+        {
+          "tag": "epoch   4 |",
+          "elapsed_sec": 880.6909112930298,
+          "val_loss": 0.7794639468193054,
+          "train_loss": 0.6151866597287795,
+          "metrics": {
+            "balanced_acc": 0.7030208817961218,
+            "cohen_kappa": 0.5981117131402489,
+            "weighted_f1": 0.7606303535291377
+          },
+          "lr": [
+            8.535533905932733e-05
+          ],
+          "best_val": 0.5981117131402489,
+          "confusion": [
+            [
+              1772,
+              45,
+              16
+            ],
+            [
+              729,
+              1853,
+              130
+            ],
+            [
+              167,
+              104,
+              230
+            ]
+          ],
+          "class_f1": [
+            0.7873805820928682,
+            0.7861688587187102,
+            0.5245153933865451
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2668,
+            2002,
+            376
+          ]
+        },
+        {
+          "tag": "epoch   5 |",
+          "elapsed_sec": 1055.1887106895447,
+          "val_loss": 0.7912041439285761,
+          "train_loss": 0.598278909690978,
+          "metrics": {
+            "balanced_acc": 0.7459973633544869,
+            "cohen_kappa": 0.5972191813148064,
+            "weighted_f1": 0.7567668343259703
+          },
+          "lr": [
+            7.938926261462354e-05
+          ],
+          "best_val": 0.5981117131402489,
+          "confusion": [
+            [
+              1732,
+              48,
+              53
+            ],
+            [
+              640,
+              1753,
+              319
+            ],
+            [
+              109,
+              68,
+              324
+            ]
+          ],
+          "class_f1": [
+            0.8029670839128419,
+            0.7653350796769265,
+            0.5413533834586466
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2481,
+            1869,
+            696
+          ]
+        },
+        {
+          "tag": "epoch   6 |",
+          "elapsed_sec": 1229.6914970874786,
+          "val_loss": 0.7746588401024854,
+          "train_loss": 0.5847758991245884,
+          "metrics": {
+            "balanced_acc": 0.729608006587234,
+            "cohen_kappa": 0.6044979590181451,
+            "weighted_f1": 0.7635400050714904
+          },
+          "lr": [
+            7.269952498697707e-05
+          ],
+          "best_val": 0.6044979590181451,
+          "confusion": [
+            [
+              1739,
+              49,
+              45
+            ],
+            [
+              564,
+              1815,
+              333
+            ],
+            [
+              133,
+              82,
+              286
+            ]
+          ],
+          "class_f1": [
+            0.8147107050831577,
+            0.7793044224989266,
+            0.49098712446351933
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2436,
+            1946,
+            664
+          ]
+        },
+        {
+          "tag": "epoch   7 |",
+          "elapsed_sec": 1404.212648153305,
+          "val_loss": 0.8243217628590668,
+          "train_loss": 0.56929993698656,
+          "metrics": {
+            "balanced_acc": 0.7227353839169277,
+            "cohen_kappa": 0.5621489371820783,
+            "weighted_f1": 0.7318988127820393
+          },
+          "lr": [
+            6.545084971874702e-05
+          ],
+          "best_val": 0.6044979590181451,
+          "confusion": [
+            [
+              1752,
+              38,
+              43
+            ],
+            [
+              751,
+              1637,
+              324
+            ],
+            [
+              134,
+              62,
+              305
+            ]
+          ],
+          "class_f1": [
+            0.7838926174496644,
+            0.735895706900427,
+            0.5200341005967605
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2637,
+            1737,
+            672
+          ]
+        },
+        {
+          "tag": "epoch   8 |",
+          "elapsed_sec": 1578.7263686656952,
+          "val_loss": 0.7643142729243145,
+          "train_loss": 0.5590420030864769,
+          "metrics": {
+            "balanced_acc": 0.7550383990310107,
+            "cohen_kappa": 0.631884378545802,
+            "weighted_f1": 0.7822923138552283
+          },
+          "lr": [
+            5.782172325201126e-05
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1710,
+              62,
+              61
+            ],
+            [
+              474,
+              1897,
+              341
+            ],
+            [
+              106,
+              78,
+              317
+            ]
+          ],
+          "class_f1": [
+            0.8294930875576036,
+            0.7989050326384503,
+            0.519672131147541
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2290,
+            2037,
+            719
+          ]
+        },
+        {
+          "tag": "epoch   9 |",
+          "elapsed_sec": 1753.2380819320679,
+          "val_loss": 0.7738203238460082,
+          "train_loss": 0.5435852408870455,
+          "metrics": {
+            "balanced_acc": 0.740052391872927,
+            "cohen_kappa": 0.6227152010258084,
+            "weighted_f1": 0.7772488787866763
+          },
+          "lr": [
+            4.999999999999972e-05
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1702,
+              67,
+              64
+            ],
+            [
+              492,
+              1906,
+              314
+            ],
+            [
+              106,
+              100,
+              295
+            ]
+          ],
+          "class_f1": [
+            0.8236148076457779,
+            0.7966562173458726,
+            0.5025553662691652
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2300,
+            2073,
+            673
+          ]
+        },
+        {
+          "tag": "epoch  10 |",
+          "elapsed_sec": 1927.7405261993408,
+          "val_loss": 0.8987187654534473,
+          "train_loss": 0.5296313633490642,
+          "metrics": {
+            "balanced_acc": 0.7467691723332203,
+            "cohen_kappa": 0.5852513941801641,
+            "weighted_f1": 0.7476676009562411
+          },
+          "lr": [
+            4.217827674798824e-05
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1728,
+              44,
+              61
+            ],
+            [
+              598,
+              1684,
+              430
+            ],
+            [
+              112,
+              50,
+              339
+            ]
+          ],
+          "class_f1": [
+            0.8091781784125498,
+            0.7501113585746102,
+            0.5093914350112697
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2438,
+            1778,
+            830
+          ]
+        },
+        {
+          "tag": "epoch  11 |",
+          "elapsed_sec": 2102.23832821846,
+          "val_loss": 0.8009380047457128,
+          "train_loss": 0.5183007626249325,
+          "metrics": {
+            "balanced_acc": 0.7556240624785797,
+            "cohen_kappa": 0.6223035903986753,
+            "weighted_f1": 0.7765664094207719
+          },
+          "lr": [
+            3.454915028125244e-05
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1695,
+              59,
+              79
+            ],
+            [
+              456,
+              1859,
+              397
+            ],
+            [
+              102,
+              70,
+              329
+            ]
+          ],
+          "class_f1": [
+            0.8296622613803231,
+            0.791063829787234,
+            0.5038284839203675
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2253,
+            1988,
+            805
+          ]
+        },
+        {
+          "tag": "epoch  12 |",
+          "elapsed_sec": 2276.707362174988,
+          "val_loss": 0.7758992859457112,
+          "train_loss": 0.5125960031806869,
+          "metrics": {
+            "balanced_acc": 0.756447512498816,
+            "cohen_kappa": 0.6230166660743006,
+            "weighted_f1": 0.7771654748986462
+          },
+          "lr": [
+            2.7300475013022548e-05
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1681,
+              74,
+              78
+            ],
+            [
+              474,
+              1881,
+              357
+            ],
+            [
+              95,
+              76,
+              330
+            ]
+          ],
+          "class_f1": [
+            0.8234141562576537,
+            0.793168880455408,
+            0.5213270142180095
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2250,
+            2031,
+            765
+          ]
+        },
+        {
+          "tag": "epoch  13 |",
+          "elapsed_sec": 2451.1951158046722,
+          "val_loss": 0.7683804159677481,
+          "train_loss": 0.5032222038452101,
+          "metrics": {
+            "balanced_acc": 0.7372379629407186,
+            "cohen_kappa": 0.6179804426914967,
+            "weighted_f1": 0.7734648981920741
+          },
+          "lr": [
+            2.0610737385376278e-05
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1714,
+              72,
+              47
+            ],
+            [
+              539,
+              1887,
+              286
+            ],
+            [
+              120,
+              90,
+              291
+            ]
+          ],
+          "class_f1": [
+            0.8150261531145981,
+            0.792690611216131,
+            0.5173333333333333
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2373,
+            2049,
+            624
+          ]
+        },
+        {
+          "tag": "epoch  14 |",
+          "elapsed_sec": 2625.609334230423,
+          "val_loss": 0.8102057653514645,
+          "train_loss": 0.49460710912666084,
+          "metrics": {
+            "balanced_acc": 0.7343035674519478,
+            "cohen_kappa": 0.593994020862793,
+            "weighted_f1": 0.7560302443955601
+          },
+          "lr": [
+            1.4644660940672615e-05
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1726,
+              58,
+              49
+            ],
+            [
+              626,
+              1775,
+              311
+            ],
+            [
+              126,
+              71,
+              304
+            ]
+          ],
+          "class_f1": [
+            0.8007422871723499,
+            0.7690641247833622,
+            0.5218884120171674
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2478,
+            1904,
+            664
+          ]
+        },
+        {
+          "tag": "epoch  15 |",
+          "elapsed_sec": 2800.062565088272,
+          "val_loss": 0.846954188957999,
+          "train_loss": 0.48543300689558494,
+          "metrics": {
+            "balanced_acc": 0.7379174056330946,
+            "cohen_kappa": 0.5879014844843279,
+            "weighted_f1": 0.7515349534383265
+          },
+          "lr": [
+            9.549150281252635e-06
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1716,
+              53,
+              64
+            ],
+            [
+              605,
+              1738,
+              369
+            ],
+            [
+              122,
+              60,
+              319
+            ]
+          ],
+          "class_f1": [
+            0.8026192703461179,
+            0.7617795310103003,
+            0.5091779728651237
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2443,
+            1851,
+            752
+          ]
+        },
+        {
+          "tag": "epoch  16 |",
+          "elapsed_sec": 2974.498433113098,
+          "val_loss": 0.8140034469999845,
+          "train_loss": 0.4825268467605668,
+          "metrics": {
+            "balanced_acc": 0.740977105119936,
+            "cohen_kappa": 0.6064014452663999,
+            "weighted_f1": 0.7647153920968707
+          },
+          "lr": [
+            5.449673790581627e-06
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1719,
+              60,
+              54
+            ],
+            [
+              577,
+              1818,
+              317
+            ],
+            [
+              114,
+              79,
+              308
+            ]
+          ],
+          "class_f1": [
+            0.8102757482913033,
+            0.7787534804026558,
+            0.5220338983050847
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2410,
+            1957,
+            679
+          ]
+        },
+        {
+          "tag": "epoch  17 |",
+          "elapsed_sec": 3148.9577701091766,
+          "val_loss": 0.8158216219914111,
+          "train_loss": 0.47641164982466505,
+          "metrics": {
+            "balanced_acc": 0.7393171993570613,
+            "cohen_kappa": 0.6022101401538074,
+            "weighted_f1": 0.7620386037049597
+          },
+          "lr": [
+            2.447174185242334e-06
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1715,
+              61,
+              57
+            ],
+            [
+              572,
+              1805,
+              335
+            ],
+            [
+              114,
+              78,
+              309
+            ]
+          ],
+          "class_f1": [
+            0.810108644307983,
+            0.7753436426116839,
+            0.5141430948419301
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2401,
+            1944,
+            701
+          ]
+        },
+        {
+          "tag": "epoch  18 |",
+          "elapsed_sec": 3323.4211542606354,
+          "val_loss": 0.8169439623627481,
+          "train_loss": 0.4747019497787251,
+          "metrics": {
+            "balanced_acc": 0.740235286274633,
+            "cohen_kappa": 0.6029344647475448,
+            "weighted_f1": 0.7628186612763139
+          },
+          "lr": [
+            6.155829702431188e-07
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1708,
+              66,
+              59
+            ],
+            [
+              561,
+              1812,
+              339
+            ],
+            [
+              115,
+              75,
+              311
+            ]
+          ],
+          "class_f1": [
+            0.8100545411429927,
+            0.7768488745980707,
+            0.5140495867768595
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2384,
+            1953,
+            709
+          ]
+        },
+        {
+          "tag": "epoch  19 |",
+          "elapsed_sec": 3497.8564455509186,
+          "val_loss": 0.8147241405293911,
+          "train_loss": 0.4760948790946612,
+          "metrics": {
+            "balanced_acc": 0.7406598302990887,
+            "cohen_kappa": 0.6030830724290898,
+            "weighted_f1": 0.7629871667087126
+          },
+          "lr": [
+            0.0
+          ],
+          "best_val": 0.631884378545802,
+          "confusion": [
+            [
+              1706,
+              66,
+              61
+            ],
+            [
+              558,
+              1813,
+              341
+            ],
+            [
+              114,
+              75,
+              312
+            ]
+          ],
+          "class_f1": [
+            0.8102588458798385,
+            0.7771110158594084,
+            0.5135802469135803
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2378,
+            1954,
+            714
+          ]
+        }
+      ]
+    },
+    {
+      "path": "runs/tuar-factorized_f4_joint_confirm/seed1/result.json",
+      "sha256": "bb5c8d70f071cf396ff9726e701a594376fc856dd2948071fc9a343083a53bde",
+      "progress_sha256": "4ee089fb636270bf1b6ee91d73aa17ed8b5434a3fbcc1e3549530fad6d082aae",
+      "name": "tuar-factorized_f4_joint_confirm",
+      "seed": 1,
+      "epochs_run": 20,
+      "stopped_by": "epochs",
+      "wall_time_sec": 3504.40846824646,
+      "n_params_M": 3.580819,
+      "selected_tag": "epoch   7 |",
+      "selected_validation": {
+        "balanced_acc": 0.7315773912058372,
+        "cohen_kappa": 0.6157507528394341,
+        "weighted_f1": 0.7738690763820588
+      },
+      "class_counts": {
+        "train": [
+          8642,
+          7192,
+          4816
+        ],
+        "val": [
+          1833,
+          2712,
+          501
+        ],
+        "test": [
+          661,
+          543,
+          732
+        ]
+      },
+      "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+      "config": {
+        "batch_size": 32,
+        "data_root": "$PACLOCK_PROC/processed/tuar",
+        "dataset": "tuar",
+        "device": "cuda",
+        "epochs": 20,
+        "eval_every_steps": 0,
+        "grad_clip": 1.0,
+        "group": "factorized_joint_confirm",
+        "label_smoothing": 0.1,
+        "loss": "cross_entropy",
+        "lr": 0.0001,
+        "max_hours": 2.0,
+        "model": "paclock",
+        "model_kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band_broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        },
+        "name": "tuar-factorized_f4_joint_confirm",
+        "num_classes": 3,
+        "num_workers": 8,
+        "optimizer": "adamw",
+        "patience": 20,
+        "sample_rate": 200,
+        "scheduler": "cosine",
+        "seed": 1,
+        "weight_decay": 1e-05,
+        "screening_note": "Prospective paired seed-1 confirmation on existing mi2104x allocations; compare arms within the same runtime cohort. Do not pool directly with the mi2101x seed-0 screen.",
+        "backfill": {
+          "source_job": null,
+          "allocation": "416422",
+          "gpu": 2,
+          "original_max_hours": 2,
+          "max_hours": 2.0
+        }
+      },
+      "validation_history": [
+        {
+          "tag": "epoch   0 |",
+          "elapsed_sec": 181.82021808624268,
+          "val_loss": 0.7936837167679509,
+          "train_loss": 0.9293278240751556,
+          "metrics": {
+            "balanced_acc": 0.6891292224004694,
+            "cohen_kappa": 0.5477711212309546,
+            "weighted_f1": 0.7300970822471027
+          },
+          "lr": [
+            9.938441702975719e-05
+          ],
+          "best_val": 0.5477711212309546,
+          "confusion": [
+            [
+              1667,
+              93,
+              73
+            ],
+            [
+              721,
+              1760,
+              231
+            ],
+            [
+              122,
+              124,
+              255
+            ]
+          ],
+          "class_f1": [
+            0.7676721160488141,
+            0.7506931115376413,
+            0.4811320754716981
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2510,
+            1977,
+            559
+          ]
+        },
+        {
+          "tag": "epoch   1 |",
+          "elapsed_sec": 356.473023891449,
+          "val_loss": 0.8698820117153699,
+          "train_loss": 0.719363208295022,
+          "metrics": {
+            "balanced_acc": 0.6984653327066881,
+            "cohen_kappa": 0.5123662901129661,
+            "weighted_f1": 0.6988678842325217
+          },
+          "lr": [
+            9.755282581475777e-05
+          ],
+          "best_val": 0.5477711212309546,
+          "confusion": [
+            [
+              1680,
+              49,
+              104
+            ],
+            [
+              756,
+              1519,
+              437
+            ],
+            [
+              119,
+              72,
+              310
+            ]
+          ],
+          "class_f1": [
+            0.7657247037374658,
+            0.6980698529411765,
+            0.45857988165680474
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2555,
+            1640,
+            851
+          ]
+        },
+        {
+          "tag": "epoch   2 |",
+          "elapsed_sec": 531.1170563697815,
+          "val_loss": 0.900598909847344,
+          "train_loss": 0.6549146094650676,
+          "metrics": {
+            "balanced_acc": 0.7155287369055371,
+            "cohen_kappa": 0.5156978793814302,
+            "weighted_f1": 0.6967147370836044
+          },
+          "lr": [
+            9.455032620941844e-05
+          ],
+          "best_val": 0.5477711212309546,
+          "confusion": [
+            [
+              1695,
+              33,
+              105
+            ],
+            [
+              727,
+              1457,
+              528
+            ],
+            [
+              109,
+              49,
+              343
+            ]
+          ],
+          "class_f1": [
+            0.7768102658111824,
+            0.6854857680545754,
+            0.46445497630331756
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2531,
+            1539,
+            976
+          ]
+        },
+        {
+          "tag": "epoch   3 |",
+          "elapsed_sec": 705.7890405654907,
+          "val_loss": 0.8547002295904522,
+          "train_loss": 0.6142643602455363,
+          "metrics": {
+            "balanced_acc": 0.7093572716777916,
+            "cohen_kappa": 0.5594142538657602,
+            "weighted_f1": 0.7320316906098373
+          },
+          "lr": [
+            9.045084971874727e-05
+          ],
+          "best_val": 0.5594142538657602,
+          "confusion": [
+            [
+              1740,
+              44,
+              49
+            ],
+            [
+              697,
+              1665,
+              350
+            ],
+            [
+              143,
+              75,
+              283
+            ]
+          ],
+          "class_f1": [
+            0.7885791978246091,
+            0.7406583629893239,
+            0.47844463229078615
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2580,
+            1784,
+            682
+          ]
+        },
+        {
+          "tag": "epoch   4 |",
+          "elapsed_sec": 880.4914684295654,
+          "val_loss": 0.7893545565348637,
+          "train_loss": 0.5874645238044461,
+          "metrics": {
+            "balanced_acc": 0.7036302174171324,
+            "cohen_kappa": 0.5636273532575335,
+            "weighted_f1": 0.7362585913555295
+          },
+          "lr": [
+            8.535533905932733e-05
+          ],
+          "best_val": 0.5636273532575335,
+          "confusion": [
+            [
+              1735,
+              41,
+              57
+            ],
+            [
+              686,
+              1707,
+              319
+            ],
+            [
+              136,
+              97,
+              268
+            ]
+          ],
+          "class_f1": [
+            0.7904328018223234,
+            0.749177090190915,
+            0.46812227074235807
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2557,
+            1845,
+            644
+          ]
+        },
+        {
+          "tag": "epoch   5 |",
+          "elapsed_sec": 1055.1973667144775,
+          "val_loss": 0.9827756236625623,
+          "train_loss": 0.560152830031265,
+          "metrics": {
+            "balanced_acc": 0.6844676472217661,
+            "cohen_kappa": 0.48394053365120837,
+            "weighted_f1": 0.6723046527200717
+          },
+          "lr": [
+            7.938926261462354e-05
+          ],
+          "best_val": 0.5636273532575335,
+          "confusion": [
+            [
+              1754,
+              20,
+              59
+            ],
+            [
+              966,
+              1366,
+              380
+            ],
+            [
+              151,
+              53,
+              297
+            ]
+          ],
+          "class_f1": [
+            0.7457482993197279,
+            0.6581546615273428,
+            0.4801940177849636
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2871,
+            1439,
+            736
+          ]
+        },
+        {
+          "tag": "epoch   6 |",
+          "elapsed_sec": 1229.8719987869263,
+          "val_loss": 0.7987325581945951,
+          "train_loss": 0.5340593149049363,
+          "metrics": {
+            "balanced_acc": 0.7345026367948796,
+            "cohen_kappa": 0.6078651573785223,
+            "weighted_f1": 0.7746912622992755
+          },
+          "lr": [
+            7.269952498697707e-05
+          ],
+          "best_val": 0.6078651573785223,
+          "confusion": [
+            [
+              1564,
+              131,
+              138
+            ],
+            [
+              326,
+              1973,
+              413
+            ],
+            [
+              64,
+              125,
+              312
+            ]
+          ],
+          "class_f1": [
+            0.8259836282017428,
+            0.7986237603723942,
+            0.4574780058651026
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            1954,
+            2229,
+            863
+          ]
+        },
+        {
+          "tag": "epoch   7 |",
+          "elapsed_sec": 1404.5552535057068,
+          "val_loss": 0.7951044317664979,
+          "train_loss": 0.5106562267608318,
+          "metrics": {
+            "balanced_acc": 0.7315773912058372,
+            "cohen_kappa": 0.6157507528394341,
+            "weighted_f1": 0.7738690763820588
+          },
+          "lr": [
+            6.545084971874702e-05
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1689,
+              62,
+              82
+            ],
+            [
+              476,
+              1905,
+              331
+            ],
+            [
+              98,
+              117,
+              286
+            ]
+          ],
+          "class_f1": [
+            0.82470703125,
+            0.7944120100083403,
+            0.4766666666666667
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2263,
+            2084,
+            699
+          ]
+        },
+        {
+          "tag": "epoch   8 |",
+          "elapsed_sec": 1579.218220949173,
+          "val_loss": 0.9542745051881935,
+          "train_loss": 0.48413883140397146,
+          "metrics": {
+            "balanced_acc": 0.7276933189995504,
+            "cohen_kappa": 0.5519687150097624,
+            "weighted_f1": 0.7272459673196813
+          },
+          "lr": [
+            5.782172325201126e-05
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1673,
+              37,
+              123
+            ],
+            [
+              622,
+              1621,
+              469
+            ],
+            [
+              100,
+              64,
+              337
+            ]
+          ],
+          "class_f1": [
+            0.7913907284768212,
+            0.731168245376635,
+            0.47132867132867134
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2395,
+            1722,
+            929
+          ]
+        },
+        {
+          "tag": "epoch   9 |",
+          "elapsed_sec": 1753.882422208786,
+          "val_loss": 1.0006931588242325,
+          "train_loss": 0.4598983385522299,
+          "metrics": {
+            "balanced_acc": 0.7175346837814409,
+            "cohen_kappa": 0.5217056267253439,
+            "weighted_f1": 0.6995195237982029
+          },
+          "lr": [
+            4.999999999999972e-05
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1725,
+              29,
+              79
+            ],
+            [
+              738,
+              1456,
+              518
+            ],
+            [
+              114,
+              49,
+              338
+            ]
+          ],
+          "class_f1": [
+            0.782312925170068,
+            0.6858219500706547,
+            0.47075208913649025
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2577,
+            1534,
+            935
+          ]
+        },
+        {
+          "tag": "epoch  10 |",
+          "elapsed_sec": 1928.5225343704224,
+          "val_loss": 0.97238081505027,
+          "train_loss": 0.436340542585119,
+          "metrics": {
+            "balanced_acc": 0.7244908384352335,
+            "cohen_kappa": 0.5588571860473905,
+            "weighted_f1": 0.7330032676772549
+          },
+          "lr": [
+            4.217827674798824e-05
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1682,
+              43,
+              108
+            ],
+            [
+              579,
+              1652,
+              481
+            ],
+            [
+              106,
+              71,
+              324
+            ]
+          ],
+          "class_f1": [
+            0.800952380952381,
+            0.7378293881196963,
+            0.4582743988684583
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2367,
+            1766,
+            913
+          ]
+        },
+        {
+          "tag": "epoch  11 |",
+          "elapsed_sec": 2103.1816635131836,
+          "val_loss": 0.945327566394323,
+          "train_loss": 0.4158478795374879,
+          "metrics": {
+            "balanced_acc": 0.7186772431798291,
+            "cohen_kappa": 0.5577547262347917,
+            "weighted_f1": 0.733496015969048
+          },
+          "lr": [
+            3.454915028125244e-05
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1670,
+              48,
+              115
+            ],
+            [
+              603,
+              1682,
+              427
+            ],
+            [
+              104,
+              84,
+              313
+            ]
+          ],
+          "class_f1": [
+            0.7933491686460807,
+            0.7432611577551922,
+            0.4616519174041298
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2377,
+            1814,
+            855
+          ]
+        },
+        {
+          "tag": "epoch  12 |",
+          "elapsed_sec": 2277.8900306224823,
+          "val_loss": 0.9151732061482682,
+          "train_loss": 0.39838180462642353,
+          "metrics": {
+            "balanced_acc": 0.7103154020546407,
+            "cohen_kappa": 0.5806196632676368,
+            "weighted_f1": 0.7516011599998397
+          },
+          "lr": [
+            2.7300475013022548e-05
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1666,
+              77,
+              90
+            ],
+            [
+              560,
+              1831,
+              321
+            ],
+            [
+              105,
+              122,
+              274
+            ]
+          ],
+          "class_f1": [
+            0.8001921229586936,
+            0.7722479966258963,
+            0.4620573355817875
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2331,
+            2030,
+            685
+          ]
+        },
+        {
+          "tag": "epoch  13 |",
+          "elapsed_sec": 2452.543253183365,
+          "val_loss": 0.9308247451163545,
+          "train_loss": 0.3825680852028608,
+          "metrics": {
+            "balanced_acc": 0.7039598125610999,
+            "cohen_kappa": 0.570252292596827,
+            "weighted_f1": 0.7443350044898113
+          },
+          "lr": [
+            2.0610737385376278e-05
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1673,
+              82,
+              78
+            ],
+            [
+              592,
+              1796,
+              324
+            ],
+            [
+              121,
+              111,
+              269
+            ]
+          ],
+          "class_f1": [
+            0.7930789286560797,
+            0.7640927462242076,
+            0.4590443686006826
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2386,
+            1989,
+            671
+          ]
+        },
+        {
+          "tag": "epoch  14 |",
+          "elapsed_sec": 2627.1793451309204,
+          "val_loss": 0.9799299960649466,
+          "train_loss": 0.3701785155586414,
+          "metrics": {
+            "balanced_acc": 0.7204782749435301,
+            "cohen_kappa": 0.5631846407544228,
+            "weighted_f1": 0.7373682464732537
+          },
+          "lr": [
+            1.4644660940672615e-05
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1671,
+              62,
+              100
+            ],
+            [
+              590,
+              1706,
+              416
+            ],
+            [
+              107,
+              83,
+              311
+            ]
+          ],
+          "class_f1": [
+            0.7955248750297548,
+            0.7477536708305939,
+            0.4683734939759036
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2368,
+            1851,
+            827
+          ]
+        },
+        {
+          "tag": "epoch  15 |",
+          "elapsed_sec": 2801.8348479270935,
+          "val_loss": 0.9682500641557235,
+          "train_loss": 0.36053782867573364,
+          "metrics": {
+            "balanced_acc": 0.7292219677885176,
+            "cohen_kappa": 0.5730848053498123,
+            "weighted_f1": 0.7467467810851186
+          },
+          "lr": [
+            9.549150281252635e-06
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1625,
+              77,
+              131
+            ],
+            [
+              493,
+              1764,
+              455
+            ],
+            [
+              87,
+              88,
+              326
+            ]
+          ],
+          "class_f1": [
+            0.8048538880633977,
+            0.7601809954751131,
+            0.46142958244869076
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2205,
+            1929,
+            912
+          ]
+        },
+        {
+          "tag": "epoch  16 |",
+          "elapsed_sec": 2976.473618745804,
+          "val_loss": 0.9498243090472643,
+          "train_loss": 0.35251391566021156,
+          "metrics": {
+            "balanced_acc": 0.7218173463866506,
+            "cohen_kappa": 0.5729288843638694,
+            "weighted_f1": 0.7463782833829058
+          },
+          "lr": [
+            5.449673790581627e-06
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1640,
+              79,
+              114
+            ],
+            [
+              530,
+              1779,
+              403
+            ],
+            [
+              86,
+              107,
+              308
+            ]
+          ],
+          "class_f1": [
+            0.8021521154316459,
+            0.7607440667094291,
+            0.4645550527903469
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2256,
+            1965,
+            825
+          ]
+        },
+        {
+          "tag": "epoch  17 |",
+          "elapsed_sec": 3151.141785144806,
+          "val_loss": 0.9800476294152344,
+          "train_loss": 0.34829453584210424,
+          "metrics": {
+            "balanced_acc": 0.720656505257328,
+            "cohen_kappa": 0.5662108567039166,
+            "weighted_f1": 0.7409499844475474
+          },
+          "lr": [
+            2.447174185242334e-06
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1649,
+              71,
+              113
+            ],
+            [
+              556,
+              1740,
+              416
+            ],
+            [
+              96,
+              94,
+              311
+            ]
+          ],
+          "class_f1": [
+            0.7977745524915336,
+            0.7537361923326835,
+            0.4638329604772558
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2301,
+            1905,
+            840
+          ]
+        },
+        {
+          "tag": "epoch  18 |",
+          "elapsed_sec": 3325.8127262592316,
+          "val_loss": 0.9891602564838868,
+          "train_loss": 0.34553671386035234,
+          "metrics": {
+            "balanced_acc": 0.7192316890390148,
+            "cohen_kappa": 0.5636858666888227,
+            "weighted_f1": 0.7384485569461868
+          },
+          "lr": [
+            6.155829702431188e-07
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1662,
+              66,
+              105
+            ],
+            [
+              577,
+              1720,
+              415
+            ],
+            [
+              105,
+              87,
+              309
+            ]
+          ],
+          "class_f1": [
+            0.7957864496049797,
+            0.7502726281352236,
+            0.46466165413533833
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2344,
+            1873,
+            829
+          ]
+        },
+        {
+          "tag": "epoch  19 |",
+          "elapsed_sec": 3500.4466264247894,
+          "val_loss": 0.989695701606666,
+          "train_loss": 0.3437844206212844,
+          "metrics": {
+            "balanced_acc": 0.7224994282878608,
+            "cohen_kappa": 0.5656658126756646,
+            "weighted_f1": 0.7396137654237599
+          },
+          "lr": [
+            0.0
+          ],
+          "best_val": 0.6157507528394341,
+          "confusion": [
+            [
+              1661,
+              67,
+              105
+            ],
+            [
+              569,
+              1721,
+              422
+            ],
+            [
+              99,
+              88,
+              314
+            ]
+          ],
+          "class_f1": [
+            0.7981739548294089,
+            0.7502179598953792,
+            0.46795827123695977
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2329,
+            1876,
+            841
+          ]
+        }
+      ]
+    },
+    {
+      "path": "runs/tuar-factorized_f2_confirm/seed1/result.json",
+      "sha256": "02208b3e47cca891eb4010edc8f0117556746befccc4625e2fea6c9410842d3f",
+      "progress_sha256": "d003a8911d94ce0137298727afb6931d70665d3eeefa7823ecde6dec372650c8",
+      "name": "tuar-factorized_f2_confirm",
+      "seed": 1,
+      "epochs_run": 20,
+      "stopped_by": "epochs",
+      "wall_time_sec": 3461.051908493042,
+      "n_params_M": 3.580819,
+      "selected_tag": "epoch   7 |",
+      "selected_validation": {
+        "balanced_acc": 0.7560062225678271,
+        "cohen_kappa": 0.6309756851583201,
+        "weighted_f1": 0.7835904057388446
+      },
+      "class_counts": {
+        "train": [
+          8642,
+          7192,
+          4816
+        ],
+        "val": [
+          1833,
+          2712,
+          501
+        ],
+        "test": [
+          661,
+          543,
+          732
+        ]
+      },
+      "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+      "config": {
+        "batch_size": 32,
+        "data_root": "$PACLOCK_PROC/processed/tuar",
+        "dataset": "tuar",
+        "device": "cuda",
+        "epochs": 20,
+        "eval_every_steps": 0,
+        "grad_clip": 1.0,
+        "group": "factorized_content_confirm",
+        "label_smoothing": 0.1,
+        "loss": "cross_entropy",
+        "lr": 0.0001,
+        "max_hours": 2.0,
+        "model": "paclock",
+        "model_kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        },
+        "name": "tuar-factorized_f2_confirm",
+        "num_classes": 3,
+        "num_workers": 8,
+        "optimizer": "adamw",
+        "patience": 20,
+        "sample_rate": 200,
+        "scheduler": "cosine",
+        "seed": 1,
+        "weight_decay": 1e-05,
+        "screening_note": "Prospective seed-1 broadband-content confirmation against completed tuar-factorized_f1_scale1_confirm seed1 on mi2104x. Reuses that exact recipe and source; only content source changes. Two-hour training cap; no extra Slurm allocation.",
+        "backfill": {
+          "source_job": null,
+          "allocation": "416484",
+          "gpu": 0,
+          "original_max_hours": 2.0,
+          "max_hours": 2.0
+        }
+      },
+      "validation_history": [
+        {
+          "tag": "epoch   0 |",
+          "elapsed_sec": 178.90439176559448,
+          "val_loss": 0.8473187760461734,
+          "train_loss": 0.9030595380270813,
+          "metrics": {
+            "balanced_acc": 0.6645225305271059,
+            "cohen_kappa": 0.5058096898750433,
+            "weighted_f1": 0.7006133397335936
+          },
+          "lr": [
+            9.938441702975719e-05
+          ],
+          "best_val": 0.5058096898750433,
+          "confusion": [
+            [
+              1734,
+              73,
+              26
+            ],
+            [
+              976,
+              1596,
+              140
+            ],
+            [
+              157,
+              114,
+              230
+            ]
+          ],
+          "class_f1": [
+            0.737872340425532,
+            0.7101223581757509,
+            0.5128205128205128
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2867,
+            1783,
+            396
+          ]
+        },
+        {
+          "tag": "epoch   1 |",
+          "elapsed_sec": 351.50060272216797,
+          "val_loss": 0.826776964189131,
+          "train_loss": 0.7192353339110366,
+          "metrics": {
+            "balanced_acc": 0.7069519839570023,
+            "cohen_kappa": 0.5415120836417966,
+            "weighted_f1": 0.7224322826645895
+          },
+          "lr": [
+            9.755282581475777e-05
+          ],
+          "best_val": 0.5415120836417966,
+          "confusion": [
+            [
+              1667,
+              66,
+              100
+            ],
+            [
+              681,
+              1656,
+              375
+            ],
+            [
+              106,
+              94,
+              301
+            ]
+          ],
+          "class_f1": [
+            0.7777000233263355,
+            0.7314487632508834,
+            0.47141738449490994
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2454,
+            1816,
+            776
+          ]
+        },
+        {
+          "tag": "epoch   2 |",
+          "elapsed_sec": 524.069815158844,
+          "val_loss": 0.9447964703357672,
+          "train_loss": 0.6590800305638151,
+          "metrics": {
+            "balanced_acc": 0.7162422821270349,
+            "cohen_kappa": 0.5164402031826086,
+            "weighted_f1": 0.6959748920472617
+          },
+          "lr": [
+            9.455032620941844e-05
+          ],
+          "best_val": 0.5415120836417966,
+          "confusion": [
+            [
+              1713,
+              37,
+              83
+            ],
+            [
+              746,
+              1447,
+              519
+            ],
+            [
+              112,
+              48,
+              341
+            ]
+          ],
+          "class_f1": [
+            0.7779291553133515,
+            0.6819038642789821,
+            0.47229916897506924
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2571,
+            1532,
+            943
+          ]
+        },
+        {
+          "tag": "epoch   3 |",
+          "elapsed_sec": 696.6059055328369,
+          "val_loss": 0.8199974119285994,
+          "train_loss": 0.6198097267202548,
+          "metrics": {
+            "balanced_acc": 0.715907286904015,
+            "cohen_kappa": 0.5786297360645314,
+            "weighted_f1": 0.7456433131315582
+          },
+          "lr": [
+            9.045084971874727e-05
+          ],
+          "best_val": 0.5786297360645314,
+          "confusion": [
+            [
+              1747,
+              47,
+              39
+            ],
+            [
+              678,
+              1735,
+              299
+            ],
+            [
+              147,
+              76,
+              278
+            ]
+          ],
+          "class_f1": [
+            0.7931895573212259,
+            0.7592997811816192,
+            0.4977618621307073
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2572,
+            1858,
+            616
+          ]
+        },
+        {
+          "tag": "epoch   4 |",
+          "elapsed_sec": 869.1442196369171,
+          "val_loss": 0.8012353078096728,
+          "train_loss": 0.589966191088452,
+          "metrics": {
+            "balanced_acc": 0.7192973825726491,
+            "cohen_kappa": 0.5773153386242244,
+            "weighted_f1": 0.7453474676475174
+          },
+          "lr": [
+            8.535533905932733e-05
+          ],
+          "best_val": 0.5786297360645314,
+          "confusion": [
+            [
+              1725,
+              53,
+              55
+            ],
+            [
+              665,
+              1741,
+              306
+            ],
+            [
+              126,
+              87,
+              288
+            ]
+          ],
+          "class_f1": [
+            0.7932858128305358,
+            0.7581101676464185,
+            0.5008695652173913
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2516,
+            1881,
+            649
+          ]
+        },
+        {
+          "tag": "epoch   5 |",
+          "elapsed_sec": 1041.6588938236237,
+          "val_loss": 0.9024740653701976,
+          "train_loss": 0.5622351582482135,
+          "metrics": {
+            "balanced_acc": 0.6927641706385855,
+            "cohen_kappa": 0.5166105490407507,
+            "weighted_f1": 0.6989791992338572
+          },
+          "lr": [
+            7.938926261462354e-05
+          ],
+          "best_val": 0.5786297360645314,
+          "confusion": [
+            [
+              1773,
+              26,
+              34
+            ],
+            [
+              914,
+              1492,
+              306
+            ],
+            [
+              166,
+              54,
+              281
+            ]
+          ],
+          "class_f1": [
+            0.7567221510883483,
+            0.6965452847805789,
+            0.5008912655971479
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2853,
+            1572,
+            621
+          ]
+        },
+        {
+          "tag": "epoch   6 |",
+          "elapsed_sec": 1214.224754333496,
+          "val_loss": 0.7633729158323023,
+          "train_loss": 0.5362531219842633,
+          "metrics": {
+            "balanced_acc": 0.7471545715062448,
+            "cohen_kappa": 0.6115876725978924,
+            "weighted_f1": 0.7748550604689677
+          },
+          "lr": [
+            7.269952498697707e-05
+          ],
+          "best_val": 0.6115876725978924,
+          "confusion": [
+            [
+              1580,
+              115,
+              138
+            ],
+            [
+              376,
+              1944,
+              392
+            ],
+            [
+              65,
+              104,
+              332
+            ]
+          ],
+          "class_f1": [
+            0.8199273482096523,
+            0.7975384615384615,
+            0.4871606749816581
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2021,
+            2163,
+            862
+          ]
+        },
+        {
+          "tag": "epoch   7 |",
+          "elapsed_sec": 1386.811278104782,
+          "val_loss": 0.7793402147443989,
+          "train_loss": 0.5085460419533053,
+          "metrics": {
+            "balanced_acc": 0.7560062225678271,
+            "cohen_kappa": 0.6309756851583201,
+            "weighted_f1": 0.7835904057388446
+          },
+          "lr": [
+            6.545084971874702e-05
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1662,
+              88,
+              83
+            ],
+            [
+              435,
+              1938,
+              339
+            ],
+            [
+              82,
+              95,
+              324
+            ]
+          ],
+          "class_f1": [
+            0.8285144566301097,
+            0.8019863438857853,
+            0.5196471531676022
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2179,
+            2121,
+            746
+          ]
+        },
+        {
+          "tag": "epoch   8 |",
+          "elapsed_sec": 1559.3491592407227,
+          "val_loss": 0.8672019256443917,
+          "train_loss": 0.4835797808026382,
+          "metrics": {
+            "balanced_acc": 0.7458480149714138,
+            "cohen_kappa": 0.5712395067119328,
+            "weighted_f1": 0.7383320971682962
+          },
+          "lr": [
+            5.782172325201126e-05
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1697,
+              47,
+              89
+            ],
+            [
+              627,
+              1652,
+              433
+            ],
+            [
+              87,
+              62,
+              352
+            ]
+          ],
+          "class_f1": [
+            0.799717247879359,
+            0.7386541471048513,
+            0.512
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2411,
+            1761,
+            874
+          ]
+        },
+        {
+          "tag": "epoch   9 |",
+          "elapsed_sec": 1731.9063165187836,
+          "val_loss": 0.8167579864399342,
+          "train_loss": 0.46192356491974634,
+          "metrics": {
+            "balanced_acc": 0.7319487631826614,
+            "cohen_kappa": 0.5775830019657443,
+            "weighted_f1": 0.7442426412658484
+          },
+          "lr": [
+            4.999999999999972e-05
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1720,
+              69,
+              44
+            ],
+            [
+              667,
+              1716,
+              329
+            ],
+            [
+              115,
+              73,
+              313
+            ]
+          ],
+          "class_f1": [
+            0.7935409457900807,
+            0.750984682713348,
+            0.527379949452401
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2502,
+            1858,
+            686
+          ]
+        },
+        {
+          "tag": "epoch  10 |",
+          "elapsed_sec": 1904.4739978313446,
+          "val_loss": 0.8554697944016396,
+          "train_loss": 0.43883883173436206,
+          "metrics": {
+            "balanced_acc": 0.7160585288682323,
+            "cohen_kappa": 0.5682985390010971,
+            "weighted_f1": 0.7399197232750424
+          },
+          "lr": [
+            4.217827674798824e-05
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1705,
+              76,
+              52
+            ],
+            [
+              650,
+              1728,
+              334
+            ],
+            [
+              123,
+              87,
+              291
+            ]
+          ],
+          "class_f1": [
+            0.7909997680352586,
+            0.7508146860742994,
+            0.4940577249575552
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2478,
+            1891,
+            677
+          ]
+        },
+        {
+          "tag": "epoch  11 |",
+          "elapsed_sec": 2077.0519168376923,
+          "val_loss": 0.8950908400967151,
+          "train_loss": 0.41828437943023056,
+          "metrics": {
+            "balanced_acc": 0.7254264674788905,
+            "cohen_kappa": 0.5581773086877401,
+            "weighted_f1": 0.7317772071879817
+          },
+          "lr": [
+            3.454915028125244e-05
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1685,
+              76,
+              72
+            ],
+            [
+              637,
+              1666,
+              409
+            ],
+            [
+              99,
+              80,
+              322
+            ]
+          ],
+          "class_f1": [
+            0.7921955806299953,
+            0.7348919276576974,
+            0.4938650306748466
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2421,
+            1822,
+            803
+          ]
+        },
+        {
+          "tag": "epoch  12 |",
+          "elapsed_sec": 2249.6364727020264,
+          "val_loss": 0.849027113823951,
+          "train_loss": 0.3997245700828062,
+          "metrics": {
+            "balanced_acc": 0.7200106158109939,
+            "cohen_kappa": 0.5833451642030063,
+            "weighted_f1": 0.7513843108830793
+          },
+          "lr": [
+            2.7300475013022548e-05
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1690,
+              92,
+              51
+            ],
+            [
+              601,
+              1804,
+              307
+            ],
+            [
+              117,
+              97,
+              287
+            ]
+          ],
+          "class_f1": [
+            0.7969818439047395,
+            0.7668437832093518,
+            0.5008726003490401
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2408,
+            1993,
+            645
+          ]
+        },
+        {
+          "tag": "epoch  13 |",
+          "elapsed_sec": 2422.27365398407,
+          "val_loss": 0.8858629729174361,
+          "train_loss": 0.3836152116672912,
+          "metrics": {
+            "balanced_acc": 0.7171999270629161,
+            "cohen_kappa": 0.5729204902479236,
+            "weighted_f1": 0.7439545536953056
+          },
+          "lr": [
+            2.0610737385376278e-05
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1691,
+              88,
+              54
+            ],
+            [
+              610,
+              1758,
+              344
+            ],
+            [
+              122,
+              88,
+              291
+            ]
+          ],
+          "class_f1": [
+            0.7946428571428571,
+            0.7567800258286699,
+            0.4890756302521008
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2423,
+            1934,
+            689
+          ]
+        },
+        {
+          "tag": "epoch  14 |",
+          "elapsed_sec": 2594.8363823890686,
+          "val_loss": 0.9095779331047323,
+          "train_loss": 0.37252787862768855,
+          "metrics": {
+            "balanced_acc": 0.7249995914104809,
+            "cohen_kappa": 0.5706527367473858,
+            "weighted_f1": 0.7424467451757661
+          },
+          "lr": [
+            1.4644660940672615e-05
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1673,
+              86,
+              74
+            ],
+            [
+              548,
+              1729,
+              435
+            ],
+            [
+              109,
+              79,
+              313
+            ]
+          ],
+          "class_f1": [
+            0.8037472976219073,
+            0.7507598784194529,
+            0.47316704459561604
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2330,
+            1894,
+            822
+          ]
+        },
+        {
+          "tag": "epoch  15 |",
+          "elapsed_sec": 2767.361034631729,
+          "val_loss": 0.9101929807964759,
+          "train_loss": 0.3629731397049346,
+          "metrics": {
+            "balanced_acc": 0.7295059399134999,
+            "cohen_kappa": 0.5729529925699137,
+            "weighted_f1": 0.7451559673596027
+          },
+          "lr": [
+            9.549150281252635e-06
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1647,
+              97,
+              89
+            ],
+            [
+              510,
+              1750,
+              452
+            ],
+            [
+              96,
+              82,
+              323
+            ]
+          ],
+          "class_f1": [
+            0.8061674008810573,
+            0.7541478129713424,
+            0.47326007326007324
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2253,
+            1929,
+            864
+          ]
+        },
+        {
+          "tag": "epoch  16 |",
+          "elapsed_sec": 2939.869077205658,
+          "val_loss": 0.9057439622245257,
+          "train_loss": 0.35553720736466693,
+          "metrics": {
+            "balanced_acc": 0.7166230906908092,
+            "cohen_kappa": 0.5653587405002953,
+            "weighted_f1": 0.7401865510707203
+          },
+          "lr": [
+            5.449673790581627e-06
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1658,
+              99,
+              76
+            ],
+            [
+              558,
+              1748,
+              406
+            ],
+            [
+              101,
+              99,
+              301
+            ]
+          ],
+          "class_f1": [
+            0.7990361445783133,
+            0.7505367110347789,
+            0.4688473520249221
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2317,
+            1946,
+            783
+          ]
+        },
+        {
+          "tag": "epoch  17 |",
+          "elapsed_sec": 3112.310042142868,
+          "val_loss": 0.9121612244391744,
+          "train_loss": 0.35092386225059674,
+          "metrics": {
+            "balanced_acc": 0.7194248873167443,
+            "cohen_kappa": 0.5707108655503084,
+            "weighted_f1": 0.743331846034457
+          },
+          "lr": [
+            2.447174185242334e-06
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1668,
+              94,
+              71
+            ],
+            [
+              559,
+              1756,
+              397
+            ],
+            [
+              105,
+              95,
+              301
+            ]
+          ],
+          "class_f1": [
+            0.8009603841536614,
+            0.7541335623792141,
+            0.47401574803149604
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2332,
+            1945,
+            769
+          ]
+        },
+        {
+          "tag": "epoch  18 |",
+          "elapsed_sec": 3284.720714330673,
+          "val_loss": 0.9299790983713125,
+          "train_loss": 0.34828879478915187,
+          "metrics": {
+            "balanced_acc": 0.7180270558343071,
+            "cohen_kappa": 0.5626272889916799,
+            "weighted_f1": 0.7375555365574568
+          },
+          "lr": [
+            6.155829702431188e-07
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1665,
+              91,
+              77
+            ],
+            [
+              570,
+              1722,
+              420
+            ],
+            [
+              105,
+              90,
+              306
+            ]
+          ],
+          "class_f1": [
+            0.7979870596693026,
+            0.7462621885157097,
+            0.46932515337423314
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2340,
+            1903,
+            803
+          ]
+        },
+        {
+          "tag": "epoch  19 |",
+          "elapsed_sec": 3457.138204574585,
+          "val_loss": 0.9314614647551428,
+          "train_loss": 0.34697819457334633,
+          "metrics": {
+            "balanced_acc": 0.7185055115112435,
+            "cohen_kappa": 0.5624891819508931,
+            "weighted_f1": 0.7373214468771949
+          },
+          "lr": [
+            0.0
+          ],
+          "best_val": 0.6309756851583201,
+          "confusion": [
+            [
+              1666,
+              90,
+              77
+            ],
+            [
+              573,
+              1719,
+              420
+            ],
+            [
+              106,
+              88,
+              307
+            ]
+          ],
+          "class_f1": [
+            0.7975107707036859,
+            0.7459318724235192,
+            0.4704980842911877
+          ],
+          "target_counts": [
+            1833,
+            2712,
+            501
+          ],
+          "pred_counts": [
+            2345,
+            1897,
+            804
+          ]
+        }
+      ]
+    }
+  ],
+  "recipe_equal_except_augmentations_for_joint_pair": true,
+  "recipe_equal_except_augmentations_and_content_source_for_broadband_comparison": true,
+  "removed_metadata_fields": [
+    "name",
+    "group",
+    "backfill",
+    "screening_note"
+  ],
+  "cohort_and_parameter_counts_equal": true,
+  "delta_augmented_joint_minus_control": {
+    "tuar-factorized_f4_joint_confirm": {
+      "balanced_acc": 0.023461007825173463,
+      "cohen_kappa": 0.016133625706367893,
+      "weighted_f1": 0.008423237473169531
+    },
+    "tuar-factorized_f2_confirm": {
+      "balanced_acc": -0.0009678235368164589,
+      "cohen_kappa": 0.0009086933874818959,
+      "weighted_f1": -0.0012980918836162925
+    }
+  },
+  "process_closure": {
+    "receipt": {
+      "source_job": null,
+      "source_name": "CONF_tuar_f4_aug_s1",
+      "origin": "prospective_confirmation",
+      "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized",
+      "config": "configs/factorized_joint_augment/tuar_f4_aug_s1.yaml",
+      "seed": 1,
+      "name": "tuar-factorized_f4_aug_confirm",
+      "dataset": "tuar",
+      "min_remaining_hours": 3.0,
+      "sha256": "ef025a3ab9197f84eed3ee80b49f3e3b133a337695bc9aa8c44c49a1bf7e5cb8",
+      "smoke_receipt": "results/audits/joint-augmentation-smoke-20260913.json",
+      "smoke_receipt_sha256": "cec9a802a1f20905f665e6f79f7588b2911f727230f4d447d0022859d50944c2",
+      "control": "tuar-factorized_f4_joint_confirm:1",
+      "training_cap_hours": 2,
+      "minimum_effective_training_cap_hours": 2.0,
+      "completion_gate_receipt": "results/audits/tuev-joint-completion-20260913.json",
+      "completion_gate_sha256": "615828711895bc269a728c597e1e09cb0fcb94644d582c3c40d90b78b7d0c89d",
+      "source_commit_at_review": "e519015",
+      "model_smoke_commit": "6d7f5de",
+      "prepared_at": "2026-09-13T06:05:59.280854+00:00",
+      "allocation": "416422",
+      "node": "k002-005",
+      "gpu": 1,
+      "started_at": 1789279631.997352,
+      "original_max_hours": 2,
+      "max_hours": 2.0,
+      "slurm_step": "0",
+      "pid": 1362700,
+      "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/30_augment_tuar_f4_s1.out",
+      "exit_code": 0,
+      "finished_at": 1789283155.5640552,
+      "result": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/runs/tuar-factorized_f4_aug_confirm/seed1/result.json",
+      "result_exists": true
+    },
+    "trainer_absent_from_ps": true,
+    "raw_evidence": "{\n  \"source_job\": null,\n  \"source_name\": \"CONF_tuar_f4_aug_s1\",\n  \"origin\": \"prospective_confirmation\",\n  \"repo\": \"/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized\",\n  \"config\": \"configs/factorized_joint_augment/tuar_f4_aug_s1.yaml\",\n  \"seed\": 1,\n  \"name\": \"tuar-factorized_f4_aug_confirm\",\n  \"dataset\": \"tuar\",\n  \"min_remaining_hours\": 3.0,\n  \"sha256\": \"ef025a3ab9197f84eed3ee80b49f3e3b133a337695bc9aa8c44c49a1bf7e5cb8\",\n  \"smoke_receipt\": \"results/audits/joint-augmentation-smoke-20260913.json\",\n  \"smoke_receipt_sha256\": \"cec9a802a1f20905f665e6f79f7588b2911f727230f4d447d0022859d50944c2\",\n  \"control\": \"tuar-factorized_f4_joint_confirm:1\",\n  \"training_cap_hours\": 2,\n  \"minimum_effective_training_cap_hours\": 2.0,\n  \"completion_gate_receipt\": \"results/audits/tuev-joint-completion-20260913.json\",\n  \"completion_gate_sha256\": \"615828711895bc269a728c597e1e09cb0fcb94644d582c3c40d90b78b7d0c89d\",\n  \"source_commit_at_review\": \"e519015\",\n  \"model_smoke_commit\": \"6d7f5de\",\n  \"prepared_at\": \"2026-09-13T06:05:59.280854+00:00\",\n  \"allocation\": \"416422\",\n  \"node\": \"k002-005\",\n  \"gpu\": 1,\n  \"started_at\": 1789279631.997352,\n  \"original_max_hours\": 2,\n  \"max_hours\": 2.0,\n  \"slurm_step\": \"0\",\n  \"pid\": 1362700,\n  \"log\": \"/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/30_augment_tuar_f4_s1.out\",\n  \"exit_code\": 0,\n  \"finished_at\": 1789283155.5640552,\n  \"result\": \"/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/runs/tuar-factorized_f4_aug_confirm/seed1/result.json\",\n  \"result_exists\": true\n}    PID     ELAPSED STAT COMMAND\n1342568    12:49:10 Rsl  python3\n1362701    01:00:09 Ssl  python3\n416751|RUNNING|10:19:05|12:00:00|k006-004-v5\n416485|RUNNING|14:18:30|1-00:00:00|k003-008\n416422|RUNNING|19:25:26|1-00:00:00|k002-005\n",
+    "allocation_retained_for_TUEV_and_CHB": true
+  },
+  "source_commit_at_admission": "e519015",
+  "model_smoke_commit": "6d7f5de",
+  "decision": "Retain augmentation as a promising recipe option for joint content; wait for the already-running complete TUEV gate before admitting more seeds or datasets. No final candidate frozen and no pretraining resumed.",
+  "limitations": [
+    "One training seed does not establish equivalence, generalization, or justify family elimination.",
+    "Broadband comparison changes both augmentation and content source, so it is not an augmentation-only causal contrast.",
+    "Controls finished earlier on the same hardware partition.",
+    "Only checkpoint-selected validation metrics informed this decision; no test metrics are included in this audit."
+  ]
+}
