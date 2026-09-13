@@ -1,0 +1,30 @@
+{
+  "at": "2026-09-13T03:21:35.039320+00:00",
+  "run": "chbmit-cf2_v1d192_ptR",
+  "seed": 0,
+  "primary_metric": "pr_auc",
+  "best_val": 0.5632897286252513,
+  "stopped_by": "patience",
+  "epochs": 6,
+  "wall_time_sec": 80093.46621632576,
+  "max_hours": 22.5,
+  "result_sha256": "40d5677c44ea012f259364be61d2da7c65e48f720488015d590adc2ee656884a",
+  "log_sha256": "606e578c97e9564bcea96e9938191aa5f3fb5eb0d1f251839ccf8cd2e85bf64b",
+  "stop_verified": "Training log reports ordinary patience stop, with no budget-stop line; runtime is below the configured cap.",
+  "control": {
+    "run": "chbmit-cf2_v1d192",
+    "best_val": 0.6917524104992696,
+    "stopped_by": "patience",
+    "sha256": "dbba5c26d8ca0549ccb9b22b76114f4b3310543de4ea430c6bac5a702d27a152"
+  },
+  "cohort_match": true,
+  "recipe_match_except_name_group_checkpoint": true,
+  "delta_if_matched": -0.12846268187401833,
+  "allocation": {
+    "job": "416043",
+    "state": "COMPLETED",
+    "elapsed": "22:15:16",
+    "exit_code": "0:0"
+  },
+  "caveat": "Single seed; do not infer a family-wide pretraining effect or discard a family from this comparison."
+}
