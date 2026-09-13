@@ -29,16 +29,16 @@ all use index spatial embeddings. The completed f2–f1 validation difference
 is +.032663. Original result hashes and execution differences are recorded
 in `results/audits/isruc-factorized-completion-20260913.json`.
 
-One TUAR seed-1 broadband-content confirmation, `tuar-factorized_f2_confirm`,
-is now running on allocation 416484, GPU 0. It reuses the completed
-`tuar-factorized_f1_scale1_confirm` seed-1 control (validation kappa .608668),
-with an otherwise matching training recipe and unchanged `paclock_bench`
-source since that control. Both use mi2104x; the control was completed earlier,
-not concurrently. A real-batch smoke projected .92 hours of training; the
-added arm has a two-hour training cap. This admission requested no new Slurm
-allocation, although extra work can extend an existing allocation. The plan,
-smoke and verified process receipt are in `results/audits/tuar-f2-seed1-*.json`.
-Its result is pending and does not establish a final architecture.
+The TUAR seed-1 broadband-content confirmation, `tuar-factorized_f2_confirm`,
+has completed all 20 epochs. Against the completed band-content control,
+validation kappa improves .608668 to .630976 (+.022308), balanced accuracy
+.717209 to .756006 (+.038797), and weighted F1 .773720 to .783590. Cohort
+identities, class counts and recipes match after removing identity and
+execution/descriptive metadata; both have two-hour caps and finish normally.
+Both use mi2104x, but the control completed earlier on another allocation.
+The original result hashes and checkpoint-selected validation metrics are in
+`results/audits/tuar-f2-seed1-completion-20260913.json`. This confirms the TUAR
+direction in a second seed without resolving the cross-corpus content tradeoff.
 
 The separate mi2101x TUEV seed-0 scale pair has completed all 20 epochs.
 Scale 1.0 achieves validation kappa .616866 and scale .3 achieves .644781
@@ -59,21 +59,24 @@ within this mi2104x cohort. No new Slurm allocation was requested, although
 added work can extend existing allocation duration. The process receipt is
 `results/audits/tuev-seed1-pair-admission-20260913.json`.
 
-A fixed-width joint-content alternative, f4, is implemented on the factorized
-branch at `1ac4ddd` and GPU-smoked, but **not admitted to training**. It keeps
-128 coupling coordinates and splits the existing 64 content coordinates into
-32 band-local and 32 broadband coordinates, with unchanged parameterization
-and initialization. Each source therefore has less capacity than its own
-64-coordinate control; this is not a claim of signal invertibility. The joint
-contract passes exact coordinate checks, finite random/flat/near-flat gradients,
-three-lane trainability and strict checkpoint reload. Real-batch smokes on
-416043 GPU 1 take about .257 s/step for TUEV and .256 s/step for TUAR after two
-warmups, with 10.31 GiB peak memory; projected training alone is 3.05/.92 hours.
-The rationale is the cross-corpus content tradeoff, including live CHB-MIT
-PR-AUC .6730 for f1 versus .4289 for still-improving f2. The TUEV scale pair is now reviewed; await the completed TUAR f2 seed-1
-confirmation before deciding on this trial.
-The proposed TUEV/TUAR training caps are five/two hours, with eligible existing
-seed-1 controls reused. See `results/audits/factorized-joint-preparation-20260913.json`.
+The fixed-width joint-content alternative, f4, is now **running** as a bounded
+TUEV/TUAR seed-1 trial after both admission gates were reviewed. Both run on
+existing allocation 416422: TUEV on GPU 3 and TUAR on GPU 2. The TUEV band
+control is running on GPU 1 of the same allocation; the TUAR band control is
+already complete. Runtime configs match their smokes, and owner/process/GPU/
+cgroup checks passed. Model source matches smoke commit `1ac4ddd` exactly.
+No new allocation or pretraining job was requested. Training caps are five
+hours for TUEV and two for TUAR; added work may extend allocation duration.
+See `results/audits/factorized-joint-admission-20260913.json`.
+
+f4 keeps 128 coupling coordinates and splits the existing 64 content coordinates
+into 32 band-local and 32 broadband coordinates, with unchanged parameterization
+and initialization. Each source has less capacity than its 64-coordinate control;
+this is not a signal-invertibility claim. Contract checks cover exact coordinates,
+finite random/flat/near-flat gradients, three-lane trainability and checkpoint
+reload. Smokes measured about .257/.256 s per TUEV/TUAR step after two warmups,
+10.31 GiB peak memory, and 3.05/.92 hours of projected training without loading
+or evaluation. Performance results for f4 remain pending.
 
 The 200-Hz f3 implementation remains blocked after its realized lowest filter
 peaked at DC with gain 70.156. That invalidates the intended low-frequency
@@ -85,6 +88,13 @@ CHB-MIT/TUSZ pilots continue or stop under their configured patience. Inspect
 step validations as well as epoch ends. Their validation cadence differs from
 TUEV; equal epoch numbers alone do not establish equal training progress.
 Do not discard an entire model family from these seed-0 pilots.
+
+The completed IIIC duplex+self-coupling control has validation kappa .547425
+versus duplex .539373 (+.008053); the analogous TUEV seed-0 change is negative.
+The added diagonal terms are not a self-only control. These single-seed results
+remain mixed and do not justify a new sweep. Allocation 416453 completed with
+exit code 0 and its controller released the node. Details are in
+`results/audits/iiic-self-coupling-completion-20260913.json`.
 
 ## Existing axisfree pretraining candidate
 
