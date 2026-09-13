@@ -1,0 +1,301 @@
+{
+  "at": "2026-09-13T02:25:59.460319+00:00",
+  "state": "completed_seed0_pair_reviewed",
+  "primary_metric": "cohen_kappa",
+  "runtime_cohort": "mi2101x",
+  "rows": [
+    {
+      "name": "tuev-factorized_f1_scale1_mi2101x",
+      "seed": 0,
+      "result_path": "runs/tuev-factorized_f1_scale1_mi2101x/seed0/result.json",
+      "result_sha256": "8d9a9c7cf23beabebd6c09ae0a84898a149c9e10d3e26b2eb7441dcbf90c1652",
+      "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+      "class_counts": {
+        "train": [
+          526,
+          10963,
+          5515,
+          984,
+          10553,
+          39904
+        ],
+        "val": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "test": [
+          567,
+          4677,
+          1998,
+          329,
+          2204,
+          19646
+        ]
+      },
+      "config": {
+        "batch_size": 32,
+        "data_root": "$PACLOCK_PROC/processed/tuev",
+        "dataset": "tuev",
+        "device": "cuda",
+        "epochs": 20,
+        "eval_every_steps": 0,
+        "grad_clip": 1.0,
+        "group": "factorized_scale",
+        "label_smoothing": 0.1,
+        "loss": "cross_entropy",
+        "lr": 0.0001,
+        "max_hours": 5.0,
+        "model": "paclock",
+        "model_kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        },
+        "name": "tuev-factorized_f1_scale1_mi2101x",
+        "num_classes": 6,
+        "num_workers": 8,
+        "optimizer": "adamw",
+        "patience": 20,
+        "sample_rate": 200,
+        "scheduler": "cosine",
+        "seed": 0,
+        "weight_decay": 1e-05,
+        "screening_note": "Matched single-card two-corpus scale screening; seed 0 is not a final model decision."
+      },
+      "epochs": 20,
+      "stopped_by": "epochs",
+      "best_checkpoint_validation": {
+        "balanced_acc": 0.6313606817753815,
+        "cohen_kappa": 0.6168661243356321,
+        "weighted_f1": 0.9203374566210119
+      },
+      "best_tag": "epoch   1 |",
+      "confusion": [
+        [
+          3,
+          72,
+          10,
+          0,
+          6,
+          28
+        ],
+        [
+          2,
+          254,
+          35,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          181,
+          396,
+          44,
+          46,
+          0
+        ],
+        [
+          5,
+          37,
+          1,
+          37,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          470,
+          29
+        ],
+        [
+          215,
+          418,
+          44,
+          92,
+          227,
+          12826
+        ]
+      ],
+      "wall_time_sec": 15200.453521251678
+    },
+    {
+      "name": "tuev-factorized_f1_scale03_mi2101x",
+      "seed": 0,
+      "result_path": "runs/tuev-factorized_f1_scale03_mi2101x/seed0/result.json",
+      "result_sha256": "8dd2599b10ab93135603514b6f8fb31c65fdbc7d409b6939c297396aa19a7dda",
+      "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+      "class_counts": {
+        "train": [
+          526,
+          10963,
+          5515,
+          984,
+          10553,
+          39904
+        ],
+        "val": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "test": [
+          567,
+          4677,
+          1998,
+          329,
+          2204,
+          19646
+        ]
+      },
+      "config": {
+        "batch_size": 32,
+        "data_root": "$PACLOCK_PROC/processed/tuev",
+        "dataset": "tuev",
+        "device": "cuda",
+        "epochs": 20,
+        "eval_every_steps": 0,
+        "grad_clip": 1.0,
+        "group": "factorized_scale",
+        "label_smoothing": 0.1,
+        "loss": "cross_entropy",
+        "lr": 0.0001,
+        "max_hours": 5.0,
+        "model": "paclock",
+        "model_kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 0.3,
+          "content_source": "band",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        },
+        "name": "tuev-factorized_f1_scale03_mi2101x",
+        "num_classes": 6,
+        "num_workers": 8,
+        "optimizer": "adamw",
+        "patience": 20,
+        "sample_rate": 200,
+        "scheduler": "cosine",
+        "seed": 0,
+        "weight_decay": 1e-05,
+        "screening_note": "Matched single-card two-corpus scale screening; seed 0 is not a final model decision."
+      },
+      "epochs": 20,
+      "stopped_by": "epochs",
+      "best_checkpoint_validation": {
+        "balanced_acc": 0.5691144288591757,
+        "cohen_kappa": 0.6447806107945238,
+        "weighted_f1": 0.9287757082848267
+      },
+      "best_tag": "epoch   2 |",
+      "confusion": [
+        [
+          0,
+          54,
+          34,
+          0,
+          0,
+          31
+        ],
+        [
+          0,
+          119,
+          123,
+          0,
+          0,
+          49
+        ],
+        [
+          0,
+          153,
+          415,
+          48,
+          13,
+          40
+        ],
+        [
+          0,
+          29,
+          5,
+          44,
+          0,
+          8
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          459,
+          40
+        ],
+        [
+          176,
+          110,
+          66,
+          136,
+          123,
+          13211
+        ]
+      ],
+      "wall_time_sec": 14454.537932395935
+    }
+  ],
+  "configuration_match": "Identical after removing run name and the intended content_scale 1.0 versus 0.3.",
+  "validation_delta_scale03_minus_scale1": {
+    "balanced_acc": -0.06224625291620578,
+    "cohen_kappa": 0.027914486458891608,
+    "weighted_f1": 0.008438251663814844
+  },
+  "decision": "Admit the prepared paired seed-1 confirmation on mi2104x. The positive kappa difference needs replication; balanced accuracy falls substantially, so this is not a general improvement or candidate freeze.",
+  "seed1_caps": {
+    "training_hours_each": 5,
+    "min_remaining_allocation_hours": 6
+  },
+  "guardrails": [
+    "Compare the seed-1 pair within its mi2104x runtime cohort.",
+    "Review kappa, balanced accuracy and per-class recall from the kappa-selected checkpoint; do not select separate checkpoints to maximize each reported metric.",
+    "No test metric was used in this decision.",
+    "No additional pretraining and no f4 admission in this gate."
+  ]
+}
