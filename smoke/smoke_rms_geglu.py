@@ -1,5 +1,6 @@
 """Legacy equivalence and train-only budget smoke, via slurm/smoke_gpu.slurm."""
 import gc
+from contextlib import nullcontext
 import hashlib
 import json
 import math
@@ -122,9 +123,34 @@ for dataset in ('tuev', 'sleepedf'):
         optimizer = torch.optim.AdamW(model.parameters(), lr=cfg['lr'], weight_decay=cfg['weight_decay'])
         steps = math.ceil(len(labels)/cfg['batch_size'])
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=cfg['epochs']*steps)
+        # A random augmentation can first reach its FFT/kernel path after the
+        # first two batches. Warm every path explicitly, including both flip
+        # outcomes, before collecting any steady-state timing. Retain timings
+        # for these cold/warm pairs instead of discarding unexplained outliers.
+        path_warmups = []
+        for augmentation in [torch.nn.Identity()] + list(model.augment.augs):
+            force_flip = patch.object(augmentation, 'prob', 1.0) if hasattr(augmentation, 'prob') else nullcontext()
+            warm_durations = []
+            with force_flip, patch.object(model.augment, 'forward', side_effect=augmentation):
+                for _ in range(2):
+                    torch.cuda.synchronize(); start = time.perf_counter()
+                    optimizer.zero_grad(set_to_none=True)
+                    with amp_context(cfg, torch.device('cuda')):
+                        loss = criterion(model(x), y)
+                    assert torch.isfinite(loss)
+                    loss.backward()
+                    norm = torch.nn.utils.clip_grad_norm_(model.parameters(), cfg['grad_clip'])
+                    assert torch.isfinite(norm)
+                    optimizer.step(); scheduler.step()
+                    torch.cuda.synchronize(); warm_durations.append(time.perf_counter()-start)
+            path_warmups.append(dict(path=type(augmentation).__name__, seconds=warm_durations))
+        trace = []
+        handles = [a.register_forward_pre_hook(
+            lambda _module, _input, name=type(a).__name__: trace.append(name))
+            for a in model.augment.augs]
         torch.cuda.reset_peak_memory_stats()
         durations = []
-        for i in range(6):
+        for i in range(14):
             torch.cuda.synchronize(); start = time.perf_counter()
             optimizer.zero_grad(set_to_none=True)
             with amp_context(cfg, torch.device('cuda')):
@@ -141,11 +167,16 @@ for dataset in ('tuev', 'sleepedf'):
                         assert param.grad is not None and torch.isfinite(param.grad).all()
                         assert param.grad.abs().sum() > 0
             assert all(torch.isfinite(p).all() for p in model.parameters())
+        for handle in handles:
+            handle.remove()
+        assert len(trace) == len(durations)
         projected = statistics.mean(durations[2:])*steps*cfg['epochs']
         records.append(dict(config=str(path.relative_to(ROOT)), dataset=dataset, variant=variant,
             parameters=sum(p.numel() for p in model.parameters()), input_shape=list(x.shape),
             sample_rate=cfg['sample_rate'], train_rows=len(labels), steps_per_epoch=steps,
             warmup_steps_excluded=2, steady_step_seconds=durations[2:],
+            augmentation_path_warmups=path_warmups,
+            steady_step_augmentations=trace[2:],
             projected_training_seconds=projected, peak_GiB=torch.cuda.max_memory_allocated()/2**30,
             finite_loss_gradients_parameters=True, training_cap_hours=cfg['max_hours'],
             fits_80_percent_of_cap=projected < .8*cfg['max_hours']*3600))
