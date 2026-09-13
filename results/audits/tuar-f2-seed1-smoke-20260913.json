@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "partition": "mi2104x",
+  "job": "416043",
+  "config": "configs/factorized_scale_confirm/tuar_f2_s1.yaml",
+  "seed": 1,
+  "host": "k003-006.hpcfund",
+  "torch": "2.7.1+rocm6.3",
+  "rocm": "6.3.42131-fa1d09cbd",
+  "device": "AMD Instinct MI210",
+  "visible_gpus": 1,
+  "input_shape": [
+    32,
+    16,
+    1000
+  ],
+  "steps": 5,
+  "warmup_excluded": 2,
+  "steady_step_seconds": [
+    0.2555418260162696,
+    0.25526399799855426,
+    0.2554290209664032
+  ],
+  "peak_GiB": 10.308542728424072,
+  "projected_train_seconds": 3299.918065719152,
+  "projection_note": "Excludes data loading and evaluation; not a completion guarantee.",
+  "config_sha256": "98aaaf8bdf7c54e9b429180b5fa7ae71a69364e76ed998144372b60a256e0c80",
+  "smoke_sha256": "5c827b6aa32b691d2258d7bb897544364399f34b02abca0f95ae3518cc249ab5",
+  "git_commit": "85d2cca52ed069aefcbe8b771dedda836f51e07e"
+}
