@@ -754,3 +754,27 @@ Trainer 1362700 has exited; allocation 416422 remains active for TUEV and CHB.
 No new allocation was submitted. Full validation histories, configuration
 checks, result hashes and the exit receipt are in
 `results/audits/tuar-augmentation-completion-20260913.json`.
+
+## Same-cohort, paired-seed baseline gaps
+
+A local comparison now pairs each candidate with CBraMod, REVE and EEGPT
+only where recorded validation cohorts agree and the same training seeds
+exist. Means use that seed intersection; missing seeds do not become zeros.
+Full per-seed scores, result hashes, construction metadata and missing-cell
+reasons are in `results/audits/matched-baseline-gaps-20260913.json`.
+
+Against the locally reproduced pretrained CBraMod, rotation-only has ten
+complete three-seed pairs: six positive differences (ADFD, CAUEEG, IIIC, TUAB,
+TUEP, TUEV) and four negative (BCI-IV-2a, ISRUC, Sleep-EDF, TUAR). Duplex has
+nine such pairs: the same six positive datasets, with ISRUC, Sleep-EDF and
+TUAR negative. These are descriptive validation comparisons across different
+training recipes/pretraining budgets, not causal ablations or SOTA evidence.
+No mixed-metric mean or retrospective near-SOTA threshold is defined.
+
+FACED and PhysioNet-MI also show substantial gaps in the available incomplete
+seed coverage, which calls for diagnosis and replication rather than family
+elimination. New joint models have zero complete three-seed pairs. Historical
+rotation/duplex coverage cannot be assigned to them. After the current TUEV
+gate, a promising common joint recipe needs a second matched seed and sleep
+corpora before wider expansion; retain the broader movement/affect gaps in
+the final-model requirements. No training is admitted by this audit.
