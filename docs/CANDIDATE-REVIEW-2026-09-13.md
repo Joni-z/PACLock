@@ -40,13 +40,24 @@ allocation, although extra work can extend an existing allocation. The plan,
 smoke and verified process receipt are in `results/audits/tuar-f2-seed1-*.json`.
 Its result is pending and does not establish a final architecture.
 
-The TUEV seed-1 scale pair is prepared but **not admitted**. Both real-batch
-GPU smokes passed on an idle slot of existing allocation 416043, at about
-.256 seconds/step after two warmups and 10.31 GiB peak memory. Projected
-training is about 3.04 hours per arm, excluding loading and evaluation;
-each has a five-hour training cap and needs six hours left in an allocation.
-Review the completed seed-0 TUEV pair before admission. The conditional plan
-and smoke receipts are in `results/audits/tuev-seed1-confirm-preparation-20260913.json`.
+The separate mi2101x TUEV seed-0 scale pair has completed all 20 epochs.
+Scale 1.0 achieves validation kappa .616866 and scale .3 achieves .644781
+(+.027914). At their kappa-selected checkpoints, balanced accuracy changes
+from .631361 to .569114 (-.062246); per-class recall shows a substantial
+tradeoff. Configurations match except for the intended scale and run name,
+with identical manifests and class counts. No test score informed admission.
+See `results/audits/tuev-scale-seed0-completion-20260913.json`.
+
+The prepared TUEV seed-1 confirmation pair is now **running** on mi2104x:
+scale 1.0 on allocation 416422 GPU 1, and scale .3 on 416484 GPU 3. Both use
+20 epochs and a five-hour training cap; the runtime configurations match the
+GPU-smoked configurations after removing execution metadata. Owner, process,
+configuration, GPU selector and Slurm cgroup were verified. The model-source
+diff since their earlier smoke only adds the unused joint-content branch;
+the existing band-content arithmetic is unchanged. Compare the paired arms
+within this mi2104x cohort. No new Slurm allocation was requested, although
+added work can extend existing allocation duration. The process receipt is
+`results/audits/tuev-seed1-pair-admission-20260913.json`.
 
 A fixed-width joint-content alternative, f4, is implemented on the factorized
 branch at `1ac4ddd` and GPU-smoked, but **not admitted to training**. It keeps
@@ -59,8 +70,8 @@ three-lane trainability and strict checkpoint reload. Real-batch smokes on
 416043 GPU 1 take about .257 s/step for TUEV and .256 s/step for TUAR after two
 warmups, with 10.31 GiB peak memory; projected training alone is 3.05/.92 hours.
 The rationale is the cross-corpus content tradeoff, including live CHB-MIT
-PR-AUC .6730 for f1 versus .4289 for still-improving f2. Review the completed
-TUEV scale pair and TUAR f2 seed-1 confirmation before deciding on this trial.
+PR-AUC .6730 for f1 versus .4289 for still-improving f2. The TUEV scale pair is now reviewed; await the completed TUAR f2 seed-1
+confirmation before deciding on this trial.
 The proposed TUEV/TUAR training caps are five/two hours, with eligible existing
 seed-1 controls reused. See `results/audits/factorized-joint-preparation-20260913.json`.
 
