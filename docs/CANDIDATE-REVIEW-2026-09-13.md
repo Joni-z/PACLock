@@ -125,6 +125,32 @@ metrics, and measured 110.5-second evaluation runtime are in
 `results/audits/tuar-content-knockout-20260913.json`. Await the current TUEV
 comparison before admitting a new design or expanding f4 across corpora.
 
+The same coordinate diagnostic now covers TUEV using immutable snapshots of
+still-running seed-1 checkpoints. The scale-1 and scale-.3 controls were observed
+at 11 validations (selected epochs 6 and 0); f4 at nine validations (selected
+epoch 1). All snapshot baselines exactly reproduce their saved validation kappa.
+These are provisional checkpoint diagnostics, not complete-training results.
+For TUEV f4, unmodified kappa is .637154, zero coupling .049324, zero all content
+.541583, zero band content .614323, and zero broadband content .549926.
+
+Both corpora's trained f4 checkpoints are sensitive to coupling and broadband
+coordinates. Removing band content costs .022831 kappa on this TUEV snapshot
+versus .001593 on the completed TUAR model, so the band lane cannot be declared
+universally redundant from TUAR alone. The TUEV scale-.3 checkpoint also rises
+from .620768 to .648009 after content zeroing, with balanced accuracy slightly
+lower (.477718 to .474354). This post-hoc validation intervention is not a new
+candidate score, a test result, or evidence for immediately deleting content.
+The effects still confound information removal with changes to input statistics
+and shared normalization; no specific causal PAC benefit has been established.
+
+Step 416422.2 completed normally in 5:38 on previously idle GPU 2, with 324.4
+seconds measured by the probe and no optimizer/test evaluation. Training
+processes remained live afterward. The factorized-branch script revision is
+`1573d3b`; immutable checkpoint/metadata snapshots remain alongside
+`results/audits/tuev-content-knockout-snapshot-20260913.json` on AMD. The receipt
+records their hashes and observed training state. Finish the original TUEV
+training comparison before changing architecture or admitting more runs.
+
 The 200-Hz f3 implementation remains blocked after its realized lowest filter
 peaked at DC with gain 70.156. That invalidates the intended low-frequency
 contrast; the completed TUAR f3 record is retained but excluded from candidate
