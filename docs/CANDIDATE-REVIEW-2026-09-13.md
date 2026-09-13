@@ -249,6 +249,24 @@ verified. Admission receipts are in
 `results/audits/tuar-seed1-confirm-admission-20260913.json`; source/config hashes
 pin the comparison to branch commit `9665c7e`. No new Slurm job was submitted.
 
+Both seed-1 arms subsequently completed all 20 epochs. Their validation kappa
+was **.606875** (scale .3) versus **.608668** (scale 1), a difference of
+**-.001793**. Balanced accuracy was .721983 versus .717209; weighted F1 was
+.771903 versus .773720. Thus the positive TUAR kappa change observed at seed 0
+did not reproduce in this seed/runtime cohort. Treat this pair as essentially
+neutral and do not expand TUAR scale replication at this point. Keep the
+existing TUEV pair running before deciding the shortlist. Full validation
+curves and original-result checksums are recorded in
+`results/audits/tuar-seed1-confirm-result-20260913.json`. Do not pool the two
+runtime cohorts silently or claim a universal improvement from the first seed.
+
+A source inspection found both TUEG and frozen TUEV preprocessing calling
+`norm_div100`, with `WindowDataset` and the CBraMod classifier wrapper applying
+no second scaling. This does not support a simple double-normalization or
+unit-conversion explanation for weak transfer. Actual corpus amplitude
+distributions were not measured in this inspection; no input rescaling or
+additional pretraining was introduced on that hypothesis.
+
 Direct process inspection found 19 training roots across the 12 active
 four-card AMD allocations, with at least one trainer in every allocation.
 The seven single-card allocations are separate. Idle cards alone are not a
