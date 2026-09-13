@@ -778,3 +778,27 @@ rotation/duplex coverage cannot be assigned to them. After the current TUEV
 gate, a promising common joint recipe needs a second matched seed and sleep
 corpora before wider expansion; retain the broader movement/affect gaps in
 the final-model requirements. No training is admitted by this audit.
+
+## Preserve metrics at the selected validation checkpoint
+
+The trainer now writes `selected_validation` with the selection metric, tag,
+zero-based validation index and all metrics from the exact evaluation that
+selected `best_state`. The legacy `best_val` remains the selection score;
+`val_curve` remains the primary-metric history. Optimizer, selection rule,
+strict-tie behavior, patience and training budgets are unchanged. In particular,
+a later higher PR-AUC cannot replace the PR-AUC paired with an AUROC-selected
+checkpoint. No extra validation pass or training is needed.
+
+The actual validation closures from both AMD and Torch source versions passed
+a local controlled regression that separates AUROC and PR-AUC peaks, checks
+selected weights and first-tie retention, and evaluates the serialized record.
+Existing candidate-matrix tests still exclude legacy records without the
+selected primary metric. This change preserves evidence for future consumers;
+it does not relax their admission rules or rewrite historical results.
+
+The minimal metadata patch was applied to both AMD worktrees and the distinct
+Torch trainer without a broad pull. The four Torch pending jobs remained
+pending before and after deployment and will load the added recording code.
+The two already-running raw controls retain their loaded code. Tests, before
+and after source hashes, queue evidence and scope are recorded in
+`results/audits/selected-validation-recording-20260913.json`.

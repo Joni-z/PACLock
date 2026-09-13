@@ -285,6 +285,7 @@ def main():
     eval_every_steps = cfg.get("eval_every_steps", 0)
 
     best, best_state, val_curve = -np.inf, None, []
+    best_val_metrics, best_val_tag, best_val_index = None, None, None
     patience, since_best = cfg.get("patience", 0), 0
     # Hours of training after which the run stops and reports what it has. None
     # keeps the old behaviour exactly.
@@ -298,6 +299,7 @@ def main():
 
     def validate(tag: str):
         nonlocal best, best_state, since_best
+        nonlocal best_val_metrics, best_val_tag, best_val_index
         val_loss, m, val_logits, val_y = evaluate(
             model, val_loader, device, criterion, cfg["num_classes"], cfg, return_raw=True)
         # The curve stays on the reported metric -- it is what rule 3 reads and
@@ -308,6 +310,8 @@ def main():
         improved = m[select_key] > best
         if improved:
             best, since_best = m[select_key], 0
+            best_val_metrics = {metric: float(value) for metric, value in m.items()}
+            best_val_tag, best_val_index = tag, len(val_curve) - 1
             best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
         else:
             since_best += 1
@@ -500,6 +504,14 @@ def main():
         "primary_metric": key,
         "test": test_m,
         "best_val": float(best),
+        # Keep best_val as the selection score for backward compatibility.
+        # These metrics belong to exactly the same selected model state.
+        "selected_validation": {
+            "selection_metric": select_key,
+            "tag": best_val_tag,
+            "evaluation_index": best_val_index,
+            "metrics": best_val_metrics,
+        } if best_val_metrics is not None else None,
         "val_curve": [float(v) for v in val_curve],
         "verdict": verdict,
         "epochs_run": epoch + 1,

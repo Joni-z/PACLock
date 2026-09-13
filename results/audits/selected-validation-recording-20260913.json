@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-09-13T07:36:24.846658+00:00",
+  "tests": [
+    "actual AMD validation closure: selected weights/metrics, strict-tie retention, primary-curve divergence and serialized record: passed",
+    "actual Torch validation closure: same checks passed",
+    "candidate-matrix legacy mixed-metric exclusions: 2 passed"
+  ],
+  "patch_scope": "Add selected-checkpoint validation metrics, tag and evaluation index; keep selection, optimizer, budget, patience and legacy best_val unchanged.",
+  "hosts": {
+    "amd_main": {
+      "host": "amd",
+      "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock",
+      "sha256": "e988c418659d8029009b087dd3be4e2d5e443d0871dfe703dba6a6c839f52e33",
+      "patched_sha256": "ec8c15480fb734b47716e16100ac3afdcf3b99344c20d975a47b3e6a98192084",
+      "verified_remote_bytes": true
+    },
+    "amd_factorized": {
+      "host": "amd",
+      "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized",
+      "sha256": "e988c418659d8029009b087dd3be4e2d5e443d0871dfe703dba6a6c839f52e33",
+      "patched_sha256": "ec8c15480fb734b47716e16100ac3afdcf3b99344c20d975a47b3e6a98192084",
+      "verified_remote_bytes": true
+    },
+    "torch": {
+      "host": "torch",
+      "repo": "/scratch/zz5070/PACLock",
+      "sha256": "cd94917a6167b8a9904bb5f322255f2997c117be7adb2271f223dd2974975f18",
+      "patched_sha256": "033382b861481adaf1911491e2638eac0a5331d789f154a682763791ac00348c",
+      "verified_remote_bytes": true
+    }
+  },
+  "torch_queue_before": "17365677|PENDING|0:00||QOSGrpGRES\n17365676|PENDING|0:00||QOSGrpGRES\n17365675|PENDING|0:00||QOSGrpGRES\n17365674|PENDING|0:00||QOSGrpGRES\n17365672|RUNNING|11:23:53|gh116|None\n17365673|RUNNING|11:23:53|gh118|None\n",
+  "torch_queue_after": "17365677|PENDING|0:00||QOSGrpGRES\n17365676|PENDING|0:00||QOSGrpGRES\n17365675|PENDING|0:00||QOSGrpGRES\n17365674|PENDING|0:00||QOSGrpGRES\n17365672|RUNNING|11:23:57|gh116|None\n17365673|RUNNING|11:23:57|gh118|None\n",
+  "historical_results": "Preserved; already-running processes keep their loaded code and cannot acquire this metadata retroactively.",
+  "candidate_matrix_policy": "Legacy selection/primary mismatches remain excluded; this patch preserves future evidence and does not relax ranking admission."
+}
