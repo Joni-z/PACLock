@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=crofremo
-#SBATCH --account=torch_pr_63_tandon_advanced
-#SBATCH --partition=h100_tandon
+#SBATCH --account=torch_pr_63_general
+#SBATCH --partition=h200_public
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --gres=gpu:1
@@ -11,19 +11,17 @@
 #SBATCH --output=logs/%x-%j.out
 #SBATCH --error=logs/%x-%j.out
 #
-# NYU Torch launcher: ONE config on ONE GPU per job (Torch schedules single-GPU
-# jobs far sooner than whole nodes, the opposite of amd where --exclusive is
-# forced and packing four processes per node is the only way not to waste it).
+# NYU Torch launcher: one config on one GPU per job. The eight-CPU default
+# matches the eight DataLoader workers in the TUSZ transplant configs.
 #
 # Usage:
 #   sbatch slurm/torch_run.slurm <cfg.yaml> [seed]            # one seed
 #   sbatch --array=0-2 slurm/torch_run.slurm <cfg.yaml>       # seeds 0 1 2
 #   sbatch -p h200_public -A torch_pr_63_general slurm/torch_run.slurm <cfg>
 #
-# Accounts/partitions this user can reach (checked 2026-09-02):
-#   torch_pr_63_tandon_advanced -> h100_tandon, h200_tandon, a100_tandon
-#   torch_pr_63_general         -> h200_public, l40s_public
-# Job QOS is set by walltime: <=48h -> gpu48 (16 GPUs/user), <=7d -> gpu168 (4).
+# Use h200_public with torch_pr_63_general. The h100_tandon QOS previously
+# left this project's jobs pending. Actual concurrency also depends on group
+# QOS limits; inspect the current squeue reason rather than assuming a quota.
 set -euo pipefail
 
 CONFIG=${1:?usage: sbatch slurm/torch_run.slurm <config.yaml> [seed]}

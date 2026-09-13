@@ -26,7 +26,7 @@ model_kwargs:
 multi_lr: true
 name: tusz-cbramod_crofremo_bands
 num_classes: 2
-num_workers: 16
+num_workers: 8
 optimizer: adamw
 patience: 0
 sample_rate: 200
@@ -35,4 +35,5 @@ seed: 0
 select_metric: auroc
 val_subsample: 20000
 weight_decay: 0.05
-max_hours: 44.0
+# Training cap for the 24-hour Torch allocations.
+max_hours: 23.0
