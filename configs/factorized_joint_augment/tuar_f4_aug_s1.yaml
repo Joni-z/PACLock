@@ -1,0 +1,52 @@
+batch_size: 32
+data_root: $PACLOCK_PROC/processed/tuar
+dataset: tuar
+device: cuda
+epochs: 20
+eval_every_steps: 0
+grad_clip: 1.0
+group: factorized_joint_augment_confirm
+label_smoothing: 0.1
+loss: cross_entropy
+lr: 0.0001
+max_hours: 2
+model: paclock
+model_kwargs:
+  arch: triaxial
+  augmentations:
+  - flip0.5
+  - jitter0.05
+  - mask0.2
+  - channel0.2
+  - frequency0.2
+  band_pe: index
+  content_scale: 1.0
+  content_source: band_broadband
+  coupling_dim: 128
+  d_model: 192
+  depth: 6
+  dropout: 0.2
+  freq_mixer: attention
+  interaction_mode: rotation
+  kernel_size: 201
+  n_bands: 8
+  n_heads: 4
+  pac_patch_len: 50
+  pac_token_mode: measured
+  patch_len: 50
+  spatial_pe: xyz
+  tokenizer_mode: factorized
+name: tuar-factorized_f4_aug_confirm
+num_classes: 3
+num_workers: 8
+optimizer: adamw
+patience: 20
+sample_rate: 200
+scheduler: cosine
+seed: 1
+weight_decay: 1.0e-05
+screening_note: Prepared, not admitted. Historical augmentation-only comparison supports
+  a bounded TUEV/TUAR transfer gate. Preserve baseline f4 recipe except augmentation.
+  Admit only after full current TUEV gate review and successful real-batch smoke;
+  prefer existing mi2104x allocation with cap plus 30 minutes remaining. This is a
+  recipe change, not a new architecture or evidence of final-candidate success.
