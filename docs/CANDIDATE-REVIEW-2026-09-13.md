@@ -180,6 +180,24 @@ metrics and control checks are in
 `results/audits/preferred-phase-knockout-20260913.json`. This sharpens the
 mechanism claim while the final candidate and broad performance remain open.
 
+Historical from-scratch own-phase controls provide a different, necessary
+comparison. Ten pairs match config (apart from identity/phase mode), seed,
+manifest and class counts for the older duplex model. Measured-minus-own mean
+validation effects are +.016224 kappa on IIIC (three seeds), -.028458 PR-AUC
+on CHB (three), -.012056 PR-AUC on TUSZ (two), and -.000421 kappa on TUEV (two).
+IIIC favors measured alignment in all three seeds; CHB/TUSZ are mixed and TUEV
+is essentially tied. Measured TUEV seed 1 is absent; TUSZ seed 0 is excluded
+because manifest timestamps differ, which alone does not prove different
+examples. Historical source identity remains unverified.
+
+These older trained controls cannot settle the current f4 architecture, but
+warn against equating a trained checkpoint's sensitivity with the prior's
+training benefit: an independently trained alternative may compensate. Own
+still keeps each band's analytic phase/amplitude; it is not an amplitude-only
+or trained magnitude/scramble control. Do not repeat the old sweep. Any final
+new model's attribution needs its own matched training evidence. Exact pair
+identities and hashes are in `results/audits/trained-own-controls-20260913.json`.
+
 The 200-Hz f3 implementation remains blocked after its realized lowest filter
 peaked at DC with gain 70.156. That invalidates the intended low-frequency
 contrast; the completed TUAR f3 record is retained but excluded from candidate
