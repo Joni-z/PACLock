@@ -66,7 +66,13 @@ A separate concrete model discrepancy was found: the historical adapter uses
 a hidden width of 800, whereas upstream TUEV all_patch_reps uses 1000, adding
 3,240,200 parameters. That corrected head now passes full-state strict loading
 and bit-identical synthetic-forward comparison against upstream on an allocated
-CPU. A distinctly named configuration is prepared; it has not been trained.
-Preserve historical results as adapter measurements, not native-task/SOTA
-reproduction proof. See `results/audits/cbramod-native-head-inventory-20260913.json`
-and `results/audits/cbramod-tuev-head-parity-20260913.json`.
+CPU. The distinctly named 800/1000-wide seed-1 confirmations both completed
+all 50 epochs. The 800-wide run exactly reproduced the historical 50-epoch
+validation-kappa curve. The 1000-wide run changes selected validation kappa
+from .443026 to .450285, but balanced accuracy declines from .464050 to
+.408304. This head correction does not establish a large performance gain
+or certify full numeric preprocessing parity. Preserve historical results as
+adapter measurements, not native-task/SOTA reproduction proof. See
+`results/audits/cbramod-native-head-inventory-20260913.json`,
+`results/audits/cbramod-tuev-head-parity-20260913.json`, and
+`results/audits/cbramod-head-completion-20260913.json`.

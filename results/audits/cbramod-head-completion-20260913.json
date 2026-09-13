@@ -1,0 +1,447 @@
+{
+  "recorded_at": "2026-09-13T09:36:40.036273+00:00",
+  "state": "head_pair_completed_full_50_epochs",
+  "results": [
+    {
+      "name": "tuev-cbramod_pretrained_head800_confirm",
+      "seed": 1,
+      "epochs_run": 50,
+      "stopped_by": "epochs",
+      "wall_time_sec": 4139.580140113831,
+      "best_val": 0.44302556330834275,
+      "primary_metric": "cohen_kappa",
+      "n_params_M": 17.846006,
+      "config": {
+        "name": "tuev-cbramod_pretrained_head800_confirm",
+        "group": "baseline_head_confirm",
+        "dataset": "tuev",
+        "data_root": "$PACLOCK_PROC/processed/tuev",
+        "model": "cbramod",
+        "loader": null,
+        "pretrained": true,
+        "optimizer": "adamw",
+        "lr": 0.0001,
+        "weight_decay": 0.05,
+        "epochs": 50,
+        "batch_size": 64,
+        "multi_lr": true,
+        "scheduler": "cosine",
+        "grad_clip": 1.0,
+        "patience": 0,
+        "num_workers": 8,
+        "device": "cuda",
+        "eval_every_steps": 0,
+        "model_kwargs": {
+          "dropout": 0.1,
+          "classifier_hidden_dim": 800
+        },
+        "num_classes": 6,
+        "sample_rate": 200,
+        "loss": "cross_entropy",
+        "label_smoothing": 0.1,
+        "seed": 1,
+        "max_hours": 2.0,
+        "screening_note": "Prepared head-fidelity pair on a shared frozen cohort. Admit only after real-training-batch timing fits 80 percent of the cap and an existing allocation has at least three hours remaining. No new allocation.",
+        "backfill": {
+          "source_job": null,
+          "allocation": "416422",
+          "gpu": 3,
+          "original_max_hours": 2.0,
+          "max_hours": 2.0
+        }
+      },
+      "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+      "class_counts": {
+        "train": [
+          526,
+          10963,
+          5515,
+          984,
+          10553,
+          39904
+        ],
+        "val": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "test": [
+          567,
+          4677,
+          1998,
+          329,
+          2204,
+          19646
+        ]
+      },
+      "selected_validation": {
+        "tag": "epoch   1 |",
+        "elapsed_sec": 182.70792317390442,
+        "val_loss": 0.7614357868009363,
+        "train_loss": 0.48689742269360015,
+        "metrics": {
+          "balanced_acc": 0.46405020244134815,
+          "cohen_kappa": 0.44302556330834275,
+          "weighted_f1": 0.8818798791817527
+        },
+        "lr": [
+          9.960573506572425e-05,
+          0.0004980286753286207
+        ],
+        "best_val": 0.44302556330834275,
+        "confusion": [
+          [
+            12,
+            16,
+            37,
+            0,
+            21,
+            33
+          ],
+          [
+            0,
+            51,
+            0,
+            0,
+            240,
+            0
+          ],
+          [
+            13,
+            141,
+            163,
+            0,
+            249,
+            103
+          ],
+          [
+            0,
+            13,
+            0,
+            60,
+            0,
+            13
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            319,
+            180
+          ],
+          [
+            89,
+            285,
+            132,
+            22,
+            455,
+            12839
+          ]
+        ],
+        "class_f1": [
+          0.10300429184549356,
+          0.12781954887218044,
+          0.3256743256743257,
+          0.7142857142857143,
+          0.3576233183856502,
+          0.9513894034827713
+        ],
+        "target_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "pred_counts": [
+          114,
+          507,
+          332,
+          82,
+          1284,
+          13168
+        ]
+      },
+      "selected_validation_index": 1,
+      "completion_receipt": {
+        "source_job": null,
+        "source_name": "CBHEAD_800",
+        "origin": "baseline_head_fidelity_confirmation",
+        "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized",
+        "config": "configs/baseline_head_confirm/tuev_cbramod_h800_s1.yaml",
+        "seed": 1,
+        "name": "tuev-cbramod_pretrained_head800_confirm",
+        "dataset": "tuev",
+        "min_remaining_hours": 3.0,
+        "sha256": "7fdb898dc7471418bcb8e8ce439535e15e7b15c7f93e032987e13dcdbfda69d5",
+        "smoke_receipt": "results/audits/cbramod-head-training-smoke-20260913.json",
+        "smoke_receipt_sha256": "f7d35848486ce3b23a13d765842666bf5bcf1ec4bced18c54e7f22d98c563e16",
+        "source_commit_at_admission": "59e1ee6d937da2019567f2d8bc97cb9da20a77c1",
+        "training_cap_hours": 2.0,
+        "projected_training_seconds": 3779.9054664901632,
+        "admission_reason": "Matched 800/1000 task-head fidelity correction; real-batch timing fits cap; reuse idle GPUs in an existing allocation.",
+        "prepared_at": 1789287677.597791,
+        "allocation": "416422",
+        "node": "k002-005",
+        "gpu": 3,
+        "started_at": 1789287707.5156975,
+        "original_max_hours": 2.0,
+        "max_hours": 2.0,
+        "slurm_step": "0",
+        "pid": 1366899,
+        "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/40_head_tuev_h800_s1.out",
+        "exit_code": 0,
+        "finished_at": 1789291867.938483,
+        "result": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/runs/tuev-cbramod_pretrained_head800_confirm/seed1/result.json",
+        "result_exists": true
+      }
+    },
+    {
+      "name": "tuev-cbramod_pretrained_nativehead",
+      "seed": 1,
+      "epochs_run": 50,
+      "stopped_by": "epochs",
+      "wall_time_sec": 4279.897967576981,
+      "best_val": 0.45028469645093827,
+      "primary_metric": "cohen_kappa",
+      "n_params_M": 21.086206,
+      "config": {
+        "name": "tuev-cbramod_pretrained_nativehead",
+        "group": "baseline_head_confirm",
+        "dataset": "tuev",
+        "data_root": "$PACLOCK_PROC/processed/tuev",
+        "model": "cbramod",
+        "loader": null,
+        "pretrained": true,
+        "optimizer": "adamw",
+        "lr": 0.0001,
+        "weight_decay": 0.05,
+        "epochs": 50,
+        "batch_size": 64,
+        "multi_lr": true,
+        "scheduler": "cosine",
+        "grad_clip": 1.0,
+        "patience": 0,
+        "num_workers": 8,
+        "device": "cuda",
+        "eval_every_steps": 0,
+        "model_kwargs": {
+          "dropout": 0.1,
+          "classifier_hidden_dim": 1000
+        },
+        "num_classes": 6,
+        "sample_rate": 200,
+        "loss": "cross_entropy",
+        "label_smoothing": 0.1,
+        "seed": 1,
+        "max_hours": 2.0,
+        "screening_note": "Prepared head-fidelity pair on a shared frozen cohort. Admit only after real-training-batch timing fits 80 percent of the cap and an existing allocation has at least three hours remaining. No new allocation.",
+        "backfill": {
+          "source_job": null,
+          "allocation": "416422",
+          "gpu": 1,
+          "original_max_hours": 2.0,
+          "max_hours": 2.0
+        }
+      },
+      "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+      "class_counts": {
+        "train": [
+          526,
+          10963,
+          5515,
+          984,
+          10553,
+          39904
+        ],
+        "val": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "test": [
+          567,
+          4677,
+          1998,
+          329,
+          2204,
+          19646
+        ]
+      },
+      "selected_validation": {
+        "tag": "epoch   5 |",
+        "elapsed_sec": 531.2602624893188,
+        "val_loss": 0.7309818943916273,
+        "train_loss": 0.4497430427887729,
+        "metrics": {
+          "balanced_acc": 0.40830422875478695,
+          "cohen_kappa": 0.45028469645093827,
+          "weighted_f1": 0.8787400914519328
+        },
+        "lr": [
+          9.648882429441302e-05,
+          0.0004824441214720648
+        ],
+        "best_val": 0.45028469645093827,
+        "confusion": [
+          [
+            0,
+            16,
+            37,
+            19,
+            0,
+            47
+          ],
+          [
+            0,
+            12,
+            0,
+            76,
+            203,
+            0
+          ],
+          [
+            2,
+            86,
+            52,
+            65,
+            414,
+            50
+          ],
+          [
+            0,
+            13,
+            0,
+            55,
+            3,
+            15
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            375,
+            124
+          ],
+          [
+            132,
+            154,
+            0,
+            66,
+            459,
+            13011
+          ]
+        ],
+        "class_f1": [
+          0.0,
+          0.041884816753926704,
+          0.13720316622691292,
+          0.2997275204359673,
+          0.38382804503582396,
+          0.9613210683808046
+        ],
+        "target_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "pred_counts": [
+          134,
+          282,
+          89,
+          281,
+          1454,
+          13247
+        ]
+      },
+      "selected_validation_index": 5,
+      "completion_receipt": {
+        "source_job": null,
+        "source_name": "CBHEAD_1000",
+        "origin": "baseline_head_fidelity_confirmation",
+        "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized",
+        "config": "configs/baseline_head_confirm/tuev_cbramod_h1000_s1.yaml",
+        "seed": 1,
+        "name": "tuev-cbramod_pretrained_nativehead",
+        "dataset": "tuev",
+        "min_remaining_hours": 3.0,
+        "sha256": "9074ebf39119c73136b4f6849ecfdcb68d605bed222ce5132de0f7e5cc1f5bbe",
+        "smoke_receipt": "results/audits/cbramod-head-training-smoke-20260913.json",
+        "smoke_receipt_sha256": "f7d35848486ce3b23a13d765842666bf5bcf1ec4bced18c54e7f22d98c563e16",
+        "source_commit_at_admission": "59e1ee6d937da2019567f2d8bc97cb9da20a77c1",
+        "training_cap_hours": 2.0,
+        "projected_training_seconds": 3796.119330156216,
+        "admission_reason": "Matched 800/1000 task-head fidelity correction; real-batch timing fits cap; reuse idle GPUs in an existing allocation.",
+        "prepared_at": 1789287684.580905,
+        "allocation": "416422",
+        "node": "k002-005",
+        "gpu": 1,
+        "started_at": 1789287707.5046885,
+        "original_max_hours": 2.0,
+        "max_hours": 2.0,
+        "slurm_step": "0",
+        "pid": 1366898,
+        "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/40_head_tuev_h1000_s1.out",
+        "exit_code": 0,
+        "finished_at": 1789292019.069364,
+        "result": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/runs/tuev-cbramod_pretrained_nativehead/seed1/result.json",
+        "result_exists": true
+      }
+    }
+  ],
+  "source_sha256": {
+    "PACLock/runs/tuev-cbramod_pretrained_head800_confirm/seed1/result.json": "45ea009a0bacd35f65b6663d6444f89858b0da79c9ba179fa1b99c1252b3ad32",
+    "PACLock/runs/tuev-cbramod_pretrained_head800_confirm/seed1/progress.json": "67eafeb7089afff1f8bed45e33814f2b2ea1fd68709eea434c968b0ac649f1de",
+    "PACLock/runs/tuev-cbramod_pretrained_nativehead/seed1/result.json": "c6ca7ec42006b2a4b84c794b327494add2c4fce17516e9e4ee88a5cc75862033",
+    "PACLock/runs/tuev-cbramod_pretrained_nativehead/seed1/progress.json": "381fe4e05ed0cb75eecba3bbb9f1029b098faa830ef1c1be719978c92220a046",
+    "PACLock/runs/tuev-cbramod_pretrained/seed1/result.json": "127bfd379d34e3e701e223232a8746a6951541054efca2b22451cc8cea642a61",
+    "PACLock-backfill-20260913/done/40_head_tuev_h800_s1.json": "852050b2dde74221dcbc5c3bf8fd04335c9fcb7436fb3f57a84e0e0a99c52716",
+    "PACLock-backfill-20260913/done/40_head_tuev_h1000_s1.json": "73fb6aae2a62117a275bd225a0561bdd591080010c2e5d0d40c5826f3cca3e82"
+  },
+  "config_differences": {
+    "backfill.gpu": [
+      3,
+      1
+    ],
+    "model_kwargs.classifier_hidden_dim": [
+      800,
+      1000
+    ],
+    "name": [
+      "tuev-cbramod_pretrained_head800_confirm",
+      "tuev-cbramod_pretrained_nativehead"
+    ]
+  },
+  "selected_validation_deltas": {
+    "cohen_kappa": 0.00725913314259552,
+    "balanced_acc": -0.0557459736865612,
+    "weighted_f1": -0.0031397877298199317
+  },
+  "historical_800_head_full_50_epoch_kappa_curve_bit_equal": true,
+  "historical_result_sha256": "127bfd379d34e3e701e223232a8746a6951541054efca2b22451cc8cea642a61",
+  "released_allocation": {
+    "job": "416422",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "21:51:45"
+  },
+  "caveats": [
+    "Validation only; no test scores used for this comparison.",
+    "One training seed; this is a head-fidelity check, not a SOTA reproduction certificate.",
+    "The 1000-wide head matches upstream TUEV all-patch architecture, but numeric preprocessing fidelity remains unverified.",
+    "Changing head width changes parameter count and initialization RNG consumption; this is not an equal-parameter causal estimate."
+  ],
+  "decision": "Keep the corrected 1000-wide TUEV adapter for future task-faithful baseline work and retain historical 800-wide results separately. The small one-seed difference does not explain a large candidate-performance gap or justify a head-width sweep. Allocation 416422 drained and released normally."
+}
