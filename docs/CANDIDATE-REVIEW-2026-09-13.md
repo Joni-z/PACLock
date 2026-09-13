@@ -654,8 +654,15 @@ and TUAR at seed 1. Both keep f4's original model, dropout .2, weight decay
 descriptive fields. This tests an augmentation-by-current-recipe interaction,
 not a new architecture. There are no new formal training admissions yet.
 Finish the existing TUEV f4 gate before deciding whether to admit these two
-configs; prefer an existing mi2104x allocation only if the full training cap
-plus 30 minutes remains. Caps are five hours for TUEV and two for TUAR.
+configs. Configured caps are five hours for TUEV and two for TUAR. The running
+backfill controller actually applies `min(configured_cap, remaining_hours-1)`,
+so require at least **5.5 hours remaining for TUEV** and **three for TUAR**.
+This preserves at least 4.5/2 hours of training plus the controller's full
+one-hour completion buffer. Both measured training projections fit within
+80% of these minimum effective caps. Record any reduced execution cap and
+exclude budget-stopped runs from completed-model comparisons. The prepared
+plan is `results/audits/joint-augmentation-admission-plan-20260913.json`; it
+does not admit training or request any new allocation.
 
 The training-only smoke passed on an already idle GPU in 416422, source
 `6d7f5de`. It invokes each of the five configured augmentation modules, checks
