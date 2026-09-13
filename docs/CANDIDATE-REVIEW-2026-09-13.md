@@ -72,13 +72,28 @@ normally with a full result and exit 0. This parent status must not trigger a
 restart or invalidate that completed result. Allocation 416422 remains occupied
 by other experiments; its scale-1 trainer has exited.
 
-The fixed-width joint-content alternative, f4, has completed its TUAR seed-1
-trial; its TUEV trial remains running on allocation 416422 GPU 3. The completed
-band-content control used GPU 1. TUAR used GPU 2, and its trainer has exited.
-No new allocation or pretraining job was requested. Training caps are five
-hours for TUEV and two for TUAR; added work may extend allocation duration.
-Runtime/source admission checks are recorded in
-`results/audits/factorized-joint-admission-20260913.json`.
+The fixed-width joint-content alternative, f4, has completed all 20 epochs on
+both TUEV and TUAR at seed 1. TUEV finishes with validation kappa **.637154**,
+balanced accuracy **.577796**, and weighted F1 **.926717**. Against the matched
+band-content scale-1 control, these improve by .064218, .065389 and .017900;
+against scale .3, by .016386, .100078 and .007750. Recipes, cohorts and parameter
+counts match for the intended content contrast. The trainer exited with code
+0 after 3.205 hours. Full histories, hashes and completion receipt are in
+`results/audits/tuev-joint-completion-20260913.json`.
+
+The final selected TUEV checkpoint has exactly the same SHA-256 as the immutable
+snapshot used for the earlier content/preferred-phase probes. Those probe
+receipts retain their original provisional observation times; their measured
+interventions now describe the checkpoint selected at full completion as well.
+They remain post-training interventions, not retrained ablations. This f4 result
+still trails historical rotation-only seed-1 validation kappa .649116, whose
+narrower model is not a matched-width causal control. SPSW recall remains zero.
+No final candidate is frozen and no pretraining is resumed.
+
+The TUEV f4 trainer used allocation 416422 GPU 3; the completed band-content
+control used GPU 1. TUAR f4 used GPU 2. Their original admission checks are in
+`results/audits/factorized-joint-admission-20260913.json`; no new allocation was
+requested for these completed gates.
 
 All three TUAR content arms completed 20 epochs with matching recipes, cohorts
 and parameter counts. At their kappa-selected checkpoints:
@@ -93,8 +108,8 @@ Joint content improves kappa by .007083 over band content but trails broadband
 by .015225, with lower balanced accuracy and weighted F1 as well. Controls
 completed earlier on different mi2104x allocations. This one seed has not
 shown that splitting content capacity preserves the stronger TUAR result.
-Do not expand joint content to other corpora yet; finish the already-running
-TUEV comparison before the next architecture decision. Detailed config checks,
+Do not expand joint content to other corpora yet. The now-completed TUEV gate
+supports only the bounded TUEV/TUAR augmentation transfer below. Detailed config checks,
 selected metrics and original hashes are in
 `results/audits/tuar-joint-completion-20260913.json`.
 
@@ -105,7 +120,7 @@ this is not a signal-invertibility claim. Contract checks cover exact coordinate
 finite random/flat/near-flat gradients, three-lane trainability and checkpoint
 reload. Smokes measured about .257/.256 s per TUEV/TUAR step after two warmups,
 10.31 GiB peak memory, and 3.05/.92 hours of projected training without loading
-or evaluation. The TUEV performance result for f4 remains pending.
+or evaluation. The completed TUEV result is recorded above.
 
 A validation-only checkpoint diagnostic now probes the completed TUAR models.
 All three unmodified checkpoints reproduce their selected validation metrics,
@@ -135,8 +150,8 @@ The diagnostic ran on already-idle GPU 2 in allocation 416422; step 416422.1
 completed normally in 2:05 while TUEV training remained live. Script revision
 `c80edab` is on the factorized branch. Checkpoint/script hashes, all three models'
 metrics, and measured 110.5-second evaluation runtime are in
-`results/audits/tuar-content-knockout-20260913.json`. Await the current TUEV
-comparison before admitting a new design or expanding f4 across corpora.
+`results/audits/tuar-content-knockout-20260913.json`. At that observation the
+TUEV gate was still pending; its subsequent completion is recorded above.
 
 The same coordinate diagnostic now covers TUEV using immutable snapshots of
 still-running seed-1 checkpoints. The scale-1 and scale-.3 controls were observed
@@ -636,7 +651,7 @@ capacity. They do not establish that reweighting, deduplication, augmentation,
 or pretraining will help. No training/evaluation data or recipe was changed;
 the existing unweighted-CE benchmark and in-flight gates remain intact.
 
-## Prepared augmentation gate, not admitted
+## Bounded augmentation gate, running
 
 Historical r2/r4 results isolate the existing augmentation list at fixed
 dropout .35 and weight decay .05 across seven matching seed-0 corpus pairs.
@@ -648,21 +663,30 @@ metrics, cohort identifiers and class counts match within each pair; historical
 runtime/source identity is not established. Full checks and original hashes:
 `results/audits/historical-augmentation-pairs-20260913.json`.
 
-Prepare one bounded transfer of that existing augmentation list to f4 on TUEV
-and TUAR at seed 1. Both keep f4's original model, dropout .2, weight decay
+One bounded transfer of that existing augmentation list to f4 on TUEV
+and TUAR at seed 1 is now running. Both keep f4's original model, dropout .2, weight decay
 1e-5 and training recipe; only augmentation changes, apart from identity and
 descriptive fields. This tests an augmentation-by-current-recipe interaction,
-not a new architecture. There are no new formal training admissions yet.
-Finish the existing TUEV f4 gate before deciding whether to admit these two
-configs. Configured caps are five hours for TUEV and two for TUAR. The running
+not a new architecture. Admission followed the full TUEV f4 completion and
+validation-only review. Configured caps are five hours for TUEV and two for TUAR. The running
 backfill controller actually applies `min(configured_cap, remaining_hours-1)`,
 so require at least **5.5 hours remaining for TUEV** and **three for TUAR**.
 This preserves at least 4.5/2 hours of training plus the controller's full
 one-hour completion buffer. Both measured training projections fit within
 80% of these minimum effective caps. Record any reduced execution cap and
 exclude budget-stopped runs from completed-model comparisons. The prepared
-plan is `results/audits/joint-augmentation-admission-plan-20260913.json`; it
-does not admit training or request any new allocation.
+plan is `results/audits/joint-augmentation-admission-plan-20260913.json`;
+its original prepared-state record is retained.
+
+Both tasks were admitted to existing allocation **416422**, with no new Slurm
+job: TUAR on GPU 1 (PID 1362700, two-hour cap) and TUEV on GPU 2 (PID 1362701,
+effective cap **4.57835 hours**). Owner, live process, configuration, allocation
+cgroup and GPU selector were verified. Actual runtime configurations match the
+smoked configs except recorded execution budget metadata. Source at admission
+was `e519015`, with the model source unchanged from smoke revision `6d7f5de`.
+Receipt: `results/audits/joint-augmentation-admission-20260913.json`.
+Added work can extend this existing allocation. Do not admit further variants
+or pretraining while this bounded pair is unresolved.
 
 The training-only smoke passed on an already idle GPU in 416422, source
 `6d7f5de`. It invokes each of the five configured augmentation modules, checks
