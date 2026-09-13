@@ -822,3 +822,34 @@ pack exit receipt and Slurm closure are audited in
 `results/audits/chb-single-pilot-completion-20260913.json`. AMD now has the two
 remaining four-card allocations, 416422 and 416485; TUEV augmentation and the
 other CHB trials continue under their existing caps.
+
+## CBraMod task-head fidelity gap and prepared TUEV correction
+
+A direct inspection of upstream revision `0ff6be918985689e7df679bc731ffb70e6c6224f`
+found that the shared adapter had a fixed 800-wide hidden layer, while upstream
+TUEV all_patch_reps uses 1000. The upstream CLI selects all_patch_reps by default.
+At the same 16-channel, 1000-sample input and six-class output this is a difference
+of 3,240,200 parameters. Upstream TUAB, CHB and FACED use 2000; Mumtaz uses 1000.
+The old claim that 800 was the official TUAB head was incorrect and is removed.
+Historical local CBraMod scores remain valid measurements of their recorded
+adapter, but are not certified faithful upstream task reproductions. This
+qualifies the earlier matched-baseline gaps; it must not be hidden by excluding
+the affected baselines and reporting only favorable comparisons.
+
+The adapter now accepts an explicit classifier_hidden_dim while retaining
+800 for historical callers. A separate prepared configuration,
+`configs/experiments/tuev_cbramod_pretrained_nativehead.yaml`, selects 1000 and
+a new run identity. The original 50-epoch recipe remains otherwise intact.
+This is a head correction only; it does not certify full native preprocessing
+or optimization parity, and no baseline training has been submitted.
+
+An allocated CPU check loaded the released pretrained backbone through the
+actual builder, strictly copied the entire model state into upstream TUEV,
+and obtained bit-identical logits on synthetic input. It also confirmed the
+legacy default remains 800. Step 416422.6 completed with exit 0 in five seconds;
+the check itself took .431 seconds, with no dataset arrays or training. TUEV
+and CHB training stayed live in the allocation. The executed-source hashes and
+post-check documentation-only edits are recorded separately, with identical
+executable ASTs after removing docstrings. Evidence:
+`results/audits/cbramod-tuev-head-parity-20260913.json` and
+`results/audits/cbramod-native-head-inventory-20260913.json`.

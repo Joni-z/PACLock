@@ -1,0 +1,246 @@
+{
+  "vendor_revision": "0ff6be918985689e7df679bc731ffb70e6c6224f",
+  "reference_classifier": "all_patch_reps (upstream CLI default)",
+  "task_heads": [
+    {
+      "file": "models/model_for_bciciv2a.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "22 * 4 * 200",
+          "4 * 200"
+        ],
+        [
+          "4 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "param.num_of_classes"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_chb.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "16 * 10 * 200",
+          "10 * 200"
+        ],
+        [
+          "10 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "1"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_faced.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "32 * 10 * 200",
+          "10 * 200"
+        ],
+        [
+          "10 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "param.num_of_classes"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_mumtaz.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "19 * 5 * 200",
+          "5 * 200"
+        ],
+        [
+          "5 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "1"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_physio.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "64 * 4 * 200",
+          "4 * 200"
+        ],
+        [
+          "4 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "param.num_of_classes"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_seedvig.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "17 * 8 * 200",
+          "8 * 200"
+        ],
+        [
+          "8 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "1"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_seedv.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "62 * 1 * 200",
+          "4 * 200"
+        ],
+        [
+          "4 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "param.num_of_classes"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_shu.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "32 * 4 * 200",
+          "4 * 200"
+        ],
+        [
+          "4 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "1"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_speech.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "64 * 3 * 200",
+          "3 * 200"
+        ],
+        [
+          "3 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "param.num_of_classes"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_stress.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "20 * 5 * 200",
+          "5 * 200"
+        ],
+        [
+          "5 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "1"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_tuab.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "16 * 10 * 200",
+          "10 * 200"
+        ],
+        [
+          "10 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "1"
+        ]
+      ]
+    },
+    {
+      "file": "models/model_for_tuev.py",
+      "all_patch_reps_linear_dimensions": [
+        [
+          "16 * 5 * 200",
+          "5 * 200"
+        ],
+        [
+          "5 * 200",
+          "200"
+        ],
+        [
+          "200",
+          "param.num_of_classes"
+        ]
+      ]
+    }
+  ],
+  "source_sha256": {
+    "models/model_for_bciciv2a.py": "a7d720d2c1603cffdca4485d33d8f3d1db66876c9b9e48dd18f063af5e65b297",
+    "models/model_for_chb.py": "5346a02842e0539133f9b975b3cc43eb8f298fe2451a97f174205d5f95df80b4",
+    "models/model_for_faced.py": "0f711a8d117ba0222995a33f6a6dfb2b8d3fe7a219ce0528a71917e5d8082513",
+    "models/model_for_isruc.py": "2a516f4758275ef7757a17fd22337db32bda751b72ebba343e90d91578544d61",
+    "models/model_for_mumtaz.py": "6665f3683b4dca108a7b540871231dffb9902c03e03d10f3e31d787b4711b8a0",
+    "models/model_for_physio.py": "ad4e87d12c968e24795117776a22da1ba42afa0cfd9a28e060ccaf174432f094",
+    "models/model_for_seedvig.py": "df7c7d77887803c36132192574eb817016b71cb080c2bd78e679e493580b52a2",
+    "models/model_for_seedv.py": "38fd14adac5c1462316a0d270654a28f36aa20ca5ff79e4730e04dc522fe225e",
+    "models/model_for_shu.py": "ef0aae9ce432fb33b82341fd76c5fb1c0c9c0ab8a76b54d071d01cca35028dda",
+    "models/model_for_speech.py": "84bc0db76015072cbb8a1a497dc48f31a33abd2a9b396de4480054f63999fa30",
+    "models/model_for_stress.py": "173e584be22451f446ef98189d1774f808233d34f3a04056a044b44dfb164805",
+    "models/model_for_tuab.py": "0f1b544d079c66231dcaad4344b468fbfdf3ac28eac566bf69d67df93c90851e",
+    "models/model_for_tuev.py": "29df3cad926996f17771bed3055f57899d61df23ba04533298f006ec04dfc1ab"
+  },
+  "historical_adapter_hidden_width": 800,
+  "scope": "Static inspection of upstream task-head definitions, not a full protocol or training reproduction audit.",
+  "confirmed_TUEV_difference": "800 versus upstream 1000; adds 3,240,200 parameters at (16,1000), six-class output.",
+  "other_reproduction_gaps": "Upstream TUAB, CHB and FACED use width 2000; Mumtaz uses 1000. Binary output shape, sample dimensions, native conditioning and task selection also require separate checks before calling a run faithful.",
+  "policy": "Preserve historical results and internal paired comparisons; do not call them faithful native CBraMod or SOTA reproduction evidence. Prepare only the verified TUEV width correction, without admitting training.",
+  "parity_receipt": "results/audits/cbramod-tuev-head-parity-20260913.json",
+  "parity_receipt_sha256": "22ee953cef12cf5d0916bad5107286b74a5594a671549dbd5ec8ba133feb9902",
+  "post_parity_documentation_changes": {
+    "executable_AST_equal_after_removing_docstrings": true,
+    "source_hashes": {
+      "paclock_bench/models/build.py": {
+        "executed_source_sha256": "512ae2fbfe035b098147618b9de0e501ec2bce53f03416467ad7cce61fa3471b",
+        "final_source_sha256": "ef57d740f510499b515e5b9f20f06a0e633a2177c22882e29546ca8ca54e5a2c"
+      },
+      "paclock_bench/models/foundation/cbramod_adapter.py": {
+        "executed_source_sha256": "f91327c75aa50924ef81943532872ea7d5090d5c51f2eeeddcc09b61d67c3a5d",
+        "final_source_sha256": "3fdf18e0c2d5262e3826c2e7ed632dcbdb29542f12175bde54119f3613e2e984"
+      }
+    }
+  },
+  "step_closure": "416422.6|COMPLETED|0:0|00:00:05\n416485|RUNNING|15:15:13|k003-008\n416422|RUNNING|20:22:09|k002-005\n    PID     ELAPSED STAT COMMAND\n1342568    13:45:53 Rsl  python3\n1362701    01:56:52 Rsl  python3\n"
+}
