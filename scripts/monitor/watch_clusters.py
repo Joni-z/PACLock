@@ -94,8 +94,14 @@ def collect(host,root,state,previous):
    out['accounting']=ssh(host,'sacct -X -n -P -j '+','.join(missing)+' -o JobID,State,ExitCode,Elapsed')
   # Read result files; all JSON parsing/comparison runs on this local machine.
   if host!='b2':
-   data=ssh(host,'cd '+shlex.quote(root)+' && find runs -type f \\( -name result.json -o -name progress.json -o -name stopped.json -o -name design_stop.json \\) -print0 | tar --null -T - -cf -',binary=True)
-   extract(data,dest)
+   out['results_verified']=False
+   try:
+    data=ssh(host,'cd '+shlex.quote(root)+' && find runs -type f \\( -name result.json -o -name progress.json -o -name stopped.json -o -name design_stop.json \\) -print0 | tar --null -T - -cf -',binary=True)
+    extract(data,dest)
+    out['results_verified']=True
+   except Exception as exc:
+    # A slow archive must not suppress live job logs or the result-sync check.
+    out['errors'].append('result archive: '+str(exc))
   if host=='amd':
    q=root+'-backfill-20260913'
    data=ssh(host,'cd '+shlex.quote(q)+' && tar -cf - logs running done deferred',binary=True)

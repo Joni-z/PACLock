@@ -14,4 +14,21 @@ class MonitorTests(unittest.TestCase):
    row=m.collect('amd','/repo',Path(tmp),dict(jobs=jobs))
   self.assertFalse(row['ok']);self.assertEqual(row['jobs'],jobs)
   self.assertTrue(row['jobs_are_cached']);self.assertNotIn('accounting',row)
+ def test_archive_timeout_still_checks_live_logs_and_sync(self):
+  commands=[]
+  def remote(host,cmd,**kwargs):
+   commands.append(cmd)
+   if cmd.startswith('squeue '):return '123|h200_public|trial|RUNNING|1:00|gh116|/repo|None\n'
+   if 'find runs ' in cmd:raise TimeoutError('archive read timeout')
+   if cmd.startswith('scontrol '):return 'JobId=123 JobState=RUNNING StdOut=/repo/logs/trial.out'
+   if cmd.startswith('tail '):return 'epoch 24 | val auroc=0.88\n'
+   if 'push_runs.sh' in cmd:return 'sync completed'
+   raise AssertionError(cmd)
+  with tempfile.TemporaryDirectory() as tmp,patch.object(m,'ssh',side_effect=remote):
+   row=m.collect('torch','/repo',Path(tmp),{})
+  self.assertTrue(row['queue_verified']);self.assertFalse(row['results_verified'])
+  self.assertEqual(row['jobs'][0]['tail'],'epoch 24 | val auroc=0.88\n')
+  self.assertEqual(row['sync_output'],'sync completed')
+  self.assertEqual(row['errors'],['result archive: archive read timeout'])
+  self.assertTrue(any('push_runs.sh' in cmd for cmd in commands))
 if __name__=='__main__':unittest.main()
