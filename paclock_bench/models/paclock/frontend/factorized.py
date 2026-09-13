@@ -21,8 +21,10 @@ class FactorizedFrontend(TriAxialFrontend):
                  **kwargs):
         if coupling_dim <= 0 or coupling_dim % 2 or coupling_dim >= hidden_dim:
             raise ValueError("factorized needs an even coupling_dim < hidden_dim")
-        if content_source not in ("band", "broadband", "zero"):
-            raise ValueError("content_source must be band/broadband/zero")
+        if content_source not in ("band", "broadband", "zero", "band_broadband"):
+            raise ValueError("content_source must be band/broadband/zero/band_broadband")
+        if content_source == "band_broadband" and (hidden_dim - coupling_dim) % 2:
+            raise ValueError("band_broadband requires an even content width")
         if not math.isfinite(content_scale) or content_scale <= 0:
             raise ValueError("content_scale must be finite and positive")
         if kwargs.get("raw_stem", "linear") != "linear":
@@ -80,6 +82,16 @@ class FactorizedFrontend(TriAxialFrontend):
             local = local.reshape(B, C, self.n_bands, P, -1)
             if self.content_source == "zero":
                 local = local * 0.0
+            elif self.content_source == "band_broadband":
+                # Keep the existing projection and initialization stream: its
+                # first half reads the band signal, its second half reads raw
+                # waveform. Neither parameter count nor token width increases.
+                # Coordinates stay separate; each lane has half the capacity
+                # of the corresponding single-source content control.
+                raw = _patch_project(self.local_projection, x.reshape(B * C, T))
+                raw = raw.reshape(B, C, 1, P, -1).expand(-1, -1, self.n_bands, -1, -1)
+                half = local.shape[-1] // 2
+                local = torch.cat((local[..., :half], raw[..., half:]), dim=-1)
         tokens = torch.cat((relation, self.content_scale * local), dim=-1)
         result = (tokens, vectors[0].abs(), self.token_band_hz())
         if return_amp_target:
