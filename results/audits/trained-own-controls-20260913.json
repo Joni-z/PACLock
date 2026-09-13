@@ -1,0 +1,327 @@
+{
+  "observed_at": "2026-09-13T04:35:25.652904+00:00",
+  "pairs": [
+    {
+      "dataset": "iiic",
+      "seed": 2,
+      "own_score": 0.5108947128399085,
+      "measured_score": 0.5270093366255817,
+      "delta_measured_minus_own": 0.016114623785673188,
+      "own": {
+        "path": "runs/iiic-cf2_v1d192own/seed2/result.json",
+        "sha256": "565b4544fe71dfde468678847331a701019871f25ef3c95aa3a6bd580cef7b02",
+        "name": "iiic-cf2_v1d192own",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": null
+      },
+      "measured": {
+        "path": "runs/iiic-cf2_v1d192/seed2/result.json",
+        "sha256": "17f5564a9391d2aaf363cd3e46cd35b8315dbdcc93c79be298683e19ebce43f7",
+        "name": "iiic-cf2_v1d192",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": null
+      }
+    },
+    {
+      "dataset": "iiic",
+      "seed": 0,
+      "own_score": 0.513217008246241,
+      "measured_score": 0.5137470299211336,
+      "delta_measured_minus_own": 0.0005300216748926889,
+      "own": {
+        "path": "runs/iiic-cf2_v1d192own/seed0/result.json",
+        "sha256": "1a2e296ac374d4c70b94ffe34408766eca7a51644df61e2e127d69d0e8db6a36",
+        "name": "iiic-cf2_v1d192own",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": null
+      },
+      "measured": {
+        "path": "runs/iiic-cf2_v1d192/seed0/result.json",
+        "sha256": "6ae2e65f1af2b8a30d4fbf67a1c7f6346a2bb8969ac8939b76efa28a36cc8fa5",
+        "name": "iiic-cf2_v1d192",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": null
+      }
+    },
+    {
+      "dataset": "iiic",
+      "seed": 1,
+      "own_score": 0.49539562452779595,
+      "measured_score": 0.5274235684632331,
+      "delta_measured_minus_own": 0.032027943935437175,
+      "own": {
+        "path": "runs/iiic-cf2_v1d192own/seed1/result.json",
+        "sha256": "8a91fcd9431d054d5dde6101b6c3d8ce3a7c9342b7d2d46c6c1a96bc62a0878e",
+        "name": "iiic-cf2_v1d192own",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": null
+      },
+      "measured": {
+        "path": "runs/iiic-cf2_v1d192/seed1/result.json",
+        "sha256": "58e0db447bf36251d58cfd32e3a0106f3a7052892e19b519d3b4d1793e1ed22d",
+        "name": "iiic-cf2_v1d192",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": null
+      }
+    },
+    {
+      "dataset": "chbmit",
+      "seed": 2,
+      "own_score": 0.5870277944295397,
+      "measured_score": 0.5835477765568213,
+      "delta_measured_minus_own": -0.003480017872718344,
+      "own": {
+        "path": "runs/chbmit-cf2_v1d192own/seed2/result.json",
+        "sha256": "ddef6468b0314c7402610a61f8b686d260a86a84167eb290397d3d020b91262e",
+        "name": "chbmit-cf2_v1d192own",
+        "stopped_by": "patience",
+        "epochs_run": 4,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:57:56.642805+00:00",
+        "val_subsample": null
+      },
+      "measured": {
+        "path": "runs/chbmit-cf2_v1d192/seed2/result.json",
+        "sha256": "7269ed013860bbf59e66d90cc70753433f24be3e6b469cb1c52176027c52fac5",
+        "name": "chbmit-cf2_v1d192",
+        "stopped_by": "patience",
+        "epochs_run": 3,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:57:56.642805+00:00",
+        "val_subsample": null
+      }
+    },
+    {
+      "dataset": "chbmit",
+      "seed": 0,
+      "own_score": 0.6753556936946,
+      "measured_score": 0.6917524104992696,
+      "delta_measured_minus_own": 0.016396716804669587,
+      "own": {
+        "path": "runs/chbmit-cf2_v1d192own/seed0/result.json",
+        "sha256": "ef9663fe92c0407e76f02a9386b8b0e54f439076380e0c5a3a381ef02f606594",
+        "name": "chbmit-cf2_v1d192own",
+        "stopped_by": "patience",
+        "epochs_run": 5,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:57:56.642805+00:00",
+        "val_subsample": null
+      },
+      "measured": {
+        "path": "runs/chbmit-cf2_v1d192/seed0/result.json",
+        "sha256": "dbba5c26d8ca0549ccb9b22b76114f4b3310543de4ea430c6bac5a702d27a152",
+        "name": "chbmit-cf2_v1d192",
+        "stopped_by": "patience",
+        "epochs_run": 4,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:57:56.642805+00:00",
+        "val_subsample": null
+      }
+    },
+    {
+      "dataset": "chbmit",
+      "seed": 1,
+      "own_score": 0.6610166962135959,
+      "measured_score": 0.562724805415054,
+      "delta_measured_minus_own": -0.09829189079854195,
+      "own": {
+        "path": "runs/chbmit-cf2_v1d192own/seed1/result.json",
+        "sha256": "6d14d8bae0f18f2690dbde97753e636174cbdfb42ebbd3222593b5a0fd3e6dcd",
+        "name": "chbmit-cf2_v1d192own",
+        "stopped_by": "patience",
+        "epochs_run": 3,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:57:56.642805+00:00",
+        "val_subsample": null
+      },
+      "measured": {
+        "path": "runs/chbmit-cf2_v1d192/seed1/result.json",
+        "sha256": "064a725fcd5948ccae43e32de3e37637da569fba7b4e87a75bb1b9fe955220d8",
+        "name": "chbmit-cf2_v1d192",
+        "stopped_by": "patience",
+        "epochs_run": 3,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:57:56.642805+00:00",
+        "val_subsample": null
+      }
+    },
+    {
+      "dataset": "tusz",
+      "seed": 2,
+      "own_score": 0.3585133147215852,
+      "measured_score": 0.37315347092872636,
+      "delta_measured_minus_own": 0.014640156207141153,
+      "own": {
+        "path": "runs/tusz-cf2_v1d192own/seed2/result.json",
+        "sha256": "0138e82110eebbe84bfe6c3fa391d3c42598eb65fafa7c1f48386299235fa709",
+        "name": "tusz-cf2_v1d192own",
+        "stopped_by": "patience",
+        "epochs_run": 2,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:04:53.501948+00:00",
+        "val_subsample": 20000
+      },
+      "measured": {
+        "path": "runs/tusz-cf2_v1d192/seed2/result.json",
+        "sha256": "f03c260243a79de64ddbe0217d14b930d1100049cc6dbe3257c50aed0ca7a8b7",
+        "name": "tusz-cf2_v1d192",
+        "stopped_by": "patience",
+        "epochs_run": 2,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:04:53.501948+00:00",
+        "val_subsample": 20000
+      }
+    },
+    {
+      "dataset": "tusz",
+      "seed": 1,
+      "own_score": 0.36076240108000884,
+      "measured_score": 0.32201057145456097,
+      "delta_measured_minus_own": -0.038751829625447876,
+      "own": {
+        "path": "runs/tusz-cf2_v1d192own/seed1/result.json",
+        "sha256": "cfa7cc6dd70ef4d8ce543d7efd88e78410d47b8627f99b0c52dfe426e8c82d1b",
+        "name": "tusz-cf2_v1d192own",
+        "stopped_by": "patience",
+        "epochs_run": 2,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:04:53.501948+00:00",
+        "val_subsample": 20000
+      },
+      "measured": {
+        "path": "runs/tusz-cf2_v1d192/seed1/result.json",
+        "sha256": "06b0d20c8a59eec3e38f2383dded598bbe6356ee9cfcd22c5edcba84278145a1",
+        "name": "tusz-cf2_v1d192",
+        "stopped_by": "patience",
+        "epochs_run": 2,
+        "selection_metric": "pr_auc",
+        "manifest": "2026-08-04T12:04:53.501948+00:00",
+        "val_subsample": 20000
+      }
+    },
+    {
+      "dataset": "tuev",
+      "seed": 2,
+      "own_score": 0.5296773345865252,
+      "measured_score": 0.5310518701172766,
+      "delta_measured_minus_own": 0.0013745355307513973,
+      "own": {
+        "path": "runs/tuev-cf2_v1d192own/seed2/result.json",
+        "sha256": "7070dbbaac987d50ba6a3029cf3260cc0e7c41c587ad99cda3a8ed7dff6fb7bc",
+        "name": "tuev-cf2_v1d192own",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": null
+      },
+      "measured": {
+        "path": "runs/tuev-cf2_v1d192/seed2/result.json",
+        "sha256": "3657de9cf0885cc84bf30e4485aceeccf10a5c2394de3f9322247e42ecd66460",
+        "name": "tuev-cf2_v1d192",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": null
+      }
+    },
+    {
+      "dataset": "tuev",
+      "seed": 0,
+      "own_score": 0.5239112957569412,
+      "measured_score": 0.5216950247787022,
+      "delta_measured_minus_own": -0.0022162709782389545,
+      "own": {
+        "path": "runs/tuev-cf2_v1d192own/seed0/result.json",
+        "sha256": "f4d324cc7383bea305765d0128bdcb94871da178674d445548ea96bc44008e92",
+        "name": "tuev-cf2_v1d192own",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": null
+      },
+      "measured": {
+        "path": "runs/tuev-cf2_v1d192/seed0/result.json",
+        "sha256": "7a8453674189d8bcdfe5ac063e8461adbf0afafc8833484e3261832759665e16",
+        "name": "tuev-cf2_v1d192",
+        "stopped_by": "epochs",
+        "epochs_run": 20,
+        "selection_metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": null
+      }
+    }
+  ],
+  "summary": {
+    "chbmit": {
+      "paired_seeds": [
+        0,
+        1,
+        2
+      ],
+      "mean_measured_minus_own": -0.02845839728886357
+    },
+    "iiic": {
+      "paired_seeds": [
+        0,
+        1,
+        2
+      ],
+      "mean_measured_minus_own": 0.01622419646533435
+    },
+    "tuev": {
+      "paired_seeds": [
+        0,
+        2
+      ],
+      "mean_measured_minus_own": -0.00042086772374377857
+    },
+    "tusz": {
+      "paired_seeds": [
+        1,
+        2
+      ],
+      "mean_measured_minus_own": -0.012055836709153361
+    }
+  },
+  "matching": "Same seed, complete/patience stop below time cap, same manifest timestamp/class counts/config after removing name/group/seed and pac_token_mode; missing mode interpreted using documented measured default.",
+  "excluded": [
+    {
+      "dataset": "tuev",
+      "seed": 1,
+      "reason": "Measured result absent from canonical AMD run inventory."
+    },
+    {
+      "dataset": "tusz",
+      "seed": 0,
+      "reason": "Own and measured manifest timestamps differ; this alone does not prove different examples."
+    }
+  ],
+  "limitations": [
+    "Historical training-source identity is not established by config equality.",
+    "These are older duplex models, not the current factorized f4 architecture.",
+    "Own retains each band analytic phase/amplitude while removing cross-band alignment; it is not amplitude-only or a magnitude/scramble-trained control.",
+    "Current post-training phase sensitivity does not establish superiority over an alternative trained from scratch."
+  ],
+  "decision": "Do not relaunch the old own-control sweep. Keep current performance confirmations; mechanism claims for any final new model require matched trained controls rather than substituting post-hoc sensitivity."
+}
