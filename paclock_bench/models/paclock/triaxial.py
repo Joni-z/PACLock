@@ -521,27 +521,53 @@ FREQ_MIXERS = {
 # --------------------------------------------------------------------------- #
 # Tri-axial block + encoder
 # --------------------------------------------------------------------------- #
+class GEGLUFFN(nn.Module):
+    """Gated FFN with the legacy 2D GELU FFN's matrix-parameter budget.
+
+    Three D-by-H projections replace two D-by-2D projections, so H=4D/3.
+    Bias and normalization parameter counts differ slightly. This is an
+    opt-in backbone component; it makes no change to the PAC tokenizer.
+    """
+
+    def __init__(self, d_model, dropout):
+        super().__init__()
+        hidden = (4 * d_model + 2) // 3
+        self.in_proj = nn.Linear(d_model, 2 * hidden)
+        self.out_proj = nn.Linear(hidden, d_model)
+        self.drop = nn.Dropout(dropout)
+
+    def forward(self, x):
+        value, gate = self.in_proj(x).chunk(2, dim=-1)
+        return self.drop(self.out_proj(self.drop(value * F.gelu(gate))))
+
+
 class TriAxialBlock(nn.Module):
     """Pre-norm, one sub-layer per axis, then an FFN. Grid in, grid out."""
 
     def __init__(self, d_model, freq_mixer="coupling", n_heads=4, dropout=0.1,
-                 space_over_bands: bool = False, **mk):
+                 space_over_bands: bool = False, block_variant="legacy", **mk):
         super().__init__()
+        if block_variant not in ("legacy", "rms_geglu"):
+            raise ValueError(f"unknown tri-axial block variant: {block_variant!r}")
+        norm = nn.LayerNorm if block_variant == "legacy" else partial(nn.RMSNorm, eps=1e-5)
         # CF2 (2026-09-07): fold the band rows into the spatial axis so rows interact
         # through spatial attention; used with freq_mixer="none" to test whether the
         # coupling token can carry the cross-frequency information on its own.
         self.space_over_bands = space_over_bands
-        self.n_time = nn.LayerNorm(d_model)
+        self.n_time = norm(d_model)
         self.time = _MHA(d_model, n_heads, use_rope=True)
-        self.n_space = nn.LayerNorm(d_model)
+        self.n_space = norm(d_model)
         self.space = _MHA(d_model, n_heads)
-        self.n_freq = nn.LayerNorm(d_model)
+        self.n_freq = norm(d_model)
         self.freq = FREQ_MIXERS[freq_mixer](d_model, n_heads=n_heads, **mk)
-        self.n_ffn = nn.LayerNorm(d_model)
-        self.ffn = nn.Sequential(
-            nn.Linear(d_model, 2 * d_model), nn.GELU(), nn.Dropout(dropout),
-            nn.Linear(2 * d_model, d_model), nn.Dropout(dropout),
-        )
+        self.n_ffn = norm(d_model)
+        if block_variant == "legacy":
+            self.ffn = nn.Sequential(
+                nn.Linear(d_model, 2 * d_model), nn.GELU(), nn.Dropout(dropout),
+                nn.Linear(2 * d_model, d_model), nn.Dropout(dropout),
+            )
+        else:
+            self.ffn = GEGLUFFN(d_model, dropout)
 
     def forward(self, x, coupling, pac_vector=None):
         # x: (B, C, nb, P, D) ; coupling: (B, C, P, nb, nb)
@@ -587,11 +613,12 @@ class TriAxialBlock(nn.Module):
 
 class TriAxialEncoder(nn.Module):
     def __init__(self, depth, d_model, freq_mixer="coupling", n_heads=4, dropout=0.1,
-                 space_over_bands: bool = False, **mk):
+                 space_over_bands: bool = False, block_variant="legacy", **mk):
         super().__init__()
         self.blocks = nn.ModuleList([
             TriAxialBlock(d_model, freq_mixer, n_heads, dropout,
-                          space_over_bands=space_over_bands, **mk) for _ in range(depth)
+                          space_over_bands=space_over_bands,
+                          block_variant=block_variant, **mk) for _ in range(depth)
         ])
 
     def forward(self, x, coupling, pac_vector=None):

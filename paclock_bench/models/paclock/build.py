@@ -143,6 +143,7 @@ class TriAxialPACLock(nn.Module):
             freq_mixer=self.freq_mixer,
             n_heads=cfg.get("n_heads", 4), dropout=cfg.get("dropout", 0.1),
             space_over_bands=cfg.get("space_over_bands", False),
+            block_variant=cfg.get("block_variant", "legacy"),
             # Only FreqMITopology reads this; every other mixer swallows it via **_,
             # so passing it unconditionally leaves existing configs bit-identical.
             mi_k=cfg.get("mi_k", 3),
