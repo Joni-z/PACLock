@@ -1,7 +1,9 @@
 # RMSNorm and GEGLU backbone screen
 
-Status: implementation and combined single-card verification passed; the four
-bounded training admissions are being prepared. The joint augmentation screen did not deliver a
+Status: implementation, combined verification and all four individual smokes
+passed. Jobs 417388–417391 are running on separate mi2101x allocations; actual
+trainer processes were verified against their configurations and Slurm cgroups.
+The joint augmentation screen did not deliver a
 TUEV kappa gain, so its automatic second-seed expansion remains held.
 
 The next hypothesis concerns the encoder, while retaining the coupling/local
@@ -59,11 +61,27 @@ also warms every augmentation path before its existing budget check.
 
 ## Bounded comparison
 
-Four prepared seed-0 configurations are under `configs/backbone_gate/`:
+Four admitted seed-0 configurations are under `configs/backbone_gate/`:
 TUEV and Sleep-EDF, each with legacy and RMSNorm/GEGLU. Both arms use joint
 128/32/32 coupling/band/broadband content and the same augmentation list.
 Within each corpus the only substantive change is the backbone variant.
 These distinct run identities do not reuse the held augmentation-only plan.
+
+Admission source is `3049b8375951a963293f4284b4128d85e0beb356`.
+The process and individual-smoke receipts are recorded in
+`results/audits/rms-geglu-admission-20260913.json`:
+
+| Corpus / arm | Job | Node | Trainer PID |
+| --- | --- | --- | --- |
+| TUEV legacy | 417388 | k006-004-v3 | 1749039 |
+| TUEV RMSNorm/GEGLU | 417389 | k006-004-v4 | 769216 |
+| Sleep-EDF legacy | 417390 | k006-004-v5 | 3415815 |
+| Sleep-EDF RMSNorm/GEGLU | 417391 | k006-004-v6 | 1734259 |
+
+All four use CPython 3.9.21, Torch 2.7.1+rocm6.3, ROCm 6.3 and the
+rocBLAS override. VM v6 has a different OS Python build; byte-identical OS
+images or interpreter executables are not claimed. This receipt establishes
+successful admission, not model performance.
 
 TUEV keeps 20 epochs and a five-hour training cap within a six-hour allocation;
 Sleep-EDF keeps 20 epochs and a four-hour cap within a five-hour allocation.
