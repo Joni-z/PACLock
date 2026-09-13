@@ -1,0 +1,85 @@
+{
+  "at": "2026-09-13T03:21:35.038236+00:00",
+  "state": "completed",
+  "run": "tuev-cbramod_ptc_tuegc_140k_gate",
+  "seed": 0,
+  "epochs": 50,
+  "primary_metric": "cohen_kappa",
+  "best_checkpoint_validation": {
+    "balanced_acc": 0.42185693901985494,
+    "cohen_kappa": 0.4245127819503889,
+    "weighted_f1": 0.8839419317915277
+  },
+  "best_tag": "epoch   9 |",
+  "manifest": "2026-08-05T01:56:41.969236+00:00",
+  "class_counts": {
+    "train": [
+      526,
+      10963,
+      5515,
+      984,
+      10553,
+      39904
+    ],
+    "val": [
+      119,
+      291,
+      669,
+      86,
+      500,
+      13822
+    ],
+    "test": [
+      567,
+      4677,
+      1998,
+      329,
+      2204,
+      19646
+    ]
+  },
+  "config": {
+    "name": "tuev-cbramod_ptc_tuegc_140k_gate",
+    "group": "pretrain_gate",
+    "dataset": "tuev",
+    "data_root": "$PACLOCK_PROC/processed/tuev",
+    "model": "cbramod_paclockfe",
+    "loader": null,
+    "pretrained": false,
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 0.05,
+    "epochs": 50,
+    "batch_size": 64,
+    "multi_lr": true,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "patience": 0,
+    "num_workers": 8,
+    "device": "cuda",
+    "eval_every_steps": 0,
+    "model_kwargs": {
+      "dropout": 0.1,
+      "adapter": "replace",
+      "band_mode": "channels",
+      "tokenizer_mode": "pac_interaction",
+      "interaction_mode": "rotation"
+    },
+    "num_classes": 6,
+    "sample_rate": 200,
+    "loss": "cross_entropy",
+    "label_smoothing": 0.1,
+    "seed": 0,
+    "pretrained_path": "pretrain_runs_cbramod/transfer_140k/crofremo_140000.pt",
+    "max_hours": 11.0,
+    "gate_note": "Matched 140k native/coupling transfer diagnostic; seed 0 screening is not a final architecture decision."
+  },
+  "result_sha256": "777e0947d98a7a40dbe1cd1ec5c68cb072dab133ad6874e6be0f83290ab903eb",
+  "allocation": {
+    "job": "416830",
+    "state": "COMPLETED",
+    "elapsed": "05:21:22",
+    "exit_code": "0:0"
+  },
+  "decision": "Do not extend pretraining allocation from this gate. The existing TUEV CPL scratch record uses duplex, while this gate uses pac_interaction/rotation bands-as-channels; it is not a matched scratch counterfactual. Do not label the score difference as a pretraining effect."
+}

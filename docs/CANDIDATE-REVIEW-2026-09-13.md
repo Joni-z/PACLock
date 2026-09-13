@@ -96,19 +96,41 @@ remain mixed and do not justify a new sweep. Allocation 416453 completed with
 exit code 0 and its controller released the node. Details are in
 `results/audits/iiic-self-coupling-completion-20260913.json`.
 
+Both 140k-step TUEG transfer gates have now completed all 50 finetuning epochs:
+native validation kappa .403105 and coupling .424513. The coupling job 416830
+completed normally in 5:21:22 and released its single-card allocation. Its
+historical scratch counterpart uses a different duplex frontend, so this is
+not a matched estimate of pretraining's effect. No new pretraining allocation
+is justified by these gates. See `results/audits/cpl-140k-transfer-completion-20260913.json`.
+
+Torch scheduling now defaults to `h200_public / torch_pr_63_general`. Slurm
+rejected attempts to increase CPUs on pending jobs 17365674–17365677, which
+retain their queue identities and eight CPUs. The three TUSZ transplant configs
+now use eight workers and a 23-hour training cap for their 24-hour allocations;
+all model, optimizer, loss and 50-epoch settings are unchanged. The two running
+raw controls keep their already-loaded configuration. These experiments select
+by AUROC, so maximum logged PR-AUC is not their selected checkpoint score.
+Source hashes, atomic replacements/backups and scheduler responses are recorded
+in `results/audits/torch-pending-cpus-20260913.json`.
+
 ## Existing axisfree pretraining candidate
 
 The inventory now includes both `cf2_v1d192` and `cf2_v1d192_ptR`, which were
 previously absent from the monitor's family allowlist. The pretrained variant
-has ten completed seed-0 datasets. Nine have matching manifest identities,
+now has eleven completed seed-0 datasets. Ten have matching manifest identities,
 class counts and recipes against scratch after removing name/group/checkpoint:
-four improve and five decline. TUEV kappa changes .521695 to .557578, while
+four improve and six decline. TUEV kappa changes .521695 to .557578, while
 TUAR changes .595250 to .526905. These single-seed observations do not establish
 a stable pretraining benefit and do not justify more pretraining allocation.
 TUSZ has equal counts but different manifest timestamps, so its apparent gain
 is excluded from the matched count; the timestamp difference alone does not
 prove different examples. Historical source/checkpoint provenance remains a
-limitation. See `results/audits/axisfree-pretrain-validation-20260913.json`.
+limitation. The added CHB-MIT result is PR-AUC .563290 versus scratch .691752
+(-.128463), with an ordinary patience stop verified in the log and runtime
+below its cap. Allocation 416043 completed normally and released. The initial
+nine-pair audit and this additional completion are recorded in
+`results/audits/axisfree-pretrain-validation-20260913.json` and
+`results/audits/chb-axisfree-completion-20260913.json`.
 
 ## Historical readout check
 
