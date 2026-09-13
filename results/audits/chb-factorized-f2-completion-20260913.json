@@ -1,0 +1,488 @@
+{
+  "recorded_at": "2026-09-13T08:52:47.319805+00:00",
+  "state": "chb_f2_completed_normal_patience",
+  "results": [
+    {
+      "path": "runs/chbmit-factorized_f0/seed0/result.json",
+      "sha256": "fb0995df0449cae669892d357b33367ea624fe1b16ac7ab9883ea3f1c47d5ca9",
+      "name": "chbmit-factorized_f0",
+      "seed": 0,
+      "primary_metric": "pr_auc",
+      "best_val": 0.587277307880852,
+      "epochs_run": 4,
+      "stopped_by": "patience",
+      "wall_time_sec": 34646.98294067383,
+      "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+      "class_counts": {
+        "train": [
+          313322,
+          2883
+        ],
+        "val": [
+          21034,
+          150
+        ],
+        "test": [
+          17110,
+          276
+        ]
+      },
+      "n_params_M": 3.615954,
+      "config": {
+        "name": "chbmit-factorized_f0",
+        "group": "factorized",
+        "dataset": "chbmit",
+        "data_root": "$PACLOCK_PROC/processed/chbmit",
+        "model": "paclock",
+        "optimizer": "adamw",
+        "lr": 0.0001,
+        "weight_decay": 1e-05,
+        "scheduler": "cosine",
+        "grad_clip": 1.0,
+        "num_workers": 8,
+        "device": "cuda",
+        "num_classes": 2,
+        "epochs": 20,
+        "batch_size": 32,
+        "eval_every_steps": 200,
+        "patience": 20,
+        "loss": "focal",
+        "focal_alpha": 0.25,
+        "focal_gamma": 2.0,
+        "sample_rate": 200,
+        "model_kwargs": {
+          "arch": "triaxial",
+          "d_model": 192,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "factorized",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50,
+          "coupling_dim": 128,
+          "content_source": "zero",
+          "content_scale": 1.0
+        },
+        "seed": 0,
+        "max_hours": 21.51098324570391,
+        "backfill": {
+          "source_job": "416627",
+          "allocation": "416484",
+          "gpu": 2,
+          "original_max_hours": 22.5,
+          "max_hours": 21.51098324570391
+        }
+      }
+    },
+    {
+      "path": "runs/chbmit-factorized_f1/seed0/result.json",
+      "sha256": "86da2b5c307deeb9e08e06d1595760a155036a1ddf8b4b4160dfac9b70565ffe",
+      "name": "chbmit-factorized_f1",
+      "seed": 0,
+      "primary_metric": "pr_auc",
+      "best_val": 0.6730264886717272,
+      "epochs_run": 4,
+      "stopped_by": "patience",
+      "wall_time_sec": 34380.9052259922,
+      "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+      "class_counts": {
+        "train": [
+          313322,
+          2883
+        ],
+        "val": [
+          21034,
+          150
+        ],
+        "test": [
+          17110,
+          276
+        ]
+      },
+      "n_params_M": 3.615954,
+      "config": {
+        "name": "chbmit-factorized_f1",
+        "group": "factorized",
+        "dataset": "chbmit",
+        "data_root": "$PACLOCK_PROC/processed/chbmit",
+        "model": "paclock",
+        "optimizer": "adamw",
+        "lr": 0.0001,
+        "weight_decay": 1e-05,
+        "scheduler": "cosine",
+        "grad_clip": 1.0,
+        "num_workers": 8,
+        "device": "cuda",
+        "num_classes": 2,
+        "epochs": 20,
+        "batch_size": 32,
+        "eval_every_steps": 200,
+        "patience": 20,
+        "loss": "focal",
+        "focal_alpha": 0.25,
+        "focal_gamma": 2.0,
+        "sample_rate": 200,
+        "model_kwargs": {
+          "arch": "triaxial",
+          "d_model": 192,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "factorized",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50,
+          "coupling_dim": 128,
+          "content_source": "band",
+          "content_scale": 1.0
+        },
+        "seed": 0,
+        "max_hours": 16.78959409091208,
+        "backfill": {
+          "source_job": "416627",
+          "allocation": "416457",
+          "gpu": 3,
+          "original_max_hours": 22.5,
+          "max_hours": 16.78959409091208
+        }
+      }
+    },
+    {
+      "path": "runs/chbmit-factorized_f2/seed0/result.json",
+      "sha256": "7417964a81572e85f10f4149d9e32ffa27efec1ca8dcd969afee61ad8084663a",
+      "name": "chbmit-factorized_f2",
+      "seed": 0,
+      "primary_metric": "pr_auc",
+      "best_val": 0.5195872015944218,
+      "epochs_run": 6,
+      "stopped_by": "patience",
+      "wall_time_sec": 51896.812710523605,
+      "data_manifest_created": "2026-08-04T12:57:56.642805+00:00",
+      "class_counts": {
+        "train": [
+          313322,
+          2883
+        ],
+        "val": [
+          21034,
+          150
+        ],
+        "test": [
+          17110,
+          276
+        ]
+      },
+      "n_params_M": 3.615954,
+      "config": {
+        "name": "chbmit-factorized_f2",
+        "group": "factorized",
+        "dataset": "chbmit",
+        "data_root": "$PACLOCK_PROC/processed/chbmit",
+        "model": "paclock",
+        "optimizer": "adamw",
+        "lr": 0.0001,
+        "weight_decay": 1e-05,
+        "scheduler": "cosine",
+        "grad_clip": 1.0,
+        "num_workers": 8,
+        "device": "cuda",
+        "num_classes": 2,
+        "epochs": 20,
+        "batch_size": 32,
+        "eval_every_steps": 200,
+        "patience": 20,
+        "loss": "focal",
+        "focal_alpha": 0.25,
+        "focal_gamma": 2.0,
+        "sample_rate": 200,
+        "model_kwargs": {
+          "arch": "triaxial",
+          "d_model": 192,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "factorized",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50,
+          "coupling_dim": 128,
+          "content_source": "broadband",
+          "content_scale": 1.0
+        },
+        "seed": 0,
+        "max_hours": 16.39539934423235,
+        "backfill": {
+          "source_job": "416627",
+          "allocation": "416422",
+          "gpu": 0,
+          "original_max_hours": 22.5,
+          "max_hours": 16.39539934423235
+        }
+      }
+    }
+  ],
+  "config_differences": {
+    "backfill.allocation": [
+      "416484",
+      "416457",
+      "416422"
+    ],
+    "backfill.gpu": [
+      2,
+      3,
+      0
+    ],
+    "backfill.max_hours": [
+      21.51098324570391,
+      16.78959409091208,
+      16.39539934423235
+    ],
+    "max_hours": [
+      21.51098324570391,
+      16.78959409091208,
+      16.39539934423235
+    ],
+    "model_kwargs.content_source": [
+      "zero",
+      "band",
+      "broadband"
+    ],
+    "name": [
+      "chbmit-factorized_f0",
+      "chbmit-factorized_f1",
+      "chbmit-factorized_f2"
+    ]
+  },
+  "f2_minus_f1_pr_auc": -0.15343928707730536,
+  "f2_minus_f0_pr_auc": -0.06769010628643013,
+  "completion_receipt": {
+    "source_job": "416627",
+    "source_name": "FACT_chbmit",
+    "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized",
+    "config": "configs/factorized/chbmit_f2.yaml",
+    "seed": 0,
+    "name": "chbmit-factorized_f2",
+    "dataset": "chbmit",
+    "min_remaining_hours": 14,
+    "sha256": "645ce3a56f3f7a8c619a124e97643e6043e3319c0f412304f8cfd4c2cbe0039c",
+    "allocation": "416422",
+    "node": "k002-005",
+    "gpu": 0,
+    "started_at": 1789237090.636069,
+    "original_max_hours": 22.5,
+    "max_hours": 16.39539934423235,
+    "slurm_step": "0",
+    "pid": 1342568,
+    "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/10_416627_chbmit_f2_s0.out",
+    "exit_code": 0,
+    "finished_at": 1789289008.7969959,
+    "result": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/runs/chbmit-factorized_f2/seed0/result.json",
+    "result_exists": true
+  },
+  "cross_corpus_seed0_context": [
+    {
+      "dataset": "tuev",
+      "cells": [
+        {
+          "name": "tuev-factorized_f0",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.5920339756760868,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+          "val_subsample": null,
+          "sha256": "06bcb0ac4783b234c7c6473e069715c383b4f8b498d8f20daafb5bd936469cce"
+        },
+        {
+          "name": "tuev-factorized_f1",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.6293830334044075,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+          "val_subsample": null,
+          "sha256": "9c6d21bcbd9b24baa1f7e8954f39a87e48d195d4139a3705299800885436e06c"
+        },
+        {
+          "name": "tuev-factorized_f2",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.6005725633817347,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+          "val_subsample": null,
+          "sha256": "12ef7d0b34fa7da9ce9fa81fe7bde5fc4095bc13f62777e0b987822f319dfad4"
+        }
+      ]
+    },
+    {
+      "dataset": "tuar",
+      "cells": [
+        {
+          "name": "tuar-factorized_f0",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.6048564442913953,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+          "val_subsample": null,
+          "sha256": "941dd7071778e887ee153d3c503101ca79eb8308a44e74070326e3d3fc1b3c5b"
+        },
+        {
+          "name": "tuar-factorized_f1",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.6013541017245357,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+          "val_subsample": null,
+          "sha256": "6e4be3ba4f749538d339c9be50c5031cb26580b63bf3a8112049700b36c2481c"
+        },
+        {
+          "name": "tuar-factorized_f2",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.6231412171526807,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-17T11:03:32.287406+00:00",
+          "val_subsample": null,
+          "sha256": "a858b24e313330def28f09856bff55e4fc5665b3b90a6fcb821618f84ceb1454"
+        }
+      ]
+    },
+    {
+      "dataset": "tusz",
+      "cells": [
+        {
+          "name": "tusz-factorized_f0",
+          "seed": 0,
+          "primary_metric": "pr_auc",
+          "best_val": 0.3772372236285481,
+          "stopped_by": "patience",
+          "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+          "val_subsample": 20000,
+          "sha256": "a91948c9f78014bca7596e1890ac7e24fd15ec73a09912c8520f82a5f4602e54"
+        },
+        {
+          "name": "tusz-factorized_f1",
+          "seed": 0,
+          "primary_metric": "pr_auc",
+          "best_val": 0.34952080644550243,
+          "stopped_by": "patience",
+          "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+          "val_subsample": 20000,
+          "sha256": "affc60f2c9493198b11b3a08d0583fda00d80c45dfbbcbeda700cf0092c2fa6f"
+        },
+        {
+          "name": "tusz-factorized_f2",
+          "seed": 0,
+          "primary_metric": "pr_auc",
+          "best_val": 0.37611457242545066,
+          "stopped_by": "patience",
+          "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+          "val_subsample": 20000,
+          "sha256": "e40338628deda34900ecaa91ed3109eb9d1c77b2fca14c4d4dbd53c07f89d60d"
+        }
+      ]
+    },
+    {
+      "dataset": "sleepedf",
+      "cells": [
+        {
+          "name": "sleepedf-factorized_f0",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.6403278616077747,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+          "val_subsample": null,
+          "sha256": "3035ddbb09786ee8f26d728e339e62e943845e71e3ea775b70f418741d825822"
+        },
+        {
+          "name": "sleepedf-factorized_f1",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.6415863472741984,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+          "val_subsample": null,
+          "sha256": "eaddfc95ca1580b5699c488336962f9e015e9a3140ab41797b0e4756480b4a62"
+        },
+        {
+          "name": "sleepedf-factorized_f2",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.6728594970412571,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-04T10:52:50.798900+00:00",
+          "val_subsample": null,
+          "sha256": "4f359fca42ed653931f0a507f1c516417e195c1ff477cc17dc8ab8b4f64a08db"
+        }
+      ]
+    },
+    {
+      "dataset": "isruc",
+      "cells": [
+        {
+          "name": "isruc-factorized_f0",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.7231843897846111,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+          "val_subsample": null,
+          "sha256": "21cdec6f35b47d2f815e561569dd00760ce3aff196ae5b90836c2b32beb3e655"
+        },
+        {
+          "name": "isruc-factorized_f1",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.7257705958021662,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+          "val_subsample": null,
+          "sha256": "f0d05f2b42c89f45424c2ca7f0ebf10e9c897422bebbec36829cf3e799da14ac"
+        },
+        {
+          "name": "isruc-factorized_f2",
+          "seed": 0,
+          "primary_metric": "cohen_kappa",
+          "best_val": 0.758433905832134,
+          "stopped_by": "epochs",
+          "data_manifest_created": "2026-08-05T03:42:29.038926+00:00",
+          "val_subsample": null,
+          "sha256": "2888dece8ebb8430384173005ff3d951c68becfee0e9c8163a42190342888e61"
+        }
+      ]
+    }
+  ],
+  "decision": "Retain the completed negative CHB result; no extension or restart. The broadband-only content option is not a supported universal replacement: effects vary across the six screened corpora. Wait for the admitted TUEV joint-augmentation gate before expansion.",
+  "caveats": [
+    "Validation-only comparison; test values excluded from this audit and decision.",
+    "One seed per corpus; no family elimination or mixed-metric averaging.",
+    "Matched recorded CHB recipe, parameter count and cohort except content source, run identity, placement and nonbinding runtime caps. Historical source/runtime identity is not fully certified.",
+    "CHB f2 completed six epochs under its 16.395-hour runtime cap. The GPU was released, but allocation 416422 remains needed by three TUEV trainers."
+  ]
+}
