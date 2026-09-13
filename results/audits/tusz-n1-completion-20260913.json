@@ -1,0 +1,151 @@
+{
+  "observed_at": "2026-09-13T03:39:45.621370+00:00",
+  "comparison": "TUSZ seed-0 16-band rotation versus 8-band rotation",
+  "results": [
+    {
+      "path": "runs/tusz-crofremo_n1/seed0/result.json",
+      "sha256": "5a4ccf64c7a537ab97e774ab6ceca58bd4bc6b2c90daed9fc4fb7294469452c6",
+      "name": "tusz-crofremo_n1",
+      "seed": 0,
+      "primary_metric": "pr_auc",
+      "best_val": 0.38566036094501294,
+      "epochs_run": 3,
+      "stopped_by": "patience",
+      "wall_time_sec": 34749.76795768738,
+      "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+      "class_counts": {
+        "train": [
+          313196,
+          13472
+        ],
+        "val": [
+          153259,
+          3136
+        ],
+        "test": [
+          43364,
+          2727
+        ]
+      },
+      "config": {
+        "name": "tusz-crofremo_n1",
+        "group": "design",
+        "dataset": "tusz",
+        "data_root": "$PACLOCK_PROC/processed/tusz",
+        "model": "paclock",
+        "optimizer": "adamw",
+        "lr": 0.0001,
+        "weight_decay": 1e-05,
+        "scheduler": "cosine",
+        "grad_clip": 1.0,
+        "num_workers": 8,
+        "device": "cuda",
+        "num_classes": 2,
+        "epochs": 20,
+        "batch_size": 32,
+        "eval_every_steps": 200,
+        "patience": 20,
+        "loss": "bce_with_logits",
+        "sample_rate": 200,
+        "val_subsample": 20000,
+        "model_kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 16,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        },
+        "seed": 0,
+        "max_hours": 22.5
+      }
+    },
+    {
+      "path": "runs/tusz-paclock_rot2/seed0/result.json",
+      "sha256": "72734005a23172e07d8a925f27c8f7c85f0c8fd581ede2caa24068edea210cb9",
+      "name": "tusz-paclock_rot2",
+      "seed": 0,
+      "primary_metric": "pr_auc",
+      "best_val": 0.3621377153131793,
+      "epochs_run": 2,
+      "stopped_by": "patience",
+      "wall_time_sec": 13298.552631378174,
+      "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+      "class_counts": {
+        "train": [
+          313196,
+          13472
+        ],
+        "val": [
+          153259,
+          3136
+        ],
+        "test": [
+          43364,
+          2727
+        ]
+      },
+      "config": {
+        "name": "tusz-paclock_rot2",
+        "group": "C",
+        "dataset": "tusz",
+        "data_root": "$PACLOCK_PROC/processed/tusz",
+        "model": "paclock",
+        "optimizer": "adamw",
+        "lr": 0.0001,
+        "weight_decay": 1e-05,
+        "scheduler": "cosine",
+        "grad_clip": 1.0,
+        "num_workers": 8,
+        "device": "cuda",
+        "num_classes": 2,
+        "epochs": 20,
+        "batch_size": 32,
+        "eval_every_steps": 200,
+        "patience": 20,
+        "loss": "bce_with_logits",
+        "sample_rate": 200,
+        "val_subsample": 20000,
+        "model_kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        },
+        "seed": 0,
+        "max_hours": 22.5
+      }
+    }
+  ],
+  "delta_validation_pr_auc": 0.02352264563183365,
+  "cohort_and_recipe_checks": "Same manifest timestamp, class counts, and configs except name/group/n_bands. Both select by PR-AUC; ordinary patience, below wall budget.",
+  "limitations": [
+    "One seed only; do not eliminate or freeze a family.",
+    "Different elapsed training and epoch counts: 16 bands 3 epochs, 8 bands 2 epochs under identical patience policy.",
+    "Historical training-source identity is not proven by config equality.",
+    "Job 416484 remains allocated for other trainers; completion of this child does not release the node."
+  ],
+  "decision": "No further band-count sweep admitted. Preserve the small TUSZ gain alongside the negative IIIC result; finish current joint-content and TUEV scale confirmations first."
+}
