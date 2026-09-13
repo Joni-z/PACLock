@@ -1,0 +1,5645 @@
+{
+  "recorded_at": "2026-09-13T07:16:00.852796+00:00",
+  "candidate_matrix_sha256": "8acb0d8540acedbf9cb01dd4cf5e88119ce32ad2a207cdf6393df4bf2f55bd71",
+  "snapshot_at": 1789283362.810507,
+  "comparison": "Paired training seeds, equal recorded validation cohort, completed eligible records only",
+  "summary_against_cbramod": {
+    "paclock_rot2": {
+      "three_seed_matched_datasets": 10,
+      "positive_delta": [
+        "adfd",
+        "caueeg",
+        "iiic",
+        "tuab",
+        "tuep",
+        "tuev"
+      ],
+      "negative_delta": [
+        "bci_iv_2a",
+        "isruc",
+        "sleepedf",
+        "tuar"
+      ]
+    },
+    "paclock_duplex": {
+      "three_seed_matched_datasets": 9,
+      "positive_delta": [
+        "adfd",
+        "caueeg",
+        "iiic",
+        "tuab",
+        "tuep",
+        "tuev"
+      ],
+      "negative_delta": [
+        "isruc",
+        "sleepedf",
+        "tuar"
+      ]
+    },
+    "factorized_f4_joint_confirm": {
+      "three_seed_matched_datasets": 0,
+      "positive_delta": [],
+      "negative_delta": []
+    },
+    "factorized_f4_aug_confirm": {
+      "three_seed_matched_datasets": 0,
+      "positive_delta": [],
+      "negative_delta": []
+    }
+  },
+  "pairs": [
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "adfd",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "adfd",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-20T13:03:25.271983+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          306,
+          233,
+          403
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.49770467539006497,
+      "baseline_mean": 0.4380134589365451,
+      "mean_delta": 0.05969121645351988,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.10772913398512995,
+          "candidate": {
+            "name": "adfd-paclock_rot2",
+            "score": 0.543646001598946,
+            "result_sha256": "d31e5458281f22bb9a71918bf5bdc6286c2d37491db272713df7cefc92bb2046",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_rot2/seed0/result.json",
+            "epochs": 28,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-cbramod_pretrained",
+            "score": 0.4359168676138161,
+            "result_sha256": "8408554da93690ad47faa7c6a1badfdcd8014cb9252f6019d2122f71f95650c1",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.020471527825486946,
+          "candidate": {
+            "name": "adfd-paclock_rot2",
+            "score": 0.47241825053716807,
+            "result_sha256": "20a57ebb0c5b2ceeffcb043e837c3ffa8a244db4869562a03b5d0e60005ff974",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_rot2/seed1/result.json",
+            "epochs": 25,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-cbramod_pretrained",
+            "score": 0.4519467227116811,
+            "result_sha256": "8ea22d1cbe34a03ac1993967252b9bcf05bfdb7776dc4c74e019be860534076b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.05087298754994274,
+          "candidate": {
+            "name": "adfd-paclock_rot2",
+            "score": 0.4770497740340807,
+            "result_sha256": "9cc61442b1a8adad261b9e5301ad01b1228b2355b253c172b17814bee7c31745",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_rot2/seed2/result.json",
+            "epochs": 30,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-cbramod_pretrained",
+            "score": 0.426176786484138,
+            "result_sha256": "dab37d0bf07af9f10068695311912429771b40dbf96919c11eb8806620372cb0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "adfd",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "adfd",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-20T13:03:25.271983+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          306,
+          233,
+          403
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.522568695332443,
+      "baseline_mean": 0.4380134589365451,
+      "mean_delta": 0.0845552363958979,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.04710435987158218,
+          "candidate": {
+            "name": "adfd-paclock_duplex",
+            "score": 0.4830212274853983,
+            "result_sha256": "10a59bb217c12a2c93d43f3c4688a1e8cbfa34d857067bd5331f4b29dbf913bd",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_duplex/seed0/result.json",
+            "epochs": 30,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "adfd-cbramod_pretrained",
+            "score": 0.4359168676138161,
+            "result_sha256": "8408554da93690ad47faa7c6a1badfdcd8014cb9252f6019d2122f71f95650c1",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.10852364176304852,
+          "candidate": {
+            "name": "adfd-paclock_duplex",
+            "score": 0.5604703644747296,
+            "result_sha256": "9711b556847237a43cabd9a25deec6ecee9408ad38ae76cb8d3da7bda409e6b9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_duplex/seed1/result.json",
+            "epochs": 25,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-cbramod_pretrained",
+            "score": 0.4519467227116811,
+            "result_sha256": "8ea22d1cbe34a03ac1993967252b9bcf05bfdb7776dc4c74e019be860534076b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.09803770755306301,
+          "candidate": {
+            "name": "adfd-paclock_duplex",
+            "score": 0.524214494037201,
+            "result_sha256": "86d83b7f5779ff96923b19cc64f34dc492680e201a3ec8f8aea05db5bb76e950",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_duplex/seed2/result.json",
+            "epochs": 26,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-cbramod_pretrained",
+            "score": 0.426176786484138,
+            "result_sha256": "dab37d0bf07af9f10068695311912429771b40dbf96919c11eb8806620372cb0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "bci_iv_2a",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "bci_iv_2a",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-04T10:52:01.822097+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          108,
+          108,
+          108,
+          108
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.40972222222222227,
+      "baseline_mean": 0.5385802469135802,
+      "mean_delta": -0.128858024691358,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.10416666666666663,
+          "candidate": {
+            "name": "bci_iv_2a-paclock_rot2",
+            "score": 0.43518518518518523,
+            "result_sha256": "2782c087dcda6cad17f360af71b352002111bd7a89f533b24e45fc3009061075",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/bci_iv_2a-paclock_rot2/seed0/result.json",
+            "epochs": 66,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "bci_iv_2a-cbramod_pretrained",
+            "score": 0.5393518518518519,
+            "result_sha256": "d176373890b302a80edc60c2389a6c7230f285399a061927baba9ffd674e4825",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/bci_iv_2a-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.13888888888888884,
+          "candidate": {
+            "name": "bci_iv_2a-paclock_rot2",
+            "score": 0.3912037037037037,
+            "result_sha256": "7213dbc1251e86677ff6cceb932f19c33793f2ecf076911be4de52f98325f36d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/bci_iv_2a-paclock_rot2/seed1/result.json",
+            "epochs": 47,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "bci_iv_2a-cbramod_pretrained",
+            "score": 0.5300925925925926,
+            "result_sha256": "571e67b74c27d42a52138693b49c578b11cd8393b6712076c4f4d1bd995420d1",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/bci_iv_2a-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.1435185185185185,
+          "candidate": {
+            "name": "bci_iv_2a-paclock_rot2",
+            "score": 0.4027777777777778,
+            "result_sha256": "027a9b3d700f60935c165dd94926adc46240e013f702fac30d7f9c3b5297b99c",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/bci_iv_2a-paclock_rot2/seed2/result.json",
+            "epochs": 57,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "bci_iv_2a-cbramod_pretrained",
+            "score": 0.5462962962962963,
+            "result_sha256": "659531db3dd0753664c571c2cf7108953f8ab0287fbdfa0eecda14c9c489e30a",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/bci_iv_2a-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "index",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "bci_iv_2a",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "bci_iv_2a",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-04T10:52:01.822097+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          108,
+          108,
+          108,
+          108
+        ]
+      },
+      "shared_seeds": [
+        0
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.43518518518518523,
+      "baseline_mean": 0.5393518518518519,
+      "mean_delta": -0.10416666666666663,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.10416666666666663,
+          "candidate": {
+            "name": "bci_iv_2a-paclock_duplex",
+            "score": 0.43518518518518523,
+            "result_sha256": "1b2a1fc5b0eafafaaf4e3e675dde2d949fb2da5ec550c96cd51a0fca477df26a",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/bci_iv_2a-paclock_duplex/seed0/result.json",
+            "epochs": 78,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "bci_iv_2a-cbramod_pretrained",
+            "score": 0.5393518518518519,
+            "result_sha256": "d176373890b302a80edc60c2389a6c7230f285399a061927baba9ffd674e4825",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/bci_iv_2a-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "index",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "caueeg",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "caueeg",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-24T13:43:42.262721+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1531,
+          1389,
+          915
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.5033298731739156,
+      "baseline_mean": 0.48663179310229926,
+      "mean_delta": 0.016698080071616366,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.009224585929432594,
+          "candidate": {
+            "name": "caueeg-paclock_rot2",
+            "score": 0.48402414185638265,
+            "result_sha256": "8e4b4e8a2990041195231d1ca5d79621b99026386c29af481e74178403120c26",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-cbramod_pretrained",
+            "score": 0.47479955592695006,
+            "result_sha256": "890af980181cc1bffd7bb9f7705caa314686a89d106eb73a4f0413ac149f1761",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.007749050515294453,
+          "candidate": {
+            "name": "caueeg-paclock_rot2",
+            "score": 0.5062007813196833,
+            "result_sha256": "2f2f1ed0fe0e72d88b7c05210ffe36be0c1986274e960aa6ad312474f1d7b5c5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-cbramod_pretrained",
+            "score": 0.4984517308043888,
+            "result_sha256": "235583493f415767ac2966da1fe7c9d404cf7629b88e04b42c0490a624607812",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.03312060377012205,
+          "candidate": {
+            "name": "caueeg-paclock_rot2",
+            "score": 0.5197646963456809,
+            "result_sha256": "f397e747583e71aa6d615b626ff4c99c4d45acf711039af760f41b1f3659fb21",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-cbramod_pretrained",
+            "score": 0.48664409257555885,
+            "result_sha256": "5c670ea2a4d091de0bd2d1b604cbfdb6d90137cccc81ba0199176108b4380bdf",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "caueeg",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "caueeg",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-24T13:43:42.262721+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1531,
+          1389,
+          915
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.5047225190086644,
+      "baseline_mean": 0.48663179310229926,
+      "mean_delta": 0.018090725906365197,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.02751116000921333,
+          "candidate": {
+            "name": "caueeg-paclock_duplex",
+            "score": 0.5023107159361634,
+            "result_sha256": "8337f85ee83a3c6813d50dd112e2cc349a9b8b19c639afed0177782b16b1fdb5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-cbramod_pretrained",
+            "score": 0.47479955592695006,
+            "result_sha256": "890af980181cc1bffd7bb9f7705caa314686a89d106eb73a4f0413ac149f1761",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.025608231047269447,
+          "candidate": {
+            "name": "caueeg-paclock_duplex",
+            "score": 0.5240599618516583,
+            "result_sha256": "1168c0499cb0f2b6e73b8cba4a6d56e1a27cb78f41e2ded17b48612634a306a9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-cbramod_pretrained",
+            "score": 0.4984517308043888,
+            "result_sha256": "235583493f415767ac2966da1fe7c9d404cf7629b88e04b42c0490a624607812",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.0011527866626128147,
+          "candidate": {
+            "name": "caueeg-paclock_duplex",
+            "score": 0.48779687923817167,
+            "result_sha256": "4578ccefee5037dfe82210f247c09951f53b7d48d10cb73cf5200164bb17df5e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-cbramod_pretrained",
+            "score": 0.48664409257555885,
+            "result_sha256": "5c670ea2a4d091de0bd2d1b604cbfdb6d90137cccc81ba0199176108b4380bdf",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "eegmat",
+      "metric": "auroc",
+      "cohort": {
+        "dataset": "eegmat",
+        "metric": "auroc",
+        "manifest": "2026-08-21T09:57:23.714216+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          180,
+          60
+        ]
+      },
+      "shared_seeds": [
+        0
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.6829629629629629,
+      "baseline_mean": 0.8375,
+      "mean_delta": -0.15453703703703714,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.15453703703703714,
+          "candidate": {
+            "name": "eegmat-paclock_duplex",
+            "score": 0.6829629629629629,
+            "result_sha256": "2198608756452d5923c66f0d676d183e69c16aee2399e67bdca73c9a71165e2b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/eegmat-paclock_duplex/seed0/result.json",
+            "epochs": 30,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "eegmat-cbramod_pretrained",
+            "score": 0.8375,
+            "result_sha256": "9b4eee73bfc478c75874bec9366ca3f7668a14c0327bfccca4034036f21a5702",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/eegmat-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "faced",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "faced",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-05T06:14:21.533854+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          180,
+          180,
+          180,
+          180,
+          240,
+          180,
+          180,
+          180,
+          180
+        ]
+      },
+      "shared_seeds": [
+        0
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.16604938271604935,
+      "baseline_mean": 0.6087962962962964,
+      "mean_delta": -0.44274691358024704,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.44274691358024704,
+          "candidate": {
+            "name": "faced-paclock_rot2",
+            "score": 0.16604938271604935,
+            "result_sha256": "94b881c74ac5675228d78d8b2c24724106eaaacd6e12268b786959dfa72f73bd",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/faced-paclock_rot2/seed0/result.json",
+            "epochs": 47,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "faced-cbramod_pretrained",
+            "score": 0.6087962962962964,
+            "result_sha256": "bb52b55b02d96d9bcd7153ddfdc1b800ec6c4d5be065d972f70e764c73f7d075",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/faced-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 200,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "index",
+          "pac_patch_len": 200
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "iiic",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "iiic",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2901,
+          3092,
+          2240,
+          2402,
+          2407,
+          2736
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.5479447083632826,
+      "baseline_mean": 0.4224844474439415,
+      "mean_delta": 0.12546026091934104,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.1258779303645482,
+          "candidate": {
+            "name": "iiic-paclock_rot2",
+            "score": 0.5612408260531658,
+            "result_sha256": "436e9c7eb872c2ad35ba677638ded5c6ef5d5b28cb597c4b4935fdbd77c10f07",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-cbramod_pretrained",
+            "score": 0.43536289568861763,
+            "result_sha256": "4da0ceb6342c364328c5b21d395ae81c82dafef9f1c0c71abbf6ccc14afddeb4",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.12101453321201106,
+          "candidate": {
+            "name": "iiic-paclock_rot2",
+            "score": 0.5394090921565471,
+            "result_sha256": "1a2c050f491e0dba5005ae85d4caf5d7a5b8648acacc501cffd6e1f52e2fd402",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-cbramod_pretrained",
+            "score": 0.41839455894453603,
+            "result_sha256": "c8f7b017ca4eadb6c2382e3bd8ff1216a8851aa9781939e518fb0544c68e0e9d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.12948831918146386,
+          "candidate": {
+            "name": "iiic-paclock_rot2",
+            "score": 0.5431842068801347,
+            "result_sha256": "5be6e656af18351726be5673847a98d2e4a2d507b9931e9b5311fd97b1c2a4a0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-cbramod_pretrained",
+            "score": 0.41369588769867083,
+            "result_sha256": "a094be3173d1798886101e93a85e487e90fba33b17b2ddd3bac9d312791193a8",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "iiic",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "iiic",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2901,
+          3092,
+          2240,
+          2402,
+          2407,
+          2736
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.536978267395926,
+      "baseline_mean": 0.4224844474439415,
+      "mean_delta": 0.11449381995198449,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.10400979052893156,
+          "candidate": {
+            "name": "iiic-paclock_duplex",
+            "score": 0.5393726862175492,
+            "result_sha256": "c00f284c74f4881f65ec278ff9957d5c20b27f0d91fc0ec233045f111f90b414",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-cbramod_pretrained",
+            "score": 0.43536289568861763,
+            "result_sha256": "4da0ceb6342c364328c5b21d395ae81c82dafef9f1c0c71abbf6ccc14afddeb4",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.11570515450581287,
+          "candidate": {
+            "name": "iiic-paclock_duplex",
+            "score": 0.5340997134503489,
+            "result_sha256": "c6bb46b389f78946ebbf14c42826962a6aa694003db4c3dedb5f9be47c308d19",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-cbramod_pretrained",
+            "score": 0.41839455894453603,
+            "result_sha256": "c8f7b017ca4eadb6c2382e3bd8ff1216a8851aa9781939e518fb0544c68e0e9d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.12376651482120904,
+          "candidate": {
+            "name": "iiic-paclock_duplex",
+            "score": 0.5374624025198799,
+            "result_sha256": "d1758539f24e4cb5853063e698c6580d05de18d28a34ebfed17383c41b4325de",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-cbramod_pretrained",
+            "score": 0.41369588769867083,
+            "result_sha256": "a094be3173d1798886101e93a85e487e90fba33b17b2ddd3bac9d312791193a8",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "isruc",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "isruc",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-05T03:42:29.038926+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2072,
+          1015,
+          3226,
+          1980,
+          1067
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.7246767069745363,
+      "baseline_mean": 0.7397904445693048,
+      "mean_delta": -0.015113737594768343,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.0052349754424021455,
+          "candidate": {
+            "name": "isruc-paclock_rot2",
+            "score": 0.7315018776175131,
+            "result_sha256": "2ed780542ff759cdd64c0b048de80c8c1bc2e16d5d441c656ef832e7848370d3",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "isruc-cbramod_pretrained",
+            "score": 0.7367368530599152,
+            "result_sha256": "101984dc818be11dd8d169c3c753a663049bce5086b4b94fb742aad757c53c6e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.02313667311715273,
+          "candidate": {
+            "name": "isruc-paclock_rot2",
+            "score": 0.7215969378224234,
+            "result_sha256": "b12419618dfff7e458ba69cad668b108348d6886557b10a32bec1e06a8adc645",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "isruc-cbramod_pretrained",
+            "score": 0.7447336109395761,
+            "result_sha256": "be1aaf4733e9166ce21e09492c206780f51993e44818f1bef470c25bb799e7dc",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.016969564224750155,
+          "candidate": {
+            "name": "isruc-paclock_rot2",
+            "score": 0.7209313054836727,
+            "result_sha256": "d470d0f868e3ffc41ae4c8f3c16b5e5d8bee89a7d65f71d9ac7b9c4ae5a3ed7e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "isruc-cbramod_pretrained",
+            "score": 0.7379008697084228,
+            "result_sha256": "b4b7c53ea92edf25f21111928baf68b8392779dda85df77feb64e31a038478a6",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "index",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "isruc",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "isruc",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-05T03:42:29.038926+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2072,
+          1015,
+          3226,
+          1980,
+          1067
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.7343553256559295,
+      "baseline_mean": 0.7397904445693048,
+      "mean_delta": -0.005435118913375225,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.0010022337912685142,
+          "candidate": {
+            "name": "isruc-paclock_duplex",
+            "score": 0.7357346192686467,
+            "result_sha256": "472ec0f860735808d5f6b09a819606a0f89224c23e6931915dd1fe7be4001f97",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "isruc-cbramod_pretrained",
+            "score": 0.7367368530599152,
+            "result_sha256": "101984dc818be11dd8d169c3c753a663049bce5086b4b94fb742aad757c53c6e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.011510520556121673,
+          "candidate": {
+            "name": "isruc-paclock_duplex",
+            "score": 0.7332230903834545,
+            "result_sha256": "08a50b760e9cc42bfabdac5e2d74c5eca35aeafdecb182203dde7ed1f4d9e43b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "isruc-cbramod_pretrained",
+            "score": 0.7447336109395761,
+            "result_sha256": "be1aaf4733e9166ce21e09492c206780f51993e44818f1bef470c25bb799e7dc",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.003792602392735489,
+          "candidate": {
+            "name": "isruc-paclock_duplex",
+            "score": 0.7341082673156873,
+            "result_sha256": "4ade45f6fa0bec823a20948102b3df1fef23169b9583bbeb81ae23fbf8a61a1d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "isruc-cbramod_pretrained",
+            "score": 0.7379008697084228,
+            "result_sha256": "b4b7c53ea92edf25f21111928baf68b8392779dda85df77feb64e31a038478a6",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "index",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "mumtaz",
+      "metric": "auroc",
+      "cohort": {
+        "dataset": "mumtaz",
+        "metric": "auroc",
+        "manifest": "2026-08-21T09:57:12.546560+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          417,
+          539
+        ]
+      },
+      "shared_seeds": [
+        0
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.866410396728999,
+      "baseline_mean": 0.9290497101391243,
+      "mean_delta": -0.0626393134101253,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.0626393134101253,
+          "candidate": {
+            "name": "mumtaz-paclock_duplex",
+            "score": 0.866410396728999,
+            "result_sha256": "8992da04cfedffd1ef29f2a8cc637ea7573342353343c65f6eeb54f0735f929a",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/mumtaz-paclock_duplex/seed0/result.json",
+            "epochs": 30,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "mumtaz-cbramod_pretrained",
+            "score": 0.9290497101391243,
+            "result_sha256": "443d44f9057db27c0a2cc176c94e56296ab16039afce79311461b2da17e433d9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/mumtaz-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "physionet_mi",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "physionet_mi",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-04T10:52:50.796908+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          435,
+          432,
+          434,
+          433
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.30165547539641835,
+      "baseline_mean": 0.5662973246034606,
+      "mean_delta": -0.26464184920704237,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.2519212375778771,
+          "candidate": {
+            "name": "physionet_mi-paclock_rot2",
+            "score": 0.3063069024976437,
+            "result_sha256": "6d45be5227536d3cbdc55b3ded68245b5249f68fd9fffc2b207c9a3c3dd64eb2",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/physionet_mi-paclock_rot2/seed0/result.json",
+            "epochs": 55,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "physionet_mi-cbramod_pretrained",
+            "score": 0.5582281400755208,
+            "result_sha256": "8ab8202a498d514477de20ed187770a47ce819d6b03b886298177b8a56a98ae4",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/physionet_mi-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.2773624608362076,
+          "candidate": {
+            "name": "physionet_mi-paclock_rot2",
+            "score": 0.29700404829519295,
+            "result_sha256": "d3a9600435a1c4f8654d7446d80cc7c599fa4d82a5288ba94783476e495b5453",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/physionet_mi-paclock_rot2/seed1/result.json",
+            "epochs": 55,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "physionet_mi-cbramod_pretrained",
+            "score": 0.5743665091314005,
+            "result_sha256": "384384f091e5fa8343096785c759213bf33f4292c8dc623feac96cc9c04f2a93",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/physionet_mi-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 200,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "index",
+          "pac_patch_len": 200
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "sleepedf",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "sleepedf",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-04T10:52:50.798900+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          14158,
+          4849,
+          10838,
+          1647,
+          4150
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.6395886301996129,
+      "baseline_mean": 0.6647849141849973,
+      "mean_delta": -0.025196283985384465,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.023993144537885924,
+          "candidate": {
+            "name": "sleepedf-paclock_rot2",
+            "score": 0.6436485610845792,
+            "result_sha256": "cef1cfb6ba2e621dbfe43241ac196ebf61390e047b6c94a872f24e63dc2b3894",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "sleepedf-cbramod_pretrained",
+            "score": 0.6676417056224652,
+            "result_sha256": "6caf33452ad2968b60a67de23e2727f2d73ea436bd773f83e52157406f2e3411",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.01552160897666921,
+          "candidate": {
+            "name": "sleepedf-paclock_rot2",
+            "score": 0.6428459507948933,
+            "result_sha256": "ed6520d405b71913132a6cdaff2e8f8fa9a8a9c72f3d3f17a0eae3c6ba65fcc8",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "sleepedf-cbramod_pretrained",
+            "score": 0.6583675597715625,
+            "result_sha256": "64d65e8a37fcdc249c82297d66032766605633332e9a2c4ae337829cb22a9bfe",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.03607409844159826,
+          "candidate": {
+            "name": "sleepedf-paclock_rot2",
+            "score": 0.632271378719366,
+            "result_sha256": "a7d31bc9ba4dc858687ee17eff4f17ddc140871d2eaf4bccef0ceb3ee39f6f7c",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "sleepedf-cbramod_pretrained",
+            "score": 0.6683454771609643,
+            "result_sha256": "cf3f26c522602929c56629a954a438529d23156070dd8bd13285f96e8fda02c3",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "sleepedf",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "sleepedf",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-04T10:52:50.798900+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          14158,
+          4849,
+          10838,
+          1647,
+          4150
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.6330456627244843,
+      "baseline_mean": 0.6647849141849973,
+      "mean_delta": -0.03173925146051304,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.031265527975491536,
+          "candidate": {
+            "name": "sleepedf-paclock_duplex",
+            "score": 0.6363761776469736,
+            "result_sha256": "e45f0d69292a23eb08602cf46c6e1b33bb00681c7273289360126a821997e769",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "sleepedf-cbramod_pretrained",
+            "score": 0.6676417056224652,
+            "result_sha256": "6caf33452ad2968b60a67de23e2727f2d73ea436bd773f83e52157406f2e3411",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.03090905916131781,
+          "candidate": {
+            "name": "sleepedf-paclock_duplex",
+            "score": 0.6274585006102447,
+            "result_sha256": "17a326aaf153a53a2a2e02d220bc7ea35094c22778943cbc177d9221c32b1b47",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "sleepedf-cbramod_pretrained",
+            "score": 0.6583675597715625,
+            "result_sha256": "64d65e8a37fcdc249c82297d66032766605633332e9a2c4ae337829cb22a9bfe",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.033043167244729776,
+          "candidate": {
+            "name": "sleepedf-paclock_duplex",
+            "score": 0.6353023099162345,
+            "result_sha256": "7319f2eb798bdce5512d77012dd85d2a19b55f93f8f1f77ba999ec4209a5a674",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "sleepedf-cbramod_pretrained",
+            "score": 0.6683454771609643,
+            "result_sha256": "cf3f26c522602929c56629a954a438529d23156070dd8bd13285f96e8fda02c3",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuab",
+      "metric": "auroc",
+      "cohort": {
+        "dataset": "tuab",
+        "metric": "auroc",
+        "manifest": "2026-08-04T12:32:29.190287+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          35815,
+          39592
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.909155100462053,
+      "baseline_mean": 0.881500090889378,
+      "mean_delta": 0.027655009572675044,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.026791748894708145,
+          "candidate": {
+            "name": "tuab-paclock_rot2",
+            "score": 0.9089616690409706,
+            "result_sha256": "c1e8327374ec54b8bacfc084096220ad3fb454465fee85a20c9188fca9e1386a",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-paclock_rot2/seed0/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuab-cbramod_pretrained",
+            "score": 0.8821699201462625,
+            "result_sha256": "e52905d340dfd98c1de5f548b27f0d0c89245db844af15e8d95662e157dc6e19",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.02285631217279871,
+          "candidate": {
+            "name": "tuab-paclock_rot2",
+            "score": 0.9074137703246858,
+            "result_sha256": "993c42ce1cb2cb73d1a8ce33fe4255fbb63c25634e6d61cbe44a8b354a518fb2",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-paclock_rot2/seed1/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuab-cbramod_pretrained",
+            "score": 0.8845574581518871,
+            "result_sha256": "26f63873dae7b540679640c6309a90ad641429748893891c85733dfa95cd38d5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.03331696765051828,
+          "candidate": {
+            "name": "tuab-paclock_rot2",
+            "score": 0.9110898620205025,
+            "result_sha256": "168ff9c70ee13db4080c09ab2c8bed5ba11aa9f25a70b59c36d183a4a2fb5f27",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-paclock_rot2/seed2/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuab-cbramod_pretrained",
+            "score": 0.8777728943699842,
+            "result_sha256": "80bcf85a0357fba6bfb213a8b8cbc0c5b4f09e8af45918cb9058eb7ad44715b4",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuab",
+      "metric": "auroc",
+      "cohort": {
+        "dataset": "tuab",
+        "metric": "auroc",
+        "manifest": "2026-08-04T12:32:29.190287+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          35815,
+          39592
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.9132352253443968,
+      "baseline_mean": 0.881500090889378,
+      "mean_delta": 0.031735134455018854,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.031047220529760944,
+          "candidate": {
+            "name": "tuab-paclock_duplex",
+            "score": 0.9132171406760234,
+            "result_sha256": "1c267a81914283344d9f8e5ed1731051c7dc93053a2bddce3822145fc090be19",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-paclock_duplex/seed0/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuab-cbramod_pretrained",
+            "score": 0.8821699201462625,
+            "result_sha256": "e52905d340dfd98c1de5f548b27f0d0c89245db844af15e8d95662e157dc6e19",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.02998567519086992,
+          "candidate": {
+            "name": "tuab-paclock_duplex",
+            "score": 0.914543133342757,
+            "result_sha256": "fab8834f81be0daffded74fee350a24737419e2c1ef45e05eb11f85a01cd6d97",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-paclock_duplex/seed1/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuab-cbramod_pretrained",
+            "score": 0.8845574581518871,
+            "result_sha256": "26f63873dae7b540679640c6309a90ad641429748893891c85733dfa95cd38d5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.0341725076444257,
+          "candidate": {
+            "name": "tuab-paclock_duplex",
+            "score": 0.9119454020144099,
+            "result_sha256": "ab42132f57e2ff98ecb8d228a1df4b08e4bd10dacea6034eb85f5a008c323a19",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-paclock_duplex/seed2/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuab-cbramod_pretrained",
+            "score": 0.8777728943699842,
+            "result_sha256": "80bcf85a0357fba6bfb213a8b8cbc0c5b4f09e8af45918cb9058eb7ad44715b4",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuab-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuar",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuar",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-17T11:03:32.287406+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1833,
+          2712,
+          501
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.596572292032523,
+      "baseline_mean": 0.6209290480786457,
+      "mean_delta": -0.024356756046122603,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.03899670433437352,
+          "candidate": {
+            "name": "tuar-paclock_rot2",
+            "score": 0.5933143959659926,
+            "result_sha256": "25e63236efe49eae28adb6acfcd6c5b83de2e1686c9a4acb8a7f11e3ef5a652a",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-cbramod_pretrained",
+            "score": 0.6323111003003661,
+            "result_sha256": "f699b7338d4ff3c676bb1d2a5885de3781281f6ab66fd7db9f9e8ce0d7570211",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.021216262434025634,
+          "candidate": {
+            "name": "tuar-paclock_rot2",
+            "score": 0.5911705571104945,
+            "result_sha256": "282ef159dc9594b83cd85048a854dbf90532363fc917e1f3168e01b4659e4aab",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-cbramod_pretrained",
+            "score": 0.6123868195445201,
+            "result_sha256": "c269c9e4f238193e8f5d453357d28da6045387bf58a03b0757863aee8419dff9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.012857301369968654,
+          "candidate": {
+            "name": "tuar-paclock_rot2",
+            "score": 0.6052319230210821,
+            "result_sha256": "5bd47d9c5168ca790481dd411dff6b6ba5b31ca379b7babad7455ed704902159",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-cbramod_pretrained",
+            "score": 0.6180892243910507,
+            "result_sha256": "ff58dbd7540d5828ff85f878160daa1da9c32cfd5e05de1e9305f7585a8adb8f",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuar",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuar",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-17T11:03:32.287406+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1833,
+          2712,
+          501
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.6115206430296792,
+      "baseline_mean": 0.6209290480786457,
+      "mean_delta": -0.009408405048966376,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.015025909149521732,
+          "candidate": {
+            "name": "tuar-paclock_duplex",
+            "score": 0.6172851911508443,
+            "result_sha256": "7d0d71016afd560c3843d6268aedd29794d67b14c5f4c77096e3c7d2f538390e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-cbramod_pretrained",
+            "score": 0.6323111003003661,
+            "result_sha256": "f699b7338d4ff3c676bb1d2a5885de3781281f6ab66fd7db9f9e8ce0d7570211",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.013055606175657708,
+          "candidate": {
+            "name": "tuar-paclock_duplex",
+            "score": 0.5993312133688624,
+            "result_sha256": "4d3849a35fb97a12c80ed24f5236e318ccf67421d901f282c5bed4ff4743de85",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-cbramod_pretrained",
+            "score": 0.6123868195445201,
+            "result_sha256": "c269c9e4f238193e8f5d453357d28da6045387bf58a03b0757863aee8419dff9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.00014369982171968942,
+          "candidate": {
+            "name": "tuar-paclock_duplex",
+            "score": 0.617945524569331,
+            "result_sha256": "659727af52fef4861f2dc43bfd99e708d85e1779d5031502e31d5641a62297a0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-cbramod_pretrained",
+            "score": 0.6180892243910507,
+            "result_sha256": "ff58dbd7540d5828ff85f878160daa1da9c32cfd5e05de1e9305f7585a8adb8f",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuar",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuar",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-17T11:03:32.287406+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1833,
+          2712,
+          501
+        ]
+      },
+      "shared_seeds": [
+        1
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.6157507528394341,
+      "baseline_mean": 0.6123868195445201,
+      "mean_delta": 0.0033639332949140233,
+      "observations": [
+        {
+          "seed": 1,
+          "delta": 0.0033639332949140233,
+          "candidate": {
+            "name": "tuar-factorized_f4_joint_confirm",
+            "score": 0.6157507528394341,
+            "result_sha256": "bb5c8d70f071cf396ff9726e701a594376fc856dd2948071fc9a343083a53bde",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-factorized_f4_joint_confirm/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-cbramod_pretrained",
+            "score": 0.6123868195445201,
+            "result_sha256": "c269c9e4f238193e8f5d453357d28da6045387bf58a03b0757863aee8419dff9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band_broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuar",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuar",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-17T11:03:32.287406+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1833,
+          2712,
+          501
+        ]
+      },
+      "shared_seeds": [
+        1
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.631884378545802,
+      "baseline_mean": 0.6123868195445201,
+      "mean_delta": 0.019497559001281917,
+      "observations": [
+        {
+          "seed": 1,
+          "delta": 0.019497559001281917,
+          "candidate": {
+            "name": "tuar-factorized_f4_aug_confirm",
+            "score": 0.631884378545802,
+            "result_sha256": "a790c09e774967519f882cb27dd69d9a8cf1b6731c7b9525c1d4205df9dd163a",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-factorized_f4_aug_confirm/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-cbramod_pretrained",
+            "score": 0.6123868195445201,
+            "result_sha256": "c269c9e4f238193e8f5d453357d28da6045387bf58a03b0757863aee8419dff9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "augmentations": [
+            "flip0.5",
+            "jitter0.05",
+            "mask0.2",
+            "channel0.2",
+            "frequency0.2"
+          ],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band_broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuep",
+      "metric": "auroc",
+      "cohort": {
+        "dataset": "tuep",
+        "metric": "auroc",
+        "manifest": "2026-08-19T15:40:43.059470+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2910,
+          20898
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.7022604310447176,
+      "baseline_mean": 0.655628659225955,
+      "mean_delta": 0.046631771818762546,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.013887556940781587,
+          "candidate": {
+            "name": "tuep-paclock_rot2",
+            "score": 0.6824929398528411,
+            "result_sha256": "1a197fb4878e3f6220f07699f11fbb986043c80195ef86df2a4e257f7d27bf80",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_rot2/seed0/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-cbramod_pretrained",
+            "score": 0.6686053829120595,
+            "result_sha256": "e267364d4215249a31de6e1a8d1c088f41084aa8e368d2ae79686f32217ce698",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.06855196521543516,
+          "candidate": {
+            "name": "tuep-paclock_rot2",
+            "score": 0.7198685548099935,
+            "result_sha256": "2afa0cd1804755e92a519ff3df25f1744a0df70861642cb86f7871f94ae3fae0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_rot2/seed1/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-cbramod_pretrained",
+            "score": 0.6513165895945583,
+            "result_sha256": "9f2474b3d76eafb5c09f6540a8e83f856c2dcad00ed269590bdc0380327c10d5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.05745579330007089,
+          "candidate": {
+            "name": "tuep-paclock_rot2",
+            "score": 0.7044197984713183,
+            "result_sha256": "81ebcebd7707cbd6135a0690f61d5364a9ef481f2b9be32089b1e5de0b590320",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_rot2/seed2/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-cbramod_pretrained",
+            "score": 0.6469640051712474,
+            "result_sha256": "6dae5aab511404d460427d6f98f800ec521b1d085d6313acebd3ea69b9b7a2a2",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuep",
+      "metric": "auroc",
+      "cohort": {
+        "dataset": "tuep",
+        "metric": "auroc",
+        "manifest": "2026-08-19T15:40:43.059470+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2910,
+          20898
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.7425828633420146,
+      "baseline_mean": 0.655628659225955,
+      "mean_delta": 0.08695420411605954,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.08407754700543535,
+          "candidate": {
+            "name": "tuep-paclock_duplex",
+            "score": 0.7526829299174949,
+            "result_sha256": "8ea8797426a17bc9a0ece29683ce8953ae7b627a86978271efdbc7fd27cb2af3",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_duplex/seed0/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-cbramod_pretrained",
+            "score": 0.6686053829120595,
+            "result_sha256": "e267364d4215249a31de6e1a8d1c088f41084aa8e368d2ae79686f32217ce698",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.08739349759377824,
+          "candidate": {
+            "name": "tuep-paclock_duplex",
+            "score": 0.7387100871883365,
+            "result_sha256": "fa35c9090234a0bd0d1c5ed7c61ab96fc8afb01f57cf11c27bf9a4782bc440ce",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_duplex/seed1/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-cbramod_pretrained",
+            "score": 0.6513165895945583,
+            "result_sha256": "9f2474b3d76eafb5c09f6540a8e83f856c2dcad00ed269590bdc0380327c10d5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.08939156774896506,
+          "candidate": {
+            "name": "tuep-paclock_duplex",
+            "score": 0.7363555729202125,
+            "result_sha256": "1204d6f889d13dbda5e0c0842c773da17dd887266c245b266eb614e7c5e5fff0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_duplex/seed2/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-cbramod_pretrained",
+            "score": 0.6469640051712474,
+            "result_sha256": "6dae5aab511404d460427d6f98f800ec521b1d085d6313acebd3ea69b9b7a2a2",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuev",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuev",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.6503858872430905,
+      "baseline_mean": 0.41762751553646543,
+      "mean_delta": 0.23275837170662514,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.20354164585391388,
+          "candidate": {
+            "name": "tuev-paclock_rot2",
+            "score": 0.6338886563971755,
+            "result_sha256": "83157e53d48f0ebd754ebc1996a1f151c17268d20eea89d0e2158d54012a8164",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-cbramod_pretrained",
+            "score": 0.43034701054326163,
+            "result_sha256": "0206732402365640bef1cac032253e4da43d9db035e606c72544de89025d0062",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.2060903843136398,
+          "candidate": {
+            "name": "tuev-paclock_rot2",
+            "score": 0.6491159476219825,
+            "result_sha256": "602b8c8e3186431a71e82fa8db7fe6a42439d937b7cd072d4b19eb62efc73ae6",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-cbramod_pretrained",
+            "score": 0.44302556330834275,
+            "result_sha256": "127bfd379d34e3e701e223232a8746a6951541054efca2b22451cc8cea642a61",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.2886430849523217,
+          "candidate": {
+            "name": "tuev-paclock_rot2",
+            "score": 0.6681530577101136,
+            "result_sha256": "b7070e9ae480b3f773ba9c48adb0e2c9a5289535fb4dd01b91a253e44743ba95",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-cbramod_pretrained",
+            "score": 0.37950997275779186,
+            "result_sha256": "5bad6e563dcfd0d1089b7a0d86154ed3627501c6485e3feee1c5bc58ae58dd58",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuev",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuev",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.6187583308781365,
+      "baseline_mean": 0.41762751553646543,
+      "mean_delta": 0.20113081534167102,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.1789779809237939,
+          "candidate": {
+            "name": "tuev-paclock_duplex",
+            "score": 0.6093249914670555,
+            "result_sha256": "f83ac97a4176a40bd31c71d02a98bfff3f23b00134c5058f48572cd0239bde09",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-cbramod_pretrained",
+            "score": 0.43034701054326163,
+            "result_sha256": "0206732402365640bef1cac032253e4da43d9db035e606c72544de89025d0062",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-cbramod_pretrained/seed0/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.18761684244665366,
+          "candidate": {
+            "name": "tuev-paclock_duplex",
+            "score": 0.6306424057549964,
+            "result_sha256": "b0478b4d4077f244ad859713a9f76643b2aaa262c6869548bf47222c2924e06a",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-cbramod_pretrained",
+            "score": 0.44302556330834275,
+            "result_sha256": "127bfd379d34e3e701e223232a8746a6951541054efca2b22451cc8cea642a61",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.2367976226545655,
+          "candidate": {
+            "name": "tuev-paclock_duplex",
+            "score": 0.6163075954123574,
+            "result_sha256": "3b1bf22ee54bffabe7a627080fc6d6680bf8c3d846a36c42717c5493f560a832",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-cbramod_pretrained",
+            "score": 0.37950997275779186,
+            "result_sha256": "5bad6e563dcfd0d1089b7a0d86154ed3627501c6485e3feee1c5bc58ae58dd58",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-cbramod_pretrained/seed2/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuev",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuev",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ]
+      },
+      "shared_seeds": [
+        1
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.637153617192539,
+      "baseline_mean": 0.44302556330834275,
+      "mean_delta": 0.1941280538841963,
+      "observations": [
+        {
+          "seed": 1,
+          "delta": 0.1941280538841963,
+          "candidate": {
+            "name": "tuev-factorized_f4_joint_confirm",
+            "score": 0.637153617192539,
+            "result_sha256": "a3f29ef1727524d331efc50fc653ab6441c656dbcb80e124453c8d5723cdf139",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-factorized_f4_joint_confirm/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-cbramod_pretrained",
+            "score": 0.44302556330834275,
+            "result_sha256": "127bfd379d34e3e701e223232a8746a6951541054efca2b22451cc8cea642a61",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-cbramod_pretrained/seed1/result.json",
+            "epochs": 50,
+            "stopped_by": "epochs"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band_broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        }
+      },
+      "baseline_construction": {
+        "model": "cbramod",
+        "kwargs": {
+          "dropout": 0.1
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "reve_pretrained",
+      "dataset": "adfd",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "adfd",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-20T13:03:25.271983+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          306,
+          233,
+          403
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.49770467539006497,
+      "baseline_mean": 0.5678216863415018,
+      "mean_delta": -0.07011701095143685,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.021773116393243197,
+          "candidate": {
+            "name": "adfd-paclock_rot2",
+            "score": 0.543646001598946,
+            "result_sha256": "d31e5458281f22bb9a71918bf5bdc6286c2d37491db272713df7cefc92bb2046",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_rot2/seed0/result.json",
+            "epochs": 28,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-reve_pretrained",
+            "score": 0.5654191179921892,
+            "result_sha256": "229d6cc5403296bcf4aacb073ee7c245960ac209d6eeb34050d1027da73a02e0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-reve_pretrained/seed0/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.0660131600632125,
+          "candidate": {
+            "name": "adfd-paclock_rot2",
+            "score": 0.47241825053716807,
+            "result_sha256": "20a57ebb0c5b2ceeffcb043e837c3ffa8a244db4869562a03b5d0e60005ff974",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_rot2/seed1/result.json",
+            "epochs": 25,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-reve_pretrained",
+            "score": 0.5384314106003806,
+            "result_sha256": "530a7e9a86bd45309fbed5599ab75e717a912d847a7418f582a786c3b4fcd589",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-reve_pretrained/seed1/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.12256475639785486,
+          "candidate": {
+            "name": "adfd-paclock_rot2",
+            "score": 0.4770497740340807,
+            "result_sha256": "9cc61442b1a8adad261b9e5301ad01b1228b2355b253c172b17814bee7c31745",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_rot2/seed2/result.json",
+            "epochs": 30,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-reve_pretrained",
+            "score": 0.5996145304319356,
+            "result_sha256": "5d634c86311173018a1558cda880ca54a52c854d539cd8a800c2dc825f9e171b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-reve_pretrained/seed2/result.json",
+            "epochs": 12,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "reve_pretrained",
+      "dataset": "adfd",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "adfd",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-20T13:03:25.271983+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          306,
+          233,
+          403
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.522568695332443,
+      "baseline_mean": 0.5678216863415018,
+      "mean_delta": -0.04525299100905883,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.08239789050679097,
+          "candidate": {
+            "name": "adfd-paclock_duplex",
+            "score": 0.4830212274853983,
+            "result_sha256": "10a59bb217c12a2c93d43f3c4688a1e8cbfa34d857067bd5331f4b29dbf913bd",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_duplex/seed0/result.json",
+            "epochs": 30,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "adfd-reve_pretrained",
+            "score": 0.5654191179921892,
+            "result_sha256": "229d6cc5403296bcf4aacb073ee7c245960ac209d6eeb34050d1027da73a02e0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-reve_pretrained/seed0/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.022038953874349065,
+          "candidate": {
+            "name": "adfd-paclock_duplex",
+            "score": 0.5604703644747296,
+            "result_sha256": "9711b556847237a43cabd9a25deec6ecee9408ad38ae76cb8d3da7bda409e6b9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_duplex/seed1/result.json",
+            "epochs": 25,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-reve_pretrained",
+            "score": 0.5384314106003806,
+            "result_sha256": "530a7e9a86bd45309fbed5599ab75e717a912d847a7418f582a786c3b4fcd589",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-reve_pretrained/seed1/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.07540003639473458,
+          "candidate": {
+            "name": "adfd-paclock_duplex",
+            "score": 0.524214494037201,
+            "result_sha256": "86d83b7f5779ff96923b19cc64f34dc492680e201a3ec8f8aea05db5bb76e950",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_duplex/seed2/result.json",
+            "epochs": 26,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-reve_pretrained",
+            "score": 0.5996145304319356,
+            "result_sha256": "5d634c86311173018a1558cda880ca54a52c854d539cd8a800c2dc825f9e171b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-reve_pretrained/seed2/result.json",
+            "epochs": 12,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "reve_pretrained",
+      "dataset": "caueeg",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "caueeg",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-24T13:43:42.262721+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1531,
+          1389,
+          915
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.5033298731739156,
+      "baseline_mean": 0.5194408875339784,
+      "mean_delta": -0.016111014360062792,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.016402154200226504,
+          "candidate": {
+            "name": "caueeg-paclock_rot2",
+            "score": 0.48402414185638265,
+            "result_sha256": "8e4b4e8a2990041195231d1ca5d79621b99026386c29af481e74178403120c26",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-reve_pretrained",
+            "score": 0.5004262960566092,
+            "result_sha256": "1e5f845f9a1c1cbebb345763d0aaef880fad08c8de06a65dc8b7a15000180842",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-reve_pretrained/seed0/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.052831006036568984,
+          "candidate": {
+            "name": "caueeg-paclock_rot2",
+            "score": 0.5062007813196833,
+            "result_sha256": "2f2f1ed0fe0e72d88b7c05210ffe36be0c1986274e960aa6ad312474f1d7b5c5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-reve_pretrained",
+            "score": 0.5590317873562523,
+            "result_sha256": "994d2015a68ad8e4bb315e9a21e4b5a5000421474e2043f84a71d11f7ced198d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-reve_pretrained/seed1/result.json",
+            "epochs": 30,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.020900117156607112,
+          "candidate": {
+            "name": "caueeg-paclock_rot2",
+            "score": 0.5197646963456809,
+            "result_sha256": "f397e747583e71aa6d615b626ff4c99c4d45acf711039af760f41b1f3659fb21",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-reve_pretrained",
+            "score": 0.4988645791890738,
+            "result_sha256": "870454e5aee7dea8d64c50bf83b67fff1bc36b0d83e613e65aae7aea0ecf5392",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-reve_pretrained/seed2/result.json",
+            "epochs": 13,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "reve_pretrained",
+      "dataset": "caueeg",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "caueeg",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-24T13:43:42.262721+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1531,
+          1389,
+          915
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.5047225190086644,
+      "baseline_mean": 0.5194408875339784,
+      "mean_delta": -0.01471836852531396,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.0018844198795542333,
+          "candidate": {
+            "name": "caueeg-paclock_duplex",
+            "score": 0.5023107159361634,
+            "result_sha256": "8337f85ee83a3c6813d50dd112e2cc349a9b8b19c639afed0177782b16b1fdb5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-reve_pretrained",
+            "score": 0.5004262960566092,
+            "result_sha256": "1e5f845f9a1c1cbebb345763d0aaef880fad08c8de06a65dc8b7a15000180842",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-reve_pretrained/seed0/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.03497182550459399,
+          "candidate": {
+            "name": "caueeg-paclock_duplex",
+            "score": 0.5240599618516583,
+            "result_sha256": "1168c0499cb0f2b6e73b8cba4a6d56e1a27cb78f41e2ded17b48612634a306a9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-reve_pretrained",
+            "score": 0.5590317873562523,
+            "result_sha256": "994d2015a68ad8e4bb315e9a21e4b5a5000421474e2043f84a71d11f7ced198d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-reve_pretrained/seed1/result.json",
+            "epochs": 30,
+            "stopped_by": "epochs"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.011067699950902121,
+          "candidate": {
+            "name": "caueeg-paclock_duplex",
+            "score": 0.48779687923817167,
+            "result_sha256": "4578ccefee5037dfe82210f247c09951f53b7d48d10cb73cf5200164bb17df5e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-reve_pretrained",
+            "score": 0.4988645791890738,
+            "result_sha256": "870454e5aee7dea8d64c50bf83b67fff1bc36b0d83e613e65aae7aea0ecf5392",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-reve_pretrained/seed2/result.json",
+            "epochs": 13,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "reve_pretrained",
+      "dataset": "iiic",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "iiic",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2901,
+          3092,
+          2240,
+          2402,
+          2407,
+          2736
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.5479447083632826,
+      "baseline_mean": 0.5007758234239653,
+      "mean_delta": 0.04716888493931718,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.054501925676736285,
+          "candidate": {
+            "name": "iiic-paclock_rot2",
+            "score": 0.5612408260531658,
+            "result_sha256": "436e9c7eb872c2ad35ba677638ded5c6ef5d5b28cb597c4b4935fdbd77c10f07",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-reve_pretrained",
+            "score": 0.5067389003764295,
+            "result_sha256": "db0d80efa57606e6aa9c1a48b509801656fa33cde3a396266258d84b0df91aa7",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-reve_pretrained/seed0/result.json",
+            "epochs": 14,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.04075684978331373,
+          "candidate": {
+            "name": "iiic-paclock_rot2",
+            "score": 0.5394090921565471,
+            "result_sha256": "1a2c050f491e0dba5005ae85d4caf5d7a5b8648acacc501cffd6e1f52e2fd402",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-reve_pretrained",
+            "score": 0.49865224237323336,
+            "result_sha256": "8a135a9dfad2130d38d876e25bbe8a4cde46a0bd1f7fe6c25dc16359f70de6c8",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-reve_pretrained/seed1/result.json",
+            "epochs": 17,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.046247879357901533,
+          "candidate": {
+            "name": "iiic-paclock_rot2",
+            "score": 0.5431842068801347,
+            "result_sha256": "5be6e656af18351726be5673847a98d2e4a2d507b9931e9b5311fd97b1c2a4a0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-reve_pretrained",
+            "score": 0.49693632752223316,
+            "result_sha256": "559de1835a9388b27e98741f686162f82d6dad8692b99682577e81bb4a8bca74",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-reve_pretrained/seed2/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "reve_pretrained",
+      "dataset": "iiic",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "iiic",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2901,
+          3092,
+          2240,
+          2402,
+          2407,
+          2736
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.536978267395926,
+      "baseline_mean": 0.5007758234239653,
+      "mean_delta": 0.03620244397196063,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.032633785841119645,
+          "candidate": {
+            "name": "iiic-paclock_duplex",
+            "score": 0.5393726862175492,
+            "result_sha256": "c00f284c74f4881f65ec278ff9957d5c20b27f0d91fc0ec233045f111f90b414",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-reve_pretrained",
+            "score": 0.5067389003764295,
+            "result_sha256": "db0d80efa57606e6aa9c1a48b509801656fa33cde3a396266258d84b0df91aa7",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-reve_pretrained/seed0/result.json",
+            "epochs": 14,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.035447471077115544,
+          "candidate": {
+            "name": "iiic-paclock_duplex",
+            "score": 0.5340997134503489,
+            "result_sha256": "c6bb46b389f78946ebbf14c42826962a6aa694003db4c3dedb5f9be47c308d19",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-reve_pretrained",
+            "score": 0.49865224237323336,
+            "result_sha256": "8a135a9dfad2130d38d876e25bbe8a4cde46a0bd1f7fe6c25dc16359f70de6c8",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-reve_pretrained/seed1/result.json",
+            "epochs": 17,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.04052607499764671,
+          "candidate": {
+            "name": "iiic-paclock_duplex",
+            "score": 0.5374624025198799,
+            "result_sha256": "d1758539f24e4cb5853063e698c6580d05de18d28a34ebfed17383c41b4325de",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-reve_pretrained",
+            "score": 0.49693632752223316,
+            "result_sha256": "559de1835a9388b27e98741f686162f82d6dad8692b99682577e81bb4a8bca74",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-reve_pretrained/seed2/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "reve_pretrained",
+      "dataset": "tuep",
+      "metric": "auroc",
+      "cohort": {
+        "dataset": "tuep",
+        "metric": "auroc",
+        "manifest": "2026-08-19T15:40:43.059470+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2910,
+          20898
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.7022604310447176,
+      "baseline_mean": 0.53292664243727,
+      "mean_delta": 0.16933378860744772,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.16766862874133537,
+          "candidate": {
+            "name": "tuep-paclock_rot2",
+            "score": 0.6824929398528411,
+            "result_sha256": "1a197fb4878e3f6220f07699f11fbb986043c80195ef86df2a4e257f7d27bf80",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_rot2/seed0/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-reve_pretrained",
+            "score": 0.5148243111115057,
+            "result_sha256": "86f2a283bafde0a1a00f492eddf695f70cc5f9e5d8ce16691fa24e1ad7c70589",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-reve_pretrained/seed0/result.json",
+            "epochs": 21,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.16519412403692746,
+          "candidate": {
+            "name": "tuep-paclock_rot2",
+            "score": 0.7198685548099935,
+            "result_sha256": "2afa0cd1804755e92a519ff3df25f1744a0df70861642cb86f7871f94ae3fae0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_rot2/seed1/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-reve_pretrained",
+            "score": 0.554674430773066,
+            "result_sha256": "d72d964aea079945bbce2cdd206e75522d11cf68ed7933a9bdc3ae397073306d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-reve_pretrained/seed1/result.json",
+            "epochs": 19,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.1751386130440803,
+          "candidate": {
+            "name": "tuep-paclock_rot2",
+            "score": 0.7044197984713183,
+            "result_sha256": "81ebcebd7707cbd6135a0690f61d5364a9ef481f2b9be32089b1e5de0b590320",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_rot2/seed2/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-reve_pretrained",
+            "score": 0.529281185427238,
+            "result_sha256": "f851865f02bccec5b98fa6c1ef08e5eb0b0e8684a1cd4b821199535ee27418b9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-reve_pretrained/seed2/result.json",
+            "epochs": 19,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "reve_pretrained",
+      "dataset": "tuep",
+      "metric": "auroc",
+      "cohort": {
+        "dataset": "tuep",
+        "metric": "auroc",
+        "manifest": "2026-08-19T15:40:43.059470+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2910,
+          20898
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.7425828633420146,
+      "baseline_mean": 0.53292664243727,
+      "mean_delta": 0.2096562209047447,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.23785861880598913,
+          "candidate": {
+            "name": "tuep-paclock_duplex",
+            "score": 0.7526829299174949,
+            "result_sha256": "8ea8797426a17bc9a0ece29683ce8953ae7b627a86978271efdbc7fd27cb2af3",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_duplex/seed0/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-reve_pretrained",
+            "score": 0.5148243111115057,
+            "result_sha256": "86f2a283bafde0a1a00f492eddf695f70cc5f9e5d8ce16691fa24e1ad7c70589",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-reve_pretrained/seed0/result.json",
+            "epochs": 21,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.18403565641527053,
+          "candidate": {
+            "name": "tuep-paclock_duplex",
+            "score": 0.7387100871883365,
+            "result_sha256": "fa35c9090234a0bd0d1c5ed7c61ab96fc8afb01f57cf11c27bf9a4782bc440ce",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_duplex/seed1/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-reve_pretrained",
+            "score": 0.554674430773066,
+            "result_sha256": "d72d964aea079945bbce2cdd206e75522d11cf68ed7933a9bdc3ae397073306d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-reve_pretrained/seed1/result.json",
+            "epochs": 19,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.20707438749297447,
+          "candidate": {
+            "name": "tuep-paclock_duplex",
+            "score": 0.7363555729202125,
+            "result_sha256": "1204d6f889d13dbda5e0c0842c773da17dd887266c245b266eb614e7c5e5fff0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-paclock_duplex/seed2/result.json",
+            "epochs": 1,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tuep-reve_pretrained",
+            "score": 0.529281185427238,
+            "result_sha256": "f851865f02bccec5b98fa6c1ef08e5eb0b0e8684a1cd4b821199535ee27418b9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuep-reve_pretrained/seed2/result.json",
+            "epochs": 19,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "reve_pretrained",
+      "dataset": "tuev",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuev",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.6503858872430905,
+      "baseline_mean": 0.566774693844651,
+      "mean_delta": 0.08361119339843955,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.02692961458285903,
+          "candidate": {
+            "name": "tuev-paclock_rot2",
+            "score": 0.6338886563971755,
+            "result_sha256": "83157e53d48f0ebd754ebc1996a1f151c17268d20eea89d0e2158d54012a8164",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-reve_pretrained",
+            "score": 0.6069590418143165,
+            "result_sha256": "ff6e4fb6ee3393e72196385b2663b455d85a00c945234c91d77882b8a27d1912",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-reve_pretrained/seed0/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.10435963277196025,
+          "candidate": {
+            "name": "tuev-paclock_rot2",
+            "score": 0.6491159476219825,
+            "result_sha256": "602b8c8e3186431a71e82fa8db7fe6a42439d937b7cd072d4b19eb62efc73ae6",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-reve_pretrained",
+            "score": 0.5447563148500223,
+            "result_sha256": "955a72820f5237c0f53a58bdd54debbc8749a00d42016b21f867281fbda0ba6f",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-reve_pretrained/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.11954433284049937,
+          "candidate": {
+            "name": "tuev-paclock_rot2",
+            "score": 0.6681530577101136,
+            "result_sha256": "b7070e9ae480b3f773ba9c48adb0e2c9a5289535fb4dd01b91a253e44743ba95",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-reve_pretrained",
+            "score": 0.5486087248696142,
+            "result_sha256": "8df37b94b13f66c1af2c10ac38803e8add11d999c40c56ab3e18f38d7524683b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-reve_pretrained/seed2/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "reve_pretrained",
+      "dataset": "tuev",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuev",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.6187583308781365,
+      "baseline_mean": 0.566774693844651,
+      "mean_delta": 0.05198363703348544,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.0023659496527390633,
+          "candidate": {
+            "name": "tuev-paclock_duplex",
+            "score": 0.6093249914670555,
+            "result_sha256": "f83ac97a4176a40bd31c71d02a98bfff3f23b00134c5058f48572cd0239bde09",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-reve_pretrained",
+            "score": 0.6069590418143165,
+            "result_sha256": "ff6e4fb6ee3393e72196385b2663b455d85a00c945234c91d77882b8a27d1912",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-reve_pretrained/seed0/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.08588609090497412,
+          "candidate": {
+            "name": "tuev-paclock_duplex",
+            "score": 0.6306424057549964,
+            "result_sha256": "b0478b4d4077f244ad859713a9f76643b2aaa262c6869548bf47222c2924e06a",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-reve_pretrained",
+            "score": 0.5447563148500223,
+            "result_sha256": "955a72820f5237c0f53a58bdd54debbc8749a00d42016b21f867281fbda0ba6f",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-reve_pretrained/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.06769887054274315,
+          "candidate": {
+            "name": "tuev-paclock_duplex",
+            "score": 0.6163075954123574,
+            "result_sha256": "3b1bf22ee54bffabe7a627080fc6d6680bf8c3d846a36c42717c5493f560a832",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-reve_pretrained",
+            "score": 0.5486087248696142,
+            "result_sha256": "8df37b94b13f66c1af2c10ac38803e8add11d999c40c56ab3e18f38d7524683b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-reve_pretrained/seed2/result.json",
+            "epochs": 11,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "tuev",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuev",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-05T01:56:41.969236+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ]
+      },
+      "shared_seeds": [
+        1
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.637153617192539,
+      "baseline_mean": 0.5447563148500223,
+      "mean_delta": 0.09239730234251675,
+      "observations": [
+        {
+          "seed": 1,
+          "delta": 0.09239730234251675,
+          "candidate": {
+            "name": "tuev-factorized_f4_joint_confirm",
+            "score": 0.637153617192539,
+            "result_sha256": "a3f29ef1727524d331efc50fc653ab6441c656dbcb80e124453c8d5723cdf139",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-factorized_f4_joint_confirm/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuev-reve_pretrained",
+            "score": 0.5447563148500223,
+            "result_sha256": "955a72820f5237c0f53a58bdd54debbc8749a00d42016b21f867281fbda0ba6f",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-reve_pretrained/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band_broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "reve_pretrained",
+      "dataset": "tusz",
+      "metric": "pr_auc",
+      "cohort": {
+        "dataset": "tusz",
+        "metric": "pr_auc",
+        "manifest": "2026-08-04T12:04:53.501948+00:00",
+        "val_subsample": 20000,
+        "val_counts": [
+          153259,
+          3136
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.36015751750475244,
+      "baseline_mean": 0.32817892156412043,
+      "mean_delta": 0.03197859594063198,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.046639085988569196,
+          "candidate": {
+            "name": "tusz-paclock_rot2",
+            "score": 0.3621377153131793,
+            "result_sha256": "72734005a23172e07d8a925f27c8f7c85f0c8fd581ede2caa24068edea210cb9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-paclock_rot2/seed0/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tusz-reve_pretrained",
+            "score": 0.3154986293246101,
+            "result_sha256": "ff3ee81fdc8f00dab14f99221a990ce38128a706b02f1e3aa63994d9001c5da2",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-reve_pretrained/seed0/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.01636375483889385,
+          "candidate": {
+            "name": "tusz-paclock_rot2",
+            "score": 0.35302093409699964,
+            "result_sha256": "e825d78b1892b7fb7348df8bf7e6118977b500bbea7d7e2858b994b73493ca38",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-paclock_rot2/seed1/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tusz-reve_pretrained",
+            "score": 0.3366571792581058,
+            "result_sha256": "53b2db1e853336df74d418ba994e83f9613a9dc8da08fa96f1a94ef293ed12b1",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-reve_pretrained/seed1/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.03293294699443289,
+          "candidate": {
+            "name": "tusz-paclock_rot2",
+            "score": 0.36531390310407835,
+            "result_sha256": "57a788e3ff777c4881c341c23ad0d71e3b93cda5131015f125fdd7dbf942e473",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-paclock_rot2/seed2/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tusz-reve_pretrained",
+            "score": 0.33238095610964546,
+            "result_sha256": "4b74ddd4e02437c7756365d0b54f1cffc046666eed03acb956011097953aa84b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-reve_pretrained/seed2/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "reve_pretrained",
+      "dataset": "tusz",
+      "metric": "pr_auc",
+      "cohort": {
+        "dataset": "tusz",
+        "metric": "pr_auc",
+        "manifest": "2026-08-04T12:04:53.501948+00:00",
+        "val_subsample": 20000,
+        "val_counts": [
+          153259,
+          3136
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.38355418785612494,
+      "baseline_mean": 0.32817892156412043,
+      "mean_delta": 0.055375266292004476,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.030521756506885267,
+          "candidate": {
+            "name": "tusz-paclock_duplex",
+            "score": 0.34602038583149536,
+            "result_sha256": "cf49e0467503daef5f9e6010ff54e7b39111a75788496cc97639e2022cdf490d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-paclock_duplex/seed0/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tusz-reve_pretrained",
+            "score": 0.3154986293246101,
+            "result_sha256": "ff3ee81fdc8f00dab14f99221a990ce38128a706b02f1e3aa63994d9001c5da2",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-reve_pretrained/seed0/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.0780024366056512,
+          "candidate": {
+            "name": "tusz-paclock_duplex",
+            "score": 0.414659615863757,
+            "result_sha256": "f9bc871e28a3b2d47625d11c8000d10141a19c2be0cc9905be8d2230eb71081d",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-paclock_duplex/seed1/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tusz-reve_pretrained",
+            "score": 0.3366571792581058,
+            "result_sha256": "53b2db1e853336df74d418ba994e83f9613a9dc8da08fa96f1a94ef293ed12b1",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-reve_pretrained/seed1/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.05760160576347695,
+          "candidate": {
+            "name": "tusz-paclock_duplex",
+            "score": 0.3899825618731224,
+            "result_sha256": "9b43f92eb516008bc821cc8e389f3f74a068f378a299aca546379a86791656c1",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-paclock_duplex/seed2/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "tusz-reve_pretrained",
+            "score": 0.33238095610964546,
+            "result_sha256": "4b74ddd4e02437c7756365d0b54f1cffc046666eed03acb956011097953aa84b",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tusz-reve_pretrained/seed2/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "reve",
+        "kwargs": {
+          "dropout": 0.15
+        }
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "eegpt_pretrained",
+      "dataset": "adfd",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "adfd",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-20T13:03:25.271983+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          306,
+          233,
+          403
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.49770467539006497,
+      "baseline_mean": 0.5428118956567024,
+      "mean_delta": -0.04510722026663746,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.007787779485216584,
+          "candidate": {
+            "name": "adfd-paclock_rot2",
+            "score": 0.543646001598946,
+            "result_sha256": "d31e5458281f22bb9a71918bf5bdc6286c2d37491db272713df7cefc92bb2046",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_rot2/seed0/result.json",
+            "epochs": 28,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-eegpt_pretrained",
+            "score": 0.5514337810841626,
+            "result_sha256": "e64d6a7e97819a6be7636b23f28c73993b60a9b425944be9947742647cd3a58e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-eegpt_pretrained/seed0/result.json",
+            "epochs": 23,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": -0.03339201827690391,
+          "candidate": {
+            "name": "adfd-paclock_rot2",
+            "score": 0.47241825053716807,
+            "result_sha256": "20a57ebb0c5b2ceeffcb043e837c3ffa8a244db4869562a03b5d0e60005ff974",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_rot2/seed1/result.json",
+            "epochs": 25,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-eegpt_pretrained",
+            "score": 0.505810268814072,
+            "result_sha256": "6dc6a4b2a2af54dc9e651225bfeacea1a4421cbdfe7270b47e1b5e44c8623704",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-eegpt_pretrained/seed1/result.json",
+            "epochs": 16,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.09414186303779187,
+          "candidate": {
+            "name": "adfd-paclock_rot2",
+            "score": 0.4770497740340807,
+            "result_sha256": "9cc61442b1a8adad261b9e5301ad01b1228b2355b253c172b17814bee7c31745",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_rot2/seed2/result.json",
+            "epochs": 30,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-eegpt_pretrained",
+            "score": 0.5711916370718726,
+            "result_sha256": "740c29eb89619e9aa987fd6d9f975e298e60d923adcafa269652a0b6f0ea7f9c",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-eegpt_pretrained/seed2/result.json",
+            "epochs": 12,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "eegpt",
+        "kwargs": {}
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "eegpt_pretrained",
+      "dataset": "adfd",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "adfd",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-20T13:03:25.271983+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          306,
+          233,
+          403
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.522568695332443,
+      "baseline_mean": 0.5428118956567024,
+      "mean_delta": -0.02024320032425943,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.06841255359876436,
+          "candidate": {
+            "name": "adfd-paclock_duplex",
+            "score": 0.4830212274853983,
+            "result_sha256": "10a59bb217c12a2c93d43f3c4688a1e8cbfa34d857067bd5331f4b29dbf913bd",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_duplex/seed0/result.json",
+            "epochs": 30,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "adfd-eegpt_pretrained",
+            "score": 0.5514337810841626,
+            "result_sha256": "e64d6a7e97819a6be7636b23f28c73993b60a9b425944be9947742647cd3a58e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-eegpt_pretrained/seed0/result.json",
+            "epochs": 23,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.05466009566065766,
+          "candidate": {
+            "name": "adfd-paclock_duplex",
+            "score": 0.5604703644747296,
+            "result_sha256": "9711b556847237a43cabd9a25deec6ecee9408ad38ae76cb8d3da7bda409e6b9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_duplex/seed1/result.json",
+            "epochs": 25,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-eegpt_pretrained",
+            "score": 0.505810268814072,
+            "result_sha256": "6dc6a4b2a2af54dc9e651225bfeacea1a4421cbdfe7270b47e1b5e44c8623704",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-eegpt_pretrained/seed1/result.json",
+            "epochs": 16,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.0469771430346716,
+          "candidate": {
+            "name": "adfd-paclock_duplex",
+            "score": 0.524214494037201,
+            "result_sha256": "86d83b7f5779ff96923b19cc64f34dc492680e201a3ec8f8aea05db5bb76e950",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-paclock_duplex/seed2/result.json",
+            "epochs": 26,
+            "stopped_by": "patience"
+          },
+          "baseline": {
+            "name": "adfd-eegpt_pretrained",
+            "score": 0.5711916370718726,
+            "result_sha256": "740c29eb89619e9aa987fd6d9f975e298e60d923adcafa269652a0b6f0ea7f9c",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-eegpt_pretrained/seed2/result.json",
+            "epochs": 12,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "eegpt",
+        "kwargs": {}
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "eegpt_pretrained",
+      "dataset": "caueeg",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "caueeg",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-24T13:43:42.262721+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1531,
+          1389,
+          915
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.5033298731739156,
+      "baseline_mean": 0.5036598300948122,
+      "mean_delta": -0.00032995692089658285,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.019873620355470023,
+          "candidate": {
+            "name": "caueeg-paclock_rot2",
+            "score": 0.48402414185638265,
+            "result_sha256": "8e4b4e8a2990041195231d1ca5d79621b99026386c29af481e74178403120c26",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-eegpt_pretrained",
+            "score": 0.5038977622118527,
+            "result_sha256": "12b7e3cbc2079ff057eae420393cb64561050b2d378a1dffeec6ca9b56024e97",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-eegpt_pretrained/seed0/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.00038509221304250385,
+          "candidate": {
+            "name": "caueeg-paclock_rot2",
+            "score": 0.5062007813196833,
+            "result_sha256": "2f2f1ed0fe0e72d88b7c05210ffe36be0c1986274e960aa6ad312474f1d7b5c5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-eegpt_pretrained",
+            "score": 0.5058156891066408,
+            "result_sha256": "831b4fd55dd0c4259d35e55f46e85f4ba3148c0b50a98d64e156a67daaa3d006",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-eegpt_pretrained/seed1/result.json",
+            "epochs": 4,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.01849865737973777,
+          "candidate": {
+            "name": "caueeg-paclock_rot2",
+            "score": 0.5197646963456809,
+            "result_sha256": "f397e747583e71aa6d615b626ff4c99c4d45acf711039af760f41b1f3659fb21",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-eegpt_pretrained",
+            "score": 0.5012660389659431,
+            "result_sha256": "3db2de73e3e98175c71ecb8f6d070eeb6c5178aa599a774552f73b5cbd74f334",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-eegpt_pretrained/seed2/result.json",
+            "epochs": 4,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "eegpt",
+        "kwargs": {}
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "eegpt_pretrained",
+      "dataset": "caueeg",
+      "metric": "balanced_acc",
+      "cohort": {
+        "dataset": "caueeg",
+        "metric": "balanced_acc",
+        "manifest": "2026-08-24T13:43:42.262721+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1531,
+          1389,
+          915
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.5047225190086644,
+      "baseline_mean": 0.5036598300948122,
+      "mean_delta": 0.00106268891385225,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": -0.0015870462756892856,
+          "candidate": {
+            "name": "caueeg-paclock_duplex",
+            "score": 0.5023107159361634,
+            "result_sha256": "8337f85ee83a3c6813d50dd112e2cc349a9b8b19c639afed0177782b16b1fdb5",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-eegpt_pretrained",
+            "score": 0.5038977622118527,
+            "result_sha256": "12b7e3cbc2079ff057eae420393cb64561050b2d378a1dffeec6ca9b56024e97",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-eegpt_pretrained/seed0/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.018244272745017498,
+          "candidate": {
+            "name": "caueeg-paclock_duplex",
+            "score": 0.5240599618516583,
+            "result_sha256": "1168c0499cb0f2b6e73b8cba4a6d56e1a27cb78f41e2ded17b48612634a306a9",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-eegpt_pretrained",
+            "score": 0.5058156891066408,
+            "result_sha256": "831b4fd55dd0c4259d35e55f46e85f4ba3148c0b50a98d64e156a67daaa3d006",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-eegpt_pretrained/seed1/result.json",
+            "epochs": 4,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": -0.013469159727771463,
+          "candidate": {
+            "name": "caueeg-paclock_duplex",
+            "score": 0.48779687923817167,
+            "result_sha256": "4578ccefee5037dfe82210f247c09951f53b7d48d10cb73cf5200164bb17df5e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "caueeg-eegpt_pretrained",
+            "score": 0.5012660389659431,
+            "result_sha256": "3db2de73e3e98175c71ecb8f6d070eeb6c5178aa599a774552f73b5cbd74f334",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-eegpt_pretrained/seed2/result.json",
+            "epochs": 4,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "eegpt",
+        "kwargs": {}
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "eegpt_pretrained",
+      "dataset": "iiic",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "iiic",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2901,
+          3092,
+          2240,
+          2402,
+          2407,
+          2736
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.5479447083632826,
+      "baseline_mean": 0.4244376450136945,
+      "mean_delta": 0.12350706334958801,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.16329628375464056,
+          "candidate": {
+            "name": "iiic-paclock_rot2",
+            "score": 0.5612408260531658,
+            "result_sha256": "436e9c7eb872c2ad35ba677638ded5c6ef5d5b28cb597c4b4935fdbd77c10f07",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-eegpt_pretrained",
+            "score": 0.3979445422985253,
+            "result_sha256": "ca674c45d86ddc4e4a0fbd56d73c02fcfa65357f6e35da5a630cb99aa0e4d8d0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-eegpt_pretrained/seed0/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.0968038111527687,
+          "candidate": {
+            "name": "iiic-paclock_rot2",
+            "score": 0.5394090921565471,
+            "result_sha256": "1a2c050f491e0dba5005ae85d4caf5d7a5b8648acacc501cffd6e1f52e2fd402",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_rot2/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-eegpt_pretrained",
+            "score": 0.4426052810037784,
+            "result_sha256": "770a05f239bab8b0c8a1f6ccff99b0035dc1c77c380e3d944fd30e4bb89e50c1",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-eegpt_pretrained/seed1/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.11042109514135479,
+          "candidate": {
+            "name": "iiic-paclock_rot2",
+            "score": 0.5431842068801347,
+            "result_sha256": "5be6e656af18351726be5673847a98d2e4a2d507b9931e9b5311fd97b1c2a4a0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_rot2/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-eegpt_pretrained",
+            "score": 0.4327631117387799,
+            "result_sha256": "431e2b59beb85ff4bdaa033a7b04ca1fc0202cd7d997310258cdfc99ff8f1efb",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-eegpt_pretrained/seed2/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "eegpt",
+        "kwargs": {}
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "eegpt_pretrained",
+      "dataset": "iiic",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "iiic",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-26T03:32:57.096698+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          2901,
+          3092,
+          2240,
+          2402,
+          2407,
+          2736
+        ]
+      },
+      "shared_seeds": [
+        0,
+        1,
+        2
+      ],
+      "three_seed_pair": true,
+      "candidate_mean": 0.536978267395926,
+      "baseline_mean": 0.4244376450136945,
+      "mean_delta": 0.11254062238223146,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.14142814391902392,
+          "candidate": {
+            "name": "iiic-paclock_duplex",
+            "score": 0.5393726862175492,
+            "result_sha256": "c00f284c74f4881f65ec278ff9957d5c20b27f0d91fc0ec233045f111f90b414",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-eegpt_pretrained",
+            "score": 0.3979445422985253,
+            "result_sha256": "ca674c45d86ddc4e4a0fbd56d73c02fcfa65357f6e35da5a630cb99aa0e4d8d0",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-eegpt_pretrained/seed0/result.json",
+            "epochs": 2,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 1,
+          "delta": 0.09149443244657052,
+          "candidate": {
+            "name": "iiic-paclock_duplex",
+            "score": 0.5340997134503489,
+            "result_sha256": "c6bb46b389f78946ebbf14c42826962a6aa694003db4c3dedb5f9be47c308d19",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_duplex/seed1/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-eegpt_pretrained",
+            "score": 0.4426052810037784,
+            "result_sha256": "770a05f239bab8b0c8a1f6ccff99b0035dc1c77c380e3d944fd30e4bb89e50c1",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-eegpt_pretrained/seed1/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        },
+        {
+          "seed": 2,
+          "delta": 0.10469929078109996,
+          "candidate": {
+            "name": "iiic-paclock_duplex",
+            "score": 0.5374624025198799,
+            "result_sha256": "d1758539f24e4cb5853063e698c6580d05de18d28a34ebfed17383c41b4325de",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-paclock_duplex/seed2/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "iiic-eegpt_pretrained",
+            "score": 0.4327631117387799,
+            "result_sha256": "431e2b59beb85ff4bdaa033a7b04ca1fc0202cd7d997310258cdfc99ff8f1efb",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-eegpt_pretrained/seed2/result.json",
+            "epochs": 3,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "eegpt",
+        "kwargs": {}
+      }
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "eegpt_pretrained",
+      "dataset": "tuar",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuar",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-17T11:03:32.287406+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1833,
+          2712,
+          501
+        ]
+      },
+      "shared_seeds": [
+        0
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.5933143959659926,
+      "baseline_mean": 0.5733616940259321,
+      "mean_delta": 0.01995270194006049,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.01995270194006049,
+          "candidate": {
+            "name": "tuar-paclock_rot2",
+            "score": 0.5933143959659926,
+            "result_sha256": "25e63236efe49eae28adb6acfcd6c5b83de2e1686c9a4acb8a7f11e3ef5a652a",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-paclock_rot2/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-eegpt_pretrained",
+            "score": 0.5733616940259321,
+            "result_sha256": "a67b0f1887869ba975f1254d66382ad0c8c5f41ad3aad6283a7a8f4af06e8eaf",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-eegpt_pretrained/seed0/result.json",
+            "epochs": 10,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "pac_interaction",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "eegpt",
+        "kwargs": {}
+      }
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "eegpt_pretrained",
+      "dataset": "tuar",
+      "metric": "cohen_kappa",
+      "cohort": {
+        "dataset": "tuar",
+        "metric": "cohen_kappa",
+        "manifest": "2026-08-17T11:03:32.287406+00:00",
+        "val_subsample": 0,
+        "val_counts": [
+          1833,
+          2712,
+          501
+        ]
+      },
+      "shared_seeds": [
+        0
+      ],
+      "three_seed_pair": false,
+      "candidate_mean": 0.6172851911508443,
+      "baseline_mean": 0.5733616940259321,
+      "mean_delta": 0.04392349712491228,
+      "observations": [
+        {
+          "seed": 0,
+          "delta": 0.04392349712491228,
+          "candidate": {
+            "name": "tuar-paclock_duplex",
+            "score": 0.6172851911508443,
+            "result_sha256": "7d0d71016afd560c3843d6268aedd29794d67b14c5f4c77096e3c7d2f538390e",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-paclock_duplex/seed0/result.json",
+            "epochs": 20,
+            "stopped_by": "epochs"
+          },
+          "baseline": {
+            "name": "tuar-eegpt_pretrained",
+            "score": 0.5733616940259321,
+            "result_sha256": "a67b0f1887869ba975f1254d66382ad0c8c5f41ad3aad6283a7a8f4af06e8eaf",
+            "path": "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-eegpt_pretrained/seed0/result.json",
+            "epochs": 10,
+            "stopped_by": "patience"
+          }
+        }
+      ],
+      "candidate_construction": {
+        "model": "paclock",
+        "kwargs": {
+          "arch": "triaxial",
+          "d_model": 128,
+          "depth": 6,
+          "n_bands": 8,
+          "n_heads": 4,
+          "dropout": 0.2,
+          "kernel_size": 201,
+          "patch_len": 50,
+          "augmentations": [],
+          "freq_mixer": "attention",
+          "band_pe": "index",
+          "tokenizer_mode": "duplex",
+          "pac_token_mode": "measured",
+          "interaction_mode": "rotation",
+          "spatial_pe": "xyz",
+          "pac_patch_len": 50
+        }
+      },
+      "baseline_construction": {
+        "model": "eegpt",
+        "kwargs": {}
+      }
+    }
+  ],
+  "missing_or_incompatible": [
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "adfd",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "adfd",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "bci_iv_2a",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "bci_iv_2a",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "caueeg",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "caueeg",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "eegmat",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "eegmat",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "eegmat",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "faced",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "faced",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "faced",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "iiic",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "iiic",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "isruc",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "isruc",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "cbramod_pretrained",
+      "dataset": "mumtaz",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "mumtaz",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "mumtaz",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "cbramod_pretrained",
+      "dataset": "physionet_mi",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "physionet_mi",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "physionet_mi",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "sleepedf",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "sleepedf",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuab",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuab",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuep",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuep",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "cbramod_pretrained",
+      "dataset": "tuev",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "adfd",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "adfd",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "caueeg",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "caueeg",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "reve_pretrained",
+      "dataset": "chbmit",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "reve_pretrained",
+      "dataset": "chbmit",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "chbmit",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "chbmit",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "iiic",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "iiic",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "reve_pretrained",
+      "dataset": "siena",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "reve_pretrained",
+      "dataset": "siena",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "siena",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "siena",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "reve_pretrained",
+      "dataset": "tuab",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "reve_pretrained",
+      "dataset": "tuab",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "tuab",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "tuab",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "tuep",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "tuep",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "tuev",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "tusz",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "reve_pretrained",
+      "dataset": "tusz",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "adfd",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "adfd",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "caueeg",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "caueeg",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "eegpt_pretrained",
+      "dataset": "eegmat",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "eegpt_pretrained",
+      "dataset": "eegmat",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "eegmat",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "eegmat",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "iiic",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "iiic",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "eegpt_pretrained",
+      "dataset": "mumtaz",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "eegpt_pretrained",
+      "dataset": "mumtaz",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "mumtaz",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "mumtaz",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "eegpt_pretrained",
+      "dataset": "siena",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "eegpt_pretrained",
+      "dataset": "siena",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "siena",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "siena",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "tuar",
+      "reason": "no common seed"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "tuar",
+      "reason": "no common seed"
+    },
+    {
+      "family": "paclock_rot2",
+      "baseline": "eegpt_pretrained",
+      "dataset": "tuep",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "paclock_duplex",
+      "baseline": "eegpt_pretrained",
+      "dataset": "tuep",
+      "reason": "cohort metadata differs"
+    },
+    {
+      "family": "factorized_f4_joint_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "tuep",
+      "reason": "no eligible completed cell"
+    },
+    {
+      "family": "factorized_f4_aug_confirm",
+      "baseline": "eegpt_pretrained",
+      "dataset": "tuep",
+      "reason": "no eligible completed cell"
+    }
+  ],
+  "limitations": [
+    "These are local reproduced baselines, not published SOTA scores.",
+    "Equal recorded cohorts are necessary but do not prove historical source/array/checkpoint identity.",
+    "Training recipes, model sizes, preprocessing within wrappers and pretraining budgets can differ; these are benchmark comparisons, not causal architecture ablations.",
+    "No mixed-metric aggregate or post-hoc near-SOTA margin is used.",
+    "Single-seed rows only identify replication gaps; they do not eliminate model families.",
+    "The new augmented joint candidate has one complete TUAR seed and no complete TUEV seed at this snapshot.",
+    "The existing candidate-matrix exclusions remain; omitted native-loader baselines cannot be treated as weak scores."
+  ],
+  "decision": "Keep the existing TUEV gate as the immediate dependency. If the joint recipe passes the paired gate, replicate it and test sleep corpora before broader expansion; do not claim final-candidate coverage from historical rotation/duplex or choose a different model per dataset."
+}
