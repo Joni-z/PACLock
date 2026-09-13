@@ -100,7 +100,18 @@ contrast; the completed TUAR f3 record is retained but excluded from candidate
 selection. The 100-Hz Sleep f3 was diagnostic and completed. The detailed
 measurement remains in `TUEV-DIAGNOSIS-2026-09-13.md` on the factorized branch.
 
-CHB-MIT/TUSZ pilots continue or stop under their configured patience. Inspect
+CHB-MIT factorized f0 and f1 have both closed with ordinary patience after
+four epochs: validation PR-AUC .587277 for zero content and .673026 for
+band-local content (+.085749). The cohort and d192 recipe match except for
+content source, identity/backfill and nonbinding time caps. This supports the
+value of the band-local lane on CHB in one seed; broadband f2 is still running.
+Historical d128 duplex scores .678728 and rotation .634410 on the same cohort,
+so f1 is competitive but does not establish superiority over duplex or isolate
+tokenization from model width. Allocation 416457 completed normally in 15:45:54
+and released; f0's allocation 416484 still hosts a TUEV confirmation.
+See `results/audits/chb-factorized-f1-completion-20260913.json`.
+
+Remaining CHB-MIT/TUSZ pilots continue or stop under their configured patience. Inspect
 step validations as well as epoch ends. Their validation cadence differs from
 TUEV; equal epoch numbers alone do not establish equal training progress.
 Do not discard an entire model family from these seed-0 pilots.
