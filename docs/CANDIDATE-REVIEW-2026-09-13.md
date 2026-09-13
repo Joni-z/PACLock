@@ -116,6 +116,25 @@ step validations as well as epoch ends. Their validation cadence differs from
 TUEV; equal epoch numbers alone do not establish equal training progress.
 Do not discard an entire model family from these seed-0 pilots.
 
+The TUSZ factorized f2 pilot has now closed with ordinary patience after four
+epochs. Validation PR-AUC is .376115 for broadband content, .377237 for zero
+content and .349521 for band content; the other arms stopped after two and one
+epochs respectively under the same patience policy. Recipes, d192 construction,
+cohorts and 20,000-window validation caps match except content source, identity,
+execution metadata and nonbinding time caps. Broadband has not surpassed zero
+content in this seed. These capped-validation scores must not be ranked against
+the full-validation 16-band TUSZ score .385660. No further content sweep is
+admitted; details are in `results/audits/tusz-factorized-completion-20260913.json`.
+
+A retrospective replay also shows why patience semantics cannot be silently
+changed to save compute: stopping CHB f1 at its first 20-validation plateau
+would retain .607448 rather than its later .673026 PR-AUC. Analogous missed
+gains are .025978 for CHB duplex and .053972 for the TUSZ 16-band pilot.
+These are replays of recorded curves, not new runs or proven compute savings.
+Keep the existing epoch-boundary policy for current comparisons. A transient
+plateau alone is insufficient evidence to discard a branch or erase its
+in-memory best state. The same audit records all replay inputs and hashes.
+
 The completed IIIC duplex+self-coupling control has validation kappa .547425
 versus duplex .539373 (+.008053); the analogous TUEV seed-0 change is negative.
 The added diagonal terms are not a self-only control. These single-seed results

@@ -1,0 +1,231 @@
+{
+  "observed_at": "2026-09-13T04:02:26.021695+00:00",
+  "results": [
+    {
+      "path": "runs/tusz-factorized_f2/seed0/result.json",
+      "sha256": "e40338628deda34900ecaa91ed3109eb9d1c77b2fca14c4d4dbd53c07f89d60d",
+      "content_source": "broadband",
+      "name": "tusz-factorized_f2",
+      "seed": 0,
+      "best_val": 0.37611457242545066,
+      "epochs_run": 4,
+      "stopped_by": "patience",
+      "wall_time_sec": 34860.31594467163,
+      "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+      "class_counts": {
+        "train": [
+          313196,
+          13472
+        ],
+        "val": [
+          153259,
+          3136
+        ],
+        "test": [
+          43364,
+          2727
+        ]
+      },
+      "max_hours": 16.396385235322846,
+      "execution": {
+        "source_job": "416629",
+        "allocation": "416426",
+        "gpu": 0,
+        "original_max_hours": 22.5,
+        "max_hours": 16.396385235322846
+      }
+    },
+    {
+      "path": "runs/tusz-factorized_f0/seed0/result.json",
+      "sha256": "a91948c9f78014bca7596e1890ac7e24fd15ec73a09912c8520f82a5f4602e54",
+      "content_source": "zero",
+      "name": "tusz-factorized_f0",
+      "seed": 0,
+      "best_val": 0.3772372236285481,
+      "epochs_run": 2,
+      "stopped_by": "patience",
+      "wall_time_sec": 17747.455203533173,
+      "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+      "class_counts": {
+        "train": [
+          313196,
+          13472
+        ],
+        "val": [
+          153259,
+          3136
+        ],
+        "test": [
+          43364,
+          2727
+        ]
+      },
+      "max_hours": 16.789736114475463,
+      "execution": {
+        "source_job": "416629",
+        "allocation": "416456",
+        "gpu": 1,
+        "original_max_hours": 22.5,
+        "max_hours": 16.789736114475463
+      }
+    },
+    {
+      "path": "runs/tusz-factorized_f1/seed0/result.json",
+      "sha256": "affc60f2c9493198b11b3a08d0583fda00d80c45dfbbcbeda700cf0092c2fa6f",
+      "content_source": "band",
+      "name": "tusz-factorized_f1",
+      "seed": 0,
+      "best_val": 0.34952080644550243,
+      "epochs_run": 1,
+      "stopped_by": "patience",
+      "wall_time_sec": 8963.867137908936,
+      "data_manifest_created": "2026-08-04T12:04:53.501948+00:00",
+      "class_counts": {
+        "train": [
+          313196,
+          13472
+        ],
+        "val": [
+          153259,
+          3136
+        ],
+        "test": [
+          43364,
+          2727
+        ]
+      },
+      "max_hours": 16.789736114475463,
+      "execution": {
+        "source_job": "416629",
+        "allocation": "416456",
+        "gpu": 2,
+        "original_max_hours": 22.5,
+        "max_hours": 16.789736114475463
+      }
+    }
+  ],
+  "common_recipe_without_content_source": {
+    "group": "factorized",
+    "dataset": "tusz",
+    "data_root": "$PACLOCK_PROC/processed/tusz",
+    "model": "paclock",
+    "optimizer": "adamw",
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "num_workers": 8,
+    "device": "cuda",
+    "num_classes": 2,
+    "epochs": 20,
+    "batch_size": 32,
+    "eval_every_steps": 200,
+    "patience": 20,
+    "loss": "bce_with_logits",
+    "sample_rate": 200,
+    "val_subsample": 20000,
+    "model_kwargs": {
+      "arch": "triaxial",
+      "d_model": 192,
+      "depth": 6,
+      "n_bands": 8,
+      "n_heads": 4,
+      "dropout": 0.2,
+      "kernel_size": 201,
+      "patch_len": 50,
+      "augmentations": [],
+      "freq_mixer": "attention",
+      "band_pe": "index",
+      "tokenizer_mode": "factorized",
+      "pac_token_mode": "measured",
+      "interaction_mode": "rotation",
+      "spatial_pe": "xyz",
+      "pac_patch_len": 50,
+      "coupling_dim": 128,
+      "content_scale": 1.0
+    },
+    "seed": 0
+  },
+  "comparison": "Same d192 cohort, capped 20k-window validation and recipe except content source; nonbinding time caps and execution locations differ. Broadband .376115, zero .377237, band .349521; all ordinary patience stops.",
+  "limitations": [
+    "Single-seed screening evidence; different epoch counts under the same epoch-boundary patience policy.",
+    "Do not compare the capped-validation scores directly against the full-validation TUSZ 16-band result .385660.",
+    "Allocation 416426 remains held for CHB self-coupling after this child finishes."
+  ],
+  "patience_replay": [
+    {
+      "path": "runs/tusz-factorized_f2/seed0/result.json",
+      "sha256": "e40338628deda34900ecaa91ed3109eb9d1c77b2fca14c4d4dbd53c07f89d60d",
+      "first_patience_eval_1based": 91,
+      "actual_validation_count": 208,
+      "best_at_hypothetical_stop": 0.37193809190092664,
+      "actual_best": 0.37611457242545066,
+      "missed_later_gain": 0.004176480524524018
+    },
+    {
+      "path": "runs/tusz-factorized_f0/seed0/result.json",
+      "sha256": "a91948c9f78014bca7596e1890ac7e24fd15ec73a09912c8520f82a5f4602e54",
+      "first_patience_eval_1based": 94,
+      "actual_validation_count": 104,
+      "best_at_hypothetical_stop": 0.3772372236285481,
+      "actual_best": 0.3772372236285481,
+      "missed_later_gain": 0.0
+    },
+    {
+      "path": "runs/tusz-factorized_f1/seed0/result.json",
+      "sha256": "affc60f2c9493198b11b3a08d0583fda00d80c45dfbbcbeda700cf0092c2fa6f",
+      "first_patience_eval_1based": 52,
+      "actual_validation_count": 52,
+      "best_at_hypothetical_stop": 0.34952080644550243,
+      "actual_best": 0.34952080644550243,
+      "missed_later_gain": 0.0
+    },
+    {
+      "path": "runs/chbmit-factorized_f1/seed0/result.json",
+      "sha256": "86da2b5c307deeb9e08e06d1595760a155036a1ddf8b4b4160dfac9b70565ffe",
+      "first_patience_eval_1based": 129,
+      "actual_validation_count": 200,
+      "best_at_hypothetical_stop": 0.6074478577394248,
+      "actual_best": 0.6730264886717272,
+      "missed_later_gain": 0.06557863093230243
+    },
+    {
+      "path": "runs/chbmit-paclock_rot2/seed0/result.json",
+      "sha256": "0d388696406a75c674155b487bbca878cbb6d348f0d613ec1468d70b3794550b",
+      "first_patience_eval_1based": 186,
+      "actual_validation_count": 200,
+      "best_at_hypothetical_stop": 0.634409981962569,
+      "actual_best": 0.634409981962569,
+      "missed_later_gain": 0.0
+    },
+    {
+      "path": "runs/chbmit-paclock_duplex/seed0/result.json",
+      "sha256": "36722b4be3a7ffd6f0ac1d523353aeecc84297eabdc7f2fa564958fef60474ea",
+      "first_patience_eval_1based": 137,
+      "actual_validation_count": 300,
+      "best_at_hypothetical_stop": 0.6527498507225398,
+      "actual_best": 0.6787276863391541,
+      "missed_later_gain": 0.025977835616614375
+    },
+    {
+      "path": "runs/tusz-crofremo_n1/seed0/result.json",
+      "sha256": "5a4ccf64c7a537ab97e774ab6ceca58bd4bc6b2c90daed9fc4fb7294469452c6",
+      "first_patience_eval_1based": 44,
+      "actual_validation_count": 156,
+      "best_at_hypothetical_stop": 0.3316881414513435,
+      "actual_best": 0.38566036094501294,
+      "missed_later_gain": 0.05397221949366943
+    },
+    {
+      "path": "runs/tusz-paclock_rot2/seed0/result.json",
+      "sha256": "72734005a23172e07d8a925f27c8f7c85f0c8fd581ede2caa24068edea210cb9",
+      "first_patience_eval_1based": 74,
+      "actual_validation_count": 104,
+      "best_at_hypothetical_stop": 0.3429612294482765,
+      "actual_best": 0.3621377153131793,
+      "missed_later_gain": 0.01917648586490278
+    }
+  ],
+  "replay_limitations": "Retrospective replay of recorded scalar curves only. It shows best scores that earlier stopping would miss; it is not a new training run, an unbiased stopping-policy validation, or a measured wall-time saving.",
+  "decision": "No additional content or band sweep admitted. Keep current TUEV trials and existing patience semantics; do not silently replace epoch-boundary stopping with a per-validation rule that changes selected checkpoints."
+}
