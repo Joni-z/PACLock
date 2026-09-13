@@ -1,0 +1,63 @@
+{
+  "recorded_at": "2026-09-13T09:54:46.715927+00:00",
+  "state": "prepared_after_combined_smoke_pass",
+  "jobs_submitted": 0,
+  "smoke_job": "417383",
+  "smoke_source_commit": "961a94fb03e98871a25a1fe9185e59a2cd7b87f9",
+  "smoke_receipt": "results/audits/rms-geglu-smoke-20260913.json",
+  "smoke_sha256": "9d80160856a2fce761acf60bdddc69f35a564f73231ab4b91934ef5acb979fbc",
+  "items": [
+    {
+      "config": "configs/backbone_gate/tuev_legacy_s0.yaml",
+      "sha256": "b9d949cdf6c4aa238d741a9f9117d01cf69eed6dd20da7001343adde372c8815",
+      "name": "tuev-factorized_f4_blockcontrol",
+      "seed": 0,
+      "partition": "mi2101x",
+      "cpus": 16,
+      "training_cap_hours": 5,
+      "wall_hours": 6
+    },
+    {
+      "config": "configs/backbone_gate/tuev_rms_geglu_s0.yaml",
+      "sha256": "235db260052077a46dbbe85cc00310117a1c157a886d12982996d14c99a77e4c",
+      "name": "tuev-factorized_f4_rmsgeglu",
+      "seed": 0,
+      "partition": "mi2101x",
+      "cpus": 16,
+      "training_cap_hours": 5,
+      "wall_hours": 6
+    },
+    {
+      "config": "configs/backbone_gate/sleepedf_legacy_s0.yaml",
+      "sha256": "3146c5d22ff896893f604975625f4c9331033d2fb0e0e9d70f4009f72c3dbf8d",
+      "name": "sleepedf-factorized_f4_blockcontrol",
+      "seed": 0,
+      "partition": "mi2101x",
+      "cpus": 16,
+      "training_cap_hours": 4,
+      "wall_hours": 5
+    },
+    {
+      "config": "configs/backbone_gate/sleepedf_rms_geglu_s0.yaml",
+      "sha256": "f17a4b0871ac747da8c3b6d55cb02317f2a1497e56fb24feeb2905ea7df804db",
+      "name": "sleepedf-factorized_f4_rmsgeglu",
+      "seed": 0,
+      "partition": "mi2101x",
+      "cpus": 16,
+      "training_cap_hours": 4,
+      "wall_hours": 5
+    }
+  ],
+  "advance_rule": {
+    "all_arms_complete_normally": true,
+    "tuev_kappa_delta_min": 0.02,
+    "tuev_balanced_accuracy_delta_min": 0,
+    "sleepedf_kappa_delta_min": 0,
+    "sleepedf_balanced_accuracy_delta_min": 0,
+    "selected_checkpoint_class_recall_review_required": true,
+    "one_seed_not_family_elimination": true
+  },
+  "maximum_requested_single_card_node_hours": 22,
+  "external_allocation_unit_conversion": "unverified",
+  "pretraining_admitted": false
+}

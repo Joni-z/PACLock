@@ -1,0 +1,417 @@
+{
+  "job": "417383",
+  "step": null,
+  "partition": "mi2101x",
+  "host": "k006-004-v3.hpcfund",
+  "torch": "2.7.1+rocm6.3",
+  "rocm": "6.3.42131-fa1d09cbd",
+  "device": "AMD Instinct MI210",
+  "baseline_commit": "345fd9cb60a08da0875717e8d5ac5cb66bfa2697",
+  "legacy_equivalence": {
+    "initial_state_bit_exact": true,
+    "eval_logits_bit_exact": true,
+    "dropout_optimizer_step_close": true,
+    "optimizer_rtol": 1e-06,
+    "optimizer_atol": 1e-08,
+    "optimizer_comparisons": [
+      {
+        "comparison": "old_again",
+        "max_abs": 5.820766091346741e-11,
+        "different_elements": 3
+      },
+      {
+        "comparison": "new_legacy",
+        "max_abs": 5.820766091346741e-11,
+        "different_elements": 3
+      }
+    ]
+  },
+  "unknown_variant_rejected": true,
+  "new_variant_flat_finite_and_strict_checkpoint_roundtrip": true,
+  "validation_or_test_arrays_loaded": false,
+  "records": [
+    {
+      "config": "configs/backbone_gate/tuev_legacy_s0.yaml",
+      "dataset": "tuev",
+      "variant": "legacy",
+      "parameters": 3616726,
+      "input_shape": [
+        32,
+        16,
+        1000
+      ],
+      "sample_rate": 200,
+      "train_rows": 68445,
+      "steps_per_epoch": 2139,
+      "warmup_steps_excluded": 2,
+      "steady_step_seconds": [
+        0.3113933901768178,
+        0.3102386009413749,
+        0.31054020998999476,
+        0.3105343889910728,
+        0.3105125371366739,
+        0.31075578602030873,
+        0.3113198201172054,
+        0.3114584730938077,
+        0.31100267195142806,
+        0.3107809729408473,
+        0.3102784070651978,
+        0.3106796839274466
+      ],
+      "augmentation_path_warmups": [
+        {
+          "path": "Identity",
+          "seconds": [
+            0.3288467349484563,
+            0.3109212189447135
+          ]
+        },
+        {
+          "path": "Flip",
+          "seconds": [
+            0.3103822418488562,
+            0.3097103738691658
+          ]
+        },
+        {
+          "path": "Jitter",
+          "seconds": [
+            0.31006842106580734,
+            0.3107970538549125
+          ]
+        },
+        {
+          "path": "TemporalMask",
+          "seconds": [
+            0.31127465586178005,
+            0.3103387989103794
+          ]
+        },
+        {
+          "path": "ChannelMask",
+          "seconds": [
+            0.33104292885400355,
+            0.3099217819981277
+          ]
+        },
+        {
+          "path": "FrequencyMask",
+          "seconds": [
+            2.4777286699973047,
+            0.31077449209988117
+          ]
+        }
+      ],
+      "steady_step_augmentations": [
+        "Flip",
+        "TemporalMask",
+        "FrequencyMask",
+        "ChannelMask",
+        "ChannelMask",
+        "TemporalMask",
+        "ChannelMask",
+        "TemporalMask",
+        "FrequencyMask",
+        "Jitter",
+        "FrequencyMask",
+        "Jitter"
+      ],
+      "projected_training_seconds": 13295.649469485506,
+      "peak_GiB": 10.25302505493164,
+      "finite_loss_gradients_parameters": true,
+      "training_cap_hours": 5,
+      "fits_80_percent_of_cap": true
+    },
+    {
+      "config": "configs/backbone_gate/tuev_rms_geglu_s0.yaml",
+      "dataset": "tuev",
+      "variant": "rms_geglu",
+      "parameters": 3612886,
+      "input_shape": [
+        32,
+        16,
+        1000
+      ],
+      "sample_rate": 200,
+      "train_rows": 68445,
+      "steps_per_epoch": 2139,
+      "warmup_steps_excluded": 2,
+      "steady_step_seconds": [
+        0.33521133312024176,
+        0.3346970120910555,
+        0.33573141414672136,
+        0.33470126101747155,
+        0.33475675503723323,
+        0.33507282100617886,
+        0.334516883129254,
+        0.3349026800133288,
+        0.335669226013124,
+        0.3353942090179771,
+        0.33589468197897077,
+        0.3347329800017178
+      ],
+      "augmentation_path_warmups": [
+        {
+          "path": "Identity",
+          "seconds": [
+            0.3464074640069157,
+            0.3355389309581369
+          ]
+        },
+        {
+          "path": "Flip",
+          "seconds": [
+            0.3342817889060825,
+            0.33466920000500977
+          ]
+        },
+        {
+          "path": "Jitter",
+          "seconds": [
+            0.3348001060076058,
+            0.3344490339513868
+          ]
+        },
+        {
+          "path": "TemporalMask",
+          "seconds": [
+            0.3351701048668474,
+            0.3412341249641031
+          ]
+        },
+        {
+          "path": "ChannelMask",
+          "seconds": [
+            0.33440786600112915,
+            0.3343986379913986
+          ]
+        },
+        {
+          "path": "FrequencyMask",
+          "seconds": [
+            0.33489447413012385,
+            0.33510844805277884
+          ]
+        }
+      ],
+      "steady_step_augmentations": [
+        "Flip",
+        "TemporalMask",
+        "FrequencyMask",
+        "ChannelMask",
+        "ChannelMask",
+        "TemporalMask",
+        "ChannelMask",
+        "TemporalMask",
+        "FrequencyMask",
+        "Jitter",
+        "FrequencyMask",
+        "Jitter"
+      ],
+      "projected_training_seconds": 14335.867679683724,
+      "peak_GiB": 12.061116218566895,
+      "finite_loss_gradients_parameters": true,
+      "training_cap_hours": 5,
+      "fits_80_percent_of_cap": true
+    },
+    {
+      "config": "configs/backbone_gate/sleepedf_legacy_s0.yaml",
+      "dataset": "sleepedf",
+      "variant": "legacy",
+      "parameters": 3616533,
+      "input_shape": [
+        32,
+        2,
+        3000
+      ],
+      "sample_rate": 100,
+      "train_rows": 122430,
+      "steps_per_epoch": 3826,
+      "warmup_steps_excluded": 2,
+      "steady_step_seconds": [
+        0.1251531350426376,
+        0.1253653538879007,
+        0.1254329199437052,
+        0.12539284490048885,
+        0.12537787691690028,
+        0.12539332685992122,
+        0.12524671107530594,
+        0.12543601589277387,
+        0.12496561999432743,
+        0.1248201048001647,
+        0.1253889079671353,
+        0.12506788317114115
+      ],
+      "augmentation_path_warmups": [
+        {
+          "path": "Identity",
+          "seconds": [
+            9.884439966175705,
+            0.1261086070444435
+          ]
+        },
+        {
+          "path": "Flip",
+          "seconds": [
+            0.1263930629938841,
+            0.12594764190725982
+          ]
+        },
+        {
+          "path": "Jitter",
+          "seconds": [
+            0.12522831582464278,
+            0.12629397492855787
+          ]
+        },
+        {
+          "path": "TemporalMask",
+          "seconds": [
+            0.12582391896285117,
+            0.26740263192914426
+          ]
+        },
+        {
+          "path": "ChannelMask",
+          "seconds": [
+            0.12506488687358797,
+            0.12524228286929429
+          ]
+        },
+        {
+          "path": "FrequencyMask",
+          "seconds": [
+            1.6090673138387501,
+            0.125418164068833
+          ]
+        }
+      ],
+      "steady_step_augmentations": [
+        "Flip",
+        "TemporalMask",
+        "FrequencyMask",
+        "ChannelMask",
+        "ChannelMask",
+        "TemporalMask",
+        "ChannelMask",
+        "TemporalMask",
+        "FrequencyMask",
+        "Jitter",
+        "FrequencyMask",
+        "Jitter"
+      ],
+      "projected_training_seconds": 9584.389533218153,
+      "peak_GiB": 3.9448609352111816,
+      "finite_loss_gradients_parameters": true,
+      "training_cap_hours": 4,
+      "fits_80_percent_of_cap": true
+    },
+    {
+      "config": "configs/backbone_gate/sleepedf_rms_geglu_s0.yaml",
+      "dataset": "sleepedf",
+      "variant": "rms_geglu",
+      "parameters": 3612693,
+      "input_shape": [
+        32,
+        2,
+        3000
+      ],
+      "sample_rate": 100,
+      "train_rows": 122430,
+      "steps_per_epoch": 3826,
+      "warmup_steps_excluded": 2,
+      "steady_step_seconds": [
+        0.1337933128233999,
+        0.13380400487221777,
+        0.13400257006287575,
+        0.13424785202369094,
+        0.13624406792223454,
+        0.1337956478819251,
+        0.13375600310973823,
+        0.134047192055732,
+        0.13420567219145596,
+        0.13399520399980247,
+        0.13416948216035962,
+        0.13349444000050426
+      ],
+      "augmentation_path_warmups": [
+        {
+          "path": "Identity",
+          "seconds": [
+            0.13877625297755003,
+            0.13378048781305552
+          ]
+        },
+        {
+          "path": "Flip",
+          "seconds": [
+            0.1337608420290053,
+            0.13356943102553487
+          ]
+        },
+        {
+          "path": "Jitter",
+          "seconds": [
+            0.1423640619032085,
+            0.13393084309063852
+          ]
+        },
+        {
+          "path": "TemporalMask",
+          "seconds": [
+            0.13405345496721566,
+            0.13415407296270132
+          ]
+        },
+        {
+          "path": "ChannelMask",
+          "seconds": [
+            0.13399608619511127,
+            0.13360364502295852
+          ]
+        },
+        {
+          "path": "FrequencyMask",
+          "seconds": [
+            0.13394000986590981,
+            0.1341999899595976
+          ]
+        }
+      ],
+      "steady_step_augmentations": [
+        "Flip",
+        "TemporalMask",
+        "FrequencyMask",
+        "ChannelMask",
+        "ChannelMask",
+        "TemporalMask",
+        "ChannelMask",
+        "TemporalMask",
+        "FrequencyMask",
+        "Jitter",
+        "FrequencyMask",
+        "Jitter"
+      ],
+      "projected_training_seconds": 10263.59858045277,
+      "peak_GiB": 4.601810932159424,
+      "finite_loss_gradients_parameters": true,
+      "training_cap_hours": 4,
+      "fits_80_percent_of_cap": true
+    }
+  ],
+  "all_fit": true,
+  "projection_limitation": "Training compute only; excludes data loading, validation, final evaluation and saving.",
+  "git_commit": "961a94fb03e98871a25a1fe9185e59a2cd7b87f9",
+  "source_sha256": {
+    "smoke/smoke_rms_geglu.py": "12acfdc955327e60cbaae99eac137540549392373864f54584428f1d32c3d30d",
+    "paclock_bench/models/paclock/triaxial.py": "f4610c6e367a3ba64cac71f97f1a44549434980a72d5980893a04128e6baedfc",
+    "paclock_bench/models/paclock/build.py": "65e99cd87013f964463e8bbc76ebfedd815d232d4e5d58b01581eb689bd2fcb4",
+    "paclock_bench/models/paclock/frontend/factorized.py": "2ecb5551f17aca34151f9d1bc5a50db3f1867c6314d50eed653fa66d90efaa1a",
+    "paclock_bench/training/train.py": "ec8c15480fb734b47716e16100ac3afdcf3b99344c20d975a47b3e6a98192084",
+    "paclock_bench/training/losses.py": "a51c7aac6eec9d57f4e475eb6021dd90fab1fcaac5a404b44755e4794bf0f6f7",
+    "configs/backbone_gate/tuev_legacy_s0.yaml": "b9d949cdf6c4aa238d741a9f9117d01cf69eed6dd20da7001343adde372c8815",
+    "configs/backbone_gate/tuev_rms_geglu_s0.yaml": "235db260052077a46dbbe85cc00310117a1c157a886d12982996d14c99a77e4c",
+    "configs/backbone_gate/sleepedf_legacy_s0.yaml": "3146c5d22ff896893f604975625f4c9331033d2fb0e0e9d70f4009f72c3dbf8d",
+    "configs/backbone_gate/sleepedf_rms_geglu_s0.yaml": "f17a4b0871ac747da8c3b6d55cb02317f2a1497e56fb24feeb2905ea7df804db"
+  }
+}
