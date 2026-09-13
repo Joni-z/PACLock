@@ -1,4 +1,4 @@
-"""Validation-only coordinate knockouts of completed TUAR checkpoints.
+"""Validation-only coordinate knockouts of factorized checkpoints.
 
 Run through smoke_gpu.slurm in an existing allocation. These interventions
 measure sensitivity after training; they are not retrained ablations or a
@@ -6,6 +6,7 @@ specific test of physical PAC versus other information in coupling tokens.
 """
 import argparse
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -32,6 +33,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', required=True)
     ap.add_argument('--job', required=True)
+    ap.add_argument('--dataset', choices=('tuar', 'tuev'), default='tuar')
+    ap.add_argument('--run', action='append', dest='runs')
+    ap.add_argument('--allow-running', action='store_true')
     args = ap.parse_args()
     assert os.environ.get('SLURM_JOB_ID') == args.job
     assert torch.cuda.is_available() and torch.cuda.device_count() == 1
@@ -40,19 +44,39 @@ def main():
     started = time.monotonic()
     rows = []
     dataset = None
-    for name in ('tuar-factorized_f1_scale1_confirm',
-                 'tuar-factorized_f2_confirm',
-                 'tuar-factorized_f4_joint_confirm'):
+    names = args.runs or ('tuar-factorized_f1_scale1_confirm',
+                         'tuar-factorized_f2_confirm',
+                         'tuar-factorized_f4_joint_confirm')
+    snapshot_dir = dest.with_suffix('')
+    snapshot_dir.mkdir(parents=True, exist_ok=False)
+    for name in names:
+        assert Path(name).name == name
         directory = Path('runs') / name / 'seed1'
-        result = json.loads((directory / 'result.json').read_text())
         checkpoint = directory / 'best.pt'
-        checkpoint_hash = sha(checkpoint)
-        saved = torch.load(checkpoint, map_location='cpu', weights_only=False)
+        checkpoint_bytes = checkpoint.read_bytes()
+        checkpoint_hash = hashlib.sha256(checkpoint_bytes).hexdigest()
+        saved = torch.load(io.BytesIO(checkpoint_bytes), map_location='cpu', weights_only=False)
         cfg = saved['config']
-        assert cfg == result['config'] and cfg['dataset'] == 'tuar'
-        assert result['stopped_by'] == 'epochs' and result['epochs_run'] == 20
+        complete = (directory / 'result.json').exists()
+        assert complete or args.allow_running
+        source = directory / ('result.json' if complete else 'progress.json')
+        source_bytes = source.read_bytes()
+        result = json.loads(source_bytes)
+        assert cfg == result['config'] and cfg['dataset'] == args.dataset
+        if complete:
+            assert result['stopped_by'] == 'epochs' and result['epochs_run'] == 20
+            reference_value = result['best_val']
+        else:
+            selected = [r for r in result['history'] if r['tag'] == saved['tag']]
+            assert len(selected) == 1, 'Checkpoint and progress snapshot disagree'
+            reference_value = selected[0]['metrics']['cohen_kappa']
         assert cfg['model_kwargs']['freq_mixer'] == 'attention'
-        assert abs(saved['best_val'] - result['best_val']) < 1e-12
+        assert abs(saved['best_val'] - reference_value) < 1e-12
+        snapshot_checkpoint = snapshot_dir / (name + '-best.pt')
+        with snapshot_checkpoint.open('xb') as handle:
+            handle.write(checkpoint_bytes)
+        (snapshot_dir / (name + '-metadata.json')).write_bytes(source_bytes)
+        del checkpoint_bytes
         root = expand(cfg['data_root'])
         assert load_manifest(root)['created_utc'] == result['data_manifest_created']
         if dataset is None:
@@ -89,22 +113,27 @@ def main():
             torch.cuda.synchronize()
             before = time.monotonic()
             try:
-                loss, metrics = evaluate(model, loader, 'cuda', criterion, 3, cfg)
+                loss, metrics = evaluate(model, loader, 'cuda', criterion, cfg['num_classes'], cfg)
             finally:
                 if hook is not None:
                     hook.remove()
             torch.cuda.synchronize()
             assert np.isfinite(loss) and all(np.isfinite(v) for v in metrics.values())
             if mode == 'full':
-                assert abs(metrics['cohen_kappa'] - result['best_val']) < 1e-6, (name, metrics, result['best_val'])
+                assert abs(metrics['cohen_kappa'] - reference_value) < 1e-6, (name, metrics, reference_value)
             evaluations[mode] = dict(val_loss=loss, metrics=metrics,
                                      elapsed_seconds=time.monotonic() - before)
             print(name, mode, json.dumps(metrics), flush=True)
         # Hooks did not mutate parameters or checkpoint files.
         assert all(torch.equal(v.cpu(), saved['model'][k]) for k, v in model.state_dict().items())
-        assert sha(checkpoint) == checkpoint_hash
+        assert sha(snapshot_checkpoint) == checkpoint_hash
+        if complete:
+            assert sha(checkpoint) == checkpoint_hash
         rows.append(dict(name=name, checkpoint=str(checkpoint), checkpoint_sha256=checkpoint_hash,
-                         result_sha256=sha(directory / 'result.json'), selected_tag=saved['tag'],
+                         checkpoint_snapshot=str(snapshot_checkpoint), source_metadata=str(source),
+                         source_metadata_sha256=hashlib.sha256(source_bytes).hexdigest(),
+                         completed_training=complete, selected_tag=saved['tag'],
+                         observed_validations=len(result.get('history', [])) if not complete else None,
                          first_validation_batch_token_rms=lane_rms, evaluations=evaluations))
         del model, loader, saved
         torch.cuda.empty_cache()
