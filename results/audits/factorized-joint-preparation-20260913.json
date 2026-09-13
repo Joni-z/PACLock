@@ -1,0 +1,36 @@
+{
+  "at": "2026-09-13T02:12:51.313376+00:00",
+  "status": "prepared_and_gpu_smoked_not_admitted",
+  "model_commit": "1ac4ddd3c7c7c444681757303a035f7330b70749",
+  "content_source": "band_broadband",
+  "coordinate_widths": [
+    128,
+    32,
+    32
+  ],
+  "parameterization": "Same projection parameters and initial state as band/broadband controls; first half reads band signals, second half reads raw waveform.",
+  "tradeoff": "Each content source has 32 coordinates instead of its single-source control's 64; exact token coordinates are preserved, not invertibility of either signal.",
+  "motivation": [
+    "Completed seed-0 TUEV favors band content; completed Sleep-EDF, TUAR and ISRUC favor broadband content.",
+    "Live CHB-MIT logs show best validation PR-AUC .6730 for band and .4289 for broadband; broadband is still improving and this is not a completed comparison."
+  ],
+  "admission_conditions": [
+    "Review completed TUEV seed-0 scale pair and TUAR f2 seed-1 confirmation first.",
+    "If admitted, use an existing compatible allocation with sufficient remaining time; do not add a pretraining run.",
+    "Reuse eligible f1 seed-1 controls on mi2104x; verify complete configs, cohorts and execution provenance before comparison."
+  ],
+  "proposed_training_caps_hours": {
+    "tuev": 5,
+    "tuar": 2
+  },
+  "minimum_remaining_allocation_hours": {
+    "tuev": 6,
+    "tuar": 4
+  },
+  "smoke_receipts": [
+    "results/audits/factorized-joint-contract-20260913.json",
+    "results/audits/tuev-f4-joint-smoke-20260913.json",
+    "results/audits/tuar-f4-joint-smoke-20260913.json"
+  ],
+  "training_submitted": false
+}

@@ -48,6 +48,22 @@ each has a five-hour training cap and needs six hours left in an allocation.
 Review the completed seed-0 TUEV pair before admission. The conditional plan
 and smoke receipts are in `results/audits/tuev-seed1-confirm-preparation-20260913.json`.
 
+A fixed-width joint-content alternative, f4, is implemented on the factorized
+branch at `1ac4ddd` and GPU-smoked, but **not admitted to training**. It keeps
+128 coupling coordinates and splits the existing 64 content coordinates into
+32 band-local and 32 broadband coordinates, with unchanged parameterization
+and initialization. Each source therefore has less capacity than its own
+64-coordinate control; this is not a claim of signal invertibility. The joint
+contract passes exact coordinate checks, finite random/flat/near-flat gradients,
+three-lane trainability and strict checkpoint reload. Real-batch smokes on
+416043 GPU 1 take about .257 s/step for TUEV and .256 s/step for TUAR after two
+warmups, with 10.31 GiB peak memory; projected training alone is 3.05/.92 hours.
+The rationale is the cross-corpus content tradeoff, including live CHB-MIT
+PR-AUC .6730 for f1 versus .4289 for still-improving f2. Review the completed
+TUEV scale pair and TUAR f2 seed-1 confirmation before deciding on this trial.
+The proposed TUEV/TUAR training caps are five/two hours, with eligible existing
+seed-1 controls reused. See `results/audits/factorized-joint-preparation-20260913.json`.
+
 The 200-Hz f3 implementation remains blocked after its realized lowest filter
 peaked at DC with gain 70.156. That invalidates the intended low-frequency
 contrast; the completed TUAR f3 record is retained but excluded from candidate

@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "job": "416043",
+  "host": "k003-006.hpcfund",
+  "git_commit": "1ac4ddd3c7c7c444681757303a035f7330b70749",
+  "coordinate_widths": [
+    128,
+    32,
+    32
+  ],
+  "identical_initial_state": true,
+  "exact_source_coordinates": true,
+  "all_three_lanes_receive_gradients": true,
+  "finite_random_flat_nearflat": true,
+  "strict_checkpoint_roundtrip": true,
+  "sha256": {
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/smoke/smoke_factorized_joint.py": "d3459736e6301f63e2e8b439508a86149d10588bd62ed6dc4df5288bca295240",
+    "paclock_bench/models/paclock/frontend/factorized.py": "2ecb5551f17aca34151f9d1bc5a50db3f1867c6314d50eed653fa66d90efaa1a"
+  }
+}
