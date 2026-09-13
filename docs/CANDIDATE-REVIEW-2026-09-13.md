@@ -802,3 +802,23 @@ pending before and after deployment and will load the added recording code.
 The two already-running raw controls retain their loaded code. Tests, before
 and after source hashes, queue evidence and scope are recorded in
 `results/audits/selected-validation-recording-20260913.json`.
+
+## Single-card CHB scheduling pilot closed at its budget
+
+Job 416751 has completed with exit 0 after 11:06:13 and released its single-card
+allocation. The configured 11-hour training budget triggered at epoch 3 step
+200; the total duration includes validation, evaluation and saving around the
+budget stop.
+`epochs_run=4` means three complete epochs plus a truncated fourth. The selected
+validation PR-AUC is .658491 at epoch 2 step 9800, with balanced accuracy .583333
+and AUROC .972911. The near-budget improvement is retained in the checkpoint
+history, but the run remains `scheduling_pilot` and `stopped_by=time_budget`.
+
+Do not admit it into completed candidate ranking, relabel it as an uninterrupted
+self-inclusion trial, or continue/restart it. The migration originally restarted
+from seed without optimizer state and used the separate mi2101x software stack.
+The original result, full validation history, migration provenance, log hashes,
+pack exit receipt and Slurm closure are audited in
+`results/audits/chb-single-pilot-completion-20260913.json`. AMD now has the two
+remaining four-card allocations, 416422 and 416485; TUEV augmentation and the
+other CHB trials continue under their existing caps.
