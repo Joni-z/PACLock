@@ -1,0 +1,108 @@
+{
+  "ok": true,
+  "job": "416422",
+  "host": "k002-005.hpcfund",
+  "git_commit": "6d7f5de22441cb89a258b735d64c79798fd20cd1",
+  "training_batches_only": true,
+  "runs": [
+    {
+      "dataset": "tuev",
+      "seed": 1,
+      "config": "configs/factorized_joint_augment/tuev_f4_aug_s1.yaml",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "measured": [
+        {
+          "module": "flip0.5",
+          "seconds": 0.26930473698303103,
+          "loss": 1.1001135110855103
+        },
+        {
+          "module": "jitter0.05",
+          "seconds": 0.26909106300445274,
+          "loss": 1.0991953611373901
+        },
+        {
+          "module": "mask0.2",
+          "seconds": 0.26946535002207384,
+          "loss": 1.068047046661377
+        },
+        {
+          "module": "channel0.2",
+          "seconds": 0.2690623379894532,
+          "loss": 1.0784742832183838
+        },
+        {
+          "module": "frequency0.2",
+          "seconds": 0.2691484410315752,
+          "loss": 1.0791723728179932
+        }
+      ],
+      "warmup_steps_excluded": 2,
+      "all_three_lanes_receive_gradients": true,
+      "eval_augmentation_bypass_exact": true,
+      "peak_GiB": 10.311423778533936,
+      "projected_training_seconds": 11516.991424785694,
+      "projection_note": "Training only; excludes loading, validation and final evaluation."
+    },
+    {
+      "dataset": "tuar",
+      "seed": 1,
+      "config": "configs/factorized_joint_augment/tuar_f4_aug_s1.yaml",
+      "batch": [
+        32,
+        16,
+        1000
+      ],
+      "measured": [
+        {
+          "module": "flip0.5",
+          "seconds": 0.2688713169773109,
+          "loss": 1.1571563482284546
+        },
+        {
+          "module": "jitter0.05",
+          "seconds": 0.26889317895984277,
+          "loss": 1.0664831399917603
+        },
+        {
+          "module": "mask0.2",
+          "seconds": 0.26898245804477483,
+          "loss": 1.1267329454421997
+        },
+        {
+          "module": "channel0.2",
+          "seconds": 0.26900895801372826,
+          "loss": 1.1533517837524414
+        },
+        {
+          "module": "frequency0.2",
+          "seconds": 0.26904176000971347,
+          "loss": 1.110633373260498
+        }
+      ],
+      "warmup_steps_excluded": 2,
+      "all_three_lanes_receive_gradients": true,
+      "eval_augmentation_bypass_exact": true,
+      "peak_GiB": 10.309699535369873,
+      "projected_training_seconds": 3474.957184461877,
+      "projection_note": "Training only; excludes loading, validation and final evaluation."
+    }
+  ],
+  "sha256": {
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/smoke/smoke_joint_augmentation.py": "662d71b9e18a667cae44c12356aa19a4ab9a280b3e1a6aeb1e2bfc74d0bda439",
+    "paclock_bench/models/paclock/augment.py": "9f2f36226ada89a0f3da26cfeba37f138b60cece5204b95ca028b9ba9a751ae0",
+    "paclock_bench/models/paclock/build.py": "3be731e943d465d7d6f646ff750831bb6c84449c90aab4b65d17f0530c6cfe5d",
+    "paclock_bench/models/build.py": "50928abb29c997660ec55a49537e8788f7e842795f5742f650ddb4dd87c683e7",
+    "paclock_bench/models/paclock/frontend/factorized.py": "2ecb5551f17aca34151f9d1bc5a50db3f1867c6314d50eed653fa66d90efaa1a",
+    "paclock_bench/models/paclock/frontend/triaxial.py": "2092893d45a6621629f6d432c1af7cbcf9f82e47c2f995fe4829c005a4aa6cba",
+    "paclock_bench/models/paclock/triaxial.py": "08ea20014236aaaf72393b960339774d99c25d0761839c5fe097e3f9a68011a4",
+    "paclock_bench/training/train.py": "e988c418659d8029009b087dd3be4e2d5e443d0871dfe703dba6a6c839f52e33",
+    "paclock_bench/training/losses.py": "a51c7aac6eec9d57f4e475eb6021dd90fab1fcaac5a404b44755e4794bf0f6f7",
+    "configs/factorized_joint_augment/tuev_f4_aug_s1.yaml": "cab8c05c77b94d179ea6da6fded0c73f0a686de99c298731b89862d2de2aa0fc",
+    "configs/factorized_joint_augment/tuar_f4_aug_s1.yaml": "ef025a3ab9197f84eed3ee80b49f3e3b133a337695bc9aa8c44c49a1bf7e5cb8"
+  }
+}
