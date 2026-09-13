@@ -113,6 +113,16 @@ by AUROC, so maximum logged PR-AUC is not their selected checkpoint score.
 Source hashes, atomic replacements/backups and scheduler responses are recorded
 in `results/audits/torch-pending-cpus-20260913.json`.
 
+The TUSZ 16-band rotation pilot has completed with ordinary patience after
+three epochs. Its selected validation PR-AUC is .385660 versus .362138 for
+the 8-band control (+.023523). Manifest timestamps, class counts and recipes
+match except for band count and identity fields; both use the same patience
+policy and finish below their wall-time caps. The 8-band control stopped after
+two epochs, and historical source identity remains unverified. Combined with
+the negative IIIC band-count result, this single-seed gain does not justify
+another band sweep. Job 416484 still hosts other trainers; the completed child
+does not release its node. See `results/audits/tusz-n1-completion-20260913.json`.
+
 ## Existing axisfree pretraining candidate
 
 The inventory now includes both `cf2_v1d192` and `cf2_v1d192_ptR`, which were
@@ -131,6 +141,15 @@ below its cap. Allocation 416043 completed normally and released. The initial
 nine-pair audit and this additional completion are recorded in
 `results/audits/axisfree-pretrain-validation-20260913.json` and
 `results/audits/chb-axisfree-completion-20260913.json`.
+
+TUAB axisfree pretraining transfer has now closed as a budget-censored result.
+The log stops training at the 22.5-hour budget during epoch 3, step 200;
+`stopped_by=time_budget` is already correct and no scores or metadata were
+changed. `epochs_run=4` includes this interrupted fourth epoch, not four full
+epochs. Allocation 416044 completed with exit code 0 in 22:46:46 and released.
+Exclude this record from complete-training candidate ranking; no retry or
+additional pretraining was admitted. See
+`results/audits/tuab-axisfree-completion-20260913.json`.
 
 ## Historical readout check
 

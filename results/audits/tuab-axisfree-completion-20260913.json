@@ -1,0 +1,29 @@
+{
+  "observed_at": "2026-09-13T03:40:46.041698+00:00",
+  "job_id": "416044",
+  "scheduler": {
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "22:46:46",
+    "absent_from_squeue": true
+  },
+  "result": {
+    "path": "runs/tuab-cf2_v1d192_ptR/seed0/result.json",
+    "sha256": "f942bedbc39f133e151f73fb562f799747637695b06c7df833580d442bab212d",
+    "name": "tuab-cf2_v1d192_ptR",
+    "seed": 0,
+    "primary_metric": "auroc",
+    "best_val": 0.9075609334717116,
+    "epochs_run": 4,
+    "stopped_by": "time_budget",
+    "wall_time_sec": 81979.98679947853
+  },
+  "log": {
+    "path": "logs/AXFPT_b-416044-tuab_axisfree_ptR-s0.out",
+    "sha256": "1dd112b38f1a0ebd7deb89d8daaaf964d2207e01064f0097cc8d90a31706c744",
+    "stop_line": "stopping: 22.5h wall-clock budget reached at epoch 3 step 200"
+  },
+  "metadata_correction": false,
+  "decision": "Retain budget-censored result, exclude from complete-training candidate ranking, do not restart or allocate more pretraining.",
+  "interpretation": "epochs_run=4 includes the fourth epoch interrupted at step 200; this is not four complete epochs or completion of the 20-epoch recipe."
+}
