@@ -886,3 +886,26 @@ retains the historical shared-head baseline with its fidelity caveat. Wait for
 full selected-validation results before assessing the size of the head effect.
 This one-seed check neither certifies full native-protocol/SOTA reproduction nor
 justifies additional model variants or pretraining.
+
+## CHB factorized broadband-content screen completed
+
+CHB f2 seed 0 completed six epochs with normal patience stopping, exit 0,
+in 14.416 hours, within its 16.395-hour cap. Selected validation PR-AUC is
+0.519587, below matched band-content f1 (0.673026) and zero-content f0
+(0.587277): differences -0.153439 and -0.067690. All three use the same
+recorded cohort, focal-loss recipe and 3.615954M parameters. Configuration
+differences are content source, run identity, placement and nonbinding caps;
+historical source/runtime identity is not fully certified.
+
+This completes the six-corpus seed-0 f0/f1/f2 screen. Broadband content remains
+better than band content on TUAR, TUSZ, Sleep-EDF and ISRUC, but worse on TUEV
+and CHB. These are separate within-corpus validation comparisons, not an
+average across metrics or grounds for eliminating a family from one seed.
+Neither content source is established as the universal final candidate.
+
+Retain the negative result and do not extend or restart this CHB run. GPU 0
+is released; allocation 416422 still holds the three admitted TUEV trainers.
+The joint-augmentation gate remains the next candidate decision. Exact result
+hashes, configuration differences and controller completion receipt are in
+`results/audits/chb-factorized-f2-completion-20260913.json`. No test values
+were used for this decision.
