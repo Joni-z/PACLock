@@ -1,0 +1,95 @@
+{
+  "at": "2026-09-13T03:09:25.738123+00:00",
+  "initial_attempt": "CPUsPerTask=16 alone was rejected for 17365674; subsequent attempt specifies total CPU count and CPUs per task together.",
+  "jobs": [
+    {
+      "job": "17365674",
+      "before": "JobId=17365674 JobName=seed_tusz_cbramod_add_cpl_s1 UserId=zz5070(4206200) GroupId=zz5070(4206200) MCS_label=N/A Priority=12501 Nice=0 Account=torch_pr_63_general QOS=gpu48 JobState=PENDING Reason=QOSGrpGRES Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-09-11T04:20:18 EligibleTime=2026-09-11T04:20:18 AccrueTime=2026-09-11T04:20:18 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-12T23:09:24 Scheduler=Main Partition=h200_public AllocNode:Sid=torch-login-b-1:2413217 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=64G,node=1,billing=8,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=64G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/zz5070/PACLock/slurm/torch_run.slurm WorkDir=/scratch/zz5070/PACLock StdErr=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_add_cpl_s1-17365674.out StdIn=/dev/null StdOut=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_add_cpl_s1-17365674.out GresEnforceBind=Yes TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n",
+      "after": "JobId=17365674 JobName=seed_tusz_cbramod_add_cpl_s1 UserId=zz5070(4206200) GroupId=zz5070(4206200) MCS_label=N/A Priority=12501 Nice=0 Account=torch_pr_63_general QOS=gpu48 JobState=PENDING Reason=QOSGrpGRES Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-09-11T04:20:18 EligibleTime=2026-09-11T04:20:18 AccrueTime=2026-09-11T04:20:18 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-12T23:09:24 Scheduler=Main Partition=h200_public AllocNode:Sid=torch-login-b-1:2413217 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=64G,node=1,billing=8,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=64G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/zz5070/PACLock/slurm/torch_run.slurm WorkDir=/scratch/zz5070/PACLock StdErr=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_add_cpl_s1-17365674.out StdIn=/dev/null StdOut=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_add_cpl_s1-17365674.out GresEnforceBind=Yes TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n",
+      "returncode": 1,
+      "stderr": "Unspecified error for job 17365674\n",
+      "verified_16_cpus": false
+    }
+  ],
+  "resolution": "Keep existing 8-CPU allocations and queue positions; set all three TUSZ transplant configs to eight workers and a 23-hour training cap.",
+  "config_changes": [
+    {
+      "config": "configs/cf1/tusz_cbramod_add_raw.yaml",
+      "before_sha256": "35fc622d9d62b7bc1b65a6eaee9fe9c2ceb0ef9ca1e1dbf54872712d901ab6bd",
+      "after_sha256": "b418477a9f54ae8b50d60572ff2a6deaaa044836ba4e55857d39b651249cd0bd",
+      "changes": {
+        "num_workers": [
+          16,
+          8
+        ],
+        "max_hours": [
+          30.0,
+          23.0
+        ]
+      },
+      "all_other_yaml_values_identical": true
+    },
+    {
+      "config": "configs/cf1/tusz_cbramod_add_cpl.yaml",
+      "before_sha256": "758b6393f0fbbbccb2ae7a15f41892f80acc8034358d511cd96c86f358f5d2fa",
+      "after_sha256": "6af4fac4d636f3d859412018dc964764fa309275bf0da768baeb504cec692a57",
+      "changes": {
+        "num_workers": [
+          16,
+          8
+        ],
+        "max_hours": [
+          30.0,
+          23.0
+        ]
+      },
+      "all_other_yaml_values_identical": true
+    },
+    {
+      "config": "configs/experiments/tusz_cbramod_crofremo_bands.yaml",
+      "before_sha256": "dd247f3a59955b84c5efc77c1686a2f846d02a2abfc09ff2225710d5e7526eaf",
+      "after_sha256": "a9c5879b428aa4142ee37938d0788ca8cf4a20b3c0f3c30e3760e23b96a755fb",
+      "changes": {
+        "num_workers": [
+          16,
+          8
+        ],
+        "max_hours": [
+          44.0,
+          23.0
+        ]
+      },
+      "all_other_yaml_values_identical": true
+    }
+  ],
+  "applied_at": "2026-09-13T03:12:12.271816+00:00",
+  "running_process_note": "The running raw seed-1/2 processes retain their already-loaded configuration; no restart was issued.",
+  "selection_note": "These TUSZ runs select checkpoints by validation AUROC, not by the maximum logged PR-AUC. The selection rule and all model/optimizer/loss settings are preserved.",
+  "torch_deployed_at": "2026-09-13T03:13:46.485901+00:00",
+  "torch_backup_directory": "/scratch/zz5070/PACLock/results/audits/torch-runtime-20260913T031339/before",
+  "deployed_file_hashes": {
+    "slurm/torch_run.slurm": "291bc0aa9ac160354d76f42257a0e64001c9780e12ff900ecda0c817421703cc",
+    "configs/cf1/tusz_cbramod_add_raw.yaml": "b418477a9f54ae8b50d60572ff2a6deaaa044836ba4e55857d39b651249cd0bd",
+    "configs/cf1/tusz_cbramod_add_cpl.yaml": "6af4fac4d636f3d859412018dc964764fa309275bf0da768baeb504cec692a57",
+    "configs/experiments/tusz_cbramod_crofremo_bands.yaml": "a9c5879b428aa4142ee37938d0788ca8cf4a20b3c0f3c30e3760e23b96a755fb"
+  },
+  "queue_after": [
+    {
+      "job": "17365674",
+      "metadata": "JobId=17365674 JobName=seed_tusz_cbramod_add_cpl_s1 UserId=zz5070(4206200) GroupId=zz5070(4206200) MCS_label=N/A Priority=12501 Nice=0 Account=torch_pr_63_general QOS=gpu48 JobState=PENDING Reason=QOSGrpGRES Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-09-11T04:20:18 EligibleTime=2026-09-11T04:20:18 AccrueTime=2026-09-11T04:20:18 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-12T23:13:41 Scheduler=Main Partition=h200_public AllocNode:Sid=torch-login-b-1:2413217 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=64G,node=1,billing=8,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=64G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/zz5070/PACLock/slurm/torch_run.slurm WorkDir=/scratch/zz5070/PACLock StdErr=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_add_cpl_s1-17365674.out StdIn=/dev/null StdOut=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_add_cpl_s1-17365674.out GresEnforceBind=Yes TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n"
+    },
+    {
+      "job": "17365675",
+      "metadata": "JobId=17365675 JobName=seed_tusz_cbramod_add_cpl_s2 UserId=zz5070(4206200) GroupId=zz5070(4206200) MCS_label=N/A Priority=12501 Nice=0 Account=torch_pr_63_general QOS=gpu48 JobState=PENDING Reason=QOSGrpGRES Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-09-11T04:20:18 EligibleTime=2026-09-11T04:20:18 AccrueTime=2026-09-11T04:20:18 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-12T23:13:44 Scheduler=Main Partition=h200_public AllocNode:Sid=torch-login-b-1:2413217 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=64G,node=1,billing=8,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=64G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/zz5070/PACLock/slurm/torch_run.slurm WorkDir=/scratch/zz5070/PACLock StdErr=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_add_cpl_s2-17365675.out StdIn=/dev/null StdOut=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_add_cpl_s2-17365675.out GresEnforceBind=Yes TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n"
+    },
+    {
+      "job": "17365676",
+      "metadata": "JobId=17365676 JobName=seed_tusz_cbramod_crofremo_bands_s1 UserId=zz5070(4206200) GroupId=zz5070(4206200) MCS_label=N/A Priority=12501 Nice=0 Account=torch_pr_63_general QOS=gpu48 JobState=PENDING Reason=QOSGrpGRES Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-09-11T04:20:18 EligibleTime=2026-09-11T04:20:18 AccrueTime=2026-09-11T04:20:18 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-12T23:13:44 Scheduler=Main Partition=h200_public AllocNode:Sid=torch-login-b-1:2413217 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=64G,node=1,billing=8,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=64G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/zz5070/PACLock/slurm/torch_run.slurm WorkDir=/scratch/zz5070/PACLock StdErr=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_crofremo_bands_s1-17365676.out StdIn=/dev/null StdOut=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_crofremo_bands_s1-17365676.out GresEnforceBind=Yes TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n"
+    },
+    {
+      "job": "17365677",
+      "metadata": "JobId=17365677 JobName=seed_tusz_cbramod_crofremo_bands_s2 UserId=zz5070(4206200) GroupId=zz5070(4206200) MCS_label=N/A Priority=12501 Nice=0 Account=torch_pr_63_general QOS=gpu48 JobState=PENDING Reason=QOSGrpGRES Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-09-11T04:20:18 EligibleTime=2026-09-11T04:20:18 AccrueTime=2026-09-11T04:20:18 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-12T23:13:44 Scheduler=Main Partition=h200_public AllocNode:Sid=torch-login-b-1:2413217 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=64G,node=1,billing=8,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=64G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/zz5070/PACLock/slurm/torch_run.slurm WorkDir=/scratch/zz5070/PACLock StdErr=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_crofremo_bands_s2-17365677.out StdIn=/dev/null StdOut=/scratch/zz5070/PACLock/logs/seed_tusz_cbramod_crofremo_bands_s2-17365677.out GresEnforceBind=Yes TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n"
+    }
+  ],
+  "torch_worktree_note": "These exact files are applied in the existing worktree; existing unrelated edits, including the TUAB result metadata correction, were not overwritten."
+}
