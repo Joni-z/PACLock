@@ -54,3 +54,19 @@ Evidence: `/Users/mr.z/PACLock-monitor/tuev-protocol-manifests.tar` and
 `/Users/mr.z/PACLock-monitor/tuev-protocol-comparison.json` contain the current
 AMD manifests and their locally computed comparison. BIOT counts above come
 from the historical `tuev-biot_prest16/seed0/result.json`.
+
+## CBraMod adapter is not yet a faithful native-task reproduction
+
+Upstream TUEV source confirms the 16-bipolar montage, 200 Hz, five-second
+context, /100 scaling and sorted-subject 80/20 split conventions. Shared
+conventions alone do not establish identical arrays: filtering implementation
+and order, event indexing, irregular durations and exclusions require checking.
+
+A separate concrete model discrepancy was found: the historical adapter uses
+a hidden width of 800, whereas upstream TUEV all_patch_reps uses 1000, adding
+3,240,200 parameters. That corrected head now passes full-state strict loading
+and bit-identical synthetic-forward comparison against upstream on an allocated
+CPU. A distinctly named configuration is prepared; it has not been trained.
+Preserve historical results as adapter measurements, not native-task/SOTA
+reproduction proof. See `results/audits/cbramod-native-head-inventory-20260913.json`
+and `results/audits/cbramod-tuev-head-parity-20260913.json`.

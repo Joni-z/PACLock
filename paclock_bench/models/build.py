@@ -118,8 +118,8 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
 
     if name == "cbramod":
         # Group B/C: official CBraMod code + pretrained_weights.pth.
-        # Reads our own preprocessed data -- CBraMod's preprocessing IS the
-        # frozen protocol (see cbramod_adapter docstring).
+        # Uses shared frozen data; task-head and native-protocol parity need
+        # dataset-specific checks (see the CBraMod head/protocol audits).
         from .foundation.cbramod_adapter import build_cbramod
 
         from ..paths import expand as _expand
@@ -130,6 +130,7 @@ def build_model(cfg: dict, input_shape: tuple[int, ...]) -> nn.Module:
             seq_len=T,
             pretrained=bool(cfg.get("pretrained", True)),
             dropout=cfg.get("model_kwargs", {}).get("dropout", 0.1),
+            classifier_hidden_dim=cfg.get("model_kwargs", {}).get("classifier_hidden_dim", 800),
             # a 3-D sample (seq, channels, time) means the corpus is stored as
             # epoch sequences -- ISRUC -- where upstream uses model_for_isruc.py
             # rather than the flatten-and-classify head

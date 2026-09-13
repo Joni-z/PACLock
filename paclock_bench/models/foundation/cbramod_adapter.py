@@ -1,21 +1,19 @@
-"""CBraMod for group B: official code, official weights, official recipe.
+"""CBraMod backbone and weights with an explicitly configured task head.
 
-Architecture comes from the vendored repo (``vendor/cbramod/models/cbramod.py``);
-this module builds it exactly as ``models/model_for_tuab.py`` does and loads
-``pretrained_weights.pth`` from the HuggingFace release.
+Architecture comes from the vendored repo (``vendor/cbramod/models/cbramod.py``)
+and loads ``pretrained_weights.pth`` from the release. The historical shared
+head width is 800; upstream task heads differ (TUEV 1000, TUAB/CHB/FACED 2000).
+A shared-width adaptation is not automatically a faithful task reproduction.
 
     CBraMod(in_dim=200, out_dim=200, d_model=200,
             dim_feedforward=800, seq_len=30, n_layer=12, nhead=8)
     backbone.proj_out = nn.Identity()      # the pretraining head is discarded
 
-**CBraMod is the one group-B model that can reuse our own preprocessed data.**
-Its ``preprocessing/preprocessing_tuab.py`` does 0.3-75 Hz band-pass, 60 Hz
-notch, the same 16 bipolar montage and 200 Hz -- which is where our frozen
-protocol came from in the first place. So instead of writing a fourth
-preprocessing pipeline, its rows read the same npy as groups A/C/D. That is not
-a shortcut around the "use each repo's own preprocessing" rule; it is that rule
-being satisfied by construction, and worth stating because it is the only model
-for which the two coincide.
+These adapters use our frozen arrays for internally matched comparisons.
+Upstream TUAB/TUEV share the 16-bipolar montage, 200 Hz sampling and /100
+scaling conventions. That alone does not establish bit-exact preprocessing
+parity: filtering order, event boundaries and recording exclusions also matter.
+Native protocol and task-head fidelity must be checked per dataset.
 
 Its Dataset reshapes each window to (channels, patches, 200) and divides by 100:
 
@@ -52,7 +50,10 @@ def _import_cbramod():
 
 
 class CBraModClassifier(nn.Module):
-    """CBraMod backbone + the 'all_patch_reps' head from model_for_tuab.py.
+    """CBraMod backbone + an 'all_patch_reps' head.
+
+    The historical adapter default width is 800. Upstream TUEV uses 1000;
+    reproduce that head with ``classifier_hidden_dim=1000`` and a new run name.
 
     The wrapper also does the (batch, channel, time) -> (batch, channel, patch,
     200) reshape that CBraMod's Dataset does, so the shared training loop can
@@ -64,19 +65,20 @@ class CBraModClassifier(nn.Module):
     """
 
     def __init__(self, backbone: nn.Module, n_channels: int, n_patches: int,
-                 n_classes: int, dropout: float = 0.1):
+                 n_classes: int, dropout: float = 0.1,
+                 classifier_hidden_dim: int = 800):
         super().__init__()
         self.backbone = backbone
         self.backbone.proj_out = nn.Identity()
         self.n_patches = n_patches
         feat = n_channels * n_patches * BACKBONE_ARGS["d_model"]
-        # model_for_tuab.py's 'all_patch_reps' classifier
+        # Preserve the historical default while allowing the actual task head.
         self.classifier = nn.Sequential(
             nn.Flatten(start_dim=1),
-            nn.Linear(feat, 4 * BACKBONE_ARGS["d_model"]),
+            nn.Linear(feat, classifier_hidden_dim),
             nn.ELU(),
             nn.Dropout(dropout),
-            nn.Linear(4 * BACKBONE_ARGS["d_model"], BACKBONE_ARGS["d_model"]),
+            nn.Linear(classifier_hidden_dim, BACKBONE_ARGS["d_model"]),
             nn.ELU(),
             nn.Dropout(dropout),
             nn.Linear(BACKBONE_ARGS["d_model"], n_classes),
@@ -152,7 +154,8 @@ class CBraModSequence(nn.Module):
 
 def build_cbramod(n_classes: int, n_channels: int, seq_len: int, *,
                   pretrained: bool = True, dropout: float = 0.1,
-                  sequence: bool = False, pretrained_path: str | None = None) -> nn.Module:
+                  sequence: bool = False, pretrained_path: str | None = None,
+                  classifier_hidden_dim: int = 800) -> nn.Module:
     """Build CBraMod; ``pretrained=False`` is the group-C from-scratch row.
 
     ``sequence=True`` selects the ISRUC variant (model_for_isruc.py), which is
@@ -170,15 +173,17 @@ def build_cbramod(n_classes: int, n_channels: int, seq_len: int, *,
     n_patches = seq_len // PATCH
     if sequence:
         return CBraModSequence(backbone, n_channels, n_patches, n_classes)
-    return CBraModClassifier(backbone, n_channels, n_patches, n_classes, dropout)
+    return CBraModClassifier(backbone, n_channels, n_patches, n_classes, dropout,
+                            classifier_hidden_dim=classifier_hidden_dim)
 
 
 def count_backbone_params(model: nn.Module) -> float:
     """Backbone-only parameter count, in millions.
 
     The xlsx lists CBraMod at ~4M, which is the foundation model itself. The
-    total depends on the corpus, because the ``all_patch_reps`` head flattens
-    ``channels * patches * 200`` -- 17.9M on TUEV up to 56.3M on FACED. Both
+    total depends on the corpus and configured hidden width, because the head
+    flattens ``channels * patches * 200``. Historical shared-width totals range
+    from about 17.9M on TUEV to 56.3M on FACED. Both
     numbers are real; they answer different questions, so both are reported.
     """
     bb = getattr(model, "backbone", None)

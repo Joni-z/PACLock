@@ -1,0 +1,29 @@
+{
+  "allocation": "416422",
+  "step": "6",
+  "host": "k002-005.hpcfund",
+  "device": "cpu",
+  "torch_version": "2.7.1+rocm6.3",
+  "pretrained_backbone_loaded_by_builder": true,
+  "full_state_strict_load": true,
+  "reference_logits_bit_equal": true,
+  "corrected_hidden_width": 1000,
+  "legacy_default_width": 800,
+  "parameter_increase": 3240200,
+  "parameters": 21086206,
+  "elapsed_sec": 0.43131589889526367,
+  "input": "synthetic standard normal, shape (2,16,1000)",
+  "training_performed": false,
+  "dataset_arrays_loaded": false,
+  "vendor_revision": "0ff6be918985689e7df679bc731ffb70e6c6224f",
+  "source_sha256": {
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/configs/experiments/tuev_cbramod_pretrained_nativehead.yaml": "c9d795be57c59bdb0eed34401775daa1ed45715e53562c5b5ec35d1477523411",
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/smoke/cbramod_tuev_head_parity.py": "fd31ac3e81a2eb3aaa67c159862041f518b60d7d6da6a8077eef05594196f5a4",
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/paclock_bench/models/build.py": "512ae2fbfe035b098147618b9de0e501ec2bce53f03416467ad7cce61fa3471b",
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/paclock_bench/models/foundation/cbramod_adapter.py": "f91327c75aa50924ef81943532872ea7d5090d5c51f2eeeddcc09b61d67c3a5d",
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/vendor/cbramod/models/model_for_tuev.py": "29df3cad926996f17771bed3055f57899d61df23ba04533298f006ec04dfc1ab",
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/vendor/cbramod/datasets/tuev_dataset.py": "da78fb2caa0ddc462e59b172f00f2680009b455fef384c1e3bdf05825f8de475",
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/vendor/cbramod/preprocessing/preprocessing_tuev.py": "3ec3ae3967353f86f4c970bdf86e7382e59bc492b7397382372f6b429231c6f3",
+    "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/vendor/cbramod/finetune_main.py": "6fb96bbc7a73b487c9fdc1f39e8e0ee10fb36c535b0975f8d255fc85eae717f9"
+  }
+}
