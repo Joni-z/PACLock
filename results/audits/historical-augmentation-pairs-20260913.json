@@ -1,0 +1,185 @@
+{
+  "rows": [
+    {
+      "dataset": "tuev",
+      "seed": 0,
+      "plain": 0.518494502078482,
+      "augmented": 0.6094976038706483,
+      "delta": 0.09100310179216631,
+      "stop": [
+        "epochs",
+        "epochs"
+      ],
+      "epochs": [
+        20,
+        20
+      ],
+      "excluded": [],
+      "paths": [
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-cf2_v1d192_r2/seed0/result.json",
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuev-cf2_v1d192_r4/seed0/result.json"
+      ],
+      "sha256": [
+        "b9a07b2889716db311c80274f3a8e11ff7529bbcf973d940a9fd90c26005dbc8",
+        "a2f18be994a102f982fd6118c7c44c271f5056036c094eb96c6273d4d3940dea"
+      ],
+      "primary_metric": "cohen_kappa"
+    },
+    {
+      "dataset": "tuar",
+      "seed": 0,
+      "plain": 0.5949857655054841,
+      "augmented": 0.5899013170961462,
+      "delta": -0.005084448409337861,
+      "stop": [
+        "epochs",
+        "epochs"
+      ],
+      "epochs": [
+        20,
+        20
+      ],
+      "excluded": [],
+      "paths": [
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cf2_v1d192_r2/seed0/result.json",
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/tuar-cf2_v1d192_r4/seed0/result.json"
+      ],
+      "sha256": [
+        "422823218020e7f8a9e328ed43402e259dfc621343f0df5fe976b34722df4fca",
+        "14356eec8a56040af5dffe849a2c57af6a5b386911dca5f7eac846521163727f"
+      ],
+      "primary_metric": "cohen_kappa"
+    },
+    {
+      "dataset": "isruc",
+      "seed": 0,
+      "plain": 0.7309364695773459,
+      "augmented": 0.7239343819031223,
+      "delta": -0.0070020876742236116,
+      "stop": [
+        "epochs",
+        "epochs"
+      ],
+      "epochs": [
+        20,
+        20
+      ],
+      "excluded": [],
+      "paths": [
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-cf2_v1d192_r2/seed0/result.json",
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/isruc-cf2_v1d192_r4/seed0/result.json"
+      ],
+      "sha256": [
+        "1b2da5c517fcf2a65ef86b7e5e2ea230c752d31551194b64228757bd175f3c26",
+        "9267f4f7d469be32f1d104bf7f0aee054869a2c8627725b394646ba3b99c1ebf"
+      ],
+      "primary_metric": "cohen_kappa"
+    },
+    {
+      "dataset": "sleepedf",
+      "seed": 0,
+      "plain": 0.6247652690225898,
+      "augmented": 0.6389606361830624,
+      "delta": 0.01419536716047265,
+      "stop": [
+        "epochs",
+        "epochs"
+      ],
+      "epochs": [
+        20,
+        20
+      ],
+      "excluded": [],
+      "paths": [
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-cf2_v1d192_r2/seed0/result.json",
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/sleepedf-cf2_v1d192_r4/seed0/result.json"
+      ],
+      "sha256": [
+        "8980d693abe617201f7d9c38daafcd9fd69df872623c6f6fea1b4b798a5f0c06",
+        "2946eb2553dce83f47f5e29dbdf03a55632de5a2294e760cb145622336a49127"
+      ],
+      "primary_metric": "cohen_kappa"
+    },
+    {
+      "dataset": "iiic",
+      "seed": 0,
+      "plain": 0.5170133912145874,
+      "augmented": 0.5423166793432482,
+      "delta": 0.025303288128660784,
+      "stop": [
+        "epochs",
+        "epochs"
+      ],
+      "epochs": [
+        20,
+        20
+      ],
+      "excluded": [],
+      "paths": [
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-cf2_v1d192_r2/seed0/result.json",
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/iiic-cf2_v1d192_r4/seed0/result.json"
+      ],
+      "sha256": [
+        "3feb16598160751a821bfa9d88e94b53d66b2232223a95d578ece2e4d7c4a5ec",
+        "e795849f3cc28d174a3904415bbef58d2d9ba5bb76667d2ca237ac2306dcd2e2"
+      ],
+      "primary_metric": "cohen_kappa"
+    },
+    {
+      "dataset": "adfd",
+      "seed": 0,
+      "plain": 0.4298971887028015,
+      "augmented": 0.4944552090352678,
+      "delta": 0.06455802033246627,
+      "stop": [
+        "patience",
+        "epochs"
+      ],
+      "epochs": [
+        25,
+        30
+      ],
+      "excluded": [],
+      "paths": [
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-cf2_v1d192_r2/seed0/result.json",
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/adfd-cf2_v1d192_r4/seed0/result.json"
+      ],
+      "sha256": [
+        "790b34dd5f8328e35ccce34b6a676a9d48b296cd908e08e8897a4eee4b34b5a1",
+        "aca01a2df072ae0a11cbc767513c099a0453a1cdb61969b947da270e62b1f940"
+      ],
+      "primary_metric": "balanced_acc"
+    },
+    {
+      "dataset": "caueeg",
+      "seed": 0,
+      "plain": 0.48670069444417147,
+      "augmented": 0.49952861763799095,
+      "delta": 0.01282792319381948,
+      "stop": [
+        "epochs",
+        "epochs"
+      ],
+      "epochs": [
+        20,
+        20
+      ],
+      "excluded": [],
+      "paths": [
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-cf2_v1d192_r2/seed0/result.json",
+        "/Users/mr.z/PACLock-monitor/hosts/amd/runs/caueeg-cf2_v1d192_r4/seed0/result.json"
+      ],
+      "sha256": [
+        "c66acd615bd6d00c7539d6f31c130ca762afb0b8407ded1a0296f70a908202b3",
+        "670dbdcfc932f05b1a0dc32643d43833b6c75645e4a5e3bca15443d0c0884136"
+      ],
+      "primary_metric": "balanced_acc"
+    }
+  ],
+  "caveats": [
+    "Validation-only retrospective comparison. Historical training source/runtime not verified.",
+    "Matches preserve fixed dropout .35 and weight decay .05; this does not isolate augmentation at the current f4 regularization."
+  ],
+  "recorded_at": "2026-09-13T05:46:01.278756+00:00",
+  "interpretation": "Seven valid seed-0 matched-recipe pairs: five positive and two negative primary-validation directions; motivates a bounded cross-corpus gate, not a universal gain or final-model claim. Kappa for five corpora; balanced accuracy for ADFD and CAUEEG. Deltas are not averaged across metrics."
+}

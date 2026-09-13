@@ -48,20 +48,33 @@ tradeoff. Configurations match except for the intended scale and run name,
 with identical manifests and class counts. No test score informed admission.
 See `results/audits/tuev-scale-seed0-completion-20260913.json`.
 
-The prepared TUEV seed-1 confirmation pair is now **running** on mi2104x:
-scale 1.0 on allocation 416422 GPU 1, and scale .3 on 416484 GPU 3. Both use
-20 epochs and a five-hour training cap; the runtime configurations match the
-GPU-smoked configurations after removing execution metadata. Owner, process,
-configuration, GPU selector and Slurm cgroup were verified. The model-source
-diff since their earlier smoke only adds the unused joint-content branch;
-the existing band-content arithmetic is unchanged. Compare the paired arms
-within this mi2104x cohort. No new Slurm allocation was requested, although
-added work can extend existing allocation duration. The process receipt is
-`results/audits/tuev-seed1-pair-admission-20260913.json`.
+The TUEV seed-1 confirmation pair has **completed all 20 epochs** on mi2104x,
+with trainer exit code 0 in both completion receipts. At each kappa-selected
+checkpoint:
+
+| Content scale | Validation kappa | Balanced accuracy | Weighted F1 |
+|---|---:|---:|---:|
+| 1.0 | .572936 | .512407 | .908817 |
+| .3 | .620768 | .477718 | .918967 |
+
+Scale .3 raises kappa by .047832 but lowers balanced accuracy by .034689,
+repeating the direction of the seed-0 metric tradeoff. Configurations match
+except content scale, identity and execution metadata; manifests and all class
+counts match. Stop expanding the scale sweep while the joint-content gate
+finishes. Do not pool the mi2101x seed-0 and mi2104x seed-1 cohorts silently.
+Source at admission was `ccc0495`; full histories, original hashes and trainer
+receipts are in `results/audits/tuev-scale-seed1-completion-20260913.json`.
+
+Allocation 416484 has released its node after 12:49:52. Slurm records its
+original packed batch as FAILED (1:0), consistent with previously stopped
+original children, including TUSZ n3. The later scale-.3 trainer itself completed
+normally with a full result and exit 0. This parent status must not trigger a
+restart or invalidate that completed result. Allocation 416422 remains occupied
+by other experiments; its scale-1 trainer has exited.
 
 The fixed-width joint-content alternative, f4, has completed its TUAR seed-1
-trial; its TUEV trial remains running on allocation 416422 GPU 3 alongside
-the band-content control on GPU 1. TUAR used GPU 2, and its trainer has exited.
+trial; its TUEV trial remains running on allocation 416422 GPU 3. The completed
+band-content control used GPU 1. TUAR used GPU 2, and its trainer has exited.
 No new allocation or pretraining job was requested. Training caps are five
 hours for TUEV and two for TUAR; added work may extend allocation duration.
 Runtime/source admission checks are recorded in
@@ -622,6 +635,37 @@ generalization and effective sample diversity before merely increasing model
 capacity. They do not establish that reweighting, deduplication, augmentation,
 or pretraining will help. No training/evaluation data or recipe was changed;
 the existing unweighted-CE benchmark and in-flight gates remain intact.
+
+## Prepared augmentation gate, not admitted
+
+Historical r2/r4 results isolate the existing augmentation list at fixed
+dropout .35 and weight decay .05 across seven matching seed-0 corpus pairs.
+TUEV validation kappa rises .518495 to .609498 (+.091003). TUAR and ISRUC
+decline by .005084 and .007002; Sleep-EDF and IIIC improve by .014195 and
+.025303. ADFD and CAUEEG improve in **balanced accuracy**, their primary metric,
+by .064558 and .012828. Do not average these mixed metrics. Recipes, selection
+metrics, cohort identifiers and class counts match within each pair; historical
+runtime/source identity is not established. Full checks and original hashes:
+`results/audits/historical-augmentation-pairs-20260913.json`.
+
+Prepare one bounded transfer of that existing augmentation list to f4 on TUEV
+and TUAR at seed 1. Both keep f4's original model, dropout .2, weight decay
+1e-5 and training recipe; only augmentation changes, apart from identity and
+descriptive fields. This tests an augmentation-by-current-recipe interaction,
+not a new architecture. There are no new formal training admissions yet.
+Finish the existing TUEV f4 gate before deciding whether to admit these two
+configs; prefer an existing mi2104x allocation only if the full training cap
+plus 30 minutes remains. Caps are five hours for TUEV and two for TUAR.
+
+The training-only smoke passed on an already idle GPU in 416422, source
+`6d7f5de`. It invokes each of the five configured augmentation modules, checks
+finite gradients/parameters and learning in all three token lanes, and verifies
+exact evaluation-time augmentation bypass. After two warmups, steps average
+about .269 seconds with 10.31 GiB peak memory. Projected training alone is
+3.20 hours on TUEV and .97 hours on TUAR; loading and evaluation are additional.
+Receipts and source/config hashes are in
+`results/audits/joint-augmentation-smoke-20260913.json`. No validation or test
+arrays were used by this smoke, and no pretraining was started.
 
 ## Monitoring without model calls
 
