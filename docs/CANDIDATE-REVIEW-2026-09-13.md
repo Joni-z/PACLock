@@ -920,8 +920,11 @@ unaugmented joint control, the respective differences are -0.000082,
 +0.026738 and +0.001093. Selection uses the same first strict maximum of
 validation kappa for all reported metrics, not separate maxima.
 
-SPSW recall moves from 0/119 to only 3/119 validation rows. GPED recall falls
-from 483/669 to 300/669; PLED, EYEM, ARTF and background recall improve.
+SPSW recall moves from 0/119 to only 3/119 validation rows. PLED recall falls
+from 483/669 to 300/669; GPED (148/291 to 187/291), EYEM, ARTF and background
+recall improve. Earlier prose interchanged GPED and PLED; the numeric matrices
+and model-selection result were unchanged. The audit now records named rows
+using the canonical class order from the table generator.
 The aggregate balanced-accuracy gain does not establish that the difficult
 classes are solved. These rows are subject-concentrated and include repeated
 inputs, so their counts are not independent-subject sample sizes.

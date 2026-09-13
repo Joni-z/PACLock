@@ -188,7 +188,39 @@
         0.5116279069767442,
         0.774,
         0.9505860222833165
-      ]
+      ],
+      "named_class_recall": {
+        "SPSW": {
+          "correct_rows": 0,
+          "total_rows": 119,
+          "recall": 0.0
+        },
+        "GPED": {
+          "correct_rows": 148,
+          "total_rows": 291,
+          "recall": 0.5085910652920962
+        },
+        "PLED": {
+          "correct_rows": 483,
+          "total_rows": 669,
+          "recall": 0.7219730941704036
+        },
+        "EYEM": {
+          "correct_rows": 44,
+          "total_rows": 86,
+          "recall": 0.5116279069767442
+        },
+        "ARTF": {
+          "correct_rows": 387,
+          "total_rows": 500,
+          "recall": 0.774
+        },
+        "BCKG": {
+          "correct_rows": 13139,
+          "total_rows": 13822,
+          "recall": 0.9505860222833165
+        }
+      }
     },
     {
       "name": "tuev-factorized_f4_aug_confirm",
@@ -382,7 +414,39 @@
         0.627906976744186,
         0.93,
         0.9530458689046448
-      ]
+      ],
+      "named_class_recall": {
+        "SPSW": {
+          "correct_rows": 3,
+          "total_rows": 119,
+          "recall": 0.025210084033613446
+        },
+        "GPED": {
+          "correct_rows": 187,
+          "total_rows": 291,
+          "recall": 0.6426116838487973
+        },
+        "PLED": {
+          "correct_rows": 300,
+          "total_rows": 669,
+          "recall": 0.4484304932735426
+        },
+        "EYEM": {
+          "correct_rows": 54,
+          "total_rows": 86,
+          "recall": 0.627906976744186
+        },
+        "ARTF": {
+          "correct_rows": 465,
+          "total_rows": 500,
+          "recall": 0.93
+        },
+        "BCKG": {
+          "correct_rows": 13173,
+          "total_rows": 13822,
+          "recall": 0.9530458689046448
+        }
+      }
     }
   ],
   "source_sha256": {
@@ -481,8 +545,19 @@
     "Nonbinding runtime caps differ; original completed 20-epoch recipes are preserved.",
     "Selected metrics are from the same first-strict-maximum kappa validation entry, not separately maximized."
   ],
-  "decision": "Retain augmentation as a limited recipe option, not the final candidate: TUEV kappa is flat, SPSW recall remains 3/119 rows and GPED recall falls, despite higher balanced accuracy and a positive matched TUAR result. Hold the four prepared second-seed configurations; no automatic replication, new architecture sweep or pretraining is admitted. Complete the already-running baseline-head fidelity pair before the next budget decision.",
+  "decision": "Retain augmentation as a limited recipe option, not the final candidate: TUEV kappa is flat, SPSW recall remains 3/119 rows and PLED recall falls, despite higher balanced accuracy and a positive matched TUAR result. Hold the four prepared second-seed configurations; no automatic replication, new architecture sweep or pretraining is admitted. Complete the already-running baseline-head fidelity pair before the next budget decision.",
   "prepared_second_seed_jobs_submitted": 0,
   "candidate_status": "not_frozen_performance_goal_unmet",
-  "related_tuar_audit": "results/audits/tuar-augmentation-completion-20260913.json"
+  "related_tuar_audit": "results/audits/tuar-augmentation-completion-20260913.json",
+  "class_names": [
+    "SPSW",
+    "GPED",
+    "PLED",
+    "EYEM",
+    "ARTF",
+    "BCKG"
+  ],
+  "class_name_source": "scripts/gen_tables.py:CLASSES",
+  "class_name_source_sha256": "932439209c9d98051b2dc08b5f22810de56cf5a2929c1b7158497fd3b99a0002",
+  "reporting_correction": "Earlier prose interchanged GPED and PLED. PLED recall falls from 483/669 to 300/669; GPED rises from 148/291 to 187/291. Numeric source artifacts and model selection are unchanged."
 }
