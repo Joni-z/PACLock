@@ -1,0 +1,33 @@
+{
+  "source_job": null,
+  "source_name": "CONF_tuar_f2_s1",
+  "origin": "prospective_confirmation",
+  "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized",
+  "config": "configs/factorized_scale_confirm/tuar_f2_s1.yaml",
+  "seed": 1,
+  "name": "tuar-factorized_f2_confirm",
+  "dataset": "tuar",
+  "min_remaining_hours": 4,
+  "sha256": "98aaaf8bdf7c54e9b429180b5fa7ae71a69364e76ed998144372b60a256e0c80",
+  "smoke_receipt": "results/audits/tuar-f2-seed1-smoke-20260913.json",
+  "smoke_receipt_sha256": "37d0c2d622a108a59015f1005786036faf30476eda89082422bfbd7ce4673c2e",
+  "control": "tuar-factorized_f1_scale1_confirm:1",
+  "training_cap_hours": 2,
+  "prepared_at": "2026-09-13T01:47:49.110604+00:00",
+  "allocation": "416484",
+  "node": "k003-004",
+  "gpu": 0,
+  "started_at": 1789264072.9937627,
+  "original_max_hours": 2.0,
+  "max_hours": 2.0,
+  "slurm_step": "0",
+  "pid": 1462106,
+  "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/20_confirm_tuar_f2_s1.out",
+  "process_verification": {
+    "uid": 3361,
+    "pid": 1462106,
+    "command": "/usr/bin/python3 -u -m paclock_bench.training.train --config /work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/configs/20_confirm_tuar_f2_s1.yaml --seed 1 ",
+    "cgroup": "0::/system.slice/k003-004_slurmstepd.scope/job_416484/step_0/user/task_special\n",
+    "gpu": "0"
+  }
+}

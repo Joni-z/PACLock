@@ -29,6 +29,17 @@ all use index spatial embeddings. The completed f2–f1 validation difference
 is +.032663. Original result hashes and execution differences are recorded
 in `results/audits/isruc-factorized-completion-20260913.json`.
 
+One TUAR seed-1 broadband-content confirmation, `tuar-factorized_f2_confirm`,
+is now running on allocation 416484, GPU 0. It reuses the completed
+`tuar-factorized_f1_scale1_confirm` seed-1 control (validation kappa .608668),
+with an otherwise matching training recipe and unchanged `paclock_bench`
+source since that control. Both use mi2104x; the control was completed earlier,
+not concurrently. A real-batch smoke projected .92 hours of training; the
+added arm has a two-hour training cap. This admission requested no new Slurm
+allocation, although extra work can extend an existing allocation. The plan,
+smoke and verified process receipt are in `results/audits/tuar-f2-seed1-*.json`.
+Its result is pending and does not establish a final architecture.
+
 The TUEV seed-1 scale pair is prepared but **not admitted**. Both real-batch
 GPU smokes passed on an idle slot of existing allocation 416043, at about
 .256 seconds/step after two warmups and 10.31 GiB peak memory. Projected
