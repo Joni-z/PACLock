@@ -1,0 +1,488 @@
+{
+  "recorded_at": "2026-09-13T09:21:26.311741+00:00",
+  "state": "tuev_augmentation_completed_full_epochs",
+  "results": [
+    {
+      "name": "tuev-factorized_f4_joint_confirm",
+      "seed": 1,
+      "n_params_M": 3.616726,
+      "best_val": 0.637153617192539,
+      "primary_metric": "cohen_kappa",
+      "epochs_run": 20,
+      "stopped_by": "epochs",
+      "wall_time_sec": 11536.816434621811,
+      "config": {
+        "batch_size": 32,
+        "data_root": "$PACLOCK_PROC/processed/tuev",
+        "dataset": "tuev",
+        "device": "cuda",
+        "epochs": 20,
+        "eval_every_steps": 0,
+        "grad_clip": 1.0,
+        "group": "factorized_joint_confirm",
+        "label_smoothing": 0.1,
+        "loss": "cross_entropy",
+        "lr": 0.0001,
+        "max_hours": 5.0,
+        "model": "paclock",
+        "model_kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band_broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        },
+        "name": "tuev-factorized_f4_joint_confirm",
+        "num_classes": 6,
+        "num_workers": 8,
+        "optimizer": "adamw",
+        "patience": 20,
+        "sample_rate": 200,
+        "scheduler": "cosine",
+        "seed": 1,
+        "weight_decay": 1e-05,
+        "screening_note": "Prepared conditionally for paired seed-1 confirmation on an existing mi2104x allocation. Admit only after the seed-0 TUEV pair completes and is reviewed. Compare within runtime cohort; do not silently pool with mi2101x seed 0.",
+        "backfill": {
+          "source_job": null,
+          "allocation": "416422",
+          "gpu": 3,
+          "original_max_hours": 5,
+          "max_hours": 5.0
+        }
+      },
+      "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+      "class_counts": {
+        "train": [
+          526,
+          10963,
+          5515,
+          984,
+          10553,
+          39904
+        ],
+        "val": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "test": [
+          567,
+          4677,
+          1998,
+          329,
+          2204,
+          19646
+        ]
+      },
+      "selected_validation": {
+        "tag": "epoch   1 |",
+        "elapsed_sec": 1154.8556220531464,
+        "val_loss": 0.6515707122392891,
+        "train_loss": 0.5263931734392497,
+        "metrics": {
+          "balanced_acc": 0.5777963481204268,
+          "cohen_kappa": 0.637153617192539,
+          "weighted_f1": 0.9267173945396459
+        },
+        "lr": [
+          9.755282581475709e-05
+        ],
+        "best_val": 0.637153617192539,
+        "confusion": [
+          [
+            0,
+            84,
+            7,
+            0,
+            0,
+            28
+          ],
+          [
+            0,
+            148,
+            126,
+            0,
+            17,
+            0
+          ],
+          [
+            0,
+            124,
+            483,
+            0,
+            51,
+            11
+          ],
+          [
+            0,
+            23,
+            0,
+            44,
+            0,
+            19
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            387,
+            112
+          ],
+          [
+            66,
+            396,
+            88,
+            4,
+            129,
+            13139
+          ]
+        ],
+        "class_f1": [
+          0.0,
+          0.2776735459662289,
+          0.7030567685589519,
+          0.6567164179104478,
+          0.7140221402214022,
+          0.9685599498728392
+        ],
+        "target_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "pred_counts": [
+          66,
+          775,
+          705,
+          48,
+          584,
+          13309
+        ]
+      },
+      "selected_validation_index": 1,
+      "class_recall": [
+        0.0,
+        0.5085910652920962,
+        0.7219730941704036,
+        0.5116279069767442,
+        0.774,
+        0.9505860222833165
+      ]
+    },
+    {
+      "name": "tuev-factorized_f4_aug_confirm",
+      "seed": 1,
+      "n_params_M": 3.616726,
+      "best_val": 0.6370718018539914,
+      "primary_metric": "cohen_kappa",
+      "epochs_run": 20,
+      "stopped_by": "epochs",
+      "wall_time_sec": 11589.467789411545,
+      "config": {
+        "batch_size": 32,
+        "data_root": "$PACLOCK_PROC/processed/tuev",
+        "dataset": "tuev",
+        "device": "cuda",
+        "epochs": 20,
+        "eval_every_steps": 0,
+        "grad_clip": 1.0,
+        "group": "factorized_joint_augment_confirm",
+        "label_smoothing": 0.1,
+        "loss": "cross_entropy",
+        "lr": 0.0001,
+        "max_hours": 4.5783497583866115,
+        "model": "paclock",
+        "model_kwargs": {
+          "arch": "triaxial",
+          "augmentations": [
+            "flip0.5",
+            "jitter0.05",
+            "mask0.2",
+            "channel0.2",
+            "frequency0.2"
+          ],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band_broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        },
+        "name": "tuev-factorized_f4_aug_confirm",
+        "num_classes": 6,
+        "num_workers": 8,
+        "optimizer": "adamw",
+        "patience": 20,
+        "sample_rate": 200,
+        "scheduler": "cosine",
+        "seed": 1,
+        "weight_decay": 1e-05,
+        "screening_note": "Prepared, not admitted. Historical augmentation-only comparison supports a bounded TUEV/TUAR transfer gate. Preserve baseline f4 recipe except augmentation. Admit only after full current TUEV gate review and successful real-batch smoke; prefer existing mi2104x allocation with cap plus 30 minutes remaining. This is a recipe change, not a new architecture or evidence of final-candidate success.",
+        "backfill": {
+          "source_job": null,
+          "allocation": "416422",
+          "gpu": 2,
+          "original_max_hours": 5,
+          "max_hours": 4.5783497583866115
+        }
+      },
+      "data_manifest_created": "2026-08-05T01:56:41.969236+00:00",
+      "class_counts": {
+        "train": [
+          526,
+          10963,
+          5515,
+          984,
+          10553,
+          39904
+        ],
+        "val": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "test": [
+          567,
+          4677,
+          1998,
+          329,
+          2204,
+          19646
+        ]
+      },
+      "selected_validation": {
+        "tag": "epoch   2 |",
+        "elapsed_sec": 1737.4844210147858,
+        "val_loss": 0.6510166565864539,
+        "train_loss": 0.5346512607516056,
+        "metrics": {
+          "balanced_acc": 0.6045341844674641,
+          "cohen_kappa": 0.6370718018539914,
+          "weighted_f1": 0.9278108123582969
+        },
+        "lr": [
+          9.455032620941782e-05
+        ],
+        "best_val": 0.6370718018539914,
+        "confusion": [
+          [
+            3,
+            78,
+            10,
+            0,
+            0,
+            28
+          ],
+          [
+            21,
+            187,
+            32,
+            0,
+            51,
+            0
+          ],
+          [
+            0,
+            340,
+            300,
+            0,
+            29,
+            0
+          ],
+          [
+            0,
+            9,
+            0,
+            54,
+            0,
+            23
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            465,
+            34
+          ],
+          [
+            66,
+            374,
+            0,
+            4,
+            205,
+            13173
+          ]
+        ],
+        "class_f1": [
+          0.028708133971291867,
+          0.292415949960907,
+          0.5928853754940712,
+          0.75,
+          0.744,
+          0.9728951255539143
+        ],
+        "target_counts": [
+          119,
+          291,
+          669,
+          86,
+          500,
+          13822
+        ],
+        "pred_counts": [
+          90,
+          988,
+          343,
+          58,
+          750,
+          13258
+        ]
+      },
+      "selected_validation_index": 2,
+      "class_recall": [
+        0.025210084033613446,
+        0.6426116838487973,
+        0.4484304932735426,
+        0.627906976744186,
+        0.93,
+        0.9530458689046448
+      ]
+    }
+  ],
+  "source_sha256": {
+    "runs/tuev-factorized_f4_joint_confirm/seed1/result.json": "a3f29ef1727524d331efc50fc653ab6441c656dbcb80e124453c8d5723cdf139",
+    "runs/tuev-factorized_f4_joint_confirm/seed1/progress.json": "2afc4e07f8af9ad31b465fa5ced865565930dffb920ec7d55d68588ccbb042a9",
+    "runs/tuev-factorized_f4_aug_confirm/seed1/result.json": "ad466fe70f56b49ace4350be352762f33a491fe45f355a789f7739530f8f2af5",
+    "runs/tuev-factorized_f4_aug_confirm/seed1/progress.json": "71884fe9018e99ab5b18002adab037efb64019235a4f4970d6d9a8fca5ddfe41"
+  },
+  "config_differences": {
+    "backfill.gpu": [
+      3,
+      2
+    ],
+    "backfill.max_hours": [
+      5.0,
+      4.5783497583866115
+    ],
+    "group": [
+      "factorized_joint_confirm",
+      "factorized_joint_augment_confirm"
+    ],
+    "max_hours": [
+      5.0,
+      4.5783497583866115
+    ],
+    "model_kwargs.augmentations": [
+      [],
+      [
+        "flip0.5",
+        "jitter0.05",
+        "mask0.2",
+        "channel0.2",
+        "frequency0.2"
+      ]
+    ],
+    "name": [
+      "tuev-factorized_f4_joint_confirm",
+      "tuev-factorized_f4_aug_confirm"
+    ],
+    "screening_note": [
+      "Prepared conditionally for paired seed-1 confirmation on an existing mi2104x allocation. Admit only after the seed-0 TUEV pair completes and is reviewed. Compare within runtime cohort; do not silently pool with mi2101x seed 0.",
+      "Prepared, not admitted. Historical augmentation-only comparison supports a bounded TUEV/TUAR transfer gate. Preserve baseline f4 recipe except augmentation. Admit only after full current TUEV gate review and successful real-batch smoke; prefer existing mi2104x allocation with cap plus 30 minutes remaining. This is a recipe change, not a new architecture or evidence of final-candidate success."
+    ]
+  },
+  "selected_validation_deltas": {
+    "cohen_kappa": -8.181533854767498e-05,
+    "balanced_acc": 0.026737836347037303,
+    "weighted_f1": 0.0010934178186510213
+  },
+  "class_recall_deltas": [
+    0.025210084033613446,
+    0.1340206185567011,
+    -0.27354260089686094,
+    0.11627906976744184,
+    0.15600000000000003,
+    0.0024598466213283654
+  ],
+  "completion_receipt": {
+    "source_job": null,
+    "source_name": "CONF_tuev_f4_aug_s1",
+    "origin": "prospective_confirmation",
+    "repo": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized",
+    "config": "configs/factorized_joint_augment/tuev_f4_aug_s1.yaml",
+    "seed": 1,
+    "name": "tuev-factorized_f4_aug_confirm",
+    "dataset": "tuev",
+    "min_remaining_hours": 5.5,
+    "sha256": "cab8c05c77b94d179ea6da6fded0c73f0a686de99c298731b89862d2de2aa0fc",
+    "smoke_receipt": "results/audits/joint-augmentation-smoke-20260913.json",
+    "smoke_receipt_sha256": "cec9a802a1f20905f665e6f79f7588b2911f727230f4d447d0022859d50944c2",
+    "control": "tuev-factorized_f4_joint_confirm:1",
+    "training_cap_hours": 5,
+    "minimum_effective_training_cap_hours": 4.5,
+    "completion_gate_receipt": "results/audits/tuev-joint-completion-20260913.json",
+    "completion_gate_sha256": "615828711895bc269a728c597e1e09cb0fcb94644d582c3c40d90b78b7d0c89d",
+    "source_commit_at_review": "e519015",
+    "model_smoke_commit": "6d7f5de",
+    "prepared_at": "2026-09-13T06:05:59.278913+00:00",
+    "allocation": "416422",
+    "node": "k002-005",
+    "gpu": 2,
+    "started_at": 1789279632.0101454,
+    "original_max_hours": 5,
+    "max_hours": 4.5783497583866115,
+    "slurm_step": "0",
+    "pid": 1362701,
+    "log": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-backfill-20260913/logs/30_augment_tuev_f4_s1.out",
+    "exit_code": 0,
+    "finished_at": 1789291247.8098342,
+    "result": "/work1/chenyuyou/yifanwang/Zhizhe/PACLock-factorized/runs/tuev-factorized_f4_aug_confirm/seed1/result.json",
+    "result_exists": true
+  },
+  "caveats": [
+    "Validation only; test scores are excluded from the audit and decision.",
+    "One training seed. Class recalls have small and subject-concentrated validation support; no physiological or SOTA claim.",
+    "Nonbinding runtime caps differ; original completed 20-epoch recipes are preserved.",
+    "Selected metrics are from the same first-strict-maximum kappa validation entry, not separately maximized."
+  ],
+  "decision": "Retain augmentation as a limited recipe option, not the final candidate: TUEV kappa is flat, SPSW recall remains 3/119 rows and GPED recall falls, despite higher balanced accuracy and a positive matched TUAR result. Hold the four prepared second-seed configurations; no automatic replication, new architecture sweep or pretraining is admitted. Complete the already-running baseline-head fidelity pair before the next budget decision.",
+  "prepared_second_seed_jobs_submitted": 0,
+  "candidate_status": "not_frozen_performance_goal_unmet",
+  "related_tuar_audit": "results/audits/tuar-augmentation-completion-20260913.json"
+}

@@ -909,3 +909,34 @@ The joint-augmentation gate remains the next candidate decision. Exact result
 hashes, configuration differences and controller completion receipt are in
 `results/audits/chb-factorized-f2-completion-20260913.json`. No test values
 were used for this decision.
+
+## TUEV augmentation completed without the required performance breakthrough
+
+The seed-1 joint-content augmentation run completed all 20 epochs normally
+in 3.219 hours, within its 4.578-hour effective cap; the controller records
+trainer exit 0. Its kappa-selected validation checkpoint has kappa 0.637072,
+balanced accuracy 0.604534 and weighted F1 0.927811. Against the completed
+unaugmented joint control, the respective differences are -0.000082,
++0.026738 and +0.001093. Selection uses the same first strict maximum of
+validation kappa for all reported metrics, not separate maxima.
+
+SPSW recall moves from 0/119 to only 3/119 validation rows. GPED recall falls
+from 483/669 to 300/669; PLED, EYEM, ARTF and background recall improve.
+The aggregate balanced-accuracy gain does not establish that the difficult
+classes are solved. These rows are subject-concentrated and include repeated
+inputs, so their counts are not independent-subject sample sizes.
+
+Together with the positive TUAR augmentation result, this supports keeping
+the augmentation recipe as an option. It does not establish the required
+TUEV performance breakthrough or a final common model across ten-plus tasks.
+The four prepared seed-0 paired configurations remain held, with zero jobs
+submitted. Do not automatically replicate this flat TUEV result or restart
+pretraining. This is a budget-priority decision, not elimination of the
+architecture from one training seed. Finish the admitted baseline-head
+fidelity pair before the next compute decision.
+
+The completion receipt, result/progress hashes, exact configuration differences,
+selected-checkpoint confusion matrices and per-class recalls are retained in
+`results/audits/tuev-augmentation-completion-20260913.json`. No test values
+were used for this review. Allocation 416422 remains for the two baseline
+head confirmations; the completed augmentation trainer has released GPU 2.
