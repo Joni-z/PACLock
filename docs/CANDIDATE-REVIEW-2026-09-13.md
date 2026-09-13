@@ -94,6 +94,37 @@ reload. Smokes measured about .257/.256 s per TUEV/TUAR step after two warmups,
 10.31 GiB peak memory, and 3.05/.92 hours of projected training without loading
 or evaluation. The TUEV performance result for f4 remains pending.
 
+A validation-only checkpoint diagnostic now probes the completed TUAR models.
+All three unmodified checkpoints reproduce their selected validation metrics,
+and parameters/checkpoint hashes remain unchanged. In f4, coordinate-zeroing
+before positional embeddings gives:
+
+| TUAR f4 intervention | Validation kappa |
+|---|---:|
+| Unmodified checkpoint | .615751 |
+| Zero coupling coordinates | .176542 |
+| Zero all content coordinates | .469919 |
+| Zero band-content coordinates | .614158 |
+| Zero broadband-content coordinates | .525218 |
+
+The trained f4 prediction is sensitive to coupling and broadband coordinates;
+its kappa barely changes when band content is removed. On the first validation
+batch, band-content RMS is .6542 and broadband RMS .2941, so larger token scale
+alone does not establish useful contribution. The result is consistent with
+checking the fixed 32/32 capacity allocation next, but does not prove it caused
+the gap to the 64-coordinate broadband control. Zeroing shifts the encoder's
+input distribution and shared normalization, and coupling coordinates carry
+more than a selective physical-PAC intervention. These are neither retrained
+ablation scores nor proof that PAC itself causes the gain. No test split was
+loaded or evaluated, and no optimizer or training was used.
+
+The diagnostic ran on already-idle GPU 2 in allocation 416422; step 416422.1
+completed normally in 2:05 while TUEV training remained live. Script revision
+`c80edab` is on the factorized branch. Checkpoint/script hashes, all three models'
+metrics, and measured 110.5-second evaluation runtime are in
+`results/audits/tuar-content-knockout-20260913.json`. Await the current TUEV
+comparison before admitting a new design or expanding f4 across corpora.
+
 The 200-Hz f3 implementation remains blocked after its realized lowest filter
 peaked at DC with gain 70.156. That invalidates the intended low-frequency
 contrast; the completed TUAR f3 record is retained but excluded from candidate
