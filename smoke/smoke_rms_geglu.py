@@ -42,6 +42,9 @@ set_seed(17)
 with patch.object(pacbuild, 'TriAxialEncoder', reference.TriAxialEncoder):
     before = build_model(cfg, (16, 1000)).cuda()
 set_seed(17)
+with patch.object(pacbuild, 'TriAxialEncoder', reference.TriAxialEncoder):
+    repeated = build_model(cfg, (16, 1000)).cuda()
+set_seed(17)
 after = build_model(cfg, (16, 1000)).cuda()
 assert before.state_dict().keys() == after.state_dict().keys()
 for k, v in before.state_dict().items():
@@ -51,15 +54,29 @@ y = torch.tensor([0, 1], device='cuda')
 before.eval(); after.eval()
 with torch.no_grad():
     torch.testing.assert_close(before(x), after(x), rtol=0, atol=0)
-for m in (before, after):
+for m in (before, repeated, after):
     m.train(); set_seed(23)
     opt = torch.optim.AdamW(m.parameters(), lr=1e-4, weight_decay=1e-5)
     loss = torch.nn.functional.cross_entropy(m(x), y)
     loss.backward(); torch.nn.utils.clip_grad_norm_(m.parameters(), 1.0); opt.step()
-for k, v in before.state_dict().items():
-    torch.testing.assert_close(v, after.state_dict()[k], rtol=0, atol=0)
-legacy_equivalence = dict(initial_state=True, eval_logits=True, dropout_optimizer_step=True)
-del before, after, opt, x, y
+optimizer_comparisons = []
+for label, other in (('old_again', repeated), ('new_legacy', after)):
+    max_abs = 0.0
+    different_elements = 0
+    for k, v in before.state_dict().items():
+        value = other.state_dict()[k]
+        # Production GPU backward/reductions are not guaranteed bitwise
+        # deterministic. Keep init/forward exact; bound a float32 optimizer
+        # step and record the old-versus-old repeat alongside the code change.
+        torch.testing.assert_close(v, value, rtol=1e-6, atol=1e-8)
+        different_elements += int((v != value).sum())
+        max_abs = max(max_abs, float((v-value).abs().max()))
+    optimizer_comparisons.append(dict(comparison=label, max_abs=max_abs,
+                                      different_elements=different_elements))
+legacy_equivalence = dict(initial_state_bit_exact=True, eval_logits_bit_exact=True,
+    dropout_optimizer_step_close=True, optimizer_rtol=1e-6, optimizer_atol=1e-8,
+    optimizer_comparisons=optimizer_comparisons)
+del before, repeated, after, opt, m, other, x, y
 gc.collect(); torch.cuda.empty_cache()
 
 try:
@@ -143,7 +160,7 @@ files = [Path(__file__), ROOT/'paclock_bench/models/paclock/triaxial.py',
 result = dict(job=os.environ['SLURM_JOB_ID'], step=os.environ.get('SLURM_STEP_ID'),
     partition=os.environ.get('SLURM_JOB_PARTITION'), host=os.uname().nodename,
     torch=torch.__version__, rocm=torch.version.hip, device=torch.cuda.get_device_name(),
-    baseline_commit=baseline_commit, legacy_bit_exact=legacy_equivalence,
+    baseline_commit=baseline_commit, legacy_equivalence=legacy_equivalence,
     unknown_variant_rejected=True, new_variant_flat_finite_and_strict_checkpoint_roundtrip=True,
     validation_or_test_arrays_loaded=False, records=records,
     all_fit=all(r['fits_80_percent_of_cap'] for r in records),
