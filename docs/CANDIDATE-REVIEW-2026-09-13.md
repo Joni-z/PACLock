@@ -853,3 +853,36 @@ post-check documentation-only edits are recorded separately, with identical
 executable ASTs after removing docstrings. Evidence:
 `results/audits/cbramod-tuev-head-parity-20260913.json` and
 `results/audits/cbramod-native-head-inventory-20260913.json`.
+
+## Matched CBraMod TUEV head confirmation admitted on existing GPUs
+
+The verified task-head discrepancy justifies a bounded reproduction check
+independent of the still-running candidate augmentation gate. A real-training-
+batch smoke used the actual two-rate AdamW recipe, cosine schedule and clipping
+on frozen TUEV training arrays only. Both widths have finite loss, gradients
+and updated parameters. After excluding two warmup steps, means are about
+.071 seconds per step, projecting 1.05 hours of training compute for 50 epochs.
+Both fit under 80 percent of their two-hour training caps, leaving room for
+loading/evaluation; this is an estimate, not a completion guarantee.
+
+The matched seed-1 configurations differ only in run identity and hidden width.
+Both have eight workers and the same frozen data/optimization recipe. They
+were admitted from source `59e1ee6` to already-idle GPUs in allocation 416422:
+
+| Run | Head width | GPU | Trainer PID | Cap |
+|---|---:|---:|---:|---:|
+| tuev-cbramod_pretrained_nativehead | 1000 | 1 | 1366898 | 2 h |
+| tuev-cbramod_pretrained_head800_confirm | 800 | 3 | 1366899 | 2 h |
+
+No new Slurm allocation was submitted. The controller owner, allocation cgroup,
+Python/PyTorch path, actual child PIDs/GPU selectors, runtime configurations
+and source/config hashes were checked. Both runtime caps remain two hours;
+admission required at least three hours left in the existing allocation.
+The smoke is `results/audits/cbramod-head-training-smoke-20260913.json`; actual
+admission is `results/audits/cbramod-head-confirmation-admission-20260913.json`.
+
+The candidate matrix recognizes the two separate baseline identities and
+retains the historical shared-head baseline with its fidelity caveat. Wait for
+full selected-validation results before assessing the size of the head effect.
+This one-seed check neither certifies full native-protocol/SOTA reproduction nor
+justifies additional model variants or pretraining.

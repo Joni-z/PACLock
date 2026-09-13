@@ -10,6 +10,7 @@ FAMILIES = (
     'factorized_f2_confirm', 'factorized_f4_joint_confirm', 'factorized_f4_aug_confirm',
     'cf2_v0d192', 'cf2_v0d192cs', 'cf2_v1d192', 'cf2_v1d192_ptR',
     'labram_pretrained', 'cbramod_pretrained',
+    'cbramod_pretrained_head800_confirm', 'cbramod_pretrained_nativehead',
     'biot_prest16', 'reve_pretrained', 'eegpt_pretrained',
 )
 
@@ -81,6 +82,7 @@ def summarize(snapshot):
                     'Validation evidence only; no SOTA or final-model claim.',
                     'Match cohort identity before comparison; recipes may still differ.',
                     'Configuration fingerprints do not prove historical source identity.',
+                    'Historical shared-width CBraMod task heads are not certified native-task reproductions; retain them separately from corrected-head confirmations.',
                     'Missing selected-primary metrics are excluded, not treated as poor scores.',
                     'Single-seed cells are screening evidence only.'])
 
