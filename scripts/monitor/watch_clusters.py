@@ -61,6 +61,37 @@ def packed_log_paths(jobs):
    paths[path]=dict(job=job['id'],tag=tag,gpu=int(gpu),launch_pid=int(pid))
  return paths
 
+def packed_receipt_paths(jobs):
+ paths={}
+ for job in jobs:
+  meta=job.get('metadata','')
+  if not any(script in meta for script in ('configs_packed.slurm','smoke_then_train.slurm')):continue
+  log=re.search(r'(?:^| )StdOut=(\S+)',meta)
+  work=job.get('workdir')
+  if not log or not work:continue
+  parent=Path(log.group(1));root=Path(work)
+  if parent.suffix!='.out' or '..' in parent.parts or root not in parent.parents:continue
+  paths[str(parent.with_name(parent.stem+'-pack.json'))]=job
+ return paths
+
+def receipt_log_paths(data,receipts):
+ paths={}
+ with tarfile.open(fileobj=io.BytesIO(data)) as archive:
+  for member in archive:
+   if not member.isfile():continue
+   name='/'+member.name.lstrip('/');job=receipts.get(name)
+   if job is None:continue
+   if member.size>2_000_000:raise ValueError('oversized pack receipt')
+   pack=json.load(archive.extractfile(member))
+   if str(pack.get('job'))!=job['id']:raise ValueError('pack receipt job mismatch')
+   root=Path(job['workdir'])
+   for run in pack.get('running',[])+pack.get('done',[]):
+    log=Path(run['log']);log=log if log.is_absolute() else root/log
+    if '..' in log.parts or root not in log.parents:raise ValueError('pack log outside work directory')
+    paths[str(log)]=dict(job=job['id'],tag=run['name'],seed=run['seed'],
+      gpu=run['gpu'],launch_pid=run['pid'],reported_exit_code=run.get('exit_code'))
+ return paths
+
 def packed_log_rows(text,paths):
  rows={};current=None
  for line in text.splitlines():
@@ -127,10 +158,20 @@ def collect(host,root,state,previous):
     except Exception as exc:out['errors'].append(f"log {job['id']}: {exc}")
   if host=='amd':
    paths=packed_log_paths(out['jobs'])
+   receipts=packed_receipt_paths(out['jobs'])
+   if receipts:
+    try:
+     # Filesystem reads only; receipt parsing stays on the local monitor.
+     cmd='for p in '+' '.join(shlex.quote(p) for p in receipts)+'; do if test -f "$p"; then printf "%s\\n" "$p"; fi; done | tar -T - -cf -'
+     paths.update(receipt_log_paths(ssh(host,cmd,binary=True),receipts))
+    except Exception as exc:out['errors'].append('packed receipts: '+str(exc))
    if paths:
     try:
      text=ssh(host,'tail -v -n 40 -- '+' '.join(shlex.quote(p) for p in paths))
      out['packed_logs']=packed_log_rows(text,paths)
+     for row in out['packed_logs']:
+      if re.search(r'Traceback|out of memory|loss\s*[=: ]\s*(?:nan|inf)\b',row['tail'],re.I) or row.get('reported_exit_code') not in (None,0):
+       out['errors'].append('trainer log requires review: '+row['tag'])
     except Exception as exc:out['errors'].append('packed trainer logs: '+str(exc))
   if host=='torch':
    try:
