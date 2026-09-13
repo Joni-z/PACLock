@@ -1,0 +1,225 @@
+{
+  "at": "2026-09-13T02:48:01.010732+00:00",
+  "state": "completed_seed1_content_confirmation",
+  "runtime_cohort": "mi2104x",
+  "rows": [
+    {
+      "name": "tuar-factorized_f1_scale1_confirm",
+      "result_path": "runs/tuar-factorized_f1_scale1_confirm/seed1/result.json",
+      "sha256": "3fbbdb307b9d8f98d95f956abce086d66476442931c9d587bd19380971bb8a27",
+      "seed": 1,
+      "epochs": 20,
+      "stopped_by": "epochs",
+      "config": {
+        "batch_size": 32,
+        "data_root": "$PACLOCK_PROC/processed/tuar",
+        "dataset": "tuar",
+        "device": "cuda",
+        "epochs": 20,
+        "eval_every_steps": 0,
+        "grad_clip": 1.0,
+        "group": "factorized_scale_confirm",
+        "label_smoothing": 0.1,
+        "loss": "cross_entropy",
+        "lr": 0.0001,
+        "max_hours": 2.0,
+        "model": "paclock",
+        "model_kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "band",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        },
+        "name": "tuar-factorized_f1_scale1_confirm",
+        "num_classes": 3,
+        "num_workers": 8,
+        "optimizer": "adamw",
+        "patience": 20,
+        "sample_rate": 200,
+        "scheduler": "cosine",
+        "seed": 1,
+        "weight_decay": 1e-05,
+        "screening_note": "Prospective paired seed-1 confirmation on existing mi2104x allocations; compare arms within the same runtime cohort. Do not pool directly with the mi2101x seed-0 screen.",
+        "backfill": {
+          "source_job": null,
+          "allocation": "416426",
+          "gpu": 2,
+          "original_max_hours": 2.0,
+          "max_hours": 2.0
+        }
+      },
+      "manifest": "2026-08-17T11:03:32.287406+00:00",
+      "class_counts": {
+        "train": [
+          8642,
+          7192,
+          4816
+        ],
+        "val": [
+          1833,
+          2712,
+          501
+        ],
+        "test": [
+          661,
+          543,
+          732
+        ]
+      },
+      "best_checkpoint_validation": {
+        "balanced_acc": 0.7172088721860578,
+        "cohen_kappa": 0.6086675656752666,
+        "weighted_f1": 0.7737198380392811
+      },
+      "best_tag": "epoch   7 |",
+      "confusion": [
+        [
+          1597,
+          111,
+          125
+        ],
+        [
+          406,
+          2000,
+          306
+        ],
+        [
+          96,
+          133,
+          272
+        ]
+      ],
+      "wall_time_sec": 3465.827059030533
+    },
+    {
+      "name": "tuar-factorized_f2_confirm",
+      "result_path": "runs/tuar-factorized_f2_confirm/seed1/result.json",
+      "sha256": "02208b3e47cca891eb4010edc8f0117556746befccc4625e2fea6c9410842d3f",
+      "seed": 1,
+      "epochs": 20,
+      "stopped_by": "epochs",
+      "config": {
+        "batch_size": 32,
+        "data_root": "$PACLOCK_PROC/processed/tuar",
+        "dataset": "tuar",
+        "device": "cuda",
+        "epochs": 20,
+        "eval_every_steps": 0,
+        "grad_clip": 1.0,
+        "group": "factorized_content_confirm",
+        "label_smoothing": 0.1,
+        "loss": "cross_entropy",
+        "lr": 0.0001,
+        "max_hours": 2.0,
+        "model": "paclock",
+        "model_kwargs": {
+          "arch": "triaxial",
+          "augmentations": [],
+          "band_pe": "index",
+          "content_scale": 1.0,
+          "content_source": "broadband",
+          "coupling_dim": 128,
+          "d_model": 192,
+          "depth": 6,
+          "dropout": 0.2,
+          "freq_mixer": "attention",
+          "interaction_mode": "rotation",
+          "kernel_size": 201,
+          "n_bands": 8,
+          "n_heads": 4,
+          "pac_patch_len": 50,
+          "pac_token_mode": "measured",
+          "patch_len": 50,
+          "spatial_pe": "xyz",
+          "tokenizer_mode": "factorized"
+        },
+        "name": "tuar-factorized_f2_confirm",
+        "num_classes": 3,
+        "num_workers": 8,
+        "optimizer": "adamw",
+        "patience": 20,
+        "sample_rate": 200,
+        "scheduler": "cosine",
+        "seed": 1,
+        "weight_decay": 1e-05,
+        "screening_note": "Prospective seed-1 broadband-content confirmation against completed tuar-factorized_f1_scale1_confirm seed1 on mi2104x. Reuses that exact recipe and source; only content source changes. Two-hour training cap; no extra Slurm allocation.",
+        "backfill": {
+          "source_job": null,
+          "allocation": "416484",
+          "gpu": 0,
+          "original_max_hours": 2.0,
+          "max_hours": 2.0
+        }
+      },
+      "manifest": "2026-08-17T11:03:32.287406+00:00",
+      "class_counts": {
+        "train": [
+          8642,
+          7192,
+          4816
+        ],
+        "val": [
+          1833,
+          2712,
+          501
+        ],
+        "test": [
+          661,
+          543,
+          732
+        ]
+      },
+      "best_checkpoint_validation": {
+        "balanced_acc": 0.7560062225678271,
+        "cohen_kappa": 0.6309756851583201,
+        "weighted_f1": 0.7835904057388446
+      },
+      "best_tag": "epoch   7 |",
+      "confusion": [
+        [
+          1662,
+          88,
+          83
+        ],
+        [
+          435,
+          1938,
+          339
+        ],
+        [
+          82,
+          95,
+          324
+        ]
+      ],
+      "wall_time_sec": 3461.051908493042
+    }
+  ],
+  "delta_broadband_minus_band": {
+    "balanced_acc": 0.03879735038176935,
+    "cohen_kappa": 0.022308119483053557,
+    "weighted_f1": 0.009870567699563515
+  },
+  "recipe_match": "Identical except content_source after removing name/group, backfill execution metadata and descriptive screening_note (not consumed by training code). Both complete 20 epochs with a two-hour cap.",
+  "limitations": [
+    "The band control completed earlier on another mi2104x allocation; this is not a concurrent randomized pair.",
+    "Single seed per confirmation arm; seed-0 and seed-1 histories remain separate.",
+    "No test metric used for admission."
+  ],
+  "decision": "The broadband advantage on TUAR survives seed-1 confirmation while TUEV favors band content in the completed seed-0 pilot. Admit only the GPU-smoked fixed-width joint-content TUEV/TUAR seed-1 trial, reusing existing band controls, with training caps of five/two hours on existing allocations. No pretraining expansion or final candidate freeze."
+}
