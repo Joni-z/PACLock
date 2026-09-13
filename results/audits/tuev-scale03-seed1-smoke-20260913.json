@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "partition": "mi2104x",
+  "job": "416043",
+  "config": "configs/factorized_scale_confirm/tuev_scale03_s1.yaml",
+  "seed": 1,
+  "host": "k003-006.hpcfund",
+  "torch": "2.7.1+rocm6.3",
+  "rocm": "6.3.42131-fa1d09cbd",
+  "device": "AMD Instinct MI210",
+  "visible_gpus": 1,
+  "input_shape": [
+    32,
+    16,
+    1000
+  ],
+  "steps": 5,
+  "warmup_excluded": 2,
+  "steady_step_seconds": [
+    0.25574282003799453,
+    0.2560059300158173,
+    0.256039323983714
+  ],
+  "peak_GiB": 10.308969497680664,
+  "projected_train_seconds": 10948.657935775118,
+  "projection_note": "Excludes data loading and evaluation; not a completion guarantee.",
+  "config_sha256": "5a1105d561045794b7cf8e4b36b614b46afc51561609d6d086556d46d4153866",
+  "smoke_sha256": "5c827b6aa32b691d2258d7bb897544364399f34b02abca0f95ae3518cc249ab5",
+  "git_commit": "f241cbf13f85ef25f0f09c0d2c2485a33270fcc6"
+}

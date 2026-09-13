@@ -1,0 +1,80 @@
+{
+  "prepared_at": "2026-09-13T01:39:21.519224+00:00",
+  "state": "prepared_not_admitted",
+  "seed": 1,
+  "dataset": "tuev",
+  "epochs_per_arm": 20,
+  "training_cap_hours_per_arm": 5,
+  "minimum_remaining_allocation_hours": 6,
+  "admission_requirements": [
+    "Complete and review both seed-0 TUEV scale runs, including validation class behavior.",
+    "Revalidate live backfill controller, idle slots, remaining walltime, and absence of duplicate output/queue entries.",
+    "Admit the paired arms together on mi2104x; compare within that runtime cohort."
+  ],
+  "budget_note": "Two arms cap at ten GPU training-hours in total; using existing allocations can extend their duration. Smoke projection excludes data loading and evaluation.",
+  "decision": "Preparation only. No queue entry, sbatch submission, or training process for these confirmation names has been created.",
+  "smokes": [
+    {
+      "receipt": "results/audits/tuev-scale1-seed1-smoke-20260913.json",
+      "ok": true,
+      "partition": "mi2104x",
+      "job": "416043",
+      "config": "configs/factorized_scale_confirm/tuev_scale1_s1.yaml",
+      "seed": 1,
+      "host": "k003-006.hpcfund",
+      "torch": "2.7.1+rocm6.3",
+      "rocm": "6.3.42131-fa1d09cbd",
+      "device": "AMD Instinct MI210",
+      "visible_gpus": 1,
+      "input_shape": [
+        32,
+        16,
+        1000
+      ],
+      "steps": 5,
+      "warmup_excluded": 2,
+      "steady_step_seconds": [
+        0.2557799500063993,
+        0.2560577989788726,
+        0.25639394897734746
+      ],
+      "peak_GiB": 10.308969497680664,
+      "projected_train_seconds": 10954.984012946952,
+      "projection_note": "Excludes data loading and evaluation; not a completion guarantee.",
+      "config_sha256": "950c519979f9ca2d8259118717302b76b141d96a510c77a9f45e0405ee0973ce",
+      "smoke_sha256": "5c827b6aa32b691d2258d7bb897544364399f34b02abca0f95ae3518cc249ab5",
+      "git_commit": "f241cbf13f85ef25f0f09c0d2c2485a33270fcc6"
+    },
+    {
+      "receipt": "results/audits/tuev-scale03-seed1-smoke-20260913.json",
+      "ok": true,
+      "partition": "mi2104x",
+      "job": "416043",
+      "config": "configs/factorized_scale_confirm/tuev_scale03_s1.yaml",
+      "seed": 1,
+      "host": "k003-006.hpcfund",
+      "torch": "2.7.1+rocm6.3",
+      "rocm": "6.3.42131-fa1d09cbd",
+      "device": "AMD Instinct MI210",
+      "visible_gpus": 1,
+      "input_shape": [
+        32,
+        16,
+        1000
+      ],
+      "steps": 5,
+      "warmup_excluded": 2,
+      "steady_step_seconds": [
+        0.25574282003799453,
+        0.2560059300158173,
+        0.256039323983714
+      ],
+      "peak_GiB": 10.308969497680664,
+      "projected_train_seconds": 10948.657935775118,
+      "projection_note": "Excludes data loading and evaluation; not a completion guarantee.",
+      "config_sha256": "5a1105d561045794b7cf8e4b36b614b46afc51561609d6d086556d46d4153866",
+      "smoke_sha256": "5c827b6aa32b691d2258d7bb897544364399f34b02abca0f95ae3518cc249ab5",
+      "git_commit": "f241cbf13f85ef25f0f09c0d2c2485a33270fcc6"
+    }
+  ]
+}
