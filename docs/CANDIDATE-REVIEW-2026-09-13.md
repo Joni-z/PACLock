@@ -247,10 +247,26 @@ value of the band-local lane on CHB in one seed; broadband f2 is still running.
 Historical d128 duplex scores .678728 and rotation .634410 on the same cohort,
 so f1 is competitive but does not establish superiority over duplex or isolate
 tokenization from model width. Allocation 416457 completed normally in 15:45:54
-and released; f0's allocation 416484 still hosts a TUEV confirmation.
+and released; f0's allocation 416484 subsequently released after its TUEV
+confirmation finished, with the original packed-batch exit status noted above.
 See `results/audits/chb-factorized-f1-completion-20260913.json`.
 
-Remaining CHB-MIT/TUSZ pilots continue or stop under their configured patience. Inspect
+The CHB self-inclusive rotation run `chbmit-crofremo_s1`, seed 0, has now
+completed with ordinary patience after seven epochs, validation PR-AUC
+**.663388** and 12.456 training/evaluation hours. Its trainer exited with code
+0. Allocation **416426** completed normally (0:0) after **19:04:06** and released
+the node; no replacement allocation was requested.
+
+Across four seed-0 configuration/cohort-matched self-inclusion contrasts,
+CHB improves PR-AUC by .028978 and TUSZ by .005576, while TUEV kappa falls
+.021605 and IIIC kappa falls .004542. Parameter counts match within each
+contrast and all results stopped normally; historical source/runtime identity
+is not established. These mixed directions do not justify expanding the
+self-inclusion search. The CHB value also remains below historical duplex
+seed-0 .678728, a different architectural contrast. Completion and cross-corpus
+receipts are in `results/audits/chb-self-completion-20260913.json`.
+
+Remaining CHB-MIT pilots continue or stop under their configured patience. Inspect
 step validations as well as epoch ends. Their validation cadence differs from
 TUEV; equal epoch numbers alone do not establish equal training progress.
 Do not discard an entire model family from these seed-0 pilots.
