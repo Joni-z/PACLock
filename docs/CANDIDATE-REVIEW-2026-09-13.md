@@ -59,6 +59,21 @@ step validations as well as epoch ends. Their validation cadence differs from
 TUEV; equal epoch numbers alone do not establish equal training progress.
 Do not discard an entire model family from these seed-0 pilots.
 
+## Historical readout check
+
+The readout alternatives are already implemented and have historical results.
+Configuration-matched three-seed attention pooling improves raw-token BCI-IV-2a
+but reduces raw-token FACED validation performance in all three seeds. The
+TUEV flagship seed-0 validation kappa .652144 combines 16 bands, a deep raw
+stem, learned montage and gated mean/spatial pooling; it does not isolate the
+head's effect against the duplex .609325 control. These records do not justify
+relaunching pooling as an untested general remedy or freezing flagship.
+Historical training-source identity remains unverified, including which
+spatial-head runs used the eager-initialization fix. Pair identities, original
+result hashes, metric names and configuration differences are preserved in
+`results/audits/readout-history-20260913.json`. Continue the bounded factorized
+content/scale confirmations before adding another readout sweep.
+
 ## Cross-dataset shortlist audit
 
 The local `scripts/monitor/candidate_matrix.py` audit uses canonical result
