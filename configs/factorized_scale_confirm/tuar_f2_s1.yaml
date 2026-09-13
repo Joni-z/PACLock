@@ -1,0 +1,45 @@
+batch_size: 32
+data_root: $PACLOCK_PROC/processed/tuar
+dataset: tuar
+device: cuda
+epochs: 20
+eval_every_steps: 0
+grad_clip: 1.0
+group: factorized_content_confirm
+label_smoothing: 0.1
+loss: cross_entropy
+lr: 0.0001
+max_hours: 2.0
+model: paclock
+model_kwargs:
+  arch: triaxial
+  augmentations: []
+  band_pe: index
+  content_scale: 1.0
+  content_source: broadband
+  coupling_dim: 128
+  d_model: 192
+  depth: 6
+  dropout: 0.2
+  freq_mixer: attention
+  interaction_mode: rotation
+  kernel_size: 201
+  n_bands: 8
+  n_heads: 4
+  pac_patch_len: 50
+  pac_token_mode: measured
+  patch_len: 50
+  spatial_pe: xyz
+  tokenizer_mode: factorized
+name: tuar-factorized_f2_confirm
+num_classes: 3
+num_workers: 8
+optimizer: adamw
+patience: 20
+sample_rate: 200
+scheduler: cosine
+seed: 1
+weight_decay: 1.0e-05
+screening_note: Prospective seed-1 broadband-content confirmation against completed
+  tuar-factorized_f1_scale1_confirm seed1 on mi2104x. Reuses that exact recipe and
+  source; only content source changes. Two-hour training cap; no extra Slurm allocation.
