@@ -728,3 +728,29 @@ PID in `watch.pid` against the actual process before relying on the daemon.
 The local machine/network and SSH sessions must remain available. Connection
 failure is an alert, never evidence that training stopped. The active thread
 goal remains open until the final-candidate evidence is sufficient.
+
+## TUAR augmentation gate completed; TUEV pending
+
+The TUAR f4 augmentation confirmation completed all 20 epochs normally in
+0.973 hours, with trainer exit 0. At the validation-kappa-selected checkpoints:
+
+| TUAR seed 1 | Validation kappa | Balanced accuracy | Weighted F1 |
+|---|---:|---:|---:|
+| Joint content, no augmentation | .615751 | .731577 | .773869 |
+| Joint content, existing augmentation | .631884 | .755038 | .782292 |
+| Broadband content, no augmentation | .630976 | .756006 | .783590 |
+
+The matched joint pair differs only in augmentation plus identity/descriptive
+and placement metadata. Manifests, class counts, parameter counts, time caps
+and the remaining recipe match. Augmentation improves kappa by .016134,
+balanced accuracy by .023461 and weighted F1 by .008423. Against broadband,
+differences are +.000909, -.000968 and -.001298: close for this seed, not proof
+of equivalence. That comparison changes both content and augmentation.
+
+The result supports retaining augmentation as a recipe option, but does not
+yet justify more datasets, a final candidate, or pretraining. Complete the
+already-running TUEV counterpart before deciding on a second matched seed.
+Trainer 1362700 has exited; allocation 416422 remains active for TUEV and CHB.
+No new allocation was submitted. Full validation histories, configuration
+checks, result hashes and the exit receipt are in
+`results/audits/tuar-augmentation-completion-20260913.json`.
