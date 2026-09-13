@@ -47,6 +47,34 @@ def result_row(x):
        cfg.get('sample_rate')==200 and x['name'].endswith('_f3'))),
   diagnostic_only=x.get('group')=='scheduling_pilot')
 
+def packed_log_paths(jobs):
+ # Launcher PIDs are historical receipts, not proof that a trainer is live.
+ paths={}
+ for job in jobs:
+  meta=job.get('metadata','')
+  log=re.search(r'(?:^| )StdOut=(\S+)',meta)
+  if not log or 'configs_packed.slurm' not in meta:continue
+  parent=Path(log.group(1))
+  if parent.suffix!='.out':continue
+  for tag,gpu,pid in re.findall(r'launched ([A-Za-z0-9_.-]+) on GPU (\d+) \(pid (\d+)\)',job.get('tail','')):
+   path=str(parent.with_name(parent.stem+'-'+tag+'.out'))
+   paths[path]=dict(job=job['id'],tag=tag,gpu=int(gpu),launch_pid=int(pid))
+ return paths
+
+def packed_log_rows(text,paths):
+ rows={};current=None
+ for line in text.splitlines():
+  header=re.fullmatch(r'==> (.+) <==',line)
+  if header:
+   current=header.group(1)
+   if current in paths:rows[current]=dict(paths[current],path=current,tail='')
+  elif current in rows:rows[current]['tail']+=line+'\n'
+ for row in rows.values():
+  vals=re.findall(r'epoch\s+\d+(?: step \d+)?\s*\|\s*val [^\n]+',row['tail'])
+  row['latest_validation']=vals[-1] if vals else None
+  row['process_liveness']='not inferred from log'
+ return list(rows.values())
+
 def collect(host,root,state,previous):
  dest=state/'hosts'/host;dest.mkdir(parents=True,exist_ok=True)
  out=dict(host=host,at=time.time(),ok=False,errors=[],jobs=[],foreign_jobs=[])
@@ -90,6 +118,13 @@ def collect(host,root,state,previous):
    if log and log.group(1).startswith(root) and job['state'] in ('RUNNING','COMPLETING'):
     try:job['tail']=ssh(host,'tail -n 40 '+shlex.quote(log.group(1)))
     except Exception as exc:out['errors'].append(f"log {job['id']}: {exc}")
+  if host=='amd':
+   paths=packed_log_paths(out['jobs'])
+   if paths:
+    try:
+     text=ssh(host,'tail -v -n 40 -- '+' '.join(shlex.quote(p) for p in paths))
+     out['packed_logs']=packed_log_rows(text,paths)
+    except Exception as exc:out['errors'].append('packed trainer logs: '+str(exc))
   if host=='torch':
    try:
     # Existing site helper: no overwrites; transfer only results/json/npz.
