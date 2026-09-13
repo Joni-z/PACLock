@@ -1,0 +1,61 @@
+{
+  "labels": [
+    "Original",
+    "Zero coupling\ncoordinates",
+    "Zero band\ncontent",
+    "Zero broadband\ncontent",
+    "Remove\npreferred phase",
+    "Shuffle\nphase pairing"
+  ],
+  "rows": [
+    {
+      "dataset": "tuar",
+      "completed_training": true,
+      "selected_tag": "epoch   7 |",
+      "values": [
+        0.6157507528394341,
+        0.17654210622788935,
+        0.6141578515875121,
+        0.5252181023461675,
+        0.6022190585948977,
+        0.6106626213534804
+      ],
+      "errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.005465127379346265
+      ]
+    },
+    {
+      "dataset": "tuev",
+      "completed_training": false,
+      "selected_tag": "epoch   1 |",
+      "values": [
+        0.637153617192539,
+        0.04932389498373391,
+        0.6143234603142838,
+        0.5499255890103312,
+        0.1714729150340305,
+        0.39557628303980974
+      ],
+      "errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.006056642131373184
+      ]
+    }
+  ],
+  "matplotlib": "3.11.2",
+  "generator_sha256": "1b010f3323d9893cde08f6ac4a4720df16ccbfcfe5253d2f01f8a55856408da4",
+  "sources": {
+    "results/audits/tuar-content-knockout-20260913.json": "03bb0c7134d222c0ab14bb487a79aff50ad4df91e55211d3076bc2745f2b2a39",
+    "results/audits/tuev-content-knockout-snapshot-20260913.json": "ec89c1553dd1ea5a054f2ab9208927ad12cc9d7bd48075cee52ffc1767b73064",
+    "results/audits/preferred-phase-knockout-20260913.json": "2191c9ea2942bcd51ff21c4cdd1d8d4dac00b34c63d1ed043bd1e04b923d6478"
+  }
+}
