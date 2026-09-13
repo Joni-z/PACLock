@@ -180,6 +180,13 @@ metrics and control checks are in
 `results/audits/preferred-phase-knockout-20260913.json`. This sharpens the
 mechanism claim while the final candidate and broad performance remain open.
 
+The combined diagnostic figure is generated from those three immutable audit
+receipts by `python3 scripts/plot_content_diagnostics.py` (requires matplotlib).
+PDF, SVG, PNG and the numerical/source-hash manifest are under
+`results/figures/content-phase-diagnostics-20260913.*`. The figure labels TUEV
+as an interim checkpoint and distinguishes intervention-draw SD from training
+seed uncertainty. No table or checkpoint score was edited to produce it.
+
 Historical from-scratch own-phase controls provide a different, necessary
 comparison. Ten pairs match config (apart from identity/phase mode), seed,
 manifest and class counts for the older duplex model. Measured-minus-own mean
